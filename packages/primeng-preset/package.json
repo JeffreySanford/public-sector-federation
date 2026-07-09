@@ -1,0 +1,24 @@
+{
+  "name": "@public-sector/primeng-preset",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./provider": "./src/provider.ts",
+    "./passthrough": "./src/passthrough.ts",
+    "./theme": "./src/theme.ts"
+  },
+  "scripts": {
+    "build": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@public-sector/tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "@primeuix/themes": "*",
+    "primeng": "*"
+  }
+}

@@ -1,0 +1,57 @@
+<div class="shell">
+  <aside class="shell__nav">
+    <div class="brand">
+      <span class="brand__mark">PS</span>
+      <div>
+        <strong>Public Sector Portal</strong>
+        <small>Federated services platform</small>
+      </div>
+    </div>
+
+    <nav aria-label="Federated modules">
+      @for (link of links; track link.path) {
+        <a [routerLink]="link.path" routerLinkActive="is-active">
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <button type="button" class="theme-toggle" (click)="theme.toggleDarkMode()">
+      {{ theme.isDark() ? 'Use light mode' : 'Use dark mode' }}
+    </button>
+
+    <section class="theme-options" aria-label="Theme style">
+      <span>Theme style</span>
+      @for (variant of themeVariants; track variant.value) {
+        <button
+          type="button"
+          class="theme-chip"
+          [class.is-active]="theme.variant() === variant.value"
+          (click)="theme.setVariant(variant.value)"
+        >
+          {{ variant.label }}
+        </button>
+      }
+    </section>
+  </aside>
+
+  <main class="shell__content">
+    <header class="hero">
+      <div>
+        <p-tag value="Angular 21 + Web Components" severity="info" />
+        <h1>Token-driven services portal</h1>
+        <p>
+          Shell and remotes bootstrap the same PrimeNG preset so independently
+          delivered modules keep one visual language.
+        </p>
+      </div>
+
+      <div class="hero__actions">
+        <p-button label="QA route" icon="pi pi-shield" routerLink="/qa" />
+        <p-button label="Shell Button" icon="pi pi-check" [outlined]="true" />
+      </div>
+    </header>
+
+    <router-outlet />
+  </main>
+</div>

@@ -1,0 +1,199 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 19rem 1fr;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--p-primary-color) 12%, transparent), transparent 34rem),
+    var(--ps-surface-background);
+  color: var(--ps-text-primary);
+}
+
+.shell__nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100vh;
+  padding: 1.5rem;
+  background-color: var(--ps-nav-background);
+  background-image:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--ps-primary-background) 34%, transparent), transparent 16rem),
+    linear-gradient(180deg, color-mix(in srgb, var(--ps-nav-background) 94%, var(--ps-primary-background)), var(--ps-nav-background));
+  color: var(--ps-nav-foreground);
+  box-shadow: 1rem 0 3rem color-mix(in srgb, var(--ps-text-primary) 12%, transparent);
+}
+
+.brand {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.brand__mark {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border-radius: 1rem;
+  background-color: var(--ps-primary-background);
+  background-image:
+    linear-gradient(135deg, var(--ps-primary-background), color-mix(in srgb, var(--ps-primary-background) 64%, #ffffff));
+  color: var(--ps-primary-foreground);
+  box-shadow: 0 0.75rem 1.5rem color-mix(in srgb, var(--ps-primary-background) 32%, transparent);
+  font-weight: 800;
+}
+
+.brand small {
+  display: block;
+  color: var(--ps-nav-muted);
+}
+
+nav {
+  display: grid;
+  gap: 0.5rem;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid transparent;
+  color: var(--ps-nav-foreground);
+  text-decoration: none;
+  border-radius: var(--p-border-radius-md);
+  transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+nav a.is-active,
+nav a:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: var(--ps-nav-active-background);
+  color: var(--ps-nav-foreground);
+  transform: translateX(0.2rem);
+}
+
+.theme-toggle {
+  margin-top: auto;
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: var(--p-border-radius-md);
+  background: transparent;
+  color: var(--ps-nav-foreground);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.theme-options {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.theme-options span {
+  color: var(--ps-nav-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.theme-chip {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: var(--p-border-radius-md);
+  background: transparent;
+  color: var(--ps-nav-foreground);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.theme-chip.is-active,
+.theme-chip:hover {
+  border-color: rgba(255, 255, 255, 0.76);
+  background: var(--ps-nav-active-background);
+}
+
+.shell__content {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  padding: clamp(1rem, 3vw, 2.5rem);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 85% 10%, color-mix(in srgb, var(--p-primary-color) 24%, transparent), transparent 22rem),
+    linear-gradient(135deg, var(--p-content-background), color-mix(in srgb, var(--p-content-background) 82%, var(--p-primary-color)));
+  box-shadow: 0 1.5rem 3rem color-mix(in srgb, var(--ps-text-primary) 10%, transparent);
+}
+
+.hero::after {
+  position: absolute;
+  right: -4rem;
+  bottom: -5rem;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--p-primary-color) 16%, transparent);
+  content: '';
+}
+
+.hero h1 {
+  position: relative;
+  margin: 0.75rem 0 0.25rem;
+  font-size: clamp(2rem, 4vw, 3.75rem);
+  letter-spacing: -0.06em;
+}
+
+.hero p {
+  position: relative;
+  max-width: 52rem;
+  margin: 0;
+  color: var(--p-text-muted-color);
+}
+
+.hero__actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.remote-frame {
+  min-height: 18rem;
+}
+
+.remote-frame--loading {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--p-content-border-color);
+  border-radius: 1rem;
+  color: var(--p-text-muted-color);
+}
+
+@media (max-width: 900px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+}

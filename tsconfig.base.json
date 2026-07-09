@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@public-sector/tokens": ["packages/tokens/src/index.ts"],
+      "@public-sector/primeng-preset": ["packages/primeng-preset/src/index.ts"],
+      "@public-sector/primeng-preset/provider": ["packages/primeng-preset/src/provider.ts"],
+      "@public-sector/primeng-preset/passthrough": ["packages/primeng-preset/src/passthrough.ts"],
+      "@public-sector/ui-patterns": ["packages/ui-patterns/src/index.ts"]
+    },
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

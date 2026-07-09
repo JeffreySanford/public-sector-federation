@@ -1,0 +1,16 @@
+@import "../../../packages/tokens/src/tokens.css";
+
+@layer reset, primeng, app;
+
+@layer reset {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 1rem;
+    background: var(--ps-surface-background);
+    font-family: var(--ps-font-family, "Inter", "Segoe UI", Arial, sans-serif);
+  }
+}

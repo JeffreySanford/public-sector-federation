@@ -1,0 +1,59 @@
+{
+  "name": "qa-remote",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/qa-remote/src",
+  "projectType": "application",
+  "implicitDependencies": ["primeng-preset", "ui-patterns"],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/qa-remote",
+        "index": "apps/qa-remote/src/index.html",
+        "browser": "apps/qa-remote/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/qa-remote/tsconfig.app.json",
+        "assets": [],
+        "styles": ["./apps/qa-remote/src/styles.css"],
+        "outputHashing": "none"
+      }
+    },
+    "serve": {
+      "executor": "@angular/build:dev-server",
+      "options": {
+        "buildTarget": "qa-remote:build",
+        "port": 4204
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p apps/qa-remote/tsconfig.app.json"
+      }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "configDir": "apps/qa-remote/.storybook",
+        "browserTarget": "qa-remote:build",
+        "tsConfig": "apps/qa-remote/tsconfig.storybook.json",
+        "port": 4400,
+        "compodoc": false,
+        "open": false
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "configDir": "apps/qa-remote/.storybook",
+        "browserTarget": "qa-remote:build",
+        "tsConfig": "apps/qa-remote/tsconfig.storybook.json",
+        "outputDir": "dist/storybook/qa-remote",
+        "compodoc": false
+      }
+    }
+  },
+  "tags": ["scope:app", "type:remote", "type:qa"]
+}

@@ -1,0 +1,51 @@
+<main class="playground">
+  <header>
+    <div>
+      <p-tag value="Visual QA" severity="info" />
+      <h1>Public Sector PrimeNG preset</h1>
+      <p>Standalone visual QA for tokens, preset mapping, and dark mode.</p>
+    </div>
+    <p-button
+      [label]="theme.isDark() ? 'Light mode' : 'Dark mode'"
+      [outlined]="true"
+      (onClick)="theme.toggleDarkMode()"
+    />
+  </header>
+
+  <section class="grid">
+    <p-card>
+      <ng-template pTemplate="title">Controls</ng-template>
+      <label for="name">Applicant name</label>
+      <input id="name" pInputText value="Jordan Avery" />
+
+      <label for="status">Status</label>
+      <p-select inputId="status" [options]="statuses" [(ngModel)]="status" optionLabel="label" optionValue="value" />
+
+      <p-button label="Open dialog" icon="pi pi-window-maximize" (onClick)="visible = true" />
+    </p-card>
+
+    <p-card>
+      <ng-template pTemplate="title">Data table</ng-template>
+      <p-table [value]="rows">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Component</th>
+            <th>Layer</th>
+            <th>Status</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td>{{ row.name }}</td>
+            <td>{{ row.layer }}</td>
+            <td><p-tag [value]="row.state" severity="success" /></td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </section>
+</main>
+
+<p-dialog header="Preset dialog" [(visible)]="visible" [modal]="true">
+  <p>Dialog surface, border, text, and focus styles come from the shared preset.</p>
+</p-dialog>

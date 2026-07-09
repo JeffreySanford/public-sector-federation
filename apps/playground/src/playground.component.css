@@ -1,0 +1,55 @@
+.playground {
+  display: grid;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.5rem;
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 1rem;
+  background: var(--p-content-background);
+}
+
+h1 {
+  margin: 0.75rem 0 0.25rem;
+}
+
+p {
+  color: var(--p-text-muted-color);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+label {
+  display: block;
+  margin: 1rem 0 0.35rem;
+  font-weight: 700;
+}
+
+input,
+p-select {
+  width: 100%;
+}
+
+p-button {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .grid,
+  header {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+tmp/
+.nx/
+.angular/
+.cache/
+coverage/
+*.log
+.env
+.env.*
+!.env.example

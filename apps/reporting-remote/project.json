@@ -1,0 +1,37 @@
+{
+  "name": "reporting-remote",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/reporting-remote/src",
+  "projectType": "application",
+  "implicitDependencies": ["primeng-preset"],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/reporting-remote",
+        "index": "apps/reporting-remote/src/index.html",
+        "browser": "apps/reporting-remote/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/reporting-remote/tsconfig.app.json",
+        "assets": [],
+        "styles": ["./apps/reporting-remote/src/styles.css"],
+        "outputHashing": "none"
+      }
+    },
+    "serve": {
+      "executor": "@angular/build:dev-server",
+      "options": {
+        "buildTarget": "reporting-remote:build",
+        "port": 4202
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p apps/reporting-remote/tsconfig.app.json"
+      }
+    }
+  },
+  "tags": ["scope:app", "type:remote"]
+}

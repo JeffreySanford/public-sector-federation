@@ -1,0 +1,18 @@
+export default {
+  name: 'shell',
+  remotes: {
+    services: 'services@http://localhost:4201/main.js',
+    reporting: 'reporting@http://localhost:4202/main.js',
+    admin: 'admin@http://localhost:4203/main.js',
+  },
+  shared: {
+    '@angular/core': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    '@angular/common': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    '@angular/elements': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    '@angular/platform-browser': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    primeng: { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    '@public-sector/tokens': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    '@public-sector/primeng-preset': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+  },
+  skip: [/^@primeuix\//, /^@module-federation\//],
+};

@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum SprintStatus {
+  planned
+  active
+  closed
+}
+
+enum WorkItemStatus {
+  backlog
+  next
+  in_progress
+  blocked
+  review
+  done
+}
+
+enum WorkItemType {
+  story
+  task
+  spike
+  blocker
+}
+
+enum EffortLevel {
+  small
+  medium
+  large
+}
+
+enum TimeActivityType {
+  discovery
+  design
+  development
+  review
+  validation
+  documentation
+}
+
+model Sprint {
+  id          String           @id @default(uuid())
+  slug        String           @unique
+  name        String
+  goal        String
+  status      SprintStatus     @default(planned)
+  startsOn    DateTime?
+  endsOn      DateTime?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  workItems   WorkItem[]
+}
+
+model WorkItem {
+  id               String            @id @default(uuid())
+  slug             String            @unique
+  title            String
+  workstream       String
+  type             WorkItemType      @default(story)
+  status           WorkItemStatus    @default(backlog)
+  effort           EffortLevel
+  owner            String
+  summary          String
+  includes         String
+  blockerSummary   String?
+  doneCriteria     String
+  sortOrder        Int               @default(0)
+  sprintId         String
+  sprint           Sprint            @relation(fields: [sprintId], references: [id], onDelete: Cascade)
+  blockers         Blocker[]
+  acceptanceChecks AcceptanceCheck[]
+  timeEntries      TimeEntry[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model Blocker {
+  id           String         @id @default(uuid())
+  slug         String         @unique
+  title        String
+  affectedArea String
+  mitigation   String
+  owner        String
+  status       WorkItemStatus @default(blocked)
+  workItemId   String?
+  workItem     WorkItem?      @relation(fields: [workItemId], references: [id], onDelete: SetNull)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model AcceptanceCheck {
+  id         String         @id @default(uuid())
+  slug       String         @unique
+  check      String
+  evidence   String
+  gate       String
+  status     WorkItemStatus @default(next)
+  workItemId String?
+  workItem   WorkItem?      @relation(fields: [workItemId], references: [id], onDelete: Cascade)
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+}
+
+model TimeEntry {
+  id           String           @id @default(uuid())
+  workItemId   String
+  workItem     WorkItem         @relation(fields: [workItemId], references: [id], onDelete: Cascade)
+  activityType TimeActivityType
+  entryDate    DateTime
+  minutes      Int
+  note         String
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+}

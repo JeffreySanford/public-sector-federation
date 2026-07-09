@@ -1,0 +1,68 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.portal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ps-space-4);
+  padding: var(--ps-space-6);
+  background: var(--ps-surface-card);
+  border-bottom: 1px solid var(--ps-surface-border);
+}
+
+.eyebrow {
+  margin: 0 0 var(--ps-space-2);
+  color: var(--ps-text-secondary);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+}
+
+.portal-shell {
+  display: grid;
+  grid-template-columns: 17rem minmax(0, 1fr);
+  min-height: calc(100vh - 7rem);
+}
+
+.portal-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ps-space-2);
+  padding: var(--ps-space-4);
+  background: var(--ps-surface-card);
+  border-right: 1px solid var(--ps-surface-border);
+}
+
+.nav-item {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--ps-surface-border);
+  border-radius: var(--ps-radius-md);
+  background: transparent;
+  color: var(--ps-text-primary);
+  cursor: pointer;
+  text-align: left;
+}
+
+.nav-item.active,
+.nav-item:hover {
+  border-color: var(--ps-primary-background);
+  color: var(--ps-primary-background);
+}
+
+.portal-content {
+  display: grid;
+  gap: var(--ps-space-6);
+  padding: var(--ps-space-6);
+}
+
+.remote-host {
+  display: block;
+}

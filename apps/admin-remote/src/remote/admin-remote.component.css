@@ -1,0 +1,176 @@
+:host {
+  display: block;
+}
+
+.remote {
+  display: grid;
+  gap: 1rem;
+}
+
+.remote__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem;
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 1rem;
+  background: var(--p-content-background);
+}
+
+.remote__header h2 {
+  margin: 0.75rem 0 0.25rem;
+}
+
+.remote__header p {
+  margin: 0;
+  color: var(--p-text-muted-color);
+}
+
+.admin-button {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--ps-nav-active-background);
+  border-radius: var(--p-border-radius-md);
+  background: var(--ps-nav-active-background);
+  color: var(--ps-nav-foreground);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.admin-button i,
+.admin-button span {
+  color: inherit;
+}
+
+.remote__grid {
+  display: grid;
+  grid-template-columns: minmax(24rem, 1fr) minmax(22rem, 0.7fr);
+  gap: 1.25rem;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--p-content-border-color);
+}
+
+.setting-row:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.password-field {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+  font-weight: 700;
+}
+
+p-password {
+  display: block;
+  position: relative;
+  width: min(100%, 28rem);
+}
+
+:host ::ng-deep p-password.p-password {
+  display: block;
+  position: relative;
+  width: min(100%, 28rem);
+}
+
+:host ::ng-deep p-password .p-password,
+:host ::ng-deep p-password .p-inputwrapper,
+:host ::ng-deep p-password .p-inputtext,
+:host ::ng-deep p-password input {
+  width: 100%;
+}
+
+:host ::ng-deep p-password .p-password {
+  display: block;
+  position: relative;
+}
+
+:host ::ng-deep p-password .p-inputtext,
+:host ::ng-deep p-password input {
+  min-height: 2.75rem;
+  padding: 0.65rem 3rem 0.65rem 0.85rem;
+  padding-right: 3rem !important;
+  padding-inline-end: 3rem;
+  border: 1px solid var(--p-content-border-color);
+  border-radius: var(--p-border-radius-md);
+  background: var(--p-content-background);
+  color: var(--p-text-color);
+  font: inherit;
+}
+
+:host ::ng-deep p-password input:focus {
+  border-color: var(--p-primary-color);
+  box-shadow: var(--p-focus-ring-shadow);
+  outline: 0;
+}
+
+:host ::ng-deep p-password > svg,
+:host ::ng-deep p-password .p-password-toggle-mask,
+:host ::ng-deep p-password .p-input-icon,
+:host ::ng-deep p-password .p-icon {
+  margin-inline-start: 0.5rem;
+}
+
+:host ::ng-deep p-password > svg {
+  position: absolute;
+  top: 50%;
+  right: 0.9rem;
+  transform: translateY(-50%);
+  color: var(--p-text-muted-color);
+  pointer-events: none;
+}
+
+:host ::ng-deep p-password .p-password-toggle-mask {
+  right: 0.85rem;
+}
+
+:host ::ng-deep .admin-actions-menu {
+  width: 100%;
+  border: 0;
+}
+
+:host ::ng-deep .admin-actions-menu .p-menu-list {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.25rem;
+}
+
+:host ::ng-deep .admin-actions-menu .p-menuitem-link,
+:host ::ng-deep .admin-actions-menu .p-menu-item-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--p-border-radius-md);
+  color: var(--p-text-color);
+  white-space: normal;
+}
+
+:host ::ng-deep .admin-actions-menu .p-menuitem-icon,
+:host ::ng-deep .admin-actions-menu .p-menu-item-icon {
+  flex: 0 0 auto;
+  color: var(--p-text-muted-color);
+}
+
+:host ::ng-deep .admin-actions-menu .p-menuitem-label,
+:host ::ng-deep .admin-actions-menu .p-menu-item-label {
+  color: var(--p-text-color) !important;
+}
+
+@media (max-width: 900px) {
+  .remote__grid {
+    grid-template-columns: 1fr;
+  }
+}

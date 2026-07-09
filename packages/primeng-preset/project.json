@@ -1,0 +1,22 @@
+{
+  "name": "primeng-preset",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/primeng-preset/src",
+  "projectType": "library",
+  "implicitDependencies": ["tokens"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --dir packages/primeng-preset build"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --dir packages/primeng-preset typecheck"
+      }
+    }
+  },
+  "tags": ["scope:design-system", "type:primeng"]
+}

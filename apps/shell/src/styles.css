@@ -1,0 +1,27 @@
+@import "../../../packages/tokens/src/tokens.css";
+
+@layer reset, primeng, app;
+
+@layer reset {
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--ps-surface-background);
+    color: var(--ps-text-primary);
+    font-family: var(--ps-font-family, "Inter", "Segoe UI", Arial, sans-serif);
+  }
+}
+
+@layer app {
+  .p-dark body {
+    background: var(--ps-surface-background);
+  }
+}

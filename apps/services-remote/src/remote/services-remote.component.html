@@ -1,0 +1,255 @@
+<section class="remote">
+  <div class="remote__header">
+    <div>
+      <span class="remote-tag">Remote: Services</span>
+      <h2>Citizen services workspace</h2>
+      <p>
+        A web component remote proving shared form, focus, validation, and card
+        styling from the PrimeNG preset.
+      </p>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="action-button action-button--primary">
+        <i class="pi pi-plus" aria-hidden="true"></i>
+        <span>Create case</span>
+      </button>
+      <button type="button" class="action-button">
+        <i class="pi pi-send" aria-hidden="true"></i>
+        <span>Send notice</span>
+      </button>
+    </div>
+  </div>
+
+  <section class="metric-grid">
+    <article class="metric-card">
+      <span>Open cases</span>
+      <strong>128</strong>
+      <small>Across citizen services</small>
+    </article>
+    <article class="metric-card">
+      <span>Completed today</span>
+      <strong>34</strong>
+      <small>Notices and renewals</small>
+    </article>
+    <article class="metric-card">
+      <span>SLA health</span>
+      <strong>92%</strong>
+      <small>Trailing 7 days</small>
+    </article>
+  </section>
+
+  <div class="remote__grid">
+    <section class="service-panel">
+      <div class="panel-heading">
+        <h3>Case intake</h3>
+        <p>Token-driven citizen service form</p>
+      </div>
+
+      <label for="caseId">Case ID</label>
+      <input id="caseId" class="field-control" [(ngModel)]="caseId" aria-describedby="caseId-help" />
+      <small id="caseId-help">Uses global input text PassThrough markers.</small>
+
+      <label for="applicantName">Applicant name</label>
+      <input id="applicantName" class="field-control" [(ngModel)]="applicantName" />
+
+      <label for="serviceType">Service type</label>
+      <select id="serviceType" class="field-control" [(ngModel)]="selectedService">
+        <option value="benefits-renewal">Benefits renewal</option>
+        <option value="permit-request">Permit request</option>
+        <option value="document-upload">Document upload</option>
+        <option value="housing-assistance">Housing assistance</option>
+      </select>
+
+      <label for="appointmentDate">Appointment date</label>
+      <input id="appointmentDate" class="field-control" type="date" [(ngModel)]="appointmentDate" />
+
+      <label class="inline-control">
+        <input type="checkbox" class="switch-control" [(ngModel)]="expediteReview" />
+        <span>Expedite review</span>
+      </label>
+
+      <div class="info-message">Focus rings, borders, and validation colors come from semantic tokens.</div>
+    </section>
+
+    <section class="service-panel">
+      <div class="panel-heading">
+        <h3>Workflow status</h3>
+      </div>
+      <ol class="service-steps" aria-label="Service workflow">
+        <li class="is-complete">Intake</li>
+        <li class="is-active">Review</li>
+        <li>Decision</li>
+        <li>Notice</li>
+      </ol>
+
+      <div class="progress-block">
+        <div>
+          <strong>Eligibility completion</strong>
+          <span>2 of 3 checks complete</span>
+        </div>
+        <progress value="67" max="100" aria-label="Eligibility completion progress"></progress>
+      </div>
+
+      <div class="status-list">
+        <span>Identity verified</span>
+        <span class="status-chip status-chip--success">Complete</span>
+        <span>Eligibility review</span>
+        <span class="status-chip status-chip--warn">In progress</span>
+        <span>Final notice</span>
+        <span class="status-chip status-chip--info">Pending</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="remote__grid">
+    <section class="service-panel eligibility-panel">
+      <div class="panel-heading">
+        <h3>Eligibility checklist</h3>
+        <p>Review required evidence before moving the case to decision.</p>
+      </div>
+
+      <div class="eligibility-summary" aria-label="Eligibility review summary">
+        <div>
+          <span>Completion</span>
+          <strong>2 of 3</strong>
+          <small>One evidence item still needs review</small>
+        </div>
+        <span class="status-chip status-chip--warn">Needs income review</span>
+      </div>
+
+      <div class="eligibility-list">
+        <article class="eligibility-item is-complete">
+          <label class="eligibility-check">
+            <input type="checkbox" [(ngModel)]="documentsVerified" />
+            <span>
+              <strong>Required documents verified</strong>
+              <small>Identity, signed renewal packet, and uploaded proof of benefit period are present.</small>
+            </span>
+          </label>
+          <div class="eligibility-meta">
+            <span>Source: Upload portal</span>
+            <span>Reviewed by Intake</span>
+          </div>
+        </article>
+
+        <article class="eligibility-item is-complete">
+          <label class="eligibility-check">
+            <input type="checkbox" [(ngModel)]="residencyConfirmed" />
+            <span>
+              <strong>Residency confirmed</strong>
+              <small>Address matches state records and service region requirements.</small>
+            </span>
+          </label>
+          <div class="eligibility-meta">
+            <span>Source: Address registry</span>
+            <span>Verified Jul 8</span>
+          </div>
+        </article>
+
+        <article class="eligibility-item is-pending">
+          <label class="eligibility-check">
+            <input type="checkbox" [(ngModel)]="incomeReviewed" />
+            <span>
+              <strong>Income reviewed</strong>
+              <small>Recent income statement is missing. Request update before final decision.</small>
+            </span>
+          </label>
+          <div class="eligibility-actions">
+            <button type="button" class="action-button action-button--primary">
+              <i class="pi pi-envelope" aria-hidden="true"></i>
+              <span>Request document</span>
+            </button>
+            <button type="button" class="action-button">
+              <i class="pi pi-file-edit" aria-hidden="true"></i>
+              <span>Add note</span>
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="service-panel">
+      <div class="panel-heading">
+        <h3>Guidance notes</h3>
+      </div>
+      <div class="service-notes">
+        <details open>
+          <summary>What reviewers check</summary>
+          <p>Review documents, eligibility, and communication preferences before moving the case to decision.</p>
+        </details>
+        <details>
+          <summary>When to expedite</summary>
+          <p>Expedite cases with expiring benefits, accessibility accommodation requests, or statutory deadlines.</p>
+        </details>
+      </div>
+    </section>
+  </div>
+
+  <section class="service-panel">
+    <div class="panel-heading">
+      <h3>Case queue</h3>
+    </div>
+    <table class="case-table">
+      <thead>
+        <tr>
+          <th>Case</th>
+          <th>Applicant</th>
+          <th>Program</th>
+          <th>Status</th>
+          <th>Due</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PS-2026-1042</td>
+          <td>Jordan Avery</td>
+          <td>Benefits renewal</td>
+          <td><span class="status-chip status-chip--warn">Review</span></td>
+          <td>Today</td>
+        </tr>
+        <tr>
+          <td>PS-2026-1043</td>
+          <td>Sam Rivera</td>
+          <td>Housing assistance</td>
+          <td><span class="status-chip status-chip--success">Ready</span></td>
+          <td>Tomorrow</td>
+        </tr>
+        <tr>
+          <td>PS-2026-1044</td>
+          <td>Lee Morgan</td>
+          <td>Permit request</td>
+          <td><span class="status-chip status-chip--danger">Blocked</span></td>
+          <td>Jul 12</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="service-panel">
+    <div class="panel-heading">
+      <h3>Case timeline</h3>
+    </div>
+    <ol class="case-timeline">
+      <li>
+        <span>Jul 7</span>
+        <strong>Application received</strong>
+        <small>Complete</small>
+      </li>
+      <li>
+        <span>Jul 8</span>
+        <strong>Identity verification</strong>
+        <small>Complete</small>
+      </li>
+      <li>
+        <span>Today</span>
+        <strong>Eligibility review</strong>
+        <small>In progress</small>
+      </li>
+      <li>
+        <span>Next</span>
+        <strong>Notice generation</strong>
+        <small>Pending</small>
+      </li>
+    </ol>
+  </section>
+</section>

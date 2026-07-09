@@ -1,0 +1,50 @@
+<header class="portal-header">
+  <div>
+    <p class="eyebrow">Public Sector Digital Services</p>
+    <h1>Federated Services Portal</h1>
+  </div>
+  <button
+    pButton
+    type="button"
+    [label]="isDark() ? 'Light mode' : 'Dark mode'"
+    (click)="toggleTheme()"
+  ></button>
+</header>
+
+<main class="portal-shell">
+  <nav class="portal-nav" aria-label="Federated modules">
+    @for (remote of remotes; track remote.id) {
+      <button
+        type="button"
+        class="nav-item"
+        [class.active]="activeRemote().id === remote.id"
+        (click)="selectRemote(remote)"
+      >
+        {{ remote.label }}
+      </button>
+    }
+  </nav>
+
+  <section class="portal-content">
+    <p-card header="Shell Baseline">
+      <p>
+        This shell uses the same PrimeNG provider and token preset as every remote.
+      </p>
+      <button pButton type="button" label="Shell PrimeNG Button"></button>
+    </p-card>
+
+    <section class="remote-host" aria-live="polite">
+      @switch (activeRemote().elementName) {
+        @case ('public-services-root') {
+          <public-services-root></public-services-root>
+        }
+        @case ('public-reporting-root') {
+          <public-reporting-root></public-reporting-root>
+        }
+        @case ('public-admin-root') {
+          <public-admin-root></public-admin-root>
+        }
+      }
+    </section>
+  </section>
+</main>

@@ -1,0 +1,63 @@
+---
+description: PrimeNG federation and token contract for this Angular Nx workspace
+globs: apps/**/*.{ts,html,css},packages/**/*.{ts,css},module-federation.manifest.json,docs/federation-primeng.md
+alwaysApply: false
+---
+
+# PrimeNG Federation Contract
+
+This workspace is an Angular Nx module-federation sample using web-component remotes.
+Keep the shell and every remote aligned to the same design-system contract.
+
+## Required Provider
+
+Every independently bootstrapped Angular app must call:
+
+```ts
+providePublicSectorPrimeNG()
+```
+
+Import it from `@public-sector/primeng-preset`. Do not call raw `providePrimeNG()`
+inside apps or remotes.
+
+## Token Sources
+
+- Source tokens and baseline PrimeNG CSS variable fallbacks live in `packages/tokens`.
+- PrimeNG preset/provider logic lives in `packages/primeng-preset`.
+- Global app styles import `packages/tokens/src/tokens.css`.
+- Shell controls dark mode by toggling `.p-dark` on `document.documentElement`.
+
+## Federation Runtime
+
+The shell loads remotes from `module-federation.manifest.json`:
+
+- Shell: `4200`
+- Services: `4201`
+- Reporting: `4202`
+- Admin: `4203`
+- QA: `4204`
+
+Use one dev-server owner. Prefer `pnpm start:all`, then verify with:
+
+```bash
+pnpm verify:fed
+```
+
+## PrimeNG Reintroduction Rule
+
+Some PrimeNG hosts rendered as blank raw tags when they were used as route-critical
+or shared-wrapper content. Reintroduce PrimeNG components one family at a time:
+
+1. Verify the direct remote URL.
+2. Verify the shell-composed route.
+3. Run `pnpm verify:fed`.
+4. Only then move the pattern into a shared wrapper.
+
+Current safe smoke tests in `/qa`: `p-tag`, outlined `p-button`, `p-table`,
+`p-dialog` opened from a native trigger, and isolated `p-card`.
+
+Prefer stable token-styled native panels for route-critical content until the
+PrimeNG host is proven reliable in both direct and shell-composed views. Avoid
+promoting a PrimeNG host into a shared wrapper until the raw host passes first.
+
+Reference: https://primeng.dev/llms/llms-full.txt

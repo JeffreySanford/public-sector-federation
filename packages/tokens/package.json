@@ -1,0 +1,16 @@
+{
+  "name": "@public-sector/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens.css": "./src/tokens.css",
+    "./zeroheight-tokens.json": "./src/zeroheight-tokens.json"
+  },
+  "scripts": {
+    "build": "node src/build-tokens.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}

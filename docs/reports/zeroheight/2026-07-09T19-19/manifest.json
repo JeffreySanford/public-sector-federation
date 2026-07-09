@@ -1,0 +1,169 @@
+{
+  "packageName": "public-sector-federation-zeroheight-export",
+  "generatedAt": "2026-07-09T19:19:27.965Z",
+  "sourceWorkflow": [
+    "pnpm verify:fed",
+    "pnpm screenshots:progress",
+    "pnpm agile:report",
+    "pnpm zeroheight:export"
+  ],
+  "publishNotes": [
+    "This package is ready for Zeroheight manual upload or an API bridge.",
+    "Zeroheight public API capabilities vary by plan and currently focus on reading content and updating page statuses.",
+    "Set ZEROHEIGHT_PUBLISH_ENDPOINT to post this manifest to an internal publishing bridge."
+  ],
+  "warnings": [],
+  "pages": [
+    {
+      "zeroheightPage": "Home / Getting Started",
+      "source": "docs/design-system/README.md",
+      "output": "home-getting-started.md",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/pages/home-getting-started.md",
+      "bytes": 4419
+    },
+    {
+      "zeroheightPage": "Foundations",
+      "source": "docs/design-system/zeroheight-style-dictionary.md",
+      "output": "foundations.md",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/pages/foundations.md",
+      "bytes": 4060
+    },
+    {
+      "zeroheightPage": "Components",
+      "source": "docs/design-system/component-coverage-matrix.md",
+      "output": "components.md",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/pages/components.md",
+      "bytes": 7388
+    },
+    {
+      "zeroheightPage": "Patterns",
+      "source": "docs/design-system/app-inventory.md",
+      "output": "patterns.md",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/pages/patterns.md",
+      "bytes": 9884
+    },
+    {
+      "zeroheightPage": "Developer Guide",
+      "source": "docs/design-system/platform-reporting.md",
+      "output": "developer-guide.md",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/pages/developer-guide.md",
+      "bytes": 5718
+    },
+    {
+      "zeroheightPage": "Governance",
+      "source": "docs/design-system/agile-workflow.md",
+      "output": "governance.md",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/pages/governance.md",
+      "bytes": 6866
+    },
+    {
+      "zeroheightPage": "Figma File Blueprint",
+      "source": "docs/design-system/figma-file-blueprint.md",
+      "output": "figma-file-blueprint.md",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/pages/figma-file-blueprint.md",
+      "bytes": 5594
+    },
+    {
+      "zeroheightPage": "Zeroheight Skeleton",
+      "source": "docs/design-system/zeroheight-skeleton.md",
+      "output": "zeroheight-skeleton.md",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/pages/zeroheight-skeleton.md",
+      "bytes": 6959
+    }
+  ],
+  "tokens": [
+    {
+      "source": "packages/tokens/src/zeroheight-tokens.json",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/tokens/zeroheight-tokens.json"
+    },
+    {
+      "source": "packages/tokens/src/tokens.css",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/tokens/tokens.css"
+    },
+    {
+      "source": "packages/tokens/src/tokens/primitives.json",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/tokens/primitives.json"
+    },
+    {
+      "source": "packages/tokens/src/tokens/themes.json",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/tokens/themes.json"
+    },
+    {
+      "source": "packages/tokens/src/tokens/zeroheight-metadata.json",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/tokens/zeroheight-metadata.json"
+    },
+    {
+      "source": "packages/tokens/src/tokens/component-overrides.css",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/tokens/component-overrides.css"
+    }
+  ],
+  "reports": [
+    {
+      "source": "docs/reports/agile-progress/latest/agile-progress.json",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/agile-progress.json"
+    },
+    {
+      "source": "docs/reports/agile-progress/latest/agile-progress.md",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/agile-progress.md"
+    },
+    {
+      "source": "docs/reports/agile-progress/latest/agile-progress.html",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/agile-progress.html"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "admin.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/admin.png"
+    },
+    {
+      "file": "citizen-services.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/citizen-services.png"
+    },
+    {
+      "file": "qa-agile-neutral-dark.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/qa-agile-neutral-dark.png"
+    },
+    {
+      "file": "qa-agile-neutral-light.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/qa-agile-neutral-light.png"
+    },
+    {
+      "file": "qa-agile-pastel-dark.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/qa-agile-pastel-dark.png"
+    },
+    {
+      "file": "qa-agile-pastel-light.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/qa-agile-pastel-light.png"
+    },
+    {
+      "file": "qa-agile-report.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/qa-agile-report.png"
+    },
+    {
+      "file": "qa-agile-vibrant-dark.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/qa-agile-vibrant-dark.png"
+    },
+    {
+      "file": "qa-agile-vibrant-light.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/qa-agile-vibrant-light.png"
+    },
+    {
+      "file": "qa-workbench.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/qa-workbench.png"
+    },
+    {
+      "file": "reporting.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/reporting.png"
+    },
+    {
+      "file": "shell-home.png",
+      "packagePath": "docs/reports/zeroheight/2026-07-09T19-19/reports/agile-progress/screenshots/shell-home.png"
+    }
+  ],
+  "storybook": {
+    "localCommand": "pnpm storybook:qa",
+    "staticBuildCommand": "pnpm build-storybook:qa",
+    "staticOutput": "dist/storybook/qa-remote"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "playground",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/playground/src",
+  "projectType": "application",
+  "implicitDependencies": ["primeng-preset"],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/playground",
+        "index": "apps/playground/src/index.html",
+        "browser": "apps/playground/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/playground/tsconfig.app.json",
+        "assets": [],
+        "styles": ["./apps/playground/src/styles.css"]
+      }
+    },
+    "serve": {
+      "executor": "@angular/build:dev-server",
+      "options": {
+        "buildTarget": "playground:build",
+        "port": 4210
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p apps/playground/tsconfig.app.json"
+      }
+    }
+  },
+  "tags": ["scope:app", "type:qa"]
+}

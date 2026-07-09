@@ -1,0 +1,53 @@
+{
+  "name": "agile-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/agile-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/apps/agile-api"],
+      "options": {
+        "command": "tsc -p apps/agile-api/tsconfig.app.json"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node dist/apps/agile-api/main.js"
+      },
+      "dependsOn": ["build"]
+    },
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -w -p apps/agile-api/tsconfig.app.json"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p apps/agile-api/tsconfig.app.json"
+      }
+    },
+    "prisma:generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm prisma generate"
+      }
+    },
+    "prisma:deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm prisma migrate deploy"
+      }
+    },
+    "seed": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node apps/agile-api/prisma/seed.mjs"
+      }
+    }
+  },
+  "tags": ["scope:api", "type:nest", "type:agile"]
+}

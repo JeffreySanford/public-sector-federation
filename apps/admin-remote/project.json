@@ -1,0 +1,37 @@
+{
+  "name": "admin-remote",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/admin-remote/src",
+  "projectType": "application",
+  "implicitDependencies": ["primeng-preset"],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/admin-remote",
+        "index": "apps/admin-remote/src/index.html",
+        "browser": "apps/admin-remote/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/admin-remote/tsconfig.app.json",
+        "assets": [],
+        "styles": ["./apps/admin-remote/src/styles.css"],
+        "outputHashing": "none"
+      }
+    },
+    "serve": {
+      "executor": "@angular/build:dev-server",
+      "options": {
+        "buildTarget": "admin-remote:build",
+        "port": 4203
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p apps/admin-remote/tsconfig.app.json"
+      }
+    }
+  },
+  "tags": ["scope:app", "type:remote"]
+}

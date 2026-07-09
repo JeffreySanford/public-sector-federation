@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: public-sector-agile-postgres
+    environment:
+      POSTGRES_DB: public_sector_agile
+      POSTGRES_USER: public_sector
+      POSTGRES_PASSWORD: public_sector
+    ports:
+      - "5432:5432"
+    volumes:
+      - agile-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U public_sector -d public_sector_agile"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  agile-api:
+    build:
+      context: .
+      dockerfile: apps/agile-api/Dockerfile
+    container_name: public-sector-agile-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://public_sector:public_sector@postgres:5432/public_sector_agile?schema=public
+      PORT: 3333
+      CORS_ORIGIN: http://localhost:4200,http://localhost:4204
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./apps/agile-api/prisma/seed-data:/workspace/apps/agile-api/prisma/seed-data
+    command: >
+      sh -c "pnpm prisma migrate deploy
+      && pnpm nx run agile-api:seed
+      && pnpm nx run agile-api:serve"
+
+volumes:
+  agile-postgres-data:

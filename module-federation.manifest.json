@@ -1,0 +1,18 @@
+{
+  "services": {
+    "remoteEntry": "http://localhost:4201/main.js",
+    "elementName": "public-services-root"
+  },
+  "reporting": {
+    "remoteEntry": "http://localhost:4202/main.js",
+    "elementName": "public-reporting-root"
+  },
+  "admin": {
+    "remoteEntry": "http://localhost:4203/main.js",
+    "elementName": "public-admin-root"
+  },
+  "qa": {
+    "remoteEntry": "http://localhost:4204/main.js",
+    "elementName": "public-qa-root"
+  }
+}
