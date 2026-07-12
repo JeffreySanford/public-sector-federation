@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import { injectAxe, checkA11y } from 'axe-playwright';
 
 /**
  * Storybook Story Validation E2E Tests
