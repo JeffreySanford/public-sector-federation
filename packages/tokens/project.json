@@ -10,6 +10,12 @@
         "command": "pnpm --dir packages/tokens build"
       }
     },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --dir packages/tokens test"
+      }
+    },
     "typecheck": {
       "executor": "nx:run-commands",
       "options": {

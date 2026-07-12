@@ -1,0 +1,95 @@
+import { createServer } from 'node:http';
+import { readFile } from 'node:fs/promises';
+import { extname, join, normalize, resolve } from 'node:path';
+import { AxeBuilder } from '@axe-core/playwright';
+import { chromium } from 'playwright';
+
+const root = process.cwd();
+const storybookRoot = resolve(root, 'dist/storybook/qa-remote');
+const port = Number(process.env.STORYBOOK_E2E_PORT ?? 4410);
+const mimeTypes = new Map([
+  ['.css', 'text/css'],
+  ['.html', 'text/html'],
+  ['.js', 'text/javascript'],
+  ['.json', 'application/json'],
+  ['.svg', 'image/svg+xml'],
+  ['.woff', 'font/woff'],
+  ['.woff2', 'font/woff2'],
+]);
+
+const server = createServer(async (request, response) => {
+  try {
+    const url = new URL(request.url ?? '/', `http://localhost:${port}`);
+    const requestedPath = url.pathname === '/' ? '/index.html' : url.pathname;
+    const filePath = normalize(resolve(storybookRoot, `.${requestedPath}`));
+
+    if (!filePath.startsWith(storybookRoot)) {
+      response.writeHead(403);
+      response.end('Forbidden');
+      return;
+    }
+
+    const body = await readFile(filePath);
+    response.writeHead(200, { 'content-type': mimeTypes.get(extname(filePath)) ?? 'application/octet-stream' });
+    response.end(body);
+  } catch {
+    response.writeHead(404);
+    response.end('Not found');
+  }
+});
+
+await new Promise((resolveListen) => server.listen(port, resolveListen));
+
+const browser = await chromium.launch();
+const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+const page = await context.newPage();
+
+try {
+  const index = JSON.parse(await readFile(join(storybookRoot, 'index.json'), 'utf8'));
+  const stories = Object.values(index.entries).filter((entry) => entry.type === 'story');
+  if (stories.length !== 20) {
+    throw new Error(`Expected 20 built Storybook stories, found ${stories.length}.`);
+  }
+
+  const storyIds = ['design-system-problem-areas--overview', 'design-system-primeng-playground--component-families'];
+  for (const storyId of storyIds) {
+    await page.goto(`http://localhost:${port}/iframe.html?id=${storyId}&viewMode=story`, {
+      waitUntil: 'domcontentloaded',
+      timeout: 60000,
+    });
+    if (storyId.includes('problem-areas')) {
+      await page.getByText('Known problem areas').waitFor({ timeout: 60000 });
+    }
+    if (storyId.includes('primeng-playground')) {
+      await page.getByText('PrimeNG federation playground').waitFor({ timeout: 60000 });
+    }
+
+    const bodyText = await page.locator('body').innerText();
+    if (storyId.includes('problem-areas') && !bodyText.includes('Known problem areas')) {
+      throw new Error('Problem Areas overview story did not render expected content.');
+    }
+    if (storyId.includes('primeng-playground') && !bodyText.includes('PrimeNG federation playground')) {
+      throw new Error('PrimeNG playground story did not render expected content.');
+    }
+
+    const axe = await new AxeBuilder({ page }).analyze();
+    if (axe.violations.length > 0 || axe.incomplete.length > 0) {
+      throw new Error(
+        `${storyId} has axe issues: ${JSON.stringify(
+          {
+            violations: axe.violations.map((violation) => ({ id: violation.id, impact: violation.impact, nodes: violation.nodes.length })),
+            incomplete: axe.incomplete.map((item) => ({ id: item.id, impact: item.impact, nodes: item.nodes.length })),
+          },
+          null,
+          2,
+        )}`,
+      );
+    }
+  }
+
+  console.log(`Storybook e2e checks passed for ${stories.length} stories and ${storyIds.length} rendered story iframes.`);
+} finally {
+  await context.close();
+  await browser.close();
+  await new Promise((resolveClose) => server.close(resolveClose));
+}

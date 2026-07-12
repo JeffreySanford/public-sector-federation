@@ -1,6 +1,10 @@
 {
-  "extends": "./tsconfig.app.json",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc/qa-remote-storybook",
+    "types": []
+  },
   "files": [],
-  "include": ["src/**/*.ts", ".storybook/**/*.ts"]
+  "include": ["src/**/*.stories.ts", ".storybook/preview.ts"]
 }
 

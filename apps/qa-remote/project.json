@@ -53,6 +53,13 @@
         "outputDir": "dist/storybook/qa-remote",
         "compodoc": false
       }
+    },
+    "e2e": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build-storybook"],
+      "options": {
+        "command": "node scripts/storybook-e2e.mjs"
+      }
     }
   },
   "tags": ["scope:app", "type:remote", "type:qa"]

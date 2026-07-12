@@ -30,6 +30,18 @@
         "command": "tsc --noEmit -p apps/agile-api/tsconfig.app.json"
       }
     },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -p apps/agile-api/tsconfig.spec.json && node --test \"dist/apps/agile-api-test/test/**/*.test.js\""
+      }
+    },
+    "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm db:validate && node scripts/agile-seed-e2e.mjs"
+      }
+    },
     "prisma:generate": {
       "executor": "nx:run-commands",
       "options": {

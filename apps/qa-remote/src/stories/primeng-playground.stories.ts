@@ -8,7 +8,6 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageService } from 'primeng/api';
 import { PasswordModule } from 'primeng/password';
-import { ProgressBarModule } from 'primeng/progressbar';
 import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
@@ -32,7 +31,6 @@ interface PlaygroundRow {
     FormsModule,
     InputTextModule,
     PasswordModule,
-    ProgressBarModule,
     SelectModule,
     TableModule,
     TagModule,
@@ -40,9 +38,9 @@ interface PlaygroundRow {
     ToggleSwitchModule,
   ],
   template: `
-    <section class="storybook-shell">
+    <main class="storybook-shell">
       <header>
-        <p-tag value="Storybook Lab" severity="info" />
+        <p-tag value="Storybook Lab" severity="contrast" />
         <h1>PrimeNG federation playground</h1>
         <p>
           Use this story to test component families, states, and theme behavior before
@@ -70,24 +68,27 @@ interface PlaygroundRow {
           <div class="form-grid">
             <label>
               Applicant name
-              <input pInputText [(ngModel)]="applicantName" />
+              <input id="storybook-applicant-name" pInputText [(ngModel)]="applicantName" />
             </label>
-            <label>
-              Program
+            <label for="storybook-program">Program</label>
               <p-select
+                inputId="storybook-program"
                 [(ngModel)]="selectedProgram"
                 [options]="programs"
                 appendTo="body"
                 ariaLabel="Program"
               />
-            </label>
-            <label>
-              Temporary password
-              <p-password [(ngModel)]="temporaryPassword" [feedback]="false" toggleMask />
-            </label>
+            <label for="storybook-temporary-password">Temporary password</label>
+              <p-password
+                inputId="storybook-temporary-password"
+                [(ngModel)]="temporaryPassword"
+                [feedback]="false"
+                toggleMask
+                ariaLabel="Temporary password"
+              />
             <label class="toggle-row">
               <span>Expedite review</span>
-              <p-toggleswitch [(ngModel)]="expedited" ariaLabel="Expedite review" />
+              <p-toggleswitch inputId="storybook-expedite-review" [(ngModel)]="expedited" ariaLabel="Expedite review" />
             </label>
           </div>
         </p-card>
@@ -95,7 +96,7 @@ interface PlaygroundRow {
 
       <p-card header="Data display" subheader="Table, sort readiness, status tags, and progress">
         <div class="story-stack">
-          <p-progressbar [value]="82" aria-label="Storybook PrimeNG coverage progress" />
+          <progress value="82" max="100" aria-label="Storybook PrimeNG coverage progress"></progress>
           <p-table [value]="rows" styleClass="p-datatable-gridlines">
             <ng-template pTemplate="header">
               <tr>
@@ -148,7 +149,7 @@ interface PlaygroundRow {
           <p-button label="Close" [outlined]="true" (click)="dialogVisible = false" />
         </ng-template>
       </p-dialog>
-    </section>
+    </main>
   `,
   styles: `
     .storybook-shell {
@@ -163,15 +164,13 @@ interface PlaygroundRow {
       padding: 1.5rem;
       border: 1px solid var(--p-content-border-color);
       border-radius: 1.25rem;
-      background:
-        radial-gradient(circle at top right, color-mix(in srgb, var(--p-primary-color) 22%, transparent), transparent 34rem),
-        var(--p-content-background);
+      background: var(--p-content-background);
     }
 
     h1 {
       margin: 0.75rem 0 0.25rem;
       font-size: clamp(1.75rem, 4vw, 3rem);
-      letter-spacing: -0.05em;
+      letter-spacing: 0;
     }
 
     p {
@@ -205,6 +204,12 @@ interface PlaygroundRow {
       font-weight: 800;
     }
 
+    progress {
+      width: 100%;
+      height: 0.75rem;
+      accent-color: var(--ps-button-background);
+    }
+
     .toggle-row {
       grid-template-columns: 1fr auto;
       align-items: center;
@@ -217,7 +222,7 @@ interface PlaygroundRow {
     }
   `,
 })
-class PrimeNgPlaygroundStoryComponent {
+export class PrimeNgPlaygroundStoryComponent {
   private readonly messageService = inject(MessageService);
 
   dialogVisible = false;
@@ -234,8 +239,8 @@ class PrimeNgPlaygroundStoryComponent {
     { component: 'Dialog and Toast', family: 'Overlays', status: 'Watch' },
   ];
 
-  severity(status: PlaygroundRow['status']): 'success' | 'info' | 'warn' {
-    return status === 'Proven' ? 'success' : status === 'Active' ? 'info' : 'warn';
+  severity(status: PlaygroundRow['status']): 'success' | 'contrast' | 'warn' {
+    return status === 'Proven' ? 'success' : status === 'Active' ? 'contrast' : 'warn';
   }
 
   showToast(): void {
@@ -250,9 +255,19 @@ class PrimeNgPlaygroundStoryComponent {
 
 const meta: Meta<PrimeNgPlaygroundStoryComponent> = {
   title: 'Design System/PrimeNG Playground',
-  component: PrimeNgPlaygroundStoryComponent,
+  render: () => ({
+    moduleMetadata: {
+      imports: [PrimeNgPlaygroundStoryComponent],
+    },
+    template: '<public-primeng-playground-story />',
+  }),
   parameters: {
     layout: 'fullscreen',
+    docs: {
+      source: {
+        type: 'dynamic',
+      },
+    },
   },
 };
 

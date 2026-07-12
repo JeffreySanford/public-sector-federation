@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../../dist/apps/agile-api-test",
+    "noEmit": false
+  },
+  "include": ["src/**/*.ts", "test/**/*.test.ts"]
+}
