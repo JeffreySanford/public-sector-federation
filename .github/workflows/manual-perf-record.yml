@@ -71,6 +71,11 @@ jobs:
           PERFORMANCE_API_URL: ${{ github.event.inputs.api_url }}
         run: pnpm perf:record
 
+      - name: Export and update seed file
+        env:
+          DATABASE_URL: postgresql://public_sector:public_sector@localhost:5432/public_sector_agile
+        run: pnpm perf:export-seed --auto-commit
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
