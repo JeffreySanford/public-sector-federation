@@ -2,7 +2,7 @@
   "sprint": {
     "slug": "sprint-1-design-system-hardening",
     "name": "Sprint 1",
-    "goal": "Harden proven PrimeNG families, generate token artifacts, and make the workflow repeatable.",
+    "goal": "Compare token delivery approaches, validate Web Component-mounted subapp behavior, and keep governance documentation focused.",
     "status": "active",
     "startsOn": "2026-07-09T00:00:00.000Z",
     "endsOn": "2026-07-16T00:00:00.000Z"
@@ -37,45 +37,45 @@
       "sortOrder": 20
     },
     {
-      "slug": "track-blockers-in-component-matrix",
-      "title": "Track blockers in the matrix",
-      "workstream": "Governance",
+      "slug": "track-platform-validation-risks",
+      "title": "Track platform validation risks",
+      "workstream": "Architecture validation",
       "type": "task",
       "status": "done",
       "effort": "small",
       "owner": "Design system",
-      "summary": "Keep risky PrimeNG reintroduction decisions visible and owned.",
-      "includes": "Blank hosts, overlay clipping, token generation, route-critical fallback risk",
+      "summary": "Keep token delivery, Web Component, overlay, and PrimeNG reintroduction risks visible and owned.",
+      "includes": "Shadow DOM unknowns, overlay inheritance, blank hosts, token drift, route-critical fallback risk",
       "blockerSummary": null,
-      "doneCriteria": "Each blocker has owner, affected family, mitigation, and next action.",
+      "doneCriteria": "Each risk has an owner, affected area, mitigation, and next validation action.",
       "sortOrder": 30
     },
     {
-      "slug": "prepare-style-dictionary-source",
-      "title": "Prepare Style Dictionary source",
-      "workstream": "Token and Style Dictionary model",
+      "slug": "compare-token-delivery-methods",
+      "title": "Compare token delivery methods",
+      "workstream": "Token delivery architecture",
       "type": "story",
       "status": "done",
       "effort": "medium",
       "owner": "Tokens",
-      "summary": "Move tokens to JSON source and generate CSS plus a Zeroheight-friendly export.",
-      "includes": "Token tier model and initial semantic-to-PrimeNG mappings",
-      "blockerSummary": "Token CSS was manually authored before the generator was added.",
-      "doneCriteria": "Token browser displays source-backed token rows.",
+      "summary": "Compare how design tokens reach the shell, Web Component host, mounted subapps, PrimeNG, and documentation.",
+      "includes": "Shared token package, shell global CSS, subapp bundled CSS, host-level CSS variables, PrimeNG preset mapping",
+      "blockerSummary": "Token source and shell/subapp loading details still need validation against the production repositories.",
+      "doneCriteria": "Token delivery decision diagram and token pipeline documentation explain options, tradeoffs, and validation questions.",
       "sortOrder": 40
     },
     {
-      "slug": "publish-zeroheight-skeleton",
-      "title": "Publish Zeroheight skeleton",
-      "workstream": "Zeroheight documentation preview",
+      "slug": "validate-storybook-zeroheight-dx",
+      "title": "Validate Storybook and Zeroheight developer experience",
+      "workstream": "Developer experience validation",
       "type": "task",
       "status": "next",
       "effort": "small",
       "owner": "Design system",
-      "summary": "Create governed portal pages from the local documentation skeleton.",
-      "includes": "Home, Foundations, Components, Patterns, Developer Guide, Governance",
-      "blockerSummary": "Needs final published portal creation outside the repo.",
-      "doneCriteria": "Published-guidance model includes app inventory, component matrix, accessibility, and release notes.",
+      "summary": "Prove a small developer-focused workflow for Storybook evidence, token display, and Zeroheight governance guidance.",
+      "includes": "Storybook evidence model, token display model, component status guidance, runtime ownership boundaries, repository validation checklist",
+      "blockerSummary": "Needs repository access to replace assumptions with confirmed implementation details.",
+      "doneCriteria": "Zeroheight remains a small guidance and evidence surface rather than a full page-build effort.",
       "sortOrder": 50
     },
     {
@@ -86,10 +86,10 @@
       "status": "backlog",
       "effort": "large",
       "owner": "Services team",
-      "summary": "Reintroduce simple PrimeNG form controls into the Citizen Services remote.",
-      "includes": "InputText, Select, checkbox/radio, and supporting components",
+      "summary": "Validate simple PrimeNG form controls through the direct remote and shell-mounted Web Component path.",
+      "includes": "InputText, Select, checkbox/radio, overlay append behavior, token inheritance checks",
       "blockerSummary": "Route-critical PrimeNG hosts previously rendered blank in some remote compositions.",
-      "doneCriteria": "InputText, Select, checkbox/radio, and supporting components pass direct remote, shell, and verify:fed checks.",
+      "doneCriteria": "InputText, Select, checkbox/radio, and supporting components pass direct remote, shell-mounted, overlay, and verify:fed checks.",
       "sortOrder": 60
     }
   ],
@@ -137,10 +137,10 @@
     {
       "slug": "promotion-decision",
       "check": "Promotion decision",
-      "evidence": "Component matrix status is updated after validation.",
-      "gate": "Status moves to Active or Proven with notes.",
+      "evidence": "Component promotion status and validation evidence are updated after validation.",
+      "gate": "Status moves to Active or Proven only with Storybook, direct remote, shell-mounted, and accessibility evidence.",
       "status": "done",
-      "workItemSlug": "track-blockers-in-component-matrix"
+      "workItemSlug": "track-platform-validation-risks"
     }
   ],
   "blockers": [
@@ -157,7 +157,7 @@
       "slug": "overlay-clipping-and-z-index",
       "title": "Overlay clipping and z-index",
       "affectedArea": "Dialog, Select, DatePicker, MultiSelect, Menu",
-      "mitigation": "Prefer appendTo body and verify in shell-composed routes.",
+      "mitigation": "Confirm appendTo/container behavior and verify token inheritance in shell-composed routes.",
       "owner": "Platform",
       "status": "review",
       "workItemSlug": "harden-proven-primeng-families"
@@ -165,17 +165,17 @@
     {
       "slug": "manual-token-source",
       "title": "Manual token source",
-      "affectedArea": "Style Dictionary and Zeroheight export",
-      "mitigation": "Create token JSON and generate CSS plus docs artifacts from one source.",
+      "affectedArea": "Token source, generated CSS, and Zeroheight export",
+      "mitigation": "Create token JSON and generate CSS plus documentation artifacts from one source.",
       "owner": "Tokens",
       "status": "done",
-      "workItemSlug": "prepare-style-dictionary-source"
+      "workItemSlug": "compare-token-delivery-methods"
     },
     {
       "slug": "form-controls-not-reintroduced",
       "title": "Form controls not reintroduced",
       "affectedArea": "Citizen Services",
-      "mitigation": "Reintroduce InputText and Select in /qa, then direct remote, then shell route.",
+      "mitigation": "Reintroduce InputText and Select in /qa, then direct remote, then shell-mounted route.",
       "owner": "Services team",
       "status": "backlog",
       "workItemSlug": "citizen-services-primeng-reintroduction"
@@ -197,32 +197,32 @@
       "note": "Mirrored acceptance stories into /qa and passed federation accessibility checks."
     },
     {
-      "workItemSlug": "prepare-style-dictionary-source",
+      "workItemSlug": "compare-token-delivery-methods",
       "activityType": "development",
       "entryDate": "2026-07-09T16:30:00.000Z",
       "minutes": 80,
       "note": "Created token JSON source model and generated tokens.css plus Zeroheight export."
     },
     {
-      "workItemSlug": "publish-zeroheight-skeleton",
+      "workItemSlug": "validate-storybook-zeroheight-dx",
       "activityType": "documentation",
       "entryDate": "2026-07-09T17:15:00.000Z",
       "minutes": 35,
-      "note": "Created Figma and Zeroheight manual build sheets."
+      "note": "Created focused Storybook and Zeroheight developer-experience guidance without building a full portal."
     },
     {
       "workItemSlug": "harden-proven-primeng-families",
       "activityType": "validation",
       "entryDate": "2026-07-09T18:50:00.000Z",
       "minutes": 55,
-      "note": "Added stress-state stories, federation readiness proof in /qa, and promoted proven families in the component matrix."
+      "note": "Added stress-state stories, federation readiness proof in /qa, and updated validation evidence for proven families."
     },
     {
-      "workItemSlug": "track-blockers-in-component-matrix",
+      "workItemSlug": "track-platform-validation-risks",
       "activityType": "documentation",
       "entryDate": "2026-07-09T18:55:00.000Z",
       "minutes": 25,
-      "note": "Updated blocker table with owners, mitigations, and next actions after Sprint 1 promotion."
+      "note": "Updated validation risks with owners, mitigations, and next actions after Sprint 1 promotion."
     }
   ]
 }

@@ -91,13 +91,13 @@ export class QaRemoteComponent implements OnInit {
       status: 'In-app documentation model',
       description: 'A local view of the guidance that would be published to Zeroheight for app teams.',
       command: 'docs/design-system',
-      reportLead: 'Use this preview to model what product, design, accessibility, and engineering would read in a published portal.',
-      metrics: ['4 publishing sections', 'App inventory linked', 'Component matrix linked'],
-      nextSteps: ['Add usage examples', 'Add release notes model', 'Link Storybook stories to guidance'],
+      reportLead: 'Use this preview to model the small Storybook, token, and governance workflow Zeroheight should support.',
+      metrics: ['Focus doc linked', 'Token delivery model linked', 'Validation checklist linked'],
+      nextSteps: ['Confirm Zeroheight role', 'Link Storybook evidence', 'Keep runtime config out of documentation'],
     },
     {
       id: 'style-dictionary',
-      title: 'Style Dictionary browser',
+      title: 'Token delivery browser',
       status: 'Token export model',
       description: 'A token browser showing semantic tokens and PrimeNG mapping tokens side by side.',
       command: 'packages/tokens',
@@ -110,8 +110,8 @@ export class QaRemoteComponent implements OnInit {
       title: 'Agile plan',
       status: 'Sprint planning model',
       description: 'A delivery view for sprint slices, level of effort, blockers, and done criteria.',
-      command: 'docs/design-system/agile-workflow.md',
-      reportLead: 'Use this plan to break the design-system POC into sprint-sized increments with clear validation gates.',
+      command: 'docs/design-system/focus.md',
+      reportLead: 'Use this plan to keep the design-system work centered on token delivery, shell integration, and validation gates.',
       metrics: ['Loading sprint metrics…', 'Acceptance checks pending', 'Blockers pending'],
       nextSteps: ['Loading next steps from the Agile API.'],
     },
@@ -121,9 +121,9 @@ export class QaRemoteComponent implements OnInit {
 
   readonly zeroheightSections = [
     {
-      section: 'App inventory',
+      section: 'Architecture focus',
       audience: 'Product, design, engineering',
-      content: 'Shell/remotes, route ownership, design-system coverage, and validation checks.',
+      content: 'Token delivery, shell mounting, registry role, and validation checks.',
     },
     {
       section: 'Component coverage',
@@ -175,8 +175,8 @@ export class QaRemoteComponent implements OnInit {
     },
     {
       check: 'Promotion decision',
-      evidence: 'Component matrix status is updated after validation.',
-      gate: 'Status moves to Active or Proven with notes.',
+      evidence: 'Component promotion status and validation evidence are updated after validation.',
+      gate: 'Status moves to Active or Proven only with Storybook, direct remote, shell-mounted, and accessibility evidence.',
       status: 'Done',
     },
   ];
@@ -222,8 +222,8 @@ export class QaRemoteComponent implements OnInit {
   ];
 
   readonly zeroheightPortalRows = [
-    { page: 'Home and getting started', content: 'What this system is, who uses it, and how teams adopt it.', source: 'App inventory' },
-    { page: 'Foundations', content: 'Color, typography, spacing, radius, elevation, focus, and dark mode.', source: 'Style Dictionary and Figma' },
+    { page: 'Focus', content: 'What problem this work is solving for the unified platform.', source: 'docs/design-system/focus.md' },
+    { page: 'Token pipeline', content: 'How tokens reach shell, subapps, PrimeNG, Storybook, and documentation.', source: 'Token delivery decision diagram' },
     { page: 'Components', content: 'Usage, states, accessibility notes, and embedded Storybook examples.', source: 'Storybook' },
     { page: 'Patterns', content: 'Forms, search/filter, tables, empty states, loading, errors, confirmations.', source: '/qa and remotes' },
     { page: 'Developer guide', content: 'Install preset, import tokens, bootstrap PrimeNG, and verify federated routes.', source: 'Repo docs' },
@@ -275,19 +275,19 @@ export class QaRemoteComponent implements OnInit {
       day: 'Day 1',
       focus: 'Inventory current app',
       output: 'Foundations, components, patterns, states, inconsistencies.',
-      workItemSlugs: ['track-blockers-in-component-matrix', 'create-storybook-acceptance-checks'],
+      workItemSlugs: ['track-platform-validation-risks', 'create-storybook-acceptance-checks'],
     },
     {
       day: 'Day 2',
       focus: 'Token map v1',
       output: 'Semantic token list and PrimeNG mapping candidates.',
-      workItemSlugs: ['prepare-style-dictionary-source'],
+      workItemSlugs: ['compare-token-delivery-methods'],
     },
     {
       day: 'Day 3',
-      focus: 'Figma foundations',
-      output: 'Variables, modes, and first component frames.',
-      workItemSlugs: ['prepare-style-dictionary-source', 'publish-zeroheight-skeleton'],
+      focus: 'Token delivery comparison',
+      output: 'Shared package, shell CSS, subapp CSS, host variables, and PrimeNG preset tradeoffs.',
+      workItemSlugs: ['compare-token-delivery-methods', 'validate-storybook-zeroheight-dx'],
     },
     {
       day: 'Day 4',
@@ -297,15 +297,15 @@ export class QaRemoteComponent implements OnInit {
     },
     {
       day: 'Day 5',
-      focus: 'Zeroheight skeleton',
-      output: 'Portal structure with Storybook/Figma/token references.',
-      workItemSlugs: ['publish-zeroheight-skeleton'],
+      focus: 'Storybook and Zeroheight DX',
+      output: 'Small evidence workflow for stories, token display, component status, and governance notes.',
+      workItemSlugs: ['validate-storybook-zeroheight-dx'],
     },
     {
       day: 'Day 6',
       focus: 'Developer onboarding',
-      output: 'How to consume preset, tokens, stories, and verification checks.',
-      workItemSlugs: ['publish-zeroheight-skeleton', 'citizen-services-primeng-reintroduction'],
+      output: 'How to consume preset, tokens, stories, and validation checks.',
+      workItemSlugs: ['validate-storybook-zeroheight-dx', 'citizen-services-primeng-reintroduction'],
     },
     {
       day: 'Day 7',
@@ -388,7 +388,7 @@ export class QaRemoteComponent implements OnInit {
     'Stress states cover long labels, loading, empty data, and error feedback.',
     'Theme contrast works in neutral, vibrant, pastel, light, and dark modes.',
     'Direct remote and shell-composed /qa routes pass `pnpm verify:fed`.',
-    'Component matrix marks proven families as Active or Proven.',
+    'Component promotion evidence marks proven families as Active or Proven.',
   ];
 
   ngOnInit(): void {
