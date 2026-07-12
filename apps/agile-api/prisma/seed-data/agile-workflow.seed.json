@@ -49,6 +49,48 @@
       "blockerSummary": null,
       "doneCriteria": "Baseline metrics established, performance tracking integrated into CI/CD, regression detection enabled",
       "sortOrder": 30
+    },
+    {
+      "slug": "code-coverage-reports",
+      "title": "Code Coverage Reports",
+      "workstream": "Quality Assurance",
+      "type": "story",
+      "status": "done",
+      "effort": "medium",
+      "owner": "QA Team",
+      "summary": "Generate code coverage metrics, set minimum thresholds (70%), track trends in CI/CD pipeline",
+      "includes": "Coverage report generation, threshold configuration, trend tracking, gap analysis",
+      "blockerSummary": null,
+      "doneCriteria": "Coverage metrics established, 70% threshold configured, trend tracking enabled",
+      "sortOrder": 40
+    },
+    {
+      "slug": "testing-documentation",
+      "title": "Testing Documentation",
+      "workstream": "Documentation",
+      "type": "story",
+      "status": "done",
+      "effort": "large",
+      "owner": "Documentation Team",
+      "summary": "Create comprehensive testing guide (docs/TESTING.md) with debugging tips, performance baseline, and PR checklist template",
+      "includes": "Test run guide, debugging troubleshooting, performance baseline documentation, PR checklist template, accessibility notes",
+      "blockerSummary": null,
+      "doneCriteria": "docs/TESTING.md complete, .github/pull_request_template.md created, debugging guide comprehensive",
+      "sortOrder": 50
+    },
+    {
+      "slug": "performance-tracking",
+      "title": "Performance Tracking Setup",
+      "workstream": "Quality Assurance",
+      "type": "story",
+      "status": "done",
+      "effort": "medium",
+      "owner": "QA Team",
+      "summary": "Baseline test execution times, monitor for regressions, optimize slowest tests, track in docs/PERFORMANCE_BASELINE.md",
+      "includes": "Baseline measurement, regression monitoring, test optimization, historical tracking, threshold alerts",
+      "blockerSummary": null,
+      "doneCriteria": "docs/PERFORMANCE_BASELINE.md established with baselines and regression thresholds, E2E suite <360s total",
+      "sortOrder": 60
     }
   ],
   "acceptanceChecks": [],
