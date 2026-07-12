@@ -1,0 +1,518 @@
+<testsuites id="" name="" tests="126" failures="0" skipped="126" errors="0" time="0.3581750000000001">
+<testsuite name="apps\shell\e2e\federation.spec.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="chromium" tests="22" failures="0" skipped="22" time="0" errors="0">
+<testcase name="Shell Module Federation › should load shell application" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should render shell navigation" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should expose remotes in window object" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should have shared dependencies available" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to services remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to reporting remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to admin remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to QA remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should preserve routing when navigating between remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should maintain shared tokens across remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should load CSS variables from design system" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should not have console errors on load" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should handle remote load failure gracefully" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should initialize module federation manifest" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should share PrimeNG across remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should share Angular packages across remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load services remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load reporting remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load admin remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load QA remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Token Inheritance › should inherit color tokens in shell and remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Token Inheritance › should apply consistent font across federation boundary" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="CODE_EXAMPLES.test.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="chromium" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testcase name="Documentation Code Examples › Federation Config Example - shell federation.config.ts" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicStatusCardComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicPageHeaderComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicFormSectionComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicEmptyStateComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Playwright Configuration Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Markdownlint Configuration Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Token Package Export Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Design System Registry Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › PrimeNG Preset Mapping Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Module Federation Shared Dependencies Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › TypeScript Signal Utility Type Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Accessibility Attribute Example - ARIA Labels" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › CSS Class Naming Convention Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Testing Pattern Example - Component Setup" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Testing Pattern Example - Signal Input Test" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Testing Pattern Example - DOM Query" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Link Validation › should have valid references to component files" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Link Validation › should have valid references to test files" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Link Validation › should have valid references to documentation files" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="apps\shell\e2e\federation.spec.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="firefox" tests="22" failures="0" skipped="22" time="0" errors="0">
+<testcase name="Shell Module Federation › should load shell application" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should render shell navigation" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should expose remotes in window object" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should have shared dependencies available" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to services remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to reporting remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to admin remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to QA remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should preserve routing when navigating between remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should maintain shared tokens across remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should load CSS variables from design system" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should not have console errors on load" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should handle remote load failure gracefully" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should initialize module federation manifest" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should share PrimeNG across remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should share Angular packages across remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load services remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load reporting remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load admin remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load QA remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Token Inheritance › should inherit color tokens in shell and remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Token Inheritance › should apply consistent font across federation boundary" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="CODE_EXAMPLES.test.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="firefox" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testcase name="Documentation Code Examples › Federation Config Example - shell federation.config.ts" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicStatusCardComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicPageHeaderComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicFormSectionComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicEmptyStateComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Playwright Configuration Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Markdownlint Configuration Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Token Package Export Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Design System Registry Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › PrimeNG Preset Mapping Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Module Federation Shared Dependencies Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › TypeScript Signal Utility Type Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Accessibility Attribute Example - ARIA Labels" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › CSS Class Naming Convention Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Testing Pattern Example - Component Setup" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Testing Pattern Example - Signal Input Test" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Testing Pattern Example - DOM Query" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Link Validation › should have valid references to component files" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Link Validation › should have valid references to test files" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Link Validation › should have valid references to documentation files" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="apps\shell\e2e\federation.spec.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="webkit" tests="22" failures="0" skipped="22" time="0" errors="0">
+<testcase name="Shell Module Federation › should load shell application" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should render shell navigation" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should expose remotes in window object" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should have shared dependencies available" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to services remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to reporting remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to admin remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should allow navigation to QA remote" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should preserve routing when navigating between remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should maintain shared tokens across remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should load CSS variables from design system" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should not have console errors on load" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should handle remote load failure gracefully" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should initialize module federation manifest" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should share PrimeNG across remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Shell Module Federation › should share Angular packages across remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load services remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load reporting remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load admin remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Remote Loading Performance › should load QA remote within acceptable time" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Token Inheritance › should inherit color tokens in shell and remotes" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Token Inheritance › should apply consistent font across federation boundary" classname="apps\shell\e2e\federation.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="CODE_EXAMPLES.test.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="webkit" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testcase name="Documentation Code Examples › Federation Config Example - shell federation.config.ts" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicStatusCardComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicPageHeaderComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicFormSectionComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Component Signal Input Example - PublicEmptyStateComponent" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Playwright Configuration Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Markdownlint Configuration Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Token Package Export Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Design System Registry Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › PrimeNG Preset Mapping Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Module Federation Shared Dependencies Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › TypeScript Signal Utility Type Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Accessibility Attribute Example - ARIA Labels" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › CSS Class Naming Convention Example" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Testing Pattern Example - Component Setup" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Testing Pattern Example - Signal Input Test" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Code Examples › Testing Pattern Example - DOM Query" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Link Validation › should have valid references to component files" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Link Validation › should have valid references to test files" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Documentation Link Validation › should have valid references to documentation files" classname="CODE_EXAMPLES.test.ts">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+</testsuites>

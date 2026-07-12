@@ -129,6 +129,9 @@ importers:
       '@nx/workspace':
         specifier: 23.0.1
         version: 23.0.1
+      '@playwright/test':
+        specifier: ^1.61.1
+        version: 1.61.1
       '@schematics/angular':
         specifier: ^21.0.0
         version: 21.2.18(chokidar@5.0.0)
@@ -2716,6 +2719,11 @@ packages:
     resolution: {integrity: sha512-Vo9nkhfZxDB/sBiqIY3pjDC4mOSyure+AFlEW5hcy/tRE82MqCXjRN4InnVNMldinRt0dLYqg4HAU2XPq5e1LA==}
     peerDependencies:
       typescript: '>3.0.0'
+
+  '@playwright/test@1.61.1':
+    resolution: {integrity: sha512-8nKv6+0RJSL9FE4jYOEGXnPeM/Hg12qZpmqzZjRh3qM0Y7c3z1mrOTfFLids72RDQYVh9WpLEfR5WdpNX4fkig==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   '@primeuix/motion@0.0.10':
     resolution: {integrity: sha512-PsZwOPq79Scp7/ionshRcQ5xKVf9+zuLcyY5mf6onK8chHT5C9JGphmcIZ4CzcqxuGEpsm8AIbTGy+zS3RtzLA==}
@@ -10948,6 +10956,10 @@ snapshots:
       '@types/esquery': 1.5.4
       esquery: 1.7.0
       typescript: 5.9.3
+
+  '@playwright/test@1.61.1':
+    dependencies:
+      playwright: 1.61.1
 
   '@primeuix/motion@0.0.10':
     dependencies:
