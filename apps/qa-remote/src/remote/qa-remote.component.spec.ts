@@ -1,0 +1,58 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MessageService } from 'primeng/api';
+import { QaRemoteComponent } from './qa-remote.component';
+
+describe('QaRemoteComponent', () => {
+  let fixture: ComponentFixture<QaRemoteComponent>;
+  let component: QaRemoteComponent;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [QaRemoteComponent],
+      providers: [MessageService, provideHttpClient(), provideHttpClientTesting()],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(QaRemoteComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('maps program status to PrimeNG tag severity', () => {
+    expect(component.severity('On track')).toBe('success');
+    expect(component.severity('Watch')).toBe('warn');
+    expect(component.severity('Delayed')).toBe('danger');
+  });
+
+  it('switches between QA and performance tabs', () => {
+    expect(component.activeTab()).toBe('qa');
+
+    component.setActiveTab('performance');
+    expect(component.activeTab()).toBe('performance');
+
+    component.setActiveTab('qa');
+    expect(component.activeTab()).toBe('qa');
+  });
+
+  it('returns empty acceptance rows when empty state is enabled', () => {
+    expect(component.qaAcceptanceTableRows.length).toBeGreaterThan(0);
+
+    component.toggleQaTableEmpty();
+    expect(component.qaAcceptanceTableRows).toEqual([]);
+  });
+
+  it('toggles table loading state', () => {
+    expect(component.qaTableLoading).toBeFalse();
+
+    component.toggleQaTableLoading();
+    expect(component.qaTableLoading).toBeTrue();
+  });
+
+  it('maps workflow statuses to chip classes', () => {
+    expect(component.statusChipClass('done')).toBe('status-chip--success');
+    expect(component.statusChipClass('in progress')).toBe('status-chip--warn');
+    expect(component.statusChipClass('review')).toBe('status-chip--warn');
+    expect(component.statusChipClass('blocked')).toBe('status-chip--danger');
+    expect(component.statusChipClass('draft')).toBe('status-chip--info');
+  });
+});

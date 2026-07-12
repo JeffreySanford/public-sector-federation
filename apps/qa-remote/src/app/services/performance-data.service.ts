@@ -52,7 +52,7 @@ export interface RegressionAlertDTO {
   providedIn: 'root',
 })
 export class PerformanceDataService {
-  private apiUrl = 'http://localhost:3000/api/performance';
+  private apiUrl = 'http://localhost:3333/api/performance';
 
   constructor(private http: HttpClient) {}
 

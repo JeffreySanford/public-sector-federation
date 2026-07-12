@@ -1,8 +1,11 @@
 import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { TestPerformanceService, PerformanceMetricInput, PerformanceTrendData, PerformanceSummary } from './test-performance.service';
-import { TestPerformanceMetric, TestSuite, Browser } from '@prisma/client';
 
-@Controller('api/performance')
+type TestSuite = PerformanceMetricInput['testSuite'];
+type Browser = NonNullable<PerformanceMetricInput['browser']>;
+type RecordedMetric = Awaited<ReturnType<TestPerformanceService['recordMetric']>>;
+
+@Controller('performance')
 export class TestPerformanceController {
   constructor(private readonly service: TestPerformanceService) {}
 
@@ -11,7 +14,7 @@ export class TestPerformanceController {
    * Record a new performance metric
    */
   @Post()
-  async recordMetric(@Body() input: PerformanceMetricInput): Promise<TestPerformanceMetric> {
+  async recordMetric(@Body() input: PerformanceMetricInput): Promise<RecordedMetric> {
     return this.service.recordMetric(input);
   }
 
@@ -26,7 +29,7 @@ export class TestPerformanceController {
     @Query('testName') testName?: string,
     @Query('browser') browser?: Browser,
     @Query('limit') limit?: string,
-  ): Promise<TestPerformanceMetric[]> {
+  ): Promise<RecordedMetric[]> {
     return this.service.getMetrics(testSuite, testName, browser, limit ? parseInt(limit) : undefined);
   }
 
@@ -71,7 +74,7 @@ export class TestPerformanceController {
   async getMetricsInDateRange(
     @Query('startDate') startDate: string,
     @Query('endDate') endDate: string,
-  ): Promise<TestPerformanceMetric[]> {
+  ): Promise<RecordedMetric[]> {
     return this.service.getMetricsInDateRange(new Date(startDate), new Date(endDate));
   }
 }

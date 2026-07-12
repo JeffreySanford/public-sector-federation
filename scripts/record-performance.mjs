@@ -7,12 +7,13 @@
  * and records performance metrics to the Performance API endpoint.
  *
  * Usage:
- *   node scripts/record-performance.mjs [--api-url http://localhost:3000]
+ *   node scripts/record-performance.mjs [--api-url http://localhost:3333]
  *
  * Environment Variables:
- *   PERFORMANCE_API_URL - Override API URL (default: http://localhost:3000)
+ *   PERFORMANCE_API_URL - Override API URL (default: http://localhost:3333)
  *   GIT_COMMIT_HASH - Git commit hash (auto-detected from git if not provided)
  *   GIT_BRANCH - Git branch name (auto-detected from git if not provided)
+ *   SLACK_WEBHOOK_URL - Optional Slack incoming webhook for regression alerts
  */
 
 import { readFileSync } from 'fs';
@@ -21,7 +22,8 @@ import { existsSync } from 'fs';
 
 // Parse command line arguments
 const args = process.argv.slice(2);
-let apiUrl = process.env.PERFORMANCE_API_URL || 'http://localhost:3000';
+let apiUrl = process.env.PERFORMANCE_API_URL || 'http://localhost:3333';
+const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL;
 
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--api-url' && args[i + 1]) {
@@ -54,12 +56,14 @@ const baselineThresholds = {
   code_examples: { baselineMs: 60000, thresholdMs: 72000 },
 };
 
-// Map Playwright test suites to our TestSuite enum
-const suiteMap = {
-  'federation': 'federation',
-  'storybook': 'storybook',
-  'code-examples': 'code_examples',
-};
+// Map Playwright file paths and titles to our TestSuite enum
+const suiteMap = [
+  { pattern: 'storybook', testSuite: 'storybook' },
+  { pattern: 'code_examples', testSuite: 'code_examples' },
+  { pattern: 'code-examples', testSuite: 'code_examples' },
+  { pattern: 'federation', testSuite: 'federation' },
+  { pattern: 'qa-remote', testSuite: 'federation' },
+];
 
 // Browser map
 const browserMap = {
@@ -103,45 +107,54 @@ function readPlaywrightResults() {
 function convertToMetrics(suites, gitInfo) {
   const metrics = [];
 
-  for (const suite of suites) {
-    const suiteName = suite.title;
-    const testSuite = Object.values(suiteMap).find((s) => suiteName.toLowerCase().includes(s.toLowerCase())) || 'federation';
+  function resolveTestSuite(source) {
+    const normalized = source.toLowerCase().replaceAll('\\', '/');
+    return suiteMap.find((entry) => normalized.includes(entry.pattern))?.testSuite || 'federation';
+  }
 
-    const baseline = baselineThresholds[testSuite];
-    if (!baseline) {
-      console.warn(`Warning: No baseline defined for test suite "${testSuite}", skipping.`);
-      continue;
-    }
+  function collectSuite(suite, parents = []) {
+    const suitePath = [...parents, suite.title || ''].filter(Boolean);
 
-    for (const test of suite.tests || []) {
-      // Extract browser from test name or title
-      let browser = null;
-      const titleLower = (test.title || '').toLowerCase();
-      if (titleLower.includes('chromium')) {
-        browser = 'chromium';
-      } else if (titleLower.includes('firefox')) {
-        browser = 'firefox';
-      } else if (titleLower.includes('webkit')) {
-        browser = 'webkit';
+    for (const spec of suite.specs || []) {
+      const source = spec.file || suite.file || suitePath.join(' ');
+      const testSuite = resolveTestSuite(source);
+      const baseline = baselineThresholds[testSuite];
+
+      if (!baseline) {
+        console.warn(`Warning: No baseline defined for test suite "${testSuite}", skipping.`);
+        continue;
       }
 
-      const duration = test.duration || 0;
-      const status = getStatus(duration, baseline.baselineMs, baseline.thresholdMs);
+      for (const test of spec.tests || []) {
+        const browser = browserMap[test.projectName] || browserMap[test.projectId] || undefined;
+        const latestResult = test.results?.[test.results.length - 1];
+        const duration = latestResult?.duration || 0;
+        const status = getStatus(duration, baseline.baselineMs, baseline.thresholdMs);
+        const errorMessage = latestResult?.errors?.[0]?.message || null;
 
-      metrics.push({
-        testSuite,
-        testName: test.title || 'unknown',
-        browser: browser || undefined,
-        durationMs: duration,
-        baselineMs: baseline.baselineMs,
-        thresholdMs: baseline.thresholdMs,
-        status,
-        passed: test.status === 'passed',
-        errorMessage: test.error?.message || null,
-        commitHash: gitInfo.commitHash,
-        branch: gitInfo.branch,
-      });
+        metrics.push({
+          testSuite,
+          testName: [...suitePath.slice(1), spec.title].filter(Boolean).join(' - ') || spec.title || 'unknown',
+          browser,
+          durationMs: duration,
+          baselineMs: baseline.baselineMs,
+          thresholdMs: baseline.thresholdMs,
+          status,
+          passed: test.status === 'expected' && latestResult?.status === 'passed',
+          errorMessage,
+          commitHash: gitInfo.commitHash,
+          branch: gitInfo.branch,
+        });
+      }
     }
+
+    for (const childSuite of suite.suites || []) {
+      collectSuite(childSuite, suitePath);
+    }
+  }
+
+  for (const suite of suites) {
+    collectSuite(suite);
   }
 
   return metrics;
@@ -188,6 +201,83 @@ async function recordMetrics(metrics, apiUrl) {
   }
 }
 
+function getRegressionMetrics(metrics) {
+  return metrics.filter((metric) => metric.status === 'warning' || metric.status === 'critical');
+}
+
+async function sendSlackRegressionAlert(regressions, gitInfo) {
+  if (!slackWebhookUrl) {
+    if (regressions.length > 0) {
+      console.log('Slack webhook not configured; skipping regression notification.');
+    }
+    return;
+  }
+
+  if (regressions.length === 0) {
+    return;
+  }
+
+  const criticalCount = regressions.filter((metric) => metric.status === 'critical').length;
+  const warningCount = regressions.filter((metric) => metric.status === 'warning').length;
+  const topRegressions = regressions
+    .slice()
+    .sort((a, b) => b.durationMs - a.durationMs)
+    .slice(0, 8)
+    .map((metric) => {
+      const delta = metric.baselineMs > 0 ? Math.round(((metric.durationMs - metric.baselineMs) / metric.baselineMs) * 100) : 0;
+      const browser = metric.browser ? `/${metric.browser}` : '';
+      return `- ${metric.status.toUpperCase()} ${metric.testSuite}${browser}: ${metric.testName} (${metric.durationMs}ms, ${delta >= 0 ? '+' : ''}${delta}% vs baseline)`;
+    })
+    .join('\n');
+
+  const payload = {
+    text: `Performance regression detected on ${gitInfo.branch}`,
+    blocks: [
+      {
+        type: 'header',
+        text: {
+          type: 'plain_text',
+          text: 'Performance regression detected',
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*Branch:* ${gitInfo.branch}\n*Commit:* ${gitInfo.commitHash}\n*Alerts:* ${criticalCount} critical, ${warningCount} warning`,
+        },
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: topRegressions,
+        },
+      },
+    ],
+  };
+
+  try {
+    const response = await fetch(slackWebhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.warn(`Warning: Slack notification failed: ${response.status} ${text}`);
+      return;
+    }
+
+    console.log(`Sent Slack regression alert for ${regressions.length} metric(s).`);
+  } catch (error) {
+    console.warn(`Warning: Slack notification failed: ${error.message}`);
+  }
+}
+
 // Main execution
 async function main() {
   console.log('Recording Performance Metrics...\n');
@@ -204,6 +294,7 @@ async function main() {
   console.log(`Found ${metrics.length} test results to process.\n`);
 
   await recordMetrics(metrics, apiUrl);
+  await sendSlackRegressionAlert(getRegressionMetrics(metrics), gitInfo);
 }
 
 main().catch((error) => {

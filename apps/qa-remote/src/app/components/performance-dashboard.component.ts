@@ -15,6 +15,14 @@ interface StatusColor {
   [key: string]: string;
 }
 
+interface PerformanceKpi {
+  label: string;
+  value: string;
+  detail: string;
+  icon: string;
+  tone: 'success' | 'info' | 'warning' | 'danger';
+}
+
 @Component({
   selector: 'public-performance-dashboard',
   standalone: true,
@@ -55,6 +63,55 @@ export class PerformanceDashboardComponent implements OnInit {
     storybook: 'Storybook E2E',
     code_examples: 'Code Examples',
   };
+
+  get performanceKpis(): PerformanceKpi[] {
+    const totalTests = this.summary.reduce((sum, suite) => sum + suite.totalTests, 0);
+    const failedTests = this.summary.reduce((sum, suite) => sum + suite.failedTests, 0);
+    const averageDuration = this.summary.length
+      ? Math.round(this.summary.reduce((sum, suite) => sum + suite.averageDuration, 0) / this.summary.length)
+      : 0;
+    const improvingCount = this.trends.filter((trend) => trend.trend === 'improving').length;
+    const degradingCount = this.trends.filter((trend) => trend.trend === 'degrading').length;
+
+    return [
+      {
+        label: 'Tracked executions',
+        value: totalTests.toString(),
+        detail: `${failedTests} failing in latest sample`,
+        icon: 'pi pi-database',
+        tone: failedTests > 0 ? 'warning' : 'success',
+      },
+      {
+        label: 'Regression alerts',
+        value: this.regressions.length.toString(),
+        detail: `${this.criticalRegressionCount} critical, ${this.warningRegressionCount} warning`,
+        icon: this.regressions.length > 0 ? 'pi pi-exclamation-triangle' : 'pi pi-check-circle',
+        tone: this.criticalRegressionCount > 0 ? 'danger' : this.warningRegressionCount > 0 ? 'warning' : 'success',
+      },
+      {
+        label: 'Average duration',
+        value: `${averageDuration}ms`,
+        detail: 'Across suite summaries',
+        icon: 'pi pi-stopwatch',
+        tone: 'info',
+      },
+      {
+        label: 'Trend balance',
+        value: `${improvingCount}/${degradingCount}`,
+        detail: 'Improving vs degrading browser groups',
+        icon: degradingCount > improvingCount ? 'pi pi-arrow-trend-up' : 'pi pi-arrow-trend-down',
+        tone: degradingCount > improvingCount ? 'warning' : 'success',
+      },
+    ];
+  }
+
+  get criticalRegressionCount(): number {
+    return this.regressions.filter((regression) => regression.severity === 'critical').length;
+  }
+
+  get warningRegressionCount(): number {
+    return this.regressions.filter((regression) => regression.severity === 'warning').length;
+  }
 
   ngOnInit(): void {
     this.loadSummary();
@@ -247,10 +304,36 @@ export class PerformanceDashboardComponent implements OnInit {
     return Math.round((trend.latest / trend.baseline) * 100);
   }
 
+  calculateBaselineDeltaPercent(trend: PerformanceTrendDTO): number {
+    if (trend.baseline === 0) return 0;
+    return Math.round(((trend.latest - trend.baseline) / trend.baseline) * 100);
+  }
+
+  calculateRegressionImpact(regression: RegressionAlertDTO): number {
+    if (regression.baselineMs === 0) return 0;
+    return Math.round(((regression.currentMs - regression.baselineMs) / regression.baselineMs) * 100);
+  }
+
+  getTrendTone(trend: PerformanceTrendDTO): 'improving' | 'stable' | 'degrading' {
+    return trend.trend;
+  }
+
   getTrendIcon(trend: PerformanceTrendDTO): string {
     if (trend.trend === 'improving') return 'pi pi-arrow-down';
     if (trend.trend === 'degrading') return 'pi pi-arrow-up';
     return 'pi pi-minus';
+  }
+
+  getTrendBarWidth(trend: PerformanceTrendDTO): number {
+    return Math.min(Math.max(this.calculateDurationPercent(trend), 4), 150);
+  }
+
+  getTrendDeltaLabel(trend: PerformanceTrendDTO): string {
+    const delta = this.calculateBaselineDeltaPercent(trend);
+    if (delta === 0) {
+      return 'On baseline';
+    }
+    return `${delta > 0 ? '+' : ''}${delta}% vs baseline`;
   }
 
   Math = Math;

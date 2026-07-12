@@ -249,6 +249,109 @@ test.describe('QA Remote - Interactions & State Changes', () => {
   });
 });
 
+test.describe('QA Remote - Performance Dashboard Visualization', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route('**/api/performance/summary', async (route) => {
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify([
+          {
+            testSuite: 'federation',
+            totalTests: 12,
+            passedTests: 10,
+            failedTests: 2,
+            averageDuration: 6200,
+            status: 'warning',
+          },
+        ]),
+      });
+    });
+
+    await page.route('**/api/performance/regressions', async (route) => {
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify([
+          {
+            testName: 'Shell federation tests',
+            severity: 'warning',
+            currentMs: 13000,
+            baselineMs: 10000,
+          },
+        ]),
+      });
+    });
+
+    await page.route('**/api/performance/trends**', async (route) => {
+      await route.fulfill({
+        contentType: 'application/json',
+        body: JSON.stringify([
+          {
+            testSuite: 'federation',
+            testName: 'Shell federation tests',
+            browser: 'chromium',
+            average: 8800,
+            baseline: 10000,
+            latest: 8000,
+            trend: 'improving',
+            status: 'excellent',
+            lastUpdated: '2026-07-12T00:00:00.000Z',
+          },
+          {
+            testSuite: 'federation',
+            testName: 'Shell federation tests',
+            browser: 'firefox',
+            average: 11200,
+            baseline: 10000,
+            latest: 13000,
+            trend: 'degrading',
+            status: 'warning',
+            lastUpdated: '2026-07-12T00:00:00.000Z',
+          },
+          {
+            testSuite: 'federation',
+            testName: 'Shell federation tests',
+            browser: 'webkit',
+            average: 10000,
+            baseline: 10000,
+            latest: 10000,
+            trend: 'stable',
+            status: 'good',
+            lastUpdated: '2026-07-12T00:00:00.000Z',
+          },
+        ]),
+      });
+    });
+
+    await page.goto('http://localhost:4200/qa', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  });
+
+  test('should visualize performance improvements and degradation with infographic data', async ({ page }) => {
+    await page.getByRole('button', { name: /Performance Tracking/i }).click();
+
+    await expect(page.locator('.performance-dashboard')).toBeVisible();
+    await expect(page.locator('.infographic-card')).toHaveCount(4);
+    await expect(page.locator('.infographic-card').filter({ hasText: 'Trend balance' })).toContainText('1/1');
+
+    await expect(page.locator('.alert-card')).toBeVisible();
+    await expect(page.locator('.alert-card')).toContainText('Performance regressions detected');
+    await expect(page.locator('.alert-card')).toContainText('warning alerts need review');
+    await expect(page.locator('.impact')).toContainText('+3000ms');
+    await expect(page.locator('.impact')).toContainText('30%');
+
+    await expect(page.locator('.variance-row')).toHaveCount(3);
+    await expect(page.locator('.variance-row.improving')).toContainText('-20% vs baseline');
+    await expect(page.locator('.variance-row.improving .pi-arrow-down')).toBeVisible();
+    await expect(page.locator('.variance-row.improving .variance-bar')).toHaveAttribute('style', /80%/);
+
+    await expect(page.locator('.variance-row.degrading')).toContainText('+30% vs baseline');
+    await expect(page.locator('.variance-row.degrading .pi-arrow-up')).toBeVisible();
+    await expect(page.locator('.variance-row.degrading .variance-bar')).toHaveAttribute('style', /130%/);
+
+    await expect(page.locator('.variance-row.stable')).toContainText('On baseline');
+    await expect(page.locator('.trend-chart')).toBeVisible();
+  });
+});
+
 test.describe('QA Remote - Accessibility', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('http://localhost:4200/qa', { waitUntil: 'domcontentloaded', timeout: 60000 });
