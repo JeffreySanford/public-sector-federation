@@ -4,12 +4,12 @@ import { injectAxe, checkA11y } from 'axe-playwright';
 /**
  * Storybook Story Validation E2E Tests
  * Tests story rendering, accessibility, and component coverage
- * Stories are served at localhost:6006 by default (Storybook dev server)
+ * Stories are served at localhost:4400 by Playwright webServer config
  */
 
 test.describe('Storybook Stories - Rendering & Console', () => {
   test('should load Storybook dashboard', async ({ page }) => {
-    await page.goto('http://localhost:6006');
+    await page.goto('http://localhost:4400');
     await page.waitForLoadState('networkidle');
     
     const title = await page.title();
@@ -30,7 +30,7 @@ test.describe('Storybook Stories - Rendering & Console', () => {
     });
 
     // Navigate to first story (assuming default stories exist)
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Allow non-critical warnings but no errors
@@ -38,7 +38,7 @@ test.describe('Storybook Stories - Rendering & Console', () => {
   });
 
   test('should display story canvas', async ({ page }) => {
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Storybook canvas contains the story frame
@@ -47,7 +47,7 @@ test.describe('Storybook Stories - Rendering & Console', () => {
   });
 
   test('should load story panel without errors', async ({ page }) => {
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Check for error boundary or error state
@@ -58,7 +58,7 @@ test.describe('Storybook Stories - Rendering & Console', () => {
 
 test.describe('Storybook Stories - Accessibility (WCAG 2.1 AA)', () => {
   test('should pass axe accessibility checks on story', async ({ page }) => {
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Inject axe and check accessibility of the story frame
@@ -96,7 +96,7 @@ test.describe('Storybook Stories - Accessibility (WCAG 2.1 AA)', () => {
   });
 
   test('should have semantic heading structure', async ({ page }) => {
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Check for at least one heading (semantic structure)
@@ -108,7 +108,7 @@ test.describe('Storybook Stories - Accessibility (WCAG 2.1 AA)', () => {
   });
 
   test('should have proper color contrast', async ({ page }) => {
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Get computed colors from story elements
@@ -122,7 +122,7 @@ test.describe('Storybook Stories - Accessibility (WCAG 2.1 AA)', () => {
 
 test.describe('Storybook Stories - Keyboard Accessibility', () => {
   test('should be keyboard navigable', async ({ page }) => {
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Tab through Storybook UI elements
@@ -139,7 +139,7 @@ test.describe('Storybook Stories - Keyboard Accessibility', () => {
   });
 
   test('should support Enter key on interactive elements', async ({ page }) => {
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Find a focusable element
@@ -157,7 +157,7 @@ test.describe('Storybook Stories - Keyboard Accessibility', () => {
   });
 
   test('should have visible focus indicators', async ({ page }) => {
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Focus an element
@@ -181,7 +181,7 @@ test.describe('Storybook Stories - Keyboard Accessibility', () => {
 
 test.describe('Storybook Stories - Props & Controls', () => {
   test('should display story controls panel', async ({ page }) => {
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Look for Storybook controls/docs panel
@@ -193,7 +193,7 @@ test.describe('Storybook Stories - Props & Controls', () => {
   });
 
   test('should update story when controls change', async ({ page }) => {
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Get initial canvas content
@@ -224,7 +224,7 @@ test.describe('Storybook Stories - Props & Controls', () => {
 test.describe('Storybook Stories - Component Coverage', () => {
   test('should have PublicEmptyStateComponent story', async ({ page }) => {
     // Check for story related to empty state component
-    await page.goto('http://localhost:6006');
+    await page.goto('http://localhost:4400');
     await page.waitForLoadState('networkidle');
 
     // Look for component in sidebar
@@ -237,7 +237,7 @@ test.describe('Storybook Stories - Component Coverage', () => {
   });
 
   test('should have PublicFormSectionComponent story', async ({ page }) => {
-    await page.goto('http://localhost:6006');
+    await page.goto('http://localhost:4400');
     await page.waitForLoadState('networkidle');
 
     // Stories exist - check basic Storybook structure
@@ -248,7 +248,7 @@ test.describe('Storybook Stories - Component Coverage', () => {
   });
 
   test('should have PublicPageHeaderComponent story', async ({ page }) => {
-    await page.goto('http://localhost:6006');
+    await page.goto('http://localhost:4400');
     await page.waitForLoadState('networkidle');
 
     // Verify Storybook loads
@@ -257,7 +257,7 @@ test.describe('Storybook Stories - Component Coverage', () => {
   });
 
   test('should have PublicStatusCardComponent story', async ({ page }) => {
-    await page.goto('http://localhost:6006');
+    await page.goto('http://localhost:4400');
     await page.waitForLoadState('networkidle');
 
     // Verify Storybook loads
@@ -266,7 +266,7 @@ test.describe('Storybook Stories - Component Coverage', () => {
   });
 
   test('should have at least 4 component stories', async ({ page }) => {
-    await page.goto('http://localhost:6006');
+    await page.goto('http://localhost:4400');
     await page.waitForLoadState('networkidle');
 
     // Count story entries in sidebar (flexible - structure varies)
@@ -282,7 +282,7 @@ test.describe('Storybook Stories - Performance', () => {
   test('should load Storybook within 5 seconds', async ({ page }) => {
     const startTime = Date.now();
 
-    await page.goto('http://localhost:6006');
+    await page.goto('http://localhost:4400');
     await page.waitForLoadState('networkidle');
 
     const loadTime = Date.now() - startTime;
@@ -290,13 +290,13 @@ test.describe('Storybook Stories - Performance', () => {
   });
 
   test('should render story within 3 seconds', async ({ page }) => {
-    await page.goto('http://localhost:6006');
+    await page.goto('http://localhost:4400');
     await page.waitForLoadState('networkidle');
 
     const startTime = Date.now();
 
     // Navigate to a story
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     const canvas = page.locator('iframe[title*="canvas"]').first();
     
     try {
@@ -313,7 +313,7 @@ test.describe('Storybook Stories - Performance', () => {
 test.describe('Storybook Stories - Error Handling', () => {
   test('should handle missing story gracefully', async ({ page }) => {
     // Navigate to non-existent story
-    await page.goto('http://localhost:6006/?path=/story/nonexistent--story', { waitUntil: 'networkidle' });
+    await page.goto('http://localhost:4400/?path=/story/nonexistent--story', { waitUntil: 'networkidle' });
 
     // Should either show error message or redirect
     const content = await page.content();
@@ -326,7 +326,7 @@ test.describe('Storybook Stories - Error Handling', () => {
 
   test('should recover from story error', async ({ page }) => {
     // Go to valid story
-    await page.goto('http://localhost:6006/?path=/story');
+    await page.goto('http://localhost:4400/?path=/story');
     await page.waitForLoadState('networkidle');
 
     // Should load successfully
