@@ -5,14 +5,14 @@ patterns built on top of PrimeNG and the shared token contract.
 
 The registry should not become a wrapper around every PrimeNG component by
 default. It should exist where the team needs consistency, validation,
-accessibility, behavior, or stable APIs across applications.
+Accessibility, behavior, or stable APIs across applications.
 
 ## Usage Model
 
 | Choice | Use when |
 | --- | --- |
 | PrimeNG directly | Tokens and approved defaults are enough. |
-| Thin registry wrapper | Shared defaults, accessibility, telemetry, API consistency, or release control must be enforced. |
+| Thin registry wrapper | Shared defaults, Accessibility, telemetry, consistency, or control. |
 | Composite component or pattern | Multiple pieces form a reusable business or UX workflow. |
 
 ## Registry Expectations

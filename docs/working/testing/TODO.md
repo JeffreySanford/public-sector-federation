@@ -1,15 +1,15 @@
 # Implementation TODO
 
-**Status**: Ready to start  
-**Current Date**: 2026-07-12  
-**Solo Developer**: Yes  
+**Status**: Ready to start
+**Current Date**: 2026-07-12
+**Solo Developer**: Yes
 **Estimated Completion**: 2026-07-26
 
 ---
 
 ## Phase 1: Components & Linting (Today/Tomorrow)
 
-**Timeline**: 8-10 hours  
+**Timeline**: 8-10 hours
 **Priority**: CRITICAL
 
 ### Components (6-8 hours)
@@ -17,12 +17,12 @@
 - [ ] Create `packages/ui-patterns/src/public-form-section.component.spec.ts`
 - [ ] Create `packages/ui-patterns/src/public-page-header.component.spec.ts`
 - [ ] Create `packages/ui-patterns/src/public-status-card.component.spec.ts`
-- [ ] Add test target to `packages/ui-patterns/project.json`
+- [ ] Add test target to `packages/ui-patterns/project.JSON`
 - [ ] Verify all 4 component tests pass: `pnpm test:components`
 
 ### Linting (2 hours)
 - [ ] Install `markdownlint-cli2` and `remark-cli`
-- [ ] Create `.markdownlint.json` config
+- [ ] Create `.markdownlint.JSON` config
 - [ ] Update `scripts/lint-workspace.mjs` with markdown linting
 - [ ] Run `pnpm lint` and fix all markdown errors
 - [ ] Verify linting passes with 0 errors
@@ -36,7 +36,7 @@
 
 ## Phase 2: Federation & Examples (Next Week)
 
-**Timeline**: 12-14 hours  
+**Timeline**: 12-14 hours
 **Priority**: HIGH
 
 ### Code Example Validation (4 hours)
@@ -47,14 +47,14 @@
 - [ ] Verify tests pass: `pnpm test`
 
 ### E2E Federation Tests (8-10 hours)
-- [ ] Create `playwright.config.ts` at root
-- [ ] Create `apps/shell/e2e/federation.spec.ts`
+- [ ] Create `Playwright.config.ts` at root
+- [ ] Create `apps/shell/E2E/federation.spec.ts`
 - [ ] Test shell mounting at localhost:4200
 - [ ] Test remote mounting (services, admin, reporting, qa)
 - [ ] Test token inheritance across remotes
 - [ ] Test navigation between remotes
 - [ ] Test error scenarios
-- [ ] Verify E2E tests pass: `pnpm test:e2e`
+- [ ] Verify E2E tests pass: `pnpm test:E2E`
 
 ### Verification
 - [ ] All code examples verified ✅
@@ -65,19 +65,19 @@
 
 ## Phase 3: Storybook (Week 3)
 
-**Timeline**: 6-8 hours  
+**Timeline**: 6-8 hours
 **Priority**: MEDIUM
 
 ### Story Validation (6 hours)
-- [ ] Create `apps/qa-remote/e2e/storybook-stories.spec.ts`
+- [ ] Create `apps/qa-remote/E2E/Storybook-stories.spec.ts`
 - [ ] Test story rendering without console errors
-- [ ] Test keyboard accessibility
-- [ ] Run axe accessibility checks
+- [ ] Test keyboard Accessibility
+- [ ] Run axe Accessibility checks
 - [ ] Verify story controls work
 - [ ] Validate all documented components have stories
 
 ### Documentation Links (2 hours)
-- [ ] Create `.markdown-link-check.json` config
+- [ ] Create `.markdown-link-check.JSON` config
 - [ ] Install `markdown-link-check`
 - [ ] Validate all documentation links
 - [ ] Fix any broken references
@@ -85,7 +85,7 @@
 ### Verification
 - [ ] All story tests passing ✅
 - [ ] All documentation links valid ✅
-- [ ] No accessibility violations ✅
+- [ ] No Accessibility violations ✅
 
 ---
 
@@ -175,7 +175,7 @@ pnpm test:e2e --debug          # Debug E2E tests
 - ✅ All markdown valid
 
 **Phase 2 Complete When**:
-- ✅ `pnpm test:e2e` passes
+- ✅ `pnpm test:E2E` passes
 - ✅ All remotes mount correctly
 - ✅ CODE_EXAMPLES.test.ts passing
 - ✅ 0 federation errors
@@ -200,10 +200,10 @@ pnpm test:e2e --debug          # Debug E2E tests
 1. Verify ports: `pnpm check:dev-ports`
 2. Start shell: `pnpm serve:shell`
 3. Start service: `pnpm serve:services`
-4. Check Playwright version: `pnpm exec playwright --version`
+4. Check Playwright version: `pnpm exec Playwright --version`
 
 ### If Linting Too Strict
-Update `.markdownlint.json`:
+Update `.markdownlint.JSON`:
 - Adjust `line_length` to something reasonable (120 chars is default)
 - Disable rules that aren't important with `false`
 
@@ -220,6 +220,6 @@ Update `.markdownlint.json`:
 
 ---
 
-**Created**: 2026-07-12  
-**Last Updated**: 2026-07-12  
+**Created**: 2026-07-12
+**Last Updated**: 2026-07-12
 **Next Milestone**: Phase 1 start (2026-07-13)

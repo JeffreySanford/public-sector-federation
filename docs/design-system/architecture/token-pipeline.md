@@ -49,11 +49,11 @@ as complete.
 
 | Method | Primary value | Main risk |
 | --- | --- | --- |
-| Shared token package | One versioned source for shell, subapps, registry, and tooling. | Requires publishing and compatibility management. |
-| Shell-loaded global CSS | Central runtime theme contract for shared variables. | Subapps depend on shell-provided variables. |
-| Subapp-bundled CSS | More self-contained subapps and fallback resilience. | Risk of drift from the shell theme. |
-| Web Component host variables | Good scoping point for variables inherited into mounted subapps. | Selector-based styles still do not cross Shadow DOM. |
-| PrimeNG preset mapping | Aligns PrimeNG visuals to system tokens. | Must be maintained through PrimeNG upgrades. |
+| Shared token package | One versioned source for all. | Requires publishing management. |
+| Shell-loaded global CSS | Central runtime theme contract. | Subapps depend on shell variables. |
+| Subapp-bundled CSS | Self-contained subapps, fallback. | Risk of theme drift. |
+| Web Component host variables | Good scoping for inherited variables. | Selectors don't cross Shadow DOM. |
+| PrimeNG preset mapping | Align PrimeNG to system tokens. | Maintain through PrimeNG upgrades. |
 
 ## Questions To Validate
 

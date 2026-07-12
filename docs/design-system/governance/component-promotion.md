@@ -13,7 +13,7 @@ PrimeNG or a collection of undocumented one-off wrappers.
 | Deprecated | Still available temporarily with migration guidance. |
 
 Technical qualifiers such as `Storybook verified`, `shell verified`, or
-`accessibility risk` can be tracked separately from lifecycle status.
+`Accessibility risk` can be tracked separately from lifecycle status.
 
 ## Promotion Evidence
 
@@ -39,7 +39,7 @@ Search before creating a new shared component. If PrimeNG directly satisfies the
 need with the approved token preset, use PrimeNG directly.
 
 Create a registry wrapper when the system needs to enforce behavior, defaults,
-accessibility, telemetry, API consistency, or release control.
+Accessibility, telemetry, API consistency, or release control.
 
 Create a composite component or pattern when multiple UI pieces form a repeated
 workflow that teams should not rebuild independently.

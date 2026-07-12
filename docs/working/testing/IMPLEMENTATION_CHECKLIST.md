@@ -1,7 +1,7 @@
 # Testing Implementation Checklist
 
-**Status**: Ready to implement  
-**Start Date**: 2026-07-12  
+**Status**: Ready to implement
+**Start Date**: 2026-07-12
 **Estimated Completion**: 2026-07-26 (2 weeks)
 
 ---
@@ -21,8 +21,8 @@ This checklist provides step-by-step instructions to close the testing gaps iden
 
 ## Phase 1: Unit Tests for UI Components (Critical)
 
-**Status**: Not started  
-**Effort**: 6-8 hours  
+**Status**: Not started
+**Effort**: 6-8 hours
 **Timeline**: Days 1-2
 
 ### Task 1.1: Create test files for each component
@@ -34,7 +34,7 @@ This checklist provides step-by-step instructions to close the testing gaps iden
 - [ ] Test component creation
 - [ ] Test @Input bindings
 - [ ] Test @Output events
-- [ ] Test accessibility
+- [ ] Test Accessibility
 
 ```typescript
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -73,8 +73,8 @@ describe('PublicEmptyStateComponent', () => {
       const testTitle = 'Test Empty State';
       component.title = testTitle;
       fixture.detectChanges();
-      
-      const title = compiled.query(By.css('h2, h3'));
+
+      const title = compiled.query(By.CSS('h2, h3'));
       expect(title.nativeElement.textContent).toContain(testTitle);
     });
 
@@ -82,8 +82,8 @@ describe('PublicEmptyStateComponent', () => {
       const testMessage = 'No items found';
       component.message = testMessage;
       fixture.detectChanges();
-      
-      const message = compiled.query(By.css('p'));
+
+      const message = compiled.query(By.CSS('p'));
       expect(message.nativeElement.textContent).toContain(testMessage);
     });
   });
@@ -91,10 +91,10 @@ describe('PublicEmptyStateComponent', () => {
   describe('@Output Events', () => {
     it('should emit action event when button clicked', () => {
       spyOn(component.action, 'emit');
-      
-      const button = compiled.query(By.css('button'));
+
+      const button = compiled.query(By.CSS('button'));
       button.nativeElement.click();
-      
+
       expect(component.action.emit).toHaveBeenCalled();
     });
   });
@@ -102,19 +102,19 @@ describe('PublicEmptyStateComponent', () => {
   describe('Accessibility', () => {
     it('should have proper ARIA attributes', () => {
       fixture.detectChanges();
-      
-      const main = compiled.query(By.css('[role="main"]'));
+
+      const main = compiled.query(By.CSS('[role="main"]'));
       expect(main).toBeTruthy();
     });
 
     it('button should be keyboard accessible', () => {
       fixture.detectChanges();
       spyOn(component.action, 'emit');
-      
-      const button = compiled.query(By.css('button'));
+
+      const button = compiled.query(By.CSS('button'));
       button.nativeElement.focus();
       expect(button.nativeElement).toBe(document.activeElement);
-      
+
       const event = new KeyboardEvent('keydown', { key: 'Enter' });
       button.nativeElement.dispatchEvent(event);
     });
@@ -123,8 +123,8 @@ describe('PublicEmptyStateComponent', () => {
   describe('CSS Classes', () => {
     it('should apply appropriate CSS classes', () => {
       fixture.detectChanges();
-      
-      const container = compiled.query(By.css('.empty-state'));
+
+      const container = compiled.query(By.CSS('.empty-state'));
       expect(container).toBeTruthy();
       expect(container.nativeElement.classList.contains('empty-state')).toBe(true);
     });
@@ -145,7 +145,7 @@ describe('PublicEmptyStateComponent', () => {
 - [ ] Create file
 - [ ] Test component inputs (label, required flag, error state)
 - [ ] Test child content projection
-- [ ] Test accessibility
+- [ ] Test Accessibility
 
 ```typescript
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -178,8 +178,8 @@ describe('PublicFormSectionComponent', () => {
     it('should display label from @Input', () => {
       component.label = 'Test Label';
       fixture.detectChanges();
-      
-      const label = compiled.query(By.css('label'));
+
+      const label = compiled.query(By.CSS('label'));
       expect(label.nativeElement.textContent).toContain('Test Label');
     });
 
@@ -187,16 +187,16 @@ describe('PublicFormSectionComponent', () => {
       component.label = 'Test Label';
       component.required = true;
       fixture.detectChanges();
-      
-      const requiredMarker = compiled.query(By.css('[aria-required="true"]'));
+
+      const requiredMarker = compiled.query(By.CSS('[aria-required="true"]'));
       expect(requiredMarker).toBeTruthy();
     });
 
     it('should show error state when error=true', () => {
       component.error = true;
       fixture.detectChanges();
-      
-      const errorElement = compiled.query(By.css('.error, [role="alert"]'));
+
+      const errorElement = compiled.query(By.CSS('.error, [role="alert"]'));
       expect(errorElement).toBeTruthy();
     });
   });
@@ -205,8 +205,8 @@ describe('PublicFormSectionComponent', () => {
     it('should project form controls as children', () => {
       component.label = 'Input Field';
       fixture.detectChanges();
-      
-      const content = compiled.query(By.css('ng-content'));
+
+      const content = compiled.query(By.CSS('ng-content'));
       expect(content).toBeTruthy();
     });
   });
@@ -215,8 +215,8 @@ describe('PublicFormSectionComponent', () => {
     it('should have proper label association', () => {
       component.label = 'Test Field';
       fixture.detectChanges();
-      
-      const label = compiled.query(By.css('label'));
+
+      const label = compiled.query(By.CSS('label'));
       expect(label.nativeElement.getAttribute('for')).toBeTruthy();
     });
 
@@ -224,8 +224,8 @@ describe('PublicFormSectionComponent', () => {
       component.error = true;
       component.errorMessage = 'This field is required';
       fixture.detectChanges();
-      
-      const errorMsg = compiled.query(By.css('[role="alert"]'));
+
+      const errorMsg = compiled.query(By.CSS('[role="alert"]'));
       expect(errorMsg).toBeTruthy();
     });
   });
@@ -277,16 +277,16 @@ describe('PublicPageHeaderComponent', () => {
     it('should display title from @Input', () => {
       component.title = 'Page Title';
       fixture.detectChanges();
-      
-      const title = compiled.query(By.css('h1, h2'));
+
+      const title = compiled.query(By.CSS('h1, h2'));
       expect(title.nativeElement.textContent).toContain('Page Title');
     });
 
     it('should display subtitle when provided', () => {
       component.subtitle = 'Page subtitle';
       fixture.detectChanges();
-      
-      const subtitle = compiled.query(By.css('.subtitle, p'));
+
+      const subtitle = compiled.query(By.CSS('.subtitle, p'));
       expect(subtitle?.nativeElement.textContent).toContain('Page subtitle');
     });
   });
@@ -298,8 +298,8 @@ describe('PublicPageHeaderComponent', () => {
         { label: 'Parent', url: '/parent' }
       ];
       fixture.detectChanges();
-      
-      const breadcrumbs = compiled.queryAll(By.css('nav a, [role="navigation"] a'));
+
+      const breadcrumbs = compiled.queryAll(By.CSS('nav a, [role="navigation"] a'));
       expect(breadcrumbs.length).toBe(2);
     });
   });
@@ -307,13 +307,13 @@ describe('PublicPageHeaderComponent', () => {
   describe('Actions', () => {
     it('should emit action events', () => {
       spyOn(component.onAction, 'emit');
-      
+
       component.actions = [{ label: 'Save', key: 'save' }];
       fixture.detectChanges();
-      
-      const actionButton = compiled.query(By.css('button'));
+
+      const actionButton = compiled.query(By.CSS('button'));
       actionButton.nativeElement.click();
-      
+
       expect(component.onAction.emit).toHaveBeenCalled();
     });
   });
@@ -322,8 +322,8 @@ describe('PublicPageHeaderComponent', () => {
     it('should have proper heading hierarchy', () => {
       component.title = 'Page Title';
       fixture.detectChanges();
-      
-      const heading = compiled.query(By.css('h1, h2'));
+
+      const heading = compiled.query(By.CSS('h1, h2'));
       expect(heading).toBeTruthy();
       expect(['H1', 'H2'].includes(heading.nativeElement.tagName)).toBe(true);
     });
@@ -331,8 +331,8 @@ describe('PublicPageHeaderComponent', () => {
     it('should have navigation role for breadcrumbs', () => {
       component.breadcrumbs = [{ label: 'Home', url: '/' }];
       fixture.detectChanges();
-      
-      const nav = compiled.query(By.css('[role="navigation"]'));
+
+      const nav = compiled.query(By.CSS('[role="navigation"]'));
       expect(nav).toBeTruthy();
     });
   });
@@ -387,8 +387,8 @@ describe('PublicStatusCardComponent', () => {
       it(`should apply ${status} variant class`, () => {
         component.status = status;
         fixture.detectChanges();
-        
-        const card = compiled.query(By.css('.status-card'));
+
+        const card = compiled.query(By.CSS('.status-card'));
         expect(card.nativeElement.classList.contains(`status-${status}`)).toBe(true);
       });
     });
@@ -396,8 +396,8 @@ describe('PublicStatusCardComponent', () => {
     it('should have correct color for status', () => {
       component.status = 'success';
       fixture.detectChanges();
-      
-      const icon = compiled.query(By.css('[data-status-icon]'));
+
+      const icon = compiled.query(By.CSS('[data-status-icon]'));
       expect(icon?.nativeElement.getAttribute('data-status-icon')).toBe('success');
     });
   });
@@ -406,16 +406,16 @@ describe('PublicStatusCardComponent', () => {
     it('should display title', () => {
       component.title = 'Operation Successful';
       fixture.detectChanges();
-      
-      const title = compiled.query(By.css('.status-title'));
+
+      const title = compiled.query(By.CSS('.status-title'));
       expect(title?.nativeElement.textContent).toContain('Operation Successful');
     });
 
     it('should display message', () => {
       component.message = 'Your changes have been saved';
       fixture.detectChanges();
-      
-      const message = compiled.query(By.css('.status-message'));
+
+      const message = compiled.query(By.CSS('.status-message'));
       expect(message?.nativeElement.textContent).toContain('Your changes have been saved');
     });
   });
@@ -424,8 +424,8 @@ describe('PublicStatusCardComponent', () => {
     it('should show action button when provided', () => {
       component.actionLabel = 'Undo';
       fixture.detectChanges();
-      
-      const button = compiled.query(By.css('button'));
+
+      const button = compiled.query(By.CSS('button'));
       expect(button?.nativeElement.textContent).toContain('Undo');
     });
 
@@ -433,10 +433,10 @@ describe('PublicStatusCardComponent', () => {
       spyOn(component.onAction, 'emit');
       component.actionLabel = 'Undo';
       fixture.detectChanges();
-      
-      const button = compiled.query(By.css('button'));
+
+      const button = compiled.query(By.CSS('button'));
       button?.nativeElement.click();
-      
+
       expect(component.onAction.emit).toHaveBeenCalled();
     });
   });
@@ -445,16 +445,16 @@ describe('PublicStatusCardComponent', () => {
     it('should have appropriate ARIA role', () => {
       component.status = 'error';
       fixture.detectChanges();
-      
-      const card = compiled.query(By.css('[role="alert"]'));
+
+      const card = compiled.query(By.CSS('[role="alert"]'));
       expect(card).toBeTruthy();
     });
 
     it('should have status indication for screen readers', () => {
       component.status = 'success';
       fixture.detectChanges();
-      
-      const statusText = compiled.query(By.css('[aria-live="polite"]'));
+
+      const statusText = compiled.query(By.CSS('[aria-live="polite"]'));
       expect(statusText).toBeTruthy();
     });
   });
@@ -468,15 +468,15 @@ describe('PublicStatusCardComponent', () => {
 
 ---
 
-### Task 1.2: Add test target to `packages/ui-patterns/project.json`
+### Task 1.2: Add test target to `packages/ui-patterns/project.JSON`
 
-**Location**: `packages/ui-patterns/project.json`
+**Location**: `packages/ui-patterns/project.JSON`
 
 **Change**:
-```json
+```JSON
 {
   "name": "ui-patterns",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.JSON",
   "sourceRoot": "packages/ui-patterns/src",
   "projectType": "library",
   "targets": {
@@ -518,10 +518,10 @@ pnpm test ui-patterns
 
 # Expected output:
 # ✓ PublicEmptyStateComponent
-# ✓ PublicFormSectionComponent  
+# ✓ PublicFormSectionComponent
 # ✓ PublicPageHeaderComponent
 # ✓ PublicStatusCardComponent
-# 
+#
 # Test Suites: 4 passed
 # Tests:       40+ passed
 ```
@@ -535,8 +535,8 @@ pnpm test ui-patterns
 
 ## Phase 2: Markdown Linting (Critical)
 
-**Status**: Not started  
-**Effort**: 2 hours  
+**Status**: Not started
+**Effort**: 2 hours
 **Timeline**: Day 2
 
 ### Task 2.1: Install markdown linter
@@ -551,11 +551,11 @@ pnpm add -D markdownlint-cli2 remark-cli remark-preset-lint-consistent
 
 ---
 
-### Task 2.2: Create `.markdownlint.json`
+### Task 2.2: Create `.markdownlint.JSON`
 
-**File**: `.markdownlint.json`
+**File**: `.markdownlint.JSON`
 
-```json
+```JSON
 {
   "extends": "default",
   "line-length": {
@@ -624,8 +624,8 @@ pnpm lint
 
 ## Phase 3: Code Example Verification (High)
 
-**Status**: Not started  
-**Effort**: 4 hours  
+**Status**: Not started
+**Effort**: 4 hours
 **Timeline**: Days 3-4
 
 ### Task 3.1: Create code example test file
@@ -637,7 +637,7 @@ import { TestBed } from '@angular/core/testing';
 import { UiButtonComponent } from '@public-sector/ui-patterns';
 
 describe('CODE_EXAMPLES: Documentation Code Snippets', () => {
-  
+
   describe('Component Import', () => {
     it('should import UiButtonComponent from @public-sector/ui-patterns', () => {
       expect(UiButtonComponent).toBeDefined();
@@ -647,7 +647,7 @@ describe('CODE_EXAMPLES: Documentation Code Snippets', () => {
       TestBed.configureTestingModule({
         imports: [UiButtonComponent],
       });
-      
+
       const fixture = TestBed.createComponent(UiButtonComponent);
       expect(fixture.componentInstance).toBeTruthy();
     });
@@ -658,7 +658,7 @@ describe('CODE_EXAMPLES: Documentation Code Snippets', () => {
       const root = document.documentElement;
       const computed = getComputedStyle(root);
       const value = computed.getPropertyValue('--color-primary-500');
-      
+
       expect(value.trim()).toBeTruthy();
     });
 
@@ -666,7 +666,7 @@ describe('CODE_EXAMPLES: Documentation Code Snippets', () => {
       const root = document.documentElement;
       const computed = getComputedStyle(root);
       const value = computed.getPropertyValue('--spacing-md');
-      
+
       expect(value.trim()).toBeTruthy();
     });
 
@@ -699,11 +699,11 @@ describe('CODE_EXAMPLES: Documentation Code Snippets', () => {
 
       const fixture = TestBed.createComponent(UiButtonComponent);
       const component = fixture.componentInstance;
-      
+
       // Test example from CODE_EXAMPLES.md
       component.label = 'Save';
       component.variant = 'primary';
-      
+
       fixture.detectChanges();
       expect(fixture.nativeElement.textContent).toContain('Save');
     });
@@ -715,12 +715,12 @@ describe('CODE_EXAMPLES: Documentation Code Snippets', () => {
 
       const fixture = TestBed.createComponent(UiButtonComponent);
       const component = fixture.componentInstance;
-      
+
       spyOn(component.click, 'emit');
-      
+
       const button = fixture.nativeElement.querySelector('button');
       button.click();
-      
+
       expect(component.click.emit).toHaveBeenCalled();
     });
   });
@@ -761,13 +761,13 @@ pnpm test CODE_EXAMPLES.test.ts
 
 ## Phase 4: E2E Tests for Shell Federation (High)
 
-**Status**: Not started  
-**Effort**: 8 hours  
+**Status**: Not started
+**Effort**: 8 hours
 **Timeline**: Days 5-6
 
 ### Task 4.1: Create Playwright config
 
-**File**: `playwright.config.ts`
+**File**: `Playwright.config.ts`
 
 ```typescript
 import { defineConfig, devices } from '@playwright/test';
@@ -778,7 +778,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: 'HTML',
   use: {
     baseURL: 'http://localhost:4200',
     trace: 'on-first-retry',
@@ -818,7 +818,7 @@ export default defineConfig({
 
 ### Task 4.2: Create federation test suite
 
-**File**: `apps/shell/e2e/federation.spec.ts`
+**File**: `apps/shell/E2E/federation.spec.ts`
 
 ```typescript
 import { test, expect } from '@playwright/test';
@@ -826,17 +826,17 @@ import { test, expect } from '@playwright/test';
 test.describe('Shell Federation', () => {
   test('should load shell at port 4200', async ({ page }) => {
     await page.goto('http://localhost:4200');
-    
+
     const title = await page.title();
     expect(title).toBeTruthy();
   });
 
   test('should mount services-remote under /services', async ({ page }) => {
     await page.goto('http://localhost:4200/services');
-    
+
     // Wait for remote to load
     await page.waitForTimeout(1000);
-    
+
     // Verify content loaded
     const content = page.locator('[data-testid="services-content"]');
     await expect(content).toBeVisible();
@@ -844,28 +844,28 @@ test.describe('Shell Federation', () => {
 
   test('should share tokens across remotes', async ({ page }) => {
     await page.goto('http://localhost:4200/services');
-    
+
     // Get computed style from remote
     const button = page.locator('button').first();
     const bgColor = await button.evaluate((el) => {
       return getComputedStyle(el).backgroundColor;
     });
-    
+
     // Should be using token color, not default
     expect(bgColor).not.toBe('rgba(0, 0, 0, 0)');
   });
 
   test('should maintain navigation state across remotes', async ({ page }) => {
     await page.goto('http://localhost:4200');
-    
+
     // Navigate to services
     await page.click('a[href="/services"]');
     await page.waitForURL('**/services');
-    
+
     // Navigate back
     await page.click('a[href="/"]');
     await page.waitForURL('http://localhost:4200/');
-    
+
     expect(page.url()).toBe('http://localhost:4200/');
   });
 
@@ -892,7 +892,7 @@ test.describe('Federation Error Handling', () => {
     });
 
     await page.goto('http://localhost:4200/services');
-    
+
     // Should show error state or fallback
     const errorMsg = page.locator('[role="alert"]');
     await expect(errorMsg).toBeVisible({ timeout: 3000 });
@@ -902,14 +902,14 @@ test.describe('Federation Error Handling', () => {
 test.describe('Token Inheritance', () => {
   test('remote components should use shell tokens', async ({ page }) => {
     await page.goto('http://localhost:4200/services');
-    
+
     const elemStyle = await page.locator('.component-wrapper').first().evaluate((el) => {
       return {
         color: getComputedStyle(el).color,
         fontSize: getComputedStyle(el).fontSize,
       };
     });
-    
+
     // Verify custom token is applied
     expect(elemStyle.color).toBeTruthy();
     expect(elemStyle.fontSize).toBeTruthy();
@@ -945,13 +945,13 @@ pnpm exec playwright test apps/shell/e2e/federation.spec.ts
 
 ## Phase 5: Storybook Story Validation (Medium)
 
-**Status**: Not started  
-**Effort**: 6 hours  
+**Status**: Not started
+**Effort**: 6 hours
 **Timeline**: Days 7-8
 
 ### Task 5.1: Create story validation tests
 
-**File**: `apps/qa-remote/e2e/storybook-stories.spec.ts`
+**File**: `apps/qa-remote/E2E/Storybook-stories.spec.ts`
 
 ```typescript
 import { test, expect } from '@playwright/test';
@@ -981,23 +981,23 @@ test.describe('Storybook Stories', () => {
     await page.goto('http://localhost:4400/?path=/story/components-button--primary');
 
     const button = page.locator('button').first();
-    
+
     // Focus and activate via keyboard
     await button.focus();
     await button.press('Space');
-    
+
     // Should not throw
     expect(button).toBeTruthy();
   });
 
-  test('should pass accessibility checks', async ({ page }) => {
+  test('should pass Accessibility checks', async ({ page }) => {
     await page.goto('http://localhost:4400/?path=/story/components-button--primary');
 
     await injectAxe(page);
     await checkA11y(page, '#storybook-root', null, {
       detailedReport: true,
       detailedReportOptions: {
-        html: true,
+        HTML: true,
       },
     });
   });
@@ -1023,7 +1023,7 @@ test.describe('Component Registry in Storybook', () => {
 
     for (const component of components) {
       await page.goto(`http://localhost:4400/?path=/story/components-${component}--primary`);
-      
+
       const story = page.locator('#storybook-root');
       await expect(story).toBeVisible();
     }
@@ -1059,8 +1059,8 @@ pnpm exec playwright test apps/qa-remote/e2e/storybook-stories.spec.ts
 
 ## Phase 6: Documentation Link Validation (Optional)
 
-**Status**: Not started  
-**Effort**: 2 hours  
+**Status**: Not started
+**Effort**: 2 hours
 **Timeline**: Day 9 (if time allows)
 
 ### Task 6.1: Install link checker
@@ -1075,7 +1075,7 @@ pnpm add -D markdown-link-check
 
 ```javascript
 // In scripts/lint-workspace.mjs
-run('npx', ['markdown-link-check', 'docs/design-system/**/*.md', '--config', '.markdown-link-check.json']);
+run('npx', ['markdown-link-check', 'docs/design-system/**/*.md', '--config', '.markdown-link-check.JSON']);
 ```
 
 **Checklist**:
@@ -1086,9 +1086,9 @@ run('npx', ['markdown-link-check', 'docs/design-system/**/*.md', '--config', '.m
 
 ## Integration: Update CI/CD Pipeline
 
-### Step 1: Update npm scripts in `package.json`
+### Step 1: Update npm scripts in `package.JSON`
 
-```json
+```JSON
 {
   "scripts": {
     "lint": "node scripts/lint-workspace.mjs",
@@ -1139,8 +1139,8 @@ pnpm exec husky install
 - [ ] Documentation stays accurate
 
 ### Phase 4: ✅ E2E Federation Tests
-- [ ] playwright.config.ts created
-- [ ] `pnpm test:e2e:ui` passes
+- [ ] Playwright.config.ts created
+- [ ] `pnpm test:E2E:ui` passes
 - [ ] All remotes tested
 
 ### Phase 5: ✅ Storybook Validation
@@ -1192,6 +1192,6 @@ pnpm exec husky install
 
 ---
 
-**Created**: 2026-07-12  
-**Updated**: 2026-07-12  
+**Created**: 2026-07-12
+**Updated**: 2026-07-12
 **Next Review**: After Phase 1 completion

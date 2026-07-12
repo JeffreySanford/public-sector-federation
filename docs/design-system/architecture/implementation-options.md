@@ -7,14 +7,14 @@ the runtime, styling, routing, and deployment tradeoffs against the real code.
 
 ![Implementation options](../diagrams/shared-design-system-implementation-options.png)
 
-| Option | Strengths | Risks or costs |
+| Option | Strengths | Risks/Costs |
 | --- | --- | --- |
-| Federated Web Components | Framework boundary, explicit host element, useful for independently mounted remotes. | Does not automatically mean Shadow DOM; Angular routing, lifecycle, and dependency sharing still need design. |
-| Federated Angular routes or modules | Natural Angular router integration and shared Angular conventions. | Tighter Angular version coordination and less framework isolation. |
-| Native Federation or federated ES modules | Modern module loading with explicit shared dependency strategy. | Requires careful build and runtime configuration. |
-| Explicit `mount()` / `unmount()` lifecycle | Clear runtime contract and framework flexibility. | More custom integration code and lifecycle responsibility. |
-| Iframe adapter | Strong isolation for legacy or incompatible applications. | Styling, routing, accessibility, and cross-app communication are more expensive. |
-| Build-time shared libraries | Simple where independent deployment is unnecessary. | Does not solve independent runtime composition. |
+| Web Components | Boundary, explicit host, independent mount. | No Shadow DOM; routing/DI needs design. |
+| Federated Angular routes | Router integration, conventions. | Tighter version coordination. |
+| Native Federation ES modules | Modern loading, explicit dependencies. | Build/runtime config needed. |
+| `mount()`/`unmount()` | Clear contract, flexibility. | More custom lifecycle code. |
+| Iframe adapter | Strong isolation for legacy. | Styling, routing, Accessibility cost. |
+| Build-time libraries | Simple where deployment unnecessary. | No runtime composition. |
 
 ## Evaluation Criteria
 

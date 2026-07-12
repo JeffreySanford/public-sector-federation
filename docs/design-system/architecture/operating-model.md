@@ -42,13 +42,13 @@ consumers.
 
 | Topic | Status | Notes |
 | --- | --- | --- |
-| Token source | Needs validation | Identify authoritative source and generated outputs. |
-| Component registry | Proposed | Wrap PrimeNG only where shared behavior, accessibility, defaults, or API stability are needed. |
-| Shell mounting | Open decision | Web Components, federated Angular routes, ESM lifecycle functions, and other options need comparison. |
-| Shadow DOM | Open decision | Custom elements do not imply Shadow DOM. Selector isolation only applies at an actual shadow boundary. |
-| CSS variables | Proposed contract | Custom properties can be inherited through hosts and into shadow trees when defined on an ancestor or host. |
-| Overlays | Needs validation | Portal-based overlays may inherit from a different DOM ancestor than the triggering component. |
-| Zeroheight | Proposed governance surface | Document status, usage, evidence, and ownership. |
+| Token source | Needs validation | Identify source and generated outputs. |
+| Component registry | Proposed | Wrap PrimeNG for shared behavior, defaults, or API. |
+| Shell mounting | Open decision | Compare Web Components, federated routes, ESM. |
+| Shadow DOM | Open decision | Custom elements don't imply Shadow DOM. |
+| CSS variables | Proposed contract | Custom properties inherit through hosts/shadows. |
+| Overlays | Needs validation | Portal overlays may inherit from different ancestors. |
+| Zeroheight | Proposed governance | Document status, usage, evidence, ownership. |
 
 ## Review Goal
 

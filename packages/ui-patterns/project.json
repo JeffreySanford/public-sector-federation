@@ -10,6 +10,12 @@
         "command": "pnpm --dir packages/ui-patterns build"
       }
     },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "cd packages/ui-patterns && pnpm test"
+      }
+    },
     "typecheck": {
       "executor": "nx:run-commands",
       "options": {

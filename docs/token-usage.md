@@ -13,7 +13,7 @@ Application teams should use the design system in this order:
 Shell and remotes should import:
 
 ```ts
-import { providePublicSectorPrimeNG } from '@public-sector/primeng-preset';
+import { providePublicSectorPrimeNG } from '@public-sector/PrimeNG-preset';
 ```
 
 and include it in app-level providers.
@@ -22,8 +22,8 @@ and include it in app-level providers.
 
 Global styles may import token CSS:
 
-```css
-@import "@public-sector/tokens/tokens.css";
+```CSS
+@import "@public-sector/tokens/tokens.CSS";
 ```
 
 Use semantic variables for custom feature layout. Do not use primitive palette

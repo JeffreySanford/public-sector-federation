@@ -1,16 +1,16 @@
 # Testing Strategy & Roadmap
 
-**Status**: Ready for implementation  
-**Last Updated**: 2026-07-12  
+**Status**: Ready for implementation
+**Last Updated**: 2026-07-12
 **Audience**: Engineering team, QA leads, tech leads
 
 ---
 
 ## Quick Summary
 
-**Current State**: 1 test file (backend only), 0 component tests, no doc validation  
-**Target State**: Comprehensive testing across components, federation, E2E, docs, and linting  
-**Timeline**: 2 weeks (28-32 hours)  
+**Current State**: 1 test file (backend only), 0 component tests, no doc validation
+**Target State**: Comprehensive testing across components, federation, E2E, docs, and linting
+**Timeline**: 2 weeks (28-32 hours)
 **Complexity**: Medium - straightforward implementation, no major refactoring
 
 ---
@@ -19,9 +19,9 @@
 
 ```
 ❌ UI Components (4 components: button, form-section, header, status-card)
-❌ Shell & Federation (module federation setup)  
+❌ Shell & Federation (module federation setup)
 ❌ Remotes (admin, services, reporting, qa)
-❌ Storybook stories (rendering, accessibility)
+❌ Storybook stories (rendering, Accessibility)
 ❌ Documentation (markdown links, code examples)
 ❌ Linting (no markdown or full TypeScript linting)
 ```
@@ -43,7 +43,7 @@
 ┌─────────────────────────────────────────────────────────────┐
 │  Unit Testing Layer                                          │
 │  ├─ Component tests (packages/ui-patterns)                   │
-│  ├─ API tests (apps/agile-api) ✅ DONE                       │
+│  ├─ API tests (apps/agile-API) ✅ DONE                       │
 │  └─ Token validation tests                                   │
 └─────────────────────────────────────────────────────────────┘
                             ↓
@@ -82,7 +82,7 @@
 ### 2. Unit Tests (Component Integrity)
 - **What**: Tests components in isolation
 - **Benefit**: Prevents API breaking changes
-- **Coverage**: Props, events, accessibility, CSS classes
+- **Coverage**: Props, events, Accessibility, CSS classes
 - **Effort**: 6-8 hours for 4 components
 
 ### 3. Integration Tests (System Coherence)
@@ -109,8 +109,8 @@
 
 1. **Day 1-2**: Unit tests for 4 UI components (6-8 hours)
    - Add test files: `*.spec.ts` for each component
-   - Test props, events, accessibility
-   - Add test target to `project.json`
+   - Test props, events, Accessibility
+   - Add test target to `project.JSON`
 
 2. **Day 2**: Markdown linting (2 hours)
    - Install `markdownlint-cli2`
@@ -130,7 +130,7 @@
    - Link to actual code
 
 4. **Day 5-6**: E2E federation tests (8-10 hours)
-   - Create `playwright.config.ts`
+   - Create `Playwright.config.ts`
    - Test shell + all remotes
    - Test token inheritance
    - Test navigation
@@ -214,8 +214,8 @@ pnpm test:watch                  # Watch mode
 - 📦 `@angular/core/testing` (already in Angular)
 - 📦 `markdownlint-cli2` (2 KB)
 - 📦 `markdown-link-check` (3 KB)
-- 📦 `playwright` (already installed)
-- 📦 `axe-playwright` (1 KB)
+- 📦 `Playwright` (already installed)
+- 📦 `axe-Playwright` (1 KB)
 
 ### Time Commitment
 - **Phase 1**: 8-10 hours (1-2 developers, 1 week)
@@ -269,12 +269,12 @@ pnpm test:watch                  # Watch mode
 ### Q: Do I need to write tests for everything?
 **A**: Prioritize:
 1. Core components (ui-patterns) - YES
-2. Federation/remotes - YES  
+2. Federation/remotes - YES
 3. Utility functions - Optional
 4. One-off scripts - Optional
 
 ### Q: How long do tests take to run?
-**A**: 
+**A**:
 - Unit tests: ~10 seconds
 - E2E tests: ~30-45 seconds
 - Full suite: ~1 minute
@@ -326,7 +326,7 @@ pnpm test:watch          # Watch mode while developing
 1. Review test coverage in Phase 2 & 3
 2. Run E2E tests against staging
 3. Document any edge cases found
-4. Add accessibility test cases
+4. Add Accessibility test cases
 
 ---
 
@@ -346,7 +346,7 @@ pnpm test:watch          # Watch mode while developing
 
 ---
 
-**Prepared by**: Architecture Team  
-**Last updated**: 2026-07-12  
-**Status**: Ready for implementation  
+**Prepared by**: Architecture Team
+**Last updated**: 2026-07-12
+**Status**: Ready for implementation
 **Target start date**: 2026-07-13

@@ -1,8 +1,8 @@
 # Phase 1 Quick Start Guide
 
-**Duration**: 8-10 hours  
-**Effort Level**: Medium (straightforward template-based work)  
-**Deadline**: End of Week 1  
+**Duration**: 8-10 hours
+**Effort Level**: Medium (straightforward template-based work)
+**Deadline**: End of Week 1
 **Result**: 4 component tests + markdown linting enabled
 
 ---
@@ -12,14 +12,14 @@
 ### 1. Component Tests (6-8 hours)
 Create unit test files for 4 Angular components in `packages/ui-patterns/src/`:
 - ✅ public-empty-state.component.spec.ts
-- ✅ public-form-section.component.spec.ts  
+- ✅ public-form-section.component.spec.ts
 - ✅ public-page-header.component.spec.ts
 - ✅ public-status-card.component.spec.ts
 
 ### 2. Markdown Linting (2 hours)
 Install and enable markdown validation:
-- ✅ Add markdownlint-cli2 to package.json
-- ✅ Create .markdownlint.json
+- ✅ Add markdownlint-cli2 to package.JSON
+- ✅ Create .markdownlint.JSON
 - ✅ Update scripts/lint-workspace.mjs
 - ✅ Run linter and fix issues
 
@@ -51,10 +51,10 @@ Should show no errors (or only missing component reference, which is OK).
 ## Task 2: Create Test Target (10 min)
 
 ### Open file
-`packages/ui-patterns/project.json`
+`packages/ui-patterns/project.JSON`
 
 ### Find this section:
-```json
+```JSON
 "targets": {
   "build": { ... },
   "typecheck": { ... }
@@ -62,7 +62,7 @@ Should show no errors (or only missing component reference, which is OK).
 ```
 
 ### Add test target after build:
-```json
+```JSON
 "test": {
   "executor": "nx:run-commands",
   "options": {
@@ -103,9 +103,9 @@ pnpm add -D markdownlint-cli2 remark-cli
 Takes ~2 min. Go grab coffee ☕
 
 ### Step 2: Create config file
-Create `.markdownlint.json` in root:
+Create `.markdownlint.JSON` in root:
 
-```json
+```JSON
 {
   "extends": "default",
   "line-length": {
@@ -167,12 +167,12 @@ All linting checks passed! ✅
 - [ ] `public-form-section.component.spec.ts` created
 - [ ] `public-page-header.component.spec.ts` created
 - [ ] `public-status-card.component.spec.ts` created
-- [ ] Test target added to `packages/ui-patterns/project.json`
+- [ ] Test target added to `packages/ui-patterns/project.JSON`
 
 ### Linting
 
 - [ ] `markdownlint-cli2` installed
-- [ ] `.markdownlint.json` created
+- [ ] `.markdownlint.JSON` created
 - [ ] `scripts/lint-workspace.mjs` updated
 - [ ] `pnpm lint` passes with 0 errors
 
@@ -211,13 +211,14 @@ npm install -g pnpm
 - ✅ right: `component.spec.ts`
 
 ### Issue 4: Markdown linting too strict
-**Fix**: The .markdownlint.json can be adjusted. Most errors are:
+**Fix**: The .markdownlint.JSON can be adjusted. Most errors are:
 - **Line too long**: Wrap at 120 chars
 - **Trailing spaces**: Remove spaces at end of lines
 - **Hard tabs**: Use spaces instead
 
 ### Issue 5: `Cannot find template for component`
-**Fix**: Totally fine! The component might use inline templates. Tests still validate the component exists and has right structure.
+**Fix**: Component might use inline templates. Tests validate the component
+exists and has the right structure.
 
 ---
 
@@ -280,9 +281,9 @@ Each phase builds on the previous one but can be done by different people.
 | File | Purpose |
 |------|---------|
 | `TESTING_IMPLEMENTATION_CHECKLIST.md` | Copy test code from here |
-| `.markdownlint.json` | Linting rules config |
+| `.markdownlint.JSON` | Linting rules config |
 | `scripts/lint-workspace.mjs` | Where linting runs |
-| `packages/ui-patterns/project.json` | Add test target here |
+| `packages/ui-patterns/project.JSON` | Add test target here |
 | `TESTING_STRATEGY.md` | Why we're doing this |
 
 ---
@@ -334,7 +335,7 @@ pnpm nx list
 | Test run & fixes | 30 min | 11:45 AM |
 | **Lunch break** | 1 hr | 12:45 PM |
 | Install linter | 5 min | 12:50 PM |
-| Create .markdownlint.json | 10 min | 1:00 PM |
+| Create .markdownlint.JSON | 10 min | 1:00 PM |
 | Update lint script | 10 min | 1:10 PM |
 | Run linting & fix issues | 1 hr | 2:10 PM |
 | Final verification | 15 min | 2:25 PM |
@@ -346,7 +347,9 @@ pnpm nx list
 
 ## You've Got This! 💪
 
-This is straightforward, well-documented work. You're copying templates, pasting code, and running commands. No complex architecture or design decisions needed.
+This is straightforward, well-documented work. You're copying templates,
+pasting code, and running commands. No complex architecture or decisions
+needed.
 
 Each test file follows the same pattern. Each markdown fix is simple (spaces, line wrapping).
 
@@ -354,6 +357,6 @@ Each test file follows the same pattern. Each markdown fix is simple (spaces, li
 
 ---
 
-**Created**: 2026-07-12  
-**For**: First implementation of Phase 1  
+**Created**: 2026-07-12
+**For**: First implementation of Phase 1
 **Questions?** Check TESTING_IMPLEMENTATION_CHECKLIST.md for detailed instructions

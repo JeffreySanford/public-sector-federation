@@ -17,7 +17,7 @@ architecture.
 - Semantic tokens describe role and purpose.
 - Component tokens are added only for real component-specific needs.
 - Token names should avoid PrimeNG-specific implementation details unless they
-  live inside `@public-sector/primeng-preset`.
+  live inside `@public-sector/PrimeNG-preset`.
 
 ## Follow-Up
 

@@ -13,10 +13,10 @@ The shell is the only application users open directly during local development:
 - Admin remote: `http://localhost:4203`
 - QA remote: `http://localhost:4204`
 
-The shell reads `module-federation.manifest.json`, loads each remote bundle, and
+The shell reads `module-federation.manifest.JSON`, loads each remote bundle, and
 mounts the registered custom element:
 
-```json
+```JSON
 {
   "services": {
     "remoteEntry": "http://localhost:4201/main.js",
@@ -45,7 +45,7 @@ stale bundles on `4201`-`4204` can make the shell appear blank or out of date.
 The design system has three layers:
 
 - `packages/tokens` owns primitive, semantic, and fallback PrimeNG CSS variables.
-- `packages/primeng-preset` maps tokens into PrimeNG styled mode and exports
+- `packages/PrimeNG-preset` maps tokens into PrimeNG styled mode and exports
   `providePublicSectorPrimeNG()`.
 - Shell and remotes import token CSS from their global styles and bootstrap the
   same PrimeNG provider.
@@ -53,7 +53,7 @@ The design system has three layers:
 Every independently bootstrapped Angular app must call:
 
 ```ts
-import { providePublicSectorPrimeNG } from '@public-sector/primeng-preset';
+import { providePublicSectorPrimeNG } from '@public-sector/PrimeNG-preset';
 
 createApplication({
   providers: [providePublicSectorPrimeNG()],
@@ -87,7 +87,7 @@ Current mitigation:
   matters.
 - PrimeNG is reintroduced selectively after direct-remote and shell-composed
   checks pass.
-- `packages/tokens/src/tokens.css` includes baseline `--p-*` fallbacks so
+- `packages/tokens/src/tokens.CSS` includes baseline `--p-*` fallbacks so
   component variables exist even if runtime theme generation is delayed.
 
 ## PrimeNG Reintroduction Plan

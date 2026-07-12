@@ -13,7 +13,7 @@ source of truth; it is the component implementation layer.
 
 ## PrimeNG Preset
 
-`@public-sector/primeng-preset` maps organization tokens onto PrimeNG styled mode
+`@public-sector/PrimeNG-preset` maps organization tokens onto PrimeNG styled mode
 with `definePreset(Aura, ...)`.
 
 Current mapping highlights:

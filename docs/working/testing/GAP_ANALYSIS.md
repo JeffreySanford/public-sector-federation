@@ -1,7 +1,7 @@
 # Testing & Linting Gap Analysis
 
-**Date**: 2026-07-12  
-**Status**: Critical gaps identified  
+**Date**: 2026-07-12
+**Status**: Critical gaps identified
 **Severity**: HIGH - Components untested, documentation unchecked
 
 ---
@@ -13,10 +13,10 @@
 - ❌ 0 E2E tests for shell federation
 - ❌ No markdown linting for documentation
 - ❌ No code example verification
-- ❌ No storybook story validation
+- ❌ No Storybook story validation
 
 **Current Testing**:
-- ✅ 1 test file: `apps/agile-api/test/agile.service.test.ts` (backend only)
+- ✅ 1 test file: `apps/agile-API/test/agile.service.test.ts` (backend only)
 - ✅ Lint script validates JSON and story count only
 
 ---
@@ -120,8 +120,8 @@ docs/design-system/architecture/**/*.md          (18,500 words)
 
 ### Required: Markdown Linting Setup
 
-**Add to package.json**:
-```json
+**Add to package.JSON**:
+```JSON
 {
   "devDependencies": {
     "markdownlint-cli2": "^0.12.0",
@@ -135,8 +135,8 @@ docs/design-system/architecture/**/*.md          (18,500 words)
 }
 ```
 
-**Create `.markdownlint.json`**:
-```json
+**Create `.markdownlint.JSON`**:
+```JSON
 {
   "line-length": false,
   "no-hard-tabs": true,
@@ -175,7 +175,7 @@ export class MyFeatureComponent {
 }
 ```
 
-**Problem**: 
+**Problem**:
 - ❌ No test file imports this component
 - ❌ Code could be out of date
 - ❌ API could have changed
@@ -189,7 +189,7 @@ import { UiButtonComponent } from '@public-sector/ui-patterns';
 
 describe('CODE_EXAMPLES: Token Usage', () => {
   // Test code snippets from CODE_EXAMPLES.md
-  
+
   it('should import and use UiButtonComponent as documented', () => {
     TestBed.configureTestingModule({
       imports: [UiButtonComponent]
@@ -239,14 +239,14 @@ export const Default: Story = {
 
 ### Required: Story Validation E2E Tests
 
-Create: `apps/qa-remote/e2e/storybook-stories.e2e.ts`
+Create: `apps/qa-remote/E2E/Storybook-stories.E2E.ts`
 ```typescript
 import { test, expect } from '@playwright/test';
 
 test.describe('Storybook Stories Validation', () => {
   test('Button Default story renders', async ({ page }) => {
     await page.goto('http://localhost:4400/?path=/story/components-button--default');
-    
+
     const button = page.locator('button').first();
     await expect(button).toBeVisible();
     await expect(button).toHaveText('Click me');
@@ -254,7 +254,7 @@ test.describe('Storybook Stories Validation', () => {
 
   test('Button story is accessible', async ({ page }) => {
     await page.goto('http://localhost:4400/?path=/story/components-button--default');
-    
+
     const button = page.locator('button').first();
     await button.focus();
     await button.press('Space');
@@ -266,10 +266,10 @@ test.describe('Storybook Stories Validation', () => {
     page.on('console', msg => {
       if (msg.type() === 'error') errors.push(msg.text());
     });
-    
+
     await page.goto('http://localhost:4400/?path=/story/components-button--default');
     await page.waitForLoadState('networkidle');
-    
+
     expect(errors).toHaveLength(0);
   });
 });
@@ -298,14 +298,14 @@ test.describe('Storybook Stories Validation', () => {
 4. Theme change propagates to all remotes
 ```
 
-**Required**: `apps/shell/e2e/federation.e2e.ts`
+**Required**: `apps/shell/E2E/federation.E2E.ts`
 ```typescript
 import { test, expect } from '@playwright/test';
 
 test.describe('Shell Federation', () => {
   test('Admin remote mounts inside shell', async ({ page }) => {
     await page.goto('http://localhost:4200/admin');
-    
+
     // Should load admin-remote content inside shell
     const content = page.locator('[data-remote="admin"]');
     await expect(content).toBeVisible();
@@ -313,25 +313,25 @@ test.describe('Shell Federation', () => {
 
   test('Tokens are inherited by remotes', async ({ page }) => {
     await page.goto('http://localhost:4200/admin');
-    
+
     const button = page.locator('ui-button').first();
-    const bgColor = await button.evaluate(el => 
+    const bgColor = await button.evaluate(el =>
       getComputedStyle(el).backgroundColor
     );
-    
+
     // Should use token value, not default
     expect(bgColor).toBe('rgb(var(--color-primary-500))');
   });
 
   test('Theme change affects all remotes', async ({ page }) => {
     await page.goto('http://localhost:4200');
-    
+
     // Change theme
     await page.click('[data-theme-toggle]');
-    
+
     // Navigate to admin remote
     await page.goto('http://localhost:4200/admin');
-    
+
     // Admin should have new theme colors
     const style = await page.evaluate(() =>
       getComputedStyle(document.documentElement).getPropertyValue('--theme-mode')
@@ -348,7 +348,7 @@ test.describe('Shell Federation', () => {
 ### Status: MINIMAL - JSON only
 
 **Currently linted**:
-- ✅ JSON files (package.json, nx.json, tsconfig.json)
+- ✅ JSON files (package.JSON, nx.JSON, tsconfig.JSON)
 - ✅ Storybook story file count
 
 **NOT linted**:
@@ -422,15 +422,15 @@ const docsDir = 'docs/design-system';
 # Create test files for each component
 packages/ui-patterns/src/
   ├─ public-empty-state.component.spec.ts
-  ├─ public-form-section.component.spec.ts  
+  ├─ public-form-section.component.spec.ts
   ├─ public-page-header.component.spec.ts
   └─ public-status-card.component.spec.ts
 
-# Add to project.json: test target
+# Add to project.JSON: test target
 # Run: pnpm nx test ui-patterns
 ```
 
-**Effort**: 4-6 hours (30 min per component)  
+**Effort**: 4-6 hours (30 min per component)
 **Impact**: ✅ Prevent component API breaking changes
 
 ---
@@ -446,7 +446,7 @@ run('markdownlint-cli2', ['docs/**/*.md']);
 # Run: pnpm lint (will validate markdown)
 ```
 
-**Effort**: 1-2 hours  
+**Effort**: 1-2 hours
 **Impact**: ✅ Catch typos, broken links in docs
 
 ---
@@ -461,7 +461,7 @@ run('markdownlint-cli2', ['docs/**/*.md']);
 // Verify APIs haven't changed
 ```
 
-**Effort**: 3-4 hours  
+**Effort**: 3-4 hours
 **Impact**: ✅ Documentation stays accurate
 
 ---
@@ -474,7 +474,7 @@ run('markdownlint-cli2', ['docs/**/*.md']);
 // Test theme switching
 ```
 
-**Effort**: 6-8 hours  
+**Effort**: 6-8 hours
 **Impact**: ✅ Prevent federation breakage
 
 ---
@@ -523,7 +523,7 @@ describe('PublicEmptyStateComponent', () => {
 });
 EOF
 
-# 2. Add to project.json test target
+# 2. Add to project.JSON test target
 # 3. Run: pnpm test ui-patterns
 ```
 
@@ -582,5 +582,5 @@ echo 'run("markdownlint-cli2", ["docs/**/*.md"]);' >> scripts/lint-workspace.mjs
 
 ---
 
-**Prepared**: 2026-07-12  
+**Prepared**: 2026-07-12
 **Next Review**: After Phase 1 completion
