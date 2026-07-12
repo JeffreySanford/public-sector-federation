@@ -113,6 +113,35 @@ pnpm report:all
 pnpm report:publish
 ```
 
+## Testing
+
+This repository includes comprehensive test coverage:
+
+- **Unit Tests**: Linting, Prisma validation, Markdown formatting, JSON validation
+- **E2E Tests**: 189 tests across Chromium, Firefox, and WebKit
+  - 22 federation tests (shell + 4 remotes)
+  - 21 Storybook tests (accessibility, keyboard navigation, performance)
+  - 20 code example validation tests
+- **Code Quality**: TypeScript type checking, SCSS pattern guards
+- **Link Validation**: Markdown link checking with `pnpm lint:links`
+
+**Quick start**:
+
+```bash
+# All checks (lint + unit tests)
+pnpm lint && pnpm test
+
+# E2E tests (requires running servers)
+pnpm test:e2e
+
+# Full documentation
+pnpm docs TESTING.md
+```
+
+For detailed testing guide, see [TESTING.md](./docs/TESTING.md) and [PERFORMANCE_BASELINE.md](./docs/PERFORMANCE_BASELINE.md).
+
+---
+
 ## Module federation and design-system contract
 
 - Each remote is an independently bootstrapped Angular app.
