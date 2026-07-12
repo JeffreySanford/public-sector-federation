@@ -18,6 +18,15 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
+  
+  // Code Coverage Configuration (run with --coverage flag)
+  // pnpm playwright test --coverage
+  webServerConfig: undefined,
+  coverageOptions: {
+    include: ['apps/*/src/**/*.ts', 'packages/*/src/**/*.ts'],
+    exclude: ['**/*.spec.ts', '**/*.test.ts', '**/node_modules/**'],
+    all: true,
+  },
 
   webServer: [
     {
