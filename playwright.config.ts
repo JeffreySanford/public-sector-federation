@@ -26,6 +26,12 @@ export default defineConfig({
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
     },
+    {
+      command: 'pnpm nx run qa-remote:storybook',
+      url: 'http://localhost:4400',
+      reuseExistingServer: !process.env.CI,
+      timeout: 120000,
+    },
   ],
 
   projects: [

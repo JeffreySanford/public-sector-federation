@@ -1,5 +1,91 @@
-<testsuites id="" name="" tests="126" failures="0" skipped="126" errors="0" time="0.3581750000000001">
-<testsuite name="apps\shell\e2e\federation.spec.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="chromium" tests="22" failures="0" skipped="22" time="0" errors="0">
+<testsuites id="" name="" tests="189" failures="0" skipped="189" errors="0" time="0.3155430000000001">
+<testsuite name="apps\qa-remote\e2e\storybook-stories.spec.ts" timestamp="2026-07-12T18:42:36.927Z" hostname="chromium" tests="21" failures="0" skipped="21" time="0" errors="0">
+<testcase name="Storybook Stories - Rendering &amp; Console › should load Storybook dashboard" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Rendering &amp; Console › should render story without console errors" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Rendering &amp; Console › should display story canvas" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Rendering &amp; Console › should load story panel without errors" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Accessibility (WCAG 2.1 AA) › should pass axe accessibility checks on story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Accessibility (WCAG 2.1 AA) › should have semantic heading structure" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Accessibility (WCAG 2.1 AA) › should have proper color contrast" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Keyboard Accessibility › should be keyboard navigable" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Keyboard Accessibility › should support Enter key on interactive elements" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Keyboard Accessibility › should have visible focus indicators" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Props &amp; Controls › should display story controls panel" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Props &amp; Controls › should update story when controls change" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicEmptyStateComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicFormSectionComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicPageHeaderComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicStatusCardComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have at least 4 component stories" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Performance › should load Storybook within 5 seconds" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Performance › should render story within 3 seconds" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Error Handling › should handle missing story gracefully" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Error Handling › should recover from story error" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="apps\shell\e2e\federation.spec.ts" timestamp="2026-07-12T18:42:36.927Z" hostname="chromium" tests="22" failures="0" skipped="22" time="0" errors="0">
 <testcase name="Shell Module Federation › should load shell application" classname="apps\shell\e2e\federation.spec.ts">
 <skipped>
 </skipped>
@@ -89,7 +175,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="CODE_EXAMPLES.test.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="chromium" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testsuite name="CODE_EXAMPLES.test.ts" timestamp="2026-07-12T18:42:36.927Z" hostname="chromium" tests="20" failures="0" skipped="20" time="0" errors="0">
 <testcase name="Documentation Code Examples › Federation Config Example - shell federation.config.ts" classname="CODE_EXAMPLES.test.ts">
 <skipped>
 </skipped>
@@ -171,7 +257,93 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="apps\shell\e2e\federation.spec.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="firefox" tests="22" failures="0" skipped="22" time="0" errors="0">
+<testsuite name="apps\qa-remote\e2e\storybook-stories.spec.ts" timestamp="2026-07-12T18:42:36.927Z" hostname="firefox" tests="21" failures="0" skipped="21" time="0" errors="0">
+<testcase name="Storybook Stories - Rendering &amp; Console › should load Storybook dashboard" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Rendering &amp; Console › should render story without console errors" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Rendering &amp; Console › should display story canvas" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Rendering &amp; Console › should load story panel without errors" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Accessibility (WCAG 2.1 AA) › should pass axe accessibility checks on story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Accessibility (WCAG 2.1 AA) › should have semantic heading structure" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Accessibility (WCAG 2.1 AA) › should have proper color contrast" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Keyboard Accessibility › should be keyboard navigable" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Keyboard Accessibility › should support Enter key on interactive elements" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Keyboard Accessibility › should have visible focus indicators" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Props &amp; Controls › should display story controls panel" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Props &amp; Controls › should update story when controls change" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicEmptyStateComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicFormSectionComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicPageHeaderComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicStatusCardComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have at least 4 component stories" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Performance › should load Storybook within 5 seconds" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Performance › should render story within 3 seconds" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Error Handling › should handle missing story gracefully" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Error Handling › should recover from story error" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="apps\shell\e2e\federation.spec.ts" timestamp="2026-07-12T18:42:36.927Z" hostname="firefox" tests="22" failures="0" skipped="22" time="0" errors="0">
 <testcase name="Shell Module Federation › should load shell application" classname="apps\shell\e2e\federation.spec.ts">
 <skipped>
 </skipped>
@@ -261,7 +433,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="CODE_EXAMPLES.test.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="firefox" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testsuite name="CODE_EXAMPLES.test.ts" timestamp="2026-07-12T18:42:36.927Z" hostname="firefox" tests="20" failures="0" skipped="20" time="0" errors="0">
 <testcase name="Documentation Code Examples › Federation Config Example - shell federation.config.ts" classname="CODE_EXAMPLES.test.ts">
 <skipped>
 </skipped>
@@ -343,7 +515,93 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="apps\shell\e2e\federation.spec.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="webkit" tests="22" failures="0" skipped="22" time="0" errors="0">
+<testsuite name="apps\qa-remote\e2e\storybook-stories.spec.ts" timestamp="2026-07-12T18:42:36.927Z" hostname="webkit" tests="21" failures="0" skipped="21" time="0" errors="0">
+<testcase name="Storybook Stories - Rendering &amp; Console › should load Storybook dashboard" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Rendering &amp; Console › should render story without console errors" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Rendering &amp; Console › should display story canvas" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Rendering &amp; Console › should load story panel without errors" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Accessibility (WCAG 2.1 AA) › should pass axe accessibility checks on story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Accessibility (WCAG 2.1 AA) › should have semantic heading structure" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Accessibility (WCAG 2.1 AA) › should have proper color contrast" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Keyboard Accessibility › should be keyboard navigable" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Keyboard Accessibility › should support Enter key on interactive elements" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Keyboard Accessibility › should have visible focus indicators" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Props &amp; Controls › should display story controls panel" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Props &amp; Controls › should update story when controls change" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicEmptyStateComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicFormSectionComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicPageHeaderComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have PublicStatusCardComponent story" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Component Coverage › should have at least 4 component stories" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Performance › should load Storybook within 5 seconds" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Performance › should render story within 3 seconds" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Error Handling › should handle missing story gracefully" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Storybook Stories - Error Handling › should recover from story error" classname="apps\qa-remote\e2e\storybook-stories.spec.ts">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="apps\shell\e2e\federation.spec.ts" timestamp="2026-07-12T18:42:36.927Z" hostname="webkit" tests="22" failures="0" skipped="22" time="0" errors="0">
 <testcase name="Shell Module Federation › should load shell application" classname="apps\shell\e2e\federation.spec.ts">
 <skipped>
 </skipped>
@@ -433,7 +691,7 @@
 </skipped>
 </testcase>
 </testsuite>
-<testsuite name="CODE_EXAMPLES.test.ts" timestamp="2026-07-12T18:33:29.658Z" hostname="webkit" tests="20" failures="0" skipped="20" time="0" errors="0">
+<testsuite name="CODE_EXAMPLES.test.ts" timestamp="2026-07-12T18:42:36.927Z" hostname="webkit" tests="20" failures="0" skipped="20" time="0" errors="0">
 <testcase name="Documentation Code Examples › Federation Config Example - shell federation.config.ts" classname="CODE_EXAMPLES.test.ts">
 <skipped>
 </skipped>
