@@ -8,9 +8,18 @@ The performance tracking system automatically records test execution metrics (du
 
 1. **Database Schema**: `TestPerformanceMetric` model in Prisma
 2. **API Endpoints**: REST API for recording and querying metrics
-3. **QA Dashboard**: Visual dashboard in qa-remote for trend visualization
+3. **Dashboard View**: "Performance Tracking" tab in QA remote (optional, lazy-loaded)
 4. **CI/CD Integration**: GitHub Actions workflows for automatic recording
 5. **CLI Tool**: Node.js script for manual metric recording
+
+## How to Access
+
+The performance dashboard is accessible as an optional tab in the QA remote:
+1. Navigate to the QA remote in your shell
+2. Click the "Performance Tracking" tab (default is "QA Components")
+3. Dashboard loads on demand with regression alerts, summary cards, trends, and detailed metrics
+
+This keeps the QA remote lightweight while providing performance visibility when needed.
 
 ## Components
 
@@ -96,9 +105,9 @@ Returns PerformanceMetricDTO[] for specified range
 
 **Location**: [apps/agile-api/src/performance/](../apps/agile-api/src/performance/)
 
-### 3. QA Dashboard Component
+### 3. Performance Dashboard (QA Remote Tab)
 
-The Performance Dashboard provides:
+The Performance Dashboard is accessible as an optional tab in the QA remote application. It provides:
 - **Regression Alerts Section**: Shows critical/warning regressions with impact metrics
 - **Test Suite Summary Cards**: 5 cards for each test suite with status, duration, and pass rate
 - **Performance Trends Chart**: Line chart showing latest, average, baseline, and threshold
@@ -106,14 +115,24 @@ The Performance Dashboard provides:
 - **Responsive Design**: Mobile-optimized layout
 - **Real-time Refresh**: Manual refresh button to update data
 
-**Usage**:
-```typescript
-import { PerformanceDashboardComponent } from './app/components/performance-dashboard.component';
+**Integration**:
+The dashboard is lazily loaded via Angular's `@if` directive, so it only renders when the user clicks the "Performance Tracking" tab. This keeps the QA remote lightweight by default.
 
-@Component({
-  imports: [PerformanceDashboardComponent],
-})
-export class AppComponent {}
+**Location**: 
+- Shell → QA Remote → "Performance Tracking" tab
+
+**Implementation**:
+```typescript
+// In qa-remote.component.ts
+activeTab = signal<'qa' | 'performance'>('qa');
+setActiveTab(tab: 'qa' | 'performance'): void {
+  this.activeTab.set(tab);
+}
+
+// In qa-remote.component.html
+@if (activeTab() === 'performance') {
+  <public-performance-dashboard></public-performance-dashboard>
+}
 ```
 
 **Location**: [apps/qa-remote/src/app/components/](../apps/qa-remote/src/app/components/)
