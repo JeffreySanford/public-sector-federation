@@ -1,15 +1,36 @@
 <div class="performance-dashboard">
   <div class="header">
-    <h1>Performance Tracking Dashboard</h1>
+    <div>
+      <span class="eyebrow">Performance observability</span>
+      <h1>Performance Tracking Dashboard</h1>
+      <p>Regression alerts, suite health, and trend variance for federated test runs.</p>
+    </div>
     <button pButton type="button" label="Refresh" icon="pi pi-refresh" (click)="refreshData()" class="refresh-button"></button>
   </div>
+
+  <section class="infographic-grid" aria-label="Performance scorecard">
+    <article *ngFor="let kpi of performanceKpis" class="infographic-card" [ngClass]="'tone-' + kpi.tone">
+      <span class="infographic-icon" aria-hidden="true">
+        <i [ngClass]="kpi.icon"></i>
+      </span>
+      <div>
+        <span class="infographic-label">{{ kpi.label }}</span>
+        <strong>{{ kpi.value }}</strong>
+        <p>{{ kpi.detail }}</p>
+      </div>
+    </article>
+  </section>
 
   <!-- Regression Alerts -->
   <div class="alerts-section" *ngIf="!alertsLoading && regressions.length > 0">
     <p-card class="alert-card">
       <ng-template pTemplate="header">
         <div class="alert-header">
-          <span class="alert-title">⚠️ Performance Regressions Detected</span>
+          <span class="alert-icon" aria-hidden="true"><i class="pi pi-exclamation-triangle"></i></span>
+          <div>
+            <span class="alert-title">Performance regressions detected</span>
+            <p>{{ criticalRegressionCount }} critical and {{ warningRegressionCount }} warning alerts need review.</p>
+          </div>
         </div>
       </ng-template>
 
@@ -38,7 +59,7 @@
             <td>
               <span class="impact" [style.color]="statusColors['critical']">
                 +{{ regression.currentMs - regression.baselineMs }}ms
-                ({{ Math.round(((regression.currentMs - regression.baselineMs) / regression.baselineMs) * 100) }}%)
+                ({{ calculateRegressionImpact(regression) }}%)
               </span>
             </td>
           </tr>
@@ -69,6 +90,13 @@
           </ng-template>
 
           <div class="card-content">
+            <div class="suite-icon-row">
+              <span class="suite-icon" aria-hidden="true">
+                <i [ngClass]="suite.failedTests > 0 ? 'pi pi-exclamation-circle' : 'pi pi-check-circle'"></i>
+              </span>
+              <span>{{ suite.failedTests > 0 ? 'Needs attention' : 'Within guardrails' }}</span>
+            </div>
+
             <div class="metric">
               <span class="metric-label">Average Duration</span>
               <span class="metric-value">{{ suite.averageDuration }}ms</span>
@@ -103,6 +131,31 @@
 
       <p-chart type="line" [data]="trendChartData" [options]="trendChartOptions" class="trend-chart"></p-chart>
     </p-card>
+  </div>
+
+  <div class="variance-section" *ngIf="selectedTestSuite && !trendsLoading && trends.length > 0">
+    <h2>Baseline Variance</h2>
+    <div class="variance-list">
+      <article *ngFor="let trend of trends" class="variance-row" [ngClass]="getTrendTone(trend)">
+        <div class="variance-heading">
+          <span class="trend-indicator" [class]="trend.trend">
+            <i [ngClass]="getTrendIcon(trend)"></i>
+            {{ trend.trend | uppercase }}
+          </span>
+          <strong>{{ trend.browser ? (trend.browser | uppercase) : 'All Browsers' }}</strong>
+          <span>{{ getTrendDeltaLabel(trend) }}</span>
+        </div>
+        <div class="variance-track" aria-hidden="true">
+          <span class="variance-baseline"></span>
+          <span class="variance-bar" [style.width.%]="getTrendBarWidth(trend)"></span>
+        </div>
+        <div class="variance-metrics">
+          <span>Latest {{ trend.latest }}ms</span>
+          <span>Baseline {{ trend.baseline }}ms</span>
+          <span>Average {{ trend.average }}ms</span>
+        </div>
+      </article>
+    </div>
   </div>
 
   <!-- Detailed Trends Table -->

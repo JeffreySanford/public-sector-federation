@@ -71,9 +71,10 @@ jobs:
 
       - name: Record performance metrics
         env:
-          PERFORMANCE_API_URL: http://localhost:3000
+          PERFORMANCE_API_URL: http://localhost:3333
           GIT_COMMIT_HASH: ${{ github.event.workflow_run.head_commit.id }}
           GIT_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: pnpm perf:record
 
       - name: Export and update seed file
@@ -83,11 +84,11 @@ jobs:
 
       - name: Check for regressions
         env:
-          PERFORMANCE_API_URL: http://localhost:3000
+          PERFORMANCE_API_URL: http://localhost:3333
         run: |
           echo "Checking for performance regressions..."
           # This would be extended to fail the build if critical regressions detected
-          curl -s http://localhost:3000/api/performance/regressions | jq '.'
+          curl -s http://localhost:3333/api/performance/regressions | jq '.'
 
       - name: Comment on PR with performance results
         if: ${{ github.event.workflow_run.pull_requests }}

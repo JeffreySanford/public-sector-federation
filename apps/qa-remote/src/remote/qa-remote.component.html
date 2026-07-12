@@ -19,7 +19,7 @@
   ></button>
 </div>
 
-@if (activeTab() === 'qa') {
+<ng-container *ngIf="activeTab() === 'qa'">
   <section class="qa">
   <header class="qa-header">
     <span class="qa-tag">QA Remote</span>
@@ -938,8 +938,8 @@
     </article>
   </section>
 </section>
-}
+</ng-container>
 
-@if (activeTab() === 'performance') {
+<ng-container *ngIf="activeTab() === 'performance'">
   <public-performance-dashboard></public-performance-dashboard>
-}
+</ng-container>

@@ -113,9 +113,11 @@ Returns PerformanceMetricDTO[] for specified range
 ### 3. Performance Dashboard (QA Remote Tab)
 
 The Performance Dashboard is accessible as an optional tab in the QA remote application. It provides:
+- **Infographic Scorecard**: Shows tracked executions, alert count, average duration, and trend balance with icons
 - **Regression Alerts Section**: Shows critical/warning regressions with impact metrics
 - **Test Suite Summary Cards**: 5 cards for each test suite with status, duration, and pass rate
 - **Performance Trends Chart**: Line chart showing latest, average, baseline, and threshold
+- **Baseline Variance Visualization**: Browser-specific bars showing improvement or degradation against baseline
 - **Detailed Table**: Browser-specific performance data with trend indicators
 - **Responsive Design**: Mobile-optimized layout
 - **Real-time Refresh**: Manual refresh button to update data
@@ -149,7 +151,7 @@ setActiveTab(tab: 'qa' | 'performance'): void {
 Record test metrics from command line:
 
 ```bash
-pnpm perf:record [--api-url http://localhost:3000]
+pnpm perf:record [--api-url http://localhost:3333]
 ```
 
 The script:
@@ -161,11 +163,29 @@ The script:
 6. Reports success/failure count
 
 **Environment Variables**:
-- `PERFORMANCE_API_URL`: Override API URL (default: http://localhost:3000)
+- `PERFORMANCE_API_URL`: Override API URL (default: http://localhost:3333)
 - `GIT_COMMIT_HASH`: Git commit hash (auto-detected if not provided)
 - `GIT_BRANCH`: Git branch name (auto-detected if not provided)
+- `SLACK_WEBHOOK_URL`: Optional Slack incoming webhook for warning/critical regression alerts
 
 **Location**: [scripts/record-performance.mjs](../scripts/record-performance.mjs)
+
+### Unit Spec Coverage
+
+The QA remote includes optional Jasmine-style unit specs for performance tracking logic:
+
+```bash
+pnpm nx run qa-remote:test
+```
+
+Current coverage:
+- `qa-remote.component.spec.ts`: tab switching, severity mapping, table state, and status chip class logic
+- `performance-dashboard.component.spec.ts`: status labels, KPI helpers, pass-rate math, trend helpers, and trend loading
+- `performance-data.service.spec.ts`: HTTP endpoint and query parameter construction
+
+The target compiles the specs with TypeScript. A browser runner can be added later
+if the workspace standardizes on Karma, Web Test Runner, or Jest for Angular
+component execution.
 
 ### 5. GitHub Actions Workflows
 
@@ -207,7 +227,7 @@ The script:
 
 4. **View dashboard**:
    - Access qa-remote app and navigate to Performance Dashboard
-   - API running on http://localhost:3000
+   - API running on http://localhost:3333
 
 ### CI/CD Integration
 
@@ -219,7 +239,8 @@ The workflows are configured to:
 5. Record metrics to database
 6. Export and update seed file with latest metrics
 7. Auto-commit and push changes to master
-8. Comment on PR with results link
+8. Send Slack alerts when warning/critical regressions are detected and `SLACK_WEBHOOK_URL` is configured
+9. Comment on PR with results link
 
 **Automatic Seed Synchronization**:
 The system automatically syncs the database with the seed file, ensuring fresh
@@ -299,7 +320,7 @@ Performance tracking is tracked as a work item in the agile workflow:
 ## Troubleshooting
 
 ### Metrics not recording
-1. Verify API server is running: `curl http://localhost:3000/api/performance/summary`
+1. Verify API server is running: `curl http://localhost:3333/api/performance/summary`
 2. Check test results file exists: `ls test-results/results.json`
 3. Check git info: `git rev-parse HEAD` and `git rev-parse --abbrev-ref HEAD`
 
@@ -309,7 +330,7 @@ Performance tracking is tracked as a work item in the agile workflow:
 3. Run migrations: `pnpm api:migrate`
 
 ### Performance data not showing in dashboard
-1. Verify metrics were recorded: `curl http://localhost:3000/api/performance?limit=10`
+1. Verify metrics were recorded: `curl http://localhost:3333/api/performance?limit=10`
 2. Check browser console for API errors
 3. Verify PerformanceDataService is injected correctly
 

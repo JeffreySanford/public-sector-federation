@@ -32,6 +32,12 @@
         "command": "tsc --noEmit -p apps/qa-remote/tsconfig.app.json"
       }
     },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p apps/qa-remote/tsconfig.spec.json"
+      }
+    },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
       "options": {
