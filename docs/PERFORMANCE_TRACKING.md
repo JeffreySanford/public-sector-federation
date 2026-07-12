@@ -191,11 +191,24 @@ The workflows are configured to:
 3. Build and start API server
 4. Download test results
 5. Record metrics to database
-6. Comment on PR with results link
+6. Export and update seed file with latest metrics
+7. Auto-commit and push changes to master
+8. Comment on PR with results link
+
+**Automatic Seed Synchronization**:
+The system automatically syncs the database with the seed file, ensuring fresh database instances get the latest performance baselines. After each test run:
+- `pnpm perf:record` reads test results and saves to database
+- `pnpm perf:export-seed --auto-commit` exports latest DB metrics to seed file
+- Changes are automatically committed and pushed to master
+
+This keeps `apps/agile-api/prisma/seed-data/test-performance.seed.json` in sync with actual measured performance, eliminating manual synchronization.
+
+See [PERFORMANCE_SEED_SYNC.md](./PERFORMANCE_SEED_SYNC.md) for detailed seed auto-update documentation.
 
 **Customization**:
 - Edit `.github/workflows/performance-tracking.yml` for automatic recording
 - Edit `.github/workflows/manual-perf-record.yml` for manual runs
+- Modify `scripts/export-performance-seed.mjs` to change export behavior
 
 ## Baseline Thresholds
 
