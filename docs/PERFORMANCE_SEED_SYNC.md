@@ -1,6 +1,8 @@
 # Performance Seed Auto-Update
 
-The performance tracking system automatically synchronizes the database with the seed file, ensuring that baseline metrics stay in sync with actual measured performance data.
+The performance tracking system automatically synchronizes the database with
+the seed file, ensuring baseline metrics stay in sync with actual measured
+performance data.
 
 ## How It Works
 

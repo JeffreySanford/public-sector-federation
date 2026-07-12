@@ -68,7 +68,8 @@ Validates:
 
 **Command**: `pnpm test:e2e`
 
-⚠️ **Note**: Starts servers automatically, runs in background. Use `--reporter=dot` for minimal output or `--reporter=list` for detailed progress.
+⚠️ **Note**: Starts servers automatically, runs in background. Use
+`--reporter=dot` for minimal output or `--reporter=list` for detailed progress.
 
 #### Test Suites
 
@@ -80,12 +81,15 @@ Validates:
 **b) Storybook Tests (21 tests)**
 - File: `apps/qa-remote/e2e/storybook-stories.spec.ts`
 - Coverage: 3 browsers × 21 tests = 63 total
-- Validates: Story rendering, accessibility (WCAG 2.1 AA), keyboard navigation, performance
+- Validates: Story rendering, accessibility (WCAG 2.1 AA), keyboard navigation,
+  performance
 
 **c) QA Remote Component Tests (25+ tests)**
 - File: `apps/qa-remote/e2e/qa-remote.spec.ts`
 - Coverage: 3 browsers × 25+ tests = 75+ total
-- Validates: Tab switching (QA Components ↔ Performance Tracking), lazy loading, component rendering, accessibility, keyboard navigation, semantic HTML
+- Validates: Tab switching (QA Components ↔ Performance Tracking), lazy
+  loading, component rendering, accessibility, keyboard navigation, semantic
+  HTML
 
 **d) Code Examples Tests (20 tests)**
 - File: `CODE_EXAMPLES.test.ts`

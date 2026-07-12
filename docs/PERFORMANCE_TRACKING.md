@@ -4,7 +4,9 @@ This document describes the performance tracking system for the public-sector-fe
 
 ## Overview
 
-The performance tracking system automatically records test execution metrics (duration, status, pass/fail) to a database for trend analysis and regression detection. The system consists of:
+The performance tracking system automatically records test execution metrics
+(duration, status, pass/fail) to a database for trend analysis and regression
+detection. The system consists of:
 
 1. **Database Schema**: `TestPerformanceMetric` model in Prisma
 2. **API Endpoints**: REST API for recording and querying metrics
@@ -116,9 +118,11 @@ The Performance Dashboard is accessible as an optional tab in the QA remote appl
 - **Real-time Refresh**: Manual refresh button to update data
 
 **Integration**:
-The dashboard is lazily loaded via Angular's `@if` directive, so it only renders when the user clicks the "Performance Tracking" tab. This keeps the QA remote lightweight by default.
+The dashboard is lazily loaded via Angular's `@if` directive, so it only
+renders when the user clicks the "Performance Tracking" tab. This keeps the QA
+remote lightweight by default.
 
-**Location**: 
+**Location**:
 - Shell → QA Remote → "Performance Tracking" tab
 
 **Implementation**:
@@ -215,12 +219,15 @@ The workflows are configured to:
 8. Comment on PR with results link
 
 **Automatic Seed Synchronization**:
-The system automatically syncs the database with the seed file, ensuring fresh database instances get the latest performance baselines. After each test run:
+The system automatically syncs the database with the seed file, ensuring fresh
+database instances get the latest performance baselines. After each test run:
 - `pnpm perf:record` reads test results and saves to database
-- `pnpm perf:export-seed --auto-commit` exports latest DB metrics to seed file
+- `pnpm perf:export-seed --auto-commit` exports latest DB metrics to seed
+  file
 - Changes are automatically committed and pushed to master
 
-This keeps `apps/agile-api/prisma/seed-data/test-performance.seed.json` in sync with actual measured performance, eliminating manual synchronization.
+This keeps `apps/agile-api/prisma/seed-data/test-performance.seed.json` in
+sync with actual measured performance, eliminating manual synchronization.
 
 See [PERFORMANCE_SEED_SYNC.md](./PERFORMANCE_SEED_SYNC.md) for detailed seed auto-update documentation.
 
