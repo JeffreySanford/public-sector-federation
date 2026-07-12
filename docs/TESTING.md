@@ -1,6 +1,6 @@
 # Testing Guide
 
-**Status**: ✅ Complete | **Tests**: 189 E2E + Unit Tests | **Coverage**: In-progress
+**Status**: ✅ Complete | **Tests**: 264+ E2E + Unit Tests | **Coverage**: In-progress
 **Last Updated**: 2026-07-12
 
 ---
@@ -82,7 +82,12 @@ Validates:
 - Coverage: 3 browsers × 21 tests = 63 total
 - Validates: Story rendering, accessibility (WCAG 2.1 AA), keyboard navigation, performance
 
-**c) Code Examples Tests (20 tests)**
+**c) QA Remote Component Tests (25+ tests)**
+- File: `apps/qa-remote/e2e/qa-remote.spec.ts`
+- Coverage: 3 browsers × 25+ tests = 75+ total
+- Validates: Tab switching (QA Components ↔ Performance Tracking), lazy loading, component rendering, accessibility, keyboard navigation, semantic HTML
+
+**d) Code Examples Tests (20 tests)**
 - File: `CODE_EXAMPLES.test.ts`
 - Coverage: 3 browsers × 20 tests = 60 total
 - Validates: Documentation examples, federation config patterns, component signals, design system
@@ -96,6 +101,7 @@ Validates:
 **Baseline Metrics**:
 - Shell startup: ~40 seconds
 - Storybook startup: ~60 seconds
+- QA remote startup: ~30 seconds
 - Average test: ~2-3 seconds
 - Total E2E suite: ~180-240 seconds
 
