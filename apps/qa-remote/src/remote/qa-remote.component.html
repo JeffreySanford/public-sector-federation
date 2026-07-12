@@ -514,7 +514,16 @@
           </thead>
           <tbody>
             @for (roadmap of retrofitRoadmapRows; track roadmap.day) {
-              <tr>
+              <tr
+                class="sprint-day-row"
+                role="button"
+                tabindex="0"
+                [class.is-selected]="selectedSprintDay === roadmap.day"
+                [attr.aria-pressed]="selectedSprintDay === roadmap.day"
+                (click)="selectSprintDay(roadmap)"
+                (keydown.enter)="selectSprintDay(roadmap)"
+                (keydown.space)="selectSprintDay(roadmap); $event.preventDefault()"
+              >
                 <td><strong>{{ roadmap.day }}</strong></td>
                 <td>{{ roadmap.focus }}</td>
                 <td>{{ roadmap.output }}</td>
@@ -522,6 +531,13 @@
             }
           </tbody>
         </table>
+        <div class="sprint-board-header">
+          <div>
+            <span class="qa-tag">{{ selectedSprintDay }}</span>
+            <h4>Sprint items for {{ selectedSprintDayRoadmap.focus }}</h4>
+            <p>{{ agileSprintDaySummary }}</p>
+          </div>
+        </div>
         <table class="qa-table agile-scope-table">
           <thead>
             <tr>
@@ -533,13 +549,17 @@
             </tr>
           </thead>
           <tbody>
-            @for (scope of sprintScopeRows; track scope.item) {
+            @for (scope of selectedSprintScopeRows; track scope.item) {
               <tr>
                 <td><strong>{{ scope.item }}</strong></td>
                 <td>{{ scope.includes }}</td>
                 <td><span class="status-chip status-chip--warn">{{ scope.loe }}</span></td>
                 <td><span [class]="'status-chip ' + statusChipClass(scope.status)">{{ scope.status }}</span></td>
                 <td>{{ scope.acceptance }}</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5">No sprint items are mapped to this day yet.</td>
               </tr>
             }
           </tbody>
@@ -556,7 +576,7 @@
             </tr>
           </thead>
           <tbody>
-            @for (item of agileRows; track item.workstream + item.done) {
+            @for (item of selectedAgileRows; track item.workstream + item.done) {
               <tr>
                 <td><strong>{{ item.workstream }}</strong></td>
                 <td>{{ item.sprint }}</td>
@@ -564,6 +584,10 @@
                 <td><span [class]="'status-chip ' + statusChipClass(item.status)">{{ item.status }}</span></td>
                 <td>{{ item.blockers }}</td>
                 <td>{{ item.done }}</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="6">No sprint board items are mapped to this day yet.</td>
               </tr>
             }
           </tbody>

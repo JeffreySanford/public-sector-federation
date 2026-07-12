@@ -1,0 +1,3807 @@
+{
+  "$description": "DTCG-compatible token import generated from packages/tokens/src/tokens/*.json.",
+  "primitive": {
+    "color": {
+      "blue": {
+        "50": {
+          "$type": "color",
+          "$value": "#eff6ff",
+          "$description": "Primitive blue 50."
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#dbeafe",
+          "$description": "Primitive blue 100."
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#bfdbfe",
+          "$description": "Primitive blue 200."
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#93c5fd",
+          "$description": "Primitive blue 300."
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#60a5fa",
+          "$description": "Primitive blue 400."
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#2563eb",
+          "$description": "Primitive blue 500."
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#1d4ed8",
+          "$description": "Primitive blue 600."
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#1e40af",
+          "$description": "Primitive blue 700."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#1e3a8a",
+          "$description": "Primitive blue 800."
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#172554",
+          "$description": "Primitive blue 900."
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#0f172a",
+          "$description": "Primitive blue 950."
+        }
+      },
+      "slate": {
+        "50": {
+          "$type": "color",
+          "$value": "#f8fafc",
+          "$description": "Primitive slate 50."
+        },
+        "100": {
+          "$type": "color",
+          "$value": "#f1f5f9",
+          "$description": "Primitive slate 100."
+        },
+        "200": {
+          "$type": "color",
+          "$value": "#e2e8f0",
+          "$description": "Primitive slate 200."
+        },
+        "300": {
+          "$type": "color",
+          "$value": "#cbd5e1",
+          "$description": "Primitive slate 300."
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#94a3b8",
+          "$description": "Primitive slate 400."
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#64748b",
+          "$description": "Primitive slate 500."
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#475569",
+          "$description": "Primitive slate 600."
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#334155",
+          "$description": "Primitive slate 700."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#1e293b",
+          "$description": "Primitive slate 800."
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#0f172a",
+          "$description": "Primitive slate 900."
+        },
+        "950": {
+          "$type": "color",
+          "$value": "#020617",
+          "$description": "Primitive slate 950."
+        }
+      },
+      "purple": {
+        "600": {
+          "$type": "color",
+          "$value": "#7c3aed",
+          "$description": "Primitive purple 600."
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#6d28d9",
+          "$description": "Primitive purple 700."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#5b21b6",
+          "$description": "Primitive purple 800."
+        }
+      },
+      "cyan": {
+        "300": {
+          "$type": "color",
+          "$value": "#67e8f9",
+          "$description": "Primitive cyan 300."
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#22d3ee",
+          "$description": "Primitive cyan 400."
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#06b6d4",
+          "$description": "Primitive cyan 500."
+        }
+      },
+      "rose": {
+        "400": {
+          "$type": "color",
+          "$value": "#fb7185",
+          "$description": "Primitive rose 400."
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#f43f5e",
+          "$description": "Primitive rose 500."
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#e11d48",
+          "$description": "Primitive rose 600."
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#be123c",
+          "$description": "Primitive rose 700."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#9f1239",
+          "$description": "Primitive rose 800."
+        }
+      },
+      "green": {
+        "400": {
+          "$type": "color",
+          "$value": "#4ade80",
+          "$description": "Primitive green 400."
+        },
+        "500": {
+          "$type": "color",
+          "$value": "#16a34a",
+          "$description": "Primitive green 500."
+        },
+        "600": {
+          "$type": "color",
+          "$value": "#059669",
+          "$description": "Primitive green 600."
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#047857",
+          "$description": "Primitive green 700."
+        }
+      },
+      "amber": {
+        "200": {
+          "$type": "color",
+          "$value": "#fde68a",
+          "$description": "Primitive amber 200."
+        },
+        "400": {
+          "$type": "color",
+          "$value": "#f59e0b",
+          "$description": "Primitive amber 400."
+        }
+      }
+    },
+    "radius": {
+      "md": {
+        "$type": "dimension",
+        "$value": "0.5rem",
+        "$description": "Primitive radius md."
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "0.75rem",
+        "$description": "Primitive radius lg."
+      }
+    },
+    "space": {
+      "2": {
+        "$type": "dimension",
+        "$value": "0.5rem",
+        "$description": "Primitive spacing 2."
+      },
+      "4": {
+        "$type": "dimension",
+        "$value": "1rem",
+        "$description": "Primitive spacing 4."
+      },
+      "6": {
+        "$type": "dimension",
+        "$value": "1.5rem",
+        "$description": "Primitive spacing 6."
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "$type": "fontFamily",
+        "$value": "\"Inter\", \"Segoe UI\", Arial, sans-serif",
+        "$description": "Primary application font stack."
+      }
+    }
+  },
+  "theme": {
+    "neutral-light": {
+      "ps": {
+        "surface": {
+          "background": {
+            "$type": "color",
+            "$value": "#f8fafc",
+            "$description": "Application background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-background",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "card": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Card and panel background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-card",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "border": {
+            "$type": "color",
+            "$value": "#e2e8f0",
+            "$description": "Default border color for surfaces.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-border",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "text": {
+          "primary": {
+            "$type": "color",
+            "$value": "#0f172a",
+            "$description": "Primary readable text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-primary",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "secondary": {
+            "$type": "color",
+            "$value": "#475569",
+            "$description": "Muted supporting text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-secondary",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "primary": {
+          "background": {
+            "$type": "color",
+            "$value": "#1d4ed8",
+            "$description": "--ps-primary-background for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-background",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "--ps-primary-foreground for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-foreground",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "color": {
+              "$type": "color",
+              "$value": "#2563eb",
+              "$description": "--ps-focus-ring-color for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-focus-ring-color",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "foundation",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "danger": {
+          "color": {
+            "$type": "color",
+            "$value": "#dc2626",
+            "$description": "--ps-danger-color for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-danger-color",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "component",
+                "category": "Feedback",
+                "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#991b1b",
+            "$description": "--ps-danger-text for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-danger-text",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "success": {
+          "color": {
+            "$type": "color",
+            "$value": "#16a34a",
+            "$description": "--ps-success-color for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-success-color",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "component",
+                "category": "Feedback",
+                "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#166534",
+            "$description": "--ps-success-text for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-success-text",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "warn": {
+          "text": {
+            "$type": "color",
+            "$value": "#92400e",
+            "$description": "--ps-warn-text for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-warn-text",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "action": {
+          "text": {
+            "$type": "color",
+            "$value": "#1d4ed8",
+            "$description": "Accessible action foreground for outlined and text actions.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-action-text",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "button": {
+          "background": {
+            "$type": "color",
+            "$value": "#1d4ed8",
+            "$description": "Filled action background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-background",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Filled action foreground color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-text",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "nav": {
+          "background": {
+            "$type": "color",
+            "$value": "#0f172a",
+            "$description": "--ps-nav-background for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-background",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "--ps-nav-foreground for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-foreground",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#cbd5e1",
+            "$description": "--ps-nav-muted for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-muted",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "active": {
+            "background": {
+              "$type": "color",
+              "$value": "#1d4ed8",
+              "$description": "--ps-nav-active-background for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-nav-active-background",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "semantic",
+                  "category": "Foundations",
+                  "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "radius": {
+          "md": {
+            "$type": "dimension",
+            "$value": "0.5rem",
+            "$description": "--ps-radius-md for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-radius-md",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "foundation",
+                "category": "Foundations",
+                "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "lg": {
+            "$type": "dimension",
+            "$value": "0.75rem",
+            "$description": "--ps-radius-lg for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-radius-lg",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "foundation",
+                "category": "Foundations",
+                "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "space": {
+          "2": {
+            "$type": "dimension",
+            "$value": "0.5rem",
+            "$description": "--ps-space-2 for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-space-2",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "foundation",
+                "category": "Foundations",
+                "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "4": {
+            "$type": "dimension",
+            "$value": "1rem",
+            "$description": "--ps-space-4 for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-space-4",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "foundation",
+                "category": "Foundations",
+                "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "6": {
+            "$type": "dimension",
+            "$value": "1.5rem",
+            "$description": "--ps-space-6 for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-space-6",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "foundation",
+                "category": "Foundations",
+                "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "font": {
+          "family": {
+            "$type": "fontFamily",
+            "$value": "\"Inter\", \"Segoe UI\", Arial, sans-serif",
+            "$description": "--ps-font-family for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-font-family",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "foundation",
+                "category": "Foundations",
+                "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        }
+      },
+      "p": {
+        "primary": {
+          "hover": {
+            "color": {
+              "$type": "color",
+              "$value": "#1e40af",
+              "$description": "--p-primary-hover-color for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-hover-color",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          },
+          "active": {
+            "color": {
+              "$type": "color",
+              "$value": "#1e3a8a",
+              "$description": "--p-primary-active-color for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-active-color",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "width": {
+              "$type": "dimension",
+              "$value": "2px",
+              "$description": "--p-focus-ring-width for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-focus-ring-width",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            },
+            "offset": {
+              "$type": "dimension",
+              "$value": "2px",
+              "$description": "--p-focus-ring-offset for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-focus-ring-offset",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "button": {
+          "padding": {
+            "y": {
+              "$type": "dimension",
+              "$value": "0.65rem",
+              "$description": "--p-button-padding-y for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-button-padding-y",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": "Button"
+                }
+              }
+            },
+            "x": {
+              "$type": "dimension",
+              "$value": "0.9rem",
+              "$description": "--p-button-padding-x for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-button-padding-x",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": "Button"
+                }
+              }
+            }
+          },
+          "gap": {
+            "$type": "dimension",
+            "$value": "0.5rem",
+            "$description": "PrimeNG button icon and label gap.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-button-gap",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "primeng-mapping",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": "Button"
+              }
+            }
+          },
+          "icon": {
+            "only": {
+              "width": {
+                "$type": "dimension",
+                "$value": "2.5rem",
+                "$description": "--p-button-icon-only-width for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-button-icon-only-width",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": "Button"
+                  }
+                }
+              }
+            }
+          },
+          "rounded": {
+            "border": {
+              "radius": {
+                "$type": "dimension",
+                "$value": "999rem",
+                "$description": "--p-button-rounded-border-radius for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-button-rounded-border-radius",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": "Button"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "card": {
+          "border": {
+            "radius": {
+              "$type": "dimension",
+              "$value": "1rem",
+              "$description": "--p-card-border-radius for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-card-border-radius",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": "Card"
+                }
+              }
+            }
+          },
+          "body": {
+            "padding": {
+              "$type": "dimension",
+              "$value": "1.25rem",
+              "$description": "--p-card-body-padding for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-card-body-padding",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "PrimeNG Mapping",
+                  "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                  "primeNgFamily": "Card"
+                }
+              }
+            },
+            "gap": {
+              "$type": "dimension",
+              "$value": "1rem",
+              "$description": "--p-card-body-gap for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-card-body-gap",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "PrimeNG Mapping",
+                  "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                  "primeNgFamily": "Card"
+                }
+              }
+            }
+          },
+          "caption": {
+            "gap": {
+              "$type": "dimension",
+              "$value": "0.35rem",
+              "$description": "--p-card-caption-gap for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-card-caption-gap",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "PrimeNG Mapping",
+                  "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                  "primeNgFamily": "Card"
+                }
+              }
+            }
+          },
+          "title": {
+            "font": {
+              "size": {
+                "$type": "dimension",
+                "$value": "1.15rem",
+                "$description": "--p-card-title-font-size for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-card-title-font-size",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Foundations",
+                    "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                    "primeNgFamily": "Card"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "paginator": {
+          "nav": {
+            "button": {
+              "width": {
+                "$type": "dimension",
+                "$value": "2.25rem",
+                "$description": "--p-paginator-nav-button-width for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-paginator-nav-button-width",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": "Paginator"
+                  }
+                }
+              },
+              "height": {
+                "$type": "dimension",
+                "$value": "2.25rem",
+                "$description": "--p-paginator-nav-button-height for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-paginator-nav-button-height",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": "Paginator"
+                  }
+                }
+              },
+              "border": {
+                "radius": {
+                  "$type": "dimension",
+                  "$value": "999rem",
+                  "$description": "--p-paginator-nav-button-border-radius for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--p-paginator-nav-button-border-radius",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "primeng-mapping",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": "Paginator"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "gap": {
+            "$type": "dimension",
+            "$value": "0.35rem",
+            "$description": "--p-paginator-gap for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-paginator-gap",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "primeng-mapping",
+                "category": "Data Display",
+                "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
+                "primeNgFamily": "Paginator"
+              }
+            }
+          }
+        },
+        "menu": {
+          "item": {
+            "gap": {
+              "$type": "dimension",
+              "$value": "0.65rem",
+              "$description": "--p-menu-item-gap for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-menu-item-gap",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Overlays",
+                  "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
+                  "primeNgFamily": "Menu"
+                }
+              }
+            }
+          }
+        },
+        "dialog": {
+          "border": {
+            "radius": {
+              "$type": "dimension",
+              "$value": "1rem",
+              "$description": "--p-dialog-border-radius for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-dialog-border-radius",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Overlays",
+                  "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
+                  "primeNgFamily": "Dialog"
+                }
+              }
+            }
+          },
+          "footer": {
+            "gap": {
+              "$type": "dimension",
+              "$value": "0.75rem",
+              "$description": "--p-dialog-footer-gap for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-dialog-footer-gap",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Overlays",
+                  "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
+                  "primeNgFamily": "Dialog"
+                }
+              }
+            }
+          },
+          "header": {
+            "gap": {
+              "$type": "dimension",
+              "$value": "0.5rem",
+              "$description": "--p-dialog-header-gap for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-dialog-header-gap",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Overlays",
+                  "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
+                  "primeNgFamily": "Dialog"
+                }
+              }
+            }
+          },
+          "title": {
+            "font": {
+              "size": {
+                "$type": "dimension",
+                "$value": "1.15rem",
+                "$description": "--p-dialog-title-font-size for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-dialog-title-font-size",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Overlays",
+                    "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
+                    "primeNgFamily": "Dialog"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "toast": {
+          "blur": {
+            "$type": "dimension",
+            "$value": "12px",
+            "$description": "--p-toast-blur for neutral light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-toast-blur",
+                "selector": ":root",
+                "theme": "neutral",
+                "mode": "light",
+                "tier": "primeng-mapping",
+                "category": "Feedback",
+                "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                "primeNgFamily": "Toast"
+              }
+            }
+          },
+          "message": {
+            "gap": {
+              "$type": "dimension",
+              "$value": "0.85rem",
+              "$description": "--p-toast-message-gap for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-toast-message-gap",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Feedback",
+                  "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                  "primeNgFamily": "Toast"
+                }
+              }
+            },
+            "padding": {
+              "$type": "dimension",
+              "$value": "1rem",
+              "$description": "--p-toast-message-padding for neutral light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-toast-message-padding",
+                  "selector": ":root",
+                  "theme": "neutral",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Feedback",
+                  "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                  "primeNgFamily": "Toast"
+                }
+              }
+            },
+            "border": {
+              "width": {
+                "$type": "dimension",
+                "$value": "1px",
+                "$description": "--p-toast-message-border-width for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-toast-message-border-width",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Feedback",
+                    "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                    "primeNgFamily": "Toast"
+                  }
+                }
+              }
+            }
+          },
+          "summary": {
+            "font": {
+              "size": {
+                "$type": "dimension",
+                "$value": "0.95rem",
+                "$description": "--p-toast-summary-font-size for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-toast-summary-font-size",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Feedback",
+                    "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                    "primeNgFamily": "Toast"
+                  }
+                }
+              }
+            }
+          },
+          "detail": {
+            "font": {
+              "size": {
+                "$type": "dimension",
+                "$value": "0.9rem",
+                "$description": "--p-toast-detail-font-size for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-toast-detail-font-size",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Feedback",
+                    "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                    "primeNgFamily": "Toast"
+                  }
+                }
+              }
+            }
+          },
+          "close": {
+            "button": {
+              "width": {
+                "$type": "dimension",
+                "$value": "2rem",
+                "$description": "--p-toast-close-button-width for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-toast-close-button-width",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": "Toast"
+                  }
+                }
+              },
+              "height": {
+                "$type": "dimension",
+                "$value": "2rem",
+                "$description": "--p-toast-close-button-height for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--p-toast-close-button-height",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "primeng-mapping",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": "Toast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "vibrant-light": {
+      "ps": {
+        "surface": {
+          "background": {
+            "$type": "color",
+            "$value": "#f0f7ff",
+            "$description": "Application background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-background",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "card": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Card and panel background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-card",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "border": {
+            "$type": "color",
+            "$value": "#bfdbfe",
+            "$description": "Default border color for surfaces.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-border",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "text": {
+          "primary": {
+            "$type": "color",
+            "$value": "#172554",
+            "$description": "Primary readable text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-primary",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "secondary": {
+            "$type": "color",
+            "$value": "#1e40af",
+            "$description": "Muted supporting text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-secondary",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "primary": {
+          "background": {
+            "$type": "color",
+            "$value": "#7c3aed",
+            "$description": "--ps-primary-background for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-background",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "--ps-primary-foreground for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-foreground",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "color": {
+              "$type": "color",
+              "$value": "#06b6d4",
+              "$description": "--ps-focus-ring-color for vibrant light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-focus-ring-color",
+                  "selector": ":root.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "light",
+                  "tier": "foundation",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "danger": {
+          "color": {
+            "$type": "color",
+            "$value": "#e11d48",
+            "$description": "--ps-danger-color for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-danger-color",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "component",
+                "category": "Feedback",
+                "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#9f1239",
+            "$description": "--ps-danger-text for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-danger-text",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "success": {
+          "color": {
+            "$type": "color",
+            "$value": "#059669",
+            "$description": "--ps-success-color for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-success-color",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "component",
+                "category": "Feedback",
+                "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#047857",
+            "$description": "--ps-success-text for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-success-text",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "warn": {
+          "text": {
+            "$type": "color",
+            "$value": "#92400e",
+            "$description": "--ps-warn-text for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-warn-text",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "action": {
+          "text": {
+            "$type": "color",
+            "$value": "#5b21b6",
+            "$description": "Accessible action foreground for outlined and text actions.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-action-text",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "button": {
+          "background": {
+            "$type": "color",
+            "$value": "#5b21b6",
+            "$description": "Filled action background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-background",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Filled action foreground color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-text",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "nav": {
+          "background": {
+            "$type": "color",
+            "$value": "#172554",
+            "$description": "--ps-nav-background for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-background",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "--ps-nav-foreground for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-foreground",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#dbeafe",
+            "$description": "--ps-nav-muted for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-muted",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "active": {
+            "background": {
+              "$type": "color",
+              "$value": "#6d28d9",
+              "$description": "--ps-nav-active-background for vibrant light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-nav-active-background",
+                  "selector": ":root.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "light",
+                  "tier": "semantic",
+                  "category": "Foundations",
+                  "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "p": {
+        "primary": {
+          "color": {
+            "$type": "color",
+            "$value": "#7c3aed",
+            "$description": "--p-primary-color for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-primary-color",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "primeng-mapping",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "hover": {
+            "color": {
+              "$type": "color",
+              "$value": "#6d28d9",
+              "$description": "--p-primary-hover-color for vibrant light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-hover-color",
+                  "selector": ":root.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          },
+          "active": {
+            "color": {
+              "$type": "color",
+              "$value": "#5b21b6",
+              "$description": "--p-primary-active-color for vibrant light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-active-color",
+                  "selector": ":root.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          },
+          "inverse": {
+            "color": {
+              "$type": "color",
+              "$value": "#ffffff",
+              "$description": "--p-primary-inverse-color for vibrant light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-inverse-color",
+                  "selector": ":root.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "color": {
+              "$type": "color",
+              "$value": "#06b6d4",
+              "$description": "--p-focus-ring-color for vibrant light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-focus-ring-color",
+                  "selector": ":root.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "content": {
+          "background": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "--p-content-background for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-content-background",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "primeng-mapping",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "border": {
+            "color": {
+              "$type": "color",
+              "$value": "#bfdbfe",
+              "$description": "--p-content-border-color for vibrant light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-content-border-color",
+                  "selector": ":root.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations / Surface",
+                  "usage": "Use for page, card, border, and container surfaces.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "text": {
+          "color": {
+            "$type": "color",
+            "$value": "#172554",
+            "$description": "--p-text-color for vibrant light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-text-color",
+                "selector": ":root.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "light",
+                "tier": "primeng-mapping",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "muted": {
+            "color": {
+              "$type": "color",
+              "$value": "#1e40af",
+              "$description": "--p-text-muted-color for vibrant light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-text-muted-color",
+                  "selector": ":root.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations / Text",
+                  "usage": "Use for primary and supporting text across shell and remotes.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "pastel-light": {
+      "ps": {
+        "surface": {
+          "background": {
+            "$type": "color",
+            "$value": "#fff7ed",
+            "$description": "Application background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-background",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "card": {
+            "$type": "color",
+            "$value": "#fffbf5",
+            "$description": "Card and panel background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-card",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "border": {
+            "$type": "color",
+            "$value": "#fed7aa",
+            "$description": "Default border color for surfaces.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-border",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "text": {
+          "primary": {
+            "$type": "color",
+            "$value": "#431407",
+            "$description": "Primary readable text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-primary",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "secondary": {
+            "$type": "color",
+            "$value": "#9a3412",
+            "$description": "Muted supporting text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-secondary",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "primary": {
+          "background": {
+            "$type": "color",
+            "$value": "#fb7185",
+            "$description": "--ps-primary-background for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-background",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#431407",
+            "$description": "--ps-primary-foreground for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-foreground",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "color": {
+              "$type": "color",
+              "$value": "#f9a8d4",
+              "$description": "--ps-focus-ring-color for pastel light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-focus-ring-color",
+                  "selector": ":root.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "light",
+                  "tier": "foundation",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "danger": {
+          "color": {
+            "$type": "color",
+            "$value": "#f43f5e",
+            "$description": "--ps-danger-color for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-danger-color",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "component",
+                "category": "Feedback",
+                "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#9f1239",
+            "$description": "--ps-danger-text for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-danger-text",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "success": {
+          "color": {
+            "$type": "color",
+            "$value": "#34d399",
+            "$description": "--ps-success-color for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-success-color",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "component",
+                "category": "Feedback",
+                "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#166534",
+            "$description": "--ps-success-text for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-success-text",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "warn": {
+          "text": {
+            "$type": "color",
+            "$value": "#7c2d12",
+            "$description": "--ps-warn-text for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-warn-text",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "action": {
+          "text": {
+            "$type": "color",
+            "$value": "#9f1239",
+            "$description": "Accessible action foreground for outlined and text actions.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-action-text",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "button": {
+          "background": {
+            "$type": "color",
+            "$value": "#be123c",
+            "$description": "Filled action background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-background",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Filled action foreground color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-text",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "nav": {
+          "background": {
+            "$type": "color",
+            "$value": "#431407",
+            "$description": "--ps-nav-background for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-background",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#fff7ed",
+            "$description": "--ps-nav-foreground for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-foreground",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#fed7aa",
+            "$description": "--ps-nav-muted for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-muted",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "active": {
+            "background": {
+              "$type": "color",
+              "$value": "#be123c",
+              "$description": "--ps-nav-active-background for pastel light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-nav-active-background",
+                  "selector": ":root.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "light",
+                  "tier": "semantic",
+                  "category": "Foundations",
+                  "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "p": {
+        "primary": {
+          "color": {
+            "$type": "color",
+            "$value": "#be123c",
+            "$description": "--p-primary-color for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-primary-color",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "primeng-mapping",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "hover": {
+            "color": {
+              "$type": "color",
+              "$value": "#f43f5e",
+              "$description": "--p-primary-hover-color for pastel light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-hover-color",
+                  "selector": ":root.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          },
+          "active": {
+            "color": {
+              "$type": "color",
+              "$value": "#e11d48",
+              "$description": "--p-primary-active-color for pastel light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-active-color",
+                  "selector": ":root.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          },
+          "inverse": {
+            "color": {
+              "$type": "color",
+              "$value": "#ffffff",
+              "$description": "--p-primary-inverse-color for pastel light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-inverse-color",
+                  "selector": ":root.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "color": {
+              "$type": "color",
+              "$value": "#f9a8d4",
+              "$description": "--p-focus-ring-color for pastel light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-focus-ring-color",
+                  "selector": ":root.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "content": {
+          "background": {
+            "$type": "color",
+            "$value": "#fffbf5",
+            "$description": "--p-content-background for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-content-background",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "primeng-mapping",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "border": {
+            "color": {
+              "$type": "color",
+              "$value": "#fed7aa",
+              "$description": "--p-content-border-color for pastel light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-content-border-color",
+                  "selector": ":root.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations / Surface",
+                  "usage": "Use for page, card, border, and container surfaces.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "text": {
+          "color": {
+            "$type": "color",
+            "$value": "#431407",
+            "$description": "--p-text-color for pastel light.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-text-color",
+                "selector": ":root.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "light",
+                "tier": "primeng-mapping",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "muted": {
+            "color": {
+              "$type": "color",
+              "$value": "#9a3412",
+              "$description": "--p-text-muted-color for pastel light.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-text-muted-color",
+                  "selector": ":root.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "light",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations / Text",
+                  "usage": "Use for primary and supporting text across shell and remotes.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "neutral-dark": {
+      "ps": {
+        "surface": {
+          "background": {
+            "$type": "color",
+            "$value": "#020617",
+            "$description": "Application background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-background",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "card": {
+            "$type": "color",
+            "$value": "#0f172a",
+            "$description": "Card and panel background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-card",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "border": {
+            "$type": "color",
+            "$value": "#334155",
+            "$description": "Default border color for surfaces.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-border",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "text": {
+          "primary": {
+            "$type": "color",
+            "$value": "#f8fafc",
+            "$description": "Primary readable text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-primary",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "secondary": {
+            "$type": "color",
+            "$value": "#cbd5e1",
+            "$description": "Muted supporting text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-secondary",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "primary": {
+          "background": {
+            "$type": "color",
+            "$value": "#60a5fa",
+            "$description": "--ps-primary-background for neutral dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-background",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#020617",
+            "$description": "--ps-primary-foreground for neutral dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-foreground",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "color": {
+              "$type": "color",
+              "$value": "#93c5fd",
+              "$description": "--ps-focus-ring-color for neutral dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-focus-ring-color",
+                  "selector": ":root.p-dark",
+                  "theme": "neutral",
+                  "mode": "dark",
+                  "tier": "foundation",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "danger": {
+          "color": {
+            "$type": "color",
+            "$value": "#f87171",
+            "$description": "--ps-danger-color for neutral dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-danger-color",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Feedback",
+                "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#fecaca",
+            "$description": "--ps-danger-text for neutral dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-danger-text",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "success": {
+          "color": {
+            "$type": "color",
+            "$value": "#4ade80",
+            "$description": "--ps-success-color for neutral dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-success-color",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Feedback",
+                "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#bbf7d0",
+            "$description": "--ps-success-text for neutral dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-success-text",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "warn": {
+          "text": {
+            "$type": "color",
+            "$value": "#fde68a",
+            "$description": "--ps-warn-text for neutral dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-warn-text",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "action": {
+          "text": {
+            "$type": "color",
+            "$value": "#93c5fd",
+            "$description": "Accessible action foreground for outlined and text actions.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-action-text",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "button": {
+          "background": {
+            "$type": "color",
+            "$value": "#93c5fd",
+            "$description": "Filled action background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-background",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#020617",
+            "$description": "Filled action foreground color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-text",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "nav": {
+          "background": {
+            "$type": "color",
+            "$value": "#020617",
+            "$description": "--ps-nav-background for neutral dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-background",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#f8fafc",
+            "$description": "--ps-nav-foreground for neutral dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-foreground",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#cbd5e1",
+            "$description": "--ps-nav-muted for neutral dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-muted",
+                "selector": ":root.p-dark",
+                "theme": "neutral",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "active": {
+            "background": {
+              "$type": "color",
+              "$value": "#1d4ed8",
+              "$description": "--ps-nav-active-background for neutral dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-nav-active-background",
+                  "selector": ":root.p-dark",
+                  "theme": "neutral",
+                  "mode": "dark",
+                  "tier": "semantic",
+                  "category": "Foundations",
+                  "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "vibrant-dark": {
+      "ps": {
+        "surface": {
+          "background": {
+            "$type": "color",
+            "$value": "#07031a",
+            "$description": "Application background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-background",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "card": {
+            "$type": "color",
+            "$value": "#120a2e",
+            "$description": "Card and panel background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-card",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "border": {
+            "$type": "color",
+            "$value": "#4338ca",
+            "$description": "Default border color for surfaces.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-border",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "text": {
+          "primary": {
+            "$type": "color",
+            "$value": "#f5f3ff",
+            "$description": "Primary readable text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-primary",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "secondary": {
+            "$type": "color",
+            "$value": "#c4b5fd",
+            "$description": "Muted supporting text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-secondary",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "primary": {
+          "background": {
+            "$type": "color",
+            "$value": "#22d3ee",
+            "$description": "--ps-primary-background for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-background",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#07031a",
+            "$description": "--ps-primary-foreground for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-foreground",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "color": {
+              "$type": "color",
+              "$value": "#a78bfa",
+              "$description": "--ps-focus-ring-color for vibrant dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-focus-ring-color",
+                  "selector": ":root.p-dark.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "dark",
+                  "tier": "foundation",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "danger": {
+          "text": {
+            "$type": "color",
+            "$value": "#fecaca",
+            "$description": "--ps-danger-text for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-danger-text",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "success": {
+          "text": {
+            "$type": "color",
+            "$value": "#bbf7d0",
+            "$description": "--ps-success-text for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-success-text",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "warn": {
+          "text": {
+            "$type": "color",
+            "$value": "#fde68a",
+            "$description": "--ps-warn-text for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-warn-text",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "action": {
+          "text": {
+            "$type": "color",
+            "$value": "#67e8f9",
+            "$description": "Accessible action foreground for outlined and text actions.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-action-text",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "button": {
+          "background": {
+            "$type": "color",
+            "$value": "#67e8f9",
+            "$description": "Filled action background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-background",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#07031a",
+            "$description": "Filled action foreground color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-text",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "nav": {
+          "background": {
+            "$type": "color",
+            "$value": "#07031a",
+            "$description": "--ps-nav-background for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-background",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#f5f3ff",
+            "$description": "--ps-nav-foreground for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-foreground",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#c4b5fd",
+            "$description": "--ps-nav-muted for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-muted",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "active": {
+            "background": {
+              "$type": "color",
+              "$value": "#6d28d9",
+              "$description": "--ps-nav-active-background for vibrant dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-nav-active-background",
+                  "selector": ":root.p-dark.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "dark",
+                  "tier": "semantic",
+                  "category": "Foundations",
+                  "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "p": {
+        "primary": {
+          "color": {
+            "$type": "color",
+            "$value": "#22d3ee",
+            "$description": "--p-primary-color for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-primary-color",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "primeng-mapping",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "hover": {
+            "color": {
+              "$type": "color",
+              "$value": "#67e8f9",
+              "$description": "--p-primary-hover-color for vibrant dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-hover-color",
+                  "selector": ":root.p-dark.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          },
+          "active": {
+            "color": {
+              "$type": "color",
+              "$value": "#a5f3fc",
+              "$description": "--p-primary-active-color for vibrant dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-active-color",
+                  "selector": ":root.p-dark.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          },
+          "inverse": {
+            "color": {
+              "$type": "color",
+              "$value": "#07031a",
+              "$description": "--p-primary-inverse-color for vibrant dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-inverse-color",
+                  "selector": ":root.p-dark.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "color": {
+              "$type": "color",
+              "$value": "#a78bfa",
+              "$description": "--p-focus-ring-color for vibrant dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-focus-ring-color",
+                  "selector": ":root.p-dark.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "content": {
+          "background": {
+            "$type": "color",
+            "$value": "#120a2e",
+            "$description": "--p-content-background for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-content-background",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "primeng-mapping",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "border": {
+            "color": {
+              "$type": "color",
+              "$value": "#4338ca",
+              "$description": "--p-content-border-color for vibrant dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-content-border-color",
+                  "selector": ":root.p-dark.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations / Surface",
+                  "usage": "Use for page, card, border, and container surfaces.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "text": {
+          "color": {
+            "$type": "color",
+            "$value": "#f5f3ff",
+            "$description": "--p-text-color for vibrant dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-text-color",
+                "selector": ":root.p-dark.ps-theme-vibrant",
+                "theme": "vibrant",
+                "mode": "dark",
+                "tier": "primeng-mapping",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "muted": {
+            "color": {
+              "$type": "color",
+              "$value": "#c4b5fd",
+              "$description": "--p-text-muted-color for vibrant dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-text-muted-color",
+                  "selector": ":root.p-dark.ps-theme-vibrant",
+                  "theme": "vibrant",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations / Text",
+                  "usage": "Use for primary and supporting text across shell and remotes.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "pastel-dark": {
+      "ps": {
+        "surface": {
+          "background": {
+            "$type": "color",
+            "$value": "#1f1a2e",
+            "$description": "Application background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-background",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "card": {
+            "$type": "color",
+            "$value": "#2a2238",
+            "$description": "Card and panel background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-card",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "border": {
+            "$type": "color",
+            "$value": "#8b5cf6",
+            "$description": "Default border color for surfaces.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-surface-border",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "text": {
+          "primary": {
+            "$type": "color",
+            "$value": "#fff7ed",
+            "$description": "Primary readable text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-primary",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "secondary": {
+            "$type": "color",
+            "$value": "#fbcfe8",
+            "$description": "Muted supporting text color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-text-secondary",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "primary": {
+          "background": {
+            "$type": "color",
+            "$value": "#f9a8d4",
+            "$description": "--ps-primary-background for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-background",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#1f1a2e",
+            "$description": "--ps-primary-foreground for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-primary-foreground",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "color": {
+              "$type": "color",
+              "$value": "#f0abfc",
+              "$description": "--ps-focus-ring-color for pastel dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-focus-ring-color",
+                  "selector": ":root.p-dark.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "dark",
+                  "tier": "foundation",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "danger": {
+          "text": {
+            "$type": "color",
+            "$value": "#fecaca",
+            "$description": "--ps-danger-text for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-danger-text",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "success": {
+          "text": {
+            "$type": "color",
+            "$value": "#bbf7d0",
+            "$description": "--ps-success-text for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-success-text",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "warn": {
+          "text": {
+            "$type": "color",
+            "$value": "#fde68a",
+            "$description": "--ps-warn-text for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-warn-text",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "action": {
+          "text": {
+            "$type": "color",
+            "$value": "#fbcfe8",
+            "$description": "Accessible action foreground for outlined and text actions.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-action-text",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "button": {
+          "background": {
+            "$type": "color",
+            "$value": "#fbcfe8",
+            "$description": "Filled action background color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-background",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "component",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#1f1a2e",
+            "$description": "Filled action foreground color.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-button-text",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          }
+        },
+        "nav": {
+          "background": {
+            "$type": "color",
+            "$value": "#1f1a2e",
+            "$description": "--ps-nav-background for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-background",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "#fff7ed",
+            "$description": "--ps-nav-foreground for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-foreground",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#fbcfe8",
+            "$description": "--ps-nav-muted for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--ps-nav-muted",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "semantic",
+                "category": "Foundations",
+                "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "active": {
+            "background": {
+              "$type": "color",
+              "$value": "#9f1239",
+              "$description": "--ps-nav-active-background for pastel dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--ps-nav-active-background",
+                  "selector": ":root.p-dark.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "dark",
+                  "tier": "semantic",
+                  "category": "Foundations",
+                  "usage": "Use according to the public-sector PrimeNG federation token contract.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "p": {
+        "primary": {
+          "color": {
+            "$type": "color",
+            "$value": "#f9a8d4",
+            "$description": "--p-primary-color for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-primary-color",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "primeng-mapping",
+                "category": "Actions",
+                "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "hover": {
+            "color": {
+              "$type": "color",
+              "$value": "#fbcfe8",
+              "$description": "--p-primary-hover-color for pastel dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-hover-color",
+                  "selector": ":root.p-dark.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          },
+          "active": {
+            "color": {
+              "$type": "color",
+              "$value": "#fce7f3",
+              "$description": "--p-primary-active-color for pastel dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-active-color",
+                  "selector": ":root.p-dark.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          },
+          "inverse": {
+            "color": {
+              "$type": "color",
+              "$value": "#1f1a2e",
+              "$description": "--p-primary-inverse-color for pastel dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-primary-inverse-color",
+                  "selector": ":root.p-dark.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Actions",
+                  "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "focus": {
+          "ring": {
+            "color": {
+              "$type": "color",
+              "$value": "#f0abfc",
+              "$description": "--p-focus-ring-color for pastel dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-focus-ring-color",
+                  "selector": ":root.p-dark.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations",
+                  "usage": "Use for shape, spacing, typography, and visible focus behavior.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "content": {
+          "background": {
+            "$type": "color",
+            "$value": "#2a2238",
+            "$description": "--p-content-background for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-content-background",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "primeng-mapping",
+                "category": "Foundations / Surface",
+                "usage": "Use for page, card, border, and container surfaces.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "border": {
+            "color": {
+              "$type": "color",
+              "$value": "#8b5cf6",
+              "$description": "--p-content-border-color for pastel dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-content-border-color",
+                  "selector": ":root.p-dark.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations / Surface",
+                  "usage": "Use for page, card, border, and container surfaces.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        },
+        "text": {
+          "color": {
+            "$type": "color",
+            "$value": "#fff7ed",
+            "$description": "--p-text-color for pastel dark.",
+            "$extensions": {
+              "public-sector": {
+                "cssVariable": "--p-text-color",
+                "selector": ":root.p-dark.ps-theme-pastel",
+                "theme": "pastel",
+                "mode": "dark",
+                "tier": "primeng-mapping",
+                "category": "Foundations / Text",
+                "usage": "Use for primary and supporting text across shell and remotes.",
+                "primeNgFamily": null
+              }
+            }
+          },
+          "muted": {
+            "color": {
+              "$type": "color",
+              "$value": "#fbcfe8",
+              "$description": "--p-text-muted-color for pastel dark.",
+              "$extensions": {
+                "public-sector": {
+                  "cssVariable": "--p-text-muted-color",
+                  "selector": ":root.p-dark.ps-theme-pastel",
+                  "theme": "pastel",
+                  "mode": "dark",
+                  "tier": "primeng-mapping",
+                  "category": "Foundations / Text",
+                  "usage": "Use for primary and supporting text across shell and remotes.",
+                  "primeNgFamily": null
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

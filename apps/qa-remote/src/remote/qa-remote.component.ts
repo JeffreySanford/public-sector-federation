@@ -17,6 +17,32 @@ interface QaProgramRow {
   sla: number;
 }
 
+interface RetrofitRoadmapRow {
+  day: string;
+  focus: string;
+  output: string;
+  workItemSlugs: string[];
+}
+
+interface SprintScopeRow {
+  slug: string;
+  item: string;
+  includes: string;
+  loe: 'Small' | 'Medium' | 'Large';
+  acceptance: string;
+  status: string;
+}
+
+interface AgileBoardRow {
+  slug: string;
+  workstream: string;
+  sprint: string;
+  loe: 'Small' | 'Medium' | 'Large';
+  blockers: string;
+  done: string;
+  status: string;
+}
+
 @Component({
   selector: 'public-qa-remote',
   standalone: true,
@@ -39,6 +65,7 @@ export class QaRemoteComponent implements OnInit {
   agileSeedStatus = 'Checking seed sync status…';
   agileSprintHeadline = 'Sprint status';
   agileSprintSummary = 'Loading sprint summary from the Agile API.';
+  agileSprintDaySummary = 'Showing the sprint items for the current sprint day.';
   agileAcceptanceGates: string[] = [];
   agileNextSteps: string[] = ['Loading next steps from the Agile API.'];
   agileExportLinks = [
@@ -243,23 +270,54 @@ export class QaRemoteComponent implements OnInit {
     { area: 'Data display', tokens: 'datatable header, rows, hover, paginator selected state', source: 'tokens/themes.json and component overrides' },
   ];
 
-  readonly retrofitRoadmapRows = [
-    { day: 'Day 1', focus: 'Inventory current app', output: 'Foundations, components, patterns, states, inconsistencies.' },
-    { day: 'Day 2', focus: 'Token map v1', output: 'Semantic token list and PrimeNG mapping candidates.' },
-    { day: 'Day 3', focus: 'Figma foundations', output: 'Variables, modes, and first component frames.' },
-    { day: 'Day 4', focus: 'Storybook proof', output: 'PrimeNG stories for core component families.' },
-    { day: 'Day 5', focus: 'Zeroheight skeleton', output: 'Portal structure with Storybook/Figma/token references.' },
-    { day: 'Day 6', focus: 'Developer onboarding', output: 'How to consume preset, tokens, stories, and verification checks.' },
-    { day: 'Day 7', focus: 'Demo and next plan', output: 'Working demo plus Sprint 2 backlog and blockers.' },
+  readonly retrofitRoadmapRows: RetrofitRoadmapRow[] = [
+    {
+      day: 'Day 1',
+      focus: 'Inventory current app',
+      output: 'Foundations, components, patterns, states, inconsistencies.',
+      workItemSlugs: ['track-blockers-in-component-matrix', 'create-storybook-acceptance-checks'],
+    },
+    {
+      day: 'Day 2',
+      focus: 'Token map v1',
+      output: 'Semantic token list and PrimeNG mapping candidates.',
+      workItemSlugs: ['prepare-style-dictionary-source'],
+    },
+    {
+      day: 'Day 3',
+      focus: 'Figma foundations',
+      output: 'Variables, modes, and first component frames.',
+      workItemSlugs: ['prepare-style-dictionary-source', 'publish-zeroheight-skeleton'],
+    },
+    {
+      day: 'Day 4',
+      focus: 'Storybook proof',
+      output: 'PrimeNG stories for core component families.',
+      workItemSlugs: ['harden-proven-primeng-families', 'create-storybook-acceptance-checks'],
+    },
+    {
+      day: 'Day 5',
+      focus: 'Zeroheight skeleton',
+      output: 'Portal structure with Storybook/Figma/token references.',
+      workItemSlugs: ['publish-zeroheight-skeleton'],
+    },
+    {
+      day: 'Day 6',
+      focus: 'Developer onboarding',
+      output: 'How to consume preset, tokens, stories, and verification checks.',
+      workItemSlugs: ['publish-zeroheight-skeleton', 'citizen-services-primeng-reintroduction'],
+    },
+    {
+      day: 'Day 7',
+      focus: 'Demo and next plan',
+      output: 'Working demo plus Sprint 2 backlog and blockers.',
+      workItemSlugs: ['citizen-services-primeng-reintroduction'],
+    },
   ];
 
-  sprintScopeRows: Array<{
-    item: string;
-    includes: string;
-    loe: 'Small' | 'Medium' | 'Large';
-    acceptance: string;
-    status: string;
-  }> = [];
+  selectedSprintDay = this.currentSprintDay();
+
+  sprintScopeRows: SprintScopeRow[] = [];
 
   blockerRows: Array<{
     blocker: string;
@@ -269,14 +327,7 @@ export class QaRemoteComponent implements OnInit {
     status: string;
   }> = [];
 
-  agileRows: Array<{
-    workstream: string;
-    sprint: string;
-    loe: 'Small' | 'Medium' | 'Large';
-    blockers: string;
-    done: string;
-    status: string;
-  }> = [];
+  agileRows: AgileBoardRow[] = [];
 
   readonly tokenRows = [
     {
@@ -375,6 +426,22 @@ export class QaRemoteComponent implements OnInit {
     return this.qaTableShowEmpty ? [] : this.qaProgramRows;
   }
 
+  get selectedSprintDayRoadmap(): RetrofitRoadmapRow {
+    return this.retrofitRoadmapRows.find((row) => row.day === this.selectedSprintDay) ?? this.retrofitRoadmapRows[0];
+  }
+
+  get selectedSprintDaySlugs(): string[] {
+    return this.selectedSprintDayRoadmap.workItemSlugs;
+  }
+
+  get selectedSprintScopeRows(): SprintScopeRow[] {
+    return this.sprintScopeRows.filter((row) => this.selectedSprintDaySlugs.includes(row.slug));
+  }
+
+  get selectedAgileRows(): AgileBoardRow[] {
+    return this.agileRows.filter((row) => this.selectedSprintDaySlugs.includes(row.slug));
+  }
+
   toggleQaTableLoading(): void {
     this.qaTableLoading = !this.qaTableLoading;
   }
@@ -390,6 +457,11 @@ export class QaRemoteComponent implements OnInit {
       detail: 'Toast styling is driven by the shared PrimeNG token contract.',
       life: 3500,
     });
+  }
+
+  selectSprintDay(row: RetrofitRoadmapRow): void {
+    this.selectedSprintDay = row.day;
+    this.updateSprintDaySummary();
   }
 
   confirmAcceptanceDialog(): void {
@@ -420,6 +492,7 @@ export class QaRemoteComponent implements OnInit {
     }
 
     this.sprintScopeRows = dashboard.workItems.map((item) => ({
+      slug: item.slug,
       item: item.title,
       includes: item.includes,
       loe: this.labelEffort(item.effort),
@@ -428,6 +501,7 @@ export class QaRemoteComponent implements OnInit {
     }));
 
     this.agileRows = dashboard.workItems.map((item) => ({
+      slug: item.slug,
       workstream: item.workstream,
       sprint: dashboard.sprint.name,
       loe: this.labelEffort(item.effort),
@@ -447,6 +521,8 @@ export class QaRemoteComponent implements OnInit {
     if (this.selectedDeveloperView.id === 'agile' && agileView) {
       this.selectedDeveloperView.metrics = [...agileView.metrics];
     }
+
+    this.updateSprintDaySummary();
   }
 
   private applyAgileReport(report: AgileApiReport): void {
@@ -480,6 +556,23 @@ export class QaRemoteComponent implements OnInit {
 
   private labelStatus(status: string): string {
     return status.replaceAll('_', ' ');
+  }
+
+  private currentSprintDay(): string {
+    const sprintStart = new Date(2026, 6, 9);
+    const today = new Date();
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const elapsedDays = Math.floor((todayStart.getTime() - sprintStart.getTime()) / 86_400_000);
+    const dayIndex = Math.min(Math.max(elapsedDays, 0), this.retrofitRoadmapRows.length - 1);
+
+    return this.retrofitRoadmapRows[dayIndex].day;
+  }
+
+  private updateSprintDaySummary(): void {
+    const itemCount = this.selectedSprintScopeRows.length;
+    const noun = itemCount === 1 ? 'item' : 'items';
+
+    this.agileSprintDaySummary = `${this.selectedSprintDayRoadmap.day}: ${this.selectedSprintDayRoadmap.focus}. Showing ${itemCount} sprint ${noun}.`;
   }
 
   statusChipClass(status: string): string {

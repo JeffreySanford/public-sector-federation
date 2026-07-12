@@ -471,6 +471,45 @@
   font-weight: 800;
 }
 
+.sprint-day-row {
+  cursor: pointer;
+  transition:
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.sprint-day-row:hover,
+.sprint-day-row:focus-visible {
+  background: color-mix(in srgb, var(--p-primary-color) 10%, var(--p-content-background));
+  box-shadow: inset 0.25rem 0 0 var(--p-primary-color);
+  outline: 0;
+}
+
+.sprint-day-row.is-selected {
+  background: color-mix(in srgb, var(--p-primary-color) 14%, var(--p-content-background));
+  box-shadow: inset 0.3rem 0 0 var(--p-primary-color);
+}
+
+.sprint-board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--p-primary-color) 34%, var(--p-content-border-color));
+  border-radius: 1rem;
+  background: var(--p-content-background);
+}
+
+.sprint-board-header h4 {
+  margin: 0.5rem 0 0.25rem;
+}
+
+.sprint-board-header p {
+  margin: 0;
+  color: var(--p-text-muted-color);
+}
+
 .report-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
