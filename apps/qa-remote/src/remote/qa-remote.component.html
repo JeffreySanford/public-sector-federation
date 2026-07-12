@@ -1,6 +1,26 @@
 <p-toast />
 
-<section class="qa">
+<div class="qa-view-tabs">
+  <button
+    pButton
+    type="button"
+    label="QA Components"
+    [class.active]="activeTab() === 'qa'"
+    (click)="setActiveTab('qa')"
+    class="view-tab"
+  ></button>
+  <button
+    pButton
+    type="button"
+    label="Performance Tracking"
+    [class.active]="activeTab() === 'performance'"
+    (click)="setActiveTab('performance')"
+    class="view-tab"
+  ></button>
+</div>
+
+@if (activeTab() === 'qa') {
+  <section class="qa">
   <header class="qa-header">
     <span class="qa-tag">QA Remote</span>
     <h2>Component and token coverage</h2>
@@ -918,3 +938,8 @@
     </article>
   </section>
 </section>
+}
+
+@if (activeTab() === 'performance') {
+  <public-performance-dashboard></public-performance-dashboard>
+}

@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
@@ -6,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
+import { PerformanceDashboardComponent } from '../app/components/performance-dashboard.component';
 import { AgileWorkflowService } from './agile-workflow.service';
 import type { AgileApiDashboard, AgileApiReport, AgileSeedStatus } from './agile-workflow.service';
 
@@ -46,13 +48,15 @@ interface AgileBoardRow {
 @Component({
   selector: 'public-qa-remote',
   standalone: true,
-  imports: [ButtonModule, CardModule, DialogModule, TableModule, TagModule, ToastModule],
+  imports: [CommonModule, ButtonModule, CardModule, DialogModule, TableModule, TagModule, ToastModule, PerformanceDashboardComponent],
   templateUrl: './qa-remote.component.html',
   styleUrl: './qa-remote.component.css',
 })
 export class QaRemoteComponent implements OnInit {
   private readonly messageService = inject(MessageService);
   private readonly agileWorkflow = inject(AgileWorkflowService);
+
+  activeTab = signal<'qa' | 'performance'>('qa');
 
   dialogVisible = false;
   acceptanceDialogVisible = false;
@@ -416,6 +420,10 @@ export class QaRemoteComponent implements OnInit {
     if (view.id === 'agile') {
       view.nextSteps = [...this.agileNextSteps];
     }
+  }
+
+  setActiveTab(tab: 'qa' | 'performance'): void {
+    this.activeTab.set(tab);
   }
 
   severity(status: QaProgramRow['status']): 'success' | 'warn' | 'danger' {
