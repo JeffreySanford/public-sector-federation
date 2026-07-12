@@ -12,7 +12,9 @@ const prisma = new PrismaClient({
 });
 
 const seedPath = join(dirname(fileURLToPath(import.meta.url)), 'seed-data', 'agile-workflow.seed.json');
+const performancePath = join(dirname(fileURLToPath(import.meta.url)), 'seed-data', 'test-performance.seed.json');
 const seed = JSON.parse(await readFile(seedPath, 'utf8'));
+const performanceSeed = JSON.parse(await readFile(performancePath, 'utf8'));
 
 await prisma.$transaction(async (tx) => {
   await tx.timeEntry.deleteMany();
@@ -89,8 +91,27 @@ await prisma.$transaction(async (tx) => {
       },
     });
   }
+
+  for (const metric of performanceSeed.performanceMetrics) {
+    await tx.testPerformanceMetric.create({
+      data: {
+        testSuite: metric.testSuite,
+        testName: metric.testName,
+        browser: metric.browser,
+        durationMs: metric.durationMs,
+        baselineMs: metric.baselineMs,
+        thresholdMs: metric.thresholdMs,
+        status: metric.status,
+        passed: metric.passed,
+        errorMessage: metric.errorMessage,
+        commitHash: metric.commitHash,
+        branch: metric.branch,
+      },
+    });
+  }
 });
 
 await prisma.$disconnect();
 
 console.log(`Seeded Agile workflow data for ${seed.sprint.slug}.`);
+console.log(`Seeded ${performanceSeed.performanceMetrics.length} performance metrics.`);

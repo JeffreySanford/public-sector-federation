@@ -117,3 +117,46 @@ model TimeEntry {
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
 }
+
+enum TestSuite {
+  lint
+  unit
+  federation
+  storybook
+  code_examples
+}
+
+enum Browser {
+  chromium
+  firefox
+  webkit
+}
+
+enum PerformanceStatus {
+  excellent
+  good
+  warning
+  critical
+}
+
+model TestPerformanceMetric {
+  id             String             @id @default(uuid())
+  testSuite      TestSuite
+  testName       String
+  browser        Browser?
+  durationMs     Int
+  baselineMs     Int
+  thresholdMs    Int
+  status         PerformanceStatus
+  passed         Boolean
+  errorMessage   String?
+  commitHash     String
+  branch         String
+  recordedAt     DateTime           @default(now())
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@index([testSuite])
+  @@index([testName])
+  @@index([recordedAt])
+}
