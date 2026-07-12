@@ -15,7 +15,7 @@
 Error: expect(received).toBeLessThan(expected)
 
 Expected: < 5000
-Received:   5066
+Received:   5174
 ```
 
 # Page snapshot

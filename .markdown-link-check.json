@@ -1,0 +1,19 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^https://github.com/JeffreySanford/public-sector-federation/security/dependabot"
+    }
+  ],
+  "replacementPatterns": [
+    {
+      "pattern": "^/",
+      "replacement": "file:///d:/repos/public-sector-federation/"
+    }
+  ],
+  "timeout": 5000,
+  "retryOn429": true,
+  "aliveStatusCodes": [200, 206]
+}
