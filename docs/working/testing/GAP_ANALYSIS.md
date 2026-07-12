@@ -204,53 +204,6 @@ describe('PublicEmptyStateComponent', () => {
 
 ## 5. Storybook Story Validation Gaps - IN PROGRESS (Phase 3)
 
-Create: `apps/qa-remote/E2E/Storybook-stories.E2E.ts`
-```typescript
-import { test, expect } from '@playwright/test';
-
-test.describe('Storybook Stories Validation', () => {
-  test('Button Default story renders', async ({ page }) => {
-    await page.goto('http://localhost:4400/?path=/story/components-button--default');
-
-    const button = page.locator('button').first();
-    await expect(button).toBeVisible();
-    await expect(button).toHaveText('Click me');
-  });
-
-  test('Button story is accessible', async ({ page }) => {
-    await page.goto('http://localhost:4400/?path=/story/components-button--default');
-
-    const button = page.locator('button').first();
-    await button.focus();
-    await button.press('Space');
-    // Should trigger click without error
-  });
-
-  test('No console errors in stories', async ({ page }) => {
-    const errors: string[] = [];
-    page.on('console', msg => {
-      if (msg.type() === 'error') errors.push(msg.text());
-    });
-
-    await page.goto('http://localhost:4400/?path=/story/components-button--default');
-    await page.waitForLoadState('networkidle');
-
-    expect(errors).toHaveLength(0);
-  });
-});
-```
-
----
-
-## 5. E2E Testing Gaps
-
-### Status: MISSING
-
-**What's NOT tested**:
----
-
-## 5. Storybook Story Validation Gaps - IN PROGRESS (Phase 3)
-
 ### Status: PARTIAL - Linted but not E2E tested
 
 **What's checked** (Phase 1):

@@ -13,8 +13,8 @@
     "strict": false,
     "stern": false
   },
-  "MD003": "consistent",
-  "MD004": "consistent",
+  "MD003": false,
+  "MD004": false,
   "MD007": {
     "indent": 2
   },
@@ -41,5 +41,6 @@
     "level": 1
   },
   "MD044": false,
+  "MD046": false,
   "MD060": false
 }
