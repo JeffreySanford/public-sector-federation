@@ -1,0 +1,86 @@
+name: Manual Performance Recording
+
+on:
+  workflow_dispatch:
+    inputs:
+      api_url:
+        description: 'Performance API URL'
+        required: false
+        default: 'http://localhost:3000'
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: public_sector
+          POSTGRES_PASSWORD: public_sector
+          POSTGRES_DB: public_sector_agile
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.33.2
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run all tests
+        run: pnpm test:e2e
+        continue-on-error: true # Don't fail if tests fail, we still want to record
+
+      - name: Setup database
+        env:
+          DATABASE_URL: postgresql://public_sector:public_sector@localhost:5432/public_sector_agile
+        run: |
+          pnpm db:validate
+          pnpm api:migrate
+          pnpm api:seed
+
+      - name: Start API server
+        env:
+          DATABASE_URL: postgresql://public_sector:public_sector@localhost:5432/public_sector_agile
+        run: |
+          pnpm nx run agile-api:build
+          node dist/apps/agile-api/main.js &
+          sleep 2
+
+      - name: Record performance metrics
+        env:
+          PERFORMANCE_API_URL: ${{ github.event.inputs.api_url }}
+        run: pnpm perf:record
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/
+
+      - name: Summary
+        run: |
+          echo "## Performance Metrics Recorded" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "API URL: ${{ github.event.inputs.api_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "Test Results: Uploaded to artifacts" >> $GITHUB_STEP_SUMMARY

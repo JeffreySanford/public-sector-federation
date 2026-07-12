@@ -36,6 +36,7 @@
     "check:platform": "pnpm start:backend && pnpm check:dev-ports",
     "start:platform": "pnpm start:all",
     "agile:report": "node scripts/export-agile-report.mjs",
+    "perf:record": "node scripts/record-performance.mjs",
     "screenshots:progress": "node scripts/capture-progress-screenshots.mjs",
     "zip:screenshots": "node scripts/zip-latest-screenshots.mjs",
     "zeroheight:export": "node scripts/export-zeroheight-package.mjs",
