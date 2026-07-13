@@ -6,6 +6,9 @@ tmp/
 .cache/
 coverage/
 docs/reports/
+test-results/.last-run.json
+test-results/junit.xml
+test-results/results.json
 *.log
 .env
 .env.*

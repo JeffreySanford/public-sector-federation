@@ -12,21 +12,22 @@ to correct once the production repositories are available.
   Figma, and Zeroheight all need clear responsibilities.
 - Proposed: a versioned token pipeline, a governed component registry, and a
   promotion model based on evidence from Storybook and shell validation.
-- Needs validation: the real shell mounting model, token source location,
-  PrimeNG preset mapping, router ownership, Shadow DOM usage, overlay behavior,
-  and release/versioning process.
+- Needs validation: production token source location, PrimeNG preset mapping,
+  router ownership details, Shadow DOM usage per remote, overlay behavior, and
+  release/versioning process.
 
 ## Start Here
 
 1. [Focus](./focus.md)
 2. [Operating model](./architecture/operating-model.md)
 3. [Token pipeline](./architecture/token-pipeline.md)
-4. [Component registry](./architecture/component-registry.md)
-5. [Shell interaction](./architecture/shell-interaction.md)
-6. [Federated Web Components decision](./architecture/federated-web-components-decision.md)
-7. [Implementation options](./architecture/implementation-options.md)
-8. [Component promotion](./governance/component-promotion.md)
-9. [Repository review checklist](./validation/repository-review-checklist.md)
+4. [Token consumption strategy](./architecture/token-consumption-strategy.md)
+5. [Component registry](./architecture/component-registry.md)
+6. [Shell interaction](./architecture/shell-interaction.md)
+7. [Federated Web Components decision](./architecture/federated-web-components-decision.md)
+8. [Implementation options](./architecture/implementation-options.md)
+9. [Component promotion](./governance/component-promotion.md)
+10. [Repository review checklist](./validation/repository-review-checklist.md)
 
 ## Tool Responsibilities
 

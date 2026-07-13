@@ -13,11 +13,10 @@
 .view-tab {
   padding: 0.5rem 1rem !important;
   background: transparent !important;
-  border: none !important;
+  border: 1px solid transparent !important;
   color: var(--p-text-color);
   font-weight: 600;
-  border-bottom: 3px solid transparent;
-  border-radius: 0 !important;
+  border-radius: var(--p-border-radius-md) !important;
   transition: all 0.3s ease;
 }
 
@@ -26,8 +25,18 @@
 }
 
 .view-tab.active {
-  color: var(--p-primary-color);
-  border-bottom-color: var(--p-primary-color);
+  background: var(--p-content-background) !important;
+  border-color: var(--p-primary-color) !important;
+  color: var(--p-text-color) !important;
+  box-shadow: inset 0 -0.2rem 0 var(--p-primary-color);
+}
+
+:host ::ng-deep .view-tab.active .p-button-label,
+:host ::ng-deep .view-tab.active .p-button-icon {
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.25rem;
+  background: #0f172a;
+  color: #ffffff !important;
 }
 
 .view-tab:hover:not(.active) {

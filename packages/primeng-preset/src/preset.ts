@@ -6,7 +6,7 @@ const publicSectorPreset = {
   primitive: {
     blue: primitive.blue,
     slate: primitive.slate,
-    red: primitive.red,
+    rose: primitive.rose,
     green: primitive.green,
   },
   semantic: {

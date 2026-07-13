@@ -4,7 +4,7 @@ The design system should remain logically separate from the platform shell. The
 shell consumes the design system, proves it in a real runtime, and supplies the
 navigation and application composition for a specific business domain.
 
-![Shell interaction model](../diagrams/shell-interaction-model.svg)
+![Shell interaction model](../diagrams/shell-interaction-model.png)
 
 ```text
 Design system

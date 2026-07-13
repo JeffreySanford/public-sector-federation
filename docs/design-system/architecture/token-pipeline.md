@@ -29,6 +29,125 @@ Authoritative token source
 - Zeroheight displays token guidance and examples; it does not serve production
   runtime tokens.
 
+## Required Implementation Constraints
+
+The architecture choice is assumed: the shell composes federated Web Components.
+The token pipeline should fit that architecture instead of arguing for another
+mounting model.
+
+- The token source of truth should live in a versioned package, not in
+  Zeroheight and not only in the shell.
+- The shell should load global token CSS and own theme selection.
+- Each remote should consume the same token package so it can run inside the
+  shell and in isolation.
+- The PrimeNG preset should be generated from or mapped to the same token
+  values used by CSS custom properties.
+- Registry components should consume semantic tokens and PrimeNG preset values,
+  not define independent visual values.
+- Light DOM versus Shadow DOM must be confirmed for each remote before styling
+  inheritance is assumed.
+- PrimeNG overlays must be validated because they may render under `body` or a
+  shared overlay container rather than inside the Web Component host.
+- Zeroheight should document token guidance and evidence links; it should not
+  supply runtime tokens.
+
+## Recommended Consumption Model
+
+Applications should consume the tokens through a combination of runtime CSS and
+package APIs:
+
+```text
+packages/tokens source files
+  -> generated CSS custom properties for runtime styling
+  -> generated JSON metadata for documentation and validation
+  -> derived TypeScript exports for presets and tests
+  -> PrimeNG preset mapped from the same values
+```
+
+The primary runtime contract is CSS custom properties. The shell should load the
+generated token CSS once at the application boundary and apply the active theme
+class. Remotes should also import the generated token CSS through the same
+package so they can run independently in local development, Storybook, and
+remote-specific tests. This creates a deliberate overlap: the shell provides the
+integrated theme context, while remotes keep enough token dependency to avoid
+being shell-only applications.
+
+TypeScript exports should support tooling, tests, and the PrimeNG preset. They
+should be generated from or derived from token build artifacts rather than
+manually duplicating token values. The PrimeNG preset should map from those same
+values into PrimeNG semantic and component tokens.
+
+## Applied Repository Model
+
+The sample repository is aligned to this model in these places:
+
+- `packages/tokens` owns the source token files and generated artifacts.
+- `packages/tokens/src/tokens.css` exposes runtime CSS custom properties.
+- `packages/tokens/src/design-tokens.json` and
+  `packages/tokens/src/zeroheight-tokens.json` provide tooling and
+  documentation metadata.
+- `packages/tokens/src/index.ts` exports derived token data from generated
+  artifacts instead of maintaining a second hardcoded token copy.
+- `packages/primeng-preset` consumes `@public-sector/tokens` and maps the
+  values into the PrimeNG preset.
+- The shell imports the generated token CSS and establishes the integrated
+  runtime context.
+- Each remote imports the generated token CSS so it can render inside the shell
+  and in isolation.
+- Federation configuration shares `@public-sector/tokens` as a singleton to
+  reduce token-version drift between shell and remotes.
+
+This is the practical answer to the consumption question: publish a versioned
+token package with generated CSS, generated metadata, and derived package
+exports; let the shell own active theme context; require remotes to consume the
+same package for independent rendering; and use the same source to drive PrimeNG
+mapping.
+
+## Theme Flow
+
+The shell should own the active theme decision because it owns the integrated
+experience, navigation, route placement, and runtime composition. Theme changes
+should be represented as stable classes or attributes on a shared ancestor such
+as `html`, `body`, the shell root, or the Web Component host.
+
+Remotes should not define competing theme values. They should read the same CSS
+custom property names and respond to the shell-provided theme context. For
+isolated development, a remote may apply the same theme class locally, but the
+token names and values should still come from the token package.
+
+## DOM Boundary Requirements
+
+The current recommendation assumes token delivery must be proven against the
+actual Web Component implementation:
+
+- If a remote renders in light DOM, global CSS variables, PrimeNG theme CSS,
+  typography, and selector-based component styles can reach the mounted content.
+- If a remote uses Shadow DOM, CSS custom properties can still inherit through
+  the host, but global selectors and PrimeNG styled-mode rules do not
+  automatically cross the boundary.
+- Any Shadow DOM remote must explicitly validate host-level variables, PrimeNG
+  component styling, overlays, focus behavior, accessibility relationships, and
+  lifecycle cleanup.
+
+Web Components do not automatically mean Shadow DOM. The implementation must
+confirm the actual rendering model before token inheritance is treated as
+complete.
+
+## PrimeNG Overlay Requirements
+
+PrimeNG overlays require a separate token check because dialogs, menus, selects,
+tooltips, and popovers may render under `body` or another overlay container. If
+an overlay is outside the remote host, it may not inherit locally scoped
+variables from that host.
+
+The overlay strategy should confirm:
+
+- where overlays append;
+- whether overlay elements can resolve `--ps-*` and `--p-*` variables;
+- whether dark mode and alternate themes affect overlays consistently;
+- whether z-index, focus management, and keyboard behavior remain stable in the
+  shell-mounted route and the isolated remote.
+
 ## Zeroheight Documentation Export
 
 Zeroheight should receive token data from generated repo artifacts, not from

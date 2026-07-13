@@ -2,6 +2,10 @@
 
 ## Primary Problem
 
+The architecture choice is assumed: federated Web Components. The focus is now
+how design tokens are consumed, validated, and documented inside that required
+architecture.
+
 The shell mounts a subapplication through a Web Component. Design tokens need to
 be available to both the shell and the mounted subapplication. Some values, such
 as fonts and CSS custom properties, can inherit through normal CSS inheritance.
@@ -9,6 +13,56 @@ Selector-based styles do not cross an actual Shadow DOM boundary.
 
 Zeroheight is not part of runtime delivery. It can document tokens and link to
 evidence, but `remoteEntry` belongs to subapplication configuration.
+
+## Current Focus
+
+Given the required federated Web Component architecture, define and validate the
+design-token consumption strategy.
+
+## Immediate Deliverables
+
+- [x] Create `architecture/token-consumption-strategy.md`.
+- [x] Update `architecture/token-pipeline.md` with required implementation
+  constraints.
+- [x] Update `validation/repository-review-checklist.md` with
+  token-consumption validation checks.
+- [x] Add a Playwright spec proving token resolution in the shell and a mounted
+  remote.
+- [x] Create `architecture/token-consumption-recommendation.md` as the focused
+  recommendation summary.
+
+## Preboarding Scope
+
+Before access to the actual implementation repository, use this public-sector
+sample as a reference implementation to prove the token-consumption approach.
+
+- [x] Prove the token package shape.
+- [x] Generate CSS variables, JSON metadata, and derived TypeScript exports from
+  one token source.
+- [x] Map the same token values into a PrimeNG preset.
+- [x] Model shell and remote token consumption.
+- [x] Validate shell and mounted remote token resolution through Playwright.
+- [x] Validate Web Component host token resolution through Playwright.
+- [x] Validate PrimeNG overlay token context through Playwright.
+- [x] Document the repository validation checklist.
+- [x] Create a short recommendation focused only on token consumption.
+
+## Actual Repository Validation
+
+After access to the actual implementation repository, validate the same model
+against the real framework details before treating the recommendation as final.
+
+- [ ] Confirm where the shell loads token CSS.
+- [ ] Confirm whether remotes import tokens directly or inherit them from the
+  shell.
+- [ ] Confirm how theme selection flows from shell to remotes.
+- [ ] Confirm whether the current Web Components use light DOM or Shadow DOM.
+- [ ] Confirm how PrimeNG providers are registered per remote.
+- [ ] Confirm where PrimeNG overlays are appended and whether they inherit token
+  values.
+- [ ] Confirm how token package versions are kept aligned between shell and
+  remotes.
+- [ ] Confirm how Zeroheight receives generated token documentation artifacts.
 
 ## System Diagram
 

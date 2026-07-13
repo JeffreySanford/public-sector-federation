@@ -7,7 +7,7 @@ This is an architectural default, not a rule that forbids other integration
 models. Federated Angular routes, ES module remotes, and `mount()` contracts can
 still be appropriate when a product intentionally wants tighter integration.
 
-![Federated Web Components decision model](../diagrams/federated-web-components-decision.svg)
+![Federated Web Components decision model](../diagrams/federated-web-components-decision.png)
 
 The diagram above shows the design system, shell, subapplication, boundary, and
 validation relationships that support this decision.
