@@ -25,6 +25,83 @@ Accessibility, behavior, or stable APIs across applications.
 - PrimeNG and Angular compatibility are versioned and documented.
 - Deprecated components include migration guidance.
 
+## Example Registry Entry
+
+A complex registry should track more than a component name. Each entry should
+make ownership, maturity, token use, implementation dependencies, validation,
+and documentation evidence visible.
+
+```json
+{
+  "id": "public-status-card",
+  "name": "PublicStatusCard",
+  "package": "@public-sector/ui-patterns",
+  "status": "candidate",
+  "owner": "Design System Team",
+  "description": "Summarizes service health, progress, and next action.",
+  "source": "packages/ui-patterns/src/status-card",
+  "storybook": {
+    "title": "Design System/Status Card",
+    "url": "/?path=/story/design-system-status-card--states"
+  },
+  "zeroheight": {
+    "page": "Components / Status Card",
+    "documents": ["usage", "accessibility", "content guidance"]
+  },
+  "tokens": {
+    "semantic": [
+      "--ps-content-background",
+      "--ps-content-border",
+      "--ps-text",
+      "--ps-status-success",
+      "--ps-status-warning"
+    ],
+    "primeNg": ["content.background", "content.border.color"]
+  },
+  "dependencies": {
+    "angular": "^21.0.0",
+    "primeng": "^21.0.0",
+    "usesPrimeNg": ["Tag", "Button"]
+  },
+  "api": {
+    "inputs": ["title", "description", "severity", "actionLabel"],
+    "outputs": ["action"]
+  },
+  "states": [
+    "default",
+    "success",
+    "warning",
+    "critical",
+    "loading",
+    "empty"
+  ],
+  "accessibility": {
+    "keyboard": "Action is reachable by Tab and activates with Enter/Space.",
+    "semantics": "Heading level is configurable by host context.",
+    "contrast": "Severity color is not the only status indicator."
+  },
+  "validation": {
+    "unit": "packages/ui-patterns/src/status-card/status-card.spec.ts",
+    "storybook": "apps/qa-remote/e2e/storybook-stories.spec.ts",
+    "shell": "apps/shell/e2e/federation.spec.ts"
+  },
+  "promotion": {
+    "requiredEvidence": [
+      "Storybook states render",
+      "Token styles resolve in shell and remote",
+      "Accessibility checks pass",
+      "PrimeNG overlay behavior confirmed when applicable"
+    ],
+    "approvedBy": []
+  }
+}
+```
+
+The exact storage format can be JSON, TypeScript metadata, generated
+documentation, or a registry service. The important point is that the registry
+records the contract and evidence, while token values remain owned by
+`packages/tokens`.
+
 ## When Not To Add A Wrapper
 
 Avoid a wrapper when it only renames a PrimeNG component without adding a shared
