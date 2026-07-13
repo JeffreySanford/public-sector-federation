@@ -36,7 +36,7 @@ to replace assumptions with verified implementation details.
 - [ ] Confirm token package dependency-sharing strategy.
 - [ ] Confirm failure and fallback behavior.
 - [ ] Confirm whether custom elements are used.
-- [ ] Confirm whether each custom element renders light DOM or Shadow DOM.
+- [ ] Confirm each custom element renders light DOM, matching runtime evidence.
 
 ## Token Consumption Validation
 
@@ -49,9 +49,9 @@ to replace assumptions with verified implementation details.
   independently bootstrapped remote.
 - [ ] Record the federation sharing configuration for `@public-sector/tokens`
   and `@public-sector/primeng-preset`.
-- [ ] Record whether each Web Component host has a shadow root at runtime.
-- [ ] Record where PrimeNG overlays append, including dialogs, menus, selects,
-  popovers, and tooltips.
+- [ ] Record that each Web Component host has no shadow root at runtime.
+- [ ] Record that PrimeNG overlays append to `body`, including dialogs, menus,
+  selects, popovers, and tooltips.
 - [ ] Record how Zeroheight receives generated token documentation artifacts.
 
 ### Pass Criteria
@@ -67,13 +67,12 @@ to replace assumptions with verified implementation details.
 - [ ] Confirm token values resolve on `document.documentElement`.
 - [ ] Confirm token values resolve inside a mounted remote.
 - [ ] Confirm token values resolve on the Web Component host.
-- [ ] Confirm token values resolve inside Shadow DOM if any remote uses Shadow
-  DOM.
+- [ ] Confirm token values resolve inside mounted light DOM remotes.
 - [ ] Confirm PrimeNG provider registration for the shell and each
   independently bootstrapped remote.
 - [ ] Confirm PrimeNG components resolve `--p-*` mapped variables from the same
   token source.
-- [ ] Confirm PrimeNG overlay append targets and inherited token context.
+- [ ] Confirm PrimeNG overlays append to `body` and inherit root token context.
 - [ ] Confirm PrimeNG overlays render correctly in shell-mounted routes and
   isolated remote routes.
 - [ ] Confirm theme switching updates shell and mounted remote token values.

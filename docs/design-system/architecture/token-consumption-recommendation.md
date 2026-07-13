@@ -33,8 +33,9 @@ and application components should use semantic CSS variables and PrimeNG mapped
 tokens instead of defining independent visual values.
 
 The component registry should consume the same token contract and PrimeNG
-preset. It should wrap PrimeNG only when it adds shared API consistency,
-accessibility behavior, composition, or reusable domain patterns.
+preset. It should wrap PrimeNG so the underlying component provider remains
+replaceable. The open decision is wrapper API shape: strict design-system API,
+thin normalized pass-through, or a tiered model.
 
 ## Validation Priorities
 
@@ -46,15 +47,14 @@ Validate:
 
 - where token CSS is loaded by the shell;
 - where token CSS is loaded or inherited by each remote;
-- whether each Web Component renders light DOM or Shadow DOM;
+- that each observed Web Component renders light DOM;
 - whether token values resolve on the shell root, Web Component host, and
   mounted remote content;
-- whether Shadow DOM requires host-level CSS variable injection;
 - whether theme changes update both shell and mounted remote token values;
 - whether PrimeNG providers and the preset are registered for independently
   bootstrapped remotes;
-- whether PrimeNG overlays appended under `body` or another container still
-  receive the expected `--ps-*` and `--p-*` values;
+- whether PrimeNG overlays appended under `body` receive the expected `--ps-*`
+  and `--p-*` values;
 - whether package versions can drift between shell and remotes.
 
 ## Current Sample Evidence
@@ -86,6 +86,7 @@ repository. It should not be the runtime source of truth for application styling
 
 The best consumption model is a shared, versioned token contract that emits CSS
 custom properties, metadata, optional TypeScript exports, and a PrimeNG preset.
-The shell or platform runtime establishes active theme context. Each remote
-resolves the same contract inside and outside the shell. DOM boundaries,
-overlays, and version drift are the critical validation points.
+The shell or platform runtime establishes active theme context on `html`. Each
+remote resolves the same contract inside and outside the shell. Light DOM,
+per-remote provider setup, overlays, and version drift are the critical
+validation points.

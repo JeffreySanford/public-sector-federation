@@ -21,7 +21,7 @@ A component or pattern should not become `Active` until it has enough evidence
 for other teams to trust it:
 
 - Token alignment
-- Approved PrimeNG usage or wrapper rationale
+- Approved wrapper usage and PrimeNG provider compatibility
 - Supported states and variants
 - Storybook stories
 - Accessibility checks
@@ -35,11 +35,13 @@ for other teams to trust it:
 
 ## Decision Rules
 
-Search before creating a new shared component. If PrimeNG directly satisfies the
-need with the approved token preset, use PrimeNG directly.
+Search before creating a new shared component. PrimeNG should remain behind a
+registry wrapper so the component provider can be swapped later. A wrapper may
+be thin when PrimeNG already satisfies the need with the approved token preset,
+but application teams should still consume the registry API.
 
-Create a registry wrapper when the system needs to enforce behavior, defaults,
-Accessibility, telemetry, API consistency, or release control.
+Use a stricter registry wrapper when the system needs to enforce behavior,
+defaults, Accessibility, telemetry, API consistency, or release control.
 
 Create a composite component or pattern when multiple UI pieces form a repeated
 workflow that teams should not rebuild independently.

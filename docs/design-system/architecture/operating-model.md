@@ -38,16 +38,21 @@ registry components should be confirmed with the shell owners. If it does, those
 components should follow the same versioning and promotion rules as remote
 consumers.
 
+Runtime evidence indicates remotes are Web Components mounted in light DOM,
+`.p-dark` is applied at the document level, overlays append to `body`, and each
+remote bootstraps independently. Each remote therefore needs the approved
+PrimeNG setup unless shared bootstrap code provides it.
+
 ## Working Assumptions
 
 | Topic | Status | Notes |
 | --- | --- | --- |
 | Token source | Needs validation | Identify source and generated outputs. |
-| Component registry | Proposed | Wrap PrimeNG for shared behavior, defaults, or API. |
-| Shell mounting | Recommended default | Use federated Web Components unless tighter Angular integration is required. |
-| Shadow DOM | Open decision | Custom elements don't imply Shadow DOM. |
+| Component registry | Required boundary | Wrap PrimeNG so the provider can be swapped later. |
+| Shell mounting | Answered | Use federated Web Components. |
+| DOM model | Answered | Observed remotes mount in light DOM. |
 | CSS variables | Proposed contract | Custom properties inherit through hosts/shadows. |
-| Overlays | Needs validation | Portal overlays may inherit from different ancestors. |
+| Overlays | Answered, validate | Observed overlays append to `body` and inherit root context. |
 | Zeroheight | Proposed governance | Document status, usage, evidence, ownership. |
 
 ## Review Goal

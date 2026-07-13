@@ -8,18 +8,25 @@ subapplications, registry components, PrimeNG, documentation, and tests.
 ![Token delivery decision diagram](../diagrams/token-delivery-decision-diagram.png)
 
 ```text
-Authoritative token source
+Figma or authoritative design-token source
   -> validation and transformation
+  -> governed token package or enterprise artifact
   -> CSS custom properties
   -> JSON metadata
   -> TypeScript helpers or constants
   -> PrimeNG semantic token preset
-  -> shell, subapplications, registry, Storybook, and documentation
+  -> component registry, shell, and subapplications
+  -> Storybook and Playwright validation evidence
+  -> Zeroheight documentation and governance
 ```
+
+Zeroheight documents the token contract and evidence. It does not provide
+runtime token delivery or `remoteEntry` configuration.
 
 ## Responsibilities
 
-- Token source files own the production values.
+- Figma, token source files, or the approved token artifact provide the design
+  intent and governed values.
 - Generated CSS exposes runtime custom properties.
 - Generated JSON or TypeScript supports tooling, docs, and tests.
 - The PrimeNG preset maps system tokens into PrimeNG semantic and component
@@ -35,19 +42,20 @@ The architecture choice is assumed: the shell composes federated Web Components.
 The token pipeline should fit that architecture instead of arguing for another
 mounting model.
 
-- The token source of truth should live in a versioned package, not in
-  Zeroheight and not only in the shell.
-- The shell should load global token CSS and own theme selection.
-- Each remote should consume the same token package so it can run inside the
-  shell and in isolation.
+- The token source of truth should live in a versioned package or equivalent
+  enterprise artifact, not in Zeroheight and not only in the shell.
+- The shell or platform runtime should establish active theme context.
+- Each remote should resolve the same token contract, either through direct
+  dependency for isolated development or shell-provided runtime context when
+  mounted.
 - The PrimeNG preset should be generated from or mapped to the same token
   values used by CSS custom properties.
 - Registry components should consume semantic tokens and PrimeNG preset values,
-  not define independent visual values.
-- Light DOM versus Shadow DOM must be confirmed for each remote before styling
-  inheritance is assumed.
-- PrimeNG overlays must be validated because they may render under `body` or a
-  shared overlay container rather than inside the Web Component host.
+  wrap PrimeNG, and avoid independent visual values.
+- Runtime evidence indicates remotes mount in light DOM, so root CSS variables
+  and document-level theme classes should cascade into mounted content.
+- Runtime evidence indicates PrimeNG overlays append to `body`, so they should
+  inherit `:root` token values and `html.p-dark` theme context.
 - Zeroheight should document token guidance and evidence links; it should not
   supply runtime tokens.
 
@@ -57,20 +65,21 @@ Applications should consume the tokens through a combination of runtime CSS and
 package APIs:
 
 ```text
-packages/tokens source files
+Figma or authoritative design-token source
+  -> packages/tokens or equivalent enterprise artifact
   -> generated CSS custom properties for runtime styling
   -> generated JSON metadata for documentation and validation
   -> derived TypeScript exports for presets and tests
   -> PrimeNG preset mapped from the same values
 ```
 
-The primary runtime contract is CSS custom properties. The shell should load the
-generated token CSS once at the application boundary and apply the active theme
-class. Remotes should also import the generated token CSS through the same
-package so they can run independently in local development, Storybook, and
-remote-specific tests. This creates a deliberate overlap: the shell provides the
-integrated theme context, while remotes keep enough token dependency to avoid
-being shell-only applications.
+The primary runtime contract is CSS custom properties. The shell or platform
+runtime should load or provide the generated token CSS at the application
+boundary and apply the active theme context. Remotes should be able to resolve
+the same contract directly for local development, Storybook, and remote-specific
+tests, while also inheriting shell-provided context when mounted. This creates a
+deliberate overlap: the platform provides the integrated theme context, while
+remotes keep enough token dependency to avoid being shell-only applications.
 
 TypeScript exports should support tooling, tests, and the PrimeNG preset. They
 should be generated from or derived from token build artifacts rather than
@@ -98,17 +107,18 @@ The sample repository is aligned to this model in these places:
   reduce token-version drift between shell and remotes.
 
 This is the practical answer to the consumption question: publish a versioned
-token package with generated CSS, generated metadata, and derived package
-exports; let the shell own active theme context; require remotes to consume the
-same package for independent rendering; and use the same source to drive PrimeNG
-mapping.
+token contract with generated CSS, generated metadata, and optional derived
+package exports; let the shell or platform runtime establish active theme
+context; require remotes to resolve the same token contract for independent
+rendering; and use the same source to drive PrimeNG mapping.
 
 ## Theme Flow
 
-The shell should own the active theme decision because it owns the integrated
-experience, navigation, route placement, and runtime composition. Theme changes
-should be represented as stable classes or attributes on a shared ancestor such
-as `html`, `body`, the shell root, or the Web Component host.
+The shell or platform runtime should establish the active theme decision because
+it owns the integrated experience, navigation, route placement, and runtime
+composition. Theme changes should be represented as stable classes or attributes
+on a shared ancestor such as `html`, `body`, the shell root, or the Web
+Component host.
 
 Remotes should not define competing theme values. They should read the same CSS
 custom property names and respond to the shell-provided theme context. For
@@ -118,31 +128,31 @@ token names and values should still come from the token package.
 ## DOM Boundary Requirements
 
 The current recommendation assumes token delivery must be proven against the
-actual Web Component implementation:
+actual Web Component implementation. Runtime evidence indicates remotes mount in
+light DOM:
 
-- If a remote renders in light DOM, global CSS variables, PrimeNG theme CSS,
-  typography, and selector-based component styles can reach the mounted content.
-- If a remote uses Shadow DOM, CSS custom properties can still inherit through
-  the host, but global selectors and PrimeNG styled-mode rules do not
-  automatically cross the boundary.
-- Any Shadow DOM remote must explicitly validate host-level variables, PrimeNG
-  component styling, overlays, focus behavior, accessibility relationships, and
-  lifecycle cleanup.
+- Global CSS variables, PrimeNG theme CSS, typography, and selector-based
+  component styles can reach the mounted content.
+- `html.p-dark` can drive theme state through the normal document cascade.
+- Source and integration tests should confirm no remote attaches a shadow root
+  before the model is treated as final.
 
-Web Components do not automatically mean Shadow DOM. The implementation must
-confirm the actual rendering model before token inheritance is treated as
-complete.
+Web Components do not automatically mean Shadow DOM, but the observed runtime is
+light DOM. If a future remote uses Shadow DOM, it must explicitly validate
+host-level variables, PrimeNG component styling, overlays, focus behavior,
+accessibility relationships, and lifecycle cleanup.
 
 ## PrimeNG Overlay Requirements
 
 PrimeNG overlays require a separate token check because dialogs, menus, selects,
-tooltips, and popovers may render under `body` or another overlay container. If
-an overlay is outside the remote host, it may not inherit locally scoped
-variables from that host.
+tooltips, and popovers render under `body` in the observed runtime. Because the
+token context is rooted at `:root` and the theme class is on `html`, those
+overlays should inherit the same token and theme context as shell and remote
+content.
 
 The overlay strategy should confirm:
 
-- where overlays append;
+- that overlays append to `body`;
 - whether overlay elements can resolve `--ps-*` and `--p-*` variables;
 - whether dark mode and alternate themes affect overlays consistently;
 - whether z-index, focus management, and keyboard behavior remain stable in the
@@ -210,9 +220,8 @@ can be inherited by descendants, including descendants inside a shadow tree when
 the variable is defined on the host or an ancestor.
 
 Selector-based rules are different. A custom element rendered in light DOM does
-not block selector styles, while Shadow DOM does. The implementation needs to
-confirm whether subapplications use Shadow DOM and where token variables are
-attached.
+not block selector styles, while Shadow DOM does. The observed implementation
+uses light DOM with document-level token variables.
 
 ### Light DOM And Shadow DOM
 
@@ -233,8 +242,8 @@ rules and global theme CSS do not automatically cross the shadow boundary.
 
 Web Components do not automatically imply Shadow DOM. A custom element can
 render light DOM content, attach Shadow DOM, or mix host-level variables with
-slotted content. The implementation must confirm the actual rendering model
-before assuming how design tokens, selectors, and PrimeNG styles will behave.
+slotted content. The observed runtime uses light DOM, which is the expected path
+for the current PrimeNG-based registry work.
 
 PrimeNG needs extra scrutiny when Shadow DOM is used. Many PrimeNG components
 depend on global theme CSS, semantic CSS variables, and overlay behavior.
@@ -244,10 +253,9 @@ opened them. If a PrimeNG component is placed inside Shadow DOM, validate token
 inheritance, overlay styling, focus management, accessibility relationships, and
 lifecycle cleanup before treating the component as design-system ready.
 
-Overlays need separate validation. If an overlay is appended to `body` or a
-global overlay container, it may not inherit variables from a local component
-host. The overlay strategy should be confirmed before token delivery is treated
-as complete.
+Overlays need separate validation. In the observed runtime, overlays append to
+`body` and should inherit `:root` variables and `html.p-dark` theme context. Add
+integration coverage before token delivery is treated as complete.
 
 ## Delivery Methods To Compare
 

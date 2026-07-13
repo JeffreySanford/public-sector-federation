@@ -9,7 +9,12 @@ architecture.
 The shell mounts a subapplication through a Web Component. Design tokens need to
 be available to both the shell and the mounted subapplication. Some values, such
 as fonts and CSS custom properties, can inherit through normal CSS inheritance.
-Selector-based styles do not cross an actual Shadow DOM boundary.
+
+Runtime evidence indicates the current remotes mount in light DOM rather than
+Shadow DOM. `.p-dark` is applied on `html`, root CSS variables cascade into
+mounted remotes, and PrimeNG overlays append to `body`. Each remote bootstraps
+independently and needs the approved PrimeNG provider setup unless shared
+bootstrap code handles it.
 
 Zeroheight is not part of runtime delivery. It can document tokens and link to
 evidence, but `remoteEntry` belongs to subapplication configuration.
@@ -56,10 +61,11 @@ against the real framework details before treating the recommendation as final.
 - [ ] Confirm whether remotes import tokens directly or inherit them from the
   shell.
 - [ ] Confirm how theme selection flows from shell to remotes.
-- [ ] Confirm whether the current Web Components use light DOM or Shadow DOM.
-- [ ] Confirm how PrimeNG providers are registered per remote.
-- [ ] Confirm where PrimeNG overlays are appended and whether they inherit token
-  values.
+- [x] Capture runtime evidence that the current Web Components use light DOM.
+- [ ] Confirm how PrimeNG providers are registered per remote or shared
+  bootstrap.
+- [x] Capture runtime evidence that PrimeNG overlays append to `body`.
+- [ ] Add integration proof that overlays inherit token values.
 - [ ] Confirm how token package versions are kept aligned between shell and
   remotes.
 - [ ] Confirm how Zeroheight receives generated token documentation artifacts.
@@ -89,17 +95,17 @@ The diagram shows five separate flows:
 | Shell loads global token CSS | Does the Web Component and subapp inherit the needed CSS variables? |
 | Subapp imports token CSS | Does this avoid shell dependency or create version drift? |
 | Shared token package | Can shell, registry, and subapps consume the same versioned artifacts? |
-| Host-level variable injection | Should the shell set variables on the Web Component host for theme scoping? |
+| Document-level variable cascade | Do `html.p-dark` and `:root` variables reach mounted light DOM remotes? |
 | PrimeNG preset mapping | How do system tokens become PrimeNG semantic/component tokens? |
 | Registry component consumption | Does the shell use registry components, or only subapps? |
-| Overlay strategy | Do PrimeNG overlays inherit the same variables when rendered outside the subapp host? |
+| Overlay strategy | Do PrimeNG overlays appended to `body` inherit root token context? |
 
 ## Questions To Validate From Code
 
 - Where does the shell get `remoteEntry` configuration?
-- Is the mounted Web Component using Shadow DOM or light DOM?
+- Does source confirm the mounted Web Component uses light DOM?
 - Where are token CSS variables attached?
 - Does the subapp bundle token CSS, inherit shell CSS, or both?
-- Where do PrimeNG overlays render?
+- Do PrimeNG overlays render under `body` in every relevant component path?
 - Does the shell consume registry components?
 - How are token, registry, shell, and subapp versions aligned?
