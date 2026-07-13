@@ -1,29 +1,18 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MessageService } from 'primeng/api';
-import { PublicButtonComponent } from '@public-sector/ui-patterns';
-import { CardModule } from 'primeng/card';
-import { DialogModule } from 'primeng/dialog';
-import { MenuModule } from 'primeng/menu';
-import { PasswordModule } from 'primeng/password';
-import { ToastModule } from 'primeng/toast';
-import { TagModule } from 'primeng/tag';
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import {
+  PublicButtonComponent,
+  PublicCardComponent,
+  PublicDialogComponent,
+  PublicTagComponent,
+  PublicToastComponent,
+  PublicToastService,
+} from '@public-sector/ui-patterns';
 
 @Component({
   selector: 'public-admin-remote',
   standalone: true,
-  imports: [
-    FormsModule,
-    PublicButtonComponent,
-    CardModule,
-    DialogModule,
-    MenuModule,
-    PasswordModule,
-    ToastModule,
-    TagModule,
-    ToggleSwitchModule,
-  ],
+  imports: [FormsModule, PublicButtonComponent, PublicCardComponent, PublicDialogComponent, PublicTagComponent, PublicToastComponent],
   templateUrl: './admin-remote.component.html',
   styleUrl: './admin-remote.component.css',
 })
@@ -46,7 +35,7 @@ export class AdminRemoteComponent {
     },
   ];
 
-  constructor(private readonly messages: MessageService) {}
+  constructor(private readonly messages: PublicToastService) {}
 
   openDialog(): void {
     this.visible = true;

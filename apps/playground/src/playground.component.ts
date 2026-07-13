@@ -1,27 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PublicButtonComponent } from '@public-sector/ui-patterns';
-import { CardModule } from 'primeng/card';
-import { DialogModule } from 'primeng/dialog';
-import { InputTextModule } from 'primeng/inputtext';
-import { SelectModule } from 'primeng/select';
-import { TableModule } from 'primeng/table';
-import { TagModule } from 'primeng/tag';
+import { PublicButtonComponent, PublicCardComponent, PublicDialogComponent, PublicTagComponent } from '@public-sector/ui-patterns';
 import { PublicSectorThemeService } from '@public-sector/primeng-preset';
 
 @Component({
   selector: 'public-sector-playground',
   standalone: true,
-  imports: [
-    FormsModule,
-    PublicButtonComponent,
-    CardModule,
-    DialogModule,
-    InputTextModule,
-    SelectModule,
-    TableModule,
-    TagModule,
-  ],
+  imports: [FormsModule, PublicButtonComponent, PublicCardComponent, PublicDialogComponent, PublicTagComponent],
   templateUrl: './playground.component.html',
   styleUrl: './playground.component.css',
 })

@@ -23,19 +23,18 @@
 
   <!-- Regression Alerts -->
   <div class="alerts-section" *ngIf="!alertsLoading && regressions.length > 0">
-    <p-card class="alert-card">
-      <ng-template pTemplate="header">
-        <div class="alert-header">
-          <span class="alert-icon" aria-hidden="true"><i class="pi pi-exclamation-triangle"></i></span>
-          <div>
-            <span class="alert-title">Performance regressions detected</span>
-            <p>{{ criticalRegressionCount }} critical and {{ warningRegressionCount }} warning alerts need review.</p>
-          </div>
+    <ps-card>
+      <div class="alert-header">
+        <span class="alert-icon" aria-hidden="true"><i class="pi pi-exclamation-triangle"></i></span>
+        <div>
+          <span class="alert-title">Performance regressions detected</span>
+          <p>{{ criticalRegressionCount }} critical and {{ warningRegressionCount }} warning alerts need review.</p>
         </div>
-      </ng-template>
+      </div>
 
-      <p-table [value]="regressions" [scrollable]="true" scrollHeight="300px">
-        <ng-template pTemplate="header">
+      <div class="table-scroll">
+        <table>
+          <thead>
           <tr>
             <th>Test Name</th>
             <th>Severity</th>
@@ -43,51 +42,43 @@
             <th>Baseline (ms)</th>
             <th>Impact</th>
           </tr>
-        </ng-template>
-
-        <ng-template pTemplate="body" let-regression>
-          <tr>
-            <td>{{ regression.testName }}</td>
-            <td>
-              <p-tag
-                [value]="regression.severity | uppercase"
-                [severity]="regression.severity === 'critical' ? 'danger' : 'warning'"
-              ></p-tag>
-            </td>
-            <td>{{ regression.currentMs }}</td>
-            <td>{{ regression.baselineMs }}</td>
-            <td>
-              <span class="impact" [style.color]="statusColors['critical']">
-                +{{ regression.currentMs - regression.baselineMs }}ms
-                ({{ calculateRegressionImpact(regression) }}%)
-              </span>
-            </td>
-          </tr>
-        </ng-template>
-
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="5" class="no-data">No regressions detected</td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </p-card>
+          </thead>
+          <tbody>
+            <tr *ngFor="let regression of regressions">
+              <td>{{ regression.testName }}</td>
+              <td>
+                <ps-tag
+                  [value]="regression.severity | uppercase"
+                  [tone]="regression.severity === 'critical' ? 'danger' : 'warning'"
+                />
+              </td>
+              <td>{{ regression.currentMs }}</td>
+              <td>{{ regression.baselineMs }}</td>
+              <td>
+                <span class="impact" [style.color]="statusColors['critical']">
+                  +{{ regression.currentMs - regression.baselineMs }}ms
+                  ({{ calculateRegressionImpact(regression) }}%)
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ps-card>
   </div>
 
   <!-- Summary Cards -->
   <div class="summary-section">
     <h2>Test Suite Performance Summary</h2>
-    <p-skeleton *ngIf="summaryLoading" height="200px"></p-skeleton>
+    <ps-skeleton *ngIf="summaryLoading" height="200px" />
 
     <div class="summary-grid" *ngIf="!summaryLoading && summary.length > 0">
       <ng-container *ngFor="let suite of summary">
-        <p-card class="summary-card" [ngClass]="{ active: selectedTestSuite?.testSuite === suite.testSuite }" (click)="selectTestSuite(suite)">
-          <ng-template pTemplate="header">
-            <div class="card-header">
-              <span class="suite-name">{{ getSuiteLabel(suite.testSuite) }}</span>
-              <p-tag [value]="getStatusLabel(suite.status)" [severity]="getStatusSeverity(suite.status)"></p-tag>
-            </div>
-          </ng-template>
+        <ps-card class="summary-card" [ngClass]="{ active: selectedTestSuite?.testSuite === suite.testSuite }" (click)="selectTestSuite(suite)">
+          <div class="card-header">
+            <span class="suite-name">{{ getSuiteLabel(suite.testSuite) }}</span>
+            <ps-tag [value]="getStatusLabel(suite.status)" [tone]="getStatusSeverity(suite.status)" />
+          </div>
 
           <div class="card-content">
             <div class="suite-icon-row">
@@ -112,7 +103,7 @@
               <span class="metric-value">{{ suite.totalTests }}</span>
             </div>
           </div>
-        </p-card>
+        </ps-card>
       </ng-container>
     </div>
 
@@ -122,15 +113,20 @@
   <!-- Trend Chart -->
   <div class="trends-section" *ngIf="selectedTestSuite">
     <h2>Performance Trends</h2>
-    <p-skeleton *ngIf="trendsLoading" height="400px"></p-skeleton>
+    <ps-skeleton *ngIf="trendsLoading" height="400px" />
 
-    <p-card *ngIf="!trendsLoading && trendChartData">
-      <ng-template pTemplate="header">
-        <div class="trend-header">{{ getTrendName(selectedTestSuite.testSuite) }} - All Browsers</div>
-      </ng-template>
-
-      <p-chart type="line" [data]="trendChartData" [options]="trendChartOptions" class="trend-chart"></p-chart>
-    </p-card>
+    <ps-card *ngIf="!trendsLoading && trendChartData" [header]="getTrendName(selectedTestSuite.testSuite) + ' - All Browsers'">
+      <div class="trend-chart" aria-label="Performance trend chart">
+        <article *ngFor="let trend of trends" class="trend-chart-row">
+          <span>{{ trend.browser ? (trend.browser | uppercase) : 'All Browsers' }}</span>
+          <div class="variance-track" aria-hidden="true">
+            <span class="variance-baseline"></span>
+            <span class="variance-bar" [style.width.%]="getTrendBarWidth(trend)"></span>
+          </div>
+          <strong>{{ trend.latest }}ms</strong>
+        </article>
+      </div>
+    </ps-card>
   </div>
 
   <div class="variance-section" *ngIf="selectedTestSuite && !trendsLoading && trends.length > 0">
@@ -161,10 +157,11 @@
   <!-- Detailed Trends Table -->
   <div class="details-section" *ngIf="selectedTestSuite">
     <h2>Detailed Performance Data</h2>
-    <p-skeleton *ngIf="trendsLoading" height="300px"></p-skeleton>
+    <ps-skeleton *ngIf="trendsLoading" height="300px" />
 
-    <p-table *ngIf="!trendsLoading && trends.length > 0" [value]="trends" [scrollable]="true" scrollHeight="400px" [paginator]="true" [rows]="5">
-      <ng-template pTemplate="header">
+    <div class="table-scroll" *ngIf="!trendsLoading && trends.length > 0">
+      <table>
+        <thead>
         <tr>
           <th>Browser</th>
           <th>Latest (ms)</th>
@@ -174,43 +171,37 @@
           <th>Trend</th>
           <th>Status</th>
         </tr>
-      </ng-template>
-
-      <ng-template pTemplate="body" let-trend>
-        <tr>
-          <td>
-            <span *ngIf="trend.browser">{{ trend.browser | uppercase }}</span>
-            <span *ngIf="!trend.browser">All Browsers</span>
-          </td>
-          <td>{{ trend.latest }}</td>
-          <td>{{ trend.baseline }}</td>
-          <td>{{ trend.average }}</td>
-          <td>
-            <span [style.color]="calculateDurationPercent(trend) > 120 ? statusColors['warning'] : statusColors['good']">
-              {{ calculateDurationPercent(trend) }}%
-            </span>
-          </td>
-          <td>
-            <span class="trend-indicator" [class]="trend.trend">
-              <i [ngClass]="getTrendIcon(trend)"></i>
-              {{ trend.trend | uppercase }}
-            </span>
-          </td>
-          <td>
-            <p-tag [value]="getStatusLabel(trend.status)" [severity]="getStatusSeverity(trend.status)"></p-tag>
-          </td>
-        </tr>
-      </ng-template>
-
-      <ng-template pTemplate="emptymessage">
-        <tr>
-          <td colspan="7" class="no-data">No trend data available</td>
-        </tr>
-      </ng-template>
-    </p-table>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trend of trends">
+            <td>
+              <span *ngIf="trend.browser">{{ trend.browser | uppercase }}</span>
+              <span *ngIf="!trend.browser">All Browsers</span>
+            </td>
+            <td>{{ trend.latest }}</td>
+            <td>{{ trend.baseline }}</td>
+            <td>{{ trend.average }}</td>
+            <td>
+              <span [style.color]="calculateDurationPercent(trend) > 120 ? statusColors['warning'] : statusColors['good']">
+                {{ calculateDurationPercent(trend) }}%
+              </span>
+            </td>
+            <td>
+              <span class="trend-indicator" [class]="trend.trend">
+                <i [ngClass]="getTrendIcon(trend)"></i>
+                {{ trend.trend | uppercase }}
+              </span>
+            </td>
+            <td>
+              <ps-tag [value]="getStatusLabel(trend.status)" [tone]="getStatusSeverity(trend.status)" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="no-data" *ngIf="!trendsLoading && trends.length === 0">No trend data available for this test suite</div>
   </div>
 
-  <p-toast position="bottom-right"></p-toast>
+  <ps-toast />
 </div>

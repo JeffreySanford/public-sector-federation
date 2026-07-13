@@ -81,7 +81,7 @@ test.describe('Design token consumption contract', () => {
     await expect(page.getByRole('heading', { name: /Component and token coverage/i })).toBeVisible();
   });
 
-  test('keeps PrimeNG overlay surfaces in the shared token context', async ({ page }) => {
+  test('keeps shared overlay surfaces in the shared token context', async ({ page }) => {
     await page.goto('/admin');
     await expect(page.locator('public-admin-root')).toBeVisible();
     await expect(page.getByRole('heading', { name: /Administrative settings/i })).toBeVisible();
@@ -93,9 +93,8 @@ test.describe('Design token consumption contract', () => {
     const overlayStyles = await dialog.evaluate((element) => {
       const styles = getComputedStyle(element);
       const rootStyles = getComputedStyle(document.documentElement);
-      const overlayRoot = element.closest('.p-dialog-mask, .p-overlay-mask');
       return {
-        overlayAppendedToBody: overlayRoot?.parentElement?.tagName.toLowerCase() === 'body',
+        overlayHasShadowRoot: Boolean(element.shadowRoot),
         background: styles.backgroundColor,
         color: styles.color,
         contentBackground: styles.getPropertyValue('--p-content-background').trim(),
@@ -105,7 +104,7 @@ test.describe('Design token consumption contract', () => {
       };
     });
 
-    expect(overlayStyles.overlayAppendedToBody).toBe(true);
+    expect(overlayStyles.overlayHasShadowRoot).toBe(false);
     expect(overlayStyles.background).not.toBe('rgba(0, 0, 0, 0)');
     expect(overlayStyles.color).not.toBe('rgba(0, 0, 0, 0)');
     expect(overlayStyles.contentBackground).toBe(overlayStyles.tokenBackground);

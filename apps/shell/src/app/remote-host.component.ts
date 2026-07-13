@@ -2,12 +2,15 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  PLATFORM_ID,
   Renderer2,
   ViewChild,
-  effect,
+  inject,
   signal,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { RemoteKey, loadRemoteElement } from './remote-manifest';
 
 @Component({
@@ -25,18 +28,25 @@ import { RemoteKey, loadRemoteElement } from './remote-manifest';
 })
 export class RemoteHostComponent implements AfterViewInit {
   readonly elementName = signal<string | undefined>(undefined);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   @ViewChild('host', { static: true })
   private host?: ElementRef<HTMLElement>;
 
   private hasView = false;
+  private readonly routeSubscription: Subscription;
 
   constructor(
     private readonly renderer: Renderer2,
     private readonly route: ActivatedRoute,
   ) {
-    effect(async () => {
-      const remote = this.route.snapshot.data['remote'] as RemoteKey;
+    this.routeSubscription = this.route.data.subscribe(async (data) => {
+      if (!this.isBrowser) {
+        return;
+      }
+
+      const remote = data['remote'] as RemoteKey;
+      this.elementName.set(undefined);
       const definition = await loadRemoteElement(remote);
       this.elementName.set(definition.elementName);
       this.renderElement();
@@ -58,5 +68,9 @@ export class RemoteHostComponent implements AfterViewInit {
     const host = this.host.nativeElement;
     host.replaceChildren();
     this.renderer.appendChild(host, this.renderer.createElement(tagName));
+  }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
   }
 }

@@ -1,13 +1,13 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
-import { PublicButtonComponent } from '@public-sector/ui-patterns';
-import { CardModule } from 'primeng/card';
+import { PublicButtonComponent, PublicCardComponent } from '@public-sector/ui-patterns';
+import { PublicSectorThemeService } from '@public-sector/primeng-preset';
 import { remotes, RemoteDefinition } from './remote-registry';
 import { RemoteLoaderService } from './remote-loader.service';
 
 @Component({
   selector: 'ps-shell-root',
   standalone: true,
-  imports: [PublicButtonComponent, CardModule],
+  imports: [PublicButtonComponent, PublicCardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.css',
@@ -15,9 +15,11 @@ import { RemoteLoaderService } from './remote-loader.service';
 export class ShellComponent {
   readonly remotes = remotes;
   readonly activeRemote = signal<RemoteDefinition>(remotes[0]);
-  readonly isDark = signal(false);
 
-  constructor(private readonly remoteLoader: RemoteLoaderService) {
+  constructor(
+    private readonly remoteLoader: RemoteLoaderService,
+    readonly theme: PublicSectorThemeService,
+  ) {
     void this.selectRemote(remotes[0]);
   }
 
@@ -27,8 +29,6 @@ export class ShellComponent {
   }
 
   toggleTheme(): void {
-    const next = !this.isDark();
-    this.isDark.set(next);
-    document.documentElement.classList.toggle('p-dark', next);
+    this.theme.toggleDarkMode();
   }
 }

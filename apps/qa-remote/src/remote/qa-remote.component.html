@@ -1,4 +1,4 @@
-<p-toast />
+<ps-toast />
 
 <div class="qa-view-tabs">
   <ps-button
@@ -55,7 +55,7 @@
     <div class="acceptance-grid acceptance-grid--two">
       <article class="acceptance-panel">
         <div class="acceptance-panel__header">
-          <p-tag value="Button / Tag" severity="info" />
+          <ps-tag value="Button / Tag" tone="info" />
           <h4>Action hierarchy and status language</h4>
           <p>Filled, outlined, text, disabled, and severity labels with icon spacing.</p>
         </div>
@@ -71,48 +71,48 @@
             icon="pi pi-check"
             [outlined]="true"
           />
-          <p-tag value="Awaiting supervisor review after document resubmission" severity="warn" />
+          <ps-tag value="Awaiting supervisor review after document resubmission" tone="warn" />
         </div>
         <div class="acceptance-inline">
-          <p-tag value="On track" severity="success" />
-          <p-tag value="Watch" severity="warn" />
-          <p-tag value="Delayed" severity="danger" />
-          <p-tag value="Draft" severity="secondary" />
+          <ps-tag value="On track" tone="success" />
+          <ps-tag value="Watch" tone="warn" />
+          <ps-tag value="Delayed" tone="danger" />
+          <ps-tag value="Draft" tone="secondary" />
         </div>
       </article>
 
       <article class="acceptance-panel">
         <div class="acceptance-panel__header">
-          <p-tag value="Card" severity="info" />
+          <ps-tag value="Card" tone="info" />
           <h4>Supporting content surfaces</h4>
           <p>Cards render as stable supporting UI, not the only route-critical content.</p>
         </div>
         <div class="acceptance-card-grid">
-          <p-card header="Metric card" subheader="Operational snapshot">
+          <ps-card header="Metric card" subheader="Operational snapshot">
             <strong class="acceptance-metric">94%</strong>
             <p>SLA compliance over the trailing 30 days.</p>
-            <p-tag value="On track" severity="success" />
-          </p-card>
-          <p-card header="Long-content card" subheader="Projection and wrapping">
+            <ps-tag value="On track" tone="success" />
+          </ps-card>
+          <ps-card header="Long-content card" subheader="Projection and wrapping">
             <p>
               This card intentionally includes longer body copy to check spacing,
               line-height, text wrapping, and content projection under the shared preset.
             </p>
-          </p-card>
-          <p-card header="Empty state card" subheader="Projection and wrapping">
+          </ps-card>
+          <ps-card header="Empty state card" subheader="Projection and wrapping">
             <div class="empty-state empty-state--compact">
               <i class="pi pi-inbox" aria-hidden="true"></i>
               <strong>No pending reviews</strong>
               <p>Fallback copy exists outside route-critical card-only layouts.</p>
             </div>
-          </p-card>
+          </ps-card>
         </div>
       </article>
     </div>
 
     <article class="acceptance-panel">
       <div class="acceptance-panel__header">
-        <p-tag value="Table / Paginator" severity="info" />
+        <ps-tag value="Table / Paginator" tone="info" />
         <h4>Sortable, filterable, paginated table</h4>
         <p>Uses the same proven rows-per-page, filtering, sorting, loading, and page-report behavior as Reporting.</p>
       </div>
@@ -130,71 +130,50 @@
           (buttonClick)="toggleQaTableEmpty()"
         />
       </div>
-      <p-table
-        #qaProgramTable
-        [value]="qaAcceptanceTableRows"
-        styleClass="p-datatable-gridlines acceptance-table"
-        [loading]="qaTableLoading"
-        [paginator]="!qaTableShowEmpty"
-        [rows]="5"
-        [rowsPerPageOptions]="[5, 10, 25]"
-        paginatorDropdownAppendTo="body"
-        [showCurrentPageReport]="true"
-        currentPageReportTemplate="Showing {first}-{last} of {totalRecords}"
-        [globalFilterFields]="['program', 'status', 'region']"
-        sortField="cases"
-        [sortOrder]="-1"
-      >
-        <ng-template pTemplate="caption">
-          <div class="acceptance-table-toolbar">
-            <div>
-              <strong>Program performance</strong>
-              <span>Search, sort, filter, and page through active programs.</span>
-            </div>
-            <input
-              type="search"
-              placeholder="Search programs"
-              aria-label="Search QA program performance"
-              (input)="qaProgramTable.filterGlobal($any($event.target).value, 'contains')"
-            />
-          </div>
-        </ng-template>
-        <ng-template pTemplate="header">
+      <div class="acceptance-table-toolbar">
+        <div>
+          <strong>Program performance</strong>
+          <span>Search, sort, filter, and page through active programs.</span>
+        </div>
+        <input type="search" placeholder="Search programs" aria-label="Search QA program performance" />
+      </div>
+      <table class="qa-table acceptance-table">
+        <thead>
           <tr>
-            <th pSortableColumn="program">Program <p-sortIcon field="program" /></th>
-            <th pSortableColumn="cases">Cases <p-sortIcon field="cases" /></th>
-            <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
-            <th pSortableColumn="region">Region <p-sortIcon field="region" /></th>
-            <th pSortableColumn="sla">SLA <p-sortIcon field="sla" /></th>
+            <th>Program</th>
+            <th>Cases</th>
+            <th>Status</th>
+            <th>Region</th>
+            <th>SLA</th>
           </tr>
-          <tr>
-            <th><p-columnFilter field="program" type="text" matchMode="contains" placeholder="Filter program" [showMenu]="false" /></th>
-            <th><p-columnFilter field="cases" type="numeric" matchMode="gte" placeholder="Min cases" [showMenu]="false" /></th>
-            <th><p-columnFilter field="status" type="text" matchMode="contains" placeholder="Filter status" [showMenu]="false" /></th>
-            <th><p-columnFilter field="region" type="text" matchMode="contains" placeholder="Filter region" [showMenu]="false" /></th>
-            <th><p-columnFilter field="sla" type="numeric" matchMode="gte" placeholder="Min SLA" [showMenu]="false" /></th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-row>
-          <tr>
-            <td><strong>{{ row.program }}</strong></td>
-            <td>{{ row.cases }}</td>
-            <td><p-tag [value]="row.status" [severity]="severity(row.status)" /></td>
-            <td>{{ row.region }}</td>
-            <td>{{ row.sla }}%</td>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="5">No programs are available for the selected reporting period.</td>
-          </tr>
-        </ng-template>
-      </p-table>
+        </thead>
+        <tbody>
+          @if (qaTableLoading) {
+            <tr>
+              <td colspan="5">Loading program performance rows...</td>
+            </tr>
+          } @else {
+            @for (row of qaAcceptanceTableRows; track row.program) {
+              <tr>
+                <td><strong>{{ row.program }}</strong></td>
+                <td>{{ row.cases }}</td>
+                <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
+                <td>{{ row.region }}</td>
+                <td>{{ row.sla }}%</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5">No programs are available for the selected reporting period.</td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
     </article>
 
     <article class="acceptance-panel">
       <div class="acceptance-panel__header">
-        <p-tag value="Federation readiness" severity="success" />
+        <ps-tag value="Federation readiness" tone="success" />
         <h4>Direct remote and shell-composed proof</h4>
         <p>
           Proven PrimeNG families are validated on the QA remote directly and through
@@ -228,7 +207,7 @@
     <div class="acceptance-grid acceptance-grid--two">
       <article class="acceptance-panel">
         <div class="acceptance-panel__header">
-          <p-tag value="Dialog / Toast" severity="info" />
+          <ps-tag value="Dialog / Toast" tone="info" />
           <h4>Overlay and feedback policy</h4>
           <p>Dialog appends to body, stacks predictably, and toast severities stay styled.</p>
         </div>
@@ -239,7 +218,7 @@
           </button>
           <ps-button label="Success toast" icon="pi pi-check" (buttonClick)="showAcceptanceToast('success')" />
           <ps-button label="Warn toast" icon="pi pi-exclamation-triangle" [outlined]="true" (buttonClick)="showAcceptanceToast('warn')" />
-          <ps-button label="Error toast" icon="pi pi-times-circle" [outlined]="true" (buttonClick)="showAcceptanceToast('error')" />
+          <ps-button label="Error toast" icon="pi pi-times-circle" [outlined]="true" (buttonClick)="showAcceptanceToast('danger')" />
         </div>
       </article>
 
@@ -739,25 +718,16 @@
     </article>
   </section>
 
-  <p-dialog
-    header="Acceptance dialog"
-    [(visible)]="acceptanceDialogVisible"
-    [modal]="true"
-    appendTo="body"
-    [baseZIndex]="2000"
-    [draggable]="false"
-    [resizable]="false"
-    [style]="{ width: '32rem' }"
-  >
+  <ps-dialog header="Acceptance dialog" [(visible)]="acceptanceDialogVisible" width="32rem">
     <p>
       This overlay mirrors the Storybook Dialog / Toast acceptance story inside
       the federated QA route.
     </p>
-    <ng-template pTemplate="footer">
+    <div ps-dialog-footer>
       <ps-button label="Close" [text]="true" (buttonClick)="acceptanceDialogVisible = false" />
       <ps-button label="Confirm" icon="pi pi-check" (buttonClick)="confirmAcceptanceDialog()" />
-    </ng-template>
-  </p-dialog>
+    </div>
+  </ps-dialog>
 
   <section class="qa-card primeng-smoke">
     <div>
@@ -768,50 +738,43 @@
       </p>
     </div>
     <div class="primeng-smoke__actions">
-      <p-tag value="PrimeNG Tag" severity="info" />
+      <ps-tag value="PrimeNG Tag" tone="info" />
       <ps-button label="PrimeNG Button" icon="pi pi-check" [outlined]="true" />
       <button type="button" class="qa-button qa-button--secondary" (click)="dialogVisible = true">
         <i class="pi pi-window-maximize" aria-hidden="true"></i>
         <span>Open PrimeNG dialog</span>
       </button>
     </div>
-    <p-table [value]="primengSmokeRows" styleClass="p-datatable-sm primeng-smoke-table">
-      <ng-template pTemplate="header">
+    <table class="qa-table primeng-smoke-table">
+      <thead>
         <tr>
-          <th>PrimeNG host</th>
+          <th>Shared host</th>
           <th>Status</th>
         </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-row>
-        <tr>
-          <td>{{ row.component }}</td>
-          <td>{{ row.status }}</td>
-        </tr>
-      </ng-template>
-    </p-table>
-    <p-card header="PrimeNG card smoke" subheader="Isolated card host">
+      </thead>
+      <tbody>
+        @for (row of primengSmokeRows; track row.component) {
+          <tr>
+            <td>{{ row.component }}</td>
+            <td>{{ row.status }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <ps-card header="PrimeNG card smoke" subheader="Isolated card host">
       <p>
         This card confirms that `p-card` can render in QA when it is not the only
         route-critical content.
       </p>
-    </p-card>
+    </ps-card>
   </section>
 
-  <p-dialog
-    header="PrimeNG dialog smoke test"
-    [(visible)]="dialogVisible"
-    [modal]="true"
-    appendTo="body"
-    [baseZIndex]="2000"
-    [draggable]="false"
-    [resizable]="false"
-    [style]="{ width: '32rem' }"
-  >
+  <ps-dialog header="Shared dialog smoke test" [(visible)]="dialogVisible" width="32rem">
     <p>This dialog validates that overlays can be reintroduced after the route stays stable.</p>
-    <ng-template pTemplate="footer">
+    <div ps-dialog-footer>
       <button type="button" class="qa-button qa-button--secondary" (click)="dialogVisible = false">Close</button>
-    </ng-template>
-  </p-dialog>
+    </div>
+  </ps-dialog>
 
   <section class="category-grid">
     <article class="qa-card">

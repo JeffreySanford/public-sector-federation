@@ -1,12 +1,13 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PublicButtonComponent } from '@public-sector/ui-patterns';
-import { CardModule } from 'primeng/card';
-import { DialogModule } from 'primeng/dialog';
-import { MessageService } from 'primeng/api';
-import { TableModule } from 'primeng/table';
-import { TagModule } from 'primeng/tag';
-import { ToastModule } from 'primeng/toast';
+import {
+  PublicButtonComponent,
+  PublicCardComponent,
+  PublicDialogComponent,
+  PublicTagComponent,
+  PublicToastComponent,
+  PublicToastService,
+} from '@public-sector/ui-patterns';
 import { PerformanceDashboardComponent } from '../app/components/performance-dashboard.component';
 import { AgileWorkflowService } from './agile-workflow.service';
 import type { AgileApiDashboard, AgileApiReport, AgileSeedStatus } from './agile-workflow.service';
@@ -48,12 +49,20 @@ interface AgileBoardRow {
 @Component({
   selector: 'public-qa-remote',
   standalone: true,
-  imports: [CommonModule, PublicButtonComponent, CardModule, DialogModule, TableModule, TagModule, ToastModule, PerformanceDashboardComponent],
+  imports: [
+    CommonModule,
+    PublicButtonComponent,
+    PublicCardComponent,
+    PublicDialogComponent,
+    PublicTagComponent,
+    PublicToastComponent,
+    PerformanceDashboardComponent,
+  ],
   templateUrl: './qa-remote.component.html',
   styleUrl: './qa-remote.component.css',
 })
 export class QaRemoteComponent implements OnInit {
-  private readonly messageService = inject(MessageService);
+  private readonly messageService = inject(PublicToastService);
   private readonly agileWorkflow = inject(AgileWorkflowService);
 
   activeTab = signal<'qa' | 'performance'>('qa');
@@ -458,10 +467,10 @@ export class QaRemoteComponent implements OnInit {
     this.qaTableShowEmpty = !this.qaTableShowEmpty;
   }
 
-  showAcceptanceToast(severity: 'success' | 'info' | 'warn' | 'error'): void {
+  showAcceptanceToast(severity: 'success' | 'info' | 'warn' | 'danger'): void {
     this.messageService.add({
       severity,
-      summary: `${severity[0].toUpperCase()}${severity.slice(1)} checkpoint`,
+      summary: `${severity === 'danger' ? 'Error' : `${severity[0].toUpperCase()}${severity.slice(1)}`} checkpoint`,
       detail: 'Toast styling is driven by the shared PrimeNG token contract.',
       life: 3500,
     });

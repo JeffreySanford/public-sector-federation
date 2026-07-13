@@ -1,11 +1,6 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { AccordionModule } from 'primeng/accordion';
-import { PublicButtonComponent } from '@public-sector/ui-patterns';
-import { CardModule } from 'primeng/card';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { TableModule } from 'primeng/table';
-import { TabsModule } from 'primeng/tabs';
-import { TagModule } from 'primeng/tag';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { PublicButtonComponent, PublicCardComponent, PublicProgressComponent, PublicTagComponent } from '@public-sector/ui-patterns';
 
 interface ReportRow {
   program: string;
@@ -19,11 +14,11 @@ interface ReportRow {
 @Component({
   selector: 'public-reporting-remote',
   standalone: true,
-  imports: [AccordionModule, PublicButtonComponent, CardModule, ProgressBarModule, TableModule, TabsModule, TagModule],
+  imports: [FormsModule, PublicButtonComponent, PublicCardComponent, PublicProgressComponent, PublicTagComponent],
   templateUrl: './reporting-remote.component.html',
   styleUrl: './reporting-remote.component.css',
 })
-export class ReportingRemoteComponent implements AfterViewInit {
+export class ReportingRemoteComponent {
   readonly rows: ReportRow[] = [
     { program: 'Housing assistance', cases: 428, status: 'On track', owner: 'Avery Clark', region: 'North Region', sla: 96 },
     { program: 'Small business grants', cases: 183, status: 'Watch', owner: 'Morgan Lee', region: 'Central Region', sla: 87 },
@@ -43,16 +38,30 @@ export class ReportingRemoteComponent implements AfterViewInit {
     { label: 'Digital adoption', value: 71 },
     { label: 'Document accuracy', value: 93 },
   ];
+  readonly notes = [
+    {
+      title: 'Data quality',
+      body: 'Document accuracy is calculated from reviewed records and sampled intake forms.',
+    },
+    {
+      title: 'Service risk',
+      body: 'Delayed programs should be reviewed by regional administrators before the next reporting cycle.',
+    },
+  ];
+  query = '';
 
   severity(status: ReportRow['status']): 'success' | 'warn' | 'danger' {
     return status === 'On track' ? 'success' : status === 'Watch' ? 'warn' : 'danger';
   }
 
-  ngAfterViewInit(): void {
-    queueMicrotask(() => {
-      document.querySelectorAll('public-reporting-root p-progressbar').forEach((element) => {
-        element.removeAttribute('aria-level');
-      });
-    });
+  filteredRows(): ReportRow[] {
+    const query = this.query.trim().toLowerCase();
+    if (!query) {
+      return this.rows;
+    }
+
+    return this.rows.filter((row) =>
+      [row.program, row.status, row.owner, row.region].some((value) => value.toLowerCase().includes(query)),
+    );
   }
 }

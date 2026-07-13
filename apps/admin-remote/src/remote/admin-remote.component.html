@@ -1,9 +1,9 @@
-<p-toast />
+<ps-toast />
 
 <section class="remote">
   <div class="remote__header">
     <div>
-      <p-tag value="Remote: Admin" severity="warn" />
+      <ps-tag value="Remote: Admin" tone="warn" />
       <h2>Administrative settings</h2>
       <p>
         Dialog, menu, toast, and switch components validate overlay policy and
@@ -17,58 +17,52 @@
   </div>
 
   <div class="remote__grid">
-    <p-card>
-      <ng-template pTemplate="title">Platform controls</ng-template>
+    <ps-card header="Platform controls">
       <div class="setting-row">
         <span>Audit logging</span>
-        <p-toggleswitch [(ngModel)]="auditLogging" ariaLabel="Audit logging" />
+        <input type="checkbox" role="switch" [(ngModel)]="auditLogging" aria-label="Audit logging" />
       </div>
       <div class="setting-row">
         <span>Maintenance mode</span>
-        <p-toggleswitch [(ngModel)]="maintenanceMode" ariaLabel="Maintenance mode" />
+        <input type="checkbox" role="switch" [(ngModel)]="maintenanceMode" aria-label="Maintenance mode" />
       </div>
 
       <label class="password-field" for="temporaryPassword">
         Temporary password
-        <p-password
-          inputId="temporaryPassword"
+        <input
+          id="temporaryPassword"
+          type="password"
           [(ngModel)]="temporaryPassword"
-          [toggleMask]="true"
-          [feedback]="false"
-          appendTo="body"
           placeholder="Generate or enter password"
-        />
+        >
       </label>
 
       <button type="button" class="admin-button" (click)="showToast()">
         <i class="pi pi-save" aria-hidden="true"></i>
         <span>Save settings</span>
       </button>
-    </p-card>
+    </ps-card>
 
-    <p-card>
-      <ng-template pTemplate="title">Administrative actions</ng-template>
-      <p-menu [model]="actions" styleClass="admin-actions-menu" />
-    </p-card>
+    <ps-card header="Administrative actions">
+      <nav class="admin-actions-menu" aria-label="Administrative actions">
+        @for (action of actions; track action.label) {
+          <button type="button" (click)="action.command()">
+            <i [class]="action.icon" aria-hidden="true"></i>
+            <span>{{ action.label }}</span>
+          </button>
+        }
+      </nav>
+    </ps-card>
   </div>
 </section>
 
-<p-dialog
-  header="Remote dialog"
-  [(visible)]="visible"
-  [modal]="true"
-  appendTo="body"
-  [baseZIndex]="2000"
-  [draggable]="false"
-  [resizable]="false"
-  [style]="{ width: '32rem' }"
->
+<ps-dialog header="Remote dialog" [(visible)]="visible" width="32rem">
   <p>
     This dialog is opened from the admin remote. It should stack above shell
     chrome and use the shared PrimeNG z-index settings.
   </p>
-  <ng-template pTemplate="footer">
+  <div ps-dialog-footer>
     <ps-button label="Close" [text]="true" (buttonClick)="closeDialog()" />
     <ps-button label="Confirm" icon="pi pi-check" (buttonClick)="confirmDialog()" />
-  </ng-template>
-</p-dialog>
+  </div>
+</ps-dialog>

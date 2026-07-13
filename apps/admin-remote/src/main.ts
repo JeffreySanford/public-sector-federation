@@ -1,14 +1,12 @@
 import { provideZoneChangeDetection } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { createApplication } from '@angular/platform-browser';
-import { MessageService } from 'primeng/api';
 import { providePublicSectorPrimeNG } from '@public-sector/primeng-preset';
 import { AdminRemoteComponent } from './remote/admin-remote.component';
 
 createApplication({
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    MessageService,
     providePublicSectorPrimeNG(),
   ],
 })

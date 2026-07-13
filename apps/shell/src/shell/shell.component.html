@@ -4,7 +4,7 @@
     <h1>Federated Services Portal</h1>
   </div>
   <ps-button
-    [label]="isDark() ? 'Light mode' : 'Dark mode'"
+    [label]="theme.isDark() ? 'Light mode' : 'Dark mode'"
     (buttonClick)="toggleTheme()"
   />
 </header>
@@ -24,12 +24,12 @@
   </nav>
 
   <section class="portal-content">
-    <p-card header="Shell Baseline">
+    <ps-card header="Shell Baseline">
       <p>
         This shell uses the same PrimeNG provider and token preset as every remote.
       </p>
       <ps-button label="Shell registry button" />
-    </p-card>
+    </ps-card>
 
     <section class="remote-host" aria-live="polite">
       @switch (activeRemote().elementName) {

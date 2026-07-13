@@ -1,7 +1,6 @@
 import type { Preview } from '@storybook/angular';
 import { applicationConfig } from '@storybook/angular';
 import { provideZoneChangeDetection } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { providePublicSectorPrimeNG } from '@public-sector/primeng-preset';
 
 const applyTheme = (variant: string, mode: string) => {
@@ -19,7 +18,7 @@ const applyTheme = (variant: string, mode: string) => {
 const preview: Preview = {
   decorators: [
     applicationConfig({
-      providers: [provideZoneChangeDetection({ eventCoalescing: true }), MessageService, providePublicSectorPrimeNG()],
+      providers: [provideZoneChangeDetection({ eventCoalescing: true }), providePublicSectorPrimeNG()],
     }),
     (storyFn, context) => {
       applyTheme(String(context.globals['themeVariant'] ?? 'neutral'), String(context.globals['themeMode'] ?? 'light'));

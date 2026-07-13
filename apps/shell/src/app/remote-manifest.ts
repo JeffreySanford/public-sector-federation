@@ -10,6 +10,12 @@ export type RemoteManifest = Record<RemoteKey, RemoteDefinition>;
 let manifestPromise: Promise<RemoteManifest> | undefined;
 const remoteEntryPromises = new Map<string, Promise<void>>();
 
+function assertBrowserRuntime(): void {
+  if (typeof document === 'undefined' || typeof customElements === 'undefined') {
+    throw new Error('Remote elements can only be loaded in a browser runtime.');
+  }
+}
+
 export function getRemoteManifest(): Promise<RemoteManifest> {
   manifestPromise ??= fetch('/module-federation.manifest.json').then((response) => {
     if (!response.ok) {
@@ -23,6 +29,8 @@ export function getRemoteManifest(): Promise<RemoteManifest> {
 }
 
 export async function loadRemoteElement(remoteKey: RemoteKey): Promise<RemoteDefinition> {
+  assertBrowserRuntime();
+
   const manifest = await getRemoteManifest();
   const remote = manifest[remoteKey];
 
@@ -34,6 +42,8 @@ export async function loadRemoteElement(remoteKey: RemoteKey): Promise<RemoteDef
 }
 
 function loadRemoteEntry(remoteEntry: string): Promise<void> {
+  assertBrowserRuntime();
+
   const existing = remoteEntryPromises.get(remoteEntry);
 
   if (existing) {

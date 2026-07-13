@@ -2,7 +2,6 @@ import { provideZoneChangeDetection } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { provideHttpClient } from '@angular/common/http';
 import { createApplication } from '@angular/platform-browser';
-import { MessageService } from 'primeng/api';
 import { providePublicSectorPrimeNG } from '@public-sector/primeng-preset';
 import { QaRemoteComponent } from './remote/qa-remote.component';
 
@@ -10,7 +9,6 @@ createApplication({
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(),
-    MessageService,
     providePublicSectorPrimeNG(),
   ],
 })

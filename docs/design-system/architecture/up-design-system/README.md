@@ -16,6 +16,7 @@ enterprise runtime has already been validated.
 - [Runtime Architecture Answered](./runtime-architecture-answered.md)
 - [Design Decisions For Neil](./design-decisions-for-neil.md)
 - [Critical Design Decisions](./critical-design-decisions.md)
+- [Up Design System Change Log](./change-log.md)
 
 ## Review Scope
 
