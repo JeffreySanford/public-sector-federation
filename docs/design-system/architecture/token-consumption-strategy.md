@@ -7,15 +7,16 @@ shell-only styling.
 
 ## Recommendation
 
-The source of truth should be a token package in the design-system repository.
-That package should generate runtime CSS custom properties, documentation and
-tooling metadata, and the PrimeNG preset mapping from the same values.
+The source of truth should be a token package, or equivalent enterprise
+artifact, in the design-system repository. That contract should generate runtime
+CSS custom properties, documentation and tooling metadata, optional TypeScript
+exports, and the PrimeNG preset mapping from the same values.
 
-The shell should load the global token CSS and own theme selection. Each
-federated Web Component should consume the same token package so it can render
-correctly both inside the shell and in isolation during development and testing.
-That keeps the shell from becoming the design-system owner while still giving
-remotes a reliable contract.
+The shell or platform runtime should establish active theme context. Each
+federated Web Component should be able to resolve the same token contract,
+either through direct dependency for isolated development or through
+shell-provided runtime context when mounted. That keeps the shell from becoming
+the design-system owner while still giving remotes a reliable contract.
 
 The component registry should consume the token contract and PrimeNG preset.
 Registry components should wrap PrimeNG only when they add shared behavior,
@@ -54,6 +55,10 @@ PrimeNG overlays need separate validation because dialogs, dropdowns, menus, and
 tooltips may render under `body` or another overlay container instead of inside
 the remote host. Those overlays must receive the same token context or they can
 visually drift from the shell and remote.
+
+Zeroheight should document the token contract and evidence, but it should not
+own runtime styling or subapplication configuration. `remoteEntry` remains
+subapplication configuration.
 
 ## Evidence Model
 
