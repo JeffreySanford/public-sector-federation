@@ -9,7 +9,7 @@ the runtime, styling, routing, and deployment tradeoffs against the real code.
 
 | Option | Strengths | Risks/Costs |
 | --- | --- | --- |
-| Web Components | Boundary, explicit host, independent mount. | No Shadow DOM; routing/DI needs design. |
+| Web Components | Boundary, explicit host, independent mount. | Confirm Shadow DOM; design routing, DI, lifecycle. |
 | Federated Angular routes | Router integration, conventions. | Tighter version coordination. |
 | Native Federation ES modules | Modern loading, explicit dependencies. | Build/runtime config needed. |
 | `mount()`/`unmount()` | Clear contract, flexibility. | More custom lifecycle code. |
