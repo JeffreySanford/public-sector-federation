@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
@@ -10,7 +10,7 @@ import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'public-dialog-toast-acceptance-story',
   standalone: true,
-  imports: [ButtonModule, CardModule, DialogModule, TagModule, ToastModule],
+  imports: [PublicButtonComponent, CardModule, DialogModule, TagModule, ToastModule],
   template: `
     <p-toast />
     <section class="acceptance-story">
@@ -38,10 +38,10 @@ import { ToastModule } from 'primeng/toast';
             surfaces for success, info, warning, and error feedback.
           </p>
           <div class="inline-row">
-            <p-button label="Success" icon="pi pi-check" (click)="showToast('success')" />
-            <p-button label="Info" icon="pi pi-info-circle" [outlined]="true" (click)="showToast('info')" />
-            <p-button label="Warn" icon="pi pi-exclamation-triangle" [outlined]="true" (click)="showToast('warn')" />
-            <p-button label="Error" icon="pi pi-times-circle" [outlined]="true" (click)="showToast('error')" />
+            <ps-button label="Success" icon="pi pi-check" (buttonClick)="showToast('success')" />
+            <ps-button label="Info" icon="pi pi-info-circle" [outlined]="true" (buttonClick)="showToast('info')" />
+            <ps-button label="Warn" icon="pi pi-exclamation-triangle" [outlined]="true" (buttonClick)="showToast('warn')" />
+            <ps-button label="Error" icon="pi pi-times-circle" [outlined]="true" (buttonClick)="showToast('error')" />
           </div>
         </p-card>
       </div>
@@ -71,8 +71,8 @@ import { ToastModule } from 'primeng/toast';
           no draggable/resizable behavior, and clear footer actions.
         </p>
         <ng-template pTemplate="footer">
-          <p-button label="Close" [text]="true" (click)="dialogVisible = false" />
-          <p-button label="Confirm" icon="pi pi-check" (click)="confirmDialog()" />
+          <ps-button label="Close" [text]="true" (buttonClick)="dialogVisible = false" />
+          <ps-button label="Confirm" icon="pi pi-check" (buttonClick)="confirmDialog()" />
         </ng-template>
       </p-dialog>
     </section>
@@ -183,7 +183,7 @@ export const OverlayAndFeedback: Story = {};
 @Component({
   selector: 'public-dialog-toast-stress-story',
   standalone: true,
-  imports: [ButtonModule, DialogModule, TagModule, ToastModule],
+  imports: [PublicButtonComponent, DialogModule, TagModule, ToastModule],
   template: `
     <p-toast />
     <section class="acceptance-story">
@@ -197,7 +197,7 @@ export const OverlayAndFeedback: Story = {};
         <button type="button" class="story-button" (click)="dialogVisible = true">
           <span>Open long-content dialog</span>
         </button>
-        <p-button label="Error toast" icon="pi pi-times-circle" (click)="showToast('error')" />
+        <ps-button label="Error toast" icon="pi pi-times-circle" (buttonClick)="showToast('error')" />
       </div>
 
       <p-dialog
@@ -220,7 +220,7 @@ export const OverlayAndFeedback: Story = {};
           body so shell navigation and remote content do not clip modal surfaces.
         </p>
         <ng-template pTemplate="footer">
-          <p-button label="Close" [text]="true" (click)="dialogVisible = false" />
+          <ps-button label="Close" [text]="true" (buttonClick)="dialogVisible = false" />
         </ng-template>
       </p-dialog>
     </section>

@@ -12,12 +12,9 @@ to correct once the production repositories are available.
   Figma, and Zeroheight all need clear responsibilities.
 - Proposed: a versioned token pipeline, a governed component registry, and a
   promotion model based on evidence from Storybook and shell validation.
-- Answered by runtime evidence: federated Web Components, light DOM remotes,
-  `html.p-dark` theme context, overlays appended to `body`, and independent
-  remote bootstrap.
 - Needs validation: production token source location, PrimeNG preset mapping,
-  wrapper API shape, token normalization decisions, router ownership details,
-  shared bootstrap details, and release/versioning process.
+  router ownership details, Shadow DOM usage per remote, overlay behavior, and
+  release/versioning process.
 
 ## Start Here
 

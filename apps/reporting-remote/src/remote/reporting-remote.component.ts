@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { AccordionModule } from 'primeng/accordion';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { CardModule } from 'primeng/card';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
@@ -19,7 +19,7 @@ interface ReportRow {
 @Component({
   selector: 'public-reporting-remote',
   standalone: true,
-  imports: [AccordionModule, ButtonModule, CardModule, ProgressBarModule, TableModule, TabsModule, TagModule],
+  imports: [AccordionModule, PublicButtonComponent, CardModule, ProgressBarModule, TableModule, TabsModule, TagModule],
   templateUrl: './reporting-remote.component.html',
   styleUrl: './reporting-remote.component.css',
 })

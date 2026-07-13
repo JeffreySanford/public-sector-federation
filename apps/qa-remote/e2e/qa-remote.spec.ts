@@ -125,11 +125,12 @@ test.describe('QA Remote - Component & Tab Switching', () => {
   });
 
   test('should handle dialog visibility toggle', async ({ page }) => {
-    // Look for buttons that might trigger dialogs
-    const buttons = await page.locator('p-button').all();
+    // Look for registry buttons that might trigger dialogs
+    const registryButtons = page.locator('ps-button');
+    await expect(registryButtons.first()).toBeVisible();
     
     // Should have some buttons available
-    expect(buttons.length).toBeGreaterThan(0);
+    await expect(registryButtons).not.toHaveCount(0);
   });
 
   test('should not show console errors on load', async ({ page }) => {
@@ -151,12 +152,12 @@ test.describe('QA Remote - Component & Tab Switching', () => {
   });
 
   test('should have accessible button labels', async ({ page }) => {
-    // Check that buttons have proper labels
+    // Check that registry buttons render accessible labels
     const qaComponentsTab = page.getByRole('button', { name: /QA Components/i });
-    await expect(qaComponentsTab).toHaveAttribute('label', /QA Components/);
+    await expect(qaComponentsTab).toBeVisible();
     
     const performanceTab = page.getByRole('button', { name: /Performance Tracking/i });
-    await expect(performanceTab).toHaveAttribute('label', /Performance Tracking/);
+    await expect(performanceTab).toBeVisible();
   });
 
   test('should display all required component families', async ({ page }) => {

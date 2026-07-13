@@ -1,7 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
@@ -23,7 +23,7 @@ interface EvidenceRow {
 @Component({
   selector: 'public-problem-area-story',
   standalone: true,
-  imports: [ButtonModule, CardModule, DialogModule, FormsModule, InputTextModule, SelectModule, TableModule, TagModule, ToastModule],
+  imports: [PublicButtonComponent, CardModule, DialogModule, FormsModule, InputTextModule, SelectModule, TableModule, TagModule, ToastModule],
   template: `
     <p-toast />
     <main class="problem-story">
@@ -37,10 +37,10 @@ interface EvidenceRow {
         <p-card [header]="primaryHeading" [subheader]="primarySubheading">
           @if (mode === 'toast') {
             <div class="inline-row">
-              <p-button label="Success" icon="pi pi-check" (click)="showToast('success')" />
-              <p-button label="Info" icon="pi pi-info-circle" [outlined]="true" (click)="showToast('info')" />
-              <p-button label="Warn" icon="pi pi-exclamation-triangle" [outlined]="true" (click)="showToast('warn')" />
-              <p-button label="Error" icon="pi pi-times-circle" [outlined]="true" (click)="showToast('error')" />
+              <ps-button label="Success" icon="pi pi-check" (buttonClick)="showToast('success')" />
+              <ps-button label="Info" icon="pi pi-info-circle" [outlined]="true" (buttonClick)="showToast('info')" />
+              <ps-button label="Warn" icon="pi pi-exclamation-triangle" [outlined]="true" (buttonClick)="showToast('warn')" />
+              <ps-button label="Error" icon="pi pi-times-circle" [outlined]="true" (buttonClick)="showToast('error')" />
             </div>
           } @else if (mode === 'dialog') {
             <button type="button" class="story-button" (click)="dialogVisible = true">
@@ -126,8 +126,8 @@ interface EvidenceRow {
       >
         <p>{{ dialogCopy }}</p>
         <ng-template pTemplate="footer">
-          <p-button label="Close" [text]="true" (click)="dialogVisible = false" />
-          <p-button label="Confirm" icon="pi pi-check" (click)="confirmDialog()" />
+          <ps-button label="Close" [text]="true" (buttonClick)="dialogVisible = false" />
+          <ps-button label="Confirm" icon="pi pi-check" (buttonClick)="confirmDialog()" />
         </ng-template>
       </p-dialog>
     </main>
@@ -265,7 +265,7 @@ const meta: Meta<ProblemAreaStoryComponent> = {
         [badge]="badge"
         [title]="title"
         [summary]="summary"
-        [severity]="severity"
+        [tone]="severity"
         [mode]="mode"
         [primaryHeading]="primaryHeading"
         [primarySubheading]="primarySubheading"

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'public-button-tag-acceptance-story',
   standalone: true,
-  imports: [ButtonModule, TagModule],
+  imports: [PublicButtonComponent, TagModule],
   template: `
     <section class="acceptance-story">
       <header>
@@ -19,10 +19,10 @@ import { TagModule } from 'primeng/tag';
         <article>
           <h2>Action hierarchy</h2>
           <div class="inline-row">
-            <p-button label="Primary action" icon="pi pi-check" />
-            <p-button label="Outlined action" icon="pi pi-download" [outlined]="true" />
-            <p-button label="Text action" icon="pi pi-info-circle" [text]="true" />
-            <p-button label="Disabled action" icon="pi pi-lock" [disabled]="true" />
+            <ps-button label="Primary action" icon="pi pi-check" />
+            <ps-button label="Outlined action" icon="pi pi-download" [outlined]="true" />
+            <ps-button label="Text action" icon="pi pi-info-circle" [text]="true" />
+            <ps-button label="Disabled action" icon="pi pi-lock" [disabled]="true" />
           </div>
         </article>
 
@@ -117,7 +117,7 @@ export const States: Story = {};
 @Component({
   selector: 'public-button-tag-stress-story',
   standalone: true,
-  imports: [ButtonModule, TagModule],
+  imports: [PublicButtonComponent, TagModule],
   template: `
     <section class="acceptance-story">
       <header>
@@ -129,11 +129,11 @@ export const States: Story = {};
       <article>
         <h2>Long action labels</h2>
         <div class="inline-row">
-          <p-button
+          <ps-button
             label="Submit housing assistance eligibility review for North Region queue"
             icon="pi pi-check"
           />
-          <p-button
+          <ps-button
             label="Download quarterly public-sector reporting export with audit metadata"
             icon="pi pi-download"
             [outlined]="true"

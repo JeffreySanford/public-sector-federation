@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { AccordionModule } from 'primeng/accordion';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
@@ -25,7 +25,7 @@ interface PlaygroundRow {
   standalone: true,
   imports: [
     AccordionModule,
-    ButtonModule,
+    PublicButtonComponent,
     CardModule,
     DialogModule,
     FormsModule,
@@ -52,14 +52,14 @@ interface PlaygroundRow {
         <p-card header="Actions and feedback" subheader="Buttons, tags, toast, and dialog">
           <div class="story-stack">
             <div class="inline-row">
-              <p-button label="Primary action" icon="pi pi-check" />
-              <p-button label="Outlined action" icon="pi pi-download" [outlined]="true" />
+              <ps-button label="Primary action" icon="pi pi-check" />
+              <ps-button label="Outlined action" icon="pi pi-download" [outlined]="true" />
               <p-tag value="On track" severity="success" />
               <p-tag value="Watch" severity="warn" />
             </div>
             <div class="inline-row">
-              <p-button label="Show toast" icon="pi pi-bell" severity="secondary" (click)="showToast()" />
-              <p-button label="Open dialog" icon="pi pi-window-maximize" [outlined]="true" (click)="dialogVisible = true" />
+              <ps-button label="Show toast" icon="pi pi-bell" tone="secondary" (buttonClick)="showToast()" />
+              <ps-button label="Open dialog" icon="pi pi-window-maximize" [outlined]="true" (buttonClick)="dialogVisible = true" />
             </div>
           </div>
         </p-card>
@@ -146,7 +146,7 @@ interface PlaygroundRow {
       >
         <p>This dialog validates overlay rendering in the Storybook runtime.</p>
         <ng-template pTemplate="footer">
-          <p-button label="Close" [outlined]="true" (click)="dialogVisible = false" />
+          <ps-button label="Close" [outlined]="true" (buttonClick)="dialogVisible = false" />
         </ng-template>
       </p-dialog>
     </main>

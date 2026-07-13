@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { CardModule } from 'primeng/card';
 import { remotes, RemoteDefinition } from './remote-registry';
 import { RemoteLoaderService } from './remote-loader.service';
@@ -7,7 +7,7 @@ import { RemoteLoaderService } from './remote-loader.service';
 @Component({
   selector: 'ps-shell-root',
   standalone: true,
-  imports: [ButtonModule, CardModule],
+  imports: [PublicButtonComponent, CardModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.css',

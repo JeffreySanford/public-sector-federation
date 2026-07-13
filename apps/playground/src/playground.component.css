@@ -42,7 +42,7 @@ p-select {
   width: 100%;
 }
 
-p-button {
+ps-button {
   display: inline-block;
   margin-top: 1rem;
 }

@@ -68,7 +68,7 @@
     chrome and use the shared PrimeNG z-index settings.
   </p>
   <ng-template pTemplate="footer">
-    <p-button label="Close" [text]="true" (click)="closeDialog()" />
-    <p-button label="Confirm" icon="pi pi-check" (click)="confirmDialog()" />
+    <ps-button label="Close" [text]="true" (buttonClick)="closeDialog()" />
+    <ps-button label="Confirm" icon="pi pi-check" (buttonClick)="confirmDialog()" />
   </ng-template>
 </p-dialog>

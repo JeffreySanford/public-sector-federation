@@ -192,11 +192,11 @@ test.describe('Shell Module Federation', () => {
     expect(response.ok()).toBe(true);
   });
 
-  test('should share PrimeNG across remotes', async ({ page }) => {
+  test('should render registry-wrapped PrimeNG components across remotes', async ({ page }) => {
     await page.goto('/');
 
     const primengLoaded = await page.evaluate(() => {
-      return !!document.querySelector('.p-button, p-button, p-tag');
+      return !!document.querySelector('ps-button .p-button, ps-button, p-tag');
     });
 
     expect(primengLoaded).toBeTruthy();

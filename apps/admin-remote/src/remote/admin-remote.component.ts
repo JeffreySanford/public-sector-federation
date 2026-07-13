@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { MenuModule } from 'primeng/menu';
@@ -15,7 +15,7 @@ import { ToggleSwitchModule } from 'primeng/toggleswitch';
   standalone: true,
   imports: [
     FormsModule,
-    ButtonModule,
+    PublicButtonComponent,
     CardModule,
     DialogModule,
     MenuModule,

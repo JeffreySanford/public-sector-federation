@@ -5,7 +5,7 @@
       <h1>Performance Tracking Dashboard</h1>
       <p>Regression alerts, suite health, and trend variance for federated test runs.</p>
     </div>
-    <button pButton type="button" label="Refresh" icon="pi pi-refresh" (click)="refreshData()" class="refresh-button"></button>
+    <ps-button label="Refresh" icon="pi pi-refresh" styleClass="refresh-button" (buttonClick)="refreshData()" />
   </div>
 
   <section class="infographic-grid" aria-label="Performance scorecard">

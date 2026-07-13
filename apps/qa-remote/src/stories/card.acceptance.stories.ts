@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'public-card-acceptance-story',
   standalone: true,
-  imports: [ButtonModule, CardModule, TagModule],
+  imports: [PublicButtonComponent, CardModule, TagModule],
   template: `
     <section class="acceptance-story">
       <header>
@@ -28,7 +28,7 @@ import { TagModule } from 'primeng/tag';
             This card intentionally includes longer body copy to check spacing, line-height,
             text wrapping, and content projection under the PrimeNG styled preset.
           </p>
-          <p-button label="Review details" icon="pi pi-arrow-right" [outlined]="true" />
+          <ps-button label="Review details" icon="pi pi-arrow-right" [outlined]="true" />
         </p-card>
 
         <p-card header="Empty state card" subheader="Supporting route content">

@@ -1,17 +1,17 @@
 import { Component, input } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from './public-button.component';
 
 @Component({
   selector: 'public-empty-state',
   standalone: true,
-  imports: [ButtonModule],
+  imports: [PublicButtonComponent],
   template: `
     <section class="empty-state">
       <i [class]="icon()" aria-hidden="true"></i>
       <h3>{{ title() }}</h3>
       <p>{{ message() }}</p>
       @if (actionLabel()) {
-        <p-button [label]="actionLabel()" [outlined]="true" />
+        <ps-button [label]="actionLabel()" [outlined]="true" />
       }
     </section>
   `,

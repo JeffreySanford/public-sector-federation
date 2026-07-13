@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
@@ -14,7 +14,7 @@ import { PublicSectorThemeService } from '@public-sector/primeng-preset';
   standalone: true,
   imports: [
     FormsModule,
-    ButtonModule,
+    PublicButtonComponent,
     CardModule,
     DialogModule,
     InputTextModule,

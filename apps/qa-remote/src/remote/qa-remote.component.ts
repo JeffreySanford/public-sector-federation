@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
@@ -48,7 +48,7 @@ interface AgileBoardRow {
 @Component({
   selector: 'public-qa-remote',
   standalone: true,
-  imports: [CommonModule, ButtonModule, CardModule, DialogModule, TableModule, TagModule, ToastModule, PerformanceDashboardComponent],
+  imports: [CommonModule, PublicButtonComponent, CardModule, DialogModule, TableModule, TagModule, ToastModule, PerformanceDashboardComponent],
   templateUrl: './qa-remote.component.html',
   styleUrl: './qa-remote.component.css',
 })

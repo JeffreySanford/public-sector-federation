@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 import { PublicSectorThemeService, PublicSectorThemeVariant } from '@public-sector/primeng-preset';
@@ -8,7 +8,7 @@ import { PublicSectorThemeService, PublicSectorThemeVariant } from '@public-sect
 @Component({
   selector: 'public-sector-shell',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, ButtonModule, CardModule, TagModule],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, PublicButtonComponent, CardModule, TagModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

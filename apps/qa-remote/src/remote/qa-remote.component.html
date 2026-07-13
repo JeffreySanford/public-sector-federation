@@ -1,22 +1,16 @@
 <p-toast />
 
 <div class="qa-view-tabs">
-  <button
-    pButton
-    type="button"
+  <ps-button
     label="QA Components"
-    [class.active]="activeTab() === 'qa'"
-    (click)="setActiveTab('qa')"
-    class="view-tab"
-  ></button>
-  <button
-    pButton
-    type="button"
+    [styleClass]="activeTab() === 'qa' ? 'view-tab active' : 'view-tab'"
+    (buttonClick)="setActiveTab('qa')"
+  />
+  <ps-button
     label="Performance Tracking"
-    [class.active]="activeTab() === 'performance'"
-    (click)="setActiveTab('performance')"
-    class="view-tab"
-  ></button>
+    [styleClass]="activeTab() === 'performance' ? 'view-tab active' : 'view-tab'"
+    (buttonClick)="setActiveTab('performance')"
+  />
 </div>
 
 <ng-container *ngIf="activeTab() === 'qa'">
@@ -66,13 +60,13 @@
           <p>Filled, outlined, text, disabled, and severity labels with icon spacing.</p>
         </div>
         <div class="acceptance-inline">
-          <p-button label="Primary action" icon="pi pi-check" />
-          <p-button label="Outlined action" icon="pi pi-download" [outlined]="true" />
-          <p-button label="Text action" icon="pi pi-info-circle" [text]="true" />
-          <p-button label="Disabled action" icon="pi pi-lock" [disabled]="true" />
+          <ps-button label="Primary action" icon="pi pi-check" />
+          <ps-button label="Outlined action" icon="pi pi-download" [outlined]="true" />
+          <ps-button label="Text action" icon="pi pi-info-circle" [text]="true" />
+          <ps-button label="Disabled action" icon="pi pi-lock" [disabled]="true" />
         </div>
         <div class="acceptance-inline">
-          <p-button
+          <ps-button
             label="Submit housing assistance eligibility review for North Region queue"
             icon="pi pi-check"
             [outlined]="true"
@@ -123,17 +117,17 @@
         <p>Uses the same proven rows-per-page, filtering, sorting, loading, and page-report behavior as Reporting.</p>
       </div>
       <div class="acceptance-inline acceptance-inline--toolbar">
-        <p-button
+        <ps-button
           [label]="qaTableLoading ? 'Hide loading state' : 'Show loading state'"
           icon="pi pi-spinner"
           [outlined]="true"
-          (click)="toggleQaTableLoading()"
+          (buttonClick)="toggleQaTableLoading()"
         />
-        <p-button
+        <ps-button
           [label]="qaTableShowEmpty ? 'Restore table rows' : 'Show empty dataset'"
           icon="pi pi-inbox"
           [outlined]="true"
-          (click)="toggleQaTableEmpty()"
+          (buttonClick)="toggleQaTableEmpty()"
         />
       </div>
       <p-table
@@ -243,9 +237,9 @@
             <i class="pi pi-window-maximize" aria-hidden="true"></i>
             <span>Open acceptance dialog</span>
           </button>
-          <p-button label="Success toast" icon="pi pi-check" (click)="showAcceptanceToast('success')" />
-          <p-button label="Warn toast" icon="pi pi-exclamation-triangle" [outlined]="true" (click)="showAcceptanceToast('warn')" />
-          <p-button label="Error toast" icon="pi pi-times-circle" [outlined]="true" (click)="showAcceptanceToast('error')" />
+          <ps-button label="Success toast" icon="pi pi-check" (buttonClick)="showAcceptanceToast('success')" />
+          <ps-button label="Warn toast" icon="pi pi-exclamation-triangle" [outlined]="true" (buttonClick)="showAcceptanceToast('warn')" />
+          <ps-button label="Error toast" icon="pi pi-times-circle" [outlined]="true" (buttonClick)="showAcceptanceToast('error')" />
         </div>
       </article>
 
@@ -760,8 +754,8 @@
       the federated QA route.
     </p>
     <ng-template pTemplate="footer">
-      <p-button label="Close" [text]="true" (click)="acceptanceDialogVisible = false" />
-      <p-button label="Confirm" icon="pi pi-check" (click)="confirmAcceptanceDialog()" />
+      <ps-button label="Close" [text]="true" (buttonClick)="acceptanceDialogVisible = false" />
+      <ps-button label="Confirm" icon="pi pi-check" (buttonClick)="confirmAcceptanceDialog()" />
     </ng-template>
   </p-dialog>
 
@@ -775,7 +769,7 @@
     </div>
     <div class="primeng-smoke__actions">
       <p-tag value="PrimeNG Tag" severity="info" />
-      <p-button label="PrimeNG Button" icon="pi pi-check" [outlined]="true" />
+      <ps-button label="PrimeNG Button" icon="pi pi-check" [outlined]="true" />
       <button type="button" class="qa-button qa-button--secondary" (click)="dialogVisible = true">
         <i class="pi pi-window-maximize" aria-hidden="true"></i>
         <span>Open PrimeNG dialog</span>

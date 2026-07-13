@@ -5,10 +5,10 @@
       <h1>Public Sector PrimeNG preset</h1>
       <p>Standalone visual QA for tokens, preset mapping, and dark mode.</p>
     </div>
-    <p-button
+    <ps-button
       [label]="theme.isDark() ? 'Light mode' : 'Dark mode'"
       [outlined]="true"
-      (onClick)="theme.toggleDarkMode()"
+      (buttonClick)="theme.toggleDarkMode()"
     />
   </header>
 
@@ -21,7 +21,7 @@
       <label for="status">Status</label>
       <p-select inputId="status" [options]="statuses" [(ngModel)]="status" optionLabel="label" optionValue="value" />
 
-      <p-button label="Open dialog" icon="pi pi-window-maximize" (onClick)="visible = true" />
+      <ps-button label="Open dialog" icon="pi pi-window-maximize" (buttonClick)="visible = true" />
     </p-card>
 
     <p-card>

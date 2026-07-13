@@ -3,12 +3,10 @@
     <p class="eyebrow">Public Sector Digital Services</p>
     <h1>Federated Services Portal</h1>
   </div>
-  <button
-    pButton
-    type="button"
+  <ps-button
     [label]="isDark() ? 'Light mode' : 'Dark mode'"
-    (click)="toggleTheme()"
-  ></button>
+    (buttonClick)="toggleTheme()"
+  />
 </header>
 
 <main class="portal-shell">
@@ -30,7 +28,7 @@
       <p>
         This shell uses the same PrimeNG provider and token preset as every remote.
       </p>
-      <button pButton type="button" label="Shell PrimeNG Button"></button>
+      <ps-button label="Shell registry button" />
     </p-card>
 
     <section class="remote-host" aria-live="polite">

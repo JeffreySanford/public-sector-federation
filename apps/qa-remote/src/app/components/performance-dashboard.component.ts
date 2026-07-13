@@ -6,7 +6,7 @@ import { TagModule } from 'primeng/tag';
 import { ChartModule } from 'primeng/chart';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { SkeletonModule } from 'primeng/skeleton';
-import { ButtonModule } from 'primeng/button';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { PerformanceDataService, PerformanceSummaryDTO, PerformanceTrendDTO, RegressionAlertDTO } from '../services/performance-data.service';
@@ -26,7 +26,7 @@ interface PerformanceKpi {
 @Component({
   selector: 'public-performance-dashboard',
   standalone: true,
-  imports: [CommonModule, CardModule, TableModule, TagModule, ChartModule, ProgressBarModule, SkeletonModule, ButtonModule, ToastModule],
+  imports: [CommonModule, CardModule, TableModule, TagModule, ChartModule, ProgressBarModule, SkeletonModule, PublicButtonComponent, ToastModule],
   templateUrl: './performance-dashboard.component.html',
   styleUrl: './performance-dashboard.component.css',
 })

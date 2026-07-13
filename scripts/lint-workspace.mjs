@@ -53,7 +53,8 @@ if (!storybookMain.includes("'@storybook/addon-docs'") || !storybookMain.include
 }
 
 run('node', ['scripts/guard-scss.mjs']);
+run('node', ['scripts/check-primeng-boundaries.mjs']);
 run('pnpm', ['db:validate']);
 run('pnpm', ['markdownlint-cli2', 'docs/**/*.md', '!docs/reports/**/*.md']);
 
-console.log(`Workspace lint checks passed: ${jsonFiles.length} JSON files, ${storyCount} Storybook stories, Prisma schema, SCSS guard, and Markdown linting.`);
+console.log(`Workspace lint checks passed: ${jsonFiles.length} JSON files, ${storyCount} Storybook stories, PrimeNG boundaries, Prisma schema, SCSS guard, and Markdown linting.`);
