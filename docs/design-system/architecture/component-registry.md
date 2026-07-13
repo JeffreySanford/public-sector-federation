@@ -3,16 +3,16 @@
 The component registry should provide supported Angular UI APIs and reusable
 patterns built on top of PrimeNG and the shared token contract.
 
-The registry should not become a wrapper around every PrimeNG component by
-default. It should exist where the team needs consistency, validation,
-Accessibility, behavior, or stable APIs across applications.
+Current guidance is that PrimeNG is always wrapped so the underlying component
+provider can be swapped later. Application teams should consume the governed
+registry API instead of importing PrimeNG directly.
 
 ## Usage Model
 
 | Choice | Use when |
 | --- | --- |
-| PrimeNG directly | Tokens and approved defaults are enough. |
-| Thin registry wrapper | Shared defaults, Accessibility, telemetry, consistency, or control. |
+| Strict registry wrapper | Core components need stable design-system APIs and normalized events. |
+| Thin normalized wrapper | Advanced components need broad PrimeNG capability behind a stable import path. |
 | Composite component or pattern | Multiple pieces form a reusable business or UX workflow. |
 
 ## Registry Expectations
@@ -102,11 +102,18 @@ documentation, or a registry service. The important point is that the registry
 records the contract and evidence, while token values remain owned by
 `packages/tokens`.
 
-## When Not To Add A Wrapper
+## Wrapper Boundary
 
-Avoid a wrapper when it only renames a PrimeNG component without adding a shared
-contract. Direct PrimeNG usage is acceptable when the component already behaves
-correctly with the token preset and the team does not need a governed API.
+Avoid wrappers that only rename a PrimeNG component without defining a useful
+public contract. The wrapper can still be thin, but it should make the provider
+boundary explicit and keep PrimeNG imports out of application code.
+
+The remaining design decision is wrapper API shape:
+
+- strict design-system APIs for all public inputs, outputs, and event payloads;
+- thin normalized pass-through APIs for advanced or high-surface components;
+- a tiered model where core components are strict and advanced utilities are
+  thinner.
 
 ## Questions To Validate
 
@@ -114,6 +121,7 @@ correctly with the token preset and the team does not need a governed API.
 - Which PrimeNG version is pinned?
 - Which components already exist?
 - Are wrappers thin, broad, or mixed?
+- Which wrappers form the first proof set?
 - Is Storybook already available?
 - How are registry releases published?
 - Does the shell consume registry components or only tokens?

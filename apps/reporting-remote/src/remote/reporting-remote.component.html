@@ -1,161 +1,99 @@
 <section class="remote">
   <div class="remote__header">
     <div>
-      <p-tag value="Remote: Reporting" severity="info" />
+      <ps-tag value="Remote: Reporting" tone="info" />
       <h2>Reporting and analytics</h2>
       <p>
         PrimeNG data tables and cards are loaded only from this remote to prove
         token distribution across the web component boundary.
       </p>
     </div>
-    <p-button label="Export" icon="pi pi-download" [outlined]="true" />
+    <ps-button label="Export" icon="pi pi-download" [outlined]="true" />
   </div>
 
   <div class="metric-grid">
-    <p-card>
-      <ng-template pTemplate="title">Open cases</ng-template>
+    <ps-card header="Open cases">
       <strong>683</strong>
       <span>Across active public programs</span>
-    </p-card>
-    <p-card>
-      <ng-template pTemplate="title">SLA compliance</ng-template>
+    </ps-card>
+    <ps-card header="SLA compliance">
       <strong>94%</strong>
       <span>Measured over trailing 30 days</span>
-    </p-card>
-    <p-card>
-      <ng-template pTemplate="title">Escalations</ng-template>
+    </ps-card>
+    <ps-card header="Escalations">
       <strong>18</strong>
       <span>Requires administrative review</span>
-    </p-card>
+    </ps-card>
   </div>
 
-  <p-card>
-    <ng-template pTemplate="title">Operational indicators</ng-template>
+  <ps-card header="Operational indicators">
     <div class="progress-list">
       @for (metric of metrics; track metric.label) {
         <label>
           <span>{{ metric.label }}</span>
           <strong>{{ metric.value }}%</strong>
         </label>
-        <p-progressbar [value]="metric.value" [attr.aria-label]="metric.label + ' progress'" />
+        <ps-progress [value]="metric.value" [ariaLabel]="metric.label + ' progress'" />
       }
     </div>
-  </p-card>
+  </ps-card>
 
-  <p-card>
-    <ng-template pTemplate="title">Program performance</ng-template>
-    <p-table
-      #programTable
-      [value]="rows"
-      styleClass="p-datatable-gridlines report-table"
-      [paginator]="true"
-      [rows]="5"
-      [rowsPerPageOptions]="[5, 10, 25]"
-      paginatorDropdownAppendTo="body"
-      [showCurrentPageReport]="true"
-      currentPageReportTemplate="Showing {first}-{last} of {totalRecords}"
-      [globalFilterFields]="['program', 'status', 'owner', 'region']"
-      sortField="cases"
-      [sortOrder]="-1"
-    >
-      <ng-template pTemplate="caption">
-        <div class="table-toolbar">
-          <div>
-            <strong>Program performance</strong>
-            <span>Sort, filter, and page through active public programs.</span>
-          </div>
-          <input
-            class="table-search"
-            type="search"
-            placeholder="Search programs"
-            aria-label="Search program performance"
-            (input)="programTable.filterGlobal($any($event.target).value, 'contains')"
-          />
-        </div>
-      </ng-template>
-      <ng-template pTemplate="header">
-        <tr>
-          <th pSortableColumn="program">
-            Program
-            <p-sortIcon field="program" />
-          </th>
-          <th pSortableColumn="cases">
-            Cases
-            <p-sortIcon field="cases" />
-          </th>
-          <th pSortableColumn="status">
-            Status
-            <p-sortIcon field="status" />
-          </th>
-          <th pSortableColumn="region">
-            Region
-            <p-sortIcon field="region" />
-          </th>
-          <th pSortableColumn="sla">
-            SLA
-            <p-sortIcon field="sla" />
-          </th>
-          <th pSortableColumn="owner">
-            Owner
-            <p-sortIcon field="owner" />
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <p-columnFilter field="program" type="text" matchMode="contains" placeholder="Filter program" [showMenu]="false" />
-          </th>
-          <th>
-            <p-columnFilter field="cases" type="numeric" matchMode="gte" placeholder="Min cases" [showMenu]="false" />
-          </th>
-          <th>
-            <p-columnFilter field="status" type="text" matchMode="contains" placeholder="Filter status" [showMenu]="false" />
-          </th>
-          <th>
-            <p-columnFilter field="region" type="text" matchMode="contains" placeholder="Filter region" [showMenu]="false" />
-          </th>
-          <th>
-            <p-columnFilter field="sla" type="numeric" matchMode="gte" placeholder="Min SLA" [showMenu]="false" />
-          </th>
-          <th>
-            <p-columnFilter field="owner" type="text" matchMode="contains" placeholder="Filter owner" [showMenu]="false" />
-          </th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-row>
-        <tr>
-          <td>{{ row.program }}</td>
-          <td>{{ row.cases }}</td>
-          <td><p-tag [value]="row.status" [severity]="severity(row.status)" /></td>
-          <td>{{ row.region }}</td>
-          <td>
-            <span class="sla-value">{{ row.sla }}%</span>
-          </td>
-          <td>{{ row.owner }}</td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="emptymessage">
-        <tr>
-          <td colspan="6">No programs match the current filters.</td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </p-card>
+  <ps-card header="Program performance">
+    <div class="table-toolbar">
+      <div>
+        <strong>Program performance</strong>
+        <span>Filter active public programs.</span>
+      </div>
+      <input
+        class="table-search"
+        type="search"
+        placeholder="Search programs"
+        aria-label="Search program performance"
+        [(ngModel)]="query"
+      />
+    </div>
+    <div class="table-scroll">
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>Program</th>
+            <th>Cases</th>
+            <th>Status</th>
+            <th>Region</th>
+            <th>SLA</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of filteredRows(); track row.program) {
+            <tr>
+              <td>{{ row.program }}</td>
+              <td>{{ row.cases }}</td>
+              <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
+              <td>{{ row.region }}</td>
+              <td>
+                <span class="sla-value">{{ row.sla }}%</span>
+              </td>
+              <td>{{ row.owner }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6">No programs match the current filters.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </ps-card>
 
-  <p-card>
-    <ng-template pTemplate="title">Report notes</ng-template>
-    <p-accordion value="0" styleClass="report-notes">
-      <p-accordion-panel value="0">
-        <p-accordion-header>Data quality</p-accordion-header>
-        <p-accordion-content>
-          <p>Document accuracy is calculated from reviewed records and sampled intake forms.</p>
-        </p-accordion-content>
-      </p-accordion-panel>
-      <p-accordion-panel value="1">
-        <p-accordion-header>Service risk</p-accordion-header>
-        <p-accordion-content>
-          <p>Delayed programs should be reviewed by regional administrators before the next reporting cycle.</p>
-        </p-accordion-content>
-      </p-accordion-panel>
-    </p-accordion>
-  </p-card>
+  <ps-card header="Report notes">
+    <div class="report-notes">
+      @for (note of notes; track note.title) {
+        <details>
+          <summary>{{ note.title }}</summary>
+          <p>{{ note.body }}</p>
+        </details>
+      }
+    </div>
+  </ps-card>
 </section>

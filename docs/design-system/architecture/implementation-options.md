@@ -1,7 +1,8 @@
 # Implementation Options
 
-The shell and subapplication integration model should be chosen after comparing
-the runtime, styling, routing, and deployment tradeoffs against the real code.
+The shell and subapplication integration model is assumed for this work:
+federated Web Components. This document keeps the comparison context, but the
+implementation proof should focus on the required custom-element runtime.
 
 ## Options To Compare
 
@@ -30,8 +31,8 @@ the runtime, styling, routing, and deployment tradeoffs against the real code.
 
 ## Current Recommendation
 
-Use federated Web Components as the recommended default for the shell and
-subapplication boundary. They provide a stable custom-element contract, preserve
+Use federated Web Components as the required shell and subapplication boundary
+for this work. They provide a stable custom-element contract, preserve
 independent subapplication bootstrapping, and keep the shell from depending on
 subapplication Angular internals.
 
@@ -43,10 +44,9 @@ Keep the design-system contract portable across viable options:
 - Shell validation should prove integration behavior.
 - Zeroheight should document approved usage and link to evidence.
 
-Federated Angular routes or ES module remotes can still be appropriate when the
-shell intentionally owns routing, providers, or a tighter Angular integration.
-Those options should be treated as stronger coupling decisions, not as the
-default shell boundary.
+Federated Angular routes or ES module remotes can still be appropriate in other
+contexts when the shell intentionally owns routing, providers, or a tighter
+Angular integration. Those options are outside the current proof.
 
 ## Why Web Components Fit Best Here
 
@@ -64,12 +64,13 @@ This works well for a unified platform shell because the shell owns navigation,
 authorization, app chrome, and remote loading, while subapplications own their
 domain workflows and release timing.
 
-The decision does not remove the need for explicit contracts. Web Components
-still require clear rules for:
+The decision does not remove the need for explicit contracts. Runtime evidence
+now answers several of them: remotes mount in light DOM, `.p-dark` is applied on
+`html`, overlays append to `body`, and each remote bootstraps independently.
+The remaining rules to define are:
 
-- Shadow DOM versus light DOM
 - Inputs, attributes, events, and context passing
 - Remote lifecycle and cleanup
 - Route ownership between shell and subapplication
 - PrimeNG provider registration in every independently bootstrapped app
-- Token CSS inheritance and overlay behavior
+- Token CSS and overlay integration tests that prove the observed runtime

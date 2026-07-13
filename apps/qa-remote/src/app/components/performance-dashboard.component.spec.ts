@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MessageService } from 'primeng/api';
 import { of } from 'rxjs';
 import { PerformanceDashboardComponent } from './performance-dashboard.component';
 import { PerformanceDataService, PerformanceSummaryDTO, PerformanceTrendDTO } from '../services/performance-data.service';
@@ -45,7 +44,6 @@ describe('PerformanceDashboardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PerformanceDashboardComponent],
       providers: [
-        MessageService,
         {
           provide: PerformanceDataService,
           useValue: performanceService,
@@ -57,7 +55,7 @@ describe('PerformanceDashboardComponent', () => {
     component = fixture.componentInstance;
   });
 
-  it('maps status to PrimeNG severity and display labels', () => {
+  it('maps status to shared tag tone and display labels', () => {
     expect(component.getStatusSeverity('excellent')).toBe('success');
     expect(component.getStatusSeverity('good')).toBe('info');
     expect(component.getStatusSeverity('warning')).toBe('warning');

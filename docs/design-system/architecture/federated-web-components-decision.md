@@ -1,11 +1,11 @@
 # Federated Web Components Decision
 
-Federated Web Components are the recommended default boundary between the
-platform shell and independently owned subapplications.
+Federated Web Components are the required boundary between the platform shell
+and independently owned subapplications for this work.
 
-This is an architectural default, not a rule that forbids other integration
-models. Federated Angular routes, ES module remotes, and `mount()` contracts can
-still be appropriate when a product intentionally wants tighter integration.
+Other integration models can exist elsewhere, but this recommendation assumes
+the required federated Web Component runtime and focuses on the token and
+component-registry contracts inside it.
 
 ![Federated Web Components decision model](../diagrams/federated-web-components-decision.png)
 
@@ -61,10 +61,10 @@ contract, and own their domain workflows.
 
 | Risk | Required contract |
 | --- | --- |
-| Shadow DOM ambiguity | Confirm whether each custom element uses Shadow DOM or light DOM. |
-| Styling inheritance gaps | Define where token CSS variables are attached and inherited. |
+| DOM contract | Current evidence shows light DOM; confirm in source and tests. |
+| Styling inheritance gaps | Attach token CSS variables at `:root` and theme on `html.p-dark`. |
 | PrimeNG boundary issues | Register the shared PrimeNG provider in every bootstrapped app. |
-| Overlay behavior | Validate where dialogs, menus, popovers, and tooltips render. |
+| Overlay behavior | Current evidence shows overlays append to `body`; validate inherited tokens. |
 | Context passing | Define attributes, properties, events, and shared context explicitly. |
 | Routing ambiguity | Decide what the shell owns versus what the subapplication owns. |
 | Lifecycle cleanup | Define mount, reconnect, disconnect, and cleanup expectations. |
@@ -103,9 +103,9 @@ Before treating the pattern as production-ready, prove:
 
 - The shell can load every remote entry from manifest configuration.
 - Each remote registers the expected custom element.
-- Tokens resolve in the shell and mounted subapplications.
+- Tokens resolve in the shell and mounted light DOM subapplications.
 - PrimeNG components render with the shared provider and token preset.
-- PrimeNG overlays inherit the expected variables.
+- PrimeNG overlays appended to `body` inherit the expected variables.
 - Shell and remote routing responsibilities are documented.
 - Custom element lifecycle cleanup is tested.
 - Keyboard navigation and accessibility checks pass.
@@ -114,6 +114,6 @@ Before treating the pattern as production-ready, prove:
 
 ## Recommendation
 
-Proceed with federated Web Components as the default integration model. Keep the
-design-system contract portable, but treat federated Angular routes and ES module
-remotes as intentional tighter-coupling choices that require a specific reason.
+Proceed with federated Web Components as the required integration model for this
+work. Keep the design-system contract portable, but focus implementation proof
+on the current light DOM custom-element runtime.

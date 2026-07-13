@@ -19,9 +19,9 @@ shell-provided runtime context when mounted. That keeps the shell from becoming
 the design-system owner while still giving remotes a reliable contract.
 
 The component registry should consume the token contract and PrimeNG preset.
-Registry components should wrap PrimeNG only when they add shared behavior,
-accessibility, API consistency, or a reusable pattern. If the PrimeNG component
-already works with the approved preset, direct PrimeNG usage is acceptable.
+Registry components should wrap PrimeNG because the component provider may be
+swapped later. The remaining decision is how strict the wrapper API should be:
+strict design-system API, thin normalized pass-through, or a tiered model.
 
 ## Runtime Contract
 
@@ -42,19 +42,17 @@ smoke testing.
 
 ## Validation Priorities
 
-The main implementation risk is not federation itself. The risk is whether the
-tokens actually resolve across the DOM boundaries used by the current Web
-Components.
+Runtime evidence indicates remotes are federated Web Components rendered in
+light DOM. The active theme class is applied on `html`, and root CSS variables
+cascade naturally into mounted remote content.
 
-If remotes render in light DOM, global CSS variables and PrimeNG styles should
-work naturally. If any remote uses Shadow DOM, CSS custom properties can still
-inherit through the host, but selector-based styles and PrimeNG internals need
-explicit validation.
+Each remote bootstraps independently, so each remote needs the approved PrimeNG
+provider and preset setup unless shared bootstrap code centralizes that setup.
 
-PrimeNG overlays need separate validation because dialogs, dropdowns, menus, and
-tooltips may render under `body` or another overlay container instead of inside
-the remote host. Those overlays must receive the same token context or they can
-visually drift from the shell and remote.
+PrimeNG overlays append to `body` in the observed runtime. Because token context
+is rooted at `:root` and the theme class is on `html`, overlays should inherit
+the same token and theme context. This should still be covered by integration
+tests.
 
 Zeroheight should document the token contract and evidence, but it should not
 own runtime styling or subapplication configuration. `remoteEntry` remains
@@ -70,7 +68,7 @@ links, but it should not be the runtime source of truth.
 ## Immediate Checks
 
 - Confirm where token CSS is loaded today.
-- Confirm whether each remote uses light DOM or Shadow DOM.
-- Confirm how PrimeNG providers are registered per remote.
-- Confirm where overlays are appended.
+- Confirm the observed light DOM runtime in source and tests.
+- Confirm how PrimeNG providers are registered per remote or shared bootstrap.
+- Confirm overlays append to `body` and inherit root token context.
 - Confirm each remote renders correctly both inside and outside the shell.

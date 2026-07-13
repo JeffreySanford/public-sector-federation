@@ -55,10 +55,6 @@
   font-weight: 700;
 }
 
-:host ::ng-deep .report-table {
-  margin-top: 0.25rem;
-}
-
 .table-toolbar {
   display: flex;
   align-items: center;
@@ -93,40 +89,36 @@
   outline: 0;
 }
 
-:host ::ng-deep .report-table .p-datatable-tbody > tr > td:first-child {
+.table-scroll {
+  overflow-x: auto;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.25rem;
+}
+
+.report-table th,
+.report-table td {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--p-content-border-color);
+  text-align: left;
+  vertical-align: top;
+}
+
+.report-table tbody > tr > td:first-child {
   font-weight: 800;
 }
 
-:host ::ng-deep .report-table .p-datatable-tbody > tr > td:nth-child(2) {
+.report-table tbody > tr > td:nth-child(2) {
   color: var(--p-text-muted-color);
   font-variant-numeric: tabular-nums;
   font-weight: 800;
 }
 
-:host ::ng-deep .report-table .p-datatable-thead .p-column-filter {
-  width: 100%;
-}
-
-:host ::ng-deep .report-table .p-datatable-thead input {
-  width: 100%;
-  min-height: 2.35rem;
-  padding: 0.55rem 0.7rem;
-  border: 1px solid var(--p-content-border-color);
-  border-radius: var(--p-border-radius-md);
-  background: var(--p-content-background);
-  color: var(--p-text-color);
-  font: inherit;
-}
-
-:host ::ng-deep .report-table .p-datatable-thead input:focus {
-  border-color: var(--p-primary-color);
-  box-shadow: var(--p-focus-ring-shadow);
-  outline: 0;
-}
-
-:host ::ng-deep .report-table .p-tag {
+.report-table ps-tag {
   min-width: 5.5rem;
-  justify-content: center;
 }
 
 .sla-value {
@@ -134,39 +126,29 @@
   font-weight: 800;
 }
 
-:host ::ng-deep .report-notes {
+.report-notes {
   display: grid;
   gap: 0.75rem;
 }
 
-:host ::ng-deep .report-notes .p-accordionpanel {
+.report-notes details {
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--p-content-border-color) 72%, transparent);
   border-radius: 0.85rem;
   background: color-mix(in srgb, var(--p-content-background) 94%, var(--p-primary-color));
 }
 
-:host ::ng-deep .report-notes .p-accordionheader {
+.report-notes summary {
   min-height: auto;
   padding: 0.85rem 1rem;
-  border: 0;
-  background: transparent;
   color: var(--p-text-color);
+  cursor: pointer;
   font-weight: 700;
 }
 
-:host ::ng-deep .report-notes .p-accordioncontent,
-:host ::ng-deep .report-notes .p-accordioncontent-content {
-  border: 0;
-  background: transparent;
-}
-
-:host ::ng-deep .report-notes .p-accordioncontent-content {
-  padding: 0 1rem 1rem;
-}
-
-:host ::ng-deep .report-notes .p-accordioncontent-content p {
+.report-notes p {
   margin: 0;
+  padding: 0 1rem 1rem;
   color: var(--p-text-muted-color);
 }
 

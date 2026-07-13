@@ -1,14 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardModule } from 'primeng/card';
-import { TableModule } from 'primeng/table';
-import { TagModule } from 'primeng/tag';
-import { ChartModule } from 'primeng/chart';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { SkeletonModule } from 'primeng/skeleton';
-import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import {
+  PublicButtonComponent,
+  PublicCardComponent,
+  PublicSkeletonComponent,
+  PublicTagComponent,
+  PublicToastComponent,
+  PublicToastService,
+} from '@public-sector/ui-patterns';
 import { PerformanceDataService, PerformanceSummaryDTO, PerformanceTrendDTO, RegressionAlertDTO } from '../services/performance-data.service';
 
 interface StatusColor {
@@ -26,13 +25,13 @@ interface PerformanceKpi {
 @Component({
   selector: 'public-performance-dashboard',
   standalone: true,
-  imports: [CommonModule, CardModule, TableModule, TagModule, ChartModule, ProgressBarModule, SkeletonModule, ButtonModule, ToastModule],
+  imports: [CommonModule, PublicButtonComponent, PublicCardComponent, PublicSkeletonComponent, PublicTagComponent, PublicToastComponent],
   templateUrl: './performance-dashboard.component.html',
   styleUrl: './performance-dashboard.component.css',
 })
 export class PerformanceDashboardComponent implements OnInit {
   private readonly performanceService = inject(PerformanceDataService);
-  private readonly messageService = inject(MessageService);
+  private readonly messageService = inject(PublicToastService);
 
   // State
   summaryLoading = true;
@@ -131,7 +130,7 @@ export class PerformanceDashboardComponent implements OnInit {
       error: (error) => {
         console.error('Failed to load performance summary:', error);
         this.messageService.add({
-          severity: 'error',
+          severity: 'danger',
           summary: 'Failed to load performance data',
           detail: error.message,
         });

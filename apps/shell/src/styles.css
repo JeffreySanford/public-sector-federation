@@ -19,9 +19,3 @@
     font-family: var(--ps-font-family, "Inter", "Segoe UI", Arial, sans-serif);
   }
 }
-
-@layer app {
-  .p-dark body {
-    background: var(--ps-surface-background);
-  }
-}

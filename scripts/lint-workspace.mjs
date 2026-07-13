@@ -11,10 +11,14 @@ const jsonFiles = [
   'apps/agile-api/tsconfig.app.json',
   'apps/agile-api/tsconfig.spec.json',
   'apps/agile-api/prisma/seed-data/agile-workflow.seed.json',
+  'apps/admin-remote/tsconfig.json',
   'apps/playground/tsconfig.json',
   'apps/qa-remote/project.json',
+  'apps/qa-remote/tsconfig.json',
   'apps/qa-remote/tsconfig.app.json',
   'apps/qa-remote/tsconfig.storybook.json',
+  'apps/reporting-remote/tsconfig.json',
+  'apps/services-remote/tsconfig.json',
   'apps/shell/tsconfig.json',
   'packages/tokens/package.json',
   'packages/tokens/project.json',
@@ -53,7 +57,8 @@ if (!storybookMain.includes("'@storybook/addon-docs'") || !storybookMain.include
 }
 
 run('node', ['scripts/guard-scss.mjs']);
+run('node', ['scripts/check-primeng-boundaries.mjs']);
 run('pnpm', ['db:validate']);
 run('pnpm', ['markdownlint-cli2', 'docs/**/*.md', '!docs/reports/**/*.md']);
 
-console.log(`Workspace lint checks passed: ${jsonFiles.length} JSON files, ${storyCount} Storybook stories, Prisma schema, SCSS guard, and Markdown linting.`);
+console.log(`Workspace lint checks passed: ${jsonFiles.length} JSON files, ${storyCount} Storybook stories, PrimeNG boundaries, Prisma schema, SCSS guard, and Markdown linting.`);

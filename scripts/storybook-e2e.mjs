@@ -58,18 +58,18 @@ try {
       timeout: 60000,
     });
     if (storyId.includes('problem-areas')) {
-      await page.getByText('Known problem areas').waitFor({ timeout: 60000 });
+      await page.getByText('Problem area overview').waitFor({ timeout: 60000 });
     }
     if (storyId.includes('primeng-playground')) {
-      await page.getByText('PrimeNG federation playground').waitFor({ timeout: 60000 });
+      await page.getByText('Shared wrapper playground').waitFor({ timeout: 60000 });
     }
 
     const bodyText = await page.locator('body').innerText();
-    if (storyId.includes('problem-areas') && !bodyText.includes('Known problem areas')) {
+    if (storyId.includes('problem-areas') && !bodyText.includes('Problem area overview')) {
       throw new Error('Problem Areas overview story did not render expected content.');
     }
-    if (storyId.includes('primeng-playground') && !bodyText.includes('PrimeNG federation playground')) {
-      throw new Error('PrimeNG playground story did not render expected content.');
+    if (storyId.includes('primeng-playground') && !bodyText.includes('Shared wrapper playground')) {
+      throw new Error('Shared wrapper playground story did not render expected content.');
     }
 
     const axe = await new AxeBuilder({ page }).analyze();
