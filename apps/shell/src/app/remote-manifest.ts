@@ -8,6 +8,7 @@ export interface RemoteDefinition {
 export type RemoteManifest = Record<RemoteKey, RemoteDefinition>;
 
 let manifestPromise: Promise<RemoteManifest> | undefined;
+const remoteEntryPromises = new Map<string, Promise<void>>();
 
 export function getRemoteManifest(): Promise<RemoteManifest> {
   manifestPromise ??= fetch('/module-federation.manifest.json').then((response) => {
@@ -26,8 +27,35 @@ export async function loadRemoteElement(remoteKey: RemoteKey): Promise<RemoteDef
   const remote = manifest[remoteKey];
 
   if (!customElements.get(remote.elementName)) {
-    await import(/* @vite-ignore */ remote.remoteEntry);
+    await loadRemoteEntry(remote.remoteEntry);
   }
 
   return remote;
+}
+
+function loadRemoteEntry(remoteEntry: string): Promise<void> {
+  const existing = remoteEntryPromises.get(remoteEntry);
+
+  if (existing) {
+    return existing;
+  }
+
+  const loadPromise = new Promise<void>((resolve, reject) => {
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = remoteEntry;
+    script.dataset['remoteEntry'] = remoteEntry;
+    script.onload = () => resolve();
+    script.onerror = () => {
+      script.remove();
+      remoteEntryPromises.delete(remoteEntry);
+      reject(new Error(`Unable to load remote entry: ${remoteEntry}`));
+    };
+
+    document.head.appendChild(script);
+  });
+
+  remoteEntryPromises.set(remoteEntry, loadPromise);
+
+  return loadPromise;
 }
