@@ -1,0 +1,213 @@
+{
+  "$description": "Sample Figma-backed DTCG-compatible token input for validating token ingestion assumptions.",
+  "$extensions": {
+    "public-sector": {
+      "source": "Figma",
+      "artifact": "DTCG-compatible JSON",
+      "purpose": "Input fixture only. Zeroheight is not part of token creation.",
+      "tiers": [
+        "primitive",
+        "semantic",
+        "component",
+        "primeng-mapping"
+      ]
+    }
+  },
+  "primitive": {
+    "color": {
+      "blue": {
+        "600": {
+          "$type": "color",
+          "$value": "#1d4ed8",
+          "$description": "Primary blue primitive."
+        },
+        "700": {
+          "$type": "color",
+          "$value": "#1e40af",
+          "$description": "Primary blue hover primitive."
+        },
+        "800": {
+          "$type": "color",
+          "$value": "#1e3a8a",
+          "$description": "Primary blue active primitive."
+        }
+      },
+      "slate": {
+        "50": {
+          "$type": "color",
+          "$value": "#f8fafc",
+          "$description": "Page background primitive."
+        },
+        "900": {
+          "$type": "color",
+          "$value": "#0f172a",
+          "$description": "Primary text primitive."
+        }
+      },
+      "rose": {
+        "600": {
+          "$type": "color",
+          "$value": "#e11d48",
+          "$description": "Danger primitive."
+        }
+      }
+    },
+    "radius": {
+      "md": {
+        "$type": "dimension",
+        "$value": "0.5rem",
+        "$description": "Default component radius."
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "$type": "fontFamily",
+        "$value": "\"Inter\", \"Segoe UI\", Arial, sans-serif",
+        "$description": "Primary application font stack."
+      }
+    }
+  },
+  "semantic": {
+    "color": {
+      "surface": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.color.slate.50}",
+          "$description": "Application background."
+        }
+      },
+      "text": {
+        "primary": {
+          "$type": "color",
+          "$value": "{primitive.color.slate.900}",
+          "$description": "Primary readable text."
+        }
+      },
+      "primary": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.600}",
+          "$description": "Primary action background."
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.700}",
+          "$description": "Primary action hover background."
+        },
+        "active": {
+          "$type": "color",
+          "$value": "{primitive.color.blue.800}",
+          "$description": "Primary action active background."
+        }
+      },
+      "danger": {
+        "background": {
+          "$type": "color",
+          "$value": "{primitive.color.rose.600}",
+          "$description": "Danger or destructive action background."
+        }
+      }
+    },
+    "shape": {
+      "radius": {
+        "control": {
+          "$type": "dimension",
+          "$value": "{primitive.radius.md}",
+          "$description": "Default control radius."
+        }
+      }
+    },
+    "typography": {
+      "body": {
+        "fontFamily": {
+          "$type": "fontFamily",
+          "$value": "{primitive.typography.fontFamily}",
+          "$description": "Default body font stack."
+        }
+      }
+    }
+  },
+  "component": {
+    "button": {
+      "primary": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.primary.background}",
+          "$description": "Primary button background."
+        },
+        "hoverBackground": {
+          "$type": "color",
+          "$value": "{semantic.color.primary.hover}",
+          "$description": "Primary button hover background."
+        },
+        "activeBackground": {
+          "$type": "color",
+          "$value": "{semantic.color.primary.active}",
+          "$description": "Primary button active background."
+        },
+        "borderRadius": {
+          "$type": "dimension",
+          "$value": "{semantic.shape.radius.control}",
+          "$description": "Primary button radius."
+        }
+      }
+    },
+    "toast": {
+      "danger": {
+        "background": {
+          "$type": "color",
+          "$value": "{semantic.color.danger.background}",
+          "$description": "Danger feedback background before provider severity mapping."
+        }
+      }
+    }
+  },
+  "provider": {
+    "primeng": {
+      "semantic": {
+        "primary": {
+          "color": {
+            "$type": "color",
+            "$value": "{semantic.color.primary.background}",
+            "$description": "PrimeNG primary semantic color."
+          },
+          "hoverColor": {
+            "$type": "color",
+            "$value": "{semantic.color.primary.hover}",
+            "$description": "PrimeNG primary hover color."
+          },
+          "activeColor": {
+            "$type": "color",
+            "$value": "{semantic.color.primary.active}",
+            "$description": "PrimeNG primary active color."
+          }
+        }
+      },
+      "component": {
+        "button": {
+          "primary": {
+            "background": {
+              "$type": "color",
+              "$value": "{component.button.primary.background}",
+              "$description": "PrimeNG button primary background."
+            },
+            "borderRadius": {
+              "$type": "dimension",
+              "$value": "{component.button.primary.borderRadius}",
+              "$description": "PrimeNG button primary radius."
+            }
+          }
+        },
+        "toast": {
+          "error": {
+            "background": {
+              "$type": "color",
+              "$value": "{component.toast.danger.background}",
+              "$description": "PrimeNG error toast mapped from design-system danger."
+            }
+          }
+        }
+      }
+    }
+  }
+}

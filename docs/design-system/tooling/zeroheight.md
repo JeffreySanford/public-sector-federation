@@ -18,6 +18,9 @@ Practical implication:
 - Prepare Zeroheight-ready content now.
 - Do not block code validation on Zeroheight publishing access.
 - Do not describe Zeroheight as the source of truth for runtime behavior.
+- Do not describe Zeroheight as a token creation source.
+- Do not describe a Figma -> Zeroheight -> token input workflow unless that
+  workflow is explicitly established later.
 - Treat the repository, token build, Storybook, and shell e2e tests as the
   current evidence package.
 
@@ -35,9 +38,10 @@ Practical implication:
 ## Zeroheight Should Document For Tokens
 
 Zeroheight should receive generated token documentation artifacts from the repo,
-not hand-maintained token values. The preferred source is the token package's
-generated documentation export, such as `zeroheight-tokens.json`, backed by the
-same token source that produces runtime CSS variables and PrimeNG preset values.
+not hand-maintained token values. Figma is the known design input, and the token
+pipeline should consume a Figma-backed DTCG-compatible JSON artifact before
+generating runtime CSS variables, PrimeNG preset values, and documentation
+exports such as `zeroheight-tokens.json`.
 
 Zeroheight token pages should explain:
 

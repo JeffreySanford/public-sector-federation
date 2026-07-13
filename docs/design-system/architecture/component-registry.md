@@ -102,6 +102,23 @@ documentation, or a registry service. The important point is that the registry
 records the contract and evidence, while token values remain owned by
 `packages/tokens`.
 
+The companion
+[Registry Consumption Spec](./registry-consumption-spec.md)
+defines the wrapper import boundary, token consumption model, wrapper anatomy,
+and promotion lifecycle in more detail.
+
+## Lifecycle Statuses
+
+| Status | Meaning |
+| --- | --- |
+| Experimental | API may change; use only for proof work. |
+| Candidate | API shape is proposed and ready for design-system review. |
+| Active | Approved for app and remote consumption. |
+| Deprecated | Supported only while teams migrate to a replacement. |
+
+Registry entries should include lifecycle status and evidence links so teams
+can tell whether a wrapper is safe to adopt.
+
 ## Wrapper Boundary
 
 Avoid wrappers that only rename a PrimeNG component without defining a useful

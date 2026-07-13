@@ -10,7 +10,88 @@ const readJson = async (fileName) => JSON.parse(await readFile(join(tokensDir, f
 const themes = await readJson('themes.json');
 const primitives = await readJson('primitives.json');
 const metadata = await readJson('zeroheight-metadata.json');
+const mappingRules = await readJson('mapping-rules.json');
+const figmaDtcgSample = await readJson('figma-dtcg.sample.json');
 const componentOverrides = await readFile(join(tokensDir, 'component-overrides.css'), 'utf8');
+
+const getPath = (source, path) =>
+  path.split('.').reduce((value, segment) => {
+    if (value === undefined || value === null || !(segment in value)) {
+      throw new Error(`Missing DTCG sample path: ${path}`);
+    }
+    return value[segment];
+  }, source);
+
+const tokenValueAt = (source, path) => {
+  const token = getPath(source, path);
+  if (!token || typeof token !== 'object' || typeof token.$value !== 'string') {
+    throw new Error(`DTCG sample path is not a token value: ${path}`);
+  }
+  return token.$value;
+};
+
+const resolveDtcgReference = (source, value) => {
+  const reference = value.match(/^\{(.+)\}$/);
+  return reference ? resolveDtcgReference(source, tokenValueAt(source, reference[1])) : value;
+};
+
+const rootTokens = themes.selectors.find(({ selector }) => selector === ':root')?.tokens;
+
+if (!rootTokens) {
+  throw new Error('Missing :root theme selector.');
+}
+
+const resolveCssReference = (value) => {
+  const reference = value.match(/^var\((--[a-z0-9-]+)\)$/);
+  return reference ? resolveCssReference(rootTokens[reference[1]]) : value;
+};
+
+const assertEqual = (actual, expected, message) => {
+  if (actual !== expected) {
+    throw new Error(`${message}. Expected ${expected}, received ${actual}.`);
+  }
+};
+
+const figmaDtcgInput = {
+  file: 'packages/tokens/src/tokens/figma-dtcg.sample.json',
+  source: figmaDtcgSample.$extensions?.['public-sector']?.source,
+  artifact: figmaDtcgSample.$extensions?.['public-sector']?.artifact,
+  purpose: figmaDtcgSample.$extensions?.['public-sector']?.purpose,
+  validationChecks: [
+    'source-metadata',
+    'primitive-primary-blue',
+    'semantic-primary-background',
+    'primeng-primary-color',
+    'primeng-button-primary-background',
+    'danger-to-error-provider-reference',
+  ],
+};
+
+assertEqual(figmaDtcgInput.source, mappingRules.authoritativeInput.source, 'Figma sample source must match mapping rules');
+assertEqual(figmaDtcgInput.artifact, mappingRules.authoritativeInput.artifact, 'Figma sample artifact must match mapping rules');
+assertEqual(tokenValueAt(figmaDtcgSample, 'primitive.color.blue.600'), primitives.color.blue['600'], 'Figma primitive sample must match primitives.json');
+assertEqual(
+  resolveDtcgReference(figmaDtcgSample, tokenValueAt(figmaDtcgSample, 'semantic.color.primary.background')),
+  rootTokens['--ps-primary-background'],
+  'Figma semantic primary sample must match :root --ps-primary-background',
+);
+assertEqual(
+  resolveDtcgReference(figmaDtcgSample, tokenValueAt(figmaDtcgSample, 'provider.primeng.semantic.primary.color')),
+  resolveCssReference(rootTokens['--p-primary-color']),
+  'Figma PrimeNG primary sample must match :root --p-primary-color',
+);
+assertEqual(
+  resolveDtcgReference(figmaDtcgSample, tokenValueAt(figmaDtcgSample, 'provider.primeng.component.button.primary.background')),
+  resolveCssReference(rootTokens['--p-button-primary-background']),
+  'Figma PrimeNG button sample must match :root --p-button-primary-background',
+);
+assertEqual(
+  tokenValueAt(figmaDtcgSample, 'provider.primeng.component.toast.error.background'),
+  '{component.toast.danger.background}',
+  'Figma sample must document danger-to-error provider mapping',
+);
+
+figmaDtcgInput.validated = true;
 
 const renderSelector = ({ selector, tokens }) => {
   const declarations = Object.entries(tokens)
@@ -40,8 +121,8 @@ const matchMetadata = (tokenName) => {
 
   return (
     match ?? {
-      tier: tokenName.startsWith('--p-') ? 'primeng-mapping' : 'semantic',
-      category: tokenName.startsWith('--p-') ? 'PrimeNG Mapping' : 'Foundations',
+      tier: tokenName.startsWith(mappingRules.providerPrefix) ? 'primeng-mapping' : 'semantic',
+      category: tokenName.startsWith(mappingRules.providerPrefix) ? 'PrimeNG Mapping' : 'Foundations',
       usage: 'Use according to the public-sector PrimeNG federation token contract.',
     }
   );
@@ -95,18 +176,29 @@ const zeroheightTokens = themes.selectors.flatMap(({ selector, theme, mode, toke
       selector,
       theme,
       mode,
-      tier: name.startsWith('--p-') ? 'primeng-mapping' : docs.tier,
+      tier: name.startsWith(mappingRules.providerPrefix) ? 'primeng-mapping' : docs.tier,
       category: docs.category,
       usage: docs.usage,
       description: metadata.tokenDescriptions[name] ?? `${name} for ${theme} ${mode}.`,
       primeNgFamily: primeNgFamily(name),
       cssVariable: name,
+      mappingRulesVersion: mappingRules.version,
     };
   }),
 );
 
 const designTokens = {
   $description: 'DTCG-compatible token import generated from packages/tokens/src/tokens/*.json.',
+  $extensions: {
+    'public-sector': {
+      mappingRulesVersion: mappingRules.version,
+      authoritativeInput: mappingRules.authoritativeInput,
+      figmaDtcgInput,
+      tiers: mappingRules.tiers,
+      precedence: mappingRules.precedence,
+      normalizationRules: mappingRules.normalizationRules,
+    },
+  },
   primitive: {
     color: Object.fromEntries(
       Object.entries(primitives.color).map(([family, scale]) => [
@@ -176,7 +268,8 @@ for (const { selector, theme, mode, tokens } of themes.selectors) {
           selector,
           theme,
           mode,
-          tier: name.startsWith('--p-') ? 'primeng-mapping' : docs.tier,
+          tier: name.startsWith(mappingRules.providerPrefix) ? 'primeng-mapping' : docs.tier,
+          mappingRulesVersion: mappingRules.version,
           category: docs.category,
           usage: docs.usage,
           primeNgFamily: primeNgFamily(name),
@@ -192,6 +285,10 @@ await writeFile(
   `${JSON.stringify(
     {
       generatedFrom: 'packages/tokens/src/tokens/*.json',
+      mappingRulesVersion: mappingRules.version,
+      authoritativeInput: mappingRules.authoritativeInput,
+      figmaDtcgInput,
+      normalizationRules: mappingRules.normalizationRules,
       tokenCount: zeroheightTokens.length,
       tokens: zeroheightTokens,
     },
@@ -201,4 +298,7 @@ await writeFile(
 );
 await writeFile(join(sourceDir, 'design-tokens.json'), `${JSON.stringify(designTokens, null, 2)}\n`);
 
-console.log(`Generated tokens.css, zeroheight-tokens.json, and design-tokens.json from ${zeroheightTokens.length} token values.`);
+console.log(
+  `Generated tokens.css, zeroheight-tokens.json, and design-tokens.json from ${zeroheightTokens.length} token values. ` +
+    `Validated ${figmaDtcgInput.file}.`,
+);

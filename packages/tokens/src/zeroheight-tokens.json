@@ -1,5 +1,62 @@
 {
   "generatedFrom": "packages/tokens/src/tokens/*.json",
+  "mappingRulesVersion": "2026-07-13",
+  "authoritativeInput": {
+    "source": "Figma",
+    "artifact": "DTCG-compatible JSON",
+    "notes": "Figma is the known design input. Zeroheight is documentation output, not token creation input."
+  },
+  "figmaDtcgInput": {
+    "file": "packages/tokens/src/tokens/figma-dtcg.sample.json",
+    "source": "Figma",
+    "artifact": "DTCG-compatible JSON",
+    "purpose": "Input fixture only. Zeroheight is not part of token creation.",
+    "validationChecks": [
+      "source-metadata",
+      "primitive-primary-blue",
+      "semantic-primary-background",
+      "primeng-primary-color",
+      "primeng-button-primary-background",
+      "danger-to-error-provider-reference"
+    ],
+    "validated": true
+  },
+  "normalizationRules": [
+    {
+      "id": "danger-to-error",
+      "status": "proposed",
+      "source": "danger",
+      "target": "error",
+      "appliesTo": "wrapper-provider-severity",
+      "behavior": "Wrappers may expose danger intent while translating to PrimeNG error terminology internally."
+    },
+    {
+      "id": "typography-aliases",
+      "status": "proposed",
+      "appliesTo": "typography",
+      "behavior": "Retired bootstrap typography names map only when the active token source confirms aliases.",
+      "activeAliases": []
+    },
+    {
+      "id": "missing-ramp-aliases",
+      "status": "proposed",
+      "appliesTo": "color-ramps",
+      "behavior": "Missing provider ramp steps map to nearest approved primitive only with design approval.",
+      "activeAliases": []
+    },
+    {
+      "id": "primeng-css-variable-bridge",
+      "status": "active",
+      "appliesTo": "provider-css-variables",
+      "behavior": "Generate --p-* bridge variables from the same theme selector source as --ps-* variables."
+    },
+    {
+      "id": "component-override-css",
+      "status": "active",
+      "appliesTo": "provider-component-gaps",
+      "behavior": "Use component override CSS only for stable provider gaps not expressible through the preset."
+    }
+  ],
   "tokenCount": 294,
   "tokens": [
     {
@@ -13,7 +70,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Application background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-background"
+      "cssVariable": "--ps-surface-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-card",
@@ -26,7 +84,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Card and panel background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-card"
+      "cssVariable": "--ps-surface-card",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-border",
@@ -39,7 +98,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Default border color for surfaces.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-border"
+      "cssVariable": "--ps-surface-border",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-primary",
@@ -52,7 +112,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Primary readable text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-primary"
+      "cssVariable": "--ps-text-primary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-secondary",
@@ -65,7 +126,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Muted supporting text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-secondary"
+      "cssVariable": "--ps-text-secondary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-background",
@@ -78,7 +140,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-background for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-background"
+      "cssVariable": "--ps-primary-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-foreground",
@@ -91,7 +154,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-foreground for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-foreground"
+      "cssVariable": "--ps-primary-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-focus-ring-color",
@@ -104,7 +168,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-focus-ring-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-focus-ring-color"
+      "cssVariable": "--ps-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-danger-color",
@@ -117,7 +182,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--ps-danger-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-danger-color"
+      "cssVariable": "--ps-danger-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-danger-text",
@@ -130,7 +196,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-danger-text for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-danger-text"
+      "cssVariable": "--ps-danger-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-success-color",
@@ -143,7 +210,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--ps-success-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-success-color"
+      "cssVariable": "--ps-success-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-success-text",
@@ -156,7 +224,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-success-text for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-success-text"
+      "cssVariable": "--ps-success-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-warn-text",
@@ -169,7 +238,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-warn-text for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-warn-text"
+      "cssVariable": "--ps-warn-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-action-text",
@@ -182,7 +252,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Accessible action foreground for outlined and text actions.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-action-text"
+      "cssVariable": "--ps-action-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-background",
@@ -195,7 +266,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "Filled action background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-background"
+      "cssVariable": "--ps-button-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-text",
@@ -208,7 +280,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Filled action foreground color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-text"
+      "cssVariable": "--ps-button-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-background",
@@ -221,7 +294,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-background for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-background"
+      "cssVariable": "--ps-nav-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-foreground",
@@ -234,7 +308,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-foreground for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-foreground"
+      "cssVariable": "--ps-nav-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-muted",
@@ -247,7 +322,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-muted for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-muted"
+      "cssVariable": "--ps-nav-muted",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-active-background",
@@ -260,7 +336,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-active-background for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-active-background"
+      "cssVariable": "--ps-nav-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-radius-md",
@@ -273,7 +350,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-radius-md for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-radius-md"
+      "cssVariable": "--ps-radius-md",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-radius-lg",
@@ -286,7 +364,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-radius-lg for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-radius-lg"
+      "cssVariable": "--ps-radius-lg",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-space-2",
@@ -299,7 +378,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-space-2 for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-space-2"
+      "cssVariable": "--ps-space-2",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-space-4",
@@ -312,7 +392,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-space-4 for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-space-4"
+      "cssVariable": "--ps-space-4",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-space-6",
@@ -325,7 +406,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-space-6 for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-space-6"
+      "cssVariable": "--ps-space-6",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-font-family",
@@ -338,7 +420,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-font-family for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-font-family"
+      "cssVariable": "--ps-font-family",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-color",
@@ -351,7 +434,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-color"
+      "cssVariable": "--p-primary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-hover-color",
@@ -364,7 +448,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-hover-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-hover-color"
+      "cssVariable": "--p-primary-hover-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-active-color",
@@ -377,7 +462,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-active-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-active-color"
+      "cssVariable": "--p-primary-active-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-inverse-color",
@@ -390,7 +476,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-inverse-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-inverse-color"
+      "cssVariable": "--p-primary-inverse-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-content-background",
@@ -403,7 +490,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "--p-content-background for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-content-background"
+      "cssVariable": "--p-content-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-content-border-color",
@@ -416,7 +504,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "--p-content-border-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-content-border-color"
+      "cssVariable": "--p-content-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-text-color",
@@ -429,7 +518,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-text-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-text-color"
+      "cssVariable": "--p-text-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-text-muted-color",
@@ -442,7 +532,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-text-muted-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-text-muted-color"
+      "cssVariable": "--p-text-muted-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-border-radius-sm",
@@ -455,7 +546,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-border-radius-sm for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-border-radius-sm"
+      "cssVariable": "--p-border-radius-sm",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-border-radius-md",
@@ -468,7 +560,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-border-radius-md for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-border-radius-md"
+      "cssVariable": "--p-border-radius-md",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-border-radius-lg",
@@ -481,7 +574,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-border-radius-lg for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-border-radius-lg"
+      "cssVariable": "--p-border-radius-lg",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-focus-ring-width",
@@ -494,7 +588,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-focus-ring-width for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-focus-ring-width"
+      "cssVariable": "--p-focus-ring-width",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-focus-ring-style",
@@ -507,7 +602,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-focus-ring-style for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-focus-ring-style"
+      "cssVariable": "--p-focus-ring-style",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-focus-ring-color",
@@ -520,7 +616,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-focus-ring-color for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-focus-ring-color"
+      "cssVariable": "--p-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-focus-ring-offset",
@@ -533,7 +630,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-focus-ring-offset for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-focus-ring-offset"
+      "cssVariable": "--p-focus-ring-offset",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-focus-ring-shadow",
@@ -546,7 +644,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-focus-ring-shadow for neutral light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-focus-ring-shadow"
+      "cssVariable": "--p-focus-ring-shadow",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-transition-duration",
@@ -559,7 +658,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-transition-duration for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-transition-duration"
+      "cssVariable": "--p-button-transition-duration",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-border-radius",
@@ -572,7 +672,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-border-radius for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-border-radius"
+      "cssVariable": "--p-button-border-radius",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-padding-y",
@@ -585,7 +686,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-padding-y for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-padding-y"
+      "cssVariable": "--p-button-padding-y",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-padding-x",
@@ -598,7 +700,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-padding-x for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-padding-x"
+      "cssVariable": "--p-button-padding-x",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-gap",
@@ -611,7 +714,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "PrimeNG button icon and label gap.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-gap"
+      "cssVariable": "--p-button-gap",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-label-font-weight",
@@ -624,7 +728,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-label-font-weight for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-label-font-weight"
+      "cssVariable": "--p-button-label-font-weight",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-primary-background",
@@ -637,7 +742,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-primary-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-primary-background"
+      "cssVariable": "--p-button-primary-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-primary-hover-background",
@@ -650,7 +756,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-primary-hover-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-primary-hover-background"
+      "cssVariable": "--p-button-primary-hover-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-primary-active-background",
@@ -663,7 +770,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-primary-active-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-primary-active-background"
+      "cssVariable": "--p-button-primary-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-primary-border-color",
@@ -676,7 +784,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-primary-border-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-primary-border-color"
+      "cssVariable": "--p-button-primary-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-primary-hover-border-color",
@@ -689,7 +798,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-primary-hover-border-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-primary-hover-border-color"
+      "cssVariable": "--p-button-primary-hover-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-primary-active-border-color",
@@ -702,7 +812,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-primary-active-border-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-primary-active-border-color"
+      "cssVariable": "--p-button-primary-active-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-primary-color",
@@ -715,7 +826,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-primary-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-primary-color"
+      "cssVariable": "--p-button-primary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-primary-hover-color",
@@ -728,7 +840,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-primary-hover-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-primary-hover-color"
+      "cssVariable": "--p-button-primary-hover-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-primary-active-color",
@@ -741,7 +854,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-primary-active-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-primary-active-color"
+      "cssVariable": "--p-button-primary-active-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-primary-focus-ring-shadow",
@@ -754,7 +868,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-primary-focus-ring-shadow for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-primary-focus-ring-shadow"
+      "cssVariable": "--p-button-primary-focus-ring-shadow",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-outlined-primary-border-color",
@@ -767,7 +882,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-outlined-primary-border-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-outlined-primary-border-color"
+      "cssVariable": "--p-button-outlined-primary-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-outlined-primary-color",
@@ -780,7 +896,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-outlined-primary-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-outlined-primary-color"
+      "cssVariable": "--p-button-outlined-primary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-outlined-primary-hover-background",
@@ -793,7 +910,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-outlined-primary-hover-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-outlined-primary-hover-background"
+      "cssVariable": "--p-button-outlined-primary-hover-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-outlined-primary-active-background",
@@ -806,7 +924,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-outlined-primary-active-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-outlined-primary-active-background"
+      "cssVariable": "--p-button-outlined-primary-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-text-primary-color",
@@ -819,7 +938,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-button-text-primary-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-text-primary-color"
+      "cssVariable": "--p-button-text-primary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-text-primary-hover-background",
@@ -832,7 +952,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-button-text-primary-hover-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-text-primary-hover-background"
+      "cssVariable": "--p-button-text-primary-hover-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-text-primary-active-background",
@@ -845,7 +966,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-button-text-primary-active-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-text-primary-active-background"
+      "cssVariable": "--p-button-text-primary-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-secondary-background",
@@ -858,7 +980,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-secondary-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-secondary-background"
+      "cssVariable": "--p-button-secondary-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-secondary-border-color",
@@ -871,7 +994,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-secondary-border-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-secondary-border-color"
+      "cssVariable": "--p-button-secondary-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-secondary-color",
@@ -884,7 +1008,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-secondary-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-secondary-color"
+      "cssVariable": "--p-button-secondary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-secondary-hover-background",
@@ -897,7 +1022,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-secondary-hover-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-secondary-hover-background"
+      "cssVariable": "--p-button-secondary-hover-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-secondary-hover-border-color",
@@ -910,7 +1036,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-secondary-hover-border-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-secondary-hover-border-color"
+      "cssVariable": "--p-button-secondary-hover-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-secondary-active-background",
@@ -923,7 +1050,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-secondary-active-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-secondary-active-background"
+      "cssVariable": "--p-button-secondary-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-secondary-active-border-color",
@@ -936,7 +1064,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-secondary-active-border-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-secondary-active-border-color"
+      "cssVariable": "--p-button-secondary-active-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-secondary-focus-ring-shadow",
@@ -949,7 +1078,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-secondary-focus-ring-shadow for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-secondary-focus-ring-shadow"
+      "cssVariable": "--p-button-secondary-focus-ring-shadow",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-outlined-secondary-border-color",
@@ -962,7 +1092,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-outlined-secondary-border-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-outlined-secondary-border-color"
+      "cssVariable": "--p-button-outlined-secondary-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-outlined-secondary-color",
@@ -975,7 +1106,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-outlined-secondary-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-outlined-secondary-color"
+      "cssVariable": "--p-button-outlined-secondary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-outlined-secondary-hover-background",
@@ -988,7 +1120,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-outlined-secondary-hover-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-outlined-secondary-hover-background"
+      "cssVariable": "--p-button-outlined-secondary-hover-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-outlined-secondary-active-background",
@@ -1001,7 +1134,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-outlined-secondary-active-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-outlined-secondary-active-background"
+      "cssVariable": "--p-button-outlined-secondary-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-text-secondary-color",
@@ -1014,7 +1148,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-button-text-secondary-color for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-text-secondary-color"
+      "cssVariable": "--p-button-text-secondary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-text-secondary-hover-background",
@@ -1027,7 +1162,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-button-text-secondary-hover-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-text-secondary-hover-background"
+      "cssVariable": "--p-button-text-secondary-hover-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-text-secondary-active-background",
@@ -1040,7 +1176,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-button-text-secondary-active-background for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-text-secondary-active-background"
+      "cssVariable": "--p-button-text-secondary-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-icon-only-width",
@@ -1053,7 +1190,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-icon-only-width for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-icon-only-width"
+      "cssVariable": "--p-button-icon-only-width",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-button-rounded-border-radius",
@@ -1066,7 +1204,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-button-rounded-border-radius for neutral light.",
       "primeNgFamily": "Button",
-      "cssVariable": "--p-button-rounded-border-radius"
+      "cssVariable": "--p-button-rounded-border-radius",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-card-background",
@@ -1079,7 +1218,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "PrimeNG card background mapping.",
       "primeNgFamily": "Card",
-      "cssVariable": "--p-card-background"
+      "cssVariable": "--p-card-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-card-color",
@@ -1092,7 +1232,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--p-card-color for neutral light.",
       "primeNgFamily": "Card",
-      "cssVariable": "--p-card-color"
+      "cssVariable": "--p-card-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-card-shadow",
@@ -1105,7 +1246,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--p-card-shadow for neutral light.",
       "primeNgFamily": "Card",
-      "cssVariable": "--p-card-shadow"
+      "cssVariable": "--p-card-shadow",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-card-border-radius",
@@ -1118,7 +1260,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-card-border-radius for neutral light.",
       "primeNgFamily": "Card",
-      "cssVariable": "--p-card-border-radius"
+      "cssVariable": "--p-card-border-radius",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-card-body-padding",
@@ -1131,7 +1274,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--p-card-body-padding for neutral light.",
       "primeNgFamily": "Card",
-      "cssVariable": "--p-card-body-padding"
+      "cssVariable": "--p-card-body-padding",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-card-body-gap",
@@ -1144,7 +1288,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--p-card-body-gap for neutral light.",
       "primeNgFamily": "Card",
-      "cssVariable": "--p-card-body-gap"
+      "cssVariable": "--p-card-body-gap",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-card-caption-gap",
@@ -1157,7 +1302,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--p-card-caption-gap for neutral light.",
       "primeNgFamily": "Card",
-      "cssVariable": "--p-card-caption-gap"
+      "cssVariable": "--p-card-caption-gap",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-card-title-font-size",
@@ -1170,7 +1316,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-card-title-font-size for neutral light.",
       "primeNgFamily": "Card",
-      "cssVariable": "--p-card-title-font-size"
+      "cssVariable": "--p-card-title-font-size",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-card-title-font-weight",
@@ -1183,7 +1330,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-card-title-font-weight for neutral light.",
       "primeNgFamily": "Card",
-      "cssVariable": "--p-card-title-font-weight"
+      "cssVariable": "--p-card-title-font-weight",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-card-subtitle-color",
@@ -1196,7 +1344,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--p-card-subtitle-color for neutral light.",
       "primeNgFamily": "Card",
-      "cssVariable": "--p-card-subtitle-color"
+      "cssVariable": "--p-card-subtitle-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-datatable-border-color",
@@ -1209,7 +1358,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-datatable-border-color for neutral light.",
       "primeNgFamily": "Table",
-      "cssVariable": "--p-datatable-border-color"
+      "cssVariable": "--p-datatable-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-datatable-header-cell-background",
@@ -1222,7 +1372,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "PrimeNG table header background mapping.",
       "primeNgFamily": "Table",
-      "cssVariable": "--p-datatable-header-cell-background"
+      "cssVariable": "--p-datatable-header-cell-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-datatable-header-cell-color",
@@ -1235,7 +1386,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-datatable-header-cell-color for neutral light.",
       "primeNgFamily": "Table",
-      "cssVariable": "--p-datatable-header-cell-color"
+      "cssVariable": "--p-datatable-header-cell-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-datatable-header-cell-padding",
@@ -1248,7 +1400,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-datatable-header-cell-padding for neutral light.",
       "primeNgFamily": "Table",
-      "cssVariable": "--p-datatable-header-cell-padding"
+      "cssVariable": "--p-datatable-header-cell-padding",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-datatable-body-cell-padding",
@@ -1261,7 +1414,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-datatable-body-cell-padding for neutral light.",
       "primeNgFamily": "Table",
-      "cssVariable": "--p-datatable-body-cell-padding"
+      "cssVariable": "--p-datatable-body-cell-padding",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-datatable-row-background",
@@ -1274,7 +1428,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-datatable-row-background for neutral light.",
       "primeNgFamily": "Table",
-      "cssVariable": "--p-datatable-row-background"
+      "cssVariable": "--p-datatable-row-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-datatable-row-color",
@@ -1287,7 +1442,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-datatable-row-color for neutral light.",
       "primeNgFamily": "Table",
-      "cssVariable": "--p-datatable-row-color"
+      "cssVariable": "--p-datatable-row-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-datatable-row-hover-background",
@@ -1300,7 +1456,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-datatable-row-hover-background for neutral light.",
       "primeNgFamily": "Table",
-      "cssVariable": "--p-datatable-row-hover-background"
+      "cssVariable": "--p-datatable-row-hover-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-datatable-column-title-font-weight",
@@ -1313,7 +1470,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-datatable-column-title-font-weight for neutral light.",
       "primeNgFamily": "Table",
-      "cssVariable": "--p-datatable-column-title-font-weight"
+      "cssVariable": "--p-datatable-column-title-font-weight",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-background",
@@ -1326,7 +1484,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-paginator-background for neutral light.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-background"
+      "cssVariable": "--p-paginator-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-color",
@@ -1339,7 +1498,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-paginator-color for neutral light.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-color"
+      "cssVariable": "--p-paginator-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-border-color",
@@ -1352,7 +1512,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-paginator-border-color for neutral light.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-border-color"
+      "cssVariable": "--p-paginator-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-nav-button-width",
@@ -1365,7 +1526,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-paginator-nav-button-width for neutral light.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-nav-button-width"
+      "cssVariable": "--p-paginator-nav-button-width",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-nav-button-height",
@@ -1378,7 +1540,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-paginator-nav-button-height for neutral light.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-nav-button-height"
+      "cssVariable": "--p-paginator-nav-button-height",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-nav-button-border-radius",
@@ -1391,7 +1554,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-paginator-nav-button-border-radius for neutral light.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-nav-button-border-radius"
+      "cssVariable": "--p-paginator-nav-button-border-radius",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-nav-button-hover-background",
@@ -1404,7 +1568,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-paginator-nav-button-hover-background for neutral light.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-nav-button-hover-background"
+      "cssVariable": "--p-paginator-nav-button-hover-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-nav-button-hover-color",
@@ -1417,7 +1582,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-paginator-nav-button-hover-color for neutral light.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-nav-button-hover-color"
+      "cssVariable": "--p-paginator-nav-button-hover-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-nav-button-selected-background",
@@ -1430,7 +1596,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "Selected paginator page background.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-nav-button-selected-background"
+      "cssVariable": "--p-paginator-nav-button-selected-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-nav-button-selected-color",
@@ -1443,7 +1610,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-paginator-nav-button-selected-color for neutral light.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-nav-button-selected-color"
+      "cssVariable": "--p-paginator-nav-button-selected-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-paginator-gap",
@@ -1456,7 +1624,8 @@
       "usage": "Use for PrimeNG table, sorting, filtering, and pagination surfaces.",
       "description": "--p-paginator-gap for neutral light.",
       "primeNgFamily": "Paginator",
-      "cssVariable": "--p-paginator-gap"
+      "cssVariable": "--p-paginator-gap",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-background",
@@ -1469,7 +1638,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-background for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-background"
+      "cssVariable": "--p-menu-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-color",
@@ -1482,7 +1652,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-color for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-color"
+      "cssVariable": "--p-menu-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-border-color",
@@ -1495,7 +1666,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-border-color for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-border-color"
+      "cssVariable": "--p-menu-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-border-radius",
@@ -1508,7 +1680,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-border-radius for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-border-radius"
+      "cssVariable": "--p-menu-border-radius",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-transition-duration",
@@ -1521,7 +1694,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-transition-duration for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-transition-duration"
+      "cssVariable": "--p-menu-transition-duration",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-item-padding",
@@ -1534,7 +1708,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-item-padding for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-item-padding"
+      "cssVariable": "--p-menu-item-padding",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-item-gap",
@@ -1547,7 +1722,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-item-gap for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-item-gap"
+      "cssVariable": "--p-menu-item-gap",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-item-border-radius",
@@ -1560,7 +1736,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-item-border-radius for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-item-border-radius"
+      "cssVariable": "--p-menu-item-border-radius",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-item-color",
@@ -1573,7 +1750,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-item-color for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-item-color"
+      "cssVariable": "--p-menu-item-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-item-icon-color",
@@ -1586,7 +1764,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-item-icon-color for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-item-icon-color"
+      "cssVariable": "--p-menu-item-icon-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-item-focus-color",
@@ -1599,7 +1778,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-item-focus-color for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-item-focus-color"
+      "cssVariable": "--p-menu-item-focus-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-item-focus-background",
@@ -1612,7 +1792,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-item-focus-background for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-item-focus-background"
+      "cssVariable": "--p-menu-item-focus-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-menu-item-icon-focus-color",
@@ -1625,7 +1806,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-menu-item-icon-focus-color for neutral light.",
       "primeNgFamily": "Menu",
-      "cssVariable": "--p-menu-item-icon-focus-color"
+      "cssVariable": "--p-menu-item-icon-focus-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-background",
@@ -1638,7 +1820,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "PrimeNG dialog surface mapping.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-background"
+      "cssVariable": "--p-dialog-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-color",
@@ -1651,7 +1834,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-color for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-color"
+      "cssVariable": "--p-dialog-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-border-color",
@@ -1664,7 +1848,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-border-color for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-border-color"
+      "cssVariable": "--p-dialog-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-border-radius",
@@ -1677,7 +1862,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-border-radius for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-border-radius"
+      "cssVariable": "--p-dialog-border-radius",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-shadow",
@@ -1690,7 +1876,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-shadow for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-shadow"
+      "cssVariable": "--p-dialog-shadow",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-header-padding",
@@ -1703,7 +1890,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-header-padding for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-header-padding"
+      "cssVariable": "--p-dialog-header-padding",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-content-padding",
@@ -1716,7 +1904,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-content-padding for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-content-padding"
+      "cssVariable": "--p-dialog-content-padding",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-footer-padding",
@@ -1729,7 +1918,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-footer-padding for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-footer-padding"
+      "cssVariable": "--p-dialog-footer-padding",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-footer-gap",
@@ -1742,7 +1932,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-footer-gap for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-footer-gap"
+      "cssVariable": "--p-dialog-footer-gap",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-header-gap",
@@ -1755,7 +1946,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-header-gap for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-header-gap"
+      "cssVariable": "--p-dialog-header-gap",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-title-font-size",
@@ -1768,7 +1960,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-title-font-size for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-title-font-size"
+      "cssVariable": "--p-dialog-title-font-size",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-dialog-title-font-weight",
@@ -1781,7 +1974,8 @@
       "usage": "Use for dialog, menu, and overlay surfaces that must work in federation.",
       "description": "--p-dialog-title-font-weight for neutral light.",
       "primeNgFamily": "Dialog",
-      "cssVariable": "--p-dialog-title-font-weight"
+      "cssVariable": "--p-dialog-title-font-weight",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-width",
@@ -1794,7 +1988,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-width for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-width"
+      "cssVariable": "--p-toast-width",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-border-radius",
@@ -1807,7 +2002,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-border-radius for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-border-radius"
+      "cssVariable": "--p-toast-border-radius",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-transition-duration",
@@ -1820,7 +2016,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-transition-duration for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-transition-duration"
+      "cssVariable": "--p-toast-transition-duration",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-blur",
@@ -1833,7 +2030,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-blur for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-blur"
+      "cssVariable": "--p-toast-blur",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-gap",
@@ -1846,7 +2044,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-gap for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-gap"
+      "cssVariable": "--p-toast-message-gap",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-padding",
@@ -1859,7 +2058,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-padding for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-padding"
+      "cssVariable": "--p-toast-message-padding",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-border-width",
@@ -1872,7 +2072,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-border-width for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-border-width"
+      "cssVariable": "--p-toast-message-border-width",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-info-background",
@@ -1885,7 +2086,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-info-background for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-info-background"
+      "cssVariable": "--p-toast-message-info-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-info-border-color",
@@ -1898,7 +2100,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-info-border-color for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-info-border-color"
+      "cssVariable": "--p-toast-message-info-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-info-color",
@@ -1911,7 +2114,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-info-color for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-info-color"
+      "cssVariable": "--p-toast-message-info-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-success-background",
@@ -1924,7 +2128,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "Success toast message surface.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-success-background"
+      "cssVariable": "--p-toast-message-success-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-success-border-color",
@@ -1937,7 +2142,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-success-border-color for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-success-border-color"
+      "cssVariable": "--p-toast-message-success-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-success-color",
@@ -1950,7 +2156,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-success-color for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-success-color"
+      "cssVariable": "--p-toast-message-success-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-warn-background",
@@ -1963,7 +2170,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-warn-background for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-warn-background"
+      "cssVariable": "--p-toast-message-warn-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-warn-border-color",
@@ -1976,7 +2184,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-warn-border-color for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-warn-border-color"
+      "cssVariable": "--p-toast-message-warn-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-warn-color",
@@ -1989,7 +2198,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-warn-color for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-warn-color"
+      "cssVariable": "--p-toast-message-warn-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-error-background",
@@ -2002,7 +2212,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-error-background for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-error-background"
+      "cssVariable": "--p-toast-message-error-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-error-border-color",
@@ -2015,7 +2226,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-error-border-color for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-error-border-color"
+      "cssVariable": "--p-toast-message-error-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-message-error-color",
@@ -2028,7 +2240,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-message-error-color for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-message-error-color"
+      "cssVariable": "--p-toast-message-error-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-summary-font-weight",
@@ -2041,7 +2254,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-summary-font-weight for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-summary-font-weight"
+      "cssVariable": "--p-toast-summary-font-weight",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-summary-font-size",
@@ -2054,7 +2268,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-summary-font-size for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-summary-font-size"
+      "cssVariable": "--p-toast-summary-font-size",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-detail-font-weight",
@@ -2067,7 +2282,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-detail-font-weight for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-detail-font-weight"
+      "cssVariable": "--p-toast-detail-font-weight",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-detail-font-size",
@@ -2080,7 +2296,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--p-toast-detail-font-size for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-detail-font-size"
+      "cssVariable": "--p-toast-detail-font-size",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-close-button-width",
@@ -2093,7 +2310,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-toast-close-button-width for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-close-button-width"
+      "cssVariable": "--p-toast-close-button-width",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-toast-close-button-height",
@@ -2106,7 +2324,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-toast-close-button-height for neutral light.",
       "primeNgFamily": "Toast",
-      "cssVariable": "--p-toast-close-button-height"
+      "cssVariable": "--p-toast-close-button-height",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-background",
@@ -2119,7 +2338,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Application background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-background"
+      "cssVariable": "--ps-surface-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-card",
@@ -2132,7 +2352,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Card and panel background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-card"
+      "cssVariable": "--ps-surface-card",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-border",
@@ -2145,7 +2366,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Default border color for surfaces.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-border"
+      "cssVariable": "--ps-surface-border",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-primary",
@@ -2158,7 +2380,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Primary readable text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-primary"
+      "cssVariable": "--ps-text-primary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-secondary",
@@ -2171,7 +2394,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Muted supporting text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-secondary"
+      "cssVariable": "--ps-text-secondary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-background",
@@ -2184,7 +2408,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-background for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-background"
+      "cssVariable": "--ps-primary-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-foreground",
@@ -2197,7 +2422,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-foreground for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-foreground"
+      "cssVariable": "--ps-primary-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-focus-ring-color",
@@ -2210,7 +2436,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-focus-ring-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-focus-ring-color"
+      "cssVariable": "--ps-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-danger-color",
@@ -2223,7 +2450,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--ps-danger-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-danger-color"
+      "cssVariable": "--ps-danger-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-danger-text",
@@ -2236,7 +2464,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-danger-text for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-danger-text"
+      "cssVariable": "--ps-danger-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-success-color",
@@ -2249,7 +2478,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--ps-success-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-success-color"
+      "cssVariable": "--ps-success-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-success-text",
@@ -2262,7 +2492,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-success-text for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-success-text"
+      "cssVariable": "--ps-success-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-warn-text",
@@ -2275,7 +2506,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-warn-text for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-warn-text"
+      "cssVariable": "--ps-warn-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-action-text",
@@ -2288,7 +2520,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Accessible action foreground for outlined and text actions.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-action-text"
+      "cssVariable": "--ps-action-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-background",
@@ -2301,7 +2534,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "Filled action background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-background"
+      "cssVariable": "--ps-button-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-text",
@@ -2314,7 +2548,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Filled action foreground color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-text"
+      "cssVariable": "--ps-button-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-background",
@@ -2327,7 +2562,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-background for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-background"
+      "cssVariable": "--ps-nav-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-foreground",
@@ -2340,7 +2576,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-foreground for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-foreground"
+      "cssVariable": "--ps-nav-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-muted",
@@ -2353,7 +2590,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-muted for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-muted"
+      "cssVariable": "--ps-nav-muted",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-active-background",
@@ -2366,7 +2604,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-active-background for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-active-background"
+      "cssVariable": "--ps-nav-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-color",
@@ -2379,7 +2618,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-color"
+      "cssVariable": "--p-primary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-hover-color",
@@ -2392,7 +2632,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-hover-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-hover-color"
+      "cssVariable": "--p-primary-hover-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-active-color",
@@ -2405,7 +2646,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-active-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-active-color"
+      "cssVariable": "--p-primary-active-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-inverse-color",
@@ -2418,7 +2660,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-inverse-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-inverse-color"
+      "cssVariable": "--p-primary-inverse-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-focus-ring-color",
@@ -2431,7 +2674,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-focus-ring-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-focus-ring-color"
+      "cssVariable": "--p-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-content-background",
@@ -2444,7 +2688,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "--p-content-background for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-content-background"
+      "cssVariable": "--p-content-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-content-border-color",
@@ -2457,7 +2702,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "--p-content-border-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-content-border-color"
+      "cssVariable": "--p-content-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-text-color",
@@ -2470,7 +2716,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-text-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-text-color"
+      "cssVariable": "--p-text-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-text-muted-color",
@@ -2483,7 +2730,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-text-muted-color for vibrant light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-text-muted-color"
+      "cssVariable": "--p-text-muted-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-background",
@@ -2496,7 +2744,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Application background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-background"
+      "cssVariable": "--ps-surface-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-card",
@@ -2509,7 +2758,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Card and panel background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-card"
+      "cssVariable": "--ps-surface-card",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-border",
@@ -2522,7 +2772,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Default border color for surfaces.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-border"
+      "cssVariable": "--ps-surface-border",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-primary",
@@ -2535,7 +2786,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Primary readable text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-primary"
+      "cssVariable": "--ps-text-primary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-secondary",
@@ -2548,7 +2800,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Muted supporting text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-secondary"
+      "cssVariable": "--ps-text-secondary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-background",
@@ -2561,7 +2814,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-background for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-background"
+      "cssVariable": "--ps-primary-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-foreground",
@@ -2574,7 +2828,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-foreground for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-foreground"
+      "cssVariable": "--ps-primary-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-focus-ring-color",
@@ -2587,7 +2842,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-focus-ring-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-focus-ring-color"
+      "cssVariable": "--ps-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-danger-color",
@@ -2600,7 +2856,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--ps-danger-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-danger-color"
+      "cssVariable": "--ps-danger-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-danger-text",
@@ -2613,7 +2870,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-danger-text for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-danger-text"
+      "cssVariable": "--ps-danger-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-success-color",
@@ -2626,7 +2884,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--ps-success-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-success-color"
+      "cssVariable": "--ps-success-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-success-text",
@@ -2639,7 +2898,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-success-text for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-success-text"
+      "cssVariable": "--ps-success-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-warn-text",
@@ -2652,7 +2912,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-warn-text for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-warn-text"
+      "cssVariable": "--ps-warn-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-action-text",
@@ -2665,7 +2926,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Accessible action foreground for outlined and text actions.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-action-text"
+      "cssVariable": "--ps-action-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-background",
@@ -2678,7 +2940,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "Filled action background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-background"
+      "cssVariable": "--ps-button-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-text",
@@ -2691,7 +2954,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Filled action foreground color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-text"
+      "cssVariable": "--ps-button-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-background",
@@ -2704,7 +2968,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-background for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-background"
+      "cssVariable": "--ps-nav-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-foreground",
@@ -2717,7 +2982,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-foreground for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-foreground"
+      "cssVariable": "--ps-nav-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-muted",
@@ -2730,7 +2996,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-muted for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-muted"
+      "cssVariable": "--ps-nav-muted",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-active-background",
@@ -2743,7 +3010,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-active-background for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-active-background"
+      "cssVariable": "--ps-nav-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-color",
@@ -2756,7 +3024,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-color"
+      "cssVariable": "--p-primary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-hover-color",
@@ -2769,7 +3038,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-hover-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-hover-color"
+      "cssVariable": "--p-primary-hover-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-active-color",
@@ -2782,7 +3052,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-active-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-active-color"
+      "cssVariable": "--p-primary-active-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-inverse-color",
@@ -2795,7 +3066,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-inverse-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-inverse-color"
+      "cssVariable": "--p-primary-inverse-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-focus-ring-color",
@@ -2808,7 +3080,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-focus-ring-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-focus-ring-color"
+      "cssVariable": "--p-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-content-background",
@@ -2821,7 +3094,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "--p-content-background for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-content-background"
+      "cssVariable": "--p-content-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-content-border-color",
@@ -2834,7 +3108,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "--p-content-border-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-content-border-color"
+      "cssVariable": "--p-content-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-text-color",
@@ -2847,7 +3122,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-text-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-text-color"
+      "cssVariable": "--p-text-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-text-muted-color",
@@ -2860,7 +3136,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-text-muted-color for pastel light.",
       "primeNgFamily": null,
-      "cssVariable": "--p-text-muted-color"
+      "cssVariable": "--p-text-muted-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-background",
@@ -2873,7 +3150,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Application background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-background"
+      "cssVariable": "--ps-surface-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-card",
@@ -2886,7 +3164,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Card and panel background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-card"
+      "cssVariable": "--ps-surface-card",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-border",
@@ -2899,7 +3178,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Default border color for surfaces.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-border"
+      "cssVariable": "--ps-surface-border",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-primary",
@@ -2912,7 +3192,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Primary readable text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-primary"
+      "cssVariable": "--ps-text-primary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-secondary",
@@ -2925,7 +3206,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Muted supporting text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-secondary"
+      "cssVariable": "--ps-text-secondary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-background",
@@ -2938,7 +3220,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-background for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-background"
+      "cssVariable": "--ps-primary-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-foreground",
@@ -2951,7 +3234,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-foreground for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-foreground"
+      "cssVariable": "--ps-primary-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-focus-ring-color",
@@ -2964,7 +3248,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-focus-ring-color for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-focus-ring-color"
+      "cssVariable": "--ps-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-danger-color",
@@ -2977,7 +3262,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--ps-danger-color for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-danger-color"
+      "cssVariable": "--ps-danger-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-danger-text",
@@ -2990,7 +3276,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-danger-text for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-danger-text"
+      "cssVariable": "--ps-danger-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-success-color",
@@ -3003,7 +3290,8 @@
       "usage": "Use for semantic statuses, toast messages, and alert-like feedback.",
       "description": "--ps-success-color for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-success-color"
+      "cssVariable": "--ps-success-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-success-text",
@@ -3016,7 +3304,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-success-text for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-success-text"
+      "cssVariable": "--ps-success-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-warn-text",
@@ -3029,7 +3318,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-warn-text for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-warn-text"
+      "cssVariable": "--ps-warn-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-action-text",
@@ -3042,7 +3332,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Accessible action foreground for outlined and text actions.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-action-text"
+      "cssVariable": "--ps-action-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-background",
@@ -3055,7 +3346,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "Filled action background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-background"
+      "cssVariable": "--ps-button-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-text",
@@ -3068,7 +3360,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Filled action foreground color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-text"
+      "cssVariable": "--ps-button-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-background",
@@ -3081,7 +3374,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-background for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-background"
+      "cssVariable": "--ps-nav-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-foreground",
@@ -3094,7 +3388,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-foreground for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-foreground"
+      "cssVariable": "--ps-nav-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-muted",
@@ -3107,7 +3402,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-muted for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-muted"
+      "cssVariable": "--ps-nav-muted",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-active-background",
@@ -3120,7 +3416,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-active-background for neutral dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-active-background"
+      "cssVariable": "--ps-nav-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-background",
@@ -3133,7 +3430,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Application background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-background"
+      "cssVariable": "--ps-surface-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-card",
@@ -3146,7 +3444,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Card and panel background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-card"
+      "cssVariable": "--ps-surface-card",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-border",
@@ -3159,7 +3458,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Default border color for surfaces.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-border"
+      "cssVariable": "--ps-surface-border",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-primary",
@@ -3172,7 +3472,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Primary readable text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-primary"
+      "cssVariable": "--ps-text-primary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-secondary",
@@ -3185,7 +3486,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Muted supporting text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-secondary"
+      "cssVariable": "--ps-text-secondary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-background",
@@ -3198,7 +3500,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-background for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-background"
+      "cssVariable": "--ps-primary-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-foreground",
@@ -3211,7 +3514,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-foreground for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-foreground"
+      "cssVariable": "--ps-primary-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-focus-ring-color",
@@ -3224,7 +3528,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-focus-ring-color for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-focus-ring-color"
+      "cssVariable": "--ps-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-danger-text",
@@ -3237,7 +3542,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-danger-text for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-danger-text"
+      "cssVariable": "--ps-danger-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-success-text",
@@ -3250,7 +3556,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-success-text for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-success-text"
+      "cssVariable": "--ps-success-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-warn-text",
@@ -3263,7 +3570,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-warn-text for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-warn-text"
+      "cssVariable": "--ps-warn-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-action-text",
@@ -3276,7 +3584,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Accessible action foreground for outlined and text actions.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-action-text"
+      "cssVariable": "--ps-action-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-background",
@@ -3289,7 +3598,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "Filled action background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-background"
+      "cssVariable": "--ps-button-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-text",
@@ -3302,7 +3612,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Filled action foreground color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-text"
+      "cssVariable": "--ps-button-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-background",
@@ -3315,7 +3626,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-background for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-background"
+      "cssVariable": "--ps-nav-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-foreground",
@@ -3328,7 +3640,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-foreground for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-foreground"
+      "cssVariable": "--ps-nav-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-muted",
@@ -3341,7 +3654,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-muted for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-muted"
+      "cssVariable": "--ps-nav-muted",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-active-background",
@@ -3354,7 +3668,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-active-background for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-active-background"
+      "cssVariable": "--ps-nav-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-color",
@@ -3367,7 +3682,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-color for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-color"
+      "cssVariable": "--p-primary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-hover-color",
@@ -3380,7 +3696,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-hover-color for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-hover-color"
+      "cssVariable": "--p-primary-hover-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-active-color",
@@ -3393,7 +3710,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-active-color for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-active-color"
+      "cssVariable": "--p-primary-active-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-inverse-color",
@@ -3406,7 +3724,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-inverse-color for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-inverse-color"
+      "cssVariable": "--p-primary-inverse-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-focus-ring-color",
@@ -3419,7 +3738,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-focus-ring-color for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-focus-ring-color"
+      "cssVariable": "--p-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-content-background",
@@ -3432,7 +3752,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "--p-content-background for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-content-background"
+      "cssVariable": "--p-content-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-content-border-color",
@@ -3445,7 +3766,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "--p-content-border-color for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-content-border-color"
+      "cssVariable": "--p-content-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-text-color",
@@ -3458,7 +3780,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-text-color for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-text-color"
+      "cssVariable": "--p-text-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-text-muted-color",
@@ -3471,7 +3794,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-text-muted-color for vibrant dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-text-muted-color"
+      "cssVariable": "--p-text-muted-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-background",
@@ -3484,7 +3808,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Application background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-background"
+      "cssVariable": "--ps-surface-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-card",
@@ -3497,7 +3822,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Card and panel background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-card"
+      "cssVariable": "--ps-surface-card",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-surface-border",
@@ -3510,7 +3836,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "Default border color for surfaces.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-surface-border"
+      "cssVariable": "--ps-surface-border",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-primary",
@@ -3523,7 +3850,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Primary readable text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-primary"
+      "cssVariable": "--ps-text-primary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-text-secondary",
@@ -3536,7 +3864,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Muted supporting text color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-text-secondary"
+      "cssVariable": "--ps-text-secondary",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-background",
@@ -3549,7 +3878,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-background for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-background"
+      "cssVariable": "--ps-primary-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-primary-foreground",
@@ -3562,7 +3892,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--ps-primary-foreground for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-primary-foreground"
+      "cssVariable": "--ps-primary-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-focus-ring-color",
@@ -3575,7 +3906,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--ps-focus-ring-color for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-focus-ring-color"
+      "cssVariable": "--ps-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-danger-text",
@@ -3588,7 +3920,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-danger-text for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-danger-text"
+      "cssVariable": "--ps-danger-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-success-text",
@@ -3601,7 +3934,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-success-text for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-success-text"
+      "cssVariable": "--ps-success-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-warn-text",
@@ -3614,7 +3948,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--ps-warn-text for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-warn-text"
+      "cssVariable": "--ps-warn-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-action-text",
@@ -3627,7 +3962,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Accessible action foreground for outlined and text actions.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-action-text"
+      "cssVariable": "--ps-action-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-background",
@@ -3640,7 +3976,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "Filled action background color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-background"
+      "cssVariable": "--ps-button-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-button-text",
@@ -3653,7 +3990,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "Filled action foreground color.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-button-text"
+      "cssVariable": "--ps-button-text",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-background",
@@ -3666,7 +4004,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-background for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-background"
+      "cssVariable": "--ps-nav-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-foreground",
@@ -3679,7 +4018,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-foreground for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-foreground"
+      "cssVariable": "--ps-nav-foreground",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-muted",
@@ -3692,7 +4032,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-muted for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-muted"
+      "cssVariable": "--ps-nav-muted",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--ps-nav-active-background",
@@ -3705,7 +4046,8 @@
       "usage": "Use according to the public-sector PrimeNG federation token contract.",
       "description": "--ps-nav-active-background for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--ps-nav-active-background"
+      "cssVariable": "--ps-nav-active-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-color",
@@ -3718,7 +4060,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-color for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-color"
+      "cssVariable": "--p-primary-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-hover-color",
@@ -3731,7 +4074,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-hover-color for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-hover-color"
+      "cssVariable": "--p-primary-hover-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-active-color",
@@ -3744,7 +4088,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-active-color for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-active-color"
+      "cssVariable": "--p-primary-active-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-primary-inverse-color",
@@ -3757,7 +4102,8 @@
       "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
       "description": "--p-primary-inverse-color for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-primary-inverse-color"
+      "cssVariable": "--p-primary-inverse-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-focus-ring-color",
@@ -3770,7 +4116,8 @@
       "usage": "Use for shape, spacing, typography, and visible focus behavior.",
       "description": "--p-focus-ring-color for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-focus-ring-color"
+      "cssVariable": "--p-focus-ring-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-content-background",
@@ -3783,7 +4130,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "--p-content-background for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-content-background"
+      "cssVariable": "--p-content-background",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-content-border-color",
@@ -3796,7 +4144,8 @@
       "usage": "Use for page, card, border, and container surfaces.",
       "description": "--p-content-border-color for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-content-border-color"
+      "cssVariable": "--p-content-border-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-text-color",
@@ -3809,7 +4158,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-text-color for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-text-color"
+      "cssVariable": "--p-text-color",
+      "mappingRulesVersion": "2026-07-13"
     },
     {
       "name": "--p-text-muted-color",
@@ -3822,7 +4172,8 @@
       "usage": "Use for primary and supporting text across shell and remotes.",
       "description": "--p-text-muted-color for pastel dark.",
       "primeNgFamily": null,
-      "cssVariable": "--p-text-muted-color"
+      "cssVariable": "--p-text-muted-color",
+      "mappingRulesVersion": "2026-07-13"
     }
   ]
 }

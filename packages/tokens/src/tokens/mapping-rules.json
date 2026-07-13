@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "2026-07-13",
+  "description": "Shared token mapping and normalization rules used by docs, generated artifacts, and tests.",
+  "authoritativeInput": {
+    "source": "Figma",
+    "artifact": "DTCG-compatible JSON",
+    "notes": "Figma is the known design input. Zeroheight is documentation output, not token creation input."
+  },
+  "providerPrefix": "--p-",
+  "systemPrefix": "--ps-",
+  "tiers": [
+    {
+      "id": "primitive",
+      "description": "Raw reusable design values such as color ramps, radius, spacing, and typography."
+    },
+    {
+      "id": "semantic",
+      "description": "Platform intent that remains independent of PrimeNG."
+    },
+    {
+      "id": "component",
+      "description": "Design-system component intent exposed through wrapper APIs."
+    },
+    {
+      "id": "primeng-mapping",
+      "description": "Provider-specific bridge consumed by internal PrimeNG components."
+    }
+  ],
+  "precedence": [
+    "Approved enterprise source tokens",
+    "Approved semantic normalization rules",
+    "Component-intent tokens owned by the registry",
+    "PrimeNG provider mapping derived from semantic/component tokens",
+    "Temporary sample or bootstrap fallback values"
+  ],
+  "normalizationRules": [
+    {
+      "id": "danger-to-error",
+      "status": "proposed",
+      "source": "danger",
+      "target": "error",
+      "appliesTo": "wrapper-provider-severity",
+      "behavior": "Wrappers may expose danger intent while translating to PrimeNG error terminology internally."
+    },
+    {
+      "id": "typography-aliases",
+      "status": "proposed",
+      "appliesTo": "typography",
+      "behavior": "Retired bootstrap typography names map only when the active token source confirms aliases.",
+      "activeAliases": []
+    },
+    {
+      "id": "missing-ramp-aliases",
+      "status": "proposed",
+      "appliesTo": "color-ramps",
+      "behavior": "Missing provider ramp steps map to nearest approved primitive only with design approval.",
+      "activeAliases": []
+    },
+    {
+      "id": "primeng-css-variable-bridge",
+      "status": "active",
+      "appliesTo": "provider-css-variables",
+      "behavior": "Generate --p-* bridge variables from the same theme selector source as --ps-* variables."
+    },
+    {
+      "id": "component-override-css",
+      "status": "active",
+      "appliesTo": "provider-component-gaps",
+      "behavior": "Use component override CSS only for stable provider gaps not expressible through the preset."
+    }
+  ]
+}
