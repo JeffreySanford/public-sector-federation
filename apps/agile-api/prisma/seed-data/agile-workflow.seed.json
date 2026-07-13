@@ -86,10 +86,10 @@
       "status": "done",
       "effort": "medium",
       "owner": "QA Team",
-      "summary": "Baseline test execution times, monitor for regressions, optimize slowest tests, track in docs/PERFORMANCE_BASELINE.md",
+      "summary": "Baseline test execution times, monitor for regressions, optimize slowest tests, track in docs/performance/baseline.md",
       "includes": "Baseline measurement, regression monitoring, test optimization, historical tracking, threshold alerts",
       "blockerSummary": null,
-      "doneCriteria": "docs/PERFORMANCE_BASELINE.md established with baselines and regression thresholds, E2E suite <360s total",
+      "doneCriteria": "docs/performance/baseline.md established with baselines and regression thresholds, E2E suite <360s total",
       "sortOrder": 60
     }
   ],

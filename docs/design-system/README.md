@@ -22,9 +22,11 @@ to correct once the production repositories are available.
 2. [Operating model](./architecture/operating-model.md)
 3. [Token pipeline](./architecture/token-pipeline.md)
 4. [Component registry](./architecture/component-registry.md)
-5. [Implementation options](./architecture/implementation-options.md)
-6. [Component promotion](./governance/component-promotion.md)
-7. [Repository review checklist](./validation/repository-review-checklist.md)
+5. [Shell interaction](./architecture/shell-interaction.md)
+6. [Federated Web Components decision](./architecture/federated-web-components-decision.md)
+7. [Implementation options](./architecture/implementation-options.md)
+8. [Component promotion](./governance/component-promotion.md)
+9. [Repository review checklist](./validation/repository-review-checklist.md)
 
 ## Tool Responsibilities
 

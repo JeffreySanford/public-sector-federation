@@ -44,7 +44,7 @@ consumers.
 | --- | --- | --- |
 | Token source | Needs validation | Identify source and generated outputs. |
 | Component registry | Proposed | Wrap PrimeNG for shared behavior, defaults, or API. |
-| Shell mounting | Open decision | Compare Web Components, federated routes, ESM. |
+| Shell mounting | Recommended default | Use federated Web Components unless tighter Angular integration is required. |
 | Shadow DOM | Open decision | Custom elements don't imply Shadow DOM. |
 | CSS variables | Proposed contract | Custom properties inherit through hosts/shadows. |
 | Overlays | Needs validation | Portal overlays may inherit from different ancestors. |

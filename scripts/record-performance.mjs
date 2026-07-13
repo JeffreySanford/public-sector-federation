@@ -47,7 +47,7 @@ function getGitInfo() {
   }
 }
 
-// Baseline thresholds from docs/PERFORMANCE_BASELINE.md
+// Baseline thresholds from docs/performance/baseline.md
 const baselineThresholds = {
   lint: { baselineMs: 5000, thresholdMs: 10000 },
   unit: { baselineMs: 10000, thresholdMs: 15000 },

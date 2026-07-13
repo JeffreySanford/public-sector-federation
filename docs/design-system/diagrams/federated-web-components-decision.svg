@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Federated Web Components Decision</title>
+  <desc id="desc">Decision diagram showing how the design system, platform shell, and sub-applications relate, and why federated Web Components are the recommended default integration model.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7faff; }
+      .band { fill: #061d49; }
+      .title { fill: #ffffff; font: 700 20px Arial, sans-serif; letter-spacing: .4px; }
+      .section-title { fill: #0b2454; font: 700 16px Arial, sans-serif; }
+      .small-title { fill: #0b2454; font: 700 13px Arial, sans-serif; }
+      .text { fill: #111827; font: 12px Arial, sans-serif; }
+      .small { fill: #111827; font: 10.5px Arial, sans-serif; }
+      .muted { fill: #34435f; font: 11px Arial, sans-serif; }
+      .blue { fill: #123e91; }
+      .green { fill: #2e7d32; }
+      .purple { fill: #5b2c90; }
+      .orange { fill: #c2410c; }
+      .panel { fill: #ffffff; stroke: #8aa0c6; stroke-width: 1.2; rx: 6; }
+      .panel-blue { fill: #f8fbff; stroke: #2457b8; stroke-width: 1.4; rx: 6; }
+      .panel-green { fill: #f8fff6; stroke: #6a9f5c; stroke-width: 1.2; rx: 6; }
+      .panel-purple { fill: #fbf8ff; stroke: #8b65b6; stroke-width: 1.2; rx: 6; }
+      .panel-orange { fill: #fffaf6; stroke: #e8792e; stroke-width: 1.2; rx: 6; }
+      .row { fill: #ffffff; stroke: #b8c5dc; stroke-width: 1; rx: 4; }
+      .arrow { stroke: #0a3b8f; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .arrow-green { stroke: #237347; stroke-width: 2.4; fill: none; marker-end: url(#arrowhead-green); }
+      .divider { stroke: #a9b7cc; stroke-width: 1.1; }
+      .dash { stroke: #8aa0c6; stroke-width: 1.2; stroke-dasharray: 5 5; }
+      .icon-circle-blue { fill: #eaf1ff; stroke: #2457b8; stroke-width: 1; }
+      .icon-circle-green { fill: #eaf7e7; stroke: #2e7d32; stroke-width: 1; }
+      .icon-circle-purple { fill: #f2eafd; stroke: #6d3da5; stroke-width: 1; }
+      .icon-circle-orange { fill: #fff1e8; stroke: #e8792e; stroke-width: 1; }
+    </style>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0a3b8f"/>
+    </marker>
+    <marker id="arrowhead-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#237347"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1600" height="1000"/>
+  <rect class="band" x="10" y="10" width="1580" height="32" rx="3"/>
+  <text class="title" x="800" y="33" text-anchor="middle">DESIGN SYSTEM, SHELL, AND SUB-APPLICATION RELATIONSHIPS</text>
+
+  <rect class="panel-blue" x="28" y="62" width="360" height="395"/>
+  <text class="section-title" x="208" y="86" text-anchor="middle">DESIGN SYSTEM</text>
+  <text class="small-title" x="208" y="103" text-anchor="middle">Reusable primitives, patterns, and rules</text>
+
+  <g transform="translate(42 116)">
+    <rect class="row" width="332" height="46"/>
+    <circle class="icon-circle-blue" cx="24" cy="23" r="14"/><path d="M24 12 C15 24 18 34 24 34 C30 34 33 24 24 12Z" fill="none" stroke="#2457b8" stroke-width="2"/>
+    <text class="small-title" x="54" y="20">Tokens</text><text class="small" x="54" y="35">Names, values, generated CSS</text>
+  </g>
+  <g transform="translate(42 166)">
+    <rect class="row" width="332" height="46"/>
+    <circle class="icon-circle-blue" cx="24" cy="23" r="14"/><circle cx="18" cy="18" r="3" fill="#2457b8"/><circle cx="29" cy="17" r="3" fill="#2457b8"/><circle cx="30" cy="28" r="3" fill="#2457b8"/><circle cx="20" cy="30" r="3" fill="#2457b8"/>
+    <text class="small-title" x="54" y="20">PrimeNG Preset</text><text class="small" x="54" y="35">Semantic mapping and defaults</text>
+  </g>
+  <g transform="translate(42 216)">
+    <rect class="row" width="332" height="46"/>
+    <circle class="icon-circle-blue" cx="24" cy="23" r="14"/><path d="M24 11 36 18 24 25 12 18Z M12 18v14l12 7 12-7V18 M24 25v14" fill="none" stroke="#2457b8" stroke-width="2"/>
+    <text class="small-title" x="54" y="20">Component Registry</text><text class="small" x="54" y="35">UI primitives and composite components</text>
+  </g>
+  <g transform="translate(42 266)">
+    <rect class="row" width="332" height="46"/>
+    <circle class="icon-circle-blue" cx="24" cy="23" r="14"/><path d="M14 15h20v18H14z M14 21h20 M21 15v18 M28 15v18" fill="none" stroke="#2457b8" stroke-width="2"/>
+    <text class="small-title" x="54" y="20">Patterns</text><text class="small" x="54" y="35">Navigation, headers, cards, tables, forms, status</text>
+  </g>
+  <g transform="translate(42 316)">
+    <rect class="row" width="332" height="46"/>
+    <circle class="icon-circle-blue" cx="24" cy="23" r="14"/><circle cx="24" cy="15" r="3" fill="#2457b8"/><path d="M14 22h20 M24 18v18 M18 36l6-13 6 13" fill="none" stroke="#2457b8" stroke-width="2"/>
+    <text class="small-title" x="54" y="20">Accessibility Rules</text><text class="small" x="54" y="35">Expectations and validation rules</text>
+  </g>
+  <g transform="translate(42 366)">
+    <rect class="row" width="332" height="46"/>
+    <circle class="icon-circle-blue" cx="24" cy="23" r="14"/><path d="M13 15c7-3 14 0 22-3v21c-8 3-15 0-22 3z M13 15v24" fill="none" stroke="#2457b8" stroke-width="2"/>
+    <text class="small-title" x="54" y="20">Documentation &amp; Validation</text><text class="small" x="54" y="35">Storybook, Zeroheight, and evidence</text>
+  </g>
+
+  <text class="section-title" x="462" y="82" text-anchor="middle">FLOW OF DESIGN</text>
+  <text class="section-title" x="462" y="100" text-anchor="middle">SYSTEM ASSETS</text>
+  <text class="small-title" x="462" y="118" text-anchor="middle">(Consumed by)</text>
+  <path class="arrow" d="M388 143 H534"/>
+  <path class="arrow" d="M388 193 H456 Q456 143 534 143"/>
+  <path class="arrow" d="M388 243 H456 Q456 143 534 143"/>
+  <path class="arrow" d="M388 293 H456 Q456 312 534 312"/>
+  <path class="arrow" d="M388 343 H456 Q456 414 534 414"/>
+  <path class="arrow" d="M388 393 H456 Q456 414 534 414"/>
+
+  <rect class="panel-green" x="542" y="62" width="345" height="212"/>
+  <text class="section-title green" x="714" y="86" text-anchor="middle">PLATFORM SHELL</text>
+  <text class="small-title" x="714" y="103" text-anchor="middle">Composes experience and owns runtime</text>
+  <rect class="row" x="555" y="116" width="319" height="134"/>
+  <circle class="icon-circle-green" cx="580" cy="136" r="9"/><text class="text" x="605" y="140">Consumes tokens and registry components</text>
+  <circle class="icon-circle-green" cx="580" cy="163" r="9"/><text class="text" x="605" y="167">Applies layout and navigation patterns</text>
+  <circle class="icon-circle-green" cx="580" cy="190" r="9"/><text class="text" x="605" y="194">Owns routing, authorization, app chrome</text>
+  <circle class="icon-circle-green" cx="580" cy="217" r="9"/><text class="text" x="605" y="221">Loads and mounts remote subapplications</text>
+  <circle class="icon-circle-green" cx="580" cy="244" r="9"/><text class="text" x="605" y="248">Provides the integrated validation surface</text>
+
+  <rect class="panel-green" x="542" y="302" width="345" height="153"/>
+  <text class="section-title green" x="714" y="326" text-anchor="middle">SUB-APPLICATIONS</text>
+  <text class="small-title" x="714" y="343" text-anchor="middle">Domain workflows and independent teams</text>
+  <rect class="row" x="555" y="356" width="319" height="76"/>
+  <circle class="icon-circle-green" cx="580" cy="376" r="9"/><text class="text" x="605" y="380">Consume same tokens and registry components</text>
+  <circle class="icon-circle-green" cx="580" cy="403" r="9"/><text class="text" x="605" y="407">Plug into shell routes and navigation</text>
+  <circle class="icon-circle-green" cx="580" cy="430" r="9"/><text class="text" x="605" y="434">Own domain workflows, data, and releases</text>
+  <path class="arrow-green" d="M714 274 V302"/>
+
+  <line class="dash" x1="908" y1="62" x2="908" y2="457"/>
+  <text class="muted" x="913" y="260" transform="rotate(-90 913 260)">Boundaries</text>
+  <rect class="panel-purple" x="928" y="62" width="230" height="395"/>
+  <text class="section-title purple" x="1043" y="88" text-anchor="middle">BOUNDARY</text>
+  <rect class="panel-blue" x="940" y="100" width="200" height="140"/>
+  <text class="small-title" x="1040" y="119" text-anchor="middle">Design System Owns</text>
+  <text class="small" x="952" y="141">• Tokens, generated CSS, and exports</text>
+  <text class="small" x="952" y="160">• PrimeNG preset mapping</text>
+  <text class="small" x="952" y="179">• Registry components</text>
+  <text class="small" x="952" y="198">• Layout and navigation patterns</text>
+  <text class="small" x="952" y="217">• Accessibility rules</text>
+  <text class="small" x="952" y="236">• Documentation and evidence</text>
+  <rect class="panel-green" x="940" y="258" width="200" height="150"/>
+  <text class="small-title" x="1040" y="277" text-anchor="middle">Shell Owns</text>
+  <text class="small" x="952" y="300">• Navigation items and labels</text>
+  <text class="small" x="952" y="319">• Routes, guards, and authorization</text>
+  <text class="small" x="952" y="338">• Remote entry locations and loading</text>
+  <text class="small" x="952" y="357">• Environment configuration</text>
+  <text class="small" x="952" y="376">• Session and user context</text>
+  <text class="small" x="952" y="395">• Product copy and domain labels</text>
+
+  <rect class="panel" x="1180" y="62" width="395" height="293"/>
+  <text class="section-title" x="1378" y="86" text-anchor="middle">SHELL NAVIGATION <tspan class="small-title">(Example)</tspan></text>
+  <line class="divider" x1="1180" y1="96" x2="1575" y2="96"/>
+  <g transform="translate(1195 108)">
+    <text class="small-title" x="46" y="28">Point of Entry</text><text class="small" x="215" y="20">Route + nav placement</text><text class="small" x="215" y="36">Entry card pattern</text>
+    <line class="divider" x1="-15" y1="54" x2="380" y2="54"/>
+    <text class="small-title" x="46" y="84">Unified Pricing</text><text class="small-title" x="46" y="101">and Committing</text><text class="small" x="215" y="82">Route + mount point</text><text class="small" x="215" y="98">Landing page workflow</text>
+    <line class="divider" x1="-15" y1="119" x2="380" y2="119"/>
+    <text class="small-title" x="46" y="150">Rates Sheet</text><text class="small" x="215" y="146">Route + remote loading</text><text class="small" x="215" y="162">Rates table and filters</text>
+    <line class="divider" x1="-15" y1="184" x2="380" y2="184"/>
+    <text class="small-title" x="46" y="214">Loan Pipeline</text><text class="small" x="215" y="210">Route + remote loading</text><text class="small" x="215" y="226">Pipeline list and actions</text>
+    <line class="divider" x1="-15" y1="248" x2="380" y2="248"/>
+    <text class="small-title" x="46" y="278">Committed Loans</text><text class="small" x="215" y="274">Route + remote loading</text><text class="small" x="215" y="290">Committed loan workflows</text>
+  </g>
+
+  <rect class="panel" x="1180" y="372" width="395" height="80"/>
+  <text class="section-title" x="1378" y="393" text-anchor="middle">COMPONENT FLOW</text>
+  <text class="blue" x="1235" y="424" text-anchor="middle" font-size="24">◖</text>
+  <text class="blue" x="1300" y="424" text-anchor="middle" font-size="24">●</text>
+  <text class="blue" x="1365" y="424" text-anchor="middle" font-size="24">□</text>
+  <text class="blue" x="1430" y="424" text-anchor="middle" font-size="24">▦</text>
+  <text class="blue" x="1495" y="424" text-anchor="middle" font-size="24">✚</text>
+  <text class="small-title" x="1235" y="441" text-anchor="middle">Tokens</text>
+  <text class="small-title" x="1300" y="441" text-anchor="middle">Preset</text>
+  <text class="small-title" x="1365" y="441" text-anchor="middle">Registry</text>
+  <text class="small-title" x="1430" y="441" text-anchor="middle">Shell UI</text>
+  <text class="small-title" x="1495" y="441" text-anchor="middle">Sub-apps</text>
+  <text class="blue" x="1268" y="424" text-anchor="middle" font-size="24">→</text>
+  <text class="blue" x="1333" y="424" text-anchor="middle" font-size="24">→</text>
+  <text class="blue" x="1398" y="424" text-anchor="middle" font-size="24">→</text>
+  <text class="blue" x="1463" y="424" text-anchor="middle" font-size="24">→</text>
+
+  <rect class="panel" x="28" y="481" width="1255" height="92"/>
+  <text class="section-title" x="655" y="503" text-anchor="middle">VALIDATION EXPECTATIONS</text>
+  <g class="small-title">
+    <text x="92" y="535">✓ Tokens resolve in</text><text x="92" y="550">shell and every subapp</text>
+    <text x="252" y="535">✓ Registry components</text><text x="252" y="550">render correctly</text>
+    <text x="430" y="535">✓ Navigation, keyboard</text><text x="430" y="550">behavior, and layout work</text>
+    <text x="610" y="535">✓ Remote entry loading</text><text x="610" y="550">is reliable and observable</text>
+    <text x="792" y="535">✓ PrimeNG overlays inherit</text><text x="792" y="550">expected token values</text>
+    <text x="980" y="535">✓ Accessibility checks pass</text><text x="980" y="550">for mounted content</text>
+    <text x="1160" y="535">✓ Performance separates CI</text><text x="1160" y="550">health from runtime loading</text>
+  </g>
+  <rect class="panel" x="1310" y="481" width="265" height="92"/>
+  <rect x="1345" y="500" width="12" height="12" fill="#2457b8"/><text class="small-title" x="1370" y="510">Design System Responsibility</text>
+  <rect x="1345" y="522" width="12" height="12" fill="#2e7d32"/><text class="small-title" x="1370" y="532">Shell Responsibility</text>
+  <rect x="1345" y="544" width="12" height="12" fill="#a4c68a"/><text class="small-title" x="1370" y="554">Sub-Application Responsibility</text>
+  <rect x="1345" y="566" width="12" height="12" fill="#8b65b6"/><text class="small-title" x="1370" y="576">Boundary / Governance</text>
+
+  <rect class="band" x="10" y="600" width="1580" height="32" rx="3"/>
+  <text class="title" x="800" y="623" text-anchor="middle">FEDERATED WEB COMPONENTS DECISION</text>
+
+  <rect class="panel-blue" x="22" y="646" width="275" height="254"/>
+  <text class="section-title" x="160" y="670" text-anchor="middle">DECISION: USE FEDERATED</text>
+  <text class="section-title" x="160" y="688" text-anchor="middle">WEB COMPONENTS</text>
+  <text class="small-title" x="160" y="708" text-anchor="middle">Default boundary between shell</text>
+  <text class="small-title" x="160" y="724" text-anchor="middle">and sub-applications</text>
+  <rect class="row" x="80" y="744" width="190" height="28"/><text class="small-title" x="175" y="763" text-anchor="middle">Shell loads remote manifest</text>
+  <text class="blue" x="175" y="791" text-anchor="middle" font-size="24">↓</text>
+  <rect class="row" x="80" y="801" width="190" height="28"/><text class="small-title" x="175" y="820" text-anchor="middle">Shell loads remote entry</text>
+  <text class="blue" x="175" y="848" text-anchor="middle" font-size="24">↓</text>
+  <rect class="row" x="80" y="858" width="190" height="28"/><text class="small-title" x="175" y="877" text-anchor="middle">Remote registers custom element</text>
+
+  <rect class="panel" x="306" y="646" width="280" height="254"/>
+  <text class="section-title" x="446" y="670" text-anchor="middle">WHY THIS FITS</text>
+  <text class="text" x="320" y="700">✓ Shell owns nav, chrome, auth, routes, and loading</text>
+  <text class="text" x="320" y="728">✓ Sub-apps bootstrap independently</text>
+  <text class="text" x="320" y="756">✓ Design system stays logically abstracted</text>
+  <text class="text" x="320" y="784">✓ Shell does not import remote Angular internals</text>
+  <text class="text" x="320" y="812">✓ Direct runtime contract: load, register, mount</text>
+  <text class="text" x="320" y="840">✓ Future remotes can use different frameworks</text>
+  <text class="text" x="320" y="868">✓ Matches current repository and documentation</text>
+
+  <rect class="panel-green" x="596" y="646" width="222" height="254"/>
+  <text class="section-title green" x="707" y="670" text-anchor="middle">PROS</text>
+  <text class="text" x="612" y="704">✓ Clear shell boundary</text>
+  <text class="text" x="612" y="732">✓ Independent bootstrapping</text>
+  <text class="text" x="612" y="760">✓ Stable mount contract</text>
+  <text class="text" x="612" y="788">✓ Design-system separation</text>
+  <text class="text" x="612" y="816">✓ Deployment flexibility</text>
+  <text class="text" x="612" y="844">✓ Framework optionality</text>
+  <text class="text" x="612" y="872">✓ Runtime proof and validation</text>
+
+  <rect class="panel-orange" x="830" y="646" width="325" height="254"/>
+  <text class="section-title orange" x="992" y="670" text-anchor="middle">CONS AND REQUIRED CONTRACTS</text>
+  <text class="text" x="848" y="704">⚠ Shadow DOM ambiguity → Confirm DOM strategy</text>
+  <text class="text" x="848" y="732">⚠ Styling inheritance gaps → Define token strategy</text>
+  <text class="text" x="848" y="760">⚠ PrimeNG boundaries → Register provider</text>
+  <text class="text" x="848" y="788">⚠ Overlay behavior → Validate overlay container</text>
+  <text class="text" x="848" y="816">⚠ Context passing → Define attrs, props, events</text>
+  <text class="text" x="848" y="844">⚠ Routing ambiguity → Define ownership clearly</text>
+  <text class="text" x="848" y="872">⚠ Lifecycle cleanup → Define mount/disconnect</text>
+
+  <rect class="panel" x="1167" y="646" width="408" height="254"/>
+  <text class="section-title" x="1371" y="670" text-anchor="middle">COMPARED WITH ALTERNATIVES</text>
+  <line class="divider" x1="1167" y1="686" x2="1575" y2="686"/>
+  <text class="small-title" x="1206" y="707">Option</text><text class="small-title" x="1320" y="707">When it fits</text><text class="small-title" x="1465" y="707">Tradeoff</text>
+  <line class="divider" x1="1167" y1="720" x2="1575" y2="720"/>
+  <text class="small-title" x="1180" y="742">Federated</text><text class="small-title" x="1180" y="756">Web Components</text><text class="small" x="1295" y="746">Default shell / subapp</text><text class="small" x="1438" y="746">Needs DOM, token,</text><text class="small" x="1438" y="760">lifecycle contracts</text>
+  <line class="divider" x1="1167" y1="772" x2="1575" y2="772"/>
+  <text class="small-title" x="1180" y="794">Federated Angular</text><text class="small-title" x="1180" y="808">Routes</text><text class="small" x="1295" y="798">Shell composes routes</text><text class="small" x="1438" y="798">Tighter Angular and</text><text class="small" x="1438" y="812">router coupling</text>
+  <line class="divider" x1="1167" y1="824" x2="1575" y2="824"/>
+  <text class="small-title" x="1180" y="846">Federated ES</text><text class="small-title" x="1180" y="860">Modules</text><text class="small" x="1295" y="850">Shell imports APIs</text><text class="small" x="1438" y="850">Shell knows more</text><text class="small" x="1438" y="864">remote details</text>
+  <line class="divider" x1="1167" y1="876" x2="1575" y2="876"/>
+  <text class="small-title" x="1180" y="898">Iframe Adapter</text><text class="small" x="1295" y="898">Strong isolation</text><text class="small" x="1438" y="898">Harder styling/routing</text>
+
+  <rect class="panel" x="22" y="922" width="565" height="58"/>
+  <text class="section-title" x="305" y="943" text-anchor="middle">DESIGN SYSTEM IMPLICATIONS</text>
+  <text class="small-title" x="305" y="965" text-anchor="middle">Tokens, PrimeNG provider guidance, registry components, layout patterns, accessibility evidence, Storybook, and Zeroheight docs.</text>
+  <rect class="panel-purple" x="608" y="922" width="582" height="58"/>
+  <text class="section-title purple" x="899" y="943" text-anchor="middle">VALIDATION CHECKLIST</text>
+  <text class="small-title" x="899" y="965" text-anchor="middle">Remote manifests, element registration, token resolution, overlays, routing, lifecycle cleanup, accessibility, and performance tracking.</text>
+  <rect class="panel-blue" x="1210" y="922" width="365" height="58"/>
+  <text class="section-title" x="1392" y="943" text-anchor="middle">RECOMMENDATION</text>
+  <text class="small-title" x="1392" y="965" text-anchor="middle">Proceed with federated Web Components as the default integration model.</text>
+</svg>

@@ -192,6 +192,6 @@ Uses Updated Baselines (pnpm api:seed)
 
 ## See Also
 
-- [PERFORMANCE_TRACKING.md](./PERFORMANCE_TRACKING.md) - Complete system overview
-- [PERFORMANCE_BASELINE.md](./PERFORMANCE_BASELINE.md) - Baseline thresholds
-- [TESTING.md](./TESTING.md) - Test execution guide
+- [tracking.md](./tracking.md) - Complete system overview
+- [baseline.md](./baseline.md) - Baseline thresholds
+- [TESTING.md](../TESTING.md) - Test execution guide

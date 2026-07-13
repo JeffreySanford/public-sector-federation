@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1040" viewBox="0 0 1600 1040" role="img" aria-labelledby="title desc">
+  <title id="title">Shell Interaction Model</title>
+  <desc id="desc">Diagram showing the design system, platform shell, and sub-applications with their ownership boundaries, navigation requirements, component flow, and validation expectations.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { fill: #0f172a; font: 700 48px Arial, sans-serif; }
+      .subtitle { fill: #475569; font: 20px Arial, sans-serif; }
+      .panel { fill: #ffffff; stroke-width: 2; }
+      .panel-blue { stroke: #0b3b91; }
+      .panel-teal { stroke: #0f6674; }
+      .panel-purple { stroke: #5b2b8f; }
+      .panel-gray { stroke: #94a3b8; }
+      .heading { font: 700 22px Arial, sans-serif; }
+      .blue { fill: #0b3b91; }
+      .teal { fill: #0f6674; }
+      .purple { fill: #5b2b8f; }
+      .body { fill: #111827; font: 15px Arial, sans-serif; }
+      .small { fill: #334155; font: 13px Arial, sans-serif; }
+      .note { fill: #0f172a; font: 700 16px Arial, sans-serif; }
+      .italic { font: italic 15px Arial, sans-serif; }
+      .row { fill: #f8fafc; stroke: #cbd5e1; }
+      .chip { fill: #eef6ff; stroke: #b6d7ff; }
+      .arrow-blue { stroke: #0b3b91; stroke-width: 4; fill: none; marker-end: url(#arrowBlue); }
+      .arrow-teal { stroke: #0f6674; stroke-width: 4; fill: none; marker-end: url(#arrowTeal); }
+      .arrow-dashed { stroke: #0b3b91; stroke-width: 3; stroke-dasharray: 8 8; fill: none; marker-end: url(#arrowBlue); }
+      .table-head { fill: #0b3b91; }
+      .table-head-text { fill: #ffffff; font: 700 11px Arial, sans-serif; }
+      .table-text { fill: #111827; font: 11px Arial, sans-serif; }
+      .check { fill: #5b2b8f; font: 18px Arial, sans-serif; }
+    </style>
+    <marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#0b3b91" />
+    </marker>
+    <marker id="arrowTeal" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#0f6674" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="1040" />
+  <text class="title" x="800" y="55" text-anchor="middle">Shell Interaction Model</text>
+  <text class="subtitle" x="800" y="92" text-anchor="middle">
+    How the design system stays logically separate from the shell while supporting runtime composition and sub-application delivery.
+  </text>
+
+  <g id="top-flow">
+    <rect class="panel panel-blue" x="34" y="115" width="380" height="330" rx="12" />
+    <circle cx="105" cy="145" r="24" fill="#0b3b91" />
+    <text x="105" y="153" text-anchor="middle" fill="#fff" font-size="24">◆</text>
+    <text class="heading blue" x="170" y="153">Design System</text>
+    <rect class="row" x="48" y="178" width="352" height="36" rx="3" />
+    <rect class="row" x="48" y="214" width="352" height="36" rx="3" />
+    <rect class="row" x="48" y="250" width="352" height="36" rx="3" />
+    <rect class="row" x="48" y="286" width="352" height="36" rx="3" />
+    <rect class="row" x="48" y="322" width="352" height="36" rx="3" />
+    <rect class="row" x="48" y="358" width="352" height="36" rx="3" />
+    <text class="blue" x="72" y="202" font-size="22">◎</text>
+    <text class="body" x="112" y="201">Tokens</text>
+    <text class="blue" x="72" y="238" font-size="22">◉</text>
+    <text class="body" x="112" y="237">PrimeNG preset</text>
+    <text class="blue" x="72" y="274" font-size="22">▧</text>
+    <text class="body" x="112" y="273">Component registry</text>
+    <text class="blue" x="72" y="310" font-size="22">▤</text>
+    <text class="body" x="112" y="309">Layout and navigation patterns</text>
+    <text class="blue" x="72" y="346" font-size="22">◌</text>
+    <text class="body" x="112" y="345">Accessibility rules</text>
+    <text class="blue" x="72" y="382" font-size="22">▯</text>
+    <text class="body" x="112" y="381">Documentation and validation evidence</text>
+    <text class="italic blue" x="207" y="425" text-anchor="middle">Owns reusable primitives and patterns.</text>
+
+    <rect class="panel panel-teal" x="587" y="115" width="400" height="330" rx="12" />
+    <polygon points="668,125 692,139 692,169 668,183 644,169 644,139" fill="#0f6674" />
+    <text x="668" y="162" text-anchor="middle" fill="#fff" font-size="24">▣</text>
+    <text class="heading teal" x="730" y="157">Platform Shell</text>
+    <rect class="row" x="600" y="182" width="374" height="51" rx="3" />
+    <rect class="row" x="600" y="233" width="374" height="51" rx="3" />
+    <rect class="row" x="600" y="284" width="374" height="67" rx="3" />
+    <rect class="row" x="600" y="351" width="374" height="39" rx="3" />
+    <text class="teal" x="623" y="214" font-size="26">↗</text>
+    <text class="body" x="665" y="214">Consumes tokens and registry components</text>
+    <text class="teal" x="623" y="265" font-size="26">▤</text>
+    <text class="body" x="665" y="265">Applies layout and navigation patterns</text>
+    <text class="teal" x="623" y="316" font-size="26">▣</text>
+    <text class="body" x="665" y="310">Owns routing, authorization, app chrome,</text>
+    <text class="body" x="665" y="332">and remote loading</text>
+    <text class="teal" x="623" y="379" font-size="26">☑</text>
+    <text class="body" x="665" y="376">Provides the integrated validation surface</text>
+    <text class="italic teal" x="787" y="425" text-anchor="middle">Owns runtime composition.</text>
+
+    <rect class="panel panel-purple" x="1170" y="115" width="370" height="330" rx="12" />
+    <circle cx="1248" cy="145" r="24" fill="#5b2b8f" />
+    <text x="1248" y="153" text-anchor="middle" fill="#fff" font-size="26">▦</text>
+    <text class="heading purple" x="1310" y="157">Sub-applications</text>
+    <rect class="row" x="1185" y="182" width="340" height="80" rx="3" />
+    <rect class="row" x="1185" y="262" width="340" height="78" rx="3" />
+    <rect class="row" x="1185" y="340" width="340" height="87" rx="3" />
+    <text class="purple" x="1209" y="236" font-size="28">↗</text>
+    <text class="body" x="1250" y="219">Consume the same tokens and</text>
+    <text class="body" x="1250" y="241">registry components</text>
+    <text class="purple" x="1209" y="312" font-size="28">☞</text>
+    <text class="body" x="1250" y="306">Plug into shell routes and navigation</text>
+    <text class="purple" x="1209" y="386" font-size="28">◎</text>
+    <text class="body" x="1250" y="377">Own domain workflows, data contracts,</text>
+    <text class="body" x="1250" y="399">and release timing</text>
+  </g>
+
+  <path class="arrow-blue" d="M414 232 H580" />
+  <text class="blue" x="492" y="220" font="700 14px Arial">consumes</text>
+  <path class="arrow-teal" d="M987 232 H1160" />
+  <text class="teal" x="1074" y="218" text-anchor="middle" font="700 14px Arial">routes,</text>
+  <text class="teal" x="1074" y="238" text-anchor="middle" font="700 14px Arial">navigation,</text>
+  <text class="teal" x="1074" y="258" text-anchor="middle" font="700 14px Arial">remote loading</text>
+  <path class="arrow-dashed" d="M414 420 H1160" />
+  <text class="blue" x="475" y="408" font="700 14px Arial">shared tokens + registry</text>
+
+  <g id="boundary">
+    <rect class="panel panel-gray" x="32" y="475" width="1525" height="230" rx="8" />
+    <rect class="bg" x="730" y="462" width="140" height="35" />
+    <text class="heading" x="800" y="485" text-anchor="middle" fill="#111827">Boundary</text>
+
+    <rect class="panel panel-gray" x="54" y="497" width="705" height="155" rx="6" />
+    <rect class="panel panel-gray" x="775" y="497" width="760" height="155" rx="6" />
+    <rect class="chip" x="54" y="662" width="1480" height="32" rx="5" />
+    <text class="blue" x="92" y="535" font-size="42">▣</text>
+    <text class="heading blue" x="145" y="522">A) Design System owns</text>
+    <text class="body" x="145" y="548">• Token names, values, generated CSS, and documentation exports</text>
+    <text class="body" x="145" y="572">• PrimeNG preset mapping and approved defaults</text>
+    <text class="body" x="145" y="596">• Registry components for common UI APIs</text>
+    <text class="body" x="145" y="620">• Accessibility expectations, Storybook examples, and promotion evidence</text>
+
+    <text class="teal" x="815" y="535" font-size="42">▣</text>
+    <text class="heading teal" x="868" y="522">B) Shell owns</text>
+    <text class="body" x="868" y="548">• Which sub-applications appear in navigation</text>
+    <text class="body" x="868" y="572">• Route configuration, route guards, and authorization context</text>
+    <text class="body" x="868" y="596">• Remote entry locations and loading policy</text>
+    <text class="body" x="1200" y="548">• User/session context</text>
+    <text class="body" x="1200" y="572">• Environment-specific configuration</text>
+    <text class="body" x="1200" y="596">• Product copy and business-specific navigation labels</text>
+
+    <text class="blue" x="155" y="686" font-size="23">ⓘ</text>
+    <text class="note" x="202" y="684">
+      The shell can be the best reference implementation of the design system, but it should not own token values, generic component APIs, or cross-application design rules.
+    </text>
+  </g>
+
+  <g id="bottom">
+    <rect class="panel panel-blue" x="24" y="720" width="510" height="300" rx="10" />
+    <text class="heading blue" x="118" y="750">Navigation Requirements</text>
+    <rect class="table-head" x="34" y="766" width="490" height="24" />
+    <text class="table-head-text" x="70" y="782">Navigation item</text>
+    <text class="table-head-text" x="222" y="782">Shell responsibility</text>
+    <text class="table-head-text" x="390" y="782">Sub-app responsibility</text>
+    <g>
+      <rect class="row" x="34" y="790" width="490" height="34" />
+      <rect class="row" x="34" y="824" width="490" height="34" />
+      <rect class="row" x="34" y="858" width="490" height="34" />
+      <rect class="row" x="34" y="892" width="490" height="34" />
+      <rect class="row" x="34" y="926" width="490" height="34" />
+      <text class="table-text" x="50" y="812">Point of Entry</text>
+      <text class="table-text" x="210" y="805">Route, nav placement,</text>
+      <text class="table-text" x="210" y="819">entry-card pattern</text>
+      <text class="table-text" x="382" y="805">Entry workflow and</text>
+      <text class="table-text" x="382" y="819">domain data</text>
+      <text class="table-text" x="50" y="846">Unified Pricing</text>
+      <text class="table-text" x="210" y="839">Route and landing-page</text>
+      <text class="table-text" x="210" y="853">mount point</text>
+      <text class="table-text" x="382" y="839">Landing page and</text>
+      <text class="table-text" x="382" y="853">pricing workflows</text>
+      <text class="table-text" x="50" y="880">Rates Sheet</text>
+      <text class="table-text" x="210" y="880">Route and remote loading</text>
+      <text class="table-text" x="382" y="873">Rates table, filters,</text>
+      <text class="table-text" x="382" y="887">and rate workflow</text>
+      <text class="table-text" x="50" y="914">Loan Pipeline</text>
+      <text class="table-text" x="210" y="914">Route and remote loading</text>
+      <text class="table-text" x="382" y="907">Pipeline list, status,</text>
+      <text class="table-text" x="382" y="921">search, and actions</text>
+      <text class="table-text" x="50" y="948">Committed Loans</text>
+      <text class="table-text" x="210" y="948">Route and remote loading</text>
+      <text class="table-text" x="382" y="941">Committed-loan list,</text>
+      <text class="table-text" x="382" y="955">detail, and actions</text>
+    </g>
+    <rect class="chip" x="34" y="972" width="490" height="36" rx="5" />
+    <text class="small" x="72" y="990">Labels are shell configuration; the design system provides</text>
+    <text class="small" x="72" y="1006">navigation behavior, active state, responsive layout, and a11y rules.</text>
+
+    <rect class="panel panel-teal" x="548" y="720" width="470" height="300" rx="10" />
+    <text class="heading teal" x="682" y="750">Component Flow</text>
+    <rect class="chip" x="560" y="790" width="70" height="105" rx="6" />
+    <rect class="chip" x="650" y="790" width="80" height="105" rx="6" />
+    <rect class="chip" x="750" y="790" width="80" height="105" rx="6" />
+    <rect class="chip" x="850" y="790" width="80" height="105" rx="6" />
+    <rect class="chip" x="950" y="790" width="55" height="105" rx="6" />
+    <text class="small" x="595" y="835" text-anchor="middle">packages/</text>
+    <text class="small" x="595" y="852" text-anchor="middle">tokens</text>
+    <text class="small" x="690" y="827" text-anchor="middle">PrimeNG</text>
+    <text class="small" x="690" y="846" text-anchor="middle">preset</text>
+    <text class="small" x="790" y="827" text-anchor="middle">packages/</text>
+    <text class="small" x="790" y="846" text-anchor="middle">ui-patterns</text>
+    <text class="small" x="890" y="817" text-anchor="middle">shell nav,</text>
+    <text class="small" x="890" y="836" text-anchor="middle">header,</text>
+    <text class="small" x="890" y="855" text-anchor="middle">layout</text>
+    <text class="small" x="978" y="827" text-anchor="middle">sub-</text>
+    <text class="small" x="978" y="846" text-anchor="middle">apps</text>
+    <path class="arrow-teal" d="M630 842 H645" />
+    <path class="arrow-teal" d="M730 842 H745" />
+    <path class="arrow-teal" d="M830 842 H845" />
+    <path class="arrow-teal" d="M930 842 H945" />
+    <rect class="chip" x="560" y="925" width="445" height="72" rx="6" />
+    <text class="body" x="608" y="954">Design system provides reusable APIs and visual contracts.</text>
+    <text class="body" x="608" y="976">Shell and sub-applications provide labels, data, and behavior.</text>
+
+    <rect class="panel panel-purple" x="1035" y="720" width="540" height="300" rx="10" />
+    <text class="heading purple" x="1128" y="750">Validation Expectations</text>
+    <text class="check" x="1058" y="785">✓</text><text class="body" x="1085" y="785">Tokens resolve in the shell and every mounted sub-application</text>
+    <text class="check" x="1058" y="815">✓</text><text class="body" x="1085" y="815">Registry components render correctly inside the shell</text>
+    <text class="check" x="1058" y="845">✓</text><text class="body" x="1085" y="845">Navigation active state, keyboard behavior, and responsive layout work</text>
+    <text class="check" x="1058" y="875">✓</text><text class="body" x="1085" y="875">Remote entry loading is reliable and observable</text>
+    <text class="check" x="1058" y="905">✓</text><text class="body" x="1085" y="905">PrimeNG overlays inherit expected token values</text>
+    <text class="check" x="1058" y="935">✓</text><text class="body" x="1085" y="935">Accessibility checks pass for shell navigation and mounted content</text>
+    <text class="check" x="1058" y="965">✓</text><text class="body" x="1085" y="965">Performance separates CI health from runtime shell and remote loading</text>
+  </g>
+</svg>

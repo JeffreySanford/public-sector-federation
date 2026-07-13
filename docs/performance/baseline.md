@@ -183,7 +183,7 @@ Investigation: [Notes]
 
 ## See Also
 
-- [Testing Guide](./TESTING.md) - How to run tests
+- [Testing Guide](../TESTING.md) - How to run tests
 - [Playwright Docs](https://playwright.dev) - Official docs
 - [Performance Testing](https://playwright.dev/docs/test-performance) - Advanced profiling
 

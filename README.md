@@ -138,7 +138,8 @@ pnpm test:e2e
 pnpm docs TESTING.md
 ```
 
-For detailed testing guide, see [TESTING.md](./docs/TESTING.md) and [PERFORMANCE_BASELINE.md](./docs/PERFORMANCE_BASELINE.md).
+For detailed testing guide, see [TESTING.md](./docs/TESTING.md) and
+[performance baseline](./docs/performance/baseline.md).
 
 ---
 

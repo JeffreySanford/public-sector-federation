@@ -35,7 +35,7 @@ The `TestPerformanceMetric` model tracks:
 - Test name
 - Browser (chromium, firefox, webkit, or null for non-browser tests)
 - Duration in milliseconds
-- Baseline duration (from PERFORMANCE_BASELINE.md)
+- Baseline duration (from [baseline.md](./baseline.md))
 - Threshold duration (max acceptable)
 - Performance status (excellent, good, warning, critical)
 - Pass/fail indicator
@@ -43,7 +43,7 @@ The `TestPerformanceMetric` model tracks:
 - Git commit hash and branch
 - Timestamp
 
-**Location**: [apps/agile-api/prisma/schema.prisma](../apps/agile-api/prisma/schema.prisma)
+**Location**: [apps/agile-api/prisma/schema.prisma](../../apps/agile-api/prisma/schema.prisma)
 
 ### 2. API Endpoints
 
@@ -108,7 +108,7 @@ GET /api/performance/date-range?startDate=2026-07-01T00:00:00Z&endDate=2026-07-3
 Returns PerformanceMetricDTO[] for specified range
 ```
 
-**Location**: [apps/agile-api/src/performance/](../apps/agile-api/src/performance/)
+**Location**: [apps/agile-api/src/performance/](../../apps/agile-api/src/performance/)
 
 ### 3. Performance Dashboard (QA Remote Tab)
 
@@ -144,7 +144,7 @@ setActiveTab(tab: 'qa' | 'performance'): void {
 }
 ```
 
-**Location**: [apps/qa-remote/src/app/components/](../apps/qa-remote/src/app/components/)
+**Location**: [apps/qa-remote/src/app/components/](../../apps/qa-remote/src/app/components/)
 
 ### 4. CLI Recording Tool
 
@@ -157,7 +157,7 @@ pnpm perf:record [--api-url http://localhost:3333]
 The script:
 1. Reads `test-results/results.json` (Playwright JSON reporter output)
 2. Extracts test suite, name, browser, and duration
-3. Compares against baselines from PERFORMANCE_BASELINE.md
+3. Compares against baselines from [baseline.md](./baseline.md)
 4. Determines status (excellent/good/warning/critical)
 5. Records metrics to API via HTTP POST
 6. Reports success/failure count
@@ -168,7 +168,7 @@ The script:
 - `GIT_BRANCH`: Git branch name (auto-detected if not provided)
 - `SLACK_WEBHOOK_URL`: Optional Slack incoming webhook for warning/critical regression alerts
 
-**Location**: [scripts/record-performance.mjs](../scripts/record-performance.mjs)
+**Location**: [scripts/record-performance.mjs](../../scripts/record-performance.mjs)
 
 ### Unit Spec Coverage
 
@@ -253,7 +253,7 @@ database instances get the latest performance baselines. After each test run:
 This keeps `apps/agile-api/prisma/seed-data/test-performance.seed.json` in
 sync with actual measured performance, eliminating manual synchronization.
 
-See [PERFORMANCE_SEED_SYNC.md](./PERFORMANCE_SEED_SYNC.md) for detailed seed auto-update documentation.
+See [seed-sync.md](./seed-sync.md) for detailed seed auto-update documentation.
 
 **Customization**:
 - Edit `.github/workflows/performance-tracking.yml` for automatic recording
@@ -262,7 +262,7 @@ See [PERFORMANCE_SEED_SYNC.md](./PERFORMANCE_SEED_SYNC.md) for detailed seed aut
 
 ## Baseline Thresholds
 
-From [docs/PERFORMANCE_BASELINE.md](../docs/PERFORMANCE_BASELINE.md):
+From [baseline.md](./baseline.md):
 
 | Test Suite | Baseline | Threshold | Status |
 |------------|----------|-----------|--------|
@@ -292,7 +292,8 @@ Example regressions:
 
 ## Database Seeding
 
-Initial baseline metrics are seeded from [apps/agile-api/prisma/seed-data/test-performance.seed.json](../apps/agile-api/prisma/seed-data/test-performance.seed.json):
+Initial baseline metrics are seeded from
+[apps/agile-api/prisma/seed-data/test-performance.seed.json](../../apps/agile-api/prisma/seed-data/test-performance.seed.json):
 
 ```bash
 pnpm api:seed
@@ -346,9 +347,14 @@ Potential improvements:
 7. **Multi-team tracking**: Track performance across team ownership
 8. **Integration with PR checks**: Require performance approval for merges
 
+See [next-steps.md](./next-steps.md) for the runtime observability backlog. The
+current system mainly records CI test execution health; the next phase should
+add browser runtime and federation loading metrics.
+
 ## References
 
-- [Performance Baseline Documentation](../docs/PERFORMANCE_BASELINE.md)
-- [Testing Documentation](../docs/TESTING.md)
-- [Agile API Server](../apps/agile-api/README.md)
-- [QA Remote App](../apps/qa-remote/README.md)
+- [Performance Baseline Documentation](./baseline.md)
+- [Performance Next Steps](./next-steps.md)
+- [Testing Documentation](../TESTING.md)
+- [Agile API Server](../../apps/agile-api/README.md)
+- [QA Remote App](../../apps/qa-remote/README.md)
