@@ -390,6 +390,7 @@ Documentation:
 
 | Document | Role |
 | --- | --- |
+| [Governance Summary](./governance-summary.md) | **START HERE**: Concise overview for leadership and decision makers |
 | [Developer Journey](./developer-journey.md) | What the design-system experience looks like to an external product-team developer. |
 | [Contribution Process](./contribution-process.md) | Detailed intake, triage, evidence, and promotion process. |
 | [InnerSource Contribution Model](./innersource-contribution-model.md) | Team participation and maintainer approval model. |
@@ -398,11 +399,3 @@ Documentation:
 | [Governance Flow Map](./flow-map.md) | End-to-end flow between design, tokens, registry, validation, and docs. |
 | [Adoption And Team Buy-In](./adoption-and-team-buy-in.md) | Participation, support, and adoption measures. |
 | [Rollout Implementation](./rollout-implementation.md) | Gradual rollout sequence and risk-based approval. |
-
-## Recommended Next Step
-
-Use Zeroheight to publish one complete reference component page, such as Button
-or Status Chip. That page should include status, owner, usage guidance,
-approved variants, implementation link, Storybook link, validation evidence,
-and change history. Then use that page as the template for the rest of the
-system.

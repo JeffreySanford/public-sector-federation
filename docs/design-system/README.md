@@ -18,6 +18,8 @@ to correct once the production repositories are available.
 
 ## Start Here
 
+**Executive Summary**: [Governance Summary](./governance/governance-summary.md) — Concise overview for leadership and decision makers.
+
 1. [Focus](./focus.md)
 2. [Operating model](./architecture/operating-model.md)
 3. [Token pipeline](./architecture/token-pipeline.md)
