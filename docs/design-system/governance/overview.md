@@ -160,6 +160,73 @@ protected shared contracts, including:
 
 This lets product teams contribute without allowing uncontrolled forks.
 
+## Contributor Progression Model
+
+Contributors can build trust and influence over time through consistent participation:
+
+| Level | What It Means | Permissions | Path to Next Level |
+| --- | --- | --- | --- |
+| **User** | Uses the design system | Read access to repos and Zeroheight | Become a Contributor |
+| **Contributor** | Submits PRs and proposals | Create branches, submit PRs | Demonstrated quality across 3+ contributions |
+| **Repeat Contributor** | Regular participator with proven judgment | PR review within domain, self-merge after approval | Nominated by maintainer after 6+ months consistent quality |
+| **Trusted Committer** | Recognized reviewer for specific areas (e.g., form components, a11y) | Review and merge within agreed scope, help mentor new contributors | Appointed by Design System Council |
+| **Maintainer** | Full repository ownership | All permissions, releases, breaking changes | Proposed by council, requires consensus |
+
+This progression lets product-team developers become recognized reviewers for areas of expertise without joining the central design-system team.
+
+## Governance Levels
+
+"InnerSource" means different things in different contexts. This design system operates at the **Contributions Welcome** level:
+
+| Level | Meaning | Your System |
+| --- | --- | --- |
+| **Visible** | Anyone can read, but no participation | Not this |
+| **Feedback Welcome** | Anyone can file issues; maintainers decide on changes | Not this |
+| **Contributions Welcome** | Anyone can propose and implement; maintainers control approval | ✅ This level |
+| **Shared Write Access** | Trusted contributors can review and merge within scope | Future progression for Trusted Committers |
+| **Shared Ownership** | Multiple teams jointly control direction | Not planned |
+
+This clarity prevents confusion: contributors may not have merge rights, but they are genuinely invited to propose work.
+
+## Repository Readiness Standard
+
+Before a repository accepts InnerSource contributions, it must provide self-service onboarding:
+
+**Required files and clarity**:
+
+- `README.md` — Purpose, key links, getting started
+- `CONTRIBUTING.md` — How to propose work, coding standards, review expectations, escalation path
+- `COMMUNICATION.md` — Where discussions happen (GitHub issues, Slack, email), response times, office hours
+- Named maintainers — Who reviews PRs, makes decisions, and can be contacted
+- Local setup — Build and test commands that work
+- Coding standards — Linting, formatting, testing requirements
+- Review turnaround — Maximum time before first feedback
+- Escalation path — What happens if you're blocked
+
+This turns onboarding into a self-service process instead of requiring private conversations with maintainers.
+
+## Contribution Service Contract
+
+Contributors and maintainers make implicit promises to each other. Make them explicit:
+
+**Maintainers promise**:
+
+- New proposals acknowledged within 3 business days
+- First PR review started within 5 business days
+- A maintainer assigned before substantial implementation begins
+- Clear feedback on blockers or needed changes
+- Escalation path if review is delayed
+
+**Contributors promise**:
+
+- Follow the contribution template and provide required context
+- Remain available for code review feedback
+- Support the code through an agreed stabilization period after merge (typically 2 weeks)
+- Address defects discovered during that period
+- Work with maintainers on any adoption issues
+
+This service contract reduces fear on both sides: maintainers know contributors won't abandon code, and contributors know reviews won't take months.
+
 ## Evidence Gates
 
 Promotion should depend on evidence, not just completion of code.
@@ -251,53 +318,6 @@ Lifecycle status should be visible in Zeroheight and backed by registry
 metadata or source-controlled documentation. See
 [Component Promotion](./component-promotion.md) for promotion evidence and
 decision rules.
-
-## Operational Processes
-
-The governance model includes three core operational workflows:
-
-### 1. Intake Process
-
-How requests come in, are evaluated, and enter the roadmap.
-
-**Five-step process**:
-1. Submit request (with problem, impact, evidence)
-2. Initial review (does this belong in the system?)
-3. Search for existing solutions (reuse, extend, or create?)
-4. Assess business value (priority and timeline)
-5. Technical assessment (implementation feasibility)
-
-See [Intake Process](./governance-intake-process.md) for detailed workflow, decision matrix, and SLAs.
-
-### 2. Quality Gates
-
-Seven required gates that every component must pass before publication.
-
-**Gates**:
-1. Design Review (visual consistency, variants, responsiveness)
-2. Accessibility Review (WCAG 2.1 AA compliance)
-3. Component Implementation (TypeScript, responsive, tested)
-4. Unit Testing (≥80% coverage)
-5. Storybook Documentation (all states, examples, controls)
-6. Zeroheight Documentation (published guidance and standards)
-7. Governance Approval (Design System Council sign-off)
-
-See [Quality Gates](./governance-quality-gates.md) for detailed checklists and exceptions process.
-
-### 3. Release Process
-
-Steps to publish, communicate, and support adoption of new versions.
-
-**Phases**:
-1. Preparation (version assignment, release notes, QA)
-2. Approval (Design System Council review)
-3. Publication (NPM, GitHub, Zeroheight, Storybook)
-4. Communication (Slack, email, office hours)
-5. Adoption Support (2-week window for questions and hotfixes)
-
-See [Release Process](./governance-release-process.md) for schedule, breaking changes policy, hotfix procedures, and metrics.
-
----
 
 ## Proposed Governance Structure
 
@@ -435,26 +455,9 @@ Documentation:
 
 ## Document Map
 
-### Strategic Documents
-
 | Document | Role |
 | --- | --- |
-| [Governance Summary](./governance-summary.md) | **START HERE**: Concise overview for leadership and decision makers |
 | [Developer Journey](./developer-journey.md) | What the design-system experience looks like to an external product-team developer. |
-| [Governance Overview](./overview.md) | Complete governance framework with metrics, cadence, and adoption standards. |
-
-### Operational Processes
-
-| Document | Role |
-| --- | --- |
-| [Intake Process](./governance-intake-process.md) | How requests are submitted, evaluated, and prioritized. Five-step workflow. |
-| [Quality Gates](./governance-quality-gates.md) | Seven required gates: Design, Accessibility, Implementation, Testing, Storybook, Documentation, Approval. |
-| [Release Process](./governance-release-process.md) | Steps to publish: Preparation, Approval, Publication, Communication, Adoption Support. Hotfix procedures. |
-
-### Supporting Documents
-
-| Document | Role |
-| --- | --- |
 | [Contribution Process](./contribution-process.md) | Detailed intake, triage, evidence, and promotion process. |
 | [InnerSource Contribution Model](./innersource-contribution-model.md) | Team participation and maintainer approval model. |
 | [Component Promotion](./component-promotion.md) | Lifecycle statuses and promotion evidence. |
