@@ -280,7 +280,13 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
     const paginator = frameContent.locator('.p-paginator');
     await expect(paginator).toBeVisible({ timeout: 20000 });
     await expect(paginator.locator('.p-paginator-current')).toBeVisible({ timeout: 20000 });
-    return { frameContent, paginator };
+    const table = frameContent.locator('table').filter({
+      has: frameContent.getByRole('columnheader', { name: 'Program' }),
+    });
+    const dataRows = table.locator('tbody > tr:visible').filter({
+      has: frameContent.locator('td'),
+    });
+    return { frameContent, paginator, dataRows };
   }
 
   test('should display paginator controls', async ({ page }) => {
@@ -335,14 +341,14 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
   test('should filter rows from the search box', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-    const { frameContent } = await getTableStoryContent(page);
+    const { frameContent, dataRows, paginator } = await getTableStoryContent(page);
     const search = frameContent.getByRole('searchbox', { name: /Search programs/i });
     await search.fill('housing');
 
-    const tableRows = frameContent.locator('tbody tr');
-    await expect(tableRows).toHaveCount(2);
-    await expect(tableRows.nth(0)).toContainText('Housing assistance');
-    await expect(tableRows.nth(1)).toContainText('Emergency housing');
+    await expect(paginator.locator('.p-paginator-current')).toContainText('1 to 2 of 2');
+    await expect(dataRows).toHaveCount(2);
+    await expect(dataRows.nth(0)).toContainText('Housing assistance');
+    await expect(dataRows.nth(1)).toContainText('Emergency housing');
   });
 
   test('should reset the current report when filtering narrows the dataset', async ({ page }) => {
@@ -362,9 +368,8 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
   test('should display table rows matching page size', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-    const { frameContent } = await getTableStoryContent(page);
-    const tableRows = frameContent.locator('tbody tr');
-    await expect(tableRows).toHaveCount(5);
+    const { dataRows } = await getTableStoryContent(page);
+    await expect(dataRows).toHaveCount(5);
   });
 });
 
@@ -398,5 +403,13 @@ test.describe('Storybook Stories - Error Handling', () => {
 
     // Should load successfully
     await expect(page.locator('body')).toBeVisible();
+  });
+});
+
+test.describe('Storybook Stories - Demo Intentional Failure', () => {
+  test('INTENDED FAILED TEST FOR DEMO - this test fails on purpose so the QA walkthrough shows a visible failure', async () => {
+    expect(
+      'Intentional demo failure. This is expected for the July 14, 2026 QA demo and is not a product bug.',
+    ).toBe('This value is intentionally incorrect for the demo');
   });
 });

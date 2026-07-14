@@ -61,8 +61,7 @@ const rows: Row[] = [
         [showCurrentPageReport]="true"
         currentPageReportTemplate="{first} to {last} of {totalRecords}"
         [tableStyleClass]="'story-table'"
-        (firstChange)="first = $event"
-        (rowsChange)="rowsPerPage = $event"
+        (onPage)="onPageChange($event)"
       >
         <ng-template pTemplate="header">
           <tr>
@@ -120,6 +119,11 @@ class TablePaginatorAcceptanceStoryComponent {
   onQueryChange(query: string): void {
     this.query = query;
     this.first = 0;
+  }
+
+  onPageChange(event: { first: number; rows: number }): void {
+    this.first = event.first ?? 0;
+    this.rowsPerPage = event.rows ?? this.rowsPerPage;
   }
 
   severity(status: Row['status']): 'success' | 'warn' | 'danger' {
