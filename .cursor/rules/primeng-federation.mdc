@@ -43,21 +43,28 @@ Use one dev-server owner. Prefer `pnpm start:all`, then verify with:
 pnpm verify:fed
 ```
 
-## PrimeNG Reintroduction Rule
+## PrimeNG Wrapper Boundary
 
-Some PrimeNG hosts rendered as blank raw tags when they were used as route-critical
-or shared-wrapper content. Reintroduce PrimeNG components one family at a time:
+PrimeNG is always wrapped for new or target-state app and remote code. Apps and
+remotes consume `@public-sector/ui-patterns`; they do not import `primeng/*`,
+render direct `<p-*>` templates, use PrimeNG template directives directly, or
+style app-level `.p-*` selectors.
 
-1. Verify the direct remote URL.
-2. Verify the shell-composed route.
-3. Run `pnpm verify:fed`.
-4. Only then move the pattern into a shared wrapper.
+When a new PrimeNG-backed capability is needed:
 
-Current safe smoke tests in `/qa`: `p-tag`, outlined `p-button`, `p-table`,
-`p-dialog` opened from a native trigger, and isolated `p-card`.
+1. Add or extend a wrapper in `packages/ui-patterns`.
+2. Expose design-system inputs, outputs, types, and lifecycle status.
+3. Keep PrimeNG modules, API names, severities, and implementation details
+   internal to the wrapper.
+4. Prove the wrapper in Storybook or the QA route.
+5. Verify the direct remote URL, the shell-composed route, and `pnpm verify:fed`.
 
-Prefer stable token-styled native panels for route-critical content until the
-PrimeNG host is proven reliable in both direct and shell-composed views. Avoid
-promoting a PrimeNG host into a shared wrapper until the raw host passes first.
+Do not add direct `p-*` smoke-test usage in apps or remotes to prove new work.
+Use wrapper demos and tests instead.
+
+Migrated legacy apps may keep existing direct PrimeNG temporarily when the path
+is inventoried in `scripts/primeng-boundary-allowlist.json`. Treat each
+allowlist entry as migration debt, and move it to a wrapper when that area is
+touched.
 
 Reference: https://primeng.dev/llms/llms-full.txt

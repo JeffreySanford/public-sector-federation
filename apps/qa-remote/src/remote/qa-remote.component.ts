@@ -4,9 +4,15 @@ import {
   PublicButtonComponent,
   PublicCardComponent,
   PublicDialogComponent,
+  PublicMenuComponent,
+  PublicPopoverComponent,
+  PublicSelectComponent,
+  PublicTooltipComponent,
   PublicTagComponent,
   PublicToastComponent,
   PublicToastService,
+  type PublicMenuAction,
+  type PublicSelectOption,
 } from '@public-sector/ui-patterns';
 import { PerformanceDashboardComponent } from '../app/components/performance-dashboard.component';
 import { AgileWorkflowService } from './agile-workflow.service';
@@ -54,7 +60,11 @@ interface AgileBoardRow {
     PublicButtonComponent,
     PublicCardComponent,
     PublicDialogComponent,
+    PublicMenuComponent,
+    PublicPopoverComponent,
+    PublicSelectComponent,
     PublicTagComponent,
+    PublicTooltipComponent,
     PublicToastComponent,
     PerformanceDashboardComponent,
   ],
@@ -69,6 +79,7 @@ export class QaRemoteComponent implements OnInit {
 
   dialogVisible = false;
   acceptanceDialogVisible = false;
+  selectedOverlayProgram = 'housing';
   qaTableLoading = false;
   qaTableShowEmpty = false;
   agileApiSource = 'Loading Agile API…';
@@ -192,6 +203,30 @@ export class QaRemoteComponent implements OnInit {
       gate: 'Status moves to Active or Proven only with Storybook, direct remote, shell-mounted, and accessibility evidence.',
       status: 'Done',
     },
+  ];
+
+  readonly overlayMenuActions: PublicMenuAction[] = [
+    {
+      label: 'Review queue',
+      icon: 'pi pi-list-check',
+      action: () => this.showAcceptanceToast('info'),
+    },
+    {
+      label: 'Escalate item',
+      icon: 'pi pi-exclamation-triangle',
+      action: () => this.showAcceptanceToast('warn'),
+    },
+    {
+      label: 'Close case',
+      icon: 'pi pi-check',
+      action: () => this.showAcceptanceToast('success'),
+    },
+  ];
+
+  readonly overlayProgramOptions: PublicSelectOption[] = [
+    { label: 'Housing assistance', value: 'housing' },
+    { label: 'Benefits renewal', value: 'benefits' },
+    { label: 'Permit review', value: 'permits' },
   ];
 
   readonly federationProofRows = [

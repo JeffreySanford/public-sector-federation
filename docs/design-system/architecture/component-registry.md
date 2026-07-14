@@ -3,9 +3,14 @@
 The component registry should provide supported Angular UI APIs and reusable
 patterns built on top of PrimeNG and the shared token contract.
 
-Current guidance is that PrimeNG is always wrapped so the underlying component
-provider can be swapped later. Application teams should consume the governed
-registry API instead of importing PrimeNG directly.
+Current guidance is that PrimeNG is always wrapped for new and target-state
+work so the underlying component provider can be swapped later. Migrated
+legacy applications may keep existing direct PrimeNG usage temporarily while
+wrappers are added ad hoc.
+
+Application teams should consume the governed registry API for new work. Direct
+PrimeNG in legacy apps should be treated as migration debt with an owner and
+removal path.
 
 ## Usage Model
 
@@ -14,6 +19,7 @@ registry API instead of importing PrimeNG directly.
 | Strict registry wrapper | Core components need stable design-system APIs and normalized events. |
 | Thin normalized wrapper | Advanced components need broad PrimeNG capability behind a stable import path. |
 | Composite component or pattern | Multiple pieces form a reusable business or UX workflow. |
+| Legacy compatibility exception | Existing migrated app usage must keep working before a wrapper exists. |
 
 ## Registry Expectations
 
@@ -24,6 +30,7 @@ registry API instead of importing PrimeNG directly.
 - Shell-mounted behavior is validated before broad promotion.
 - PrimeNG and Angular compatibility are versioned and documented.
 - Deprecated components include migration guidance.
+- Legacy exceptions are inventoried and removed as wrappers become available.
 
 ## Example Registry Entry
 
@@ -131,6 +138,10 @@ The remaining design decision is wrapper API shape:
 - thin normalized pass-through APIs for advanced or high-surface components;
 - a tiered model where core components are strict and advanced utilities are
   thinner.
+
+The migration decision is separate: new subapps should use the registry from
+the start, while migrated legacy subapps can move one component family at a
+time.
 
 ## Questions To Validate
 

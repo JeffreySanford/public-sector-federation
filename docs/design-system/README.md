@@ -26,8 +26,15 @@ to correct once the production repositories are available.
 6. [Shell interaction](./architecture/shell-interaction.md)
 7. [Federated Web Components decision](./architecture/federated-web-components-decision.md)
 8. [Implementation options](./architecture/implementation-options.md)
-9. [Component promotion](./governance/component-promotion.md)
-10. [Repository review checklist](./validation/repository-review-checklist.md)
+9. [Governance overview](./governance/overview.md)
+10. [Developer journey](./governance/developer-journey.md)
+11. [Component promotion](./governance/component-promotion.md)
+12. [Contribution process](./governance/contribution-process.md)
+13. [InnerSource contribution model](./governance/innersource-contribution-model.md)
+14. [Adoption and team buy-in](./governance/adoption-and-team-buy-in.md)
+15. [Rollout implementation](./governance/rollout-implementation.md)
+16. [Zeroheight governance model](./governance/zeroheight-governance-model.md)
+17. [Repository review checklist](./validation/repository-review-checklist.md)
 
 ## Tool Responsibilities
 

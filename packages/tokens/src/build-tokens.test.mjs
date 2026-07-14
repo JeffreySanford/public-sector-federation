@@ -8,6 +8,11 @@ const sourceDir = new URL('.', import.meta.url);
 const readJson = async (fileName) => JSON.parse(await readFile(new URL(fileName, sourceDir), 'utf8'));
 const readText = async (fileName) => readFile(new URL(fileName, sourceDir), 'utf8');
 
+const resolveCssReference = (tokens, value) => {
+  const reference = value.match(/^var\((--[a-z0-9-]+)\)$/);
+  return reference ? resolveCssReference(tokens, tokens[reference[1]]) : value;
+};
+
 describe('token build artifacts', () => {
   it('keeps the sample Figma DTCG input aligned with expected token tiers', async () => {
     const sample = await readJson(join('tokens', 'figma-dtcg.sample.json'));
@@ -129,5 +134,27 @@ describe('token build artifacts', () => {
     assert.deepEqual(byId['missing-ramp-aliases'].activeAliases, []);
     assert.ok(css.includes('--p-primary-color: var(--ps-primary-background);'), 'PrimeNG bridge should map from --ps-*');
     assert.ok(css.includes('Stable PrimeNG component overrides'), 'component override rule should have emitted CSS');
+  });
+
+  it('keeps PrimeNG bridge values aligned with generated CSS token values and preset inputs', async () => {
+    const themes = await readJson(join('tokens', 'themes.json'));
+    const presetSource = await readFile(new URL('../../primeng-preset/src/preset.ts', sourceDir), 'utf8');
+    const rootTokens = themes.selectors.find(({ selector }) => selector === ':root')?.tokens;
+
+    assert.ok(rootTokens, 'root tokens should exist');
+
+    assert.equal(resolveCssReference(rootTokens, rootTokens['--p-primary-color']), rootTokens['--ps-primary-background']);
+    assert.equal(resolveCssReference(rootTokens, rootTokens['--p-primary-inverse-color']), rootTokens['--ps-primary-foreground']);
+    assert.equal(resolveCssReference(rootTokens, rootTokens['--p-content-background']), rootTokens['--ps-surface-card']);
+    assert.equal(resolveCssReference(rootTokens, rootTokens['--p-content-border-color']), rootTokens['--ps-surface-border']);
+    assert.equal(resolveCssReference(rootTokens, rootTokens['--p-text-color']), rootTokens['--ps-text-primary']);
+    assert.equal(resolveCssReference(rootTokens, rootTokens['--p-text-muted-color']), rootTokens['--ps-text-secondary']);
+    assert.equal(resolveCssReference(rootTokens, rootTokens['--p-button-primary-background']), rootTokens['--ps-primary-background']);
+
+    assert.match(presetSource, /from '@public-sector\/tokens'/);
+    assert.ok(presetSource.includes('semantic.light.primaryBackground'));
+    assert.ok(presetSource.includes('semantic.light.surfaceCard'));
+    assert.ok(presetSource.includes('semantic.dark.primaryBackground'));
+    assert.ok(presetSource.includes('typography.fontFamily'));
   });
 });

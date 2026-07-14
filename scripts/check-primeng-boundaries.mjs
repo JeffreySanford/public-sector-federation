@@ -18,7 +18,21 @@ const allowedPrimeNgStylePaths = [
 ];
 
 const violations = [];
+const legacyAllowances = [];
 let scannedFiles = 0;
+
+async function readLegacyAllowlist() {
+  try {
+    const source = await readFile(join(root, 'scripts', 'primeng-boundary-allowlist.json'), 'utf8');
+    const parsed = JSON.parse(source);
+    return (parsed.legacyPrimeNgAllowedPaths ?? []).map((path) => path.split(/[\\/]/).join(sep));
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return [];
+    }
+    throw error;
+  }
+}
 
 const isUnder = (file, prefixes) => prefixes.some((prefix) => file.startsWith(prefix));
 
@@ -53,9 +67,15 @@ function addViolation(file, line, message) {
   violations.push(`${file}:${line}: ${message}`);
 }
 
+function addLegacyAllowance(file, line, message) {
+  legacyAllowances.push(`${file}:${line}: ${message}`);
+}
+
 function lineNumber(source, index) {
   return source.slice(0, index).split('\n').length;
 }
+
+const legacyPrimeNgAllowedPaths = await readLegacyAllowlist();
 
 for (const sourceRoot of sourceRoots) {
   const files = await collectFiles(sourceRoot);
@@ -71,7 +91,9 @@ for (const sourceRoot of sourceRoots) {
       const moduleName = match[1];
       const line = lineNumber(source, match.index ?? 0);
 
-      if (!isUnder(normalizedFile, allowedPrimeNgImportPaths)) {
+      if (isUnder(normalizedFile, legacyPrimeNgAllowedPaths)) {
+        addLegacyAllowance(file, line, `Legacy direct primeng/${moduleName} import is temporarily allowed.`);
+      } else if (!isUnder(normalizedFile, allowedPrimeNgImportPaths)) {
         addViolation(
           file,
           line,
@@ -82,13 +104,17 @@ for (const sourceRoot of sourceRoots) {
 
     if (extension === '.html') {
       for (const match of source.matchAll(/<\/?p-[a-z][\w-]*/g)) {
-        if (!isUnder(normalizedFile, allowedPrimeNgImportPaths)) {
+        if (isUnder(normalizedFile, legacyPrimeNgAllowedPaths)) {
+          addLegacyAllowance(file, lineNumber(source, match.index ?? 0), 'Legacy direct PrimeNG <p-*> usage is temporarily allowed.');
+        } else if (!isUnder(normalizedFile, allowedPrimeNgImportPaths)) {
           addViolation(file, lineNumber(source, match.index ?? 0), 'Direct PrimeNG <p-*> element usage is blocked. Use @public-sector/ui-patterns wrappers or native markup.');
         }
       }
 
       for (const match of source.matchAll(/\s(pTemplate|p[A-Z][A-Za-z]*)\b/g)) {
-        if (!isUnder(normalizedFile, allowedPrimeNgImportPaths)) {
+        if (isUnder(normalizedFile, legacyPrimeNgAllowedPaths)) {
+          addLegacyAllowance(file, lineNumber(source, match.index ?? 0), 'Legacy direct PrimeNG template/directive usage is temporarily allowed.');
+        } else if (!isUnder(normalizedFile, allowedPrimeNgImportPaths)) {
           addViolation(file, lineNumber(source, match.index ?? 0), 'Direct PrimeNG template/directive usage is blocked. Use @public-sector/ui-patterns wrappers or native markup.');
         }
       }
@@ -96,7 +122,9 @@ for (const sourceRoot of sourceRoots) {
 
     if (extension === '.css' || extension === '.scss') {
       for (const match of source.matchAll(/\.p-[a-z0-9_-]+/g)) {
-        if (!isUnder(normalizedFile, allowedPrimeNgStylePaths)) {
+        if (isUnder(normalizedFile, legacyPrimeNgAllowedPaths)) {
+          addLegacyAllowance(file, lineNumber(source, match.index ?? 0), 'Legacy app-level .p-* styling is temporarily allowed.');
+        } else if (!isUnder(normalizedFile, allowedPrimeNgStylePaths)) {
           addViolation(
             file,
             lineNumber(source, match.index ?? 0),
@@ -117,4 +145,12 @@ if (violations.length > 0) {
   process.exit(1);
 }
 
-console.log(`PrimeNG wrapper boundary check passed. Scanned ${scannedFiles} source files. App/remotes have zero direct PrimeNG imports, elements, directives, or .p-* styles.`);
+if (legacyAllowances.length > 0) {
+  console.warn('Legacy PrimeNG compatibility allowances found:\n');
+  for (const allowance of legacyAllowances) {
+    console.warn(`- ${allowance}`);
+  }
+  console.warn('\nThese allowances should be tracked with owners and removed as wrappers are adopted.\n');
+}
+
+console.log(`PrimeNG wrapper boundary check passed. Scanned ${scannedFiles} source files.`);

@@ -3,7 +3,7 @@
 ## Purpose
 
 This spec explains how application and remote teams consume the component
-registry while PrimeNG remains an internal provider behind strict wrappers.
+registry while PrimeNG remains an internal provider behind wrappers.
 
 The goal is not to justify wrapping. The goal is to show how a wrapper consumes
 the shared token contract, maps public design-system API to provider internals,
@@ -11,7 +11,9 @@ and proves that apps do not need direct PrimeNG access.
 
 ## Import Boundary
 
-Applications and remotes should consume registry wrappers only.
+New applications and target-state remotes should consume registry wrappers
+only. Migrated legacy applications may keep existing PrimeNG usage temporarily
+when that usage is inventoried, owned, and tracked as migration debt.
 
 ```text
 apps and remotes
@@ -30,7 +32,7 @@ Allowed responsibilities:
 | `primeng-preset` | `@public-sector/tokens`, PrimeNG theme APIs | Map token values into PrimeNG preset shape. |
 | `tokens` | Token source files | Generate CSS variables, JSON, and TS metadata. |
 
-Disallowed application behavior:
+Disallowed behavior for new subapps and target-state code:
 
 - Importing `primeng/*` directly.
 - Rendering `<p-*>` components directly.
@@ -39,7 +41,24 @@ Disallowed application behavior:
 - Passing PrimeNG-specific configuration objects through app contracts.
 
 The boundary is enforced by `scripts/check-primeng-boundaries.mjs`, which is
-part of `pnpm lint`.
+part of `pnpm lint`. Legacy migrated paths can be listed in
+`scripts/primeng-boundary-allowlist.json`; that should be a temporary
+compatibility mechanism, not the default development path.
+
+## Migration Compatibility
+
+The target state is that shared component usage goes through
+`@public-sector/ui-patterns`. The migration path is more flexible:
+
+| App type | PrimeNG policy | Expected action |
+| --- | --- | --- |
+| New subapp | Use wrappers only. | Add or request wrappers before using PrimeNG behavior. |
+| Active migrated legacy subapp | Existing direct PrimeNG may continue temporarily. | Track usage and migrate ad hoc. |
+| Shared/platform code | Use wrappers only. | Keep the provider replacement boundary intact. |
+| New feature inside legacy app | Prefer wrappers. | Use direct PrimeNG only as accepted migration debt. |
+
+This means missing wrappers do not block a legacy app from functioning. They do
+block promotion to the target state.
 
 ## Discovering Available Wrappers
 
@@ -66,11 +85,15 @@ Current exported wrappers and services:
 | `PublicDialogComponent` | `ps-dialog` | Dialog wrapper for modal content. |
 | `PublicEmptyStateComponent` | `ps-empty-state` | Composite empty-state pattern. |
 | `PublicFormSectionComponent` | `public-form-section` | Form section/card pattern. |
+| `PublicMenuComponent` | `ps-menu` | Menu overlay wrapper with body append policy. |
 | `PublicPageHeaderComponent` | `public-page-header` | Page title and action header. |
+| `PublicPopoverComponent` | `ps-popover` | Popover overlay wrapper with projected content. |
 | `PublicProgressComponent` | `ps-progress` | Progress indicator wrapper. |
 | `PublicSkeletonComponent` | `ps-skeleton` | Loading skeleton wrapper. |
+| `PublicSelectComponent` | `ps-select` | Select overlay wrapper with token inheritance proof. |
 | `PublicStatusCardComponent` | `public-status-card` | Status summary pattern. |
 | `PublicTagComponent` | `ps-tag` | Status/tag wrapper. |
+| `PublicTooltipComponent` | `ps-tooltip` | Tooltip wrapper with body append policy. |
 | `PublicToastComponent` | `ps-toast` | Toast region component. |
 | `PublicToastService` | injectable service | Toast message API. |
 
@@ -80,8 +103,8 @@ is the practical discovery path.
 
 ## Missing Pattern Path
 
-If no available wrapper or pattern fits the need, the developer should not drop
-directly to PrimeNG in app or remote code. The fallback path is:
+If no available wrapper or pattern fits a new subapp need, the developer should
+not drop directly to PrimeNG in app or remote code. The fallback path is:
 
 1. Check whether native Angular/HTML plus existing tokens is sufficient.
    Simple layout, text, and one-off content composition may not need a PrimeNG
@@ -94,7 +117,8 @@ directly to PrimeNG in app or remote code. The fallback path is:
    than hardcoded visual values.
 5. Add Storybook or shell-mounted evidence before treating the wrapper as
    broadly usable.
-6. Run `pnpm lint` to prove app/remotes still have no direct PrimeNG usage.
+6. Run `pnpm lint` to prove target-state app/remotes still have no direct
+   PrimeNG usage.
 
 Decision guide:
 
@@ -105,6 +129,7 @@ Decision guide:
 | PrimeNG capability needed but not wrapped | Add a wrapper in `packages/ui-patterns`. |
 | API shape is uncertain | Mark wrapper experimental and keep usage local. |
 | Pattern is reusable across teams | Add Storybook evidence and lifecycle metadata. |
+| Migrated legacy app already uses PrimeNG | Track exception and migrate ad hoc. |
 
 This keeps delivery moving without weakening the provider boundary.
 
@@ -265,8 +290,11 @@ itself.
 
 ## Verification Steps
 
-- Run `pnpm lint` and confirm app/remotes have no direct PrimeNG imports,
-  `<p-*>` usage, PrimeNG directives, or app-level `.p-*` styling.
+- Run `pnpm lint` and confirm new or target-state app/remotes have no direct
+  PrimeNG imports, `<p-*>` usage, PrimeNG directives, or app-level `.p-*`
+  styling.
+- For legacy migration paths, confirm direct PrimeNG usage appears only in
+  `scripts/primeng-boundary-allowlist.json` paths and has a migration note.
 - Run `pnpm --dir packages/ui-patterns typecheck` and confirm wrapper public
   APIs compile.
 - Run `pnpm build:tokens` and confirm the token contract regenerates before
@@ -278,10 +306,11 @@ itself.
 ## Value
 
 This gives you a plan for explaining how the registry consumes the contract:
-apps import wrappers, wrappers own provider mapping, the preset consumes the
-same token package, and lint enforces the boundary. That is the practical
-answer to "we wrap PrimeNG always" because it shows how future replacement is
-contained.
+new apps import wrappers, wrappers own provider mapping, the preset consumes
+the same token package, and lint enforces the target-state boundary while still
+allowing explicit legacy compatibility. That is the practical answer to "we
+wrap PrimeNG always" because it shows how future replacement is contained
+without pretending every legacy app can migrate in one pass.
 
 Done when you can submit the wrapper consumption model with the import
 boundary, one end-to-end wrapper example, lifecycle statuses, and proof commands

@@ -25,7 +25,7 @@ Fixed constraints:
 | --- | --- |
 | Federated Web Components | Shell mounts each subapp as a Web Component. Do not re-litigate this. |
 | `remoteEntry` | Comes from subapp configuration, not Zeroheight. |
-| PrimeNG always wrapped | Registry is the only public component surface so PrimeNG can be swapped later. |
+| PrimeNG always wrapped | New and target-state work uses the registry surface so PrimeNG can be swapped later. |
 | Zeroheight | Documents tokens, registry status, evidence, and guidance. It is not runtime delivery. |
 | Token source | Figma is known input; use a Figma-backed DTCG-compatible JSON artifact. |
 
@@ -37,7 +37,8 @@ Token source (Figma / DTCG-compatible JSON)
   -> runtime contract (CSS vars, JSON, TS, PrimeNG preset)
       -> shell loads tokens, sets theme, mounts subapps
       -> component registry wraps PrimeNG and consumes same contract
-      -> subapps bootstrap independently and import registry wrappers only
+      -> new subapps bootstrap independently and import registry wrappers
+      -> migrated legacy subapps may keep tracked PrimeNG usage temporarily
 ```
 
 The cleaned-up answer should be:
@@ -46,8 +47,10 @@ The cleaned-up answer should be:
 - One package or enterprise artifact generates CSS variables, metadata,
   TypeScript helpers, and the PrimeNG preset from the same values.
 - The shell loads tokens, sets the active theme on `html`, and mounts subapps.
-- Subapps bootstrap independently, use registry wrappers, and resolve tokens
-  through package import and inherited CSS variables.
+- New subapps bootstrap independently, use registry wrappers, and resolve
+  tokens through package import and inherited CSS variables.
+- Migrated legacy subapps may keep existing PrimeNG usage temporarily while
+  wrappers are added ad hoc.
 - The registry maps design-system API to PrimeNG internals using the same token
   contract.
 - Zeroheight documents the contract and links Storybook/Playwright evidence.
@@ -85,6 +88,8 @@ Done in this learning repo:
 - [x] Strict registry wrappers in `packages/ui-patterns`.
 - [x] Direct PrimeNG app/remotes conversion completed for the current sample.
 - [x] PrimeNG boundary enforcement in `scripts/check-primeng-boundaries.mjs`.
+- [x] Legacy PrimeNG boundary allowlist shape added in
+      `scripts/primeng-boundary-allowlist.json`.
 - [x] Shell Playwright proof for token/theme behavior and dialog overlay.
 - [x] QA Storybook e2e proof for wrapper stories and accessibility.
 - [x] Zeroheight governance notes updated in
@@ -100,8 +105,8 @@ Still open from Neil's explicit asks:
       wraps PrimeNG.
 - [ ] Confirm whether the Figma/DTCG-compatible enterprise token export is
       adequate.
-- [ ] Compare token delivery methods and state one recommendation.
-- [ ] Write a short manual recommendation for Neil that applies the research.
+- [x] Compare token delivery methods and state one recommendation.
+- [x] Write a short manual recommendation for Neil that applies the research.
 
 ## Phase 1: Lock The Recommendation
 
@@ -244,45 +249,66 @@ that show apps can use registry components without importing PrimeNG.
 
 ### 1.3 Token Delivery Decision
 
-- [ ] Create `docs/design-system/architecture/token-delivery-decision.md`.
-- [ ] Compare these delivery methods in a one-page decision matrix:
+- [x] Create `docs/design-system/architecture/token-delivery-decision.md`.
+- [x] Compare these delivery methods in a one-page decision matrix:
       shell-only global CSS, remote token package import, federation shared
       singleton, and shell runtime theme context.
-- [ ] Recommend:
+- [x] Recommend:
       shared versioned package, shell establishes theme context, remotes may
       import directly for isolated dev and Storybook.
-- [ ] List what must stay aligned:
+- [x] List what must stay aligned:
       token package version, preset version, registry version, and theme class.
 
-Done when the recommendation is one paragraph and one table, not a survey.
+Value:
+
+This gives you a defensible token delivery decision instead of a survey of
+options. The recommendation is the combined model: shared versioned token
+package, shell-owned theme context, remote imports for isolated operation, and
+federation sharing for version alignment.
+
+Done when [Token Delivery Decision](./architecture/token-delivery-decision.md)
+can be linked from the Neil recommendation as the delivery model.
 
 ### 1.4 Recommendation For Neil
 
-- [ ] Create `docs/design-system/architecture/recommendation-for-neil.md`.
-- [ ] Keep it to two to four pages.
-- [ ] Include token mapping HOW with a link to the mapping spec.
-- [ ] Include registry consumption HOW with a link to the registry spec.
-- [ ] Include the token delivery model recommendation.
-- [ ] Include DOM and overlay caveats:
+- [x] Create `docs/design-system/architecture/recommendation-for-neil.md`.
+- [x] Keep it to two to four pages.
+- [x] Include token mapping HOW with a link to the mapping spec.
+- [x] Include registry consumption HOW with a link to the registry spec.
+- [x] Include the token delivery model recommendation.
+- [x] Include DOM and overlay caveats:
       light DOM, CSS variables, `body` overlays, and theme-on-`html`.
-- [ ] State what the sample repo proves versus what still needs enterprise repo
+- [x] State what the sample repo proves versus what still needs enterprise repo
       validation.
-- [ ] Remove "why federated Web Components" framing.
-- [ ] Read and edit manually before sharing. The output should sound like a
+- [x] Remove "why federated Web Components" framing.
+- [x] Read and edit manually before sharing. The output should sound like a
       practical recommendation, not an AI research dump.
+
+Value:
+
+This is the only document to send Neil. It summarizes the locked working
+decisions and links to the supporting specs for token mapping, registry
+consumption, token delivery, and component discovery.
 
 ## Phase 2: Prove It In Code
 
-### 2.1 Strict Wrapper Pattern
+### 2.1 Wrapper And Legacy Migration Pattern
 
 - [x] Convert current direct PrimeNG app/remotes usage to registry wrappers.
 - [x] Add lint boundary checks for direct `primeng/*`, `<p-*>`, PrimeNG
       directives, `MessageService`, and app-level `.p-*` styling.
-- [ ] Decide final wrapper API shape with Neil:
-      strict, thin, or tiered. Current recommendation is strict.
-- [ ] Document the chosen API in `registry-consumption-spec.md`.
-- [ ] Confirm no Cursor or local agent rules still recommend direct `p-*`
-      smoke-test usage in app/remotes.
+- [x] Decide final wrapper API shape:
+      strict for new subapps, with ad hoc wrapper adoption for migrated legacy subapps.
+- [x] Document the chosen API and migration compatibility model in
+      `registry-consumption-spec.md`.
+- [x] Confirm no Cursor or local agent rules still recommend direct `p-*`
+      smoke-test usage in apps/remotes.
+      Proof: `.cursor/rules/primeng-federation.mdc` now requires wrapper demos
+      and tests for new PrimeNG-backed work, and the repo has no other local
+      agent rule directory.
+- [ ] In the enterprise repo, populate `scripts/primeng-boundary-allowlist.json`
+      only for migrated legacy paths that need temporary direct PrimeNG
+      compatibility.
 
 ### 2.2 Token Pipeline Hardening
 
@@ -290,33 +316,69 @@ Done when the recommendation is one paragraph and one table, not a survey.
       `packages/tokens/src`.
 - [ ] Validate export format adequacy and answer yes/no for Neil with specifics.
 - [ ] Ensure `pnpm build:tokens` output matches enterprise naming where needed.
-- [ ] Verify the PrimeNG preset uses the same resolved values as `tokens.css`.
-- [ ] Add version or changelog notes for federation alignment.
+- [x] Verify the PrimeNG preset uses the same resolved values as `tokens.css`.
+- [x] Add version or changelog notes for federation alignment.
+
+Current hardening status:
+
+- [x] Document ingestion path, adequacy criteria, naming alignment, preset
+      parity, and version alignment in
+      [Token Pipeline Hardening](./architecture/token-pipeline-hardening.md).
+- [x] Add automated token test coverage that resolves key `--p-*` bridge values
+      back to their `--ps-*` source values.
+
+Blocked until the real enterprise export is available:
+
+- Ingest the real export.
+- Give a final yes/no adequacy answer.
+- Confirm whether output names must change to match enterprise naming.
 
 ### 2.3 Overlay And DOM Validation
 
 - [x] Dialog overlay inherits root tokens in current shell e2e proof.
-- [ ] Add Playwright coverage for menu.
-- [ ] Add Playwright coverage for select.
-- [ ] Add Playwright coverage for popover.
-- [ ] Add Playwright coverage for tooltip.
-- [ ] Add theme-toggle proof across shell and mounted remote for each overlay
+- [x] Add Playwright coverage for menu.
+- [x] Add Playwright coverage for select.
+- [x] Add Playwright coverage for popover.
+- [x] Add Playwright coverage for tooltip.
+- [x] Add theme-toggle proof across shell and mounted remote for each overlay
       family.
-- [ ] Document failure modes when overlay append targets are misconfigured.
+- [x] Document failure modes when overlay append targets are misconfigured.
+
+Evidence:
+
+- [Overlay DOM Validation](./architecture/overlay-dom-validation.md)
+- `apps/shell/e2e/token-consumption.spec.ts`
+- `apps/qa-remote/src/remote/qa-remote.component.html`
 
 ### 2.4 Shell And Subapp Integration
 
-- [ ] Trace and document the sample `remoteEntry` configuration path.
-- [ ] Confirm shell token CSS load path and mirror it in the docs.
-- [ ] Confirm each remote bootstrap registers the approved PrimeNG provider or
+Current sample shape:
+
+- Shell-composed remotes: services, reporting, admin, and QA.
+- Non-remotes: shell, agile-api, and playground.
+- Recommendation: do not add a synthetic legacy app yet. Prove the target-state
+  path with the four current remotes, and use the PrimeNG boundary allowlist for
+  real migrated legacy paths when the enterprise repo has one to validate.
+
+- [x] Trace and document the sample `remoteEntry` configuration path.
+- [x] Confirm shell token CSS load path and mirror it in the docs.
+- [x] Confirm each remote bootstrap registers the approved PrimeNG provider or
       consumes a proven shared bootstrap helper.
-- [ ] Add federation version-alignment checks to
+- [x] Add federation version-alignment checks to
       [Repository Review Checklist](./validation/repository-review-checklist.md).
+
+Evidence:
+
+- [Shell And Subapp Integration](./architecture/shell-subapp-integration.md)
+- [Repository Review Checklist](./validation/repository-review-checklist.md)
 
 ## Phase 3: Governance, Docs, And Enterprise Handoff
 
 ### 3.1 Zeroheight
 
+- [x] Create
+      [Zeroheight Governance Model](./governance/zeroheight-governance-model.md)
+      as the focused governance-through-Zeroheight proposal.
 - [x] Document that Zeroheight is guidance and governance only.
 - [x] Document current procurement status:
       approved in principle, pending registry/compliance/final acquisition.
@@ -332,14 +394,42 @@ Done when the recommendation is one paragraph and one table, not a survey.
 
 ### 3.2 Governance Flow Map
 
-- [ ] Create `docs/design-system/governance/flow-map.md`.
-- [ ] Show what flows from Figma and DTCG-compatible JSON into the token repo.
-- [ ] Show what flows from tokens to preset, registry, shell, and subapps.
-- [ ] Show what flows into Zeroheight and what does not.
-- [ ] Show what flows into Storybook, Playwright, and promotion lifecycle.
-- [ ] Identify owners for design, platform, registry, and subapp boundaries.
+- [x] Create `docs/design-system/governance/flow-map.md`.
+- [x] Show what flows from Figma and DTCG-compatible JSON into the token repo.
+- [x] Show what flows from tokens to preset, registry, shell, and subapps.
+- [x] Show what flows into Zeroheight and what does not.
+- [x] Show what flows into Storybook, Playwright, and promotion lifecycle.
+- [x] Identify owners for design, platform, registry, and subapp boundaries.
 
-### 3.3 Enterprise Repo Validation
+Evidence:
+
+- [Governance Flow Map](./governance/flow-map.md)
+
+Follow-up for enterprise validation:
+
+- Replace role owners with named accountable owners or team aliases.
+
+### 3.3 Governance Overview Final Shape
+
+- [ ] Keep [Governance Overview](./governance/overview.md) as the full concept
+      document for now while the governance model is being reviewed.
+- [ ] After supporting docs are accepted, shorten the overview to summarize:
+      contribution proposal, InnerSource model, evidence gates, Zeroheight
+      role, lifecycle, ownership, and exceptions.
+- [ ] Move detailed change classification, metrics, and operating cadence into
+      dedicated supporting documents or an operating-model appendix.
+- [ ] Keep the overview focused on Neil's immediate governance-through-
+      Zeroheight question and link to supporting detail instead of repeating it.
+- [x] Create
+      [Adoption And Team Buy-In](./governance/adoption-and-team-buy-in.md)
+      for participation, support, and adoption measures.
+- [x] Create [Rollout Implementation](./governance/rollout-implementation.md)
+      for gradual rollout, pilots, and risk-based approval.
+
+### 3.4 Enterprise Repo Validation
+
+Status: pending until enterprise machine access is available next Tuesday. Do
+not mark these complete from the learning repo alone.
 
 Work through [Repository Review Checklist](./validation/repository-review-checklist.md):
 
@@ -352,6 +442,12 @@ Work through [Repository Review Checklist](./validation/repository-review-checkl
 - [ ] Confirm Zeroheight ingestion path for generated artifacts.
 - [ ] Reconcile sanitized `up-design-system` notes as outdated reference
       material against real screenshots, names, and package paths.
+
+Prep:
+
+- [x] Create
+      [Enterprise Validation Status](./validation/enterprise-validation-status.md)
+      to separate sample evidence from production evidence still needed.
 
 ## Diagrams
 
@@ -374,7 +470,7 @@ Track answers in
 
 | Decision | Recommendation |
 | --- | --- |
-| Wrapper API shape | Strict design-system API. |
+| Wrapper API shape | Strict for new subapps; legacy migration can be ad hoc. |
 | PrimeNG type leakage | Never in app/remotes public API. |
 | First proof set | Button plus overlays, then broader wrapper families. |
 | `danger` versus `error` | Ask Neil whether normalization is approved. |
@@ -383,9 +479,13 @@ Track answers in
 
 ## Decisions Already Captured
 
-- PrimeNG is always wrapped. Apps and remotes should not import `primeng/*`,
-  render `<p-*>` components directly, use PrimeNG template directives directly,
-  or style app-level `.p-*` selectors.
+- PrimeNG is always wrapped for new and target-state work. Apps and remotes in
+  that lane should not import `primeng/*`, render `<p-*>` components directly,
+  use PrimeNG template directives directly, or style app-level `.p-*`
+  selectors.
+- Migrated legacy apps may continue existing direct PrimeNG usage temporarily
+  when the path is allowlisted, owned, and tracked for ad hoc wrapper
+  migration.
 - Strict wrappers are preferred over thin PrimeNG pass-through wrappers because
   the component provider may be swapped later.
 - PrimeNG remains allowed inside approved integration packages such as the UI
@@ -455,9 +555,14 @@ Neil should be able to answer these from the docs without a meeting:
 | File | Role |
 | --- | --- |
 | [Focus](./focus.md) | Active problem statement. |
+| [Governance Overview](./governance/overview.md) | Governance entry point and document map. |
 | [Token Consumption Strategy](./architecture/token-consumption-strategy.md) | Current token consumption recommendation. |
 | [Token Pipeline](./architecture/token-pipeline.md) | Pipeline constraints and token artifacts. |
 | [Component Registry](./architecture/component-registry.md) | Registry expectations. |
+| [Contribution Process](./governance/contribution-process.md) | Intake, evidence, triage, validation, and promotion process. |
+| [InnerSource Contribution Model](./governance/innersource-contribution-model.md) | Team contribution and maintainer governance. |
+| [Adoption And Team Buy-In](./governance/adoption-and-team-buy-in.md) | Product-team participation, support, and buy-in measures. |
+| [Rollout Implementation](./governance/rollout-implementation.md) | Gradual implementation sequence and risk-based approval. |
 | [PrimeNG Binding Audit](./architecture/up-design-system/primeng-binding-audit.md) | PrimeNG preset and wrapper binding notes. |
 | [Wrapper Pattern Validation](./architecture/up-design-system/wrapper-pattern-validation.md) | Wrapper model and validation guidance. |
 | [Zeroheight](./tooling/zeroheight.md) | Zeroheight governance and evidence expectations. |

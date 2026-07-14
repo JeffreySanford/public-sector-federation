@@ -222,6 +222,28 @@
         </div>
       </article>
 
+      <article class="acceptance-panel overlay-proof-panel">
+        <div class="acceptance-panel__header">
+          <ps-tag value="Menu / Select / Popover / Tooltip" tone="info" />
+          <h4>Body overlay token proof</h4>
+          <p>These strict wrappers keep PrimeNG overlay append policy inside the registry package.</p>
+        </div>
+        <div class="acceptance-inline overlay-proof-actions">
+          <ps-menu label="Open overlay menu" icon="pi pi-bars" [actions]="overlayMenuActions" />
+          <ps-select
+            label="Program overlay select"
+            [options]="overlayProgramOptions"
+            [(value)]="selectedOverlayProgram"
+            placeholder="Choose program"
+          />
+          <ps-popover label="Open token popover" icon="pi pi-info-circle">
+            <strong>Popover token context</strong>
+            <span>Content background, text color, and focus styles resolve from the shared token contract.</span>
+          </ps-popover>
+          <ps-tooltip label="Tooltip proof" text="Tooltip body overlay token proof" />
+        </div>
+      </article>
+
       <article class="acceptance-panel acceptance-panel--checklist">
         <h4>Promotion checklist</h4>
         <ul>

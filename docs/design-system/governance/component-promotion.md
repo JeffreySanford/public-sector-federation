@@ -3,14 +3,22 @@
 The promotion model keeps shared UI from becoming an uncontrolled fork of
 PrimeNG or a collection of undocumented one-off wrappers.
 
+Promotion begins after intake and triage. A useful UI element does not become a
+shared component just because it exists in one application; it needs evidence
+that the capability is reusable, owned, documented, and safe for other teams to
+adopt.
+
 ## Lifecycle
 
 | Status | Meaning |
 | --- | --- |
-| Experimental | Team-owned, unsupported, and not approved for broad reuse. |
-| Candidate | Being evaluated for shared use. |
+| Idea | Identified need that has not been accepted for discovery. |
+| Proposed | Accepted for discovery and triage, but not yet implemented. |
+| Experimental | Implementation under development; API and guidance may change. |
+| Candidate | Evidence complete enough for promotion review. |
 | Active | Approved, versioned, tested, documented, and supported. |
 | Deprecated | Still available temporarily with migration guidance. |
+| Retired | No longer supported or distributed. |
 
 Technical qualifiers such as `Storybook verified`, `shell verified`, or
 `Accessibility risk` can be tracked separately from lifecycle status.
@@ -32,6 +40,10 @@ for other teams to trust it:
 - Zeroheight guidance
 - Named owner
 - Release notes or migration notes
+
+PrimeNG preset and theme changes should follow the same evidence model because
+they affect every wrapper, direct legacy PrimeNG usage, overlays, and
+shell-mounted remotes.
 
 ## Decision Rules
 

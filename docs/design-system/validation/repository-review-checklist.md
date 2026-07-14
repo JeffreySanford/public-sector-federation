@@ -30,10 +30,20 @@ to replace assumptions with verified implementation details.
 ## Shell And Subapplications
 
 - [ ] Confirm remote-entry loading mechanism.
+- [ ] Confirm where `remoteEntry` URLs are configured and how they are promoted
+  across local, test, staging, and production environments.
 - [ ] Confirm Web Component mounting mechanism.
 - [ ] Confirm router ownership.
 - [ ] Confirm Angular dependency-sharing strategy.
 - [ ] Confirm token package dependency-sharing strategy.
+- [ ] Confirm `@public-sector/tokens`, `@public-sector/primeng-preset`, and
+  `@public-sector/ui-patterns` versions are aligned across shell and remotes.
+- [ ] Confirm shell and remotes cannot silently consume different major or
+  contract-breaking versions of token, preset, or registry packages.
+- [ ] Confirm the lockfile, package manager policy, and federation sharing
+  configuration all point to the same approved versions.
+- [ ] Confirm each independently bootstrapped shell or remote registers
+  `providePublicSectorPrimeNG()` or a proven shared bootstrap helper.
 - [ ] Confirm failure and fallback behavior.
 - [ ] Confirm whether custom elements are used.
 - [ ] Confirm each custom element renders light DOM, matching runtime evidence.

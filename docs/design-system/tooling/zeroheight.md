@@ -1,7 +1,8 @@
 # Zeroheight
 
 Zeroheight should be the governed design-system reference for guidance, status,
-ownership, and evidence.
+ownership, and evidence. It can serve as the human governance bridge between
+Figma design intent and engineering implementation.
 
 It is a communication and governance surface, not a runtime dependency.
 
@@ -19,8 +20,10 @@ Practical implication:
 - Do not block code validation on Zeroheight publishing access.
 - Do not describe Zeroheight as the source of truth for runtime behavior.
 - Do not describe Zeroheight as a token creation source.
-- Do not describe a Figma -> Zeroheight -> token input workflow unless that
-  workflow is explicitly established later.
+- Do describe Zeroheight as a governance bridge between Figma decisions and
+  engineering implementation when that helps teams find approved guidance.
+- Do not describe Zeroheight as the compiler or runtime source for production
+  token values.
 - Treat the repository, token build, Storybook, and shell e2e tests as the
   current evidence package.
 
