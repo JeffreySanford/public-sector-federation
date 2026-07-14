@@ -51,7 +51,8 @@
     "serve:qa": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js serve qa-remote",
     "serve:playground": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js serve playground",
     "storybook:qa": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run qa-remote:storybook",
-    "build-storybook:qa": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run qa-remote:build-storybook"
+    "build-storybook:qa": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run qa-remote:build-storybook",
+    "test:storybook:qa": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts"
   },
   "devDependencies": {
     "@angular-devkit/core": "^21.0.0",

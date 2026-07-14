@@ -135,10 +135,29 @@
           <strong>Program performance</strong>
           <span>Search, sort, filter, and page through active programs.</span>
         </div>
-        <input type="search" placeholder="Search programs" aria-label="Search QA program performance" />
+        <input
+          type="search"
+          placeholder="Search programs"
+          aria-label="Search QA program performance"
+          [value]="qaTableQuery"
+          (input)="onQaTableSearch(($any($event.target).value ?? '').toString())"
+        />
       </div>
-      <table class="qa-table acceptance-table">
-        <thead>
+      <p-table
+        class="qa-table acceptance-table"
+        [value]="qaAcceptanceTableRows"
+        [paginator]="true"
+        [rows]="qaTableRows"
+        [first]="qaTableFirst"
+        [rowsPerPageOptions]="[5, 10, 15]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first} to {last} of {totalRecords}"
+        [loading]="qaTableLoading"
+        [tableStyleClass]="'qa-table acceptance-table'"
+        (firstChange)="qaTableFirst = $event"
+        (rowsChange)="qaTableRows = $event"
+      >
+        <ng-template pTemplate="header">
           <tr>
             <th>Program</th>
             <th>Cases</th>
@@ -146,38 +165,22 @@
             <th>Region</th>
             <th>SLA</th>
           </tr>
-        </thead>
-        <tbody>
-          @if (qaTableLoading) {
-            <tr>
-              <td colspan="5">Loading program performance rows...</td>
-            </tr>
-          } @else {
-            @for (row of qaAcceptanceTableRows; track row.program) {
-              <tr>
-                <td><strong>{{ row.program }}</strong></td>
-                <td>{{ row.cases }}</td>
-                <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
-                <td>{{ row.region }}</td>
-                <td>{{ row.sla }}%</td>
-              </tr>
-            } @empty {
-              <tr>
-                <td colspan="5">No programs are available for the selected reporting period.</td>
-              </tr>
-            }
-          }
-        </tbody>
-      </table>
-      
-      <ps-paginator
-        itemLabel="programs"
-        [totalRecords]="qaAcceptanceTableTotalRecords"
-        [currentPage]="qaTableCurrentPage()"
-        (currentPageChange)="qaTableCurrentPage.set($event)"
-        [rowsPerPage]="qaTableRowsPerPage()"
-        (rowsPerPageChange)="qaTableRowsPerPage.set($event)"
-      />
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <td><strong>{{ row.program }}</strong></td>
+            <td>{{ row.cases }}</td>
+            <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
+            <td>{{ row.region }}</td>
+            <td>{{ row.sla }}%</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="5">No programs are available for the selected reporting period.</td>
+          </tr>
+        </ng-template>
+      </p-table>
     </article>
 
     <article class="acceptance-panel">

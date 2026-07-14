@@ -22,7 +22,7 @@ type Tone = 'success' | 'info' | 'warn' | 'danger' | 'secondary' | 'contrast';
           <table><thead><tr><th>Program</th><th>Status</th></tr></thead><tbody>@for (row of tableRows; track row.program) { <tr><td>{{ row.program }}</td><td><ps-tag [value]="row.status" [tone]="row.tone" /></td></tr> } @empty { <tr><td colspan="2">No rows available.</td></tr> }</tbody></table>
           <div class="inline-row"><ps-button label="Show toast" icon="pi pi-bell" (buttonClick)="showToast()" /><ps-button label="Open dialog" icon="pi pi-window-maximize" [outlined]="true" (buttonClick)="dialogVisible = true" /></div>
         </ps-card>
-        <ps-card header="Validation notes" subheader="What this story should prove"><p>{{ notes() }}</p><div class="inline-row"><ps-tag value="Storybook evidence" tone="contrast" /><ps-tag value="/qa checkpoint" tone="success" /><ps-tag value="Shell route" tone="warn" /></div></ps-card>
+        <ps-card header="Validation notes" subheader="What this story should prove"><p>{{ notes() }}</p><div class="inline-row"><ps-tag [value]="qaStatus()" [tone]="qaStatusTone()" /><ps-tag value="Storybook evidence" tone="contrast" /><ps-tag value="/qa checkpoint" tone="success" /><ps-tag value="Shell route" tone="warn" /></div></ps-card>
       </section>
       <ps-dialog [header]="dialogHeading()" [(visible)]="dialogVisible"><p>{{ dialogBody() }}</p><div ps-dialog-footer><ps-button label="Close" (buttonClick)="dialogVisible = false" /></div></ps-dialog>
     </main>
@@ -35,6 +35,7 @@ class ProblemAreaStoryComponent {
   readonly description = input('Focused wrapper validation for a known risk area.');
   readonly badge = input('Evidence');
   readonly tone = input<Tone>('info');
+  readonly qaStatus = input<'Passes Storybook QA' | 'Does not pass Storybook QA'>('Passes Storybook QA');
   readonly primaryHeading = input('Runtime surface');
   readonly primarySubheading = input('Wrapper and native control behavior');
   readonly notes = input('This story captures behavior that should stay stable across themes and shell mounting.');
@@ -49,6 +50,10 @@ class ProblemAreaStoryComponent {
     { program: 'Permit review', status: 'Watch', tone: 'warn' as Tone },
   ];
   showToast(): void { this.toast.add({ severity: this.tone(), summary: this.badge(), detail: this.description() }); }
+
+  qaStatusTone(): Tone {
+    return this.qaStatus() === 'Passes Storybook QA' ? 'success' : 'danger';
+  }
 }
 
 const meta: Meta<ProblemAreaStoryComponent> = {
@@ -62,6 +67,7 @@ const meta: Meta<ProblemAreaStoryComponent> = {
         [description]="description"
         [badge]="badge"
         [tone]="tone"
+        [qaStatus]="qaStatus"
         [primaryHeading]="primaryHeading"
         [primarySubheading]="primarySubheading"
         [notes]="notes"
@@ -87,3 +93,18 @@ export const LongLabelStress: Story = { args: { title: 'Long label stress', badg
 export const TokenThemeEvidence: Story = { args: { title: 'Token theme evidence', badge: 'Theme', tone: 'contrast' } };
 export const ShellMountedRisk: Story = { args: { title: 'Shell mounted risk', badge: 'Shell route', tone: 'warn' } };
 export const ZeroheightGovernance: Story = { args: { title: 'Zeroheight governance', badge: 'Governance', tone: 'success' } };
+export const KnownQaFailure: Story = {
+  args: {
+    title: 'Known QA failure',
+    badge: 'Blocked component',
+    tone: 'danger',
+    qaStatus: 'Does not pass Storybook QA',
+    primaryHeading: 'Promotion blocked',
+    primarySubheading: 'This component is intentionally held back from acceptance stories',
+    description: 'This example represents a component with unresolved Storybook QA issues and should not be promoted into the passing acceptance lane.',
+    notes: 'Fails Storybook QA until accessibility, state coverage, and runtime proof are corrected. Keep this story in Problem Areas only.',
+    dialogHeading: 'Blocked promotion evidence',
+    dialogBody: 'Do not promote this component into /qa or shell acceptance until the Storybook QA issues are fixed.',
+    invalid: true,
+  },
+};

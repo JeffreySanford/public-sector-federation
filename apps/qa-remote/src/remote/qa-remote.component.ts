@@ -1,11 +1,11 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
 import {
   PublicButtonComponent,
   PublicCardComponent,
   PublicDialogComponent,
   PublicMenuComponent,
-  PublicPaginatorComponent,
   PublicPopoverComponent,
   PublicSelectComponent,
   PublicTooltipComponent,
@@ -58,11 +58,11 @@ interface AgileBoardRow {
   standalone: true,
   imports: [
     CommonModule,
+    TableModule,
     PublicButtonComponent,
     PublicCardComponent,
     PublicDialogComponent,
     PublicMenuComponent,
-    PublicPaginatorComponent,
     PublicPopoverComponent,
     PublicSelectComponent,
     PublicTagComponent,
@@ -78,14 +78,15 @@ export class QaRemoteComponent implements OnInit {
   private readonly agileWorkflow = inject(AgileWorkflowService);
 
   activeTab = signal<'qa' | 'performance'>('qa');
-  qaTableRowsPerPage = signal(5);
-  qaTableCurrentPage = signal(1);
 
   dialogVisible = false;
   acceptanceDialogVisible = false;
   selectedOverlayProgram = 'housing';
   qaTableLoading = false;
   qaTableShowEmpty = false;
+  qaTableQuery = '';
+  qaTableFirst = 0;
+  qaTableRows = 5;
   agileApiSource = 'Loading Agile API…';
   agileApiDetail = 'Fetching sprint data from Postgres.';
   agileTimeSummary = 'Loading time summary…';
@@ -479,15 +480,20 @@ export class QaRemoteComponent implements OnInit {
   }
 
   get qaAcceptanceTableRows(): QaProgramRow[] {
-    const allRows = this.qaTableShowEmpty ? [] : this.qaProgramRows;
-    const start = (this.qaTableCurrentPage() - 1) * this.qaTableRowsPerPage();
-    const end = start + this.qaTableRowsPerPage();
-    return allRows.slice(start, end);
-  }
+    if (this.qaTableShowEmpty) {
+      return [];
+    }
 
-  get qaAcceptanceTableTotalRecords(): number {
-    const allRows = this.qaTableShowEmpty ? [] : this.qaProgramRows;
-    return allRows.length;
+    const query = this.qaTableQuery.trim().toLowerCase();
+    if (!query) {
+      return this.qaProgramRows;
+    }
+
+    return this.qaProgramRows.filter((row) =>
+      [row.program, row.status, row.region, String(row.cases), String(row.sla)].some((value) =>
+        value.toLowerCase().includes(query),
+      ),
+    );
   }
 
   get selectedSprintDayRoadmap(): RetrofitRoadmapRow {
@@ -512,6 +518,12 @@ export class QaRemoteComponent implements OnInit {
 
   toggleQaTableEmpty(): void {
     this.qaTableShowEmpty = !this.qaTableShowEmpty;
+    this.resetQaTablePaging();
+  }
+
+  onQaTableSearch(query: string): void {
+    this.qaTableQuery = query;
+    this.resetQaTablePaging();
   }
 
   showAcceptanceToast(severity: 'success' | 'info' | 'warn' | 'danger'): void {
@@ -651,5 +663,9 @@ export class QaRemoteComponent implements OnInit {
       return 'status-chip--danger';
     }
     return 'status-chip--info';
+  }
+
+  private resetQaTablePaging(): void {
+    this.qaTableFirst = 0;
   }
 }

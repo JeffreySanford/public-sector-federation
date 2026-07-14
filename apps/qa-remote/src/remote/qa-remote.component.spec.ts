@@ -40,11 +40,27 @@ describe('QaRemoteComponent', () => {
     expect(component.qaAcceptanceTableRows).toEqual([]);
   });
 
+  it('uses five rows by default and exposes the expected page sizes', () => {
+    expect(component.qaTableRows).toBe(5);
+  });
+
   it('toggles table loading state', () => {
     expect(component.qaTableLoading).toBeFalse();
 
     component.toggleQaTableLoading();
     expect(component.qaTableLoading).toBeTrue();
+  });
+
+  it('filters acceptance rows from the search box query and resets to the first page', () => {
+    component.qaTableFirst = 10;
+
+    component.onQaTableSearch('housing');
+
+    expect(component.qaTableFirst).toBe(0);
+    expect(component.qaAcceptanceTableRows.map((row) => row.program)).toEqual([
+      'Housing assistance',
+      'Emergency housing',
+    ]);
   });
 
   it('maps workflow statuses to chip classes', () => {
