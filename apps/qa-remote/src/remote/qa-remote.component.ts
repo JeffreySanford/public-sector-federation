@@ -5,6 +5,7 @@ import {
   PublicCardComponent,
   PublicDialogComponent,
   PublicMenuComponent,
+  PublicPaginatorComponent,
   PublicPopoverComponent,
   PublicSelectComponent,
   PublicTooltipComponent,
@@ -61,6 +62,7 @@ interface AgileBoardRow {
     PublicCardComponent,
     PublicDialogComponent,
     PublicMenuComponent,
+    PublicPaginatorComponent,
     PublicPopoverComponent,
     PublicSelectComponent,
     PublicTagComponent,
@@ -483,37 +485,9 @@ export class QaRemoteComponent implements OnInit {
     return allRows.slice(start, end);
   }
 
-  get qaAcceptanceTableTotalPages(): number {
+  get qaAcceptanceTableTotalRecords(): number {
     const allRows = this.qaTableShowEmpty ? [] : this.qaProgramRows;
-    return Math.ceil(allRows.length / this.qaTableRowsPerPage());
-  }
-
-  get qaAcceptanceTableStartRow(): number {
-    return (this.qaTableCurrentPage() - 1) * this.qaTableRowsPerPage() + 1;
-  }
-
-  get qaAcceptanceTableEndRow(): number {
-    const allRows = this.qaTableShowEmpty ? [] : this.qaProgramRows;
-    const end = this.qaTableCurrentPage() * this.qaTableRowsPerPage();
-    return end > allRows.length ? allRows.length : end;
-  }
-
-  qaTablePreviousPage(): void {
-    if (this.qaTableCurrentPage() > 1) {
-      this.qaTableCurrentPage.set(this.qaTableCurrentPage() - 1);
-    }
-  }
-
-  qaTableNextPage(): void {
-    if (this.qaTableCurrentPage() < this.qaAcceptanceTableTotalPages) {
-      this.qaTableCurrentPage.set(this.qaTableCurrentPage() + 1);
-    }
-  }
-
-  qaTableChangeRowsPerPage(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    this.qaTableRowsPerPage.set(parseInt(select.value, 10));
-    this.qaTableCurrentPage.set(1);
+    return allRows.length;
   }
 
   get selectedSprintDayRoadmap(): RetrofitRoadmapRow {

@@ -509,6 +509,7 @@
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
+  line-height: 1 !important;
   min-width: var(--p-paginator-nav-button-width) !important;
   width: var(--p-paginator-nav-button-width) !important;
   height: var(--p-paginator-nav-button-height) !important;
@@ -543,6 +544,15 @@
 .p-paginator .p-disabled,
 .p-paginator [disabled] {
   opacity: 0.5;
+  background: transparent !important;
+  color: var(--p-text-muted-color) !important;
+}
+
+.p-paginator .p-disabled:hover,
+.p-paginator [disabled]:hover {
+  border-color: transparent !important;
+  background: transparent !important;
+  color: var(--p-text-muted-color) !important;
 }
 
 .p-paginator .p-select,

@@ -267,9 +267,10 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
   const tableStoryUrl = `${storybookHomeUrl}/?path=/story/design-system-acceptance-table-paginator--sort-filter-and-page`;
 
   async function getIframeContent(page: import('@playwright/test').Page) {
-    const iframe = page.locator('#storybook-preview-iframe');
-    await iframe.waitFor({ state: 'visible', timeout: 20000 });
-    return iframe.frameLocator('iframe');
+    const iframe = page.frameLocator('#storybook-preview-iframe');
+    await expect(iframe.locator('body')).toBeVisible({ timeout: 20000 });
+    await expect(iframe.getByRole('heading', { name: /Program performance/i })).toBeVisible({ timeout: 20000 });
+    return iframe;
   }
 
   test('should display paginator controls', async ({ page }) => {
@@ -350,9 +351,8 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
     const frameContent = await getIframeContent(page);
-    const tableRows = frameContent.locator('table tbody tr');
-    const rowCount = await tableRows.count();
-    expect(rowCount).toBe(5);
+    const tableRows = frameContent.getByTestId('program-table').locator('tbody tr');
+    await expect(tableRows).toHaveCount(5);
   });
 });
 

@@ -162,31 +162,35 @@ This lets product teams contribute without allowing uncontrolled forks.
 
 ## Contributor Progression Model
 
-Contributors can build trust and influence over time through consistent participation:
+Contributors can build trust and influence over time through consistent
+participation:
 
 | Level | What It Means | Permissions | Path to Next Level |
 | --- | --- | --- | --- |
 | **User** | Uses the design system | Read access to repos and Zeroheight | Become a Contributor |
-| **Contributor** | Submits PRs and proposals | Create branches, submit PRs | Demonstrated quality across 3+ contributions |
-| **Repeat Contributor** | Regular participator with proven judgment | PR review within domain, self-merge after approval | Nominated by maintainer after 6+ months consistent quality |
-| **Trusted Committer** | Recognized reviewer for specific areas (e.g., form components, a11y) | Review and merge within agreed scope, help mentor new contributors | Appointed by Design System Council |
-| **Maintainer** | Full repository ownership | All permissions, releases, breaking changes | Proposed by council, requires consensus |
+| **Contributor** | Submits PRs and proposals | Create branches, submit PRs | 3+ quality contributions |
+| **Repeat Contributor** | Proven regular contributor | Domain PR review | Maintainer nomination |
+| **Trusted Committer** | Recognized reviewer | Scoped review and merge | Council appointment |
+| **Maintainer** | Repository owner | Releases and breaking changes | Council consensus |
 
-This progression lets product-team developers become recognized reviewers for areas of expertise without joining the central design-system team.
+This progression lets product-team developers become recognized reviewers for
+areas of expertise without joining the central design-system team.
 
 ## Governance Levels
 
-"InnerSource" means different things in different contexts. This design system operates at the **Contributions Welcome** level:
+"InnerSource" means different things in different contexts. This design system
+operates at the **Contributions Welcome** level:
 
 | Level | Meaning | Your System |
 | --- | --- | --- |
 | **Visible** | Anyone can read, but no participation | Not this |
 | **Feedback Welcome** | Anyone can file issues; maintainers decide on changes | Not this |
-| **Contributions Welcome** | Anyone can propose and implement; maintainers control approval | ✅ This level |
-| **Shared Write Access** | Trusted contributors can review and merge within scope | Future progression for Trusted Committers |
+| **Contributions Welcome** | Anyone can propose and implement | This level |
+| **Shared Write Access** | Trusted contributors can review and merge | Future trusted committer path |
 | **Shared Ownership** | Multiple teams jointly control direction | Not planned |
 
-This clarity prevents confusion: contributors may not have merge rights, but they are genuinely invited to propose work.
+This clarity prevents confusion: contributors may not have merge rights, but
+they are genuinely invited to propose work.
 
 ## Repository Readiness Standard
 
@@ -195,7 +199,8 @@ Before a repository accepts InnerSource contributions, it must provide self-serv
 **Required files and clarity**:
 
 - `README.md` — Purpose, key links, getting started
-- `CONTRIBUTING.md` — How to propose work, coding standards, review expectations, escalation path
+- `CONTRIBUTING.md` — Work proposals, standards, review expectations, and
+  escalation path
 - `COMMUNICATION.md` — Where discussions happen (GitHub issues, Slack, email), response times, office hours
 - Named maintainers — Who reviews PRs, makes decisions, and can be contacted
 - Local setup — Build and test commands that work
@@ -203,7 +208,8 @@ Before a repository accepts InnerSource contributions, it must provide self-serv
 - Review turnaround — Maximum time before first feedback
 - Escalation path — What happens if you're blocked
 
-This turns onboarding into a self-service process instead of requiring private conversations with maintainers.
+This turns onboarding into a self-service process instead of requiring private
+conversations with maintainers.
 
 ## Contribution Service Contract
 
@@ -225,7 +231,8 @@ Contributors and maintainers make implicit promises to each other. Make them exp
 - Address defects discovered during that period
 - Work with maintainers on any adoption issues
 
-This service contract reduces fear on both sides: maintainers know contributors won't abandon code, and contributors know reviews won't take months.
+This service contract reduces fear on both sides: maintainers know contributors
+won't abandon code, and contributors know reviews won't take months.
 
 ## Evidence Gates
 

@@ -10,6 +10,6 @@
   body {
     margin: 0;
     font-family: var(--ps-font-family, "Inter", "Segoe UI", Arial, sans-serif);
-    background: var(--p-surface-50);
+    background: var(--ps-surface-background);
   }
 }

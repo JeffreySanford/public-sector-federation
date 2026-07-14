@@ -4,6 +4,7 @@ export { PublicDialogComponent } from './public-dialog.component';
 export { PublicEmptyStateComponent } from './public-empty-state.component';
 export { PublicFormSectionComponent } from './public-form-section.component';
 export { PublicMenuComponent, type PublicMenuAction } from './public-menu.component';
+export { PublicPaginatorComponent } from './public-paginator.component';
 export { PublicPageHeaderComponent } from './public-page-header.component';
 export { PublicPopoverComponent } from './public-popover.component';
 export { PublicProgressComponent } from './public-progress.component';

@@ -286,7 +286,7 @@ team toward the right implementation path:
 | **Reuse** | Use existing component X instead | Link to Zeroheight page, Storybook example, documentation |
 | **Extend** | Propose an additive variant of existing Y | Minor change approval, extend Storybook, update docs |
 | **Create** | This should become a shared component | Route to InnerSource contribution process with timeline |
-| **Keep Local** | This is domain-specific; implement in your application | Provide pattern recommendations but no shared promotion |
+| **Keep Local** | Domain-specific; implement in the application | Provide pattern guidance but no shared promotion |
 | **Research** | This needs more evidence; revisit in 6 months | Document the gap for future roadmap discussion |
 
 ### 8. Ship Using an Approved Version

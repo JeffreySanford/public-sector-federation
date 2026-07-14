@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { PublicCardComponent, PublicTagComponent } from '@public-sector/ui-patterns';
+import { PublicCardComponent, PublicPaginatorComponent, PublicTagComponent } from '@public-sector/ui-patterns';
 
 interface Program {
   program: string;
@@ -29,13 +29,13 @@ const allPrograms: Program[] = [
 @Component({
   selector: 'public-table-paginator-story',
   standalone: true,
-  imports: [PublicCardComponent, PublicTagComponent],
+  imports: [PublicCardComponent, PublicPaginatorComponent, PublicTagComponent],
   template: `
     <main class="storybook-shell">
       <header><ps-tag value="Acceptance: Table Paginator" tone="info" /><h1>Program performance</h1><p>Filter active public programs.</p></header>
       <ps-card>
         <div class="table-scroll">
-          <table>
+          <table data-testid="program-table">
             <thead>
               <tr>
                 <th>Program</th>
@@ -66,39 +66,14 @@ const allPrograms: Program[] = [
           </table>
         </div>
         
-        <!-- Paginator -->
-        <div class="paginator">
-          <div class="paginator-info">
-            Showing {{ startRow() }} to {{ endRow() }} of {{ allPrograms.length }} programs
-          </div>
-          <div class="paginator-controls">
-            <button 
-              [disabled]="currentPage() === 1" 
-              (click)="previousPage()"
-              class="paginator-btn"
-            >
-              ← Previous
-            </button>
-            
-            <div class="page-info">
-              Page {{ currentPage() }} of {{ totalPages() }}
-            </div>
-            
-            <button 
-              [disabled]="currentPage() === totalPages()" 
-              (click)="nextPage()"
-              class="paginator-btn"
-            >
-              Next →
-            </button>
-            
-            <select [value]="rowsPerPage()" (change)="changeRowsPerPage($event)" class="rows-select">
-              <option value="5">5 per page</option>
-              <option value="10">10 per page</option>
-              <option value="15">15 per page</option>
-            </select>
-          </div>
-        </div>
+        <ps-paginator
+          itemLabel="programs"
+          [totalRecords]="allPrograms.length"
+          [currentPage]="currentPage()"
+          (currentPageChange)="currentPage.set($event)"
+          [rowsPerPage]="rowsPerPage()"
+          (rowsPerPageChange)="rowsPerPage.set($event)"
+        />
       </ps-card>
     </main>
   `,
@@ -107,56 +82,8 @@ const allPrograms: Program[] = [
     .table-scroll { overflow-x: auto; margin-bottom: 1rem; }
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 0.75rem; border-bottom: 1px solid var(--p-content-border-color); text-align: left; }
-    th { font-weight: 700; background-color: var(--p-surface-50); }
-    tr:hover { background-color: var(--p-surface-50); }
-    
-    .paginator { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      gap: 1rem; 
-      padding-top: 1rem; 
-      border-top: 1px solid var(--p-content-border-color);
-      flex-wrap: wrap;
-    }
-    .paginator-info { font-size: 0.875rem; color: var(--p-text-color-secondary); }
-    .paginator-controls { 
-      display: flex; 
-      gap: 0.5rem; 
-      align-items: center;
-    }
-    .paginator-btn { 
-      padding: 0.5rem 1rem; 
-      border: 1px solid var(--p-content-border-color); 
-      background: var(--p-surface-card);
-      border-radius: 0.375rem;
-      cursor: pointer;
-      font-size: 0.875rem;
-      transition: all 0.2s;
-    }
-    .paginator-btn:hover:not(:disabled) { 
-      background: var(--p-primary-500); 
-      color: white;
-      border-color: var(--p-primary-500);
-    }
-    .paginator-btn:disabled { 
-      opacity: 0.5; 
-      cursor: not-allowed;
-    }
-    .page-info { 
-      font-size: 0.875rem; 
-      font-weight: 600;
-      min-width: 100px;
-      text-align: center;
-    }
-    .rows-select { 
-      padding: 0.5rem 0.75rem; 
-      border: 1px solid var(--p-content-border-color); 
-      background: var(--p-surface-card);
-      border-radius: 0.375rem;
-      cursor: pointer;
-      font-size: 0.875rem;
-    }
+    th { font-weight: 700; background-color: color-mix(in srgb, var(--p-content-background) 88%, var(--p-primary-color)); }
+    tr:hover { background-color: color-mix(in srgb, var(--p-content-background) 92%, var(--p-primary-color)); }
   `,
 })
 class TablePaginatorStoryComponent {
@@ -168,37 +95,6 @@ class TablePaginatorStoryComponent {
     const start = (this.currentPage() - 1) * this.rowsPerPage();
     const end = start + this.rowsPerPage();
     return this.allPrograms.slice(start, end);
-  }
-
-  totalPages() {
-    return Math.ceil(this.allPrograms.length / this.rowsPerPage());
-  }
-
-  startRow() {
-    return (this.currentPage() - 1) * this.rowsPerPage() + 1;
-  }
-
-  endRow() {
-    const end = this.currentPage() * this.rowsPerPage();
-    return end > this.allPrograms.length ? this.allPrograms.length : end;
-  }
-
-  previousPage() {
-    if (this.currentPage() > 1) {
-      this.currentPage.set(this.currentPage() - 1);
-    }
-  }
-
-  nextPage() {
-    if (this.currentPage() < this.totalPages()) {
-      this.currentPage.set(this.currentPage() + 1);
-    }
-  }
-
-  changeRowsPerPage(event: Event) {
-    const select = event.target as HTMLSelectElement;
-    this.rowsPerPage.set(parseInt(select.value, 10));
-    this.currentPage.set(1);
   }
 
   getSeverity(status: Program['status']): 'success' | 'warn' | 'danger' {
