@@ -20,6 +20,8 @@ to correct once the production repositories are available.
 
 **Executive Summary**: [Governance Summary](./governance/governance-summary.md) — Concise overview for leadership and decision makers.
 
+**For Implementation Teams**: [Intake Process](./governance/governance-intake-process.md) → [Quality Gates](./governance/governance-quality-gates.md) → [Release Process](./governance/governance-release-process.md)
+
 1. [Focus](./focus.md)
 2. [Operating model](./architecture/operating-model.md)
 3. [Token pipeline](./architecture/token-pipeline.md)
@@ -30,13 +32,16 @@ to correct once the production repositories are available.
 8. [Implementation options](./architecture/implementation-options.md)
 9. [Governance overview](./governance/overview.md)
 10. [Developer journey](./governance/developer-journey.md)
-11. [Component promotion](./governance/component-promotion.md)
-12. [Contribution process](./governance/contribution-process.md)
-13. [InnerSource contribution model](./governance/innersource-contribution-model.md)
-14. [Adoption and team buy-in](./governance/adoption-and-team-buy-in.md)
-15. [Rollout implementation](./governance/rollout-implementation.md)
-16. [Zeroheight governance model](./governance/zeroheight-governance-model.md)
-17. [Repository review checklist](./validation/repository-review-checklist.md)
+11. [Governance intake process](./governance/governance-intake-process.md)
+12. [Governance quality gates](./governance/governance-quality-gates.md)
+13. [Governance release process](./governance/governance-release-process.md)
+14. [Component promotion](./governance/component-promotion.md)
+15. [Contribution process](./governance/contribution-process.md)
+16. [InnerSource contribution model](./governance/innersource-contribution-model.md)
+17. [Adoption and team buy-in](./governance/adoption-and-team-buy-in.md)
+18. [Rollout implementation](./governance/rollout-implementation.md)
+19. [Zeroheight governance model](./governance/zeroheight-governance-model.md)
+20. [Repository review checklist](./validation/repository-review-checklist.md)
 
 ## Tool Responsibilities
 
