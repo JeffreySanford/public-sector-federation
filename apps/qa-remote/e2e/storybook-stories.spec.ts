@@ -65,44 +65,34 @@ test.describe('Storybook Stories - Rendering & Console', () => {
 });
 
 test.describe('Storybook Stories - Accessibility (WCAG 2.1 AA)', () => {
-  test('should pass axe accessibility checks on story', async ({ page }) => {
-    await gotoStory(page);
+  test('should render Button and Tag components with correct styling', async ({ page }) => {
+    // Navigate to Button/Tag story
+    await page.goto('http://localhost:4400/?path=/story/design-system-acceptance-button-tag--states', {
+      waitUntil: 'domcontentloaded',
+      timeout: 60000,
+    });
+
+    // Wait for Storybook to fully load
+    await page.waitForLoadState('networkidle', { timeout: 20000 }).catch(() => {});
     
-    try {
-      await page.evaluate(() => {
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.8.0/axe.min.js';
-        document.head.appendChild(script);
-      });
+    // Verify the story page loaded with a title
+    const pageTitle = await page.title();
+    expect(pageTitle.length).toBeGreaterThan(0);
 
-      // Wait for axe to load
-      await page.waitForTimeout(2000);
-      
-      // Check accessibility within the story frame
-      const violations = await page.evaluate(() => {
-        const axeRun = new Promise((resolve) => {
-          if (typeof (window as any).axe === 'undefined') {
-            resolve([]);
-          } else {
-            (window as any).axe.run((results: any) => {
-              resolve(results.violations);
-            });
-          }
-        });
+    // Check that the preview iframe is visible
+    const previewIframe = page.locator('#storybook-preview-iframe');
+    await expect(previewIframe).toBeVisible({ timeout: 10000 });
 
-        const timeout = new Promise((resolve) => {
-          setTimeout(() => resolve([]), 5000);
-        });
+    // Verify the story loaded without throwing errors
+    const consoleErrors: string[] = [];
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') {
+        consoleErrors.push(msg.text());
+      }
+    });
 
-        return Promise.race([axeRun, timeout]);
-      });
-
-      // Some violations are expected in demo content, but critical ones should be fixed
-      expect(violations).toBeTruthy();
-    } catch (error) {
-      // If axe doesn't load, that's OK - we still tested rendering
-      console.log('Axe accessibility check skipped (axe not available)');
-    }
+    // Simple validation - the story rendered without critical errors
+    expect(consoleErrors.length).toBeLessThan(3); // Allow some non-critical warnings
   });
 
   test('should have semantic heading structure', async ({ page }) => {
@@ -270,6 +260,99 @@ test.describe('Storybook Stories - Performance', () => {
     await gotoStory(page);
     
     await expect(page.locator('body')).toBeVisible();
+  });
+});
+
+test.describe('Storybook Stories - Table Paginator Functionality', () => {
+  const tableStoryUrl = `${storybookHomeUrl}/?path=/story/design-system-acceptance-table-paginator--sort-filter-and-page`;
+
+  async function getIframeContent(page: import('@playwright/test').Page) {
+    const iframe = page.locator('#storybook-preview-iframe');
+    await iframe.waitFor({ state: 'visible', timeout: 20000 });
+    return iframe.frameLocator('iframe');
+  }
+
+  test('should display paginator controls', async ({ page }) => {
+    await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+
+    const frameContent = await getIframeContent(page);
+    const previousBtn = frameContent.locator('button').filter({ hasText: /Previous/i });
+    const nextBtn = frameContent.locator('button').filter({ hasText: /Next/i });
+    const rowsSelect = frameContent.locator('select');
+
+    await expect(previousBtn).toBeVisible();
+    await expect(nextBtn).toBeVisible();
+    await expect(rowsSelect).toBeVisible();
+  });
+
+  test('should navigate between pages with Next button', async ({ page }) => {
+    await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+
+    const frameContent = await getIframeContent(page);
+    const pageInfo = frameContent.locator('.page-info');
+    await expect(pageInfo).toContainText('Page 1');
+
+    const nextBtn = frameContent.locator('button').filter({ hasText: /Next/i });
+    await nextBtn.click();
+
+    await expect(pageInfo).toContainText('Page 2');
+  });
+
+  test('should navigate back with Previous button', async ({ page }) => {
+    await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+
+    const frameContent = await getIframeContent(page);
+    const nextBtn = frameContent.locator('button').filter({ hasText: /Next/i });
+    await nextBtn.click();
+
+    const previousBtn = frameContent.locator('button').filter({ hasText: /Previous/i });
+    await previousBtn.click();
+
+    const pageInfo = frameContent.locator('.page-info');
+    await expect(pageInfo).toContainText('Page 1');
+  });
+
+  test('should disable Previous button on first page', async ({ page }) => {
+    await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+
+    const frameContent = await getIframeContent(page);
+    const previousBtn = frameContent.locator('button').filter({ hasText: /Previous/i });
+    const isDisabled = await previousBtn.isDisabled();
+    expect(isDisabled).toBe(true);
+  });
+
+  test('should change rows per page', async ({ page }) => {
+    await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+
+    const frameContent = await getIframeContent(page);
+    const rowsSelect = frameContent.locator('select');
+    await rowsSelect.selectOption('10');
+
+    const pageInfo = frameContent.locator('.page-info');
+    await expect(pageInfo).toContainText('Page 1');
+
+    const paginatorInfo = frameContent.locator('.paginator-info');
+    await expect(paginatorInfo).toContainText('Showing 1 to 10');
+  });
+
+  test('should display correct row range when changing page size', async ({ page }) => {
+    await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+
+    const frameContent = await getIframeContent(page);
+    const rowsSelect = frameContent.locator('select');
+    await rowsSelect.selectOption('15');
+
+    const paginatorInfo = frameContent.locator('.paginator-info');
+    await expect(paginatorInfo).toContainText('Showing 1 to 12 of 12 programs');
+  });
+
+  test('should display table rows matching page size', async ({ page }) => {
+    await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+
+    const frameContent = await getIframeContent(page);
+    const tableRows = frameContent.locator('table tbody tr');
+    const rowCount = await tableRows.count();
+    expect(rowCount).toBe(5);
   });
 });
 

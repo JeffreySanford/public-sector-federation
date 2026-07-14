@@ -18,10 +18,6 @@ to correct once the production repositories are available.
 
 ## Start Here
 
-**Executive Summary**: [Governance Summary](./governance/governance-summary.md) — Concise overview for leadership and decision makers.
-
-**For Implementation Teams**: [Intake Process](./governance/governance-intake-process.md) → [Quality Gates](./governance/governance-quality-gates.md) → [Release Process](./governance/governance-release-process.md)
-
 1. [Focus](./focus.md)
 2. [Operating model](./architecture/operating-model.md)
 3. [Token pipeline](./architecture/token-pipeline.md)
@@ -32,9 +28,6 @@ to correct once the production repositories are available.
 8. [Implementation options](./architecture/implementation-options.md)
 9. [Governance overview](./governance/overview.md)
 10. [Developer journey](./governance/developer-journey.md)
-11. [Governance intake process](./governance/governance-intake-process.md)
-12. [Governance quality gates](./governance/governance-quality-gates.md)
-13. [Governance release process](./governance/governance-release-process.md)
 14. [Component promotion](./governance/component-promotion.md)
 15. [Contribution process](./governance/contribution-process.md)
 16. [InnerSource contribution model](./governance/innersource-contribution-model.md)

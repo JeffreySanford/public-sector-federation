@@ -169,6 +169,40 @@
           }
         </tbody>
       </table>
+      
+      <!-- Paginator -->
+      <div class="qa-paginator">
+        <div class="paginator-info">
+          Showing {{ qaAcceptanceTableStartRow }} to {{ qaAcceptanceTableEndRow }} of {{ qaProgramRows.length }} programs
+        </div>
+        <div class="paginator-controls">
+          <button 
+            [disabled]="qaTableCurrentPage() === 1" 
+            (click)="qaTablePreviousPage()"
+            class="paginator-btn"
+          >
+            ← Previous
+          </button>
+          
+          <div class="page-info">
+            Page {{ qaTableCurrentPage() }} of {{ qaAcceptanceTableTotalPages }}
+          </div>
+          
+          <button 
+            [disabled]="qaTableCurrentPage() === qaAcceptanceTableTotalPages" 
+            (click)="qaTableNextPage()"
+            class="paginator-btn"
+          >
+            Next →
+          </button>
+          
+          <select [value]="qaTableRowsPerPage()" (change)="qaTableChangeRowsPerPage($event)" class="rows-select">
+            <option value="5">5 per page</option>
+            <option value="10">10 per page</option>
+            <option value="15">15 per page</option>
+          </select>
+        </div>
+      </div>
     </article>
 
     <article class="acceptance-panel">

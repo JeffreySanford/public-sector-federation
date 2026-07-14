@@ -333,9 +333,9 @@ test.describe('QA Remote - Performance Dashboard Visualization', () => {
     await expect(page.locator('.infographic-card')).toHaveCount(4);
     await expect(page.locator('.infographic-card').filter({ hasText: 'Trend balance' })).toContainText('1/1');
 
-    await expect(page.locator('.alert-card')).toBeVisible();
-    await expect(page.locator('.alert-card')).toContainText('Performance regressions detected');
-    await expect(page.locator('.alert-card')).toContainText('warning alerts need review');
+    await expect(page.locator('.alerts-section ps-card')).toBeVisible();
+    await expect(page.locator('.alerts-section')).toContainText('Performance regressions detected');
+    await expect(page.locator('.alerts-section')).toContainText('warning alerts need review');
     await expect(page.locator('.impact')).toContainText('+3000ms');
     await expect(page.locator('.impact')).toContainText('30%');
 

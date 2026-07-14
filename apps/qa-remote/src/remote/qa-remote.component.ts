@@ -76,6 +76,8 @@ export class QaRemoteComponent implements OnInit {
   private readonly agileWorkflow = inject(AgileWorkflowService);
 
   activeTab = signal<'qa' | 'performance'>('qa');
+  qaTableRowsPerPage = signal(5);
+  qaTableCurrentPage = signal(1);
 
   dialogVisible = false;
   acceptanceDialogVisible = false;
@@ -475,7 +477,43 @@ export class QaRemoteComponent implements OnInit {
   }
 
   get qaAcceptanceTableRows(): QaProgramRow[] {
-    return this.qaTableShowEmpty ? [] : this.qaProgramRows;
+    const allRows = this.qaTableShowEmpty ? [] : this.qaProgramRows;
+    const start = (this.qaTableCurrentPage() - 1) * this.qaTableRowsPerPage();
+    const end = start + this.qaTableRowsPerPage();
+    return allRows.slice(start, end);
+  }
+
+  get qaAcceptanceTableTotalPages(): number {
+    const allRows = this.qaTableShowEmpty ? [] : this.qaProgramRows;
+    return Math.ceil(allRows.length / this.qaTableRowsPerPage());
+  }
+
+  get qaAcceptanceTableStartRow(): number {
+    return (this.qaTableCurrentPage() - 1) * this.qaTableRowsPerPage() + 1;
+  }
+
+  get qaAcceptanceTableEndRow(): number {
+    const allRows = this.qaTableShowEmpty ? [] : this.qaProgramRows;
+    const end = this.qaTableCurrentPage() * this.qaTableRowsPerPage();
+    return end > allRows.length ? allRows.length : end;
+  }
+
+  qaTablePreviousPage(): void {
+    if (this.qaTableCurrentPage() > 1) {
+      this.qaTableCurrentPage.set(this.qaTableCurrentPage() - 1);
+    }
+  }
+
+  qaTableNextPage(): void {
+    if (this.qaTableCurrentPage() < this.qaAcceptanceTableTotalPages) {
+      this.qaTableCurrentPage.set(this.qaTableCurrentPage() + 1);
+    }
+  }
+
+  qaTableChangeRowsPerPage(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    this.qaTableRowsPerPage.set(parseInt(select.value, 10));
+    this.qaTableCurrentPage.set(1);
   }
 
   get selectedSprintDayRoadmap(): RetrofitRoadmapRow {
