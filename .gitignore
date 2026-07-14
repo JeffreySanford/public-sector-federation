@@ -6,10 +6,9 @@ tmp/
 .angular/
 .cache/
 coverage/
+playwright-report/
+test-results/
 docs/reports/
-test-results/.last-run.json
-test-results/junit.xml
-test-results/results.json
 *.log
 .env
 .env.*

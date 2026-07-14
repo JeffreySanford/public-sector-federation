@@ -269,89 +269,101 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
   async function getIframeContent(page: import('@playwright/test').Page) {
     const iframe = page.frameLocator('#storybook-preview-iframe');
     await expect(iframe.locator('body')).toBeVisible({ timeout: 20000 });
-    await expect(iframe.getByRole('heading', { name: /Program performance/i })).toBeVisible({ timeout: 20000 });
+    await expect(iframe.getByRole('heading', { name: /Filter and page through active programs/i })).toBeVisible({
+      timeout: 20000,
+    });
     return iframe;
+  }
+
+  async function getTableStoryContent(page: import('@playwright/test').Page) {
+    const frameContent = await getIframeContent(page);
+    const paginator = frameContent.locator('.p-paginator');
+    await expect(paginator).toBeVisible({ timeout: 20000 });
+    await expect(paginator.locator('.p-paginator-current')).toBeVisible({ timeout: 20000 });
+    return { frameContent, paginator };
   }
 
   test('should display paginator controls', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-    const frameContent = await getIframeContent(page);
-    const previousBtn = frameContent.locator('button').filter({ hasText: /Previous/i });
-    const nextBtn = frameContent.locator('button').filter({ hasText: /Next/i });
-    const rowsSelect = frameContent.locator('select');
+    const { paginator } = await getTableStoryContent(page);
+    const previousBtn = paginator.locator('.p-paginator-prev');
+    const nextBtn = paginator.locator('.p-paginator-next');
+    const currentReport = paginator.locator('.p-paginator-current');
 
     await expect(previousBtn).toBeVisible();
     await expect(nextBtn).toBeVisible();
-    await expect(rowsSelect).toBeVisible();
+    await expect(currentReport).toContainText('1 to 5 of 10');
   });
 
   test('should navigate between pages with Next button', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-    const frameContent = await getIframeContent(page);
-    const pageInfo = frameContent.locator('.page-info');
-    await expect(pageInfo).toContainText('Page 1');
+    const { paginator } = await getTableStoryContent(page);
+    const currentReport = paginator.locator('.p-paginator-current');
+    await expect(currentReport).toContainText('1 to 5 of 10');
 
-    const nextBtn = frameContent.locator('button').filter({ hasText: /Next/i });
+    const nextBtn = paginator.locator('.p-paginator-next');
     await nextBtn.click();
 
-    await expect(pageInfo).toContainText('Page 2');
+    await expect(currentReport).toContainText('6 to 10 of 10');
   });
 
   test('should navigate back with Previous button', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-    const frameContent = await getIframeContent(page);
-    const nextBtn = frameContent.locator('button').filter({ hasText: /Next/i });
+    const { paginator } = await getTableStoryContent(page);
+    const nextBtn = paginator.locator('.p-paginator-next');
     await nextBtn.click();
 
-    const previousBtn = frameContent.locator('button').filter({ hasText: /Previous/i });
+    const previousBtn = paginator.locator('.p-paginator-prev');
     await previousBtn.click();
 
-    const pageInfo = frameContent.locator('.page-info');
-    await expect(pageInfo).toContainText('Page 1');
+    const currentReport = paginator.locator('.p-paginator-current');
+    await expect(currentReport).toContainText('1 to 5 of 10');
   });
 
   test('should disable Previous button on first page', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-    const frameContent = await getIframeContent(page);
-    const previousBtn = frameContent.locator('button').filter({ hasText: /Previous/i });
+    const { paginator } = await getTableStoryContent(page);
+    const previousBtn = paginator.locator('.p-paginator-prev');
     const isDisabled = await previousBtn.isDisabled();
     expect(isDisabled).toBe(true);
   });
 
-  test('should change rows per page', async ({ page }) => {
+  test('should filter rows from the search box', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-    const frameContent = await getIframeContent(page);
-    const rowsSelect = frameContent.locator('select');
-    await rowsSelect.selectOption('10');
+    const { frameContent } = await getTableStoryContent(page);
+    const search = frameContent.getByRole('searchbox', { name: /Search programs/i });
+    await search.fill('housing');
 
-    const pageInfo = frameContent.locator('.page-info');
-    await expect(pageInfo).toContainText('Page 1');
-
-    const paginatorInfo = frameContent.locator('.paginator-info');
-    await expect(paginatorInfo).toContainText('Showing 1 to 10');
+    const tableRows = frameContent.locator('tbody tr');
+    await expect(tableRows).toHaveCount(2);
+    await expect(tableRows.nth(0)).toContainText('Housing assistance');
+    await expect(tableRows.nth(1)).toContainText('Emergency housing');
   });
 
-  test('should display correct row range when changing page size', async ({ page }) => {
+  test('should reset the current report when filtering narrows the dataset', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-    const frameContent = await getIframeContent(page);
-    const rowsSelect = frameContent.locator('select');
-    await rowsSelect.selectOption('15');
+    const { frameContent, paginator } = await getTableStoryContent(page);
+    const nextBtn = paginator.locator('.p-paginator-next');
+    await nextBtn.click();
 
-    const paginatorInfo = frameContent.locator('.paginator-info');
-    await expect(paginatorInfo).toContainText('Showing 1 to 12 of 12 programs');
+    const search = frameContent.getByRole('searchbox', { name: /Search programs/i });
+    await search.fill('housing');
+
+    const currentReport = paginator.locator('.p-paginator-current');
+    await expect(currentReport).toContainText('1 to 2 of 2');
   });
 
   test('should display table rows matching page size', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-    const frameContent = await getIframeContent(page);
-    const tableRows = frameContent.getByTestId('program-table').locator('tbody tr');
+    const { frameContent } = await getTableStoryContent(page);
+    const tableRows = frameContent.locator('tbody tr');
     await expect(tableRows).toHaveCount(5);
   });
 });

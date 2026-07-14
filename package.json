@@ -20,10 +20,6 @@
     "start:backend": "node scripts/ensure-platform.mjs",
     "start:all": "pnpm start:backend && pnpm start:frontend",
     "check:dev-ports": "node scripts/check-dev-ports.mjs",
-    "test:a11y": "node scripts/a11y-check.mjs",
-    "test:e2e": "playwright test",
-    "test:code-examples": "playwright test CODE_EXAMPLES.test.ts",
-    "test:api": "pnpm nx run agile-api:test",
     "db:validate": "pnpm prisma validate --schema apps/agile-api/prisma/schema.prisma",
     "verify:fed": "pnpm check:dev-ports && pnpm test:a11y",
     "docker:up": "docker compose up -d --build postgres agile-api",
@@ -52,7 +48,12 @@
     "serve:playground": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js serve playground",
     "storybook:qa": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run qa-remote:storybook",
     "build-storybook:qa": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run qa-remote:build-storybook",
-    "test:storybook:qa": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts"
+    "test:a11y": "node scripts/a11y-check.mjs",
+    "test:e2e": "playwright test",
+    "test:code-examples": "playwright test CODE_EXAMPLES.test.ts",
+    "test:api": "pnpm nx run agile-api:test",
+    "test:storybook:qa": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts",
+    "test:storybook:qa:chromium": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts --project=chromium --workers=1"
   },
   "devDependencies": {
     "@angular-devkit/core": "^21.0.0",
