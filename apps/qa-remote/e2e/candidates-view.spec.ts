@@ -56,9 +56,8 @@ for (const surface of surfaces) {
     }) => {
       await openCandidatesView(page, surface.url);
 
-      const themeControls = page.getByRole('group', {
-        name: 'Candidate theme controls',
-      });
+      const themeControls = page.locator('.theme-controls');
+      await expect(themeControls).toBeVisible();
 
       await themeControls.getByRole('button', { name: 'vibrant' }).click();
       await expect(page.locator('html')).toHaveClass(/ps-theme-vibrant/);
