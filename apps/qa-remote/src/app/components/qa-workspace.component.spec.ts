@@ -33,9 +33,10 @@ describe('QaWorkspaceComponent', () => {
   it('renders Candidates as the third navigation control', () => {
     fixture.detectChanges();
 
+    const element: HTMLElement = fixture.nativeElement;
     const labels = Array.from(
-      fixture.nativeElement.querySelectorAll('.qa-workspace__tabs button'),
-    ).map((element: Element) => element.textContent?.trim());
+      element.querySelectorAll('.qa-workspace__tabs button'),
+    ).map((button) => button.textContent?.trim());
 
     expect(labels).toEqual([
       'QA Components',

@@ -84,7 +84,7 @@ for (const surface of surfaces) {
       });
       await expect(storybookLink).toHaveAttribute(
         'href',
-        /design-system-components-up-button-candidate--current-vs-candidate/,
+        /design-system-candidates-button-up--current-vs-candidate/,
       );
 
       await page

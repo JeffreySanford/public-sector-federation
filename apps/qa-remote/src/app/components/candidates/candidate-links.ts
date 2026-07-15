@@ -10,7 +10,7 @@ export interface CandidateLink {
 }
 
 export const UP_BUTTON_STORY_ID =
-  'design-system-components-up-button-candidate--current-vs-candidate';
+  'design-system-candidates-button-up--current-vs-candidate';
 
 export const UP_BUTTON_STORYBOOK_URL =
   `http://localhost:4400/?path=/story/${UP_BUTTON_STORY_ID}`;
