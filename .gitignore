@@ -13,3 +13,4 @@ docs/reports/
 .env
 .env.*
 !.env.example
+!.env.sample
