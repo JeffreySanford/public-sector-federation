@@ -33,11 +33,11 @@ export const candidateLinks: readonly CandidateLink[] = [
   },
   {
     id: 'zeroheight',
-    label: 'Open Zeroheight portal',
+    label: 'Open UP Button Candidate in Zeroheight',
     description:
-      'The portal is available now. A stable Button Candidate page URL should replace this root link after publication.',
+      'Governed Candidate documentation with status, comparison guidance, design and token direction, developer usage, and validation evidence.',
     status: 'Available',
-    href: 'https://jeffreysanford.zeroheight.com/',
+    href: 'https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-canidate',
     external: true,
   },
   {

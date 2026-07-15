@@ -24,6 +24,31 @@ const pages = [
     output: 'components.md',
   },
   {
+    zeroheightPage: 'Components / Button / UP Button Candidate / Introduction',
+    source: 'docs/design-system/components/up-button-candidate.md',
+    output: 'components-up-button-candidate-introduction.md',
+  },
+  {
+    zeroheightPage: 'Components / Button / UP Button Candidate / Overview',
+    source: 'docs/design-system/components/up-button-candidate-overview.md',
+    output: 'components-up-button-candidate-overview.md',
+  },
+  {
+    zeroheightPage: 'Components / Button / UP Button Candidate / Design & Tokens',
+    source: 'docs/design-system/components/up-button-candidate-design-tokens.md',
+    output: 'components-up-button-candidate-design-tokens.md',
+  },
+  {
+    zeroheightPage: 'Components / Button / UP Button Candidate / Developer',
+    source: 'docs/design-system/components/up-button-candidate-developer.md',
+    output: 'components-up-button-candidate-developer.md',
+  },
+  {
+    zeroheightPage: 'Components / Button / UP Button Candidate / Validation',
+    source: 'docs/design-system/components/up-button-candidate-validation.md',
+    output: 'components-up-button-candidate-validation.md',
+  },
+  {
     zeroheightPage: 'Patterns',
     source: 'docs/design-system/app-inventory.md',
     output: 'patterns.md',
