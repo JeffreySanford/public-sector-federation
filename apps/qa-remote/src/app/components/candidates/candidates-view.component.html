@@ -1,0 +1,394 @@
+<section class="candidates-view" aria-labelledby="candidatesViewTitle">
+  <header class="candidate-hero">
+    <div class="candidate-hero__content">
+      <div class="candidate-hero__eyebrow">
+        <ps-tag value="Candidate" tone="warn" />
+        <span>UP Design System Button proof</span>
+      </div>
+      <h1 id="candidatesViewTitle">Current Button vs UP Button candidate</h1>
+      <p>
+        This view isolates the first experimental component. It compares the stable
+        <code>ps-button</code> wrapper with <code>ps-up-button</code>, connects the
+        Storybook evidence, and shows what still blocks promotion. It does not migrate
+        the rest of the public-sector design system.
+      </p>
+    </div>
+
+    <aside class="candidate-hero__status" aria-label="Candidate status summary">
+      <span>Lifecycle</span>
+      <strong>Candidate</strong>
+      <small>Existing ps-button remains stable</small>
+    </aside>
+  </header>
+
+  <section class="candidate-card candidate-scope" aria-labelledby="candidateScopeTitle">
+    <div>
+      <span class="candidate-kicker">Narrow proof scope</span>
+      <h2 id="candidateScopeTitle">One Button candidate, not a system-wide conversion</h2>
+      <p>
+        Only Button-related UP design information, tokens, states, and guidance are in
+        scope. Card, Table, Dialog, Toast, navigation, and other wrappers continue to use
+        the existing public-sector contract.
+      </p>
+    </div>
+    <ul>
+      <li>Stable wrapper: <code>ps-button</code></li>
+      <li>Experimental wrapper: <code>ps-up-button</code></li>
+      <li>Promotion gate: verified UP Button tokens and completed evidence</li>
+    </ul>
+  </section>
+
+  <section class="candidate-card" aria-labelledby="comparisonControlsTitle">
+    <div class="candidate-section-heading">
+      <div>
+        <span class="candidate-kicker">Shared comparison controls</span>
+        <h2 id="comparisonControlsTitle">Drive both implementations with the same inputs</h2>
+      </div>
+      <p>
+        Use identical content and state inputs so visual and behavioral differences are
+        attributable to the wrapper and token treatment.
+      </p>
+    </div>
+
+    <div class="candidate-controls">
+      <label>
+        <span>Comparison label</span>
+        <input
+          type="text"
+          [value]="label()"
+          (input)="setLabel(($any($event.target).value ?? '').toString())"
+        />
+      </label>
+
+      <label>
+        <span>Tone</span>
+        <select
+          [value]="tone()"
+          (change)="setTone(($any($event.target).value ?? '').toString())"
+        >
+          @for (option of tones; track option) {
+            <option [value]="option">{{ option }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        <span>Appearance</span>
+        <select
+          [value]="appearance()"
+          (change)="setAppearance(($any($event.target).value ?? '').toString())"
+        >
+          @for (option of appearances; track option) {
+            <option [value]="option">{{ option }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="candidate-checkbox">
+        <input
+          type="checkbox"
+          [checked]="disabled()"
+          (change)="setDisabled(!!$any($event.target).checked)"
+        />
+        <span>Disabled</span>
+      </label>
+
+      <label class="candidate-checkbox">
+        <input
+          type="checkbox"
+          [checked]="loading()"
+          (change)="setLoading(!!$any($event.target).checked)"
+        />
+        <span>Loading</span>
+      </label>
+    </div>
+
+    <div class="live-comparison" data-testid="live-button-comparison">
+      <article class="implementation-card implementation-card--stable">
+        <div class="implementation-card__header">
+          <div>
+            <span>Current / Stable</span>
+            <h3><code>ps-button</code></h3>
+          </div>
+          <ps-tag value="Stable" tone="success" />
+        </div>
+        <div class="implementation-card__stage">
+          <ps-button
+            [label]="label() || 'Button'"
+            icon="pi pi-check"
+            [tone]="tone()"
+            [outlined]="appearance() === 'outlined'"
+            [text]="appearance() === 'text'"
+            [disabled]="disabled()"
+            [loading]="loading()"
+            (buttonClick)="recordActivation('stable')"
+          />
+        </div>
+        <output aria-live="polite">Activations: {{ stableActivations() }}</output>
+      </article>
+
+      <article class="implementation-card implementation-card--candidate">
+        <div class="implementation-card__header">
+          <div>
+            <span>UP Design System / Candidate</span>
+            <h3><code>ps-up-button</code></h3>
+          </div>
+          <ps-tag value="Candidate" tone="warn" />
+        </div>
+        <div class="implementation-card__stage">
+          <ps-up-button
+            [label]="label() || 'Button'"
+            icon="pi pi-check"
+            [tone]="tone()"
+            [appearance]="appearance()"
+            [disabled]="disabled()"
+            [loading]="loading()"
+            (buttonClick)="recordActivation('candidate')"
+          />
+        </div>
+        <output aria-live="polite">Activations: {{ candidateActivations() }}</output>
+      </article>
+    </div>
+  </section>
+
+  <section class="candidate-card" aria-labelledby="themeReviewTitle">
+    <div class="candidate-section-heading">
+      <div>
+        <span class="candidate-kicker">Theme and mode validation</span>
+        <h2 id="themeReviewTitle">Exercise every public-sector theme context</h2>
+      </div>
+      <p>
+        These controls update the shared document theme, matching shell behavior and the
+        Storybook neutral, vibrant, pastel, light, and dark toolbar combinations.
+      </p>
+    </div>
+
+    <div class="theme-controls" aria-label="Candidate theme controls">
+      <div class="theme-controls__variants" aria-label="Theme variant">
+        @for (variant of themeVariants; track variant) {
+          <button
+            type="button"
+            [class.is-active]="theme.variant() === variant"
+            [attr.aria-pressed]="theme.variant() === variant"
+            (click)="setThemeVariant(variant)"
+          >
+            {{ variant }}
+          </button>
+        }
+      </div>
+
+      <label class="candidate-checkbox candidate-checkbox--theme">
+        <input
+          type="checkbox"
+          [checked]="theme.isDark()"
+          (change)="setDarkMode(!!$any($event.target).checked)"
+        />
+        <span>Dark mode</span>
+      </label>
+
+      <strong class="theme-current">
+        Current: {{ theme.variant() }} / {{ theme.isDark() ? 'dark' : 'light' }}
+      </strong>
+    </div>
+
+    <div class="theme-matrix-table" role="region" aria-label="Theme validation matrix" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Variant</th>
+            <th scope="col">Mode</th>
+            <th scope="col">Validation expectation</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of themeMatrix; track row.variant + row.mode) {
+            <tr>
+              <td>{{ row.variant }}</td>
+              <td>{{ row.mode }}</td>
+              <td>{{ row.validation }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="candidate-card" aria-labelledby="scenarioMatrixTitle">
+    <div class="candidate-section-heading">
+      <div>
+        <span class="candidate-kicker">Stable-versus-candidate matrix</span>
+        <h2 id="scenarioMatrixTitle">Review the required Button states side by side</h2>
+      </div>
+      <p>
+        Each row uses equivalent intent while allowing the stable and candidate wrappers
+        to retain their current public APIs.
+      </p>
+    </div>
+
+    <div class="comparison-table" role="region" aria-label="Button comparison matrix" tabindex="0">
+      <div class="comparison-table__header" aria-hidden="true">
+        <span>Scenario</span>
+        <span>Current / Stable</span>
+        <span>UP Candidate</span>
+      </div>
+
+      @for (scenario of scenarios; track scenario.id) {
+        <article class="comparison-row" [attr.data-scenario]="scenario.id">
+          <div class="comparison-row__description">
+            <strong>{{ scenario.label }}</strong>
+            <span>{{ scenario.description }}</span>
+          </div>
+
+          <div class="comparison-row__sample">
+            <span class="comparison-row__mobile-label">Current / Stable</span>
+            <ps-button
+              [label]="scenario.buttonLabel"
+              [icon]="scenario.icon"
+              [tone]="scenario.tone"
+              [outlined]="scenario.appearance === 'outlined'"
+              [text]="scenario.appearance === 'text'"
+              [disabled]="!!scenario.disabled"
+              [loading]="!!scenario.loading"
+            />
+          </div>
+
+          <div class="comparison-row__sample">
+            <span class="comparison-row__mobile-label">UP Candidate</span>
+            <ps-up-button
+              [label]="scenario.buttonLabel"
+              [icon]="scenario.icon"
+              [tone]="scenario.tone"
+              [appearance]="scenario.appearance"
+              [disabled]="!!scenario.disabled"
+              [loading]="!!scenario.loading"
+            />
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="candidate-card" aria-labelledby="storybookEvidenceTitle">
+    <div class="candidate-section-heading">
+      <div>
+        <span class="candidate-kicker">Storybook integration</span>
+        <h2 id="storybookEvidenceTitle">Live isolated implementation evidence</h2>
+      </div>
+      <p>
+        The embedded story is optional at runtime. The normal link remains available when
+        Storybook is not running or iframe security settings prevent embedding.
+      </p>
+    </div>
+
+    <div class="storybook-actions">
+      <ps-button
+        [label]="showStorybookPreview() ? 'Hide Storybook preview' : 'Show Storybook preview'"
+        icon="pi pi-book"
+        [outlined]="true"
+        (buttonClick)="toggleStorybookPreview()"
+      />
+      <a [href]="storybookUrl" target="_blank" rel="noreferrer">
+        Open Current vs Candidate story
+      </a>
+      <code>design-system-components-up-button-candidate--current-vs-candidate</code>
+    </div>
+
+    @if (showStorybookPreview()) {
+      <div class="storybook-frame">
+        <iframe
+          [src]="storybookEmbedUrl"
+          title="Storybook Current Button versus UP Button candidate"
+          loading="lazy"
+        ></iframe>
+        <p>
+          Storybook must be running on <code>http://localhost:4400</code>. Use the external
+          link when the frame is unavailable.
+        </p>
+      </div>
+    }
+  </section>
+
+  <section class="candidate-card" aria-labelledby="evidenceLinksTitle">
+    <div class="candidate-section-heading">
+      <div>
+        <span class="candidate-kicker">Connected-system evidence</span>
+        <h2 id="evidenceLinksTitle">Storybook, Zeroheight, Figma, source, and tests</h2>
+      </div>
+      <p>
+        Pending destinations remain visible as governance work without creating broken
+        runtime dependencies.
+      </p>
+    </div>
+
+    <div class="evidence-grid">
+      @for (link of links; track link.id) {
+        <article class="evidence-card">
+          <div class="evidence-card__header">
+            <strong>{{ link.label }}</strong>
+            <span [class]="'evidence-status evidence-status--' + link.status.toLowerCase()">
+              {{ link.status }}
+            </span>
+          </div>
+          <p>{{ link.description }}</p>
+          @if (link.href) {
+            <a
+              [href]="link.href"
+              [target]="link.external ? '_blank' : '_self'"
+              rel="noreferrer"
+            >
+              Open evidence
+            </a>
+          } @else {
+            <span class="evidence-card__pending">URL not published yet</span>
+          }
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="candidate-card" aria-labelledby="lifecycleTitle">
+    <div class="candidate-section-heading">
+      <div>
+        <span class="candidate-kicker">Lifecycle and publication status</span>
+        <h2 id="lifecycleTitle">What is complete and what still blocks promotion</h2>
+      </div>
+    </div>
+
+    <div class="lifecycle-table" role="region" aria-label="Candidate lifecycle status" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Evidence area</th>
+            <th scope="col">Current state</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of lifecycleRows; track row.evidence) {
+            <tr>
+              <td><strong>{{ row.evidence }}</strong></td>
+              <td>{{ row.currentState }}</td>
+              <td>
+                <span [class]="'candidate-status ' + statusClass(row.status)">
+                  {{ row.status }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="candidate-card candidate-done" aria-labelledby="definitionDoneTitle">
+    <div>
+      <span class="candidate-kicker">Definition of done</span>
+      <h2 id="definitionDoneTitle">Candidate review is complete when</h2>
+    </div>
+    <ul>
+      @for (item of definitionOfDone; track item) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+  </section>
+</section>
