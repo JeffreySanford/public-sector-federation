@@ -5,7 +5,7 @@
 > **Candidate selector:** `ps-up-button`  
 > **Package:** `@public-sector/ui-patterns`  
 > **Scope:** Button only; this is not a migration of the broader public-sector design system.  
-> **Live Zeroheight page:** [UP Button Candidate](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-canidate)
+> **Live Zeroheight page:** [UP Button Candidate](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-Candidate)
 
 ## Introduction
 
@@ -17,7 +17,7 @@ The Candidate is deliberately narrow. Only Button-related UP Design System infor
 
 The live Zeroheight page is the governed documentation destination:
 
-- [Open the UP Button Candidate page in Zeroheight](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-canidate)
+- [Open the UP Button Candidate page in Zeroheight](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-Candidate)
 
 The repository remains the implementation and validation source of truth. Zeroheight communicates status, approved guidance, ownership, limitations, and evidence.
 

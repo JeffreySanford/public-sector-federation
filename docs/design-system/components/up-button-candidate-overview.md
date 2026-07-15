@@ -96,4 +96,4 @@ Until design, token, accessibility, Storybook, QA, shell-integration, and govern
 
 ## Live documentation
 
-[Open the UP Button Candidate page in Zeroheight](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-canidate)
+[Open the UP Button Candidate page in Zeroheight](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-Candidate)

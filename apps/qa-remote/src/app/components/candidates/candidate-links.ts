@@ -37,7 +37,7 @@ export const candidateLinks: readonly CandidateLink[] = [
     description:
       'Governed Candidate documentation with status, comparison guidance, design and token direction, developer usage, and validation evidence.',
     status: 'Available',
-    href: 'https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-canidate',
+    href: 'https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-Candidate',
     external: true,
   },
   {
