@@ -1,0 +1,75 @@
+public-qa-workspace {
+  display: block;
+}
+
+.qa-workspace {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.qa-workspace__tabs {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  padding: 0.85rem;
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--p-content-background) 94%, transparent);
+  box-shadow: 0 0.75rem 2rem color-mix(in srgb, var(--ps-text-primary) 8%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.qa-workspace__tab {
+  min-height: 2.65rem !important;
+  padding: 0.55rem 0.9rem !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--p-border-radius-md, 0.5rem) !important;
+  background: transparent !important;
+  color: var(--p-text-muted-color) !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
+}
+
+.qa-workspace__tab:hover,
+.qa-workspace__tab:focus-visible {
+  border-color: color-mix(in srgb, var(--p-primary-color) 48%, var(--p-content-border-color)) !important;
+  background: color-mix(in srgb, var(--p-primary-color) 8%, var(--p-content-background)) !important;
+  color: var(--p-text-color) !important;
+}
+
+.qa-workspace__tab.is-active {
+  border-color: var(--p-primary-color) !important;
+  background: color-mix(in srgb, var(--p-primary-color) 12%, var(--p-content-background)) !important;
+  color: var(--p-text-color) !important;
+  box-shadow: inset 0 -0.2rem 0 var(--p-primary-color) !important;
+}
+
+.qa-workspace__content,
+.qa-workspace__panel {
+  min-width: 0;
+}
+
+/*
+ * QaRemoteComponent originally owned its own two-view navigation. The workspace
+ * now owns QA Components, Performance Tracking, and Candidates, so the legacy
+ * switcher is hidden only when QaRemoteComponent is hosted inside this shell.
+ */
+.qa-workspace__panel--qa public-qa-remote > .qa-view-tabs {
+  display: none !important;
+}
+
+@media (max-width: 42rem) {
+  .qa-workspace__tabs {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .qa-workspace__tabs ps-button,
+  .qa-workspace__tab {
+    width: 100%;
+  }
+}
