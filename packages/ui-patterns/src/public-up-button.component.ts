@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, input, output } from '@angular/core';
+import { booleanAttribute, Component, computed, input, output } from '@angular/core';
 
 export type PublicUpButtonTone =
   | 'primary'
@@ -11,6 +11,33 @@ export type PublicUpButtonTone =
   | 'contrast';
 
 export type PublicUpButtonAppearance = 'solid' | 'outlined' | 'text';
+
+export type PublicUpButtonIcon =
+  | 'arrow-right'
+  | 'bolt'
+  | 'check'
+  | 'download'
+  | 'exclamation-triangle'
+  | 'info-circle'
+  | 'lock'
+  | 'question-circle'
+  | 'save'
+  | 'send'
+  | 'times-circle';
+
+const iconClassByName: Record<PublicUpButtonIcon, string> = {
+  'arrow-right': 'pi pi-arrow-right',
+  bolt: 'pi pi-bolt',
+  check: 'pi pi-check',
+  download: 'pi pi-download',
+  'exclamation-triangle': 'pi pi-exclamation-triangle',
+  'info-circle': 'pi pi-info-circle',
+  lock: 'pi pi-lock',
+  'question-circle': 'pi pi-question-circle',
+  save: 'pi pi-save',
+  send: 'pi pi-send',
+  'times-circle': 'pi pi-times-circle',
+};
 
 @Component({
   selector: 'ps-up-button',
@@ -27,8 +54,8 @@ export type PublicUpButtonAppearance = 'solid' | 'outlined' | 'text';
     >
       @if (loading()) {
         <span class="up-button__spinner" aria-hidden="true"></span>
-      } @else if (icon()) {
-        <span class="up-button__icon" [class]="icon()" aria-hidden="true"></span>
+      } @else if (iconClass()) {
+        <span class="up-button__icon" [class]="iconClass()" aria-hidden="true"></span>
       }
       <span class="up-button__label">{{ label() }}</span>
     </button>
@@ -263,13 +290,17 @@ export type PublicUpButtonAppearance = 'solid' | 'outlined' | 'text';
 })
 export class PublicUpButtonComponent {
   readonly label = input('Button');
-  readonly icon = input<string | undefined>();
+  readonly icon = input<PublicUpButtonIcon | undefined>();
   readonly tone = input<PublicUpButtonTone>('primary');
   readonly appearance = input<PublicUpButtonAppearance>('solid');
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly loading = input(false, { transform: booleanAttribute });
 
   readonly buttonClick = output<MouseEvent>();
+  protected readonly iconClass = computed(() => {
+    const icon = this.icon();
+    return icon ? iconClassByName[icon] : undefined;
+  });
 
   handleClick(event: MouseEvent): void {
     if (this.disabled() || this.loading()) {

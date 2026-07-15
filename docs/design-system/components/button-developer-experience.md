@@ -111,6 +111,19 @@ The candidate Button currently uses the token values already present in
 `packages/tokens/src/tokens/themes.json`. These are the concrete values that
 should be represented in Figma variables and Zeroheight token tables.
 
+Validation note from July 15, 2026: these runtime values are the current
+public-sector candidate values, not exact copies of the generated local
+`D:\repos\up-design-system` token export. The local UP repository provides
+semantic tokens such as `semantic.primary.background -> #1C6FA3`,
+`semantic.primary.foreground -> #FFFFFF`, and
+`semantic.primary.border-focus -> rgba(28, 111, 163, 0.25)`, then maps them
+through the UP PrimeNG preset. The current `ps-up-button` wrapper uses a
+public-sector `--ps-up-button-*` namespace and maps most values to this
+repository's existing public-sector and PrimeNG tokens. Treat the current
+values as candidate implementation evidence until the team decides whether the
+Button should exactly adopt UP generated values or remain a public-sector theme
+adaptation.
+
 ### Neutral Light
 
 Selector: `:root`
@@ -289,7 +302,7 @@ Usage:
   label="Submit"
   tone="primary"
   appearance="solid"
-  icon="pi pi-check"
+  icon="check"
   (buttonClick)="save()"
 />
 ```
@@ -299,7 +312,7 @@ Inputs:
 | Input | Type | Purpose |
 | --- | --- | --- |
 | `label` | `string` | Visible action label. |
-| `icon` | `string \| undefined` | Candidate icon hook. Final API should decide whether icon names stay provider-specific. |
+| `icon` | `PublicUpButtonIcon \| undefined` | Provider-neutral icon name mapped internally to the current icon provider. |
 | `tone` | `PublicUpButtonTone` | Provider-neutral action/status tone. |
 | `appearance` | `'solid' \| 'outlined' \| 'text'` | Single controlled appearance API. |
 | `disabled` | `boolean` | Prevents activation. |
@@ -497,7 +510,7 @@ Next checks to add:
 Promote from Candidate only when:
 
 - Figma component set is complete and reviewed;
-- token values above are confirmed against the real up-design-system source;
+- token values above are either aligned to the real up-design-system source or explicitly approved as a public-sector theme adaptation;
 - normalization rules are accepted;
 - `appearance` is accepted as the clean public API;
 - `warning` and `error` are accepted as public tone names;

@@ -15,7 +15,7 @@ For a standalone Angular component:
   template: `
     <ps-up-button
       label="Submit application"
-      icon="pi pi-check"
+      icon="check"
       tone="primary"
       appearance="solid"
       (buttonClick)="submitApplication()"
@@ -36,7 +36,7 @@ export class ApplicationActionsComponent {
 | Input | Type | Default | Purpose |
 | --- | --- | --- | --- |
 | `label` | `string` | `Button` | Visible action label. |
-| `icon` | `string \| undefined` | `undefined` | Optional icon class for the current Candidate proof. |
+| `icon` | `PublicUpButtonIcon \| undefined` | `undefined` | Provider-neutral icon name mapped internally to the current icon provider. |
 | `tone` | `PublicUpButtonTone` | `primary` | Provider-neutral action tone. |
 | `appearance` | `solid \| outlined \| text` | `solid` | Visual emphasis model. |
 | `disabled` | `boolean` | `false` | Prevents activation. |
@@ -71,6 +71,27 @@ export type PublicUpButtonAppearance =
   | 'text';
 ```
 
+## Icon type
+
+```typescript
+export type PublicUpButtonIcon =
+  | 'arrow-right'
+  | 'bolt'
+  | 'check'
+  | 'download'
+  | 'exclamation-triangle'
+  | 'info-circle'
+  | 'lock'
+  | 'question-circle'
+  | 'save'
+  | 'send'
+  | 'times-circle';
+```
+
+The icon names are the public contract. The current implementation maps them to
+PrimeIcons internally so application code does not depend on provider CSS class
+names.
+
 ## Usage examples
 
 ### Primary action
@@ -78,7 +99,7 @@ export type PublicUpButtonAppearance =
 ```html
 <ps-up-button
   label="Submit application"
-  icon="pi pi-check"
+  icon="check"
   tone="primary"
 />
 ```
@@ -88,7 +109,7 @@ export type PublicUpButtonAppearance =
 ```html
 <ps-up-button
   label="Save draft"
-  icon="pi pi-save"
+  icon="save"
   tone="secondary"
   appearance="outlined"
 />
@@ -99,7 +120,7 @@ export type PublicUpButtonAppearance =
 ```html
 <ps-up-button
   label="View details"
-  icon="pi pi-info-circle"
+  icon="info-circle"
   appearance="text"
 />
 ```
@@ -109,7 +130,7 @@ export type PublicUpButtonAppearance =
 ```html
 <ps-up-button
   label="Submitting"
-  icon="pi pi-send"
+  icon="send"
   [loading]="true"
 />
 ```
@@ -119,7 +140,7 @@ export type PublicUpButtonAppearance =
 ```html
 <ps-up-button
   label="Unavailable action"
-  icon="pi pi-lock"
+  icon="lock"
   [disabled]="true"
 />
 ```

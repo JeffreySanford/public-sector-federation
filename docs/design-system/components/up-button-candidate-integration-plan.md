@@ -273,10 +273,57 @@ The UP notes contain this representative primitive:
 ```
 
 - [x] Record the sanitized primary example value `#1C6FA3` as reference evidence only.
-- [ ] Verify the actual UP primary token path.
-- [ ] Verify the actual current value in every supported mode.
+- [x] Verify the actual UP primary token path in the local `D:\repos\up-design-system` repository.
+- [x] Verify the actual current value in the generated local UP token export for light and dark mode.
 - [ ] Verify whether the Figma variable ID remains current.
-- [ ] Do not replace current sample tokens with `#1C6FA3` until it is verified and approved.
+- [x] Do not replace current sample tokens with `#1C6FA3` until it is verified and approved.
+
+### Local UP repository validation
+
+Validation date: July 15, 2026.
+
+Validated local source:
+
+- `D:\repos\up-design-system\docs\token-usage.md`
+- `D:\repos\up-design-system\packages\tokens\src\generated\tokens.ts`
+- `D:\repos\up-design-system\packages\primeng-preset\src\mapping.ts`
+- `D:\repos\up-design-system\packages\ui-patterns\src\button\button.component.ts`
+- `D:\repos\up-design-system\packages\ui-patterns\src\button\button.component.html`
+- `D:\repos\up-design-system\packages\ui-patterns\src\button\button.component.css`
+
+Findings:
+
+- UP source tokens are generated from Figma DTCG exports into semantic paths such as `semantic.primary.background`, `semantic.primary.foreground`, and `semantic.primary.border-focus`.
+- The UP PrimeNG preset maps those semantic tokens into PrimeNG provider values. For example, `semantic.primary.background` becomes `primary.color`, `semantic.primary.foreground` becomes `primary.contrastColor`, and `semantic.primary.border-focus` becomes the focus-ring color.
+- The UP Button wrapper, `fm-button`, delegates rendering to PrimeNG `p-button`. It does not define or consume a public `--ps-up-button-*` component-token namespace.
+- The current public-sector `ps-up-button` is therefore not a direct copy of an existing UP Button implementation. It is a candidate `ps-*` wrapper that uses a public-sector `--ps-up-button-*` namespace and currently maps many values to this repository's existing public-sector and PrimeNG tokens.
+
+Primary value comparison:
+
+| Button concern | Current public-sector candidate | Local UP source | Result |
+| --- | --- | --- | --- |
+| Primary background | `--ps-up-button-primary-background -> #1d4ed8` | `semantic.primary.background -> #1C6FA3` | Different |
+| Primary foreground | `--ps-up-button-primary-foreground -> #ffffff` | `semantic.primary.foreground -> #FFFFFF` | Equivalent |
+| Primary border | `--ps-up-button-primary-border-color -> #1d4ed8` | `semantic.primary.border -> #1C6FA3` | Different |
+| Primary hover background | `--ps-up-button-primary-hover-background -> #1e40af` | `primitives.ramp.primary.700 -> #134A6D` | Different |
+| Primary active background | `--ps-up-button-primary-active-background -> #1e3a8a` | `primitives.ramp.primary.700 -> #134A6D` | Different |
+| Focus color | `--ps-up-button-focus-color -> #2563eb` | `semantic.primary.border-focus -> rgba(28, 111, 163, 0.25)` | Different |
+| Disabled background | `color-mix(...)` from public-sector content tokens | `semantic.disabled.background -> #DEE2E6` | Different |
+| Disabled foreground | `--p-text-muted-color -> #475569` | `semantic.disabled.foreground -> #495057` | Different |
+| Disabled border | `--p-content-border-color -> #e2e8f0` | `semantic.disabled.border -> #E9ECEF` | Different |
+
+Status conclusion:
+
+The statement "Final UP Button source tokens have not been verified against the approved enterprise source" was accurate before this local validation. After this validation, the more precise statement is:
+
+> The candidate Button token contract has been compared against the local UP Design System repository. The current `ps-up-button` namespace and behavior are candidate public-sector wrapper decisions, while most current values are still public-sector sample values rather than exact UP generated token values. Final approval still requires a design decision to either adopt the UP semantic values, keep public-sector theme values intentionally, or define a documented mapping between them.
+
+Recommended follow-up:
+
+- [ ] Decide whether `ps-up-button` should visually match local UP generated values exactly or keep public-sector theme colors while using a UP-style token contract.
+- [ ] If exact UP alignment is desired, map `--ps-up-button-*` tokens from UP semantic paths, not from the current public-sector `--ps-*` sample values.
+- [ ] If public-sector values are intentional, document them as a themed adaptation of UP rather than as direct UP token values.
+- [ ] Add a generated token inventory that records source path, resolved value, mode, and consuming `--ps-up-button-*` token for every Button state.
 
 ### Sanitized normalization rules
 

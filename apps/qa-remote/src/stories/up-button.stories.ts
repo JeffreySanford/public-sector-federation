@@ -4,11 +4,25 @@ import {
   PublicButtonComponent,
   PublicUpButtonComponent,
   type PublicUpButtonAppearance,
+  type PublicUpButtonIcon,
   type PublicUpButtonTone,
 } from '@public-sector/ui-patterns';
 
 const tones: PublicUpButtonTone[] = ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'help', 'contrast'];
 const appearances: PublicUpButtonAppearance[] = ['solid', 'outlined', 'text'];
+const icons: PublicUpButtonIcon[] = [
+  'check',
+  'arrow-right',
+  'download',
+  'info-circle',
+  'exclamation-triangle',
+  'times-circle',
+  'question-circle',
+  'bolt',
+  'save',
+  'send',
+  'lock',
+];
 
 const meta: Meta<PublicUpButtonComponent> = {
   title: 'Design System/Candidates/Button UP',
@@ -51,7 +65,7 @@ const meta: Meta<PublicUpButtonComponent> = {
   }),
   args: {
     label: 'Primary action',
-    icon: 'pi pi-check',
+    icon: 'check',
     tone: 'primary',
     appearance: 'solid',
     disabled: false,
@@ -63,8 +77,9 @@ const meta: Meta<PublicUpButtonComponent> = {
       description: 'Visible action label. Use concise, action-oriented copy.',
     },
     icon: {
-      control: 'text',
-      description: 'Optional icon class for the candidate proof. The final wrapper should define a provider-neutral icon contract.',
+      control: 'select',
+      options: icons,
+      description: 'Provider-neutral icon name mapped internally to the current icon provider.',
     },
     tone: {
       control: 'select',
@@ -111,7 +126,7 @@ export const Primary: Story = {};
 export const Secondary: Story = {
   args: {
     label: 'Secondary action',
-    icon: 'pi pi-arrow-right',
+    icon: 'arrow-right',
     tone: 'secondary',
   },
 };
@@ -119,7 +134,7 @@ export const Secondary: Story = {
 export const Success: Story = {
   args: {
     label: 'Approve',
-    icon: 'pi pi-check',
+    icon: 'check',
     tone: 'success',
   },
 };
@@ -127,7 +142,7 @@ export const Success: Story = {
 export const Info: Story = {
   args: {
     label: 'View details',
-    icon: 'pi pi-info-circle',
+    icon: 'info-circle',
     tone: 'info',
   },
 };
@@ -135,7 +150,7 @@ export const Info: Story = {
 export const Warning: Story = {
   args: {
     label: 'Review warning',
-    icon: 'pi pi-exclamation-triangle',
+    icon: 'exclamation-triangle',
     tone: 'warning',
   },
 };
@@ -143,7 +158,7 @@ export const Warning: Story = {
 export const Error: Story = {
   args: {
     label: 'Resolve error',
-    icon: 'pi pi-times-circle',
+    icon: 'times-circle',
     tone: 'error',
   },
 };
@@ -151,7 +166,7 @@ export const Error: Story = {
 export const Help: Story = {
   args: {
     label: 'Get help',
-    icon: 'pi pi-question-circle',
+    icon: 'question-circle',
     tone: 'help',
   },
 };
@@ -159,7 +174,7 @@ export const Help: Story = {
 export const Contrast: Story = {
   args: {
     label: 'High emphasis',
-    icon: 'pi pi-bolt',
+    icon: 'bolt',
     tone: 'contrast',
   },
 };
@@ -167,7 +182,7 @@ export const Contrast: Story = {
 export const Outlined: Story = {
   args: {
     label: 'Outlined action',
-    icon: 'pi pi-download',
+    icon: 'download',
     appearance: 'outlined',
   },
 };
@@ -175,7 +190,7 @@ export const Outlined: Story = {
 export const Text: Story = {
   args: {
     label: 'Text action',
-    icon: 'pi pi-info-circle',
+    icon: 'info-circle',
     appearance: 'text',
   },
 };
@@ -183,7 +198,7 @@ export const Text: Story = {
 export const Loading: Story = {
   args: {
     label: 'Submitting',
-    icon: 'pi pi-send',
+    icon: 'send',
     loading: true,
   },
 };
@@ -191,7 +206,7 @@ export const Loading: Story = {
 export const Disabled: Story = {
   args: {
     label: 'Unavailable action',
-    icon: 'pi pi-lock',
+    icon: 'lock',
     disabled: true,
   },
 };
@@ -215,7 +230,7 @@ export const InteractionHarness: Story = {
         <h1 id="upButtonInteractionTitle">UP Button interaction harness</h1>
         <ps-up-button
           label="Submit application"
-          icon="pi pi-check"
+          icon="check"
           (buttonClick)="clickCount = clickCount + 1"
         />
         <output aria-live="polite">Activations: {{ clickCount }}</output>
@@ -251,7 +266,7 @@ export const InteractionHarness: Story = {
 export const LongLabel: Story = {
   args: {
     label: 'Submit housing assistance eligibility review for North Region queue',
-    icon: 'pi pi-check',
+    icon: 'check',
     appearance: 'outlined',
   },
   parameters: {
@@ -304,7 +319,7 @@ export const ToneMatrix: Story = {
           @for (tone of tones; track tone) {
             <div class="button-cell">
               <span>{{ tone }}</span>
-              <ps-up-button [label]="tone + ' action'" [tone]="tone" icon="pi pi-check" />
+              <ps-up-button [label]="tone + ' action'" [tone]="tone" icon="check" />
             </div>
           }
         </section>
@@ -364,9 +379,9 @@ export const AppearanceMatrix: Story = {
           @for (appearance of appearances; track appearance) {
             <div class="button-cell">
               <span>{{ appearance }}</span>
-              <ps-up-button label="Primary action" tone="primary" [appearance]="appearance" icon="pi pi-check" />
-              <ps-up-button label="Secondary action" tone="secondary" [appearance]="appearance" icon="pi pi-arrow-right" />
-              <ps-up-button label="Error action" tone="error" [appearance]="appearance" icon="pi pi-times-circle" />
+              <ps-up-button label="Primary action" tone="primary" [appearance]="appearance" icon="check" />
+              <ps-up-button label="Secondary action" tone="secondary" [appearance]="appearance" icon="arrow-right" />
+              <ps-up-button label="Error action" tone="error" [appearance]="appearance" icon="times-circle" />
             </div>
           }
         </section>
@@ -423,19 +438,19 @@ export const InteractionStateReference: Story = {
         <section class="state-matrix" aria-label="UP Button interaction state reference">
           <div class="button-cell">
             <span>Default</span>
-            <ps-up-button label="Default" icon="pi pi-check" />
+            <ps-up-button label="Default" icon="check" />
           </div>
           <div class="button-cell">
             <span>Disabled</span>
-            <ps-up-button label="Disabled" icon="pi pi-lock" disabled />
+            <ps-up-button label="Disabled" icon="lock" disabled />
           </div>
           <div class="button-cell">
             <span>Loading</span>
-            <ps-up-button label="Loading" icon="pi pi-send" loading />
+            <ps-up-button label="Loading" icon="send" loading />
           </div>
           <div class="button-cell">
             <span>Focus target</span>
-            <ps-up-button label="Focus target" icon="pi pi-arrow-right" />
+            <ps-up-button label="Focus target" icon="arrow-right" />
           </div>
         </section>
       </main>
@@ -491,18 +506,18 @@ export const SizeMatrix: Story = {
         <section class="size-matrix" aria-label="UP Button size token matrix">
           <div class="button-cell size-compact">
             <span>Compact tokens</span>
-            <ps-up-button label="Compact" icon="pi pi-check" />
-            <ps-up-button label="Compact outline" icon="pi pi-download" appearance="outlined" />
+            <ps-up-button label="Compact" icon="check" />
+            <ps-up-button label="Compact outline" icon="download" appearance="outlined" />
           </div>
           <div class="button-cell">
             <span>Default tokens</span>
-            <ps-up-button label="Default" icon="pi pi-check" />
-            <ps-up-button label="Default outline" icon="pi pi-download" appearance="outlined" />
+            <ps-up-button label="Default" icon="check" />
+            <ps-up-button label="Default outline" icon="download" appearance="outlined" />
           </div>
           <div class="button-cell size-spacious">
             <span>Spacious tokens</span>
-            <ps-up-button label="Spacious" icon="pi pi-check" />
-            <ps-up-button label="Spacious outline" icon="pi pi-download" appearance="outlined" />
+            <ps-up-button label="Spacious" icon="check" />
+            <ps-up-button label="Spacious outline" icon="download" appearance="outlined" />
           </div>
         </section>
       </main>
@@ -566,7 +581,7 @@ export const FocusReference: Story = {
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="focus-reference" aria-label="UP Button focus reference">
-        <ps-up-button label="Focus reference" icon="pi pi-arrow-right" />
+        <ps-up-button label="Focus reference" icon="arrow-right" />
       </main>
     `,
     styles: [
@@ -595,13 +610,13 @@ export const LightDarkModeMatrix: Story = {
         <section class="mode-panel light-panel">
           <span>Light</span>
           @for (tone of tones; track tone) {
-            <ps-up-button [label]="tone" [tone]="tone" icon="pi pi-check" />
+            <ps-up-button [label]="tone" [tone]="tone" icon="check" />
           }
         </section>
         <section class="mode-panel dark-panel">
           <span>Dark</span>
           @for (tone of tones; track tone) {
-            <ps-up-button [label]="tone" [tone]="tone" icon="pi pi-check" />
+            <ps-up-button [label]="tone" [tone]="tone" icon="check" />
           }
         </section>
       </main>
@@ -675,21 +690,21 @@ export const ThemeVariantMatrix: Story = {
       <main class="variant-matrix" aria-label="UP Button theme variant matrix">
         <section class="variant-panel neutral">
           <span>Neutral</span>
-          <ps-up-button label="Primary" icon="pi pi-check" />
-          <ps-up-button label="Outlined" icon="pi pi-download" appearance="outlined" />
-          <ps-up-button label="Text" icon="pi pi-info-circle" appearance="text" />
+          <ps-up-button label="Primary" icon="check" />
+          <ps-up-button label="Outlined" icon="download" appearance="outlined" />
+          <ps-up-button label="Text" icon="info-circle" appearance="text" />
         </section>
         <section class="variant-panel vibrant">
           <span>Vibrant</span>
-          <ps-up-button label="Primary" icon="pi pi-check" />
-          <ps-up-button label="Outlined" icon="pi pi-download" appearance="outlined" />
-          <ps-up-button label="Text" icon="pi pi-info-circle" appearance="text" />
+          <ps-up-button label="Primary" icon="check" />
+          <ps-up-button label="Outlined" icon="download" appearance="outlined" />
+          <ps-up-button label="Text" icon="info-circle" appearance="text" />
         </section>
         <section class="variant-panel pastel">
           <span>Pastel</span>
-          <ps-up-button label="Primary" icon="pi pi-check" />
-          <ps-up-button label="Outlined" icon="pi pi-download" appearance="outlined" />
-          <ps-up-button label="Text" icon="pi pi-info-circle" appearance="text" />
+          <ps-up-button label="Primary" icon="check" />
+          <ps-up-button label="Outlined" icon="download" appearance="outlined" />
+          <ps-up-button label="Text" icon="info-circle" appearance="text" />
         </section>
       </main>
     `,
@@ -792,34 +807,34 @@ export const CurrentVsCandidate: Story = {
 
           <div class="scenario">Primary solid</div>
           <div class="sample"><ps-button label="Primary action" icon="pi pi-check" /></div>
-          <div class="sample"><ps-up-button label="Primary action" icon="pi pi-check" /></div>
+          <div class="sample"><ps-up-button label="Primary action" icon="check" /></div>
 
           <div class="scenario">Secondary solid</div>
           <div class="sample"><ps-button label="Secondary action" icon="pi pi-arrow-right" tone="secondary" /></div>
-          <div class="sample"><ps-up-button label="Secondary action" icon="pi pi-arrow-right" tone="secondary" /></div>
+          <div class="sample"><ps-up-button label="Secondary action" icon="arrow-right" tone="secondary" /></div>
 
           <div class="scenario">Outlined</div>
           <div class="sample"><ps-button label="Outlined action" icon="pi pi-download" [outlined]="true" /></div>
-          <div class="sample"><ps-up-button label="Outlined action" icon="pi pi-download" appearance="outlined" /></div>
+          <div class="sample"><ps-up-button label="Outlined action" icon="download" appearance="outlined" /></div>
 
           <div class="scenario">Text</div>
           <div class="sample"><ps-button label="Text action" icon="pi pi-info-circle" [text]="true" /></div>
-          <div class="sample"><ps-up-button label="Text action" icon="pi pi-info-circle" appearance="text" /></div>
+          <div class="sample"><ps-up-button label="Text action" icon="info-circle" appearance="text" /></div>
 
           <div class="scenario">Disabled</div>
           <div class="sample"><ps-button label="Unavailable action" icon="pi pi-lock" [disabled]="true" /></div>
-          <div class="sample"><ps-up-button label="Unavailable action" icon="pi pi-lock" [disabled]="true" /></div>
+          <div class="sample"><ps-up-button label="Unavailable action" icon="lock" [disabled]="true" /></div>
 
           <div class="scenario">Loading</div>
           <div class="sample"><ps-button label="Submitting" icon="pi pi-send" [loading]="true" /></div>
-          <div class="sample"><ps-up-button label="Submitting" icon="pi pi-send" [loading]="true" /></div>
+          <div class="sample"><ps-up-button label="Submitting" icon="send" [loading]="true" /></div>
 
           <div class="scenario">Long label</div>
           <div class="sample">
             <ps-button label="Submit housing assistance eligibility review for North Region queue" icon="pi pi-check" [outlined]="true" />
           </div>
           <div class="sample">
-            <ps-up-button label="Submit housing assistance eligibility review for North Region queue" icon="pi pi-check" appearance="outlined" />
+            <ps-up-button label="Submit housing assistance eligibility review for North Region queue" icon="check" appearance="outlined" />
           </div>
         </section>
       </main>

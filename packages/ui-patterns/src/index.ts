@@ -2,6 +2,7 @@ export { PublicButtonComponent, type PublicButtonTone } from './public-button.co
 export {
   PublicUpButtonComponent,
   type PublicUpButtonAppearance,
+  type PublicUpButtonIcon,
   type PublicUpButtonTone,
 } from './public-up-button.component';
 export { PublicCardComponent } from './public-card.component';

@@ -77,7 +77,9 @@ Do not use `ps-up-button` for:
 
 The Candidate currently uses UP-inspired styling based on the design information available to the project and the existing public-sector theme foundations.
 
-Before promotion, every Button-specific token assumption used by `ps-up-button` must be verified against the approved UP Design System Button source. This requirement applies only to the Button Candidate and does not imply migration of the rest of the public-sector design system.
+Local validation against `D:\repos\up-design-system` confirms the generated UP semantic token paths and values used for comparison. It also confirms that the current `ps-up-button` namespace and native rendering model are public-sector Candidate decisions, not a direct copy of an existing UP Button component implementation.
+
+Before promotion, every Button-specific token assumption used by `ps-up-button` must either be aligned to the approved UP Design System source or explicitly approved as a public-sector theme adaptation. This requirement applies only to the Button Candidate and does not imply migration of the rest of the public-sector design system.
 
 Until design, token, accessibility, Storybook, QA, shell-integration, and governance evidence is complete:
 
@@ -87,12 +89,12 @@ Until design, token, accessibility, Storybook, QA, shell-integration, and govern
 
 ## Known limitations
 
-- Final UP Button source tokens have not been verified against the approved enterprise source.
-- Figma Button component and variable links are still pending.
-- Storybook currently runs locally until a stable HTTPS deployment is published.
-- The Candidate icon input still uses icon CSS classes and should eventually use an approved provider-neutral icon contract.
+- Authoritative Figma Button component links, variable references, and design approval remain pending.
+- The Candidate is published through the Chromatic-hosted QA Storybook for interactive and visual validation.
+- Visual styling is currently being reviewed across tones, appearances, interaction states, themes, and light and dark modes.
+- The Candidate icon input now uses provider-neutral icon names; the current implementation maps those names to PrimeIcons internally.
 - Size variants are not yet part of the public Candidate API.
-- The Candidate has not been promoted into the canonical `ps-button` selector.
+- The Candidate remains separate from the canonical `ps-button` implementation and has not been promoted.
 
 ## Live documentation
 
