@@ -55,7 +55,8 @@
     "test:storybook:qa": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts",
     "test:storybook:qa:chromium": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts --project=chromium --workers=1",
     "test:storybook:up-button": "playwright test apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts",
-    "test:storybook:up-button:chromium": "playwright test apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts --project=chromium --workers=1"
+    "test:storybook:up-button:chromium": "playwright test apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts --project=chromium --workers=1",
+    "chromatic": "npx chromatic --build-script-name=build-storybook:qa --only-story-files=apps/qa-remote/src/stories/up-button.stories.ts --project-token=chpt_af2eb037cd3fd7e"
   },
   "devDependencies": {
     "@angular-devkit/core": "^21.0.0",
