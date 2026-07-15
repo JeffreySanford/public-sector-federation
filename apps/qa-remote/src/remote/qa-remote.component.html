@@ -83,6 +83,26 @@
 
       <article class="acceptance-panel">
         <div class="acceptance-panel__header">
+          <ps-tag value="UP Button candidate" tone="contrast" />
+          <h4>up-design-system token wrapper candidate</h4>
+          <p>Separate proof component using a cleaner appearance API before replacing the current ps-button contract.</p>
+        </div>
+        <div class="acceptance-inline">
+          <ps-up-button label="Primary action" icon="pi pi-check" />
+          <ps-up-button label="Outlined action" icon="pi pi-download" appearance="outlined" />
+          <ps-up-button label="Text action" icon="pi pi-info-circle" appearance="text" />
+          <ps-up-button label="Loading action" icon="pi pi-send" [loading]="true" />
+          <ps-up-button label="Disabled action" icon="pi pi-lock" [disabled]="true" />
+        </div>
+        <div class="acceptance-inline">
+          <ps-up-button label="Approve" tone="success" icon="pi pi-check" />
+          <ps-up-button label="Review warning" tone="warning" icon="pi pi-exclamation-triangle" />
+          <ps-up-button label="Resolve error" tone="error" icon="pi pi-times-circle" />
+        </div>
+      </article>
+
+      <article class="acceptance-panel">
+        <div class="acceptance-panel__header">
           <ps-tag value="Card" tone="info" />
           <h4>Supporting content surfaces</h4>
           <p>Cards render as stable supporting UI, not the only route-critical content.</p>

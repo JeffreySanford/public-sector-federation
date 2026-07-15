@@ -1,4 +1,9 @@
 export { PublicButtonComponent, type PublicButtonTone } from './public-button.component';
+export {
+  PublicUpButtonComponent,
+  type PublicUpButtonAppearance,
+  type PublicUpButtonTone,
+} from './public-up-button.component';
 export { PublicCardComponent } from './public-card.component';
 export { PublicDialogComponent } from './public-dialog.component';
 export { PublicEmptyStateComponent } from './public-empty-state.component';

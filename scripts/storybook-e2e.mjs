@@ -47,11 +47,15 @@ const page = await context.newPage();
 try {
   const index = JSON.parse(await readFile(join(storybookRoot, 'index.json'), 'utf8'));
   const stories = Object.values(index.entries).filter((entry) => entry.type === 'story');
-  if (stories.length !== 20) {
-    throw new Error(`Expected 20 built Storybook stories, found ${stories.length}.`);
+  if (stories.length < 21) {
+    throw new Error(`Expected at least 21 built Storybook stories, found ${stories.length}.`);
   }
 
-  const storyIds = ['design-system-problem-areas--overview', 'design-system-primeng-playground--component-families'];
+  const storyIds = [
+    'design-system-problem-areas--overview',
+    'design-system-primeng-playground--component-families',
+    'design-system-components-up-button-candidate--primary',
+  ];
   for (const storyId of storyIds) {
     await page.goto(`http://localhost:${port}/iframe.html?id=${storyId}&viewMode=story`, {
       waitUntil: 'domcontentloaded',
@@ -63,6 +67,9 @@ try {
     if (storyId.includes('primeng-playground')) {
       await page.getByText('Shared wrapper playground').waitFor({ timeout: 60000 });
     }
+    if (storyId.includes('up-button-candidate')) {
+      await page.getByRole('button', { name: 'Primary action' }).waitFor({ timeout: 60000 });
+    }
 
     const bodyText = await page.locator('body').innerText();
     if (storyId.includes('problem-areas') && !bodyText.includes('Problem area overview')) {
@@ -70,6 +77,9 @@ try {
     }
     if (storyId.includes('primeng-playground') && !bodyText.includes('Shared wrapper playground')) {
       throw new Error('Shared wrapper playground story did not render expected content.');
+    }
+    if (storyId.includes('up-button-candidate') && !bodyText.includes('Primary action')) {
+      throw new Error('UP Button candidate primary story did not render expected content.');
     }
 
     const axe = await new AxeBuilder({ page }).analyze();

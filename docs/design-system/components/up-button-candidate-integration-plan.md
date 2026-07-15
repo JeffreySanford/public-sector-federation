@@ -2,16 +2,19 @@
 
 ## Document status
 
-- [X] Initial integration plan created.
-- [X] Direction established: build a separate UP-styled Button candidate before changing the existing `ps-button`.
-- [X] Existing `PublicButtonComponent` remains the current stable wrapper during candidate validation.
-- [X] Candidate lifecycle status selected: **Candidate**.
-- [X] Zeroheight documentation approach selected: curated guidance with links or embeds to Figma, Storybook, GitHub source, and test evidence.
-- [X] Dedicated Storybook surface selected for the candidate Button.
-- [X] Candidate is intended to appear in the QA remote for side-by-side and federated-runtime validation.
+- [x] Initial integration plan created.
+- [x] Direction established: build a separate UP-styled Button candidate before changing the existing `ps-button`.
+- [x] Existing `PublicButtonComponent` remains the current stable wrapper during candidate validation.
+- [x] Candidate lifecycle status selected: **Candidate**.
+- [x] Zeroheight documentation approach selected: curated guidance with links or embeds to Figma, Storybook, GitHub source, and test evidence.
+- [x] Dedicated Storybook surface selected for the candidate Button.
+- [x] Candidate is intended to appear in the QA remote for side-by-side and federated-runtime validation.
+- [x] Isolated candidate Storybook Playwright coverage added at `apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts`.
+- [x] Candidate-specific Storybook Playwright script added: `pnpm test:storybook:up-button:chromium`.
+- [x] Static Storybook E2E run recorded: `pnpm nx run qa-remote:e2e` passed with 38 discovered stories and 3 rendered story iframes.
+- [x] Isolated candidate Storybook Playwright run recorded: `pnpm test:storybook:up-button:chromium` passed 9 tests after adding current-versus-candidate comparison coverage.
 - [ ] Confirm the local candidate implementation has been committed and pushed to the repository.
-- [ ] Record the final successful result of the static Storybook E2E run.
-- [ ] Replace all sanitized or sample token assumptions with the approved enterprise UP Design System export before promotion to Active.
+- [ ] Verify the UP Design System tokens required by `ps-up-button`, including Button color, typography, spacing, radius, size, state, focus, disabled, loading, and theme values. This requirement applies only to the Button candidate and does not imply migration of the entire public-sector design system.
 
 ## Purpose
 
@@ -38,26 +41,26 @@ The candidate is intended to prove both sides of the design-system workflow:
 
 ### Chosen direction
 
-- [X] Create a separate UP Button candidate rather than silently rewriting the existing Button.
-- [X] Keep PrimeNG internal to the wrapper package.
-- [X] Expose design-system concepts from the public Angular API.
-- [X] Use a dedicated Storybook story set for the candidate.
-- [X] Include the candidate in the QA remote.
-- [X] Use the QA remote to compare the existing and candidate Buttons.
-- [X] Use Figma as design intent and token-input evidence.
-- [X] Use Storybook as live component behavior and isolated validation evidence.
-- [X] Use Zeroheight as the governed documentation and discovery surface.
-- [X] Use GitHub as implementation, test, history, and release evidence.
+- [x] Create a separate UP Button candidate rather than silently rewriting the existing Button.
+- [x] Keep PrimeNG internal to the wrapper package.
+- [x] Expose design-system concepts from the public Angular API.
+- [x] Use a dedicated Storybook story set for the candidate.
+- [x] Include the candidate in the QA remote.
+- [x] Use the QA remote to compare the existing and candidate Buttons.
+- [x] Use Figma as design intent and token-input evidence.
+- [x] Use Storybook as live component behavior and isolated validation evidence.
+- [x] Use Zeroheight as the governed documentation and discovery surface.
+- [x] Use GitHub as implementation, test, history, and release evidence.
 
 ### Non-goals for the candidate phase
 
-- [X] Do not remove or break the existing `ps-button`.
-- [X] Do not expose `primeng/button`, `ButtonModule`, PrimeNG severity types, or `.p-*` CSS selectors to application teams.
-- [X] Do not make Zeroheight a runtime dependency.
-- [X] Do not make Zeroheight the design-token source.
-- [X] Do not claim that sanitized UP Design System notes are verified production values.
-- [X] Do not globally change every existing PrimeNG Button before the candidate is approved.
-- [X] Do not promote the component to Active solely because it compiles or visually resembles the design.
+- [x] Do not remove or break the existing `ps-button`.
+- [x] Do not expose `primeng/button`, `ButtonModule`, PrimeNG severity types, or `.p-*` CSS selectors to application teams.
+- [x] Do not make Zeroheight a runtime dependency.
+- [x] Do not make Zeroheight the design-token source.
+- [x] Do not claim that sanitized UP Design System notes are verified production values.
+- [x] Do not globally change every existing PrimeNG Button before the candidate is approved.
+- [x] Do not promote the component to Active solely because it compiles or visually resembles the design.
 
 ## Proposed architecture
 
@@ -79,48 +82,52 @@ UP Design System Figma library or approved DTCG export
 
 ## Source-of-truth boundaries
 
-| System | Authoritative responsibility | Not authoritative for |
-| --- | --- | --- |
-| UP Design System / Figma | Design intent, anatomy, variants, states, source token names, mode values, and approved visual decisions. | Angular implementation, CI status, runtime federation behavior. |
-| Token package | Versioned source inventory, normalization, generated CSS variables, JSON, TypeScript metadata, and provider mappings. | Usage prose and component approval. |
-| `ui-patterns` | Public wrapper API, event normalization, provider isolation, component behavior, and exports. | Figma source values and Zeroheight page layout. |
-| Storybook | Live isolated implementation, controls, examples, interaction evidence, accessibility evidence, and theme demonstrations. | Production runtime delivery and final governance approval. |
-| QA remote / shell | Runtime integration, token inheritance, theme propagation, Web Component behavior, and federation proof. | Token authorship and design approval. |
-| GitHub and CI | Source code, test execution, review history, releases, and deployable artifacts. | Design intent and human governance decisions. |
-| Zeroheight | Governed guidance, lifecycle status, ownership, usage rules, anti-patterns, migration guidance, and evidence links. | Runtime token delivery, component compilation, shell routing, and automatic promotion. |
+| System                   | Authoritative responsibility                                                                                              | Not authoritative for                                                                  |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| UP Design System / Figma | Design intent, anatomy, variants, states, source token names, mode values, and approved visual decisions.                 | Angular implementation, CI status, runtime federation behavior.                        |
+| Token package            | Versioned source inventory, normalization, generated CSS variables, JSON, TypeScript metadata, and provider mappings.     | Usage prose and component approval.                                                    |
+| `ui-patterns`            | Public wrapper API, event normalization, provider isolation, component behavior, and exports.                             | Figma source values and Zeroheight page layout.                                        |
+| Storybook                | Live isolated implementation, controls, examples, interaction evidence, accessibility evidence, and theme demonstrations. | Production runtime delivery and final governance approval.                             |
+| QA remote / shell        | Runtime integration, token inheritance, theme propagation, Web Component behavior, and federation proof.                  | Token authorship and design approval.                                                  |
+| GitHub and CI            | Source code, test execution, review history, releases, and deployable artifacts.                                          | Design intent and human governance decisions.                                          |
+| Zeroheight               | Governed guidance, lifecycle status, ownership, usage rules, anti-patterns, migration guidance, and evidence links.       | Runtime token delivery, component compilation, shell routing, and automatic promotion. |
 
 ## Current implementation inventory
 
 ### Existing stable Button
 
-- [X] Current wrapper source exists at `packages/ui-patterns/src/public-button.component.ts`.
-- [X] Current selector is `ps-button`.
-- [X] Current public inputs include `label`, `icon`, `tone`, `styleClass`, `outlined`, `text`, `disabled`, `loading`, and `routerLink`.
-- [X] Current public output is `buttonClick`.
-- [X] Current wrapper renders PrimeNG internally.
-- [X] Existing consumers should continue to use the stable wrapper while the candidate is evaluated.
+- [x] Current wrapper source exists at `packages/ui-patterns/src/public-button.component.ts`.
+- [x] Current selector is `ps-button`.
+- [x] Current public inputs include `label`, `icon`, `tone`, `styleClass`, `outlined`, `text`, `disabled`, `loading`, and `routerLink`.
+- [x] Current public output is `buttonClick`.
+- [x] Current wrapper renders PrimeNG internally.
+- [x] Existing consumers should continue to use the stable wrapper while the candidate is evaluated.
 
 ### Existing acceptance story
 
-- [X] Existing combined Button and Tag acceptance story exists at `apps/qa-remote/src/stories/button-tag.acceptance.stories.ts`.
-- [X] Existing acceptance coverage includes primary, outlined, text, disabled, and long-label examples.
-- [X] Keep this story as regression coverage for the current wrapper.
+- [x] Existing combined Button and Tag acceptance story exists at `apps/qa-remote/src/stories/button-tag.acceptance.stories.ts`.
+- [x] Existing acceptance coverage includes primary, outlined, text, disabled, and long-label examples.
+- [x] Keep this story as regression coverage for the current wrapper.
 - [ ] Do not use the combined Button/Tag story as the sole developer-documentation page for the candidate.
 
-### Candidate implementation reported from the local work session
+### Candidate implementation verified locally
 
-The following items were reported as completed locally. They must be verified after the local work is committed and pushed.
+The following items are verified in the local workspace. They still need to be committed, pushed, and validated from CI before they can be used as branch-level approval evidence.
 
-- [X] Candidate wrapper created locally at `packages/ui-patterns/src/public-up-button.component.ts`.
-- [X] Candidate selector reported as `ps-up-button`.
-- [X] Candidate exported locally from `packages/ui-patterns/src/index.ts`.
-- [X] Candidate Storybook file created locally at `apps/qa-remote/src/stories/up-button.stories.ts`.
-- [X] Candidate included locally in the QA remote component.
-- [X] Static Storybook validation script updated locally to reference the candidate story.
-- [X] `ui-patterns` typecheck reported green locally.
-- [X] QA remote TypeScript test reported green locally.
-- [X] Storybook static build reported green locally.
-- [ ] Final static Storybook E2E result must be recorded; the supplied work log ended while the final run was still executing.
+- [x] Candidate wrapper created at `packages/ui-patterns/src/public-up-button.component.ts`.
+- [x] Candidate selector is `ps-up-button`.
+- [x] Candidate exported from `packages/ui-patterns/src/index.ts`.
+- [x] Candidate Storybook file created at `apps/qa-remote/src/stories/up-button.stories.ts`.
+- [x] Candidate included in the QA remote component.
+- [x] Static Storybook validation script updated to reference the candidate primary story.
+- [x] Isolated Storybook Playwright spec created at `apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts`.
+- [x] Candidate test scripts added: `pnpm test:storybook:up-button` and `pnpm test:storybook:up-button:chromium`.
+- [x] `ui-patterns` typecheck passed locally.
+- [x] QA remote TypeScript test passed locally.
+- [x] Storybook static build passed locally.
+- [x] Static Storybook E2E passed locally: `pnpm nx run qa-remote:e2e` reported 38 stories and 3 rendered story iframes.
+- [x] Broad Storybook Playwright Chromium suite passed locally after removing the intentional failing test: `pnpm test:storybook:qa:chromium` reported 28 passed tests.
+- [x] Isolated candidate Storybook Playwright passed locally: `pnpm test:storybook:up-button:chromium` reported 9 passed tests after adding current-versus-candidate comparison coverage.
 - [ ] Commit and push all candidate files.
 - [ ] Verify these exact paths and APIs on the pushed branch.
 
@@ -128,9 +135,9 @@ The following items were reported as completed locally. They must be verified af
 
 ### Candidate phase
 
-- [X] Use an obviously experimental selector such as `ps-up-button` while visual and API decisions are still under review.
-- [X] Show lifecycle status as Candidate in Storybook and Zeroheight.
-- [X] Keep the current `ps-button` as the stable comparison baseline.
+- [x] Use an obviously experimental selector such as `ps-up-button` while visual and API decisions are still under review.
+- [x] Show lifecycle status as Candidate in Storybook and Zeroheight.
+- [x] Keep the current `ps-button` as the stable comparison baseline.
 
 ### Promotion phase
 
@@ -148,25 +155,28 @@ The candidate public API should describe design-system intent and prevent invali
 
 ### Appearance
 
-- [X] Preferred API direction: one `appearance` input rather than independent `outlined` and `text` booleans.
-- [ ] Confirm approved values:
-  - [ ] `solid`
-  - [ ] `outlined`
-  - [ ] `text`
+- [x] Preferred API direction: one `appearance` input rather than independent `outlined` and `text` booleans.
+- [x] Candidate currently implements:
+  - [x] `solid`
+  - [x] `outlined`
+  - [x] `text`
+- [ ] Confirm these values against the actual UP Design System source before promotion.
 - [ ] Decide whether a link-like appearance is necessary or whether navigation remains a Button behavior through `routerLink`.
 - [ ] Decide whether destructive styling is a tone or a separate intent.
 
 ### Tone
 
 - [ ] Confirm the UP Design System tone vocabulary.
-- [ ] Candidate values to evaluate:
-  - [ ] `primary`
-  - [ ] `secondary`
-  - [ ] `neutral`
-  - [ ] `success`
-  - [ ] `warning`
-  - [ ] `danger`
-  - [ ] `contrast`
+- [x] Candidate currently implements:
+  - [x] `primary`
+  - [x] `secondary`
+  - [x] `success`
+  - [x] `info`
+  - [x] `warning`
+  - [x] `error`
+  - [x] `help`
+  - [x] `contrast`
+- [ ] Decide whether the final public tone set should include `neutral`, `danger`, or another UP-specific vocabulary instead of the current candidate labels.
 - [ ] Keep provider terms such as PrimeNG `warn` and `danger` mapping internal.
 - [ ] Decide whether public design-system terminology is `danger` or `error`.
 - [ ] Document any normalization between the UP source terminology, public wrapper terminology, and PrimeNG terminology.
@@ -182,9 +192,10 @@ The candidate public API should describe design-system intent and prevent invali
 
 ### Content and icon API
 
-- [ ] `label` remains the visible text input.
-- [ ] Confirm the icon input format and whether it is provider-neutral.
-- [ ] Confirm leading icon behavior.
+- [x] `label` remains the visible text input.
+- [x] Candidate currently supports an `icon` input for the leading icon path.
+- [ ] Confirm whether the icon input format is provider-neutral enough for promotion.
+- [x] Candidate currently supports leading icon behavior.
 - [ ] Confirm trailing icon behavior.
 - [ ] Confirm icon-only behavior.
 - [ ] Require an accessible name for icon-only Buttons.
@@ -192,10 +203,10 @@ The candidate public API should describe design-system intent and prevent invali
 
 ### State and events
 
-- [ ] `disabled` is provider-neutral.
-- [ ] `loading` is provider-neutral.
-- [ ] `buttonClick` remains the normalized wrapper event.
-- [ ] Confirm whether loading suppresses repeat activation.
+- [x] `disabled` is provider-neutral in the candidate API.
+- [x] `loading` is provider-neutral in the candidate API.
+- [x] `buttonClick` remains the normalized wrapper event.
+- [x] Candidate Playwright coverage verifies that loading suppresses activation and exposes `aria-busy="true"`.
 - [ ] Confirm whether disabled and loading are mutually exclusive or can coexist.
 - [ ] Confirm router navigation behavior.
 - [ ] Confirm native Button `type` support: `button`, `submit`, and `reset`.
@@ -207,7 +218,7 @@ The candidate public API should describe design-system intent and prevent invali
 
 The repository contains **sanitized UP Design System notes**. These notes are useful for modeling the workflow, but they are not proof that the actual enterprise UP Design System currently uses every value or file name shown below.
 
-- [X] Treat the sanitized UP material as candidate/reference guidance.
+- [x] Treat the sanitized UP material as candidate/reference guidance.
 - [ ] Obtain and review the actual enterprise UP Design System source before promotion.
 - [ ] Record the source repository, package version, Figma library version, export date, and owning team in a private or approved location.
 - [ ] Replace every `unverified`, `sample`, or `sanitized` designation with an approved source reference before Active status.
@@ -261,7 +272,7 @@ The UP notes contain this representative primitive:
 }
 ```
 
-- [X] Record the sanitized primary example value `#1C6FA3` as reference evidence only.
+- [x] Record the sanitized primary example value `#1C6FA3` as reference evidence only.
 - [ ] Verify the actual UP primary token path.
 - [ ] Verify the actual current value in every supported mode.
 - [ ] Verify whether the Figma variable ID remains current.
@@ -271,11 +282,11 @@ The UP notes contain this representative primitive:
 
 The current UP notes identify these normalization examples:
 
-| Source issue or term | Normalized term | Current status |
-| --- | --- | --- |
-| `forground` | `foreground` | Sanitized compatibility rule; verify against actual export. |
-| `minus-4` | `900` | Sanitized ramp normalization; verify the owning design decision. |
-| `danger` | `error` | Sanitized semantic normalization; requires approval because public wrapper terminology may intentionally remain `danger`. |
+| Source issue or term | Normalized term | Current status                                                                                                            |
+| -------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `forground`          | `foreground`    | Sanitized compatibility rule; verify against actual export.                                                               |
+| `minus-4`            | `900`           | Sanitized ramp normalization; verify the owning design decision.                                                          |
+| `danger`             | `error`         | Sanitized semantic normalization; requires approval because public wrapper terminology may intentionally remain `danger`. |
 
 Checklist:
 
@@ -309,134 +320,134 @@ The following values are confirmed in the current public sample repository. They
 
 ### Primitive tokens
 
-| Primitive | Value | Candidate relevance |
-| --- | --- | --- |
-| `blue.50` | `#eff6ff` | Light primary tint. |
-| `blue.100` | `#dbeafe` | Light primary tint. |
-| `blue.200` | `#bfdbfe` | Border and surface mixing. |
-| `blue.300` | `#93c5fd` | Dark-mode action and focus values. |
-| `blue.400` | `#60a5fa` | Dark-mode primary. |
-| `blue.500` | `#2563eb` | Neutral focus ring. |
-| `blue.600` | `#1d4ed8` | Neutral light primary Button background. |
-| `blue.700` | `#1e40af` | Neutral light hover. |
-| `blue.800` | `#1e3a8a` | Neutral light active. |
-| `blue.900` | `#172554` | Dark navigation or vibrant text foundation. |
-| `blue.950` | `#0f172a` | Strong neutral text/navigation. |
-| `slate.50` | `#f8fafc` | Light application surface. |
-| `slate.200` | `#e2e8f0` | Light border. |
-| `slate.300` | `#cbd5e1` | Muted dark-mode text/navigation. |
-| `slate.600` | `#475569` | Secondary light text. |
-| `slate.700` | `#334155` | Dark border. |
-| `slate.900` | `#0f172a` | Primary light text. |
-| `slate.950` | `#020617` | Dark background and inverse foreground. |
-| `purple.600` | `#7c3aed` | Vibrant primary. |
-| `purple.700` | `#6d28d9` | Vibrant hover. |
-| `purple.800` | `#5b21b6` | Vibrant active/action. |
-| `cyan.300` | `#67e8f9` | Vibrant dark Button/action. |
-| `cyan.400` | `#22d3ee` | Vibrant dark primary. |
-| `cyan.500` | `#06b6d4` | Vibrant focus ring. |
-| `rose.400` | `#fb7185` | Pastel primary source. |
-| `rose.500` | `#f43f5e` | Pastel hover/danger. |
-| `rose.600` | `#e11d48` | Pastel active/danger. |
-| `rose.700` | `#be123c` | Pastel Button/action background. |
-| `rose.800` | `#9f1239` | Pastel action text. |
-| `green.400` | `#4ade80` | Dark success. |
-| `green.500` | `#16a34a` | Neutral success. |
-| `green.600` | `#059669` | Vibrant success. |
-| `green.700` | `#047857` | Strong success text. |
-| `amber.400` | `#f59e0b` | Warning foundation. |
-| `amber.200` | `#fde68a` | Dark warning text. |
-| `radius.md` | `0.5rem` | Default Button radius. |
-| `radius.lg` | `0.75rem` | Larger component radius. |
-| `space.2` | `0.5rem` | Button icon/label gap candidate. |
-| `space.4` | `1rem` | General spacing. |
-| `space.6` | `1.5rem` | General spacing. |
-| `typography.fontFamily` | `"Inter", "Segoe UI", Arial, sans-serif` | Current sample UI font stack. |
+| Primitive               | Value                                    | Candidate relevance                         |
+| ----------------------- | ---------------------------------------- | ------------------------------------------- |
+| `blue.50`               | `#eff6ff`                                | Light primary tint.                         |
+| `blue.100`              | `#dbeafe`                                | Light primary tint.                         |
+| `blue.200`              | `#bfdbfe`                                | Border and surface mixing.                  |
+| `blue.300`              | `#93c5fd`                                | Dark-mode action and focus values.          |
+| `blue.400`              | `#60a5fa`                                | Dark-mode primary.                          |
+| `blue.500`              | `#2563eb`                                | Neutral focus ring.                         |
+| `blue.600`              | `#1d4ed8`                                | Neutral light primary Button background.    |
+| `blue.700`              | `#1e40af`                                | Neutral light hover.                        |
+| `blue.800`              | `#1e3a8a`                                | Neutral light active.                       |
+| `blue.900`              | `#172554`                                | Dark navigation or vibrant text foundation. |
+| `blue.950`              | `#0f172a`                                | Strong neutral text/navigation.             |
+| `slate.50`              | `#f8fafc`                                | Light application surface.                  |
+| `slate.200`             | `#e2e8f0`                                | Light border.                               |
+| `slate.300`             | `#cbd5e1`                                | Muted dark-mode text/navigation.            |
+| `slate.600`             | `#475569`                                | Secondary light text.                       |
+| `slate.700`             | `#334155`                                | Dark border.                                |
+| `slate.900`             | `#0f172a`                                | Primary light text.                         |
+| `slate.950`             | `#020617`                                | Dark background and inverse foreground.     |
+| `purple.600`            | `#7c3aed`                                | Vibrant primary.                            |
+| `purple.700`            | `#6d28d9`                                | Vibrant hover.                              |
+| `purple.800`            | `#5b21b6`                                | Vibrant active/action.                      |
+| `cyan.300`              | `#67e8f9`                                | Vibrant dark Button/action.                 |
+| `cyan.400`              | `#22d3ee`                                | Vibrant dark primary.                       |
+| `cyan.500`              | `#06b6d4`                                | Vibrant focus ring.                         |
+| `rose.400`              | `#fb7185`                                | Pastel primary source.                      |
+| `rose.500`              | `#f43f5e`                                | Pastel hover/danger.                        |
+| `rose.600`              | `#e11d48`                                | Pastel active/danger.                       |
+| `rose.700`              | `#be123c`                                | Pastel Button/action background.            |
+| `rose.800`              | `#9f1239`                                | Pastel action text.                         |
+| `green.400`             | `#4ade80`                                | Dark success.                               |
+| `green.500`             | `#16a34a`                                | Neutral success.                            |
+| `green.600`             | `#059669`                                | Vibrant success.                            |
+| `green.700`             | `#047857`                                | Strong success text.                        |
+| `amber.400`             | `#f59e0b`                                | Warning foundation.                         |
+| `amber.200`             | `#fde68a`                                | Dark warning text.                          |
+| `radius.md`             | `0.5rem`                                 | Default Button radius.                      |
+| `radius.lg`             | `0.75rem`                                | Larger component radius.                    |
+| `space.2`               | `0.5rem`                                 | Button icon/label gap candidate.            |
+| `space.4`               | `1rem`                                   | General spacing.                            |
+| `space.6`               | `1.5rem`                                 | General spacing.                            |
+| `typography.fontFamily` | `"Inter", "Segoe UI", Arial, sans-serif` | Current sample UI font stack.               |
 
 ### Neutral light semantic and component tokens
 
-| Token | Value or mapping | Role |
-| --- | --- | --- |
-| `--ps-primary-background` | `#1d4ed8` | Primary action semantic background. |
-| `--ps-primary-foreground` | `#ffffff` | Primary action foreground. |
-| `--ps-focus-ring-color` | `#2563eb` | Visible keyboard focus. |
-| `--ps-action-text` | `#1d4ed8` | Outlined and text action foreground. |
-| `--ps-button-background` | `#1d4ed8` | Current filled Button component intent. |
-| `--ps-button-text` | `#ffffff` | Current filled Button component foreground. |
-| `--ps-danger-color` | `#dc2626` | Danger foundation. |
-| `--ps-danger-text` | `#991b1b` | Danger readable text. |
-| `--ps-success-color` | `#16a34a` | Success foundation. |
-| `--ps-success-text` | `#166534` | Success readable text. |
-| `--ps-warn-text` | `#92400e` | Warning readable text. |
-| `--ps-radius-md` | `0.5rem` | Default component radius. |
-| `--ps-radius-lg` | `0.75rem` | Large component radius. |
-| `--ps-space-2` | `0.5rem` | Compact component gap. |
-| `--ps-font-family` | `"Inter", "Segoe UI", Arial, sans-serif` | Runtime font family. |
+| Token                     | Value or mapping                         | Role                                        |
+| ------------------------- | ---------------------------------------- | ------------------------------------------- |
+| `--ps-primary-background` | `#1d4ed8`                                | Primary action semantic background.         |
+| `--ps-primary-foreground` | `#ffffff`                                | Primary action foreground.                  |
+| `--ps-focus-ring-color`   | `#2563eb`                                | Visible keyboard focus.                     |
+| `--ps-action-text`        | `#1d4ed8`                                | Outlined and text action foreground.        |
+| `--ps-button-background`  | `#1d4ed8`                                | Current filled Button component intent.     |
+| `--ps-button-text`        | `#ffffff`                                | Current filled Button component foreground. |
+| `--ps-danger-color`       | `#dc2626`                                | Danger foundation.                          |
+| `--ps-danger-text`        | `#991b1b`                                | Danger readable text.                       |
+| `--ps-success-color`      | `#16a34a`                                | Success foundation.                         |
+| `--ps-success-text`       | `#166534`                                | Success readable text.                      |
+| `--ps-warn-text`          | `#92400e`                                | Warning readable text.                      |
+| `--ps-radius-md`          | `0.5rem`                                 | Default component radius.                   |
+| `--ps-radius-lg`          | `0.75rem`                                | Large component radius.                     |
+| `--ps-space-2`            | `0.5rem`                                 | Compact component gap.                      |
+| `--ps-font-family`        | `"Inter", "Segoe UI", Arial, sans-serif` | Runtime font family.                        |
 
 ### Neutral light PrimeNG Button provider mapping
 
-| Provider token | Value or reference | Purpose |
-| --- | --- | --- |
-| `--p-primary-color` | `var(--ps-primary-background)` | PrimeNG primary semantic bridge. |
-| `--p-primary-hover-color` | `#1e40af` | Primary hover. |
-| `--p-primary-active-color` | `#1e3a8a` | Primary pressed/active. |
-| `--p-primary-inverse-color` | `var(--ps-primary-foreground)` | Primary foreground. |
-| `--p-focus-ring-width` | `2px` | Focus indicator width. |
-| `--p-focus-ring-style` | `solid` | Focus indicator style. |
-| `--p-focus-ring-color` | `var(--ps-focus-ring-color)` | Focus indicator color. |
-| `--p-focus-ring-offset` | `2px` | Focus indicator separation. |
-| `--p-focus-ring-shadow` | `0 0 0 0.2rem color-mix(in srgb, var(--ps-focus-ring-color) 24%, transparent)` | Focus halo. |
-| `--p-button-transition-duration` | `140ms` | Button transition timing. |
-| `--p-button-border-radius` | `var(--ps-radius-md)` | Button shape. |
-| `--p-button-padding-y` | `0.65rem` | Vertical padding. |
-| `--p-button-padding-x` | `0.9rem` | Horizontal padding. |
-| `--p-button-gap` | `0.5rem` | Icon/label gap. |
-| `--p-button-label-font-weight` | `700` | Label emphasis. |
-| `--p-button-primary-background` | `var(--p-primary-color)` | Filled primary default. |
-| `--p-button-primary-hover-background` | `var(--p-primary-hover-color)` | Filled primary hover. |
-| `--p-button-primary-active-background` | `var(--p-primary-active-color)` | Filled primary active. |
-| `--p-button-primary-border-color` | `var(--p-primary-color)` | Filled primary border. |
-| `--p-button-primary-hover-border-color` | `var(--p-primary-hover-color)` | Filled primary hover border. |
-| `--p-button-primary-active-border-color` | `var(--p-primary-active-color)` | Filled primary active border. |
-| `--p-button-primary-color` | `var(--p-primary-inverse-color)` | Filled primary foreground. |
-| `--p-button-primary-hover-color` | `var(--p-primary-inverse-color)` | Filled primary hover foreground. |
-| `--p-button-primary-active-color` | `var(--p-primary-inverse-color)` | Filled primary active foreground. |
-| `--p-button-primary-focus-ring-shadow` | `var(--p-focus-ring-shadow)` | Primary focus evidence. |
-| `--p-button-outlined-primary-border-color` | `color-mix(in srgb, var(--p-primary-color) 70%, var(--p-content-border-color))` | Outlined primary border. |
-| `--p-button-outlined-primary-color` | `var(--ps-action-text)` | Outlined primary text. |
-| `--p-button-outlined-primary-hover-background` | `color-mix(in srgb, var(--p-primary-color) 10%, transparent)` | Outlined primary hover. |
-| `--p-button-outlined-primary-active-background` | `color-mix(in srgb, var(--p-primary-color) 16%, transparent)` | Outlined primary active. |
-| `--p-button-text-primary-color` | `var(--ps-action-text)` | Text Button foreground. |
-| `--p-button-text-primary-hover-background` | `color-mix(in srgb, var(--p-primary-color) 10%, transparent)` | Text Button hover. |
-| `--p-button-text-primary-active-background` | `color-mix(in srgb, var(--p-primary-color) 16%, transparent)` | Text Button active. |
-| `--p-button-secondary-background` | `var(--p-content-background)` | Secondary default. |
-| `--p-button-secondary-border-color` | `var(--p-content-border-color)` | Secondary border. |
-| `--p-button-secondary-color` | `var(--p-text-color)` | Secondary foreground. |
-| `--p-button-secondary-hover-background` | `color-mix(in srgb, var(--p-content-background) 84%, var(--p-primary-color))` | Secondary hover. |
-| `--p-button-secondary-hover-border-color` | `var(--p-content-border-color)` | Secondary hover border. |
-| `--p-button-secondary-active-background` | `color-mix(in srgb, var(--p-content-background) 76%, var(--p-primary-color))` | Secondary active. |
-| `--p-button-secondary-active-border-color` | `var(--p-content-border-color)` | Secondary active border. |
-| `--p-button-secondary-focus-ring-shadow` | `var(--p-focus-ring-shadow)` | Secondary focus evidence. |
-| `--p-button-outlined-secondary-border-color` | `var(--p-content-border-color)` | Outlined secondary border. |
-| `--p-button-outlined-secondary-color` | `var(--p-text-color)` | Outlined secondary text. |
-| `--p-button-outlined-secondary-hover-background` | `color-mix(in srgb, var(--p-content-background) 84%, var(--p-primary-color))` | Outlined secondary hover. |
-| `--p-button-outlined-secondary-active-background` | `color-mix(in srgb, var(--p-content-background) 76%, var(--p-primary-color))` | Outlined secondary active. |
-| `--p-button-text-secondary-color` | `var(--p-text-color)` | Text secondary foreground. |
-| `--p-button-text-secondary-hover-background` | `color-mix(in srgb, var(--p-content-background) 84%, var(--p-primary-color))` | Text secondary hover. |
-| `--p-button-text-secondary-active-background` | `color-mix(in srgb, var(--p-content-background) 76%, var(--p-primary-color))` | Text secondary active. |
-| `--p-button-icon-only-width` | `2.5rem` | Icon-only width. |
-| `--p-button-rounded-border-radius` | `999rem` | Fully rounded option. |
+| Provider token                                    | Value or reference                                                              | Purpose                           |
+| ------------------------------------------------- | ------------------------------------------------------------------------------- | --------------------------------- |
+| `--p-primary-color`                               | `var(--ps-primary-background)`                                                  | PrimeNG primary semantic bridge.  |
+| `--p-primary-hover-color`                         | `#1e40af`                                                                       | Primary hover.                    |
+| `--p-primary-active-color`                        | `#1e3a8a`                                                                       | Primary pressed/active.           |
+| `--p-primary-inverse-color`                       | `var(--ps-primary-foreground)`                                                  | Primary foreground.               |
+| `--p-focus-ring-width`                            | `2px`                                                                           | Focus indicator width.            |
+| `--p-focus-ring-style`                            | `solid`                                                                         | Focus indicator style.            |
+| `--p-focus-ring-color`                            | `var(--ps-focus-ring-color)`                                                    | Focus indicator color.            |
+| `--p-focus-ring-offset`                           | `2px`                                                                           | Focus indicator separation.       |
+| `--p-focus-ring-shadow`                           | `0 0 0 0.2rem color-mix(in srgb, var(--ps-focus-ring-color) 24%, transparent)`  | Focus halo.                       |
+| `--p-button-transition-duration`                  | `140ms`                                                                         | Button transition timing.         |
+| `--p-button-border-radius`                        | `var(--ps-radius-md)`                                                           | Button shape.                     |
+| `--p-button-padding-y`                            | `0.65rem`                                                                       | Vertical padding.                 |
+| `--p-button-padding-x`                            | `0.9rem`                                                                        | Horizontal padding.               |
+| `--p-button-gap`                                  | `0.5rem`                                                                        | Icon/label gap.                   |
+| `--p-button-label-font-weight`                    | `700`                                                                           | Label emphasis.                   |
+| `--p-button-primary-background`                   | `var(--p-primary-color)`                                                        | Filled primary default.           |
+| `--p-button-primary-hover-background`             | `var(--p-primary-hover-color)`                                                  | Filled primary hover.             |
+| `--p-button-primary-active-background`            | `var(--p-primary-active-color)`                                                 | Filled primary active.            |
+| `--p-button-primary-border-color`                 | `var(--p-primary-color)`                                                        | Filled primary border.            |
+| `--p-button-primary-hover-border-color`           | `var(--p-primary-hover-color)`                                                  | Filled primary hover border.      |
+| `--p-button-primary-active-border-color`          | `var(--p-primary-active-color)`                                                 | Filled primary active border.     |
+| `--p-button-primary-color`                        | `var(--p-primary-inverse-color)`                                                | Filled primary foreground.        |
+| `--p-button-primary-hover-color`                  | `var(--p-primary-inverse-color)`                                                | Filled primary hover foreground.  |
+| `--p-button-primary-active-color`                 | `var(--p-primary-inverse-color)`                                                | Filled primary active foreground. |
+| `--p-button-primary-focus-ring-shadow`            | `var(--p-focus-ring-shadow)`                                                    | Primary focus evidence.           |
+| `--p-button-outlined-primary-border-color`        | `color-mix(in srgb, var(--p-primary-color) 70%, var(--p-content-border-color))` | Outlined primary border.          |
+| `--p-button-outlined-primary-color`               | `var(--ps-action-text)`                                                         | Outlined primary text.            |
+| `--p-button-outlined-primary-hover-background`    | `color-mix(in srgb, var(--p-primary-color) 10%, transparent)`                   | Outlined primary hover.           |
+| `--p-button-outlined-primary-active-background`   | `color-mix(in srgb, var(--p-primary-color) 16%, transparent)`                   | Outlined primary active.          |
+| `--p-button-text-primary-color`                   | `var(--ps-action-text)`                                                         | Text Button foreground.           |
+| `--p-button-text-primary-hover-background`        | `color-mix(in srgb, var(--p-primary-color) 10%, transparent)`                   | Text Button hover.                |
+| `--p-button-text-primary-active-background`       | `color-mix(in srgb, var(--p-primary-color) 16%, transparent)`                   | Text Button active.               |
+| `--p-button-secondary-background`                 | `var(--p-content-background)`                                                   | Secondary default.                |
+| `--p-button-secondary-border-color`               | `var(--p-content-border-color)`                                                 | Secondary border.                 |
+| `--p-button-secondary-color`                      | `var(--p-text-color)`                                                           | Secondary foreground.             |
+| `--p-button-secondary-hover-background`           | `color-mix(in srgb, var(--p-content-background) 84%, var(--p-primary-color))`   | Secondary hover.                  |
+| `--p-button-secondary-hover-border-color`         | `var(--p-content-border-color)`                                                 | Secondary hover border.           |
+| `--p-button-secondary-active-background`          | `color-mix(in srgb, var(--p-content-background) 76%, var(--p-primary-color))`   | Secondary active.                 |
+| `--p-button-secondary-active-border-color`        | `var(--p-content-border-color)`                                                 | Secondary active border.          |
+| `--p-button-secondary-focus-ring-shadow`          | `var(--p-focus-ring-shadow)`                                                    | Secondary focus evidence.         |
+| `--p-button-outlined-secondary-border-color`      | `var(--p-content-border-color)`                                                 | Outlined secondary border.        |
+| `--p-button-outlined-secondary-color`             | `var(--p-text-color)`                                                           | Outlined secondary text.          |
+| `--p-button-outlined-secondary-hover-background`  | `color-mix(in srgb, var(--p-content-background) 84%, var(--p-primary-color))`   | Outlined secondary hover.         |
+| `--p-button-outlined-secondary-active-background` | `color-mix(in srgb, var(--p-content-background) 76%, var(--p-primary-color))`   | Outlined secondary active.        |
+| `--p-button-text-secondary-color`                 | `var(--p-text-color)`                                                           | Text secondary foreground.        |
+| `--p-button-text-secondary-hover-background`      | `color-mix(in srgb, var(--p-content-background) 84%, var(--p-primary-color))`   | Text secondary hover.             |
+| `--p-button-text-secondary-active-background`     | `color-mix(in srgb, var(--p-content-background) 76%, var(--p-primary-color))`   | Text secondary active.            |
+| `--p-button-icon-only-width`                      | `2.5rem`                                                                        | Icon-only width.                  |
+| `--p-button-rounded-border-radius`                | `999rem`                                                                        | Fully rounded option.             |
 
 ### Current theme and mode values used by Button
 
-| Theme and mode | Primary | Hover | Active | Foreground | Focus | Action text | Button intent background | Button intent text |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Neutral light | `#1d4ed8` | `#1e40af` | `#1e3a8a` | `#ffffff` | `#2563eb` | `#1d4ed8` | `#1d4ed8` | `#ffffff` |
-| Vibrant light | `#7c3aed` | `#6d28d9` | `#5b21b6` | `#ffffff` | `#06b6d4` | `#5b21b6` | `#5b21b6` | `#ffffff` |
-| Pastel light | `#be123c` provider primary; `#fb7185` semantic primary | `#f43f5e` | `#e11d48` | `#ffffff` provider inverse | `#f9a8d4` | `#9f1239` | `#be123c` | `#ffffff` |
-| Neutral dark | `#60a5fa` semantic primary | Confirm generated/provider inheritance | Confirm generated/provider inheritance | `#020617` | `#93c5fd` | `#93c5fd` | `#93c5fd` | `#020617` |
-| Vibrant dark | `#22d3ee` | `#67e8f9` | `#a5f3fc` | `#07031a` | `#a78bfa` | `#67e8f9` | `#67e8f9` | `#07031a` |
-| Pastel dark | `#f9a8d4` | `#fbcfe8` | `#fce7f3` | `#1f1a2e` | `#f0abfc` | `#fbcfe8` | `#fbcfe8` | `#1f1a2e` |
+| Theme and mode | Primary                                                | Hover                                  | Active                                 | Foreground                 | Focus     | Action text | Button intent background | Button intent text |
+| -------------- | ------------------------------------------------------ | -------------------------------------- | -------------------------------------- | -------------------------- | --------- | ----------- | ------------------------ | ------------------ |
+| Neutral light  | `#1d4ed8`                                              | `#1e40af`                              | `#1e3a8a`                              | `#ffffff`                  | `#2563eb` | `#1d4ed8`   | `#1d4ed8`                | `#ffffff`          |
+| Vibrant light  | `#7c3aed`                                              | `#6d28d9`                              | `#5b21b6`                              | `#ffffff`                  | `#06b6d4` | `#5b21b6`   | `#5b21b6`                | `#ffffff`          |
+| Pastel light   | `#be123c` provider primary; `#fb7185` semantic primary | `#f43f5e`                              | `#e11d48`                              | `#ffffff` provider inverse | `#f9a8d4` | `#9f1239`   | `#be123c`                | `#ffffff`          |
+| Neutral dark   | `#60a5fa` semantic primary                             | Confirm generated/provider inheritance | Confirm generated/provider inheritance | `#020617`                  | `#93c5fd` | `#93c5fd`   | `#93c5fd`                | `#020617`          |
+| Vibrant dark   | `#22d3ee`                                              | `#67e8f9`                              | `#a5f3fc`                              | `#07031a`                  | `#a78bfa` | `#67e8f9`   | `#67e8f9`                | `#07031a`          |
+| Pastel dark    | `#f9a8d4`                                              | `#fbcfe8`                              | `#fce7f3`                              | `#1f1a2e`                  | `#f0abfc` | `#fbcfe8`   | `#fbcfe8`                | `#1f1a2e`          |
 
 ### Token gaps that must be filled from the actual UP Design System
 
@@ -521,8 +532,12 @@ Example direction:
 ```css
 :host {
   --p-button-primary-background: var(--ps-up-button-primary-background);
-  --p-button-primary-hover-background: var(--ps-up-button-primary-hover-background);
-  --p-button-primary-active-background: var(--ps-up-button-primary-active-background);
+  --p-button-primary-hover-background: var(
+    --ps-up-button-primary-hover-background
+  );
+  --p-button-primary-active-background: var(
+    --ps-up-button-primary-active-background
+  );
   --p-button-primary-color: var(--ps-up-button-primary-foreground);
   --p-button-border-radius: var(--ps-up-button-border-radius);
   --p-button-padding-x: var(--ps-up-button-padding-inline);
@@ -594,7 +609,7 @@ Example direction:
 
 ### Component structure
 
-- [X] A separate candidate wrapper was reportedly created locally.
+- [x] A separate candidate wrapper was created locally.
 - [ ] Verify the final file path and class name after commit.
 - [ ] Keep the candidate standalone if that matches the current package architecture.
 - [ ] Import PrimeNG only inside `ui-patterns`.
@@ -639,83 +654,94 @@ Example direction:
 
 ### Story organization
 
-- [X] Dedicated candidate story reportedly created locally at `apps/qa-remote/src/stories/up-button.stories.ts`.
-- [ ] Verify final Storybook title is similar to `Design System/Candidates/Button - UP Design System`.
+- [x] Dedicated candidate story created at `apps/qa-remote/src/stories/up-button.stories.ts`.
+- [x] Current Storybook title is `Design System/Components/UP Button Candidate`.
 - [ ] Keep current Button/Tag acceptance story in place.
-- [ ] Set `component` to the candidate Angular component when Storybook signal input handling supports it.
-- [ ] Use explicit Angular render templates where necessary.
+- [ ] Set `component` to the candidate Angular component when Storybook signal input handling supports it cleanly for this wrapper.
+- [x] Use explicit Angular render templates where necessary.
+- [x] Do not rely on `component` metadata until Storybook signal extraction supports this candidate without argtype/rendering issues.
 - [ ] Add `tags: ['autodocs']` when API documentation is accurate.
 - [ ] Add component and story descriptions.
 - [ ] Add links to Figma, source, QA route, and Zeroheight.
 
 ### Controls
 
-- [ ] Add label Control.
-- [ ] Add appearance radio/select Control.
-- [ ] Add tone radio/select Control.
+- [x] Add label Control.
+- [x] Add appearance radio/select Control.
+- [x] Add tone radio/select Control.
 - [ ] Add size radio/select Control.
-- [ ] Add disabled boolean Control.
-- [ ] Add loading boolean Control.
-- [ ] Add icon Control.
+- [x] Add disabled boolean Control.
+- [x] Add loading boolean Control.
+- [x] Add icon Control.
 - [ ] Add icon-position Control.
 - [ ] Add full-width Control.
-- [ ] Hide internal or unsupported provider inputs.
+- [x] Hide internal or unsupported provider inputs.
 
 ### Required stories
 
-- [ ] Primary solid.
-- [ ] Secondary solid.
+- [x] Primary solid.
+- [x] Secondary solid.
 - [ ] Neutral solid.
-- [ ] Success solid, if approved.
-- [ ] Warning solid, if approved.
-- [ ] Danger/error solid, if approved.
-- [ ] Primary outlined.
-- [ ] Secondary outlined.
-- [ ] Danger/error outlined, if approved.
-- [ ] Primary text.
-- [ ] Secondary text.
+- [x] Success solid, if approved.
+- [x] Info solid, if approved.
+- [x] Warning solid, if approved.
+- [x] Help solid, if approved.
+- [x] Contrast solid, if approved.
+- [x] Error solid, if approved.
+- [x] Primary outlined.
+- [x] Secondary outlined.
+- [x] Danger/error outlined, if approved.
+- [x] Primary text.
+- [x] Secondary text.
 - [ ] Small.
 - [ ] Medium.
 - [ ] Large.
-- [ ] Leading icon.
+- [x] Leading icon.
 - [ ] Trailing icon.
 - [ ] Icon-only.
-- [ ] Loading.
-- [ ] Disabled.
-- [ ] Long label.
+- [x] Loading.
+- [x] Disabled.
+- [x] Long label.
 - [ ] Full width.
-- [ ] Tone matrix.
-- [ ] Appearance matrix.
+- [x] Tone matrix.
+- [x] Appearance matrix.
 - [ ] Size matrix.
 - [ ] State matrix.
-- [ ] Current-versus-candidate comparison.
+- [x] Interaction harness with observable activation count.
+- [x] Current-versus-candidate comparison.
 
 ### Theme stories
 
 The QA Storybook already supports neutral, vibrant, and pastel theme variants plus light and dark modes.
 
-- [ ] Candidate renders in neutral light.
-- [ ] Candidate renders in neutral dark.
+- [x] Candidate renders in neutral light.
+- [x] Candidate renders in neutral dark.
 - [ ] Candidate renders in vibrant light.
-- [ ] Candidate renders in vibrant dark.
+- [x] Candidate renders in vibrant dark.
 - [ ] Candidate renders in pastel light.
 - [ ] Candidate renders in pastel dark.
-- [ ] Storybook toolbar changes update the candidate without reload errors.
+- [x] Storybook toolbar globals update the candidate without reload errors in the isolated Playwright test path.
 - [ ] Current and candidate Buttons both update so differences can be reviewed.
 
 ### Storybook interaction tests
 
-- [ ] Install or confirm the supported Storybook testing package for this Storybook version.
-- [ ] Button is found by role and accessible name.
-- [ ] Click invokes the normalized action.
-- [ ] Enter activates the Button.
-- [ ] Space activates the Button.
-- [ ] Disabled prevents activation.
-- [ ] Loading prevents duplicate activation.
-- [ ] Focus-visible state is observable.
+- [x] Isolated Storybook Playwright spec exists at `apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts`.
+- [x] Candidate-specific command exists: `pnpm test:storybook:up-button:chromium`.
+- [x] Isolated tests use direct `iframe.html` URLs rather than depending on the Storybook manager UI.
+- [x] Button is found by role and accessible name.
+- [x] Click invokes the normalized action.
+- [x] Enter activates the Button.
+- [x] Space activates the Button.
+- [x] Disabled prevents activation.
+- [x] Loading prevents duplicate activation and exposes `aria-busy="true"`.
+- [x] Focus-visible state is observable.
 - [ ] Icon-only requires an accessible name.
-- [ ] Long label remains readable.
-- [ ] Controls update the rendered component.
+- [x] Long label remains readable.
+- [x] Tone and appearance matrix stories render.
+- [x] Current wrapper versus UP candidate comparison story renders.
+- [x] Theme globals resolve for dark/vibrant mode.
+- [ ] Controls update the rendered component through Storybook manager controls.
+- [ ] Add Storybook `play` functions or a compatible Storybook test-runner setup if Interactions-panel evidence is required.
 - [ ] Tests appear in the Storybook Interactions panel.
 
 ### Storybook accessibility
@@ -734,7 +760,7 @@ The QA Storybook already supports neutral, vibrant, and pastel theme variants pl
 
 ### Candidate display
 
-- [X] Candidate was reportedly added locally to the QA remote.
+- [x] Candidate was added locally to the QA remote.
 - [ ] Verify the QA route after commit.
 - [ ] Add a dedicated `UP Button Candidate` section.
 - [ ] Show lifecycle badge: Candidate.
@@ -800,13 +826,36 @@ The QA Storybook already supports neutral, vibrant, and pastel theme variants pl
 
 ### Storybook static E2E
 
-- [X] Candidate story ID was reportedly added locally to `scripts/storybook-e2e.mjs`.
-- [X] Storybook static build reportedly completed successfully.
-- [ ] Record the final E2E pass after the explicit render change.
-- [ ] Validate candidate story content in the generated iframe.
-- [ ] Run axe against the candidate iframe.
+- [x] Candidate story ID was added to `scripts/storybook-e2e.mjs`.
+- [x] Storybook static build completed successfully.
+- [x] Final static E2E pass recorded after the explicit render change and current-versus-candidate story addition: `pnpm nx run qa-remote:e2e` passed with 38 discovered stories and 3 rendered story iframes.
+- [x] Candidate story content is validated in the generated iframe by the static Storybook E2E path.
+- [x] Axe runs against rendered iframe stories in the static Storybook E2E path.
 - [ ] Avoid using a story-count assertion that breaks every time a legitimate story is added unless the count is intentionally maintained.
-- [ ] Remove, skip, or environment-gate any intentional failing demo test before using CI as approval evidence.
+- [x] Intentional failing demo test removed from the broad Storybook Playwright spec.
+
+### Isolated Storybook Playwright E2E
+
+These tests are the current candidate-specific Storybook evidence path. They run only the UP Button candidate iframe stories, including the current-versus-candidate comparison story.
+
+- [x] Spec added at `apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts`.
+- [x] Script added: `pnpm test:storybook:up-button`.
+- [x] Chromium-only script added for fast candidate validation: `pnpm test:storybook:up-button:chromium`.
+- [x] Tests load direct Storybook `iframe.html` URLs.
+- [x] Primary story verifies role, accessible name, enabled state, and token-driven computed styles.
+- [x] Interaction harness verifies pointer click increments the normalized `buttonClick` output count.
+- [x] Interaction harness verifies Enter activation.
+- [x] Interaction harness verifies Space activation.
+- [x] Disabled story verifies the Button is disabled.
+- [x] Loading story verifies disabled behavior and `aria-busy="true"`.
+- [x] Focus test verifies a visible outline or focus treatment is present.
+- [x] Long-label story verifies rendered text does not clip horizontally.
+- [x] Tone matrix story verifies at least primary and error examples render.
+- [x] Appearance matrix story verifies primary and error examples render.
+- [x] Current-versus-candidate story verifies the current wrapper and UP candidate render side by side.
+- [x] Theme globals test verifies dark/vibrant mode classes and Button token variables resolve.
+- [x] Local result recorded: `pnpm test:storybook:up-button:chromium` passed 9 tests.
+- [ ] Run the full cross-browser command `pnpm test:storybook:up-button` after the candidate API is less volatile.
 
 ### Playwright QA and federation E2E
 
@@ -860,13 +909,16 @@ The QA Storybook already supports neutral, vibrant, and pastel theme variants pl
 - [ ] Commit the candidate Storybook stories.
 - [ ] Commit QA remote changes.
 - [ ] Commit Storybook static E2E changes.
-- [X] Commit this integration plan.
+- [ ] Commit isolated candidate Storybook Playwright spec.
+- [ ] Commit candidate test scripts in `package.json`.
+- [x] Commit this integration plan.
 - [ ] Run `pnpm lint`.
 - [ ] Run token build and token tests.
 - [ ] Run `ui-patterns` typecheck/tests.
 - [ ] Run QA remote typecheck/tests.
 - [ ] Run Storybook build.
 - [ ] Run Storybook static E2E.
+- [ ] Run isolated candidate Storybook Playwright E2E.
 - [ ] Run QA Playwright tests.
 - [ ] Run shell/federation Playwright tests.
 - [ ] Publish test reports or artifacts from CI.
@@ -1065,18 +1117,19 @@ The UP Button candidate must remain Candidate until all required gates are compl
 
 ## Immediate next actions
 
-1. [ ] Finish and record the current static Storybook E2E run.
-2. [ ] Commit and push the locally created candidate wrapper, stories, QA page changes, and test-script changes.
-3. [ ] Verify the pushed files against the `Current implementation inventory` section above.
-4. [ ] Obtain the actual UP Design System Button component and token export.
-5. [ ] Populate `up-button-source-inventory.json` with verified token paths, aliases, values, modes, and Figma IDs.
-6. [ ] Create the explicit source-to-semantic-to-component-to-PrimeNG mapping.
-7. [ ] Ensure candidate token overrides are scoped and do not restyle the existing `ps-button`.
-8. [ ] Complete the Storybook matrix, interaction tests, and strict axe validation.
-9. [ ] Complete QA remote side-by-side and shell-mounted integration proof.
-10. [ ] Publish Storybook to a stable HTTPS URL.
-11. [ ] Create the Zeroheight Candidate page and connect Figma, Storybook, GitHub, QA, and CI evidence.
-12. [ ] Review the promotion gates and decide whether to move the candidate into the canonical `ps-button`.
+1. [ ] Commit and push the candidate wrapper, Storybook stories, QA page changes, static E2E changes, isolated Playwright spec, test scripts, and documentation updates.
+2. [ ] Verify the pushed files against the `Current implementation inventory` section above.
+3. [ ] Run `pnpm test:storybook:up-button` across all configured Playwright projects when the candidate is ready for broader browser evidence.
+4. [x] Remove the intentional failing demo test before treating the broad Storybook Playwright suite as CI approval evidence.
+5. [ ] Obtain the actual UP Design System Button component and token export.
+6. [ ] Populate `up-button-source-inventory.json` with verified token paths, aliases, values, modes, and Figma IDs.
+7. [ ] Create the explicit source-to-semantic-to-component-to-PrimeNG mapping.
+8. [ ] Ensure candidate token overrides are scoped and do not restyle the existing `ps-button`.
+9. [ ] Complete strict axe validation and any remaining Storybook matrix coverage.
+10. [ ] Complete QA remote side-by-side and shell-mounted integration proof.
+11. [ ] Publish Storybook to a stable HTTPS URL.
+12. [ ] Create the Zeroheight Candidate page and connect Figma, Storybook, GitHub, QA, and CI evidence.
+13. [ ] Review the promotion gates and decide whether to move the candidate into the canonical `ps-button`.
 
 ## Final recommendation
 
@@ -1089,6 +1142,6 @@ The important safeguards are:
 - use real UP token exports rather than copying only visible CSS values;
 - map tokens through primitive, semantic, component, and provider tiers;
 - scope candidate provider variables so they do not globally restyle existing Buttons;
-- prove behavior in Storybook, the QA remote, and the federated shell;
+- prove behavior first with isolated Storybook iframe tests, then with QA remote and federated shell validation;
 - publish curated guidance and evidence in Zeroheight;
 - promote the candidate into the canonical `ps-button` only after design, token, API, accessibility, runtime, and governance gates are complete.

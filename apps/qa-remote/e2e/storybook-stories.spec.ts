@@ -406,10 +406,3 @@ test.describe('Storybook Stories - Error Handling', () => {
   });
 });
 
-test.describe('Storybook Stories - Demo Intentional Failure', () => {
-  test('INTENDED FAILED TEST FOR DEMO - this test fails on purpose so the QA walkthrough shows a visible failure', async () => {
-    expect(
-      'Intentional demo failure. This is expected for the July 14, 2026 QA demo and is not a product bug.',
-    ).toBe('This value is intentionally incorrect for the demo');
-  });
-});

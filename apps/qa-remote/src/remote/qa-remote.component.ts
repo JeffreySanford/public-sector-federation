@@ -12,6 +12,7 @@ import {
   PublicTagComponent,
   PublicToastComponent,
   PublicToastService,
+  PublicUpButtonComponent,
   type PublicMenuAction,
   type PublicSelectOption,
 } from '@public-sector/ui-patterns';
@@ -68,6 +69,7 @@ interface AgileBoardRow {
     PublicTagComponent,
     PublicTooltipComponent,
     PublicToastComponent,
+    PublicUpButtonComponent,
     PerformanceDashboardComponent,
   ],
   templateUrl: './qa-remote.component.html',
