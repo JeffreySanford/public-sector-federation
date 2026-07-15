@@ -146,7 +146,7 @@ export type PublicUpButtonAppearance =
 Storybook title:
 
 ```text
-Design System / Candidates / Button — UP
+Design System / Candidates / Button UP
 ```
 
 Primary comparison story ID:
