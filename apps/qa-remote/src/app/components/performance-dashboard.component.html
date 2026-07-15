@@ -49,7 +49,7 @@
               <td>
                 <ps-tag
                   [value]="regression.severity | uppercase"
-                  [tone]="regression.severity === 'critical' ? 'danger' : 'warning'"
+                  [tone]="getRegressionSeverityTone(regression.severity)"
                 />
               </td>
               <td>{{ regression.currentMs }}</td>

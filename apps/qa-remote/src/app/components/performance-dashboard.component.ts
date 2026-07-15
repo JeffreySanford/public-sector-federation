@@ -5,6 +5,7 @@ import {
   PublicCardComponent,
   PublicSkeletonComponent,
   PublicTagComponent,
+  type PublicTagTone,
   PublicToastComponent,
   PublicToastService,
 } from '@public-sector/ui-patterns';
@@ -19,7 +20,7 @@ interface PerformanceKpi {
   value: string;
   detail: string;
   icon: string;
-  tone: 'success' | 'info' | 'warning' | 'danger';
+  tone: PublicTagTone;
 }
 
 @Component({
@@ -176,7 +177,7 @@ export class PerformanceDashboardComponent implements OnInit {
     });
   }
 
-  private getTrendName(testSuite: string): string {
+  getTrendName(testSuite: string): string {
     const trendMap: { [key: string]: string } = {
       lint: 'All checks',
       unit: 'AgileService',
@@ -259,14 +260,18 @@ export class PerformanceDashboardComponent implements OnInit {
     };
   }
 
-  getStatusSeverity(status: string): string {
-    const severityMap: { [key: string]: string } = {
+  getStatusSeverity(status: string): PublicTagTone {
+    const severityMap: { [key: string]: PublicTagTone } = {
       excellent: 'success',
       good: 'info',
       warning: 'warning',
       critical: 'danger',
     };
     return severityMap[status] || 'info';
+  }
+
+  getRegressionSeverityTone(severity: RegressionAlertDTO['severity']): PublicTagTone {
+    return severity === 'critical' ? 'danger' : 'warning';
   }
 
   getStatusLabel(status: string): string {
