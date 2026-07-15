@@ -3,7 +3,7 @@ import { createCustomElement } from '@angular/elements';
 import { provideHttpClient } from '@angular/common/http';
 import { createApplication } from '@angular/platform-browser';
 import { providePublicSectorPrimeNG } from '@public-sector/primeng-preset';
-import { QaRemoteComponent } from './remote/qa-remote.component';
+import { QaWorkspaceComponent } from './app/components/qa-workspace.component';
 
 createApplication({
   providers: [
@@ -13,7 +13,7 @@ createApplication({
   ],
 })
   .then((appRef) => {
-    const element = createCustomElement(QaRemoteComponent, {
+    const element = createCustomElement(QaWorkspaceComponent, {
       injector: appRef.injector,
     });
 

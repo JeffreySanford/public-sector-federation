@@ -1,0 +1,38 @@
+<section class="qa-workspace">
+  <nav class="qa-workspace__tabs" aria-label="QA workspace views">
+    <ps-button
+      label="QA Components"
+      icon="pi pi-th-large"
+      [styleClass]="activeView() === 'qa' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
+      (buttonClick)="setActiveView('qa')"
+    />
+    <ps-button
+      label="Performance Tracking"
+      icon="pi pi-chart-line"
+      [styleClass]="activeView() === 'performance' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
+      (buttonClick)="setActiveView('performance')"
+    />
+    <ps-button
+      label="Candidates"
+      icon="pi pi-flask"
+      [styleClass]="activeView() === 'candidates' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
+      (buttonClick)="setActiveView('candidates')"
+    />
+  </nav>
+
+  <main class="qa-workspace__content" [attr.data-active-view]="activeView()">
+    @if (activeView() === 'qa') {
+      <section class="qa-workspace__panel qa-workspace__panel--qa" aria-label="QA Components view">
+        <public-qa-remote />
+      </section>
+    } @else if (activeView() === 'performance') {
+      <section class="qa-workspace__panel" aria-label="Performance Tracking view">
+        <public-performance-dashboard />
+      </section>
+    } @else {
+      <section class="qa-workspace__panel" aria-label="Candidates view">
+        <public-candidates-view />
+      </section>
+    }
+  </main>
+</section>
