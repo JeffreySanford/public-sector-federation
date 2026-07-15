@@ -54,7 +54,7 @@ try {
   const storyIds = [
     'design-system-problem-areas--overview',
     'design-system-primeng-playground--component-families',
-    'design-system-components-up-button-candidate--primary',
+    'design-system-candidates-button-up--primary',
   ];
   for (const storyId of storyIds) {
     await page.goto(`http://localhost:${port}/iframe.html?id=${storyId}&viewMode=story`, {
@@ -67,7 +67,7 @@ try {
     if (storyId.includes('primeng-playground')) {
       await page.getByText('Shared wrapper playground').waitFor({ timeout: 60000 });
     }
-    if (storyId.includes('up-button-candidate')) {
+    if (storyId.includes('button-up')) {
       await page.getByRole('button', { name: 'Primary action' }).waitFor({ timeout: 60000 });
     }
 
@@ -78,7 +78,7 @@ try {
     if (storyId.includes('primeng-playground') && !bodyText.includes('Shared wrapper playground')) {
       throw new Error('Shared wrapper playground story did not render expected content.');
     }
-    if (storyId.includes('up-button-candidate') && !bodyText.includes('Primary action')) {
+    if (storyId.includes('button-up') && !bodyText.includes('Primary action')) {
       throw new Error('UP Button candidate primary story did not render expected content.');
     }
 

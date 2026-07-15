@@ -655,7 +655,8 @@ Example direction:
 ### Story organization
 
 - [x] Dedicated candidate story created at `apps/qa-remote/src/stories/up-button.stories.ts`.
-- [x] Current Storybook title is `Design System/Components/UP Button Candidate`.
+- [x] Current Storybook title is `Design System/Candidates/Button UP`.
+- [x] Storybook sidebar order places `Design System / Candidates` above `Design System / Acceptance`.
 - [ ] Keep current Button/Tag acceptance story in place.
 - [ ] Set `component` to the candidate Angular component when Storybook signal input handling supports it cleanly for this wrapper.
 - [x] Use explicit Angular render templates where necessary.

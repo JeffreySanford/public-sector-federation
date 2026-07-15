@@ -11,7 +11,7 @@ const tones: PublicUpButtonTone[] = ['primary', 'secondary', 'success', 'info', 
 const appearances: PublicUpButtonAppearance[] = ['solid', 'outlined', 'text'];
 
 const meta: Meta<PublicUpButtonComponent> = {
-  title: 'Design System/Components/UP Button Candidate',
+  title: 'Design System/Candidates/Button UP',
   decorators: [moduleMetadata({ imports: [PublicUpButtonComponent] })],
   render: (args) => ({
     props: args,

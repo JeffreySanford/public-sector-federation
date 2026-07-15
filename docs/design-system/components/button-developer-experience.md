@@ -11,7 +11,8 @@ the repo. The new work is a separate up-design-system Button candidate:
 - selector: `ps-up-button`
 - source: `packages/ui-patterns/src/public-up-button.component.ts`
 - Storybook story: `apps/qa-remote/src/stories/up-button.stories.ts`
-- Storybook title: `Design System / Components / UP Button Candidate`
+- Storybook title: `Design System / Candidates / Button UP`
+- Storybook navigation: `Candidates` is ordered above `Acceptance` under `Design System`
 - QA remote proof: included in the `/qa` acceptance checkpoint
 
 This is the safer path. It lets us prove the up-design-system token styling,
@@ -334,7 +335,7 @@ pnpm storybook:qa
 2. Navigate to:
 
 ```text
-Design System / Components / UP Button Candidate
+Design System / Candidates / Button UP
 ```
 
 3. Review these stories:
@@ -373,7 +374,7 @@ pnpm nx run qa-remote:e2e
 The e2e script validates:
 
 ```text
-design-system-components-up-button-candidate--primary
+design-system-candidates-button-up--primary
 ```
 
 ## Figma Steps
@@ -415,7 +416,7 @@ Figma component variants:
 Create:
 
 ```text
-Components / UP Button Candidate
+Candidates / Button UP
 ```
 
 Recommended page sections:
@@ -463,12 +464,12 @@ Recommended page sections:
 Suggested iframe URLs:
 
 ```text
-/iframe.html?id=design-system-components-up-button-candidate--primary&viewMode=story&shortcuts=false&singleStory=true
-/iframe.html?id=design-system-components-up-button-candidate--tone-matrix&viewMode=story&shortcuts=false&singleStory=true
-/iframe.html?id=design-system-components-up-button-candidate--appearance-matrix&viewMode=story&shortcuts=false&singleStory=true
-/iframe.html?id=design-system-components-up-button-candidate--loading&viewMode=story&shortcuts=false&singleStory=true
-/iframe.html?id=design-system-components-up-button-candidate--disabled&viewMode=story&shortcuts=false&singleStory=true
-/iframe.html?id=design-system-components-up-button-candidate--long-label&viewMode=story&shortcuts=false&singleStory=true
+/iframe.html?id=design-system-candidates-button-up--primary&viewMode=story&shortcuts=false&singleStory=true
+/iframe.html?id=design-system-candidates-button-up--tone-matrix&viewMode=story&shortcuts=false&singleStory=true
+/iframe.html?id=design-system-candidates-button-up--appearance-matrix&viewMode=story&shortcuts=false&singleStory=true
+/iframe.html?id=design-system-candidates-button-up--loading&viewMode=story&shortcuts=false&singleStory=true
+/iframe.html?id=design-system-candidates-button-up--disabled&viewMode=story&shortcuts=false&singleStory=true
+/iframe.html?id=design-system-candidates-button-up--long-label&viewMode=story&shortcuts=false&singleStory=true
 ```
 
 ## Testing Steps

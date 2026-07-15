@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
 const storybookUrl = 'http://localhost:4400';
-const candidateId = 'design-system-components-up-button-candidate';
+const candidateId = 'design-system-candidates-button-up';
 
 function storyUrl(story: string, globals?: string): string {
   const params = new URLSearchParams({
