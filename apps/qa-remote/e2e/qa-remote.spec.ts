@@ -117,7 +117,7 @@ test.describe('QA Remote - Component & Tab Switching', () => {
 
   test('should display federation proof rows', async ({ page }) => {
     // Look for federation proof table or rows
-    const tableRows = page.locator('p-table tbody tr');
+    const tableRows = page.locator('table tbody tr');
     
     // Should have some rows (Button/Tag, Card, Table, Dialog/Toast)
     const rowCount = await tableRows.count();

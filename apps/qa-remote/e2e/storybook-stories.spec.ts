@@ -277,9 +277,9 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
 
   async function getTableStoryContent(page: import('@playwright/test').Page) {
     const frameContent = await getIframeContent(page);
-    const paginator = frameContent.locator('.p-paginator');
+    const paginator = frameContent.locator('.paginator');
     await expect(paginator).toBeVisible({ timeout: 20000 });
-    await expect(paginator.locator('.p-paginator-current')).toBeVisible({ timeout: 20000 });
+    await expect(paginator.locator('.paginator-info')).toBeVisible({ timeout: 20000 });
     const table = frameContent.locator('table').filter({
       has: frameContent.getByRole('columnheader', { name: 'Program' }),
     });
@@ -293,47 +293,47 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
     const { paginator } = await getTableStoryContent(page);
-    const previousBtn = paginator.locator('.p-paginator-prev');
-    const nextBtn = paginator.locator('.p-paginator-next');
-    const currentReport = paginator.locator('.p-paginator-current');
+    const previousBtn = paginator.getByRole('button', { name: 'Previous' });
+    const nextBtn = paginator.getByRole('button', { name: 'Next' });
+    const currentReport = paginator.locator('.paginator-info');
 
     await expect(previousBtn).toBeVisible();
     await expect(nextBtn).toBeVisible();
-    await expect(currentReport).toContainText('1 to 5 of 10');
+    await expect(currentReport).toContainText('Showing 1 to 5 of 10 programs');
   });
 
   test('should navigate between pages with Next button', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
     const { paginator } = await getTableStoryContent(page);
-    const currentReport = paginator.locator('.p-paginator-current');
-    await expect(currentReport).toContainText('1 to 5 of 10');
+    const currentReport = paginator.locator('.paginator-info');
+    await expect(currentReport).toContainText('Showing 1 to 5 of 10 programs');
 
-    const nextBtn = paginator.locator('.p-paginator-next');
+    const nextBtn = paginator.getByRole('button', { name: 'Next' });
     await nextBtn.click();
 
-    await expect(currentReport).toContainText('6 to 10 of 10');
+    await expect(currentReport).toContainText('Showing 6 to 10 of 10 programs');
   });
 
   test('should navigate back with Previous button', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
     const { paginator } = await getTableStoryContent(page);
-    const nextBtn = paginator.locator('.p-paginator-next');
+    const nextBtn = paginator.getByRole('button', { name: 'Next' });
     await nextBtn.click();
 
-    const previousBtn = paginator.locator('.p-paginator-prev');
+    const previousBtn = paginator.getByRole('button', { name: 'Previous' });
     await previousBtn.click();
 
-    const currentReport = paginator.locator('.p-paginator-current');
-    await expect(currentReport).toContainText('1 to 5 of 10');
+    const currentReport = paginator.locator('.paginator-info');
+    await expect(currentReport).toContainText('Showing 1 to 5 of 10 programs');
   });
 
   test('should disable Previous button on first page', async ({ page }) => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
     const { paginator } = await getTableStoryContent(page);
-    const previousBtn = paginator.locator('.p-paginator-prev');
+    const previousBtn = paginator.getByRole('button', { name: 'Previous' });
     const isDisabled = await previousBtn.isDisabled();
     expect(isDisabled).toBe(true);
   });
@@ -345,7 +345,7 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
     const search = frameContent.getByRole('searchbox', { name: /Search programs/i });
     await search.fill('housing');
 
-    await expect(paginator.locator('.p-paginator-current')).toContainText('1 to 2 of 2');
+    await expect(paginator.locator('.paginator-info')).toContainText('Showing 1 to 2 of 2 programs');
     await expect(dataRows).toHaveCount(2);
     await expect(dataRows.nth(0)).toContainText('Housing assistance');
     await expect(dataRows.nth(1)).toContainText('Emergency housing');
@@ -355,14 +355,14 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
     await page.goto(tableStoryUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
     const { frameContent, paginator } = await getTableStoryContent(page);
-    const nextBtn = paginator.locator('.p-paginator-next');
+    const nextBtn = paginator.getByRole('button', { name: 'Next' });
     await nextBtn.click();
 
     const search = frameContent.getByRole('searchbox', { name: /Search programs/i });
     await search.fill('housing');
 
-    const currentReport = paginator.locator('.p-paginator-current');
-    await expect(currentReport).toContainText('1 to 2 of 2');
+    const currentReport = paginator.locator('.paginator-info');
+    await expect(currentReport).toContainText('Showing 1 to 2 of 2 programs');
   });
 
   test('should display table rows matching page size', async ({ page }) => {

@@ -646,6 +646,694 @@
             }
           }
         },
+        "up": {
+          "button": {
+            "success": {
+              "foreground": {
+                "$type": "color",
+                "$value": "#ffffff",
+                "$description": "--ps-up-button-success-foreground for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-success-foreground",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              },
+              "hover": {
+                "foreground": {
+                  "$type": "color",
+                  "$value": "#ffffff",
+                  "$description": "--ps-up-button-success-hover-foreground for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-success-hover-foreground",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                }
+              },
+              "active": {
+                "foreground": {
+                  "$type": "color",
+                  "$value": "#ffffff",
+                  "$description": "--ps-up-button-success-active-foreground for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-success-active-foreground",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                }
+              }
+            },
+            "warning": {
+              "background": {
+                "$type": "color",
+                "$value": "#f59e0b",
+                "$description": "--ps-up-button-warning-background for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-warning-background",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              },
+              "foreground": {
+                "$type": "color",
+                "$value": "#431407",
+                "$description": "--ps-up-button-warning-foreground for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-warning-foreground",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              },
+              "border": {
+                "color": {
+                  "$type": "color",
+                  "$value": "#f59e0b",
+                  "$description": "--ps-up-button-warning-border-color for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-warning-border-color",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                }
+              },
+              "hover": {
+                "background": {
+                  "$type": "color",
+                  "$value": "#d97706",
+                  "$description": "--ps-up-button-warning-hover-background for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-warning-hover-background",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                },
+                "foreground": {
+                  "$type": "color",
+                  "$value": "#431407",
+                  "$description": "--ps-up-button-warning-hover-foreground for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-warning-hover-foreground",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                },
+                "border": {
+                  "color": {
+                    "$type": "color",
+                    "$value": "#d97706",
+                    "$description": "--ps-up-button-warning-hover-border-color for neutral light.",
+                    "$extensions": {
+                      "public-sector": {
+                        "cssVariable": "--ps-up-button-warning-hover-border-color",
+                        "selector": ":root",
+                        "theme": "neutral",
+                        "mode": "light",
+                        "tier": "component",
+                        "mappingRulesVersion": "2026-07-13",
+                        "category": "Actions",
+                        "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                        "primeNgFamily": null
+                      }
+                    }
+                  }
+                }
+              },
+              "active": {
+                "background": {
+                  "$type": "color",
+                  "$value": "#b45309",
+                  "$description": "--ps-up-button-warning-active-background for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-warning-active-background",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                },
+                "foreground": {
+                  "$type": "color",
+                  "$value": "#ffffff",
+                  "$description": "--ps-up-button-warning-active-foreground for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-warning-active-foreground",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                },
+                "border": {
+                  "color": {
+                    "$type": "color",
+                    "$value": "#b45309",
+                    "$description": "--ps-up-button-warning-active-border-color for neutral light.",
+                    "$extensions": {
+                      "public-sector": {
+                        "cssVariable": "--ps-up-button-warning-active-border-color",
+                        "selector": ":root",
+                        "theme": "neutral",
+                        "mode": "light",
+                        "tier": "component",
+                        "mappingRulesVersion": "2026-07-13",
+                        "category": "Actions",
+                        "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                        "primeNgFamily": null
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "error": {
+              "foreground": {
+                "$type": "color",
+                "$value": "#ffffff",
+                "$description": "--ps-up-button-error-foreground for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-error-foreground",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              },
+              "hover": {
+                "foreground": {
+                  "$type": "color",
+                  "$value": "#ffffff",
+                  "$description": "--ps-up-button-error-hover-foreground for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-error-hover-foreground",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                }
+              },
+              "active": {
+                "foreground": {
+                  "$type": "color",
+                  "$value": "#ffffff",
+                  "$description": "--ps-up-button-error-active-foreground for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-error-active-foreground",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                }
+              }
+            },
+            "help": {
+              "background": {
+                "$type": "color",
+                "$value": "#7c3aed",
+                "$description": "--ps-up-button-help-background for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-help-background",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              },
+              "foreground": {
+                "$type": "color",
+                "$value": "#ffffff",
+                "$description": "--ps-up-button-help-foreground for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-help-foreground",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              },
+              "border": {
+                "color": {
+                  "$type": "color",
+                  "$value": "#7c3aed",
+                  "$description": "--ps-up-button-help-border-color for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-help-border-color",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                }
+              },
+              "hover": {
+                "background": {
+                  "$type": "color",
+                  "$value": "#6d28d9",
+                  "$description": "--ps-up-button-help-hover-background for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-help-hover-background",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                },
+                "foreground": {
+                  "$type": "color",
+                  "$value": "#ffffff",
+                  "$description": "--ps-up-button-help-hover-foreground for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-help-hover-foreground",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                },
+                "border": {
+                  "color": {
+                    "$type": "color",
+                    "$value": "#6d28d9",
+                    "$description": "--ps-up-button-help-hover-border-color for neutral light.",
+                    "$extensions": {
+                      "public-sector": {
+                        "cssVariable": "--ps-up-button-help-hover-border-color",
+                        "selector": ":root",
+                        "theme": "neutral",
+                        "mode": "light",
+                        "tier": "component",
+                        "mappingRulesVersion": "2026-07-13",
+                        "category": "Actions",
+                        "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                        "primeNgFamily": null
+                      }
+                    }
+                  }
+                }
+              },
+              "active": {
+                "background": {
+                  "$type": "color",
+                  "$value": "#5b21b6",
+                  "$description": "--ps-up-button-help-active-background for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-help-active-background",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                },
+                "foreground": {
+                  "$type": "color",
+                  "$value": "#ffffff",
+                  "$description": "--ps-up-button-help-active-foreground for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-help-active-foreground",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                },
+                "border": {
+                  "color": {
+                    "$type": "color",
+                    "$value": "#5b21b6",
+                    "$description": "--ps-up-button-help-active-border-color for neutral light.",
+                    "$extensions": {
+                      "public-sector": {
+                        "cssVariable": "--ps-up-button-help-active-border-color",
+                        "selector": ":root",
+                        "theme": "neutral",
+                        "mode": "light",
+                        "tier": "component",
+                        "mappingRulesVersion": "2026-07-13",
+                        "category": "Actions",
+                        "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                        "primeNgFamily": null
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "border": {
+              "width": {
+                "$type": "dimension",
+                "$value": "1px",
+                "$description": "--ps-up-button-border-width for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-border-width",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              }
+            },
+            "min": {
+              "height": {
+                "$type": "dimension",
+                "$value": "2.625rem",
+                "$description": "UP Button minimum interactive height.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-min-height",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              }
+            },
+            "padding": {
+              "block": {
+                "$type": "dimension",
+                "$value": "0.65rem",
+                "$description": "UP Button vertical padding.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-padding-block",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              },
+              "inline": {
+                "$type": "dimension",
+                "$value": "0.9rem",
+                "$description": "UP Button horizontal padding.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-padding-inline",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              }
+            },
+            "content": {
+              "gap": {
+                "$type": "dimension",
+                "$value": "0.5rem",
+                "$description": "UP Button icon, spinner, and label gap.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-content-gap",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              }
+            },
+            "font": {
+              "size": {
+                "$type": "dimension",
+                "$value": "0.95rem",
+                "$description": "UP Button label font size.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-font-size",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              }
+            },
+            "icon": {
+              "size": {
+                "$type": "dimension",
+                "$value": "1rem",
+                "$description": "UP Button icon size.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-icon-size",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              }
+            },
+            "spinner": {
+              "size": {
+                "$type": "dimension",
+                "$value": "1rem",
+                "$description": "--ps-up-button-spinner-size for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-spinner-size",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              },
+              "border": {
+                "width": {
+                  "$type": "dimension",
+                  "$value": "2px",
+                  "$description": "--ps-up-button-spinner-border-width for neutral light.",
+                  "$extensions": {
+                    "public-sector": {
+                      "cssVariable": "--ps-up-button-spinner-border-width",
+                      "selector": ":root",
+                      "theme": "neutral",
+                      "mode": "light",
+                      "tier": "component",
+                      "mappingRulesVersion": "2026-07-13",
+                      "category": "Actions",
+                      "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                      "primeNgFamily": null
+                    }
+                  }
+                }
+              }
+            },
+            "focus": {
+              "width": {
+                "$type": "dimension",
+                "$value": "2px",
+                "$description": "--ps-up-button-focus-width for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-focus-width",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              },
+              "offset": {
+                "$type": "dimension",
+                "$value": "2px",
+                "$description": "--ps-up-button-focus-offset for neutral light.",
+                "$extensions": {
+                  "public-sector": {
+                    "cssVariable": "--ps-up-button-focus-offset",
+                    "selector": ":root",
+                    "theme": "neutral",
+                    "mode": "light",
+                    "tier": "component",
+                    "mappingRulesVersion": "2026-07-13",
+                    "category": "Actions",
+                    "usage": "Use for action hierarchy, PrimeNG buttons, and interactive emphasis.",
+                    "primeNgFamily": null
+                  }
+                }
+              }
+            }
+          }
+        },
         "nav": {
           "background": {
             "$type": "color",

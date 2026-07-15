@@ -1,10 +1,10 @@
 # UP Button Candidate
 
-> **Lifecycle:** Candidate  
-> **Stable alternative:** `ps-button`  
-> **Candidate selector:** `ps-up-button`  
-> **Package:** `@public-sector/ui-patterns`  
-> **Scope:** Button only; this is not a migration of the broader public-sector design system.  
+> **Lifecycle:** Candidate
+> **Stable alternative:** `ps-button`
+> **Candidate selector:** `ps-up-button`
+> **Package:** `@public-sector/ui-patterns`
+> **Scope:** Button only; this is not a migration of the broader public-sector design system.
 > **Live Zeroheight page:** [UP Button Candidate](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-Candidate)
 
 ## Introduction

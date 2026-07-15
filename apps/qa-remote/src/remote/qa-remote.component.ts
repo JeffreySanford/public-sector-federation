@@ -1,11 +1,11 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
 import {
   PublicButtonComponent,
   PublicCardComponent,
   PublicDialogComponent,
   PublicMenuComponent,
+  PublicPaginatorComponent,
   PublicPopoverComponent,
   PublicSelectComponent,
   PublicTooltipComponent,
@@ -59,11 +59,11 @@ interface AgileBoardRow {
   standalone: true,
   imports: [
     CommonModule,
-    TableModule,
     PublicButtonComponent,
     PublicCardComponent,
     PublicDialogComponent,
     PublicMenuComponent,
+    PublicPaginatorComponent,
     PublicPopoverComponent,
     PublicSelectComponent,
     PublicTagComponent,
@@ -87,7 +87,7 @@ export class QaRemoteComponent implements OnInit {
   qaTableLoading = false;
   qaTableShowEmpty = false;
   qaTableQuery = '';
-  qaTableFirst = 0;
+  qaTableCurrentPage = 1;
   qaTableRows = 5;
   agileApiSource = 'Loading Agile API…';
   agileApiDetail = 'Fetching sprint data from Postgres.';
@@ -498,6 +498,11 @@ export class QaRemoteComponent implements OnInit {
     );
   }
 
+  get qaAcceptanceVisibleRows(): QaProgramRow[] {
+    const start = (this.qaTableCurrentPage - 1) * this.qaTableRows;
+    return this.qaAcceptanceTableRows.slice(start, start + this.qaTableRows);
+  }
+
   get selectedSprintDayRoadmap(): RetrofitRoadmapRow {
     return this.retrofitRoadmapRows.find((row) => row.day === this.selectedSprintDay) ?? this.retrofitRoadmapRows[0];
   }
@@ -668,6 +673,6 @@ export class QaRemoteComponent implements OnInit {
   }
 
   private resetQaTablePaging(): void {
-    this.qaTableFirst = 0;
+    this.qaTableCurrentPage = 1;
   }
 }

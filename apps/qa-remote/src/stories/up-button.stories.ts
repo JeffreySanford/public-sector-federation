@@ -407,6 +407,365 @@ export const AppearanceMatrix: Story = {
   }),
 };
 
+export const InteractionStateReference: Story = {
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: 'Reference harness for default, disabled, loading, and keyboard-focus states. Hover and pressed states are validated through Playwright interaction.',
+      },
+    },
+  },
+  render: () => ({
+    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    template: `
+      <main class="button-story-shell">
+        <section class="state-matrix" aria-label="UP Button interaction state reference">
+          <div class="button-cell">
+            <span>Default</span>
+            <ps-up-button label="Default" icon="pi pi-check" />
+          </div>
+          <div class="button-cell">
+            <span>Disabled</span>
+            <ps-up-button label="Disabled" icon="pi pi-lock" disabled />
+          </div>
+          <div class="button-cell">
+            <span>Loading</span>
+            <ps-up-button label="Loading" icon="pi pi-send" loading />
+          </div>
+          <div class="button-cell">
+            <span>Focus target</span>
+            <ps-up-button label="Focus target" icon="pi pi-arrow-right" />
+          </div>
+        </section>
+      </main>
+    `,
+    styles: [
+      `
+        .button-story-shell {
+          padding: 2rem;
+        }
+
+        .state-matrix {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+          gap: 1rem;
+          max-width: 72rem;
+          margin: 0 auto;
+        }
+
+        .button-cell {
+          display: grid;
+          gap: 0.75rem;
+          align-content: start;
+          padding: 1rem;
+          border: 1px solid var(--p-content-border-color);
+          border-radius: var(--p-content-border-radius, 0.5rem);
+          background: var(--p-content-background);
+          color: var(--p-text-color);
+        }
+
+        .button-cell span {
+          font-size: 0.8125rem;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+      `,
+    ],
+  }),
+};
+
+export const SizeMatrix: Story = {
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: 'Token-scoped size reference for the candidate contract. These are not public component inputs.',
+      },
+    },
+  },
+  render: () => ({
+    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    template: `
+      <main class="button-story-shell">
+        <section class="size-matrix" aria-label="UP Button size token matrix">
+          <div class="button-cell size-compact">
+            <span>Compact tokens</span>
+            <ps-up-button label="Compact" icon="pi pi-check" />
+            <ps-up-button label="Compact outline" icon="pi pi-download" appearance="outlined" />
+          </div>
+          <div class="button-cell">
+            <span>Default tokens</span>
+            <ps-up-button label="Default" icon="pi pi-check" />
+            <ps-up-button label="Default outline" icon="pi pi-download" appearance="outlined" />
+          </div>
+          <div class="button-cell size-spacious">
+            <span>Spacious tokens</span>
+            <ps-up-button label="Spacious" icon="pi pi-check" />
+            <ps-up-button label="Spacious outline" icon="pi pi-download" appearance="outlined" />
+          </div>
+        </section>
+      </main>
+    `,
+    styles: [
+      `
+        .button-story-shell {
+          padding: 2rem;
+        }
+
+        .size-matrix {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+          gap: 1rem;
+          max-width: 72rem;
+          margin: 0 auto;
+        }
+
+        .button-cell {
+          display: grid;
+          gap: 0.75rem;
+          align-content: start;
+          padding: 1rem;
+          border: 1px solid var(--p-content-border-color);
+          border-radius: var(--p-content-border-radius, 0.5rem);
+          background: var(--p-content-background);
+          color: var(--p-text-color);
+        }
+
+        .button-cell span {
+          font-size: 0.8125rem;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        .size-compact {
+          --ps-up-button-min-height: 2.25rem;
+          --ps-up-button-padding-block: 0.45rem;
+          --ps-up-button-padding-inline: 0.75rem;
+          --ps-up-button-font-size: 0.875rem;
+          --ps-up-button-icon-size: 0.9rem;
+        }
+
+        .size-spacious {
+          --ps-up-button-min-height: 3rem;
+          --ps-up-button-padding-block: 0.8rem;
+          --ps-up-button-padding-inline: 1.1rem;
+          --ps-up-button-font-size: 1rem;
+          --ps-up-button-icon-size: 1.1rem;
+        }
+      `,
+    ],
+  }),
+};
+
+export const FocusReference: Story = {
+  parameters: {
+    layout: 'centered',
+  },
+  render: () => ({
+    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    template: `
+      <main class="focus-reference" aria-label="UP Button focus reference">
+        <ps-up-button label="Focus reference" icon="pi pi-arrow-right" />
+      </main>
+    `,
+    styles: [
+      `
+        .focus-reference {
+          display: grid;
+          min-width: min(24rem, calc(100vw - 2rem));
+          min-height: 10rem;
+          place-items: center;
+          padding: 2rem;
+        }
+      `,
+    ],
+  }),
+};
+
+export const LightDarkModeMatrix: Story = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: () => ({
+    props: { tones: ['primary', 'secondary', 'error', 'contrast'] satisfies PublicUpButtonTone[] },
+    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    template: `
+      <main class="mode-matrix" aria-label="UP Button light and dark mode matrix">
+        <section class="mode-panel light-panel">
+          <span>Light</span>
+          @for (tone of tones; track tone) {
+            <ps-up-button [label]="tone" [tone]="tone" icon="pi pi-check" />
+          }
+        </section>
+        <section class="mode-panel dark-panel">
+          <span>Dark</span>
+          @for (tone of tones; track tone) {
+            <ps-up-button [label]="tone" [tone]="tone" icon="pi pi-check" />
+          }
+        </section>
+      </main>
+    `,
+    styles: [
+      `
+        .mode-matrix {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+          gap: 1rem;
+          min-height: 100vh;
+          padding: 2rem;
+          background: var(--ps-surface-background);
+        }
+
+        .mode-panel {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          align-content: start;
+          align-items: center;
+          padding: 1rem;
+          border: 1px solid var(--p-content-border-color);
+          border-radius: var(--p-content-border-radius, 0.5rem);
+          background: var(--p-content-background);
+          color: var(--p-text-color);
+        }
+
+        .mode-panel > span {
+          flex: 0 0 100%;
+          font-size: 0.8125rem;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        .dark-panel {
+          --ps-surface-background: #020617;
+          --ps-surface-card: #0f172a;
+          --ps-surface-border: #334155;
+          --ps-text-primary: #f8fafc;
+          --ps-text-secondary: #cbd5e1;
+          --ps-primary-background: #60a5fa;
+          --ps-primary-foreground: #020617;
+          --ps-focus-ring-color: #93c5fd;
+          --ps-danger-color: #f87171;
+          --ps-success-color: #4ade80;
+          --ps-action-text: #93c5fd;
+          --ps-button-background: #93c5fd;
+          --ps-button-text: #020617;
+          --p-content-background: #0f172a;
+          --p-content-border-color: #334155;
+          --p-text-color: #f8fafc;
+          --p-text-muted-color: #cbd5e1;
+          --p-primary-color: #60a5fa;
+          --p-primary-hover-color: #93c5fd;
+          --p-primary-active-color: #bfdbfe;
+          --p-primary-inverse-color: #020617;
+        }
+      `,
+    ],
+  }),
+};
+
+export const ThemeVariantMatrix: Story = {
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: () => ({
+    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    template: `
+      <main class="variant-matrix" aria-label="UP Button theme variant matrix">
+        <section class="variant-panel neutral">
+          <span>Neutral</span>
+          <ps-up-button label="Primary" icon="pi pi-check" />
+          <ps-up-button label="Outlined" icon="pi pi-download" appearance="outlined" />
+          <ps-up-button label="Text" icon="pi pi-info-circle" appearance="text" />
+        </section>
+        <section class="variant-panel vibrant">
+          <span>Vibrant</span>
+          <ps-up-button label="Primary" icon="pi pi-check" />
+          <ps-up-button label="Outlined" icon="pi pi-download" appearance="outlined" />
+          <ps-up-button label="Text" icon="pi pi-info-circle" appearance="text" />
+        </section>
+        <section class="variant-panel pastel">
+          <span>Pastel</span>
+          <ps-up-button label="Primary" icon="pi pi-check" />
+          <ps-up-button label="Outlined" icon="pi pi-download" appearance="outlined" />
+          <ps-up-button label="Text" icon="pi pi-info-circle" appearance="text" />
+        </section>
+      </main>
+    `,
+    styles: [
+      `
+        .variant-matrix {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+          gap: 1rem;
+          min-height: 100vh;
+          padding: 2rem;
+          background: var(--ps-surface-background);
+        }
+
+        .variant-panel {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          align-content: start;
+          align-items: center;
+          padding: 1rem;
+          border: 1px solid var(--p-content-border-color);
+          border-radius: var(--p-content-border-radius, 0.5rem);
+          background: var(--p-content-background);
+          color: var(--p-text-color);
+        }
+
+        .variant-panel > span {
+          flex: 0 0 100%;
+          font-size: 0.8125rem;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        .vibrant {
+          --ps-surface-card: #ffffff;
+          --ps-surface-border: #bfdbfe;
+          --ps-text-primary: #172554;
+          --ps-text-secondary: #1e40af;
+          --ps-primary-background: #7c3aed;
+          --ps-primary-foreground: #ffffff;
+          --ps-focus-ring-color: #06b6d4;
+          --ps-button-background: #5b21b6;
+          --ps-button-text: #ffffff;
+          --p-content-background: #ffffff;
+          --p-content-border-color: #bfdbfe;
+          --p-text-color: #172554;
+          --p-primary-color: #7c3aed;
+          --p-primary-hover-color: #6d28d9;
+          --p-primary-active-color: #5b21b6;
+          --p-primary-inverse-color: #ffffff;
+        }
+
+        .pastel {
+          --ps-surface-card: #fffbf5;
+          --ps-surface-border: #fed7aa;
+          --ps-text-primary: #431407;
+          --ps-text-secondary: #9a3412;
+          --ps-primary-background: #fb7185;
+          --ps-primary-foreground: #431407;
+          --ps-focus-ring-color: #f9a8d4;
+          --ps-button-background: #be123c;
+          --ps-button-text: #ffffff;
+          --p-content-background: #fffbf5;
+          --p-content-border-color: #fed7aa;
+          --p-text-color: #431407;
+          --p-primary-color: #be123c;
+          --p-primary-hover-color: #f43f5e;
+          --p-primary-active-color: #e11d48;
+          --p-primary-inverse-color: #ffffff;
+        }
+      `,
+    ],
+  }),
+};
+
 export const CurrentVsCandidate: Story = {
   parameters: {
     layout: 'fullscreen',

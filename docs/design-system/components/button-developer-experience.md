@@ -299,9 +299,9 @@ Inputs:
 | Input | Type | Purpose |
 | --- | --- | --- |
 | `label` | `string` | Visible action label. |
-| `icon` | `string | undefined` | Candidate icon hook. Final API should decide whether icon names stay provider-specific. |
+| `icon` | `string \| undefined` | Candidate icon hook. Final API should decide whether icon names stay provider-specific. |
 | `tone` | `PublicUpButtonTone` | Provider-neutral action/status tone. |
-| `appearance` | `'solid' | 'outlined' | 'text'` | Single controlled appearance API. |
+| `appearance` | `'solid' \| 'outlined' \| 'text'` | Single controlled appearance API. |
 | `disabled` | `boolean` | Prevents activation. |
 | `loading` | `boolean` | Shows progress and prevents duplicate activation. |
 

@@ -42,13 +42,34 @@ if (packageJson.devDependencies['@storybook/addon-docs'] !== '10.4.6') {
 
 const storyFiles = (await readdir(join(root, 'apps/qa-remote/src/stories'))).filter((file) => file.endsWith('.stories.ts'));
 let storyCount = 0;
+const storyExports = new Set();
 for (const file of storyFiles) {
   const source = await readFile(join(root, 'apps/qa-remote/src/stories', file), 'utf8');
-  storyCount += [...source.matchAll(/^export const\s+\w+/gm)].length;
+  for (const match of source.matchAll(/^export const\s+(\w+)/gm)) {
+    storyExports.add(match[1]);
+    storyCount += 1;
+  }
 }
 
-if (storyCount !== 20) {
-  throw new Error(`Expected exactly 20 QA Storybook stories, found ${storyCount}.`);
+const requiredStories = [
+  'Primary',
+  'ToneMatrix',
+  'AppearanceMatrix',
+  'CurrentVsCandidate',
+  'InteractionStateReference',
+  'SizeMatrix',
+  'FocusReference',
+  'LightDarkModeMatrix',
+  'ThemeVariantMatrix',
+];
+
+const missingStories = requiredStories.filter((story) => !storyExports.has(story));
+if (storyCount < 20 || missingStories.length > 0) {
+  throw new Error(
+    `Expected at least 20 QA Storybook stories and required coverage stories. Found ${storyCount}; missing: ${
+      missingStories.join(', ') || 'none'
+    }.`,
+  );
 }
 
 const storybookMain = await readFile(join(root, 'apps/qa-remote/.storybook/main.ts'), 'utf8');

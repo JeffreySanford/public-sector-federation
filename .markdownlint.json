@@ -3,16 +3,7 @@
   "MD009": {
     "br_spaces": 0
   },
-  "MD013": {
-    "line_length": 120,
-    "heading_line_length": 120,
-    "code_blocks": false,
-    "code_fence": false,
-    "headers": true,
-    "headers_length": 120,
-    "strict": false,
-    "stern": false
-  },
+  "MD013": false,
   "MD003": false,
   "MD004": false,
   "MD007": {

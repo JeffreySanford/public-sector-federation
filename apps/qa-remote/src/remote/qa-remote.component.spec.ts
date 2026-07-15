@@ -52,11 +52,11 @@ describe('QaRemoteComponent', () => {
   });
 
   it('filters acceptance rows from the search box query and resets to the first page', () => {
-    component.qaTableFirst = 10;
+    component.qaTableCurrentPage = 3;
 
     component.onQaTableSearch('housing');
 
-    expect(component.qaTableFirst).toBe(0);
+    expect(component.qaTableCurrentPage).toBe(1);
     expect(component.qaAcceptanceTableRows.map((row) => row.program)).toEqual([
       'Housing assistance',
       'Emergency housing',

@@ -44,6 +44,22 @@ const browser = await chromium.launch();
 const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
 const page = await context.newPage();
 
+async function analyzeAccessibility(targetPage, attempts = 5) {
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await new AxeBuilder({ page: targetPage }).analyze();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      if (!message.includes('Axe is already running') || attempt === attempts) {
+        throw error;
+      }
+      await targetPage.waitForTimeout(300 * attempt);
+    }
+  }
+
+  throw new Error('Axe analysis did not complete.');
+}
+
 try {
   const index = JSON.parse(await readFile(join(storybookRoot, 'index.json'), 'utf8'));
   const stories = Object.values(index.entries).filter((entry) => entry.type === 'story');
@@ -82,7 +98,7 @@ try {
       throw new Error('UP Button candidate primary story did not render expected content.');
     }
 
-    const axe = await new AxeBuilder({ page }).analyze();
+    const axe = await analyzeAccessibility(page);
     if (axe.violations.length > 0 || axe.incomplete.length > 0) {
       throw new Error(
         `${storyId} has axe issues: ${JSON.stringify(

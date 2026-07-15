@@ -37,12 +37,69 @@ test.describe('UP Button Candidate isolated Storybook iframe', () => {
         borderRadius: computed.borderRadius,
         color: computed.color,
         fontWeight: computed.fontWeight,
+        tokenBackground: computed.getPropertyValue('--ps-up-button-background').trim(),
+        tokenForeground: computed.getPropertyValue('--ps-up-button-foreground').trim(),
+        tokenBorderColor: computed.getPropertyValue('--ps-up-button-border-color').trim(),
+        tokenMinHeight: computed.getPropertyValue('--ps-up-button-min-height').trim(),
       };
     });
 
     expect(styles.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
     expect(styles.borderRadius).not.toBe('0px');
     expect(Number(styles.fontWeight)).toBeGreaterThanOrEqual(600);
+    expect(styles.tokenBackground).toBeTruthy();
+    expect(styles.tokenForeground).toBeTruthy();
+    expect(styles.tokenBorderColor).toBeTruthy();
+    expect(styles.tokenMinHeight).toBeTruthy();
+  });
+
+  test('applies token-driven hover and pressed styles', async ({ page }) => {
+    await gotoCandidateStory(page, 'primary');
+
+    const button = page.getByRole('button', { name: 'Primary action' });
+    await expect(button).toBeVisible();
+
+    const defaultStyles = await button.evaluate((element) => {
+      const computed = window.getComputedStyle(element);
+      return {
+        backgroundColor: computed.backgroundColor,
+        borderColor: computed.borderColor,
+      };
+    });
+
+    await button.hover();
+    await expect
+      .poll(async () => button.evaluate((element) => window.getComputedStyle(element).backgroundColor))
+      .not.toBe(defaultStyles.backgroundColor);
+
+    const hoverStyles = await button.evaluate((element) => {
+      const computed = window.getComputedStyle(element);
+      return {
+        backgroundColor: computed.backgroundColor,
+        borderColor: computed.borderColor,
+        tokenBackground: computed.getPropertyValue('--ps-up-button-hover-background').trim(),
+      };
+    });
+
+    await page.mouse.down();
+    await expect
+      .poll(async () => button.evaluate((element) => window.getComputedStyle(element).backgroundColor))
+      .not.toBe(defaultStyles.backgroundColor);
+    const pressedStyles = await button.evaluate((element) => {
+      const computed = window.getComputedStyle(element);
+      return {
+        backgroundColor: computed.backgroundColor,
+        borderColor: computed.borderColor,
+        tokenBackground: computed.getPropertyValue('--ps-up-button-active-background').trim(),
+      };
+    });
+    await page.mouse.up();
+
+    expect(hoverStyles.tokenBackground).toBeTruthy();
+    expect(pressedStyles.tokenBackground).toBeTruthy();
+    expect(hoverStyles.backgroundColor).not.toBe(defaultStyles.backgroundColor);
+    expect(pressedStyles.backgroundColor).not.toBe(defaultStyles.backgroundColor);
+    expect(hoverStyles.borderColor).not.toBe(defaultStyles.borderColor);
   });
 
   test('emits normalized buttonClick on pointer and keyboard activation', async ({ page }) => {
@@ -128,6 +185,28 @@ test.describe('UP Button Candidate isolated Storybook iframe', () => {
     await expect(page.getByRole('button', { name: 'Error action' }).first()).toBeVisible();
   });
 
+  test('renders interaction, size, focus, mode, and theme reference stories', async ({ page }) => {
+    await gotoCandidateStory(page, 'interaction-state-reference');
+    await expect(page.getByRole('button', { name: 'Default' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Disabled' })).toBeDisabled();
+    await expect(page.getByRole('button', { name: 'Loading' })).toHaveAttribute('aria-busy', 'true');
+
+    await gotoCandidateStory(page, 'size-matrix');
+    await expect(page.getByRole('button', { name: 'Compact', exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Spacious', exact: true })).toBeVisible();
+
+    await gotoCandidateStory(page, 'focus-reference');
+    await expect(page.getByRole('button', { name: 'Focus reference' })).toBeVisible();
+
+    await gotoCandidateStory(page, 'light-dark-mode-matrix');
+    await expect(page.getByRole('button', { name: 'primary' })).toHaveCount(2);
+    await expect(page.getByRole('button', { name: 'contrast' })).toHaveCount(2);
+
+    await gotoCandidateStory(page, 'theme-variant-matrix');
+    await expect(page.getByRole('button', { name: 'Primary' })).toHaveCount(3);
+    await expect(page.getByRole('button', { name: 'Outlined' })).toHaveCount(3);
+  });
+
   test('renders current wrapper and UP candidate comparison story', async ({ page }) => {
     await gotoCandidateStory(page, 'current-vs-candidate');
 
@@ -151,6 +230,8 @@ test.describe('UP Button Candidate isolated Storybook iframe', () => {
         variantClass: document.documentElement.classList.contains('ps-theme-vibrant'),
         buttonBackground: computed.getPropertyValue('--ps-button-background').trim(),
         buttonText: computed.getPropertyValue('--ps-button-text').trim(),
+        upButtonBackground: computed.getPropertyValue('--ps-up-button-background').trim(),
+        upButtonForeground: computed.getPropertyValue('--ps-up-button-foreground').trim(),
       };
     });
 
@@ -158,5 +239,7 @@ test.describe('UP Button Candidate isolated Storybook iframe', () => {
     expect(tokenValues.variantClass).toBe(true);
     expect(tokenValues.buttonBackground).toBeTruthy();
     expect(tokenValues.buttonText).toBeTruthy();
+    expect(tokenValues.upButtonBackground).toBeTruthy();
+    expect(tokenValues.upButtonForeground).toBeTruthy();
   });
 });

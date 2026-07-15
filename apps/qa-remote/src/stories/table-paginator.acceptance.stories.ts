@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { TableModule } from 'primeng/table';
-import { PublicButtonComponent, PublicTagComponent } from '@public-sector/ui-patterns';
+import { PublicButtonComponent, PublicPaginatorComponent, PublicTagComponent } from '@public-sector/ui-patterns';
 
 interface Row {
   program: string;
@@ -27,7 +26,7 @@ const rows: Row[] = [
 @Component({
   selector: 'public-table-paginator-acceptance-story',
   standalone: true,
-  imports: [TableModule, PublicTagComponent],
+  imports: [PublicPaginatorComponent, PublicTagComponent],
   template: `
     <main class="storybook-shell">
       <header class="story-header">
@@ -52,18 +51,9 @@ const rows: Row[] = [
         />
       </div>
 
-      <p-table
-        [value]="filteredRows"
-        [paginator]="true"
-        [rows]="rowsPerPage"
-        [first]="first"
-        [rowsPerPageOptions]="[5, 10, 15]"
-        [showCurrentPageReport]="true"
-        currentPageReportTemplate="{first} to {last} of {totalRecords}"
-        [tableStyleClass]="'story-table'"
-        (onPage)="onPageChange($event)"
-      >
-        <ng-template pTemplate="header">
+      <div class="table-shell">
+        <table class="story-table">
+          <thead>
           <tr>
             <th>Program</th>
             <th>Cases</th>
@@ -71,22 +61,34 @@ const rows: Row[] = [
             <th>Region</th>
             <th>SLA</th>
           </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-row>
-          <tr>
-            <td><strong>{{ row.program }}</strong></td>
-            <td>{{ row.cases }}</td>
-            <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
-            <td>{{ row.region }}</td>
-            <td>{{ row.sla }}%</td>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="5">No programs match the current filters.</td>
-          </tr>
-        </ng-template>
-      </p-table>
+          </thead>
+          <tbody>
+            @if (pagedRows.length > 0) {
+              @for (row of pagedRows; track row.program) {
+                <tr>
+                  <td><strong>{{ row.program }}</strong></td>
+                  <td>{{ row.cases }}</td>
+                  <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
+                  <td>{{ row.region }}</td>
+                  <td>{{ row.sla }}%</td>
+                </tr>
+              }
+            } @else {
+              <tr>
+                <td colspan="5">No programs match the current filters.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <ps-paginator
+          ariaLabel="Story program pagination"
+          itemLabel="programs"
+          [totalRecords]="filteredRows.length"
+          [(currentPage)]="currentPage"
+          [(rowsPerPage)]="rowsPerPage"
+          [rowsPerPageOptions]="[5, 10, 15]"
+        />
+      </div>
     </main>
   `,
   styles: `
@@ -95,12 +97,16 @@ const rows: Row[] = [
     .toolbar{display:flex;flex-wrap:wrap;gap:1rem;align-items:end;justify-content:space-between}
     .toolbar div{display:grid;gap:.25rem}
     input{min-height:2.5rem;min-width:min(100%,20rem);padding:.6rem .75rem;border:1px solid var(--p-content-border-color);border-radius:.5rem;background:var(--p-content-background);color:var(--p-text-color)}
+    .table-shell{display:grid;gap:1rem}
+    .story-table{width:100%;border-collapse:collapse}
+    .story-table th,.story-table td{padding:.8rem;border-bottom:1px solid var(--p-content-border-color);text-align:left}
+    .story-table th{background:color-mix(in srgb,var(--p-content-background) 86%,var(--p-primary-color));font-size:.8rem;text-transform:uppercase}
   `,
 })
 class TablePaginatorAcceptanceStoryComponent {
   readonly rows = rows;
   query = '';
-  first = 0;
+  currentPage = 1;
   rowsPerPage = 5;
 
   get filteredRows(): Row[] {
@@ -116,14 +122,14 @@ class TablePaginatorAcceptanceStoryComponent {
     );
   }
 
-  onQueryChange(query: string): void {
-    this.query = query;
-    this.first = 0;
+  get pagedRows(): Row[] {
+    const start = (this.currentPage - 1) * this.rowsPerPage;
+    return this.filteredRows.slice(start, start + this.rowsPerPage);
   }
 
-  onPageChange(event: { first: number; rows: number }): void {
-    this.first = event.first ?? 0;
-    this.rowsPerPage = event.rows ?? this.rowsPerPage;
+  onQueryChange(query: string): void {
+    this.query = query;
+    this.currentPage = 1;
   }
 
   severity(status: Row['status']): 'success' | 'warn' | 'danger' {
@@ -134,7 +140,7 @@ class TablePaginatorAcceptanceStoryComponent {
 @Component({
   selector: 'public-table-paginator-stress-story',
   standalone: true,
-  imports: [TableModule, PublicButtonComponent, PublicTagComponent],
+  imports: [PublicButtonComponent, PublicPaginatorComponent, PublicTagComponent],
   template: `
     <main class="storybook-shell">
       <header class="story-header">
@@ -160,26 +166,15 @@ class TablePaginatorAcceptanceStoryComponent {
         />
       </div>
 
-      <p-table
-        [value]="activeRows"
-        [paginator]="true"
-        [rows]="5"
-        [rowsPerPageOptions]="[5, 10, 15]"
-        [showCurrentPageReport]="true"
-        currentPageReportTemplate="{first} to {last} of {totalRecords}"
-        [loading]="loading"
-        [showLoader]="true"
-        [tableStyleClass]="'story-table'"
-      >
-        <ng-template pTemplate="caption">
-          @if (loading) {
-            <div class="loading-banner" aria-live="polite">
-              <strong>Loading table rows...</strong>
-              <span>Stress state is active so the table stays in a visible loading mode.</span>
-            </div>
-          }
-        </ng-template>
-        <ng-template pTemplate="header">
+      <div class="table-shell" [attr.aria-busy]="loading">
+        @if (loading) {
+          <div class="loading-banner" aria-live="polite">
+            <strong>Loading table rows...</strong>
+            <span>Stress state is active so the table stays in a visible loading mode.</span>
+          </div>
+        }
+        <table class="story-table">
+          <thead>
           <tr>
             <th>Program</th>
             <th>Cases</th>
@@ -187,29 +182,40 @@ class TablePaginatorAcceptanceStoryComponent {
             <th>Region</th>
             <th>SLA</th>
           </tr>
-        </ng-template>
-        <ng-template pTemplate="loadingbody">
-          @for (row of loadingRows; track row) {
-            <tr>
-              <td colspan="5" class="loading-cell">Loading table rows...</td>
-            </tr>
-          }
-        </ng-template>
-        <ng-template pTemplate="body" let-row>
-          <tr>
-            <td><strong>{{ row.program }}</strong></td>
-            <td>{{ row.cases }}</td>
-            <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
-            <td>{{ row.region }}</td>
-            <td>{{ row.sla }}%</td>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="5">No programs are available for the selected reporting period.</td>
-          </tr>
-        </ng-template>
-      </p-table>
+          </thead>
+          <tbody>
+            @if (loading) {
+              @for (row of loadingRows; track row) {
+                <tr>
+                  <td colspan="5" class="loading-cell">Loading table rows...</td>
+                </tr>
+              }
+            } @else if (activePagedRows.length > 0) {
+              @for (row of activePagedRows; track row.program) {
+                <tr>
+                  <td><strong>{{ row.program }}</strong></td>
+                  <td>{{ row.cases }}</td>
+                  <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
+                  <td>{{ row.region }}</td>
+                  <td>{{ row.sla }}%</td>
+                </tr>
+              }
+            } @else {
+              <tr>
+                <td colspan="5">No programs are available for the selected reporting period.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <ps-paginator
+          ariaLabel="Stress story pagination"
+          itemLabel="programs"
+          [totalRecords]="activeRows.length"
+          [(currentPage)]="currentPage"
+          [(rowsPerPage)]="rowsPerPage"
+          [rowsPerPageOptions]="[5, 10, 15]"
+        />
+      </div>
     </main>
   `,
   styles: `
@@ -217,6 +223,10 @@ class TablePaginatorAcceptanceStoryComponent {
     .story-header{display:grid;gap:.5rem}
     .toolbar{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
     .toolbar--actions{justify-content:flex-start}
+    .table-shell{display:grid;gap:1rem}
+    .story-table{width:100%;border-collapse:collapse}
+    .story-table th,.story-table td{padding:.8rem;border-bottom:1px solid var(--p-content-border-color);text-align:left}
+    .story-table th{background:color-mix(in srgb,var(--p-content-background) 86%,var(--p-primary-color));font-size:.8rem;text-transform:uppercase}
     .loading-banner{display:grid;gap:.25rem;padding:.85rem 1rem;border:1px solid var(--p-content-border-color);border-radius:.75rem;background:color-mix(in srgb,var(--p-primary-color) 8%,var(--p-content-background))}
     .loading-cell{color:var(--p-text-muted-color);font-style:italic}
   `,
@@ -234,14 +244,19 @@ class TablePaginatorStressStoryComponent extends TablePaginatorAcceptanceStoryCo
     return this.showEmpty ? [] : this.rows;
   }
 
+  get activePagedRows(): Row[] {
+    const start = (this.currentPage - 1) * this.rowsPerPage;
+    return this.activeRows.slice(start, start + this.rowsPerPage);
+  }
+
   toggleEmpty(): void {
     this.showEmpty = !this.showEmpty;
-    this.first = 0;
+    this.currentPage = 1;
   }
 
   toggleLoading(): void {
     this.loading = !this.loading;
-    this.first = 0;
+    this.currentPage = 1;
   }
 }
 
