@@ -34,8 +34,8 @@ describe('QaWorkspaceComponent', () => {
     fixture.detectChanges();
 
     const labels = Array.from(
-      fixture.nativeElement.querySelectorAll('.qa-workspace__tabs ps-button'),
-    ).map((element: Element) => element.getAttribute('ng-reflect-label'));
+      fixture.nativeElement.querySelectorAll('.qa-workspace__tabs button'),
+    ).map((element: Element) => element.textContent?.trim());
 
     expect(labels).toEqual([
       'QA Components',
