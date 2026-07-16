@@ -43,6 +43,9 @@ await new Promise((resolveListen) => server.listen(port, resolveListen));
 const browser = await chromium.launch();
 const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
 const page = await context.newPage();
+const browserMessages = [];
+page.on('console', (message) => browserMessages.push(`console:${message.type()}: ${message.text()}`));
+page.on('pageerror', (error) => browserMessages.push(`pageerror: ${error.message}`));
 
 async function analyzeAccessibility(targetPage, attempts = 5) {
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
@@ -60,6 +63,20 @@ async function analyzeAccessibility(targetPage, attempts = 5) {
   throw new Error('Axe analysis did not complete.');
 }
 
+async function waitForStory(locator, storyId, description) {
+  try {
+    await locator.waitFor({ timeout: 30000 });
+  } catch (error) {
+    const bodyText = await page.locator('body').innerText().catch(() => '<body unavailable>');
+    throw new Error(
+      `${storyId} did not render ${description}.\n` +
+        `Body text:\n${bodyText.slice(0, 4000)}\n` +
+        `Browser messages:\n${browserMessages.slice(-20).join('\n') || '<none>'}`,
+      { cause: error },
+    );
+  }
+}
+
 try {
   const index = JSON.parse(await readFile(join(storybookRoot, 'index.json'), 'utf8'));
   const stories = Object.values(index.entries).filter((entry) => entry.type === 'story');
@@ -73,24 +90,36 @@ try {
     'design-system-candidates-button-up--primary',
     'design-system-registry-component-manifest--overview',
   ];
+
+  const availableStoryIds = new Set(stories.map((story) => story.id));
   for (const storyId of storyIds) {
+    if (!availableStoryIds.has(storyId)) {
+      const related = stories
+        .map((story) => story.id)
+        .filter((id) => id.includes('registry') || id.includes('component-manifest'));
+      throw new Error(`Built Storybook is missing ${storyId}. Related story ids: ${related.join(', ') || 'none'}`);
+    }
+  }
+
+  for (const storyId of storyIds) {
+    browserMessages.length = 0;
     await page.goto(`http://localhost:${port}/iframe.html?id=${storyId}&viewMode=story`, {
       waitUntil: 'domcontentloaded',
       timeout: 60000,
     });
     if (storyId.includes('problem-areas')) {
-      await page.getByText('Problem area overview').waitFor({ timeout: 60000 });
+      await waitForStory(page.getByText('Problem area overview'), storyId, 'the problem-area heading');
     }
     if (storyId.includes('primeng-playground')) {
-      await page.getByText('Shared wrapper playground').waitFor({ timeout: 60000 });
+      await waitForStory(page.getByText('Shared wrapper playground'), storyId, 'the PrimeNG playground heading');
     }
     if (storyId.includes('button-up')) {
-      await page.getByRole('button', { name: 'Primary action' }).waitFor({ timeout: 60000 });
+      await waitForStory(page.getByRole('button', { name: 'Primary action' }), storyId, 'the primary action');
     }
     if (storyId.includes('component-manifest')) {
-      await page.getByRole('heading', { name: 'Component Registry' }).waitFor({ timeout: 60000 });
-      await page.getByRole('row', { name: /Paginator/ }).waitFor({ timeout: 60000 });
-      await page.getByRole('row', { name: /Toast Service/ }).waitFor({ timeout: 60000 });
+      await waitForStory(page.getByRole('heading', { name: 'Component Registry' }), storyId, 'the Component Registry heading');
+      await waitForStory(page.getByRole('row', { name: /Paginator/ }), storyId, 'the Paginator registry row');
+      await waitForStory(page.getByRole('row', { name: /Toast Service/ }), storyId, 'the Toast Service registry row');
     }
 
     const bodyText = await page.locator('body').innerText();
