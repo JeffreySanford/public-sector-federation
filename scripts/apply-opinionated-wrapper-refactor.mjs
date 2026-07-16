@@ -15,6 +15,8 @@ function replaceRequired(source, search, replacement, label) {
   return source.replace(search, replacement);
 }
 
+const lines = (...values) => `${values.join('\n')}\n`;
+
 let registry = await read('packages/ui-patterns/src/manifest/component-registry.ts');
 const upButtonEntry = `  entry({
     id: 'ps-up-button',
@@ -97,81 +99,87 @@ const upButtonEntry = `  entry({
     warnings: ['Legacy Candidate aliases remain visible until current QA examples migrate.'],
   }),`;
 
-const registryPattern = /  entry\(\{\n    id: 'ps-up-button',[\s\S]*?\n  \}\),\n  entry\(\{\n    id: 'ps-card'/;
 if (!registry.includes("description: 'Opinionated PrimeNG facade")) {
-  if (!registryPattern.test(registry)) {
+  const pattern = /  entry\(\{\n    id: 'ps-up-button',[\s\S]*?\n  \}\),\n  entry\(\{\n    id: 'ps-card'/;
+  if (!pattern.test(registry)) {
     throw new Error('Unable to locate the UP Button manifest entry.');
   }
-  registry = registry.replace(
-    registryPattern,
-    `${upButtonEntry}\n  entry({\n    id: 'ps-card'`,
-  );
+  registry = registry.replace(pattern, `${upButtonEntry}\n  entry({\n    id: 'ps-card'`);
   await write('packages/ui-patterns/src/manifest/component-registry.ts', registry);
 }
 
 let validator = await read('scripts/build-component-manifest.mjs');
+const providerModuleBlock = lines(
+  '    if (implementation.providerModules.length > 0) {',
+  '      const missing = implementation.providerModules.filter((moduleName) => !detectedPrimeNgImports.includes(moduleName));',
+  '      if (missing.length > 0) {',
+  "        addProblem(problems, `${identity.id}: declared provider modules were not detected: ${missing.join(', ')}`);",
+  '      }',
+  '    }',
+);
+const providerValidationBlock = lines(
+  '    if (implementation.providerModules.length > 0) {',
+  '      const missing = implementation.providerModules.filter((moduleName) => !detectedPrimeNgImports.includes(moduleName));',
+  '      if (missing.length > 0) {',
+  "        addProblem(problems, `${identity.id}: declared provider modules were not detected: ${missing.join(', ')}`);",
+  '      }',
+  '    }',
+  '',
+  '    const providerSpecificMembers = new Set([',
+  "      'severity',",
+  "      'styleClass',",
+  "      'pt',",
+  "      'unstyled',",
+  "      'buttonProps',",
+  "      'badgeClass',",
+  "      'loadingIcon',",
+  "      'raised',",
+  "      'rounded',",
+  "      'plain',",
+  "      'fluid',",
+  '    ]);',
+  '    const publicMemberNames = [',
+  '      ...entry.publicApi.inputs,',
+  '      ...entry.publicApi.outputs,',
+  '      ...entry.publicApi.models,',
+  '    ].map((member) => member.name);',
+  '    const undeclaredProviderLeaks = publicMemberNames.filter(',
+  '      (name) => providerSpecificMembers.has(name) && !implementation.providerEscapeHatches.includes(name),',
+  '    );',
+  '    if (implementation.providerInternalOnly && undeclaredProviderLeaks.length > 0) {',
+  '      addProblem(',
+  '        problems,',
+  "        `${identity.id}: provider-specific public members must be removed or declared as escape hatches: ${undeclaredProviderLeaks.join(', ')}`,",
+  '      );',
+  '    }',
+);
 if (!validator.includes('const providerSpecificMembers = new Set')) {
   validator = replaceRequired(
     validator,
-    `    if (implementation.providerModules.length > 0) {
-      const missing = implementation.providerModules.filter((moduleName) => !detectedPrimeNgImports.includes(moduleName));
-      if (missing.length > 0) {
-        addProblem(problems, \`${identity.id}: declared provider modules were not detected: \${missing.join(', ')}\`);
-      }
-    }
-`,
-    `    if (implementation.providerModules.length > 0) {
-      const missing = implementation.providerModules.filter((moduleName) => !detectedPrimeNgImports.includes(moduleName));
-      if (missing.length > 0) {
-        addProblem(problems, \`${identity.id}: declared provider modules were not detected: \${missing.join(', ')}\`);
-      }
-    }
-
-    const providerSpecificMembers = new Set([
-      'severity',
-      'styleClass',
-      'pt',
-      'unstyled',
-      'buttonProps',
-      'badgeClass',
-      'loadingIcon',
-      'raised',
-      'rounded',
-      'plain',
-      'fluid',
-    ]);
-    const publicMemberNames = [
-      ...entry.publicApi.inputs,
-      ...entry.publicApi.outputs,
-      ...entry.publicApi.models,
-    ].map((member) => member.name);
-    const undeclaredProviderLeaks = publicMemberNames.filter(
-      (name) => providerSpecificMembers.has(name) && !implementation.providerEscapeHatches.includes(name),
-    );
-    if (implementation.providerInternalOnly && undeclaredProviderLeaks.length > 0) {
-      addProblem(
-        problems,
-        \`${identity.id}: provider-specific public members must be removed or declared as escape hatches: \${undeclaredProviderLeaks.join(', ')}\`,
-      );
-    }
-`,
+    providerModuleBlock,
+    providerValidationBlock,
     'manifest provider-leak validation',
   );
 }
+
+const ownershipBlock = lines(
+  '    if (entry.ownership.owner === null) {',
+  "      warnings.push(`${identity.id}: owner is not assigned.`);",
+  '    }',
+);
+const ownershipAndEscapeBlock = lines(
+  '    if (entry.ownership.owner === null) {',
+  "      warnings.push(`${identity.id}: owner is not assigned.`);",
+  '    }',
+  '    for (const escapeHatch of implementation.providerEscapeHatches) {',
+  "      warnings.push(`${identity.id}: provider escape hatch remains public: ${escapeHatch}.`);",
+  '    }',
+);
 if (!validator.includes('provider escape hatch remains public')) {
   validator = replaceRequired(
     validator,
-    `    if (entry.ownership.owner === null) {
-      warnings.push(\`${identity.id}: owner is not assigned.\`);
-    }
-`,
-    `    if (entry.ownership.owner === null) {
-      warnings.push(\`${identity.id}: owner is not assigned.\`);
-    }
-    for (const escapeHatch of implementation.providerEscapeHatches) {
-      warnings.push(\`${identity.id}: provider escape hatch remains public: \${escapeHatch}.\`);
-    }
-`,
+    ownershipBlock,
+    ownershipAndEscapeBlock,
     'manifest escape-hatch advisory',
   );
 }
@@ -186,29 +194,33 @@ if (!e2e.includes('design-system-architecture-opinionated-wrapper-contract--appr
     'Storybook representative story list',
   );
 }
+const manifestAssertion = lines(
+  "    if (storyId.includes('component-manifest')) {",
+  "      await waitForStory(page.getByRole('heading', { name: 'Component Registry' }), storyId, 'the Component Registry heading');",
+  "      await waitForStory(page.getByRole('row', { name: /Paginator/ }), storyId, 'the Paginator registry row');",
+  "      await waitForStory(page.getByRole('row', { name: /Toast Service/ }), storyId, 'the Toast Service registry row');",
+  '    }',
+);
+const manifestAndWrapperAssertion = lines(
+  "    if (storyId.includes('component-manifest')) {",
+  "      await waitForStory(page.getByRole('heading', { name: 'Component Registry' }), storyId, 'the Component Registry heading');",
+  "      await waitForStory(page.getByRole('row', { name: /Paginator/ }), storyId, 'the Paginator registry row');",
+  "      await waitForStory(page.getByRole('row', { name: /Toast Service/ }), storyId, 'the Toast Service registry row');",
+  '    }',
+  "    if (storyId.includes('opinionated-wrapper-contract')) {",
+  "      await waitForStory(page.getByRole('heading', { name: 'Approved high-level API' }), storyId, 'the approved API heading');",
+  "      await waitForStory(page.getByText('Private provider controls'), storyId, 'the private provider controls section');",
+  "      const destructiveButton = page.getByRole('button', { name: 'Delete draft' });",
+  "      await waitForStory(destructiveButton, storyId, 'the destructive intent button');",
+  '      await destructiveButton.click();',
+  "      await waitForStory(page.getByText('Activations: 1'), storyId, 'the normalized activated output');",
+  '    }',
+);
 if (!e2e.includes("storyId.includes('opinionated-wrapper-contract')")) {
   e2e = replaceRequired(
     e2e,
-    `    if (storyId.includes('component-manifest')) {
-      await waitForStory(page.getByRole('heading', { name: 'Component Registry' }), storyId, 'the Component Registry heading');
-      await waitForStory(page.getByRole('row', { name: /Paginator/ }), storyId, 'the Paginator registry row');
-      await waitForStory(page.getByRole('row', { name: /Toast Service/ }), storyId, 'the Toast Service registry row');
-    }
-`,
-    `    if (storyId.includes('component-manifest')) {
-      await waitForStory(page.getByRole('heading', { name: 'Component Registry' }), storyId, 'the Component Registry heading');
-      await waitForStory(page.getByRole('row', { name: /Paginator/ }), storyId, 'the Paginator registry row');
-      await waitForStory(page.getByRole('row', { name: /Toast Service/ }), storyId, 'the Toast Service registry row');
-    }
-    if (storyId.includes('opinionated-wrapper-contract')) {
-      await waitForStory(page.getByRole('heading', { name: 'Approved high-level API' }), storyId, 'the approved API heading');
-      await waitForStory(page.getByText('Private provider controls'), storyId, 'the private provider controls section');
-      const destructiveButton = page.getByRole('button', { name: 'Delete draft' });
-      await waitForStory(destructiveButton, storyId, 'the destructive intent button');
-      await destructiveButton.click();
-      await waitForStory(page.getByText('Activations: 1'), storyId, 'the normalized activated output');
-    }
-`,
+    manifestAssertion,
+    manifestAndWrapperAssertion,
     'Storybook wrapper-contract assertion',
   );
 }
