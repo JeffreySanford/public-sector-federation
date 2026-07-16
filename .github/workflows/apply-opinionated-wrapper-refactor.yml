@@ -78,7 +78,20 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Run built Storybook gate
-        run: node scripts/storybook-e2e.mjs
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/storybook-e2e.mjs 2>&1 | tee storybook-gate.log
+
+      - name: Upload Storybook gate diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opinionated-wrapper-storybook-diagnostics
+          path: |
+            storybook-gate.log
+            dist/storybook/qa-remote/index.json
+          if-no-files-found: warn
 
       - name: Commit refactor
         run: |
