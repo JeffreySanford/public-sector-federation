@@ -9,6 +9,7 @@
 - [x] Zeroheight documentation approach selected: curated guidance with links or embeds to Figma, Storybook, GitHub source, and test evidence.
 - [x] Dedicated Storybook surface selected for the candidate Button.
 - [x] Candidate is intended to appear in the QA remote for side-by-side and federated-runtime validation.
+- [x] Candidate refactored into an opinionated PrimeNG facade with preferred `intent` and `activated` APIs.
 - [x] Isolated candidate Storybook Playwright coverage added at `apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts`.
 - [x] Candidate-specific Storybook Playwright script added: `pnpm test:storybook:up-button:chromium`.
 - [x] Static Storybook E2E run recorded: `pnpm nx run qa-remote:e2e` passed with 38 discovered stories and 3 rendered story iframes.
@@ -162,12 +163,13 @@ The candidate public API should describe design-system intent and prevent invali
   - [x] `text`
 - [ ] Confirm these values against the actual UP Design System source before promotion.
 - [ ] Decide whether a link-like appearance is necessary or whether navigation remains a Button behavior through `routerLink`.
-- [ ] Decide whether destructive styling is a tone or a separate intent.
+- [x] Destructive behavior is represented as the product-facing `destructive` intent.
 
-### Tone
+### Intent and compatibility tone
 
-- [ ] Confirm the UP Design System tone vocabulary.
-- [x] Candidate currently implements:
+- [x] Preferred Candidate intent vocabulary is `primary`, `secondary`, and `destructive`.
+- [ ] Confirm that vocabulary against the approved UP Design System source.
+- [x] The temporary compatibility `tone` alias still accepts:
   - [x] `primary`
   - [x] `secondary`
   - [x] `success`
@@ -205,7 +207,8 @@ The candidate public API should describe design-system intent and prevent invali
 
 - [x] `disabled` is provider-neutral in the candidate API.
 - [x] `loading` is provider-neutral in the candidate API.
-- [x] `buttonClick` remains the normalized wrapper event.
+- [x] `activated` is the preferred normalized wrapper event and emits no provider payload.
+- [x] `buttonClick` remains a deprecated Candidate compatibility alias.
 - [x] Candidate Playwright coverage verifies that loading suppresses activation and exposes `aria-busy="true"`.
 - [ ] Confirm whether disabled and loading are mutually exclusive or can coexist.
 - [ ] Confirm router navigation behavior.

@@ -41,6 +41,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Generate Prisma client
+        run: pnpm api:prisma:generate
+
       - name: Validate component manifest
         run: pnpm manifest:check
 
@@ -58,7 +61,10 @@ jobs:
         run: pnpm lint
 
       - name: Typecheck projects
-        run: pnpm typecheck 2>&1 | tee typecheck.log
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm typecheck 2>&1 | tee typecheck.log
 
       - name: Upload typecheck diagnostics
         if: always()

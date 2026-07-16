@@ -89,6 +89,7 @@ try {
     'design-system-primeng-playground--component-families',
     'design-system-candidates-button-up--primary',
     'design-system-registry-component-manifest--overview',
+    'design-system-architecture-opinionated-wrapper-contract--approved-api',
   ];
 
   const availableStoryIds = new Set(stories.map((story) => story.id));
@@ -121,6 +122,17 @@ try {
       await waitForStory(page.getByRole('row', { name: /Paginator/ }), storyId, 'the Paginator registry row');
       await waitForStory(page.getByRole('row', { name: /Toast Service/ }), storyId, 'the Toast Service registry row');
     }
+    if (storyId.includes('opinionated-wrapper-contract')) {
+      await waitForStory(page.getByRole('heading', { name: 'Approved high-level API' }), storyId, 'the approved API heading');
+      await waitForStory(page.getByText('Private provider controls'), storyId, 'the private provider controls section');
+      const destructiveButton = page.getByRole('button', { name: 'Delete draft' });
+      await waitForStory(destructiveButton, storyId, 'the destructive intent button');
+      await destructiveButton.click();
+      await waitForStory(page.getByText('Activations: 1'), storyId, 'the normalized activated output');
+      // PrimeNG's transient ripple overlays the label immediately after activation,
+      // which prevents axe from determining the label's background color.
+      await page.waitForTimeout(800);
+    }
 
     const bodyText = await page.locator('body').innerText();
     if (storyId.includes('problem-areas') && !bodyText.includes('Problem area overview')) {
@@ -142,7 +154,15 @@ try {
         `${storyId} has axe issues: ${JSON.stringify(
           {
             violations: axe.violations.map((violation) => ({ id: violation.id, impact: violation.impact, nodes: violation.nodes.length })),
-            incomplete: axe.incomplete.map((item) => ({ id: item.id, impact: item.impact, nodes: item.nodes.length })),
+            incomplete: axe.incomplete.map((item) => ({
+              id: item.id,
+              impact: item.impact,
+              nodes: item.nodes.map((node) => ({
+                target: node.target,
+                html: node.html,
+                failureSummary: node.failureSummary,
+              })),
+            })),
           },
           null,
           2,

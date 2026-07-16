@@ -1,5 +1,13 @@
 import { booleanAttribute, Component, computed, input, output } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
 
+/** Product-facing action purpose. PrimeNG severity names are intentionally private. */
+export type PublicUpButtonIntent = 'primary' | 'secondary' | 'destructive';
+
+/**
+ * @deprecated Use PublicUpButtonIntent and the intent input for new work.
+ * This compatibility vocabulary remains only while existing candidate evidence migrates.
+ */
 export type PublicUpButtonTone =
   | 'primary'
   | 'secondary'
@@ -25,6 +33,14 @@ export type PublicUpButtonIcon =
   | 'send'
   | 'times-circle';
 
+type PrimeButtonVariant = 'outlined' | 'text' | undefined;
+
+const intentTone: Record<PublicUpButtonIntent, PublicUpButtonTone> = {
+  primary: 'primary',
+  secondary: 'secondary',
+  destructive: 'error',
+};
+
 const iconClassByName: Record<PublicUpButtonIcon, string> = {
   'arrow-right': 'pi pi-arrow-right',
   bolt: 'pi pi-bolt',
@@ -42,31 +58,28 @@ const iconClassByName: Record<PublicUpButtonIcon, string> = {
 @Component({
   selector: 'ps-up-button',
   standalone: true,
+  imports: [ButtonModule],
+  host: {
+    '[attr.data-intent]': 'intent()',
+    '[attr.data-resolved-tone]': 'resolvedTone()',
+    '[attr.data-appearance]': 'appearance()',
+    '[attr.aria-busy]': 'loading() ? "true" : null',
+    'data-provider': 'primeng',
+  },
   template: `
-    <button
-      type="button"
-      class="up-button"
-      [attr.data-tone]="tone()"
-      [attr.data-appearance]="appearance()"
+    <p-button
+      [label]="label()"
+      [icon]="iconClass()"
+      [variant]="providerVariant()"
       [disabled]="disabled() || loading()"
-      [attr.aria-busy]="loading()"
-      (click)="handleClick($event)"
-    >
-      @if (loading()) {
-        <span class="up-button__spinner" aria-hidden="true"></span>
-      } @else if (iconClass()) {
-        <span class="up-button__icon" [class]="iconClass()" aria-hidden="true"></span>
-      }
-      <span class="up-button__label">{{ label() }}</span>
-    </button>
+      [loading]="loading()"
+      [style]="providerStyle"
+      styleClass="ps-up-button__control"
+      (onClick)="handleActivate()"
+    />
   `,
   styles: `
     :host {
-      display: inline-flex;
-      max-width: 100%;
-    }
-
-    .up-button {
       --ps-up-button-tone-background: var(--ps-up-button-primary-background);
       --ps-up-button-tone-foreground: var(--ps-up-button-primary-foreground);
       --ps-up-button-tone-border-color: var(--ps-up-button-primary-border-color);
@@ -87,89 +100,35 @@ const iconClassByName: Record<PublicUpButtonIcon, string> = {
       --ps-up-button-active-foreground: var(--ps-up-button-tone-active-foreground);
       --ps-up-button-active-border-color: var(--ps-up-button-tone-active-border-color);
 
+      --p-button-transition-duration: var(--ps-up-button-transition-duration);
+      --p-button-border-radius: var(--ps-up-button-border-radius);
+      --p-button-padding-y: var(--ps-up-button-padding-block);
+      --p-button-padding-x: var(--ps-up-button-padding-inline);
+      --p-button-gap: var(--ps-up-button-content-gap);
+      --p-button-label-font-weight: var(--ps-up-button-font-weight);
+      --p-button-primary-background: var(--ps-up-button-background);
+      --p-button-primary-color: var(--ps-up-button-foreground);
+      --p-button-primary-border-color: var(--ps-up-button-border-color);
+      --p-button-primary-hover-background: var(--ps-up-button-hover-background);
+      --p-button-primary-hover-color: var(--ps-up-button-hover-foreground);
+      --p-button-primary-hover-border-color: var(--ps-up-button-hover-border-color);
+      --p-button-primary-active-background: var(--ps-up-button-active-background);
+      --p-button-primary-active-color: var(--ps-up-button-active-foreground);
+      --p-button-primary-active-border-color: var(--ps-up-button-active-border-color);
+      --p-button-primary-focus-ring-shadow: var(--ps-up-button-focus-shadow);
+      --p-button-outlined-primary-border-color: var(--ps-up-button-tone-border-color);
+      --p-button-outlined-primary-color: var(--ps-up-button-tone-background);
+      --p-button-outlined-primary-hover-background: var(--ps-up-button-outlined-hover-background);
+      --p-button-outlined-primary-active-background: var(--ps-up-button-outlined-active-background);
+      --p-button-text-primary-color: var(--ps-up-button-tone-background);
+      --p-button-text-primary-hover-background: var(--ps-up-button-text-hover-background);
+      --p-button-text-primary-active-background: var(--ps-up-button-text-active-background);
+
       display: inline-flex;
-      min-height: var(--ps-up-button-min-height);
       max-width: 100%;
-      align-items: center;
-      justify-content: center;
-      gap: var(--ps-up-button-content-gap);
-      padding-block: var(--ps-up-button-padding-block);
-      padding-inline: var(--ps-up-button-padding-inline);
-      border-width: var(--ps-up-button-border-width);
-      border-style: var(--ps-up-button-border-style);
-      border-color: var(--ps-up-button-border-color);
-      border-radius: var(--ps-up-button-border-radius);
-      background: var(--ps-up-button-background);
-      color: var(--ps-up-button-foreground);
-      font-family: var(--ps-font-family, "Inter", "Segoe UI", Arial, sans-serif);
-      font-size: var(--ps-up-button-font-size);
-      font-weight: var(--ps-up-button-font-weight);
-      line-height: var(--ps-up-button-line-height);
-      text-align: center;
-      text-decoration: none;
-      transition:
-        background-color var(--ps-up-button-transition-duration),
-        border-color var(--ps-up-button-transition-duration),
-        color var(--ps-up-button-transition-duration),
-        box-shadow var(--ps-up-button-transition-duration);
-      cursor: pointer;
     }
 
-    .up-button:hover:not(:disabled) {
-      background: var(--ps-up-button-hover-background);
-      color: var(--ps-up-button-hover-foreground);
-      border-color: var(--ps-up-button-hover-border-color);
-    }
-
-    .up-button:active:not(:disabled) {
-      background: var(--ps-up-button-active-background);
-      color: var(--ps-up-button-active-foreground);
-      border-color: var(--ps-up-button-active-border-color);
-    }
-
-    .up-button:focus-visible {
-      outline: var(--ps-up-button-focus-width) var(--ps-up-button-focus-style) var(--ps-up-button-focus-color);
-      outline-offset: var(--ps-up-button-focus-offset);
-      box-shadow: var(--ps-up-button-focus-shadow);
-    }
-
-    .up-button:disabled {
-      background: var(--ps-up-button-disabled-background);
-      color: var(--ps-up-button-disabled-foreground);
-      border-color: var(--ps-up-button-disabled-border-color);
-      opacity: var(--ps-up-button-disabled-opacity);
-      cursor: not-allowed;
-    }
-
-    .up-button[aria-busy='true'] {
-      opacity: var(--ps-up-button-loading-opacity);
-    }
-
-    .up-button[data-appearance='outlined'] {
-      --ps-up-button-background: var(--ps-up-button-outlined-background);
-      --ps-up-button-foreground: var(--ps-up-button-tone-background);
-      --ps-up-button-border-color: var(--ps-up-button-tone-border-color);
-      --ps-up-button-hover-background: var(--ps-up-button-outlined-hover-background);
-      --ps-up-button-hover-foreground: var(--ps-up-button-tone-background);
-      --ps-up-button-hover-border-color: var(--ps-up-button-tone-hover-border-color);
-      --ps-up-button-active-background: var(--ps-up-button-outlined-active-background);
-      --ps-up-button-active-foreground: var(--ps-up-button-tone-background);
-      --ps-up-button-active-border-color: var(--ps-up-button-tone-active-border-color);
-    }
-
-    .up-button[data-appearance='text'] {
-      --ps-up-button-background: var(--ps-up-button-text-background);
-      --ps-up-button-foreground: var(--ps-up-button-tone-background);
-      --ps-up-button-border-color: var(--ps-up-button-text-border-color);
-      --ps-up-button-hover-background: var(--ps-up-button-text-hover-background);
-      --ps-up-button-hover-foreground: var(--ps-up-button-tone-background);
-      --ps-up-button-hover-border-color: var(--ps-up-button-text-border-color);
-      --ps-up-button-active-background: var(--ps-up-button-text-active-background);
-      --ps-up-button-active-foreground: var(--ps-up-button-tone-background);
-      --ps-up-button-active-border-color: var(--ps-up-button-text-border-color);
-    }
-
-    .up-button[data-tone='secondary'] {
+    :host([data-resolved-tone='secondary']) {
       --ps-up-button-tone-background: var(--ps-up-button-secondary-background);
       --ps-up-button-tone-foreground: var(--ps-up-button-secondary-foreground);
       --ps-up-button-tone-border-color: var(--ps-up-button-secondary-border-color);
@@ -181,7 +140,7 @@ const iconClassByName: Record<PublicUpButtonIcon, string> = {
       --ps-up-button-tone-active-border-color: var(--ps-up-button-secondary-active-border-color);
     }
 
-    .up-button[data-tone='success'] {
+    :host([data-resolved-tone='success']) {
       --ps-up-button-tone-background: var(--ps-up-button-success-background);
       --ps-up-button-tone-foreground: var(--ps-up-button-success-foreground);
       --ps-up-button-tone-border-color: var(--ps-up-button-success-border-color);
@@ -193,7 +152,7 @@ const iconClassByName: Record<PublicUpButtonIcon, string> = {
       --ps-up-button-tone-active-border-color: var(--ps-up-button-success-active-border-color);
     }
 
-    .up-button[data-tone='info'] {
+    :host([data-resolved-tone='info']) {
       --ps-up-button-tone-background: var(--ps-up-button-info-background);
       --ps-up-button-tone-foreground: var(--ps-up-button-info-foreground);
       --ps-up-button-tone-border-color: var(--ps-up-button-info-border-color);
@@ -205,7 +164,7 @@ const iconClassByName: Record<PublicUpButtonIcon, string> = {
       --ps-up-button-tone-active-border-color: var(--ps-up-button-info-active-border-color);
     }
 
-    .up-button[data-tone='warning'] {
+    :host([data-resolved-tone='warning']) {
       --ps-up-button-tone-background: var(--ps-up-button-warning-background);
       --ps-up-button-tone-foreground: var(--ps-up-button-warning-foreground);
       --ps-up-button-tone-border-color: var(--ps-up-button-warning-border-color);
@@ -217,7 +176,7 @@ const iconClassByName: Record<PublicUpButtonIcon, string> = {
       --ps-up-button-tone-active-border-color: var(--ps-up-button-warning-active-border-color);
     }
 
-    .up-button[data-tone='error'] {
+    :host([data-resolved-tone='error']) {
       --ps-up-button-tone-background: var(--ps-up-button-error-background);
       --ps-up-button-tone-foreground: var(--ps-up-button-error-foreground);
       --ps-up-button-tone-border-color: var(--ps-up-button-error-border-color);
@@ -229,7 +188,7 @@ const iconClassByName: Record<PublicUpButtonIcon, string> = {
       --ps-up-button-tone-active-border-color: var(--ps-up-button-error-active-border-color);
     }
 
-    .up-button[data-tone='help'] {
+    :host([data-resolved-tone='help']) {
       --ps-up-button-tone-background: var(--ps-up-button-help-background);
       --ps-up-button-tone-foreground: var(--ps-up-button-help-foreground);
       --ps-up-button-tone-border-color: var(--ps-up-button-help-border-color);
@@ -241,7 +200,7 @@ const iconClassByName: Record<PublicUpButtonIcon, string> = {
       --ps-up-button-tone-active-border-color: var(--ps-up-button-help-active-border-color);
     }
 
-    .up-button[data-tone='contrast'] {
+    :host([data-resolved-tone='contrast']) {
       --ps-up-button-tone-background: var(--ps-up-button-contrast-background);
       --ps-up-button-tone-foreground: var(--ps-up-button-contrast-foreground);
       --ps-up-button-tone-border-color: var(--ps-up-button-contrast-border-color);
@@ -252,64 +211,58 @@ const iconClassByName: Record<PublicUpButtonIcon, string> = {
       --ps-up-button-tone-active-foreground: var(--ps-up-button-contrast-active-foreground);
       --ps-up-button-tone-active-border-color: var(--ps-up-button-contrast-active-border-color);
     }
-
-    .up-button__label {
-      min-width: 0;
-      overflow-wrap: anywhere;
-    }
-
-    .up-button__icon {
-      flex: 0 0 auto;
-      font-size: var(--ps-up-button-icon-size);
-    }
-
-    .up-button__spinner {
-      width: var(--ps-up-button-spinner-size);
-      height: var(--ps-up-button-spinner-size);
-      flex: 0 0 auto;
-      border: var(--ps-up-button-spinner-border-width) solid currentColor;
-      border-right-color: transparent;
-      border-radius: 999rem;
-      animation: up-button-spin 700ms linear infinite;
-    }
-
-    @keyframes up-button-spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .up-button,
-      .up-button__spinner {
-        transition: none;
-        animation-duration: 1.5s;
-      }
-    }
   `,
 })
 export class PublicUpButtonComponent {
   readonly label = input('Button');
   readonly icon = input<PublicUpButtonIcon | undefined>();
-  readonly tone = input<PublicUpButtonTone>('primary');
+  readonly intent = input<PublicUpButtonIntent>('primary');
   readonly appearance = input<PublicUpButtonAppearance>('solid');
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly loading = input(false, { transform: booleanAttribute });
 
-  readonly buttonClick = output<MouseEvent>();
+  /** @deprecated Use intent for new consumers. */
+  readonly tone = input<PublicUpButtonTone | undefined>(undefined);
+
+  readonly activated = output<void>();
+
+  /** @deprecated Use activated for new consumers. */
+  readonly buttonClick = output<void>();
+
+  protected readonly providerStyle = {
+    maxWidth: '100%',
+    minHeight: 'var(--ps-up-button-min-height)',
+    whiteSpace: 'normal',
+  } as const;
+
+  protected readonly resolvedTone = computed<PublicUpButtonTone>(
+    () => this.tone() ?? intentTone[this.intent()],
+  );
+  protected readonly providerVariant = computed<PrimeButtonVariant>(() => {
+    const appearance = this.appearance();
+    return appearance === 'solid' ? undefined : appearance;
+  });
   protected readonly iconClass = computed(() => {
-    const icon = this.icon();
-    return icon ? iconClassByName[icon] : undefined;
+    const icon = this.icon() as string | undefined;
+    if (!icon) {
+      return undefined;
+    }
+
+    // Temporary runtime compatibility for existing Candidate QA markup.
+    // Provider class strings are not part of the typed public contract.
+    if (icon.startsWith('pi ')) {
+      return icon;
+    }
+
+    return iconClassByName[icon as PublicUpButtonIcon];
   });
 
-  handleClick(event: MouseEvent): void {
+  handleActivate(): void {
     if (this.disabled() || this.loading()) {
-      event.preventDefault();
-      event.stopPropagation();
       return;
     }
 
-    this.buttonClick.emit(event);
+    this.activated.emit();
+    this.buttonClick.emit();
   }
 }
-

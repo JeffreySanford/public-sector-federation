@@ -16,7 +16,7 @@ The Candidate may be used for the QA comparison, Storybook evidence, accessibili
 
 The existing `ps-button` remains the stable public-sector Button wrapper. It uses PrimeNG internally and exposes a provider-neutral public API for tone, outlined and text treatments, disabled behavior, loading behavior, navigation, and activation events. Final styling comes through the shared PrimeNG preset and public-sector theme tokens.
 
-The `ps-up-button` is a Candidate implementation for evaluating a more design-system-owned Button model. It renders native Button markup, replaces separate `outlined` and `text` booleans with a single `appearance` API, applies Candidate UP-style token mappings, and directly owns hover, active, focus, disabled, and loading treatments.
+The `ps-up-button` is a Candidate implementation for evaluating a more design-system-owned Button model. It now acts as an opinionated PrimeNG facade: it exposes product-facing `intent`, a single `appearance` API, provider-neutral icons, and `activated`, while translating those concepts into private PrimeNG behavior and UP-style token mappings.
 
 The Candidate is intended to prove whether the UP Button API, token treatment, visual model, and governance workflow should eventually be promoted into the stable `ps-button` implementation.
 
@@ -26,11 +26,11 @@ The Candidate is intended to prove whether the UP Button API, token treatment, v
 | --- | --- | --- |
 | Lifecycle | Stable | Candidate |
 | API shape | Uses `outlined` and `text` booleans | Uses one `appearance` input |
-| Rendering | Wraps PrimeNG `p-button` | Renders native `<button>` markup |
-| Styling ownership | Uses the shared PrimeNG preset | Owns Candidate Button CSS and token mappings |
+| Rendering | Wraps PrimeNG `p-button` | Wraps PrimeNG through a smaller Candidate-owned facade |
+| Styling ownership | Uses the shared PrimeNG preset | Maps Candidate Button tokens into private PrimeNG variables |
 | Token direction | Uses current public-sector theme tokens | Evaluates UP-style Button token mappings |
-| Behavior | Delegates provider behavior through the wrapper | Normalizes activation and suppresses disabled or loading clicks |
-| Accessibility | Combines PrimeNG semantics with wrapper behavior | Explicitly controls disabled, loading, focus, and `aria-busy` behavior |
+| Behavior | Delegates provider behavior through the wrapper | Normalizes PrimeNG activation to `activated` and suppresses disabled or loading actions |
+| Accessibility | Combines PrimeNG semantics with wrapper behavior | Uses PrimeNG semantics while retaining Candidate loading, focus, and activation requirements |
 | Visual treatment | Current public-sector styling | Candidate UP-inspired styling |
 | Production guidance | Supported for application use | Limited pilot and evaluation only |
 
@@ -43,7 +43,7 @@ The Candidate evaluates:
 - a cleaner Button API;
 - Button-specific semantic and component tokens;
 - explicit hover, pressed, focus, disabled, and loading styling;
-- native Button rendering;
+- an opinionated PrimeNG facade rather than a mirrored provider API;
 - accessibility ownership;
 - shared Figma, Storybook, Zeroheight, and Angular vocabulary;
 - QA and federated-shell behavior;
@@ -77,7 +77,7 @@ Do not use `ps-up-button` for:
 
 The Candidate currently uses UP-inspired styling based on the design information available to the project and the existing public-sector theme foundations.
 
-Local validation against `D:\repos\up-design-system` confirms the generated UP semantic token paths and values used for comparison. It also confirms that the current `ps-up-button` namespace and native rendering model are public-sector Candidate decisions, not a direct copy of an existing UP Button component implementation.
+Local validation against `D:\repos\up-design-system` confirms the generated UP semantic token paths and values used for comparison. It also confirms that the current `ps-up-button` namespace and opinionated wrapper contract are public-sector Candidate decisions, not a direct copy of an existing UP Button component implementation.
 
 Before promotion, every Button-specific token assumption used by `ps-up-button` must either be aligned to the approved UP Design System source or explicitly approved as a public-sector theme adaptation. This requirement applies only to the Button Candidate and does not imply migration of the rest of the public-sector design system.
 
