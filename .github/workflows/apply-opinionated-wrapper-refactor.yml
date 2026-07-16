@@ -1,11 +1,6 @@
 name: Apply Opinionated Wrapper Refactor
 
 on:
-  push:
-    branches:
-      - feature/opinionated-wrapper-contracts
-    paths:
-      - scripts/apply-opinionated-wrapper-refactor.mjs
   pull_request:
     branches:
       - master
