@@ -75,4 +75,12 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Run built Storybook accessibility gate
-        run: node scripts/storybook-e2e.mjs
+        run: node scripts/storybook-e2e.mjs 2>&1 | tee storybook-e2e.log
+
+      - name: Upload Storybook e2e diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: storybook-e2e-diagnostics
+          path: storybook-e2e.log
+          if-no-files-found: warn
