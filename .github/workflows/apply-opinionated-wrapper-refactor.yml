@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/apply-opinionated-wrapper-refactor.yml'
       - 'scripts/apply-opinionated-wrapper-refactor.mjs'
+      - 'scripts/finalize-opinionated-wrapper-refactor.mjs'
 
 permissions:
   contents: write
@@ -41,6 +42,9 @@ jobs:
           set -o pipefail
           node scripts/apply-opinionated-wrapper-refactor.mjs 2>&1 | tee refactor.log
 
+      - name: Finalize refactor and remove one-time automation
+        run: node scripts/finalize-opinionated-wrapper-refactor.mjs
+
       - name: Upload refactor diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -74,6 +78,14 @@ jobs:
           path: validation.log
           if-no-files-found: warn
 
+      - name: Commit refactor
+        run: |
+          git config user.name "OpenAI ChatGPT"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github packages/ui-patterns apps/qa-remote docs scripts
+          git commit -m "feat: add opinionated PrimeNG wrapper contract"
+          git push origin HEAD:feature/opinionated-wrapper-contracts
+
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
 
@@ -92,11 +104,3 @@ jobs:
             storybook-gate.log
             dist/storybook/qa-remote/index.json
           if-no-files-found: warn
-
-      - name: Commit refactor
-        run: |
-          git config user.name "OpenAI ChatGPT"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add packages/ui-patterns apps/qa-remote docs scripts
-          git commit -m "feat: add opinionated PrimeNG wrapper contract"
-          git push origin HEAD:feature/opinionated-wrapper-contracts
