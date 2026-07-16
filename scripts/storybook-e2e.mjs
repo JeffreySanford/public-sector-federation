@@ -63,14 +63,15 @@ async function analyzeAccessibility(targetPage, attempts = 5) {
 try {
   const index = JSON.parse(await readFile(join(storybookRoot, 'index.json'), 'utf8'));
   const stories = Object.values(index.entries).filter((entry) => entry.type === 'story');
-  if (stories.length < 21) {
-    throw new Error(`Expected at least 21 built Storybook stories, found ${stories.length}.`);
+  if (stories.length < 29) {
+    throw new Error(`Expected at least 29 built Storybook stories, found ${stories.length}.`);
   }
 
   const storyIds = [
     'design-system-problem-areas--overview',
     'design-system-primeng-playground--component-families',
     'design-system-candidates-button-up--primary',
+    'design-system-registry-component-manifest--overview',
   ];
   for (const storyId of storyIds) {
     await page.goto(`http://localhost:${port}/iframe.html?id=${storyId}&viewMode=story`, {
@@ -86,6 +87,11 @@ try {
     if (storyId.includes('button-up')) {
       await page.getByRole('button', { name: 'Primary action' }).waitFor({ timeout: 60000 });
     }
+    if (storyId.includes('component-manifest')) {
+      await page.getByRole('heading', { name: 'Component Registry' }).waitFor({ timeout: 60000 });
+      await page.getByRole('row', { name: /Paginator/ }).waitFor({ timeout: 60000 });
+      await page.getByRole('row', { name: /Toast Service/ }).waitFor({ timeout: 60000 });
+    }
 
     const bodyText = await page.locator('body').innerText();
     if (storyId.includes('problem-areas') && !bodyText.includes('Problem area overview')) {
@@ -96,6 +102,9 @@ try {
     }
     if (storyId.includes('button-up') && !bodyText.includes('Primary action')) {
       throw new Error('UP Button candidate primary story did not render expected content.');
+    }
+    if (storyId.includes('component-manifest') && (!bodyText.includes('Paginator') || !bodyText.includes('Toast Service'))) {
+      throw new Error('Component Manifest overview did not render the expected public registry entries.');
     }
 
     const axe = await analyzeAccessibility(page);
