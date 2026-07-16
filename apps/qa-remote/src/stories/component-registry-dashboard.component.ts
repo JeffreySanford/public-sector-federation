@@ -1,10 +1,6 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
-import {
-  componentManifest,
-  type ComponentManifestEntry,
-  type EvidenceStatus,
-  type ReadinessStatus,
-} from '@public-sector/ui-patterns';
+import { componentManifest, type ComponentManifestEntry } from '@public-sector/ui-patterns';
 
 export type RegistryDashboardMode =
   | 'overview'
@@ -19,6 +15,7 @@ export type RegistryDashboardMode =
 @Component({
   selector: 'ps-component-registry-dashboard',
   standalone: true,
+  imports: [NgTemplateOutlet],
   template: `
     <main class="registry" [attr.data-mode]="mode()">
       <header class="registry__header">
@@ -424,13 +421,5 @@ export class ComponentRegistryDashboardComponent {
 
   displayList(values: string[]): string {
     return values.length > 0 ? values.join(', ') : 'None recorded';
-  }
-
-  evidenceLabel(status: EvidenceStatus): string {
-    return status;
-  }
-
-  readinessLabel(status: ReadinessStatus): string {
-    return status;
   }
 }
