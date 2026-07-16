@@ -19,9 +19,9 @@ const pageStyles = `
     color: var(--p-text-color);
   }
   header { max-width: 70rem; }
-  header p { margin: 0 0 0.35rem; color: var(--p-primary-color); font-weight: 800; text-transform: uppercase; }
+  header p { margin: 0 0 0.35rem; color: var(--p-text-color); font-weight: 800; text-transform: uppercase; }
   header h1 { margin: 0 0 0.5rem; font-size: clamp(2rem, 5vw, 3.5rem); }
-  header span { color: var(--p-text-muted-color); }
+  header span { color: var(--p-text-color); }
   .contract-grid, .matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1rem; }
   article, .live-proof { display: grid; gap: 0.8rem; align-content: start; padding: 1.25rem; border: 1px solid var(--p-content-border-color); border-radius: var(--p-border-radius-md); }
   article h2 { margin: 0; }
@@ -95,7 +95,7 @@ export const ApprovedApi: Story = {
             label="Delete draft"
             icon="times-circle"
             intent="destructive"
-            appearance="outlined"
+            appearance="solid"
             (activated)="activations = activations + 1"
           />
           <output aria-live="polite">Activations: {{ activations }}</output>

@@ -11,7 +11,7 @@
 
 The UP Button Candidate is the first component-level proof for connecting design intent, design tokens, an Angular wrapper, Storybook, the federated QA workspace, automated validation, and governed documentation.
 
-The existing `ps-button` remains the stable public-sector Button wrapper. The experimental `ps-up-button` exists to evaluate a more design-system-owned Button API, native rendering model, token mapping, state styling, accessibility ownership, and promotion process.
+The existing `ps-button` remains the stable public-sector Button wrapper. The experimental `ps-up-button` exists to evaluate a more design-system-owned Button API, opinionated PrimeNG facade, token mapping, normalized events, accessibility ownership, and promotion process.
 
 The Candidate is deliberately narrow. Only Button-related UP Design System information and shared foundations required by the Button are in scope. Card, Table, Dialog, Toast, navigation, form controls, and other wrappers continue to use the existing public-sector contract.
 

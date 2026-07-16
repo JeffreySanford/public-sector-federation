@@ -142,6 +142,34 @@ async function validateManifest(manifest) {
       }
     }
 
+    const providerSpecificMembers = new Set([
+      'severity',
+      'styleClass',
+      'pt',
+      'unstyled',
+      'buttonProps',
+      'badgeClass',
+      'loadingIcon',
+      'raised',
+      'rounded',
+      'plain',
+      'fluid',
+    ]);
+    const publicMemberNames = [
+      ...entry.publicApi.inputs,
+      ...entry.publicApi.outputs,
+      ...entry.publicApi.models,
+    ].map((member) => member.name);
+    const undeclaredProviderLeaks = publicMemberNames.filter(
+      (name) => providerSpecificMembers.has(name) && !implementation.providerEscapeHatches.includes(name),
+    );
+    if (implementation.providerInternalOnly && undeclaredProviderLeaks.length > 0) {
+      addProblem(
+        problems,
+        `${identity.id}: provider-specific public members must be removed or declared as escape hatches: ${undeclaredProviderLeaks.join(', ')}`,
+      );
+    }
+
     for (const path of [
       ...evidence.storybook.files,
       ...evidence.tests.files,
@@ -157,6 +185,9 @@ async function validateManifest(manifest) {
     }
     if (entry.ownership.owner === null) {
       warnings.push(`${identity.id}: owner is not assigned.`);
+    }
+    for (const escapeHatch of implementation.providerEscapeHatches) {
+      warnings.push(`${identity.id}: provider escape hatch remains public: ${escapeHatch}.`);
     }
   }
 

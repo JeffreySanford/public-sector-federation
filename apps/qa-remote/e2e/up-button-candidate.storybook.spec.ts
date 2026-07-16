@@ -134,7 +134,7 @@ test.describe('UP Button Candidate isolated Storybook iframe', () => {
     const button = page.getByRole('button', { name: 'Submitting' });
     await expect(button).toBeVisible();
     await expect(button).toBeDisabled();
-    await expect(button).toHaveAttribute('aria-busy', 'true');
+    await expect(page.locator('ps-up-button')).toHaveAttribute('aria-busy', 'true');
   });
 
   test('shows visible focus treatment', async ({ page }) => {
