@@ -41,7 +41,18 @@ jobs:
           cache: pnpm
 
       - name: Apply refactor
-        run: node scripts/apply-opinionated-wrapper-refactor.mjs
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/apply-opinionated-wrapper-refactor.mjs 2>&1 | tee refactor.log
+
+      - name: Upload refactor diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opinionated-wrapper-refactor-diagnostics
+          path: refactor.log
+          if-no-files-found: warn
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
