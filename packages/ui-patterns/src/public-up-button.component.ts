@@ -4,20 +4,6 @@ import { ButtonModule } from 'primeng/button';
 /** Product-facing action purpose. PrimeNG severity names are intentionally private. */
 export type PublicUpButtonIntent = 'primary' | 'secondary' | 'destructive';
 
-/**
- * @deprecated Use PublicUpButtonIntent and the intent input for new work.
- * This compatibility vocabulary remains only while existing candidate evidence migrates.
- */
-export type PublicUpButtonTone =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'info'
-  | 'warning'
-  | 'error'
-  | 'help'
-  | 'contrast';
-
 export type PublicUpButtonAppearance = 'solid' | 'outlined' | 'text';
 
 export type PublicUpButtonIcon =
@@ -35,7 +21,9 @@ export type PublicUpButtonIcon =
 
 type PrimeButtonVariant = 'outlined' | 'text' | undefined;
 
-const intentTone: Record<PublicUpButtonIntent, PublicUpButtonTone> = {
+type InternalButtonTone = 'primary' | 'secondary' | 'error';
+
+const intentTone: Record<PublicUpButtonIntent, InternalButtonTone> = {
   primary: 'primary',
   secondary: 'secondary',
   destructive: 'error',
@@ -211,6 +199,25 @@ const iconClassByName: Record<PublicUpButtonIcon, string> = {
       --ps-up-button-tone-active-foreground: var(--ps-up-button-contrast-active-foreground);
       --ps-up-button-tone-active-border-color: var(--ps-up-button-contrast-active-border-color);
     }
+
+    :host([data-appearance='solid']) ::ng-deep .ps-up-button__control {
+      border-color: var(--ps-up-button-border-color);
+      background: var(--ps-up-button-background);
+      color: var(--ps-up-button-foreground);
+      font-weight: var(--ps-up-button-font-weight);
+    }
+
+    :host([data-appearance='solid']) ::ng-deep .ps-up-button__control:not(:disabled):hover {
+      border-color: var(--ps-up-button-hover-border-color) !important;
+      background: var(--ps-up-button-hover-background) !important;
+      color: var(--ps-up-button-hover-foreground) !important;
+    }
+
+    :host([data-appearance='solid']) ::ng-deep .ps-up-button__control:not(:disabled):active {
+      border-color: var(--ps-up-button-active-border-color) !important;
+      background: var(--ps-up-button-active-background) !important;
+      color: var(--ps-up-button-active-foreground) !important;
+    }
   `,
 })
 export class PublicUpButtonComponent {
@@ -221,13 +228,7 @@ export class PublicUpButtonComponent {
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly loading = input(false, { transform: booleanAttribute });
 
-  /** @deprecated Use intent for new consumers. */
-  readonly tone = input<PublicUpButtonTone | undefined>(undefined);
-
   readonly activated = output<void>();
-
-  /** @deprecated Use activated for new consumers. */
-  readonly buttonClick = output<void>();
 
   protected readonly providerStyle = {
     maxWidth: '100%',
@@ -235,26 +236,18 @@ export class PublicUpButtonComponent {
     whiteSpace: 'normal',
   } as const;
 
-  protected readonly resolvedTone = computed<PublicUpButtonTone>(
-    () => this.tone() ?? intentTone[this.intent()],
-  );
+  protected readonly resolvedTone = computed<InternalButtonTone>(() => intentTone[this.intent()]);
   protected readonly providerVariant = computed<PrimeButtonVariant>(() => {
     const appearance = this.appearance();
     return appearance === 'solid' ? undefined : appearance;
   });
   protected readonly iconClass = computed(() => {
-    const icon = this.icon() as string | undefined;
+    const icon = this.icon();
     if (!icon) {
       return undefined;
     }
 
-    // Temporary runtime compatibility for existing Candidate QA markup.
-    // Provider class strings are not part of the typed public contract.
-    if (icon.startsWith('pi ')) {
-      return icon;
-    }
-
-    return iconClassByName[icon as PublicUpButtonIcon];
+    return iconClassByName[icon];
   });
 
   handleActivate(): void {
@@ -263,6 +256,5 @@ export class PublicUpButtonComponent {
     }
 
     this.activated.emit();
-    this.buttonClick.emit();
   }
 }

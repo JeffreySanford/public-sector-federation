@@ -70,6 +70,66 @@ function primeNgImports(source) {
   return [...source.matchAll(/from\s+['"](primeng\/[^'"]+)['"]/g)].map((match) => match[1]);
 }
 
+function angularSignalMembers(source, sourcePath) {
+  const sourceFile = ts.createSourceFile(sourcePath, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const members = { inputs: [], outputs: [], models: [] };
+  const visit = (node) => {
+    if (ts.isPropertyDeclaration(node) && ts.isIdentifier(node.name) && node.initializer) {
+      let call = node.initializer;
+      if (ts.isCallExpression(call) && ts.isPropertyAccessExpression(call.expression) && call.expression.name.text === 'required') {
+        const factory = call.expression.expression;
+        if (ts.isIdentifier(factory)) {
+          const bucket = factory.text === 'input' ? 'inputs' : factory.text === 'output' ? 'outputs' : factory.text === 'model' ? 'models' : null;
+          if (bucket) members[bucket].push(node.name.text);
+          ts.forEachChild(node, visit);
+          return;
+        }
+      }
+      if (ts.isCallExpression(call) && ts.isIdentifier(call.expression)) {
+        const bucket = call.expression.text === 'input' ? 'inputs' : call.expression.text === 'output' ? 'outputs' : call.expression.text === 'model' ? 'models' : null;
+        if (bucket) members[bucket].push(node.name.text);
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sourceFile);
+  return members;
+}
+
+function providerTypeLeaks(source, sourcePath) {
+  const sourceFile = ts.createSourceFile(sourcePath, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+  const providerAliases = new Set();
+  for (const statement of sourceFile.statements) {
+    if (!ts.isImportDeclaration(statement) || !statement.moduleSpecifier.text.startsWith('primeng/')) continue;
+    const clause = statement.importClause;
+    if (clause?.name) providerAliases.add(clause.name.text);
+    if (clause?.namedBindings && ts.isNamedImports(clause.namedBindings)) {
+      for (const element of clause.namedBindings.elements) providerAliases.add(element.name.text);
+    }
+  }
+  const leaks = [];
+  const visit = (node) => {
+    const initializer = ts.isPropertyDeclaration(node) ? node.initializer : undefined;
+    const signalCall = initializer && ts.isCallExpression(initializer)
+      ? initializer
+      : initializer && ts.isCallExpression(initializer) && ts.isPropertyAccessExpression(initializer.expression)
+        ? initializer
+        : undefined;
+    const isPublicSignal = signalCall && (
+      (ts.isIdentifier(signalCall.expression) && ['input', 'output', 'model'].includes(signalCall.expression.text)) ||
+      (ts.isPropertyAccessExpression(signalCall.expression) && ts.isIdentifier(signalCall.expression.expression) && ['input', 'output', 'model'].includes(signalCall.expression.expression.text))
+    );
+    const explicitlyPublic = (ts.isPropertyDeclaration(node) || ts.isMethodDeclaration(node)) && node.modifiers?.some((m) => m.kind === ts.SyntaxKind.PublicKeyword);
+    if (isPublicSignal || explicitlyPublic) {
+      const text = node.getText(sourceFile);
+      for (const alias of providerAliases) if (new RegExp(`\\b${alias}\\b`).test(text)) leaks.push(`${node.name?.getText(sourceFile) ?? 'member'}: ${alias}`);
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sourceFile);
+  return leaks;
+}
+
 function addProblem(problems, message) {
   problems.push(message);
 }
@@ -168,6 +228,22 @@ async function validateManifest(manifest) {
         problems,
         `${identity.id}: provider-specific public members must be removed or declared as escape hatches: ${undeclaredProviderLeaks.join(', ')}`,
       );
+    }
+
+    if (entry.publicApi.status === 'complete' && identity.kind !== 'service') {
+      const detected = angularSignalMembers(source, sourcePath);
+      for (const bucket of ['inputs', 'outputs', 'models']) {
+        const declaredNames = entry.publicApi[bucket].map((member) => member.name).sort();
+        const detectedNames = detected[bucket].sort();
+        if (declaredNames.join('|') !== detectedNames.join('|')) {
+          addProblem(problems, `${identity.id}: manifest ${bucket} [${declaredNames.join(', ')}] do not match source [${detectedNames.join(', ')}].`);
+        }
+      }
+    }
+
+    const leakedTypes = providerTypeLeaks(source, sourcePath);
+    if (implementation.providerInternalOnly && leakedTypes.length > 0) {
+      addProblem(problems, `${identity.id}: PrimeNG types appear in explicitly public members: ${leakedTypes.join(', ')}`);
     }
 
     for (const path of [

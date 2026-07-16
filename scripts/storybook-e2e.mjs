@@ -89,7 +89,7 @@ try {
     'design-system-primeng-playground--component-families',
     'design-system-candidates-button-up--primary',
     'design-system-registry-component-manifest--overview',
-    'design-system-architecture-opinionated-wrapper-contract--approved-api',
+    'design-system-architecture-opinionated-wrapper-contract--preferred-candidate-api',
   ];
 
   const availableStoryIds = new Set(stories.map((story) => story.id));
@@ -123,7 +123,7 @@ try {
       await waitForStory(page.getByRole('row', { name: /Toast Service/ }), storyId, 'the Toast Service registry row');
     }
     if (storyId.includes('opinionated-wrapper-contract')) {
-      await waitForStory(page.getByRole('heading', { name: 'Approved high-level API' }), storyId, 'the approved API heading');
+      await waitForStory(page.getByRole('heading', { name: 'Preferred candidate API' }), storyId, 'the preferred candidate API heading');
       await waitForStory(page.getByText('Private provider controls'), storyId, 'the private provider controls section');
       const destructiveButton = page.getByRole('button', { name: 'Delete draft' });
       await waitForStory(destructiveButton, storyId, 'the destructive intent button');

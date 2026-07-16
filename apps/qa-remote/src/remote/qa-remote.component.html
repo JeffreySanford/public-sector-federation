@@ -88,16 +88,16 @@
           <p>Separate proof component using a cleaner appearance API before replacing the current ps-button contract.</p>
         </div>
         <div class="acceptance-inline">
-          <ps-up-button label="Primary action" icon="pi pi-check" />
-          <ps-up-button label="Outlined action" icon="pi pi-download" appearance="outlined" />
-          <ps-up-button label="Text action" icon="pi pi-info-circle" appearance="text" />
-          <ps-up-button label="Loading action" icon="pi pi-send" [loading]="true" />
-          <ps-up-button label="Disabled action" icon="pi pi-lock" [disabled]="true" />
+          <ps-up-button label="Primary action" icon="check" />
+          <ps-up-button label="Outlined action" icon="download" appearance="outlined" />
+          <ps-up-button label="Text action" icon="info-circle" appearance="text" />
+          <ps-up-button label="Loading action" icon="send" [loading]="true" />
+          <ps-up-button label="Disabled action" icon="lock" [disabled]="true" />
         </div>
         <div class="acceptance-inline">
-          <ps-up-button label="Approve" tone="success" icon="pi pi-check" />
-          <ps-up-button label="Review warning" tone="warning" icon="pi pi-exclamation-triangle" />
-          <ps-up-button label="Resolve error" tone="error" icon="pi pi-times-circle" />
+          <ps-up-button label="Approve" intent="primary" icon="check" />
+          <ps-up-button label="Review warning" intent="secondary" icon="exclamation-triangle" />
+          <ps-up-button label="Resolve error" intent="destructive" icon="times-circle" />
         </div>
       </article>
 

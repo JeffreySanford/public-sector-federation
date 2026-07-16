@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { TagModule } from 'primeng/tag';
 
-type StatusSeverity = 'success' | 'info' | 'warn' | 'danger' | 'secondary' | 'contrast';
+export type PublicStatusCardTone = 'success' | 'info' | 'warn' | 'danger' | 'secondary' | 'contrast';
 
 @Component({
   selector: 'public-status-card',
@@ -15,7 +15,7 @@ type StatusSeverity = 'success' | 'info' | 'warn' | 'danger' | 'secondary' | 'co
         <strong>{{ value() }}</strong>
         <span class="status-card__detail">{{ detail() }}</span>
         @if (status()) {
-          <p-tag [value]="status()" [severity]="severity()" />
+          <p-tag [value]="status()" [severity]="tone()" />
         }
       </div>
     </article>
@@ -76,5 +76,5 @@ export class PublicStatusCardComponent {
   readonly value = input.required<string | number>();
   readonly detail = input('');
   readonly status = input('');
-  readonly severity = input<StatusSeverity>('info');
+  readonly tone = input<PublicStatusCardTone>('info');
 }

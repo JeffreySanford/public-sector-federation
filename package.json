@@ -11,6 +11,7 @@
     "typecheck": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run-many -t typecheck",
     "lint": "node scripts/lint-workspace.mjs",
     "lint:links": "node scripts/check-links.mjs",
+    "lint:wrappers": "node scripts/check-wrapper-contracts.mjs && node scripts/build-component-manifest.mjs --check",
     "test": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run-many -t test",
     "e2e": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run-many -t e2e",
     "graph": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js graph",

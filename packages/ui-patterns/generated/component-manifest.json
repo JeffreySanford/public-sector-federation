@@ -35,9 +35,19 @@
             "type": "string | undefined"
           },
           {
-            "name": "tone",
-            "type": "PublicButtonTone",
+            "name": "intent",
+            "type": "PublicButtonIntent",
             "defaultValue": "primary"
+          },
+          {
+            "name": "appearance",
+            "type": "PublicButtonAppearance",
+            "defaultValue": "solid"
+          },
+          {
+            "name": "tone",
+            "type": "PublicButtonTone | undefined",
+            "description": "Deprecated compatibility alias; use intent."
           },
           {
             "name": "styleClass",
@@ -71,12 +81,20 @@
         ],
         "outputs": [
           {
+            "name": "activated",
+            "type": "void",
+            "description": "Preferred provider-neutral activation event."
+          },
+          {
             "name": "buttonClick",
-            "type": "MouseEvent"
+            "type": "MouseEvent",
+            "description": "Deprecated compatibility event; use activated."
           }
         ],
         "models": [],
         "publicTypes": [
+          "PublicButtonIntent",
+          "PublicButtonAppearance",
           "PublicButtonTone"
         ]
       },
@@ -177,7 +195,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "The current stable API still exposes styleClass and separate outlined/text booleans."
+          "Legacy tone, styleClass, outlined, text, routerLink, and buttonClick remain for stable consumer compatibility."
         ]
       }
     },
@@ -404,8 +422,29 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "icon",
+            "type": "string",
+            "defaultValue": "pi pi-inbox"
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "actionLabel",
+            "type": "string",
+            "defaultValue": "''"
+          }
+        ],
         "outputs": [],
         "models": [],
         "publicTypes": []
@@ -429,7 +468,7 @@
       },
       "accessibility": {
         "pattern": "status",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -438,10 +477,17 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Empty State",
+          "files": [
+            "apps/qa-remote/src/stories/empty-state.stories.ts"
+          ],
+          "stories": [
+            "Default",
+            "WithoutAction",
+            "SearchResults",
+            "LongContent"
+          ]
         },
         "tests": {
           "status": "missing",
@@ -477,9 +523,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated Storybook evidence is recorded.",
-          "No dedicated automated behavior evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
+          "No dedicated automated behavior evidence is recorded."
         ]
       }
     },
@@ -504,8 +548,19 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "defaultValue": "''"
+          }
+        ],
         "outputs": [],
         "models": [],
         "publicTypes": []
@@ -529,7 +584,7 @@
       },
       "accessibility": {
         "pattern": "group",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -538,10 +593,17 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Form Section",
+          "files": [
+            "apps/qa-remote/src/stories/form-section.stories.ts"
+          ],
+          "stories": [
+            "CompleteForm",
+            "WithoutDescription",
+            "ValidationContent",
+            "LongResponsiveContent"
+          ]
         },
         "tests": {
           "status": "missing",
@@ -577,9 +639,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated Storybook evidence is recorded.",
-          "No dedicated automated behavior evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
+          "No dedicated automated behavior evidence is recorded."
         ]
       }
     },
@@ -604,17 +664,37 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "label",
+            "type": "string",
+            "defaultValue": "Open menu"
+          },
+          {
+            "name": "icon",
+            "type": "string",
+            "defaultValue": "pi pi-bars"
+          },
+          {
+            "name": "actions",
+            "type": "PublicMenuAction[]",
+            "defaultValue": "[]"
+          }
+        ],
         "outputs": [],
         "models": [],
-        "publicTypes": []
+        "publicTypes": [
+          "PublicMenuAction"
+        ]
       },
       "implementation": {
         "provider": "primeng",
         "providerName": "PrimeNG",
         "providerInternalOnly": true,
-        "providerModules": [],
+        "providerModules": [
+          "primeng/menu"
+        ],
         "providerEscapeHatches": [],
         "knownLimitations": []
       },
@@ -629,7 +709,7 @@
       },
       "accessibility": {
         "pattern": "menu",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -638,10 +718,18 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Menu",
+          "files": [
+            "apps/qa-remote/src/stories/menu.stories.ts"
+          ],
+          "stories": [
+            "Interactive",
+            "EmptyMenu",
+            "DisabledAction",
+            "LongLabels",
+            "CommandCallbacks"
+          ]
         },
         "tests": {
           "status": "partial",
@@ -675,13 +763,10 @@
         "promotionRequirements": []
       },
       "health": {
-        "repositoryReadiness": "partial",
+        "repositoryReadiness": "ready",
         "externalDesignBinding": "partial",
         "blockers": [],
-        "warnings": [
-          "No dedicated Storybook evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
-        ]
+        "warnings": []
       }
     },
     {
@@ -705,8 +790,24 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "eyebrow",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "defaultValue": "''"
+          }
+        ],
         "outputs": [],
         "models": [],
         "publicTypes": []
@@ -730,7 +831,7 @@
       },
       "accessibility": {
         "pattern": "banner",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -739,10 +840,17 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Page Header",
+          "files": [
+            "apps/qa-remote/src/stories/page-header.stories.ts"
+          ],
+          "stories": [
+            "Default",
+            "TitleOnly",
+            "WithoutEyebrow",
+            "LongResponsiveHeading"
+          ]
         },
         "tests": {
           "status": "missing",
@@ -778,9 +886,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated Storybook evidence is recorded.",
-          "No dedicated automated behavior evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
+          "No dedicated automated behavior evidence is recorded."
         ]
       }
     },
@@ -867,7 +973,7 @@
       },
       "accessibility": {
         "pattern": "navigation",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -876,10 +982,21 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Paginator",
+          "files": [
+            "apps/qa-remote/src/stories/paginator.stories.ts"
+          ],
+          "stories": [
+            "FirstPage",
+            "MiddlePage",
+            "LastPage",
+            "EmptyDataset",
+            "SinglePage",
+            "CustomLanguage",
+            "MobileResponsive",
+            "ModelInteraction"
+          ]
         },
         "tests": {
           "status": "missing",
@@ -915,7 +1032,6 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated Storybook evidence is recorded.",
           "No dedicated automated behavior evidence is recorded."
         ]
       }
@@ -941,8 +1057,19 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "label",
+            "type": "string",
+            "defaultValue": "Open details"
+          },
+          {
+            "name": "icon",
+            "type": "string",
+            "defaultValue": "pi pi-info-circle"
+          }
+        ],
         "outputs": [],
         "models": [],
         "publicTypes": []
@@ -951,7 +1078,9 @@
         "provider": "primeng",
         "providerName": "PrimeNG",
         "providerInternalOnly": true,
-        "providerModules": [],
+        "providerModules": [
+          "primeng/popover"
+        ],
         "providerEscapeHatches": [],
         "knownLimitations": []
       },
@@ -966,7 +1095,7 @@
       },
       "accessibility": {
         "pattern": "dialog",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -975,10 +1104,18 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Popover",
+          "files": [
+            "apps/qa-remote/src/stories/popover.stories.ts"
+          ],
+          "stories": [
+            "Interactive",
+            "ShortContent",
+            "StructuredContent",
+            "LongWrappingContent",
+            "KeyboardTrigger"
+          ]
         },
         "tests": {
           "status": "partial",
@@ -1012,13 +1149,10 @@
         "promotionRequirements": []
       },
       "health": {
-        "repositoryReadiness": "partial",
+        "repositoryReadiness": "ready",
         "externalDesignBinding": "partial",
         "blockers": [],
-        "warnings": [
-          "No dedicated Storybook evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
-        ]
+        "warnings": []
       }
     },
     {
@@ -1042,8 +1176,19 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "value",
+            "type": "number",
+            "defaultValue": "0"
+          },
+          {
+            "name": "ariaLabel",
+            "type": "string",
+            "defaultValue": "Progress"
+          }
+        ],
         "outputs": [],
         "models": [],
         "publicTypes": []
@@ -1067,7 +1212,7 @@
       },
       "accessibility": {
         "pattern": "progressbar",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -1076,10 +1221,17 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Progress",
+          "files": [
+            "apps/qa-remote/src/stories/progress.stories.ts"
+          ],
+          "stories": [
+            "Interactive",
+            "Empty",
+            "Complete",
+            "LifecycleMatrix"
+          ]
         },
         "tests": {
           "status": "missing",
@@ -1115,9 +1267,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated Storybook evidence is recorded.",
-          "No dedicated automated behavior evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
+          "No dedicated automated behavior evidence is recorded."
         ]
       }
     },
@@ -1196,7 +1346,7 @@
       },
       "accessibility": {
         "pattern": "combobox",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -1205,10 +1355,19 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Select",
+          "files": [
+            "apps/qa-remote/src/stories/select.stories.ts"
+          ],
+          "stories": [
+            "Interactive",
+            "Selected",
+            "Disabled",
+            "EmptyOptions",
+            "LongOptions",
+            "ModelBinding"
+          ]
         },
         "tests": {
           "status": "partial",
@@ -1242,12 +1401,10 @@
         "promotionRequirements": []
       },
       "health": {
-        "repositoryReadiness": "partial",
+        "repositoryReadiness": "ready",
         "externalDesignBinding": "partial",
         "blockers": [],
-        "warnings": [
-          "No dedicated Storybook evidence is recorded."
-        ]
+        "warnings": []
       }
     },
     {
@@ -1271,8 +1428,14 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "height",
+            "type": "string",
+            "defaultValue": "1rem"
+          }
+        ],
         "outputs": [],
         "models": [],
         "publicTypes": []
@@ -1296,7 +1459,7 @@
       },
       "accessibility": {
         "pattern": "presentation",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -1305,10 +1468,17 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Skeleton",
+          "files": [
+            "apps/qa-remote/src/stories/skeleton.stories.ts"
+          ],
+          "stories": [
+            "TextLine",
+            "Heading",
+            "MediaBlock",
+            "CompositeLoadingCard"
+          ]
         },
         "tests": {
           "status": "missing",
@@ -1344,9 +1514,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated Storybook evidence is recorded.",
-          "No dedicated automated behavior evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
+          "No dedicated automated behavior evidence is recorded."
         ]
       }
     },
@@ -1371,11 +1539,39 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "label",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "value",
+            "type": "string | number",
+            "required": true
+          },
+          {
+            "name": "detail",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "tone",
+            "type": "PublicStatusCardTone",
+            "defaultValue": "info"
+          }
+        ],
         "outputs": [],
         "models": [],
-        "publicTypes": []
+        "publicTypes": [
+          "PublicStatusCardTone"
+        ]
       },
       "implementation": {
         "provider": "composite",
@@ -1396,7 +1592,7 @@
       },
       "accessibility": {
         "pattern": "region",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -1405,10 +1601,19 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Status Card",
+          "files": [
+            "apps/qa-remote/src/stories/status-card.stories.ts"
+          ],
+          "stories": [
+            "Default",
+            "WithoutStatus",
+            "Warning",
+            "Critical",
+            "LongContent",
+            "OperationalDashboard"
+          ]
         },
         "tests": {
           "status": "missing",
@@ -1444,9 +1649,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated Storybook evidence is recorded.",
-          "No dedicated automated behavior evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
+          "No dedicated automated behavior evidence is recorded."
         ]
       }
     },
@@ -1673,17 +1876,37 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "label",
+            "type": "string",
+            "defaultValue": "More information"
+          },
+          {
+            "name": "text",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "position",
+            "type": "PublicTooltipPosition",
+            "defaultValue": "top"
+          }
+        ],
         "outputs": [],
         "models": [],
-        "publicTypes": []
+        "publicTypes": [
+          "PublicTooltipPosition"
+        ]
       },
       "implementation": {
         "provider": "primeng",
         "providerName": "PrimeNG",
         "providerInternalOnly": true,
-        "providerModules": [],
+        "providerModules": [
+          "primeng/tooltip"
+        ],
         "providerEscapeHatches": [],
         "knownLimitations": []
       },
@@ -1698,7 +1921,7 @@
       },
       "accessibility": {
         "pattern": "tooltip",
-        "automatedChecks": "missing",
+        "automatedChecks": "partial",
         "keyboardCoverage": "missing",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
@@ -1707,10 +1930,18 @@
       },
       "evidence": {
         "storybook": {
-          "status": "missing",
-          "title": null,
-          "files": [],
-          "stories": []
+          "status": "complete",
+          "title": "Design System/Components/Tooltip",
+          "files": [
+            "apps/qa-remote/src/stories/tooltip.stories.ts"
+          ],
+          "stories": [
+            "HoverAndFocus",
+            "LongText",
+            "EmptyText",
+            "PositionMatrix",
+            "MobileFocus"
+          ]
         },
         "tests": {
           "status": "partial",
@@ -1744,13 +1975,10 @@
         "promotionRequirements": []
       },
       "health": {
-        "repositoryReadiness": "partial",
+        "repositoryReadiness": "ready",
         "externalDesignBinding": "partial",
         "blockers": [],
-        "warnings": [
-          "No dedicated Storybook evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
-        ]
+        "warnings": []
       }
     },
     {
@@ -1806,29 +2034,18 @@
             "name": "loading",
             "type": "boolean",
             "defaultValue": "false"
-          },
-          {
-            "name": "tone",
-            "type": "PublicUpButtonTone | undefined",
-            "description": "Deprecated Candidate compatibility alias; use intent."
           }
         ],
         "outputs": [
           {
             "name": "activated",
             "type": "void",
-            "description": "Preferred high-level action event."
-          },
-          {
-            "name": "buttonClick",
-            "type": "void",
-            "description": "Deprecated Candidate compatibility alias; use activated."
+            "description": "High-level action event."
           }
         ],
         "models": [],
         "publicTypes": [
           "PublicUpButtonIntent",
-          "PublicUpButtonTone",
           "PublicUpButtonAppearance",
           "PublicUpButtonIcon"
         ]
@@ -1842,7 +2059,6 @@
         ],
         "providerEscapeHatches": [],
         "knownLimitations": [
-          "Legacy tone and buttonClick aliases remain during the Candidate compatibility window.",
           "Figma property mapping and manual screen-reader review remain pending."
         ]
       },
@@ -1896,10 +2112,10 @@
             "InteractionStateReference",
             "LightDarkModeMatrix",
             "CurrentVsCandidate",
-            "ApprovedApi",
+            "PreferredCandidateApi",
             "SupportedIntentMatrix",
             "ProviderTranslation",
-            "CompatibilityWindow"
+            "CandidateContractBoundary"
           ]
         },
         "tests": {
@@ -1942,7 +2158,6 @@
         "designReview": "pending",
         "promotionRequirements": [
           "Approve the opinionated intent API.",
-          "Remove or time-box legacy Candidate aliases.",
           "Validate the Figma property mapping.",
           "Complete manual accessibility review.",
           "Record the final promotion decision."
@@ -1956,7 +2171,7 @@
           "Manual screen-reader audit is pending."
         ],
         "warnings": [
-          "Legacy Candidate aliases remain visible until current QA examples migrate."
+          "The contract is proposed and remains pending design-system approval."
         ]
       }
     },

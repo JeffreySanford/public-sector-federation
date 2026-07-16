@@ -1,10 +1,14 @@
-export { PublicButtonComponent, type PublicButtonTone } from './public-button.component';
+export {
+  PublicButtonComponent,
+  type PublicButtonAppearance,
+  type PublicButtonIntent,
+  type PublicButtonTone,
+} from './public-button.component';
 export {
   PublicUpButtonComponent,
   type PublicUpButtonAppearance,
   type PublicUpButtonIcon,
   type PublicUpButtonIntent,
-  type PublicUpButtonTone,
 } from './public-up-button.component';
 export { PublicCardComponent } from './public-card.component';
 export { PublicDialogComponent } from './public-dialog.component';
@@ -17,7 +21,7 @@ export { PublicPopoverComponent } from './public-popover.component';
 export { PublicProgressComponent } from './public-progress.component';
 export { PublicSkeletonComponent } from './public-skeleton.component';
 export { PublicSelectComponent, type PublicSelectOption } from './public-select.component';
-export { PublicStatusCardComponent } from './public-status-card.component';
+export { PublicStatusCardComponent, type PublicStatusCardTone } from './public-status-card.component';
 export { PublicTagComponent, type PublicTagTone } from './public-tag.component';
 export { PublicTooltipComponent, type PublicTooltipPosition } from './public-tooltip.component';
 export { PublicToastComponent } from './public-toast.component';

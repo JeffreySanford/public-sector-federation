@@ -5,10 +5,10 @@ import {
   PublicUpButtonComponent,
   type PublicUpButtonAppearance,
   type PublicUpButtonIcon,
-  type PublicUpButtonTone,
+  type PublicUpButtonIntent,
 } from '@public-sector/ui-patterns';
 
-const tones: PublicUpButtonTone[] = ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'help', 'contrast'];
+const intents: PublicUpButtonIntent[] = ['primary', 'secondary', 'destructive'];
 const appearances: PublicUpButtonAppearance[] = ['solid', 'outlined', 'text'];
 const icons: PublicUpButtonIcon[] = [
   'check',
@@ -36,11 +36,11 @@ const meta: Meta<PublicUpButtonComponent> = {
         <ps-up-button
           [label]="label"
           [icon]="icon"
-          [tone]="tone"
+          [intent]="intent"
           [appearance]="appearance"
           [disabled]="disabled"
           [loading]="loading"
-          (buttonClick)="buttonClick?.($event)"
+          (activated)="activated?.()"
         />
       </main>
     `,
@@ -66,7 +66,7 @@ const meta: Meta<PublicUpButtonComponent> = {
   args: {
     label: 'Primary action',
     icon: 'check',
-    tone: 'primary',
+    intent: 'primary',
     appearance: 'solid',
     disabled: false,
     loading: false,
@@ -81,10 +81,10 @@ const meta: Meta<PublicUpButtonComponent> = {
       options: icons,
       description: 'Provider-neutral icon name mapped internally to the current icon provider.',
     },
-    tone: {
+    intent: {
       control: 'select',
-      options: tones,
-      description: 'Provider-neutral design-system tone.',
+      options: intents,
+      description: 'Product-facing action purpose.',
     },
     appearance: {
       control: 'select',
@@ -99,8 +99,8 @@ const meta: Meta<PublicUpButtonComponent> = {
       control: 'boolean',
       description: 'Shows progress and prevents duplicate activation.',
     },
-    buttonClick: {
-      action: 'buttonClick',
+    activated: {
+      action: 'activated',
       description: 'Emitted only when the candidate Button is enabled and not loading.',
     },
   },
@@ -127,7 +127,7 @@ export const Secondary: Story = {
   args: {
     label: 'Secondary action',
     icon: 'arrow-right',
-    tone: 'secondary',
+    intent: 'secondary',
   },
 };
 
@@ -135,7 +135,7 @@ export const Success: Story = {
   args: {
     label: 'Approve',
     icon: 'check',
-    tone: 'success',
+    intent: 'primary',
   },
 };
 
@@ -143,7 +143,7 @@ export const Info: Story = {
   args: {
     label: 'View details',
     icon: 'info-circle',
-    tone: 'info',
+    intent: 'secondary',
   },
 };
 
@@ -151,7 +151,7 @@ export const Warning: Story = {
   args: {
     label: 'Review warning',
     icon: 'exclamation-triangle',
-    tone: 'warning',
+    intent: 'secondary',
   },
 };
 
@@ -159,7 +159,7 @@ export const Error: Story = {
   args: {
     label: 'Resolve error',
     icon: 'times-circle',
-    tone: 'error',
+    intent: 'destructive',
   },
 };
 
@@ -167,7 +167,7 @@ export const Help: Story = {
   args: {
     label: 'Get help',
     icon: 'question-circle',
-    tone: 'help',
+    intent: 'secondary',
   },
 };
 
@@ -175,7 +175,7 @@ export const Contrast: Story = {
   args: {
     label: 'High emphasis',
     icon: 'bolt',
-    tone: 'contrast',
+    intent: 'primary',
   },
 };
 
@@ -231,7 +231,7 @@ export const InteractionHarness: Story = {
         <ps-up-button
           label="Submit application"
           icon="check"
-          (buttonClick)="clickCount = clickCount + 1"
+          (activated)="clickCount = clickCount + 1"
         />
         <output aria-live="polite">Activations: {{ clickCount }}</output>
       </main>
@@ -280,7 +280,7 @@ export const LongLabel: Story = {
         <ps-up-button
           [label]="label"
           [icon]="icon"
-          [tone]="tone"
+          [intent]="intent"
           [appearance]="appearance"
           [disabled]="disabled"
           [loading]="loading"
@@ -306,20 +306,20 @@ export const ToneMatrix: Story = {
     layout: 'fullscreen',
     docs: {
       description: {
-        story: 'Shows each approved public tone using the candidate up-design-system Button.',
+        story: 'Shows each proposed product intent using the candidate Button.',
       },
     },
   },
   render: () => ({
-    props: { tones },
+    props: { intents },
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="button-story-shell">
-        <section class="button-matrix" aria-label="UP Button tone matrix">
-          @for (tone of tones; track tone) {
+        <section class="button-matrix" aria-label="UP Button intent matrix">
+          @for (intent of intents; track intent) {
             <div class="button-cell">
-              <span>{{ tone }}</span>
-              <ps-up-button [label]="tone + ' action'" [tone]="tone" icon="check" />
+              <span>{{ intent }}</span>
+              <ps-up-button [label]="intent + ' action'" [intent]="intent" icon="check" />
             </div>
           }
         </section>
@@ -379,9 +379,9 @@ export const AppearanceMatrix: Story = {
           @for (appearance of appearances; track appearance) {
             <div class="button-cell">
               <span>{{ appearance }}</span>
-              <ps-up-button label="Primary action" tone="primary" [appearance]="appearance" icon="check" />
-              <ps-up-button label="Secondary action" tone="secondary" [appearance]="appearance" icon="arrow-right" />
-              <ps-up-button label="Error action" tone="error" [appearance]="appearance" icon="times-circle" />
+              <ps-up-button label="Primary action" intent="primary" [appearance]="appearance" icon="check" />
+              <ps-up-button label="Secondary action" intent="secondary" [appearance]="appearance" icon="arrow-right" />
+              <ps-up-button label="Destructive action" intent="destructive" [appearance]="appearance" icon="times-circle" />
             </div>
           }
         </section>
@@ -603,20 +603,20 @@ export const LightDarkModeMatrix: Story = {
     layout: 'fullscreen',
   },
   render: () => ({
-    props: { tones: ['primary', 'secondary', 'error', 'contrast'] satisfies PublicUpButtonTone[] },
+    props: { intents },
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="mode-matrix" aria-label="UP Button light and dark mode matrix">
         <section class="mode-panel light-panel">
           <span>Light</span>
-          @for (tone of tones; track tone) {
-            <ps-up-button [label]="tone" [tone]="tone" icon="check" />
+          @for (intent of intents; track intent) {
+            <ps-up-button [label]="intent" [intent]="intent" icon="check" />
           }
         </section>
         <section class="mode-panel dark-panel">
           <span>Dark</span>
-          @for (tone of tones; track tone) {
-            <ps-up-button [label]="tone" [tone]="tone" icon="check" />
+          @for (intent of intents; track intent) {
+            <ps-up-button [label]="intent" [intent]="intent" icon="check" />
           }
         </section>
       </main>
@@ -811,7 +811,7 @@ export const CurrentVsCandidate: Story = {
 
           <div class="scenario">Secondary solid</div>
           <div class="sample"><ps-button label="Secondary action" icon="pi pi-arrow-right" tone="secondary" /></div>
-          <div class="sample"><ps-up-button label="Secondary action" icon="arrow-right" tone="secondary" /></div>
+          <div class="sample"><ps-up-button label="Secondary action" icon="arrow-right" intent="secondary" /></div>
 
           <div class="scenario">Outlined</div>
           <div class="sample"><ps-button label="Outlined action" icon="pi pi-download" [outlined]="true" /></div>

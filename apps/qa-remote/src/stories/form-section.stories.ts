@@ -1,0 +1,13 @@
+import { Component } from '@angular/core';
+import type { Meta, StoryObj } from '@storybook/angular';
+import { PublicFormSectionComponent, PublicSelectComponent } from '@public-sector/ui-patterns';
+
+@Component({ selector: 'form-section-demo', standalone: true, imports: [PublicFormSectionComponent, PublicSelectComponent], template: `<public-form-section [title]="title" [description]="description"><label>Applicant name <input value="Jordan Lee" /></label><ps-select label="Program" [options]="options" /><label>Case notes <textarea rows="4">Follow-up documentation requested.</textarea></label></public-form-section>`, styles: `public-form-section{display:block;max-width:44rem}label{display:grid;gap:.35rem;font-weight:700}input,textarea{padding:.75rem;border:1px solid var(--p-content-border-color);border-radius:.5rem;background:var(--p-content-background);color:var(--p-text-color)}` })
+class FormSectionDemo { title = 'Application details'; description = 'Fields marked as required must be completed before submission.'; options = [{ label: 'Housing assistance', value: 'housing' }, { label: 'Food assistance', value: 'food' }]; }
+const meta: Meta<FormSectionDemo> = { title: 'Design System/Components/Form Section', component: FormSectionDemo, parameters: { layout: 'centered', a11y: { test: 'error' } } };
+export default meta;
+type Story = StoryObj<FormSectionDemo>;
+export const CompleteForm: Story = {};
+export const WithoutDescription: Story = { render: () => ({ props: { title: 'Contact information', description: '' }, moduleMetadata: { imports: [PublicFormSectionComponent] }, template: `<public-form-section [title]="title" [description]="description"><label>Email <input type="email" value="applicant@example.gov" /></label></public-form-section>` }) };
+export const ValidationContent: Story = { render: () => ({ moduleMetadata: { imports: [PublicFormSectionComponent] }, template: `<public-form-section title="Identity verification" description="Resolve the highlighted fields."><label>Verification code <input aria-invalid="true" aria-describedby="error" /></label><strong id="error" role="alert">Enter the 8-character verification code.</strong></public-form-section>` }) };
+export const LongResponsiveContent: Story = { render: () => ({ moduleMetadata: { imports: [PublicFormSectionComponent] }, template: `<public-form-section title="Authorized representative and alternate communication preferences" description="Provide complete information so notices can be delivered in an accessible format without delaying the eligibility determination."><p>Projected content region for complex, responsive forms.</p></public-form-section>` }), parameters: { viewport: { defaultViewport: 'mobile1' } } };

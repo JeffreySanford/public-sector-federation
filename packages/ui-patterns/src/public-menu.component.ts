@@ -31,7 +31,7 @@ export class PublicMenuComponent {
   readonly icon = input('pi pi-bars');
   readonly actions = input<PublicMenuAction[]>([]);
 
-  readonly menuItems = computed<MenuItem[]>(() =>
+  protected readonly menuItems = computed<MenuItem[]>(() =>
     this.actions().map((action) => ({
       label: action.label,
       icon: action.icon,

@@ -82,6 +82,7 @@ if (!storybookMain.includes("'@storybook/addon-docs'") || !storybookMain.include
 
 run('node', ['scripts/guard-scss.mjs']);
 run('node', ['scripts/check-primeng-boundaries.mjs']);
+run('node', ['scripts/check-wrapper-contracts.mjs']);
 run('node', ['scripts/build-component-manifest.mjs', '--check']);
 run('pnpm', ['db:validate']);
 run('pnpm', ['markdownlint-cli2', 'docs/**/*.md', '!docs/reports/**/*.md']);

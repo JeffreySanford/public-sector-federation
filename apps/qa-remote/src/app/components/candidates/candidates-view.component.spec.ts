@@ -37,13 +37,13 @@ describe('CandidatesViewComponent', () => {
 
   it('updates the shared comparison controls', () => {
     component.setLabel('Approve request');
-    component.setTone('success');
+    component.setIntent('secondary');
     component.setAppearance('outlined');
     component.setDisabled(true);
     component.setLoading(true);
 
     expect(component.label()).toBe('Approve request');
-    expect(component.tone()).toBe('success');
+    expect(component.intent()).toBe('secondary');
     expect(component.appearance()).toBe('outlined');
     expect(component.disabled()).toBeTrue();
     expect(component.loading()).toBeTrue();

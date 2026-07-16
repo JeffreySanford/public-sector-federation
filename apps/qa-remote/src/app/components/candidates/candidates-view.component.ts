@@ -6,7 +6,8 @@ import {
   PublicTagComponent,
   PublicUpButtonComponent,
   type PublicUpButtonAppearance,
-  type PublicUpButtonTone,
+  type PublicUpButtonIcon,
+  type PublicUpButtonIntent,
 } from '@public-sector/ui-patterns';
 import {
   PublicSectorThemeService,
@@ -26,8 +27,8 @@ interface ComparisonScenario {
   label: string;
   description: string;
   buttonLabel: string;
-  icon?: string;
-  tone: PublicUpButtonTone;
+  icon?: PublicUpButtonIcon;
+  intent: PublicUpButtonIntent;
   appearance: PublicUpButtonAppearance;
   disabled?: boolean;
   loading?: boolean;
@@ -62,7 +63,7 @@ export class CandidatesViewComponent {
   readonly theme = inject(PublicSectorThemeService);
 
   readonly label = signal('Review application');
-  readonly tone = signal<PublicUpButtonTone>('primary');
+  readonly intent = signal<PublicUpButtonIntent>('primary');
   readonly appearance = signal<PublicUpButtonAppearance>('solid');
   readonly disabled = signal(false);
   readonly loading = signal(false);
@@ -70,16 +71,7 @@ export class CandidatesViewComponent {
   readonly candidateActivations = signal(0);
   readonly showStorybookPreview = signal(false);
 
-  readonly tones: readonly PublicUpButtonTone[] = [
-    'primary',
-    'secondary',
-    'success',
-    'info',
-    'warning',
-    'error',
-    'help',
-    'contrast',
-  ];
+  readonly intents: readonly PublicUpButtonIntent[] = ['primary', 'secondary', 'destructive'];
 
   readonly appearances: readonly PublicUpButtonAppearance[] = [
     'solid',
@@ -106,8 +98,8 @@ export class CandidatesViewComponent {
       label: 'Primary solid',
       description: 'Default high-emphasis action.',
       buttonLabel: 'Primary action',
-      icon: 'pi pi-check',
-      tone: 'primary',
+      icon: 'check',
+      intent: 'primary',
       appearance: 'solid',
     },
     {
@@ -115,8 +107,8 @@ export class CandidatesViewComponent {
       label: 'Secondary solid',
       description: 'Supporting action using the secondary treatment.',
       buttonLabel: 'Secondary action',
-      icon: 'pi pi-arrow-right',
-      tone: 'secondary',
+      icon: 'arrow-right',
+      intent: 'secondary',
       appearance: 'solid',
     },
     {
@@ -124,8 +116,8 @@ export class CandidatesViewComponent {
       label: 'Outlined',
       description: 'Lower-emphasis action with a visible boundary.',
       buttonLabel: 'Download report',
-      icon: 'pi pi-download',
-      tone: 'primary',
+      icon: 'download',
+      intent: 'primary',
       appearance: 'outlined',
     },
     {
@@ -133,8 +125,8 @@ export class CandidatesViewComponent {
       label: 'Text',
       description: 'Lowest-emphasis action without a persistent boundary.',
       buttonLabel: 'View details',
-      icon: 'pi pi-info-circle',
-      tone: 'primary',
+      icon: 'info-circle',
+      intent: 'secondary',
       appearance: 'text',
     },
     {
@@ -142,8 +134,8 @@ export class CandidatesViewComponent {
       label: 'Disabled',
       description: 'Unavailable action that cannot be activated.',
       buttonLabel: 'Unavailable action',
-      icon: 'pi pi-lock',
-      tone: 'primary',
+      icon: 'lock',
+      intent: 'primary',
       appearance: 'solid',
       disabled: true,
     },
@@ -152,8 +144,8 @@ export class CandidatesViewComponent {
       label: 'Loading',
       description: 'In-progress action that prevents duplicate activation.',
       buttonLabel: 'Submitting',
-      icon: 'pi pi-send',
-      tone: 'primary',
+      icon: 'send',
+      intent: 'primary',
       appearance: 'solid',
       loading: true,
     },
@@ -163,8 +155,8 @@ export class CandidatesViewComponent {
       description: 'Stress state for wrapping and responsive sizing.',
       buttonLabel:
         'Submit housing assistance eligibility review for North Region queue',
-      icon: 'pi pi-check',
-      tone: 'primary',
+      icon: 'check',
+      intent: 'primary',
       appearance: 'outlined',
     },
     {
@@ -172,8 +164,8 @@ export class CandidatesViewComponent {
       label: 'Error tone',
       description: 'Destructive or error-recovery action vocabulary.',
       buttonLabel: 'Resolve error',
-      icon: 'pi pi-times-circle',
-      tone: 'error',
+      icon: 'times-circle',
+      intent: 'destructive',
       appearance: 'solid',
     },
   ];
@@ -258,9 +250,9 @@ export class CandidatesViewComponent {
     this.label.set(value.trimStart());
   }
 
-  setTone(value: string): void {
-    if (this.tones.includes(value as PublicUpButtonTone)) {
-      this.tone.set(value as PublicUpButtonTone);
+  setIntent(value: string): void {
+    if (this.intents.includes(value as PublicUpButtonIntent)) {
+      this.intent.set(value as PublicUpButtonIntent);
     }
   }
 

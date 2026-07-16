@@ -61,12 +61,12 @@
       </label>
 
       <label>
-        <span>Tone</span>
+        <span>Intent</span>
         <select
-          [value]="tone()"
-          (change)="setTone(($any($event.target).value ?? '').toString())"
+          [value]="intent()"
+          (change)="setIntent(($any($event.target).value ?? '').toString())"
         >
-          @for (option of tones; track option) {
+          @for (option of intents; track option) {
             <option [value]="option">{{ option }}</option>
           }
         </select>
@@ -116,9 +116,8 @@
           <ps-button
             [label]="label() || 'Button'"
             icon="pi pi-check"
-            [tone]="tone()"
-            [outlined]="appearance() === 'outlined'"
-            [text]="appearance() === 'text'"
+            [intent]="intent()"
+            [appearance]="appearance()"
             [disabled]="disabled()"
             [loading]="loading()"
             (buttonClick)="recordActivation('stable')"
@@ -138,12 +137,12 @@
         <div class="implementation-card__stage">
           <ps-up-button
             [label]="label() || 'Button'"
-            icon="pi pi-check"
-            [tone]="tone()"
+            icon="check"
+            [intent]="intent()"
             [appearance]="appearance()"
             [disabled]="disabled()"
             [loading]="loading()"
-            (buttonClick)="recordActivation('candidate')"
+            (activated)="recordActivation('candidate')"
           />
         </div>
         <output aria-live="polite">Activations: {{ candidateActivations() }}</output>
@@ -244,9 +243,8 @@
             <ps-button
               [label]="scenario.buttonLabel"
               [icon]="scenario.icon"
-              [tone]="scenario.tone"
-              [outlined]="scenario.appearance === 'outlined'"
-              [text]="scenario.appearance === 'text'"
+              [intent]="scenario.intent"
+              [appearance]="scenario.appearance"
               [disabled]="!!scenario.disabled"
               [loading]="!!scenario.loading"
             />
@@ -257,7 +255,7 @@
             <ps-up-button
               [label]="scenario.buttonLabel"
               [icon]="scenario.icon"
-              [tone]="scenario.tone"
+              [intent]="scenario.intent"
               [appearance]="scenario.appearance"
               [disabled]="!!scenario.disabled"
               [loading]="!!scenario.loading"

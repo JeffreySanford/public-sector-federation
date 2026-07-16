@@ -45,6 +45,34 @@ class ButtonTagAcceptanceStoryComponent {}
 })
 class ButtonTagStressStoryComponent {}
 
+@Component({
+  selector: 'public-button-contract-story',
+  standalone: true,
+  imports: [PublicButtonComponent],
+  template: `
+    <main class="storybook-shell">
+      <h1>Stable Button contract migration</h1>
+      <section>
+        <h2>Preferred API</h2>
+        <ps-button label="Save changes" intent="primary" appearance="solid" (activated)="preferred = preferred + 1" />
+        <ps-button label="Cancel" intent="secondary" appearance="text" />
+        <ps-button label="Delete record" intent="destructive" appearance="outlined" />
+        <output>Preferred activations: {{ preferred }}</output>
+      </section>
+      <section>
+        <h2>Deprecated compatibility API</h2>
+        <ps-button label="Legacy outlined" tone="warning" [outlined]="true" (buttonClick)="legacy = legacy + 1" />
+        <output>Legacy activations: {{ legacy }}</output>
+      </section>
+    </main>
+  `,
+  styles: `.storybook-shell{display:grid;gap:1.5rem;max-width:72rem;margin:0 auto}.storybook-shell section{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}`,
+})
+class ButtonContractStoryComponent {
+  preferred = 0;
+  legacy = 0;
+}
+
 const meta: Meta<ButtonTagAcceptanceStoryComponent> = {
   title: 'Design System/Acceptance/Button Tag',
   render: () => ({ moduleMetadata: { imports: [ButtonTagAcceptanceStoryComponent] }, template: '<public-button-tag-acceptance-story />' }),
@@ -56,4 +84,7 @@ type Story = StoryObj<ButtonTagAcceptanceStoryComponent>;
 export const States: Story = {};
 export const LongLabelsAndDenseText: StoryObj<ButtonTagStressStoryComponent> = {
   render: () => ({ moduleMetadata: { imports: [ButtonTagStressStoryComponent] }, template: '<public-button-tag-stress-story />' }),
+};
+export const PreferredAndLegacyContracts: StoryObj<ButtonContractStoryComponent> = {
+  render: () => ({ moduleMetadata: { imports: [ButtonContractStoryComponent] }, template: '<public-button-contract-story />' }),
 };

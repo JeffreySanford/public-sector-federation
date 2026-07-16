@@ -102,7 +102,7 @@ test.describe('UP Button Candidate isolated Storybook iframe', () => {
     expect(hoverStyles.borderColor).not.toBe(defaultStyles.borderColor);
   });
 
-  test('emits normalized buttonClick on pointer and keyboard activation', async ({ page }) => {
+  test('emits normalized activated events on pointer and keyboard activation', async ({ page }) => {
     await gotoCandidateStory(page, 'interaction-harness');
 
     const button = page.getByRole('button', { name: 'Submit application' });
@@ -175,32 +175,32 @@ test.describe('UP Button Candidate isolated Storybook iframe', () => {
     expect(geometry.scrollWidth).toBeLessThanOrEqual(geometry.clientWidth + 1);
   });
 
-  test('renders tone and appearance matrix stories', async ({ page }) => {
+  test('renders intent and appearance matrix stories', async ({ page }) => {
     await gotoCandidateStory(page, 'tone-matrix');
     await expect(page.getByRole('button', { name: 'primary action' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'error action' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'destructive action' })).toBeVisible();
 
     await gotoCandidateStory(page, 'appearance-matrix');
     await expect(page.getByRole('button', { name: 'Primary action' }).first()).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Error action' }).first()).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Destructive action' }).first()).toBeVisible();
   });
 
   test('renders interaction, size, focus, mode, and theme reference stories', async ({ page }) => {
     await gotoCandidateStory(page, 'interaction-state-reference');
     await expect(page.getByRole('button', { name: 'Default' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Disabled' })).toBeDisabled();
-    await expect(page.getByRole('button', { name: 'Loading' })).toHaveAttribute('aria-busy', 'true');
+    await expect(page.locator('ps-up-button').filter({ has: page.getByRole('button', { name: 'Loading' }) })).toHaveAttribute('aria-busy', 'true');
 
     await gotoCandidateStory(page, 'size-matrix');
-    await expect(page.getByRole('button', { name: 'Compact', exact: true })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Spacious', exact: true })).toBeVisible();
+    await expect(page.getByRole('button', { name: /Compact$/ })).toBeVisible();
+    await expect(page.getByRole('button', { name: /Spacious$/ })).toBeVisible();
 
     await gotoCandidateStory(page, 'focus-reference');
     await expect(page.getByRole('button', { name: 'Focus reference' })).toBeVisible();
 
     await gotoCandidateStory(page, 'light-dark-mode-matrix');
     await expect(page.getByRole('button', { name: 'primary' })).toHaveCount(2);
-    await expect(page.getByRole('button', { name: 'contrast' })).toHaveCount(2);
+    await expect(page.getByRole('button', { name: 'destructive' })).toHaveCount(2);
 
     await gotoCandidateStory(page, 'theme-variant-matrix');
     await expect(page.getByRole('button', { name: 'Primary' })).toHaveCount(3);

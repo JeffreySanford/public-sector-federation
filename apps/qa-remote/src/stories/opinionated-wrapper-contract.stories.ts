@@ -2,12 +2,17 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import {
   PublicUpButtonComponent,
+  componentManifest,
   type PublicUpButtonAppearance,
   type PublicUpButtonIntent,
 } from '@public-sector/ui-patterns';
 
-const intents: PublicUpButtonIntent[] = ['primary', 'secondary', 'destructive'];
-const appearances: PublicUpButtonAppearance[] = ['solid', 'outlined', 'text'];
+const candidateManifest = componentManifest.entries.find((entry) => entry.identity.id === 'ps-up-button');
+if (!candidateManifest) throw new Error('ps-up-button is missing from the component manifest.');
+const variantValues = (name: string): string[] =>
+  candidateManifest.variants.properties.find((variant) => variant.name === name)?.values ?? [];
+const intents = variantValues('intent') as PublicUpButtonIntent[];
+const appearances = variantValues('appearance') as PublicUpButtonAppearance[];
 
 const pageStyles = `
   .contract-page {
@@ -52,15 +57,15 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-export const ApprovedApi: Story = {
+export const PreferredCandidateApi: Story = {
   render: () => ({
     props: { activations: 0 },
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
-      <main class="contract-page" aria-labelledby="approvedApiTitle">
+      <main class="contract-page" aria-labelledby="preferredApiTitle">
         <header>
           <p>Neil and Dan wrapper direction</p>
-          <h1 id="approvedApiTitle">Approved high-level API</h1>
+          <h1 id="preferredApiTitle">Preferred candidate API</h1>
           <span>Consumer need → design-system contract → private PrimeNG mapping</span>
         </header>
 
@@ -166,28 +171,24 @@ export const ProviderTranslation: Story = {
   }),
 };
 
-export const CompatibilityWindow: Story = {
+export const CandidateContractBoundary: Story = {
   render: () => ({
-    props: { preferred: 0, legacy: 0 },
+    props: { preferred: 0 },
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
-      <main class="contract-page" aria-labelledby="compatibilityTitle">
+      <main class="contract-page" aria-labelledby="contractBoundaryTitle">
         <header>
-          <p>Candidate migration</p>
-          <h1 id="compatibilityTitle">Compatibility aliases are temporary</h1>
-          <span>New work uses intent and activated. Existing QA evidence may migrate through tone and buttonClick.</span>
+          <p>Candidate API boundary</p>
+          <h1 id="contractBoundaryTitle">Provider-neutral contract only</h1>
+          <span>The candidate accepts intent, appearance, approved icon names, and activated. Provider vocabulary is rejected by validation.</span>
         </header>
         <section class="contract-grid">
           <article>
-            <h2>Preferred</h2>
+            <h2>Supported contract</h2>
             <ps-up-button label="Remove item" intent="destructive" (activated)="preferred = preferred + 1" />
             <output>Activations: {{ preferred }}</output>
           </article>
-          <article>
-            <h2>Compatibility alias</h2>
-            <ps-up-button label="Resolve error" tone="error" (buttonClick)="legacy = legacy + 1" />
-            <output>Activations: {{ legacy }}</output>
-          </article>
+          <article><h2>Not public</h2><p><code>tone</code>, <code>buttonClick</code>, and raw <code>pi ...</code> classes are intentionally absent.</p></article>
         </section>
       </main>
     `,
