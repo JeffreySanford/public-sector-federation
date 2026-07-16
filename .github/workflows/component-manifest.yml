@@ -1,0 +1,53 @@
+name: Component Manifest
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/component-manifest.yml'
+      - 'apps/qa-remote/**'
+      - 'docs/design-system/**'
+      - 'packages/ui-patterns/**'
+      - 'scripts/build-component-manifest.mjs'
+      - 'scripts/lint-workspace.mjs'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Manifest, lint, and Storybook
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.2
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate component manifest
+        run: pnpm manifest:check
+
+      - name: Run workspace lint
+        run: pnpm lint
+
+      - name: Typecheck projects
+        run: pnpm typecheck
+
+      - name: Build QA Storybook
+        run: pnpm build-storybook:qa
