@@ -25,7 +25,10 @@ const jsonFiles = [
 ];
 
 const run = (command, args) => {
-  const result = spawnSync(command, args, { cwd: root, shell: true, stdio: 'inherit' });
+  const isWindowsPnpm = process.platform === 'win32' && command === 'pnpm';
+  const executable = isWindowsPnpm ? process.env.ComSpec ?? 'cmd.exe' : command;
+  const commandArgs = isWindowsPnpm ? ['/d', '/s', '/c', 'pnpm.cmd', ...args] : args;
+  const result = spawnSync(executable, commandArgs, { cwd: root, stdio: 'inherit' });
   if (result.status !== 0) {
     process.exit(result.status ?? 1);
   }

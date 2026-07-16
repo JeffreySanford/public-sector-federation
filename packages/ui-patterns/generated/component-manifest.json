@@ -1,0 +1,2062 @@
+{
+  "schemaVersion": 1,
+  "package": "@public-sector/ui-patterns",
+  "entries": [
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-button",
+        "name": "Button",
+        "kind": "component",
+        "exportName": "PublicButtonComponent",
+        "selector": "ps-button",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-button.component.ts",
+        "description": "Stable PrimeNG-backed action wrapper used by current applications and remotes."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "label",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "icon",
+            "type": "string | undefined"
+          },
+          {
+            "name": "tone",
+            "type": "PublicButtonTone",
+            "defaultValue": "primary"
+          },
+          {
+            "name": "styleClass",
+            "type": "string | undefined"
+          },
+          {
+            "name": "outlined",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "text",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "routerLink",
+            "type": "string | unknown[] | null",
+            "defaultValue": "null"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "buttonClick",
+            "type": "MouseEvent"
+          }
+        ],
+        "models": [],
+        "publicTypes": [
+          "PublicButtonTone"
+        ]
+      },
+      "implementation": {
+        "provider": "primeng",
+        "providerName": "PrimeNG",
+        "providerInternalOnly": true,
+        "providerModules": [
+          "primeng/button"
+        ],
+        "providerEscapeHatches": [
+          "styleClass"
+        ],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [
+          {
+            "name": "tone",
+            "values": [
+              "primary",
+              "secondary",
+              "success",
+              "info",
+              "warn",
+              "warning",
+              "danger",
+              "error",
+              "help",
+              "contrast"
+            ]
+          },
+          {
+            "name": "appearance",
+            "values": [
+              "solid",
+              "outlined",
+              "text"
+            ]
+          }
+        ],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "button",
+        "automatedChecks": "partial",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "complete",
+          "title": "Design System/Acceptance/Button and Tag",
+          "files": [
+            "apps/qa-remote/src/stories/button-tag.acceptance.stories.ts"
+          ],
+          "stories": []
+        },
+        "tests": {
+          "status": "partial",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "The current stable API still exposes styleClass and separate outlined/text booleans."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-card",
+        "name": "Card",
+        "kind": "component",
+        "exportName": "PublicCardComponent",
+        "selector": "ps-card",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-card.component.ts",
+        "description": "Token-driven content surface with optional heading content."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "native",
+        "providerName": "Native",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "region",
+        "automatedChecks": "partial",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "complete",
+          "title": "Design System/Acceptance/Card",
+          "files": [
+            "apps/qa-remote/src/stories/card.acceptance.stories.ts"
+          ],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated automated behavior evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-dialog",
+        "name": "Dialog",
+        "kind": "component",
+        "exportName": "PublicDialogComponent",
+        "selector": "ps-dialog",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-dialog.component.ts",
+        "description": "Modal content pattern with a controlled header, body, footer, and visibility model."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "native",
+        "providerName": "Native",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "dialog",
+        "automatedChecks": "partial",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "complete",
+          "title": "Design System/Acceptance/Dialog and Toast",
+          "files": [
+            "apps/qa-remote/src/stories/dialog-toast.acceptance.stories.ts"
+          ],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated automated behavior evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-empty-state",
+        "name": "Empty State",
+        "kind": "pattern",
+        "exportName": "PublicEmptyStateComponent",
+        "selector": "public-empty-state",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-empty-state.component.ts",
+        "description": "Composite empty-state pattern using shared tokens and the public button wrapper."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "composite",
+        "providerName": "Mixed",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "status",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded.",
+          "No dedicated automated behavior evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-form-section",
+        "name": "Form Section",
+        "kind": "pattern",
+        "exportName": "PublicFormSectionComponent",
+        "selector": "public-form-section",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-form-section.component.ts",
+        "description": "Composite form grouping surface with title, description, and projected controls."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "composite",
+        "providerName": "Mixed",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "group",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded.",
+          "No dedicated automated behavior evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-menu",
+        "name": "Menu",
+        "kind": "component",
+        "exportName": "PublicMenuComponent",
+        "selector": "ps-menu",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-menu.component.ts",
+        "description": "Governed menu action wrapper that contains PrimeNG overlay behavior."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "primeng",
+        "providerName": "PrimeNG",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "menu",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "partial",
+          "files": [
+            "apps/shell/e2e/token-consumption.spec.ts"
+          ],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-page-header",
+        "name": "Page Header",
+        "kind": "pattern",
+        "exportName": "PublicPageHeaderComponent",
+        "selector": "public-page-header",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-page-header.component.ts",
+        "description": "Composite page title and action-header pattern."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "composite",
+        "providerName": "Mixed",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "banner",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded.",
+          "No dedicated automated behavior evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-paginator",
+        "name": "Paginator",
+        "kind": "component",
+        "exportName": "PublicPaginatorComponent",
+        "selector": "ps-paginator",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-paginator.component.ts",
+        "description": "Native pagination pattern with current-page and rows-per-page models."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "totalRecords",
+            "type": "number",
+            "defaultValue": "0"
+          },
+          {
+            "name": "rowsPerPageOptions",
+            "type": "number[]",
+            "defaultValue": "[5, 10, 15]"
+          },
+          {
+            "name": "itemLabel",
+            "type": "string",
+            "defaultValue": "items"
+          },
+          {
+            "name": "ariaLabel",
+            "type": "string",
+            "defaultValue": "Pagination"
+          },
+          {
+            "name": "rowsPerPageLabel",
+            "type": "string",
+            "defaultValue": "Rows per page"
+          }
+        ],
+        "outputs": [],
+        "models": [
+          {
+            "name": "currentPage",
+            "type": "number",
+            "defaultValue": "1"
+          },
+          {
+            "name": "rowsPerPage",
+            "type": "number",
+            "defaultValue": "5"
+          }
+        ],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "native",
+        "providerName": "Native",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "navigation",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded.",
+          "No dedicated automated behavior evidence is recorded."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-popover",
+        "name": "Popover",
+        "kind": "component",
+        "exportName": "PublicPopoverComponent",
+        "selector": "ps-popover",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-popover.component.ts",
+        "description": "Governed contextual-content wrapper that contains PrimeNG overlay behavior."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "primeng",
+        "providerName": "PrimeNG",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "dialog",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "partial",
+          "files": [
+            "apps/shell/e2e/token-consumption.spec.ts"
+          ],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-progress",
+        "name": "Progress",
+        "kind": "component",
+        "exportName": "PublicProgressComponent",
+        "selector": "ps-progress",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-progress.component.ts",
+        "description": "Native progress indicator using the shared token contract."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "native",
+        "providerName": "Native",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "progressbar",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded.",
+          "No dedicated automated behavior evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-select",
+        "name": "Select",
+        "kind": "component",
+        "exportName": "PublicSelectComponent",
+        "selector": "ps-select",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-select.component.ts",
+        "description": "Opinionated PrimeNG select facade with an internal body-overlay policy."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "label",
+            "type": "string",
+            "defaultValue": "Select"
+          },
+          {
+            "name": "options",
+            "type": "PublicSelectOption[]",
+            "defaultValue": "[]"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "defaultValue": "Choose an option"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "defaultValue": "false"
+          }
+        ],
+        "outputs": [],
+        "models": [
+          {
+            "name": "value",
+            "type": "string | null",
+            "defaultValue": "null"
+          }
+        ],
+        "publicTypes": [
+          "PublicSelectOption"
+        ]
+      },
+      "implementation": {
+        "provider": "primeng",
+        "providerName": "PrimeNG",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "combobox",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "partial",
+          "files": [
+            "apps/shell/e2e/token-consumption.spec.ts"
+          ],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-skeleton",
+        "name": "Skeleton",
+        "kind": "component",
+        "exportName": "PublicSkeletonComponent",
+        "selector": "ps-skeleton",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-skeleton.component.ts",
+        "description": "Native token-driven loading placeholder."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "native",
+        "providerName": "Native",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "presentation",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded.",
+          "No dedicated automated behavior evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-status-card",
+        "name": "Status Card",
+        "kind": "pattern",
+        "exportName": "PublicStatusCardComponent",
+        "selector": "public-status-card",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-status-card.component.ts",
+        "description": "Composite metric and status summary pattern."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "composite",
+        "providerName": "Mixed",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "region",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded.",
+          "No dedicated automated behavior evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-tag",
+        "name": "Tag",
+        "kind": "component",
+        "exportName": "PublicTagComponent",
+        "selector": "ps-tag",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-tag.component.ts",
+        "description": "PrimeNG-backed status label wrapper."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "primeng",
+        "providerName": "PrimeNG",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "status",
+        "automatedChecks": "partial",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "complete",
+          "title": "Design System/Acceptance/Button and Tag",
+          "files": [
+            "apps/qa-remote/src/stories/button-tag.acceptance.stories.ts"
+          ],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated automated behavior evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-toast",
+        "name": "Toast Region",
+        "kind": "component",
+        "exportName": "PublicToastComponent",
+        "selector": "ps-toast",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-toast.component.ts",
+        "description": "Native toast presentation region backed by the public toast service."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "native",
+        "providerName": "Native",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "status",
+        "automatedChecks": "partial",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "complete",
+          "title": "Design System/Acceptance/Dialog and Toast",
+          "files": [
+            "apps/qa-remote/src/stories/dialog-toast.acceptance.stories.ts"
+          ],
+          "stories": []
+        },
+        "tests": {
+          "status": "missing",
+          "files": [],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated automated behavior evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-tooltip",
+        "name": "Tooltip",
+        "kind": "component",
+        "exportName": "PublicTooltipComponent",
+        "selector": "ps-tooltip",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-tooltip.component.ts",
+        "description": "Governed help-text wrapper that contains PrimeNG tooltip behavior."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "primeng",
+        "providerName": "PrimeNG",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "tooltip",
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "missing",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "partial",
+          "files": [
+            "apps/shell/e2e/token-consumption.spec.ts"
+          ],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": [
+          "No dedicated Storybook evidence is recorded.",
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-up-button",
+        "name": "UP Button Candidate",
+        "kind": "component",
+        "exportName": "PublicUpButtonComponent",
+        "selector": "ps-up-button",
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-up-button.component.ts",
+        "description": "Opinionated PrimeNG facade exposing product intent while keeping provider controls private."
+      },
+      "lifecycle": {
+        "status": "candidate",
+        "productionUse": false,
+        "replacementFor": "ps-button"
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "label",
+            "type": "string",
+            "defaultValue": "Button"
+          },
+          {
+            "name": "icon",
+            "type": "PublicUpButtonIcon | undefined"
+          },
+          {
+            "name": "intent",
+            "type": "PublicUpButtonIntent",
+            "defaultValue": "primary",
+            "description": "Preferred consumer-driven action purpose."
+          },
+          {
+            "name": "appearance",
+            "type": "PublicUpButtonAppearance",
+            "defaultValue": "solid"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "tone",
+            "type": "PublicUpButtonTone | undefined",
+            "description": "Deprecated Candidate compatibility alias; use intent."
+          }
+        ],
+        "outputs": [
+          {
+            "name": "activated",
+            "type": "void",
+            "description": "Preferred high-level action event."
+          },
+          {
+            "name": "buttonClick",
+            "type": "void",
+            "description": "Deprecated Candidate compatibility alias; use activated."
+          }
+        ],
+        "models": [],
+        "publicTypes": [
+          "PublicUpButtonIntent",
+          "PublicUpButtonTone",
+          "PublicUpButtonAppearance",
+          "PublicUpButtonIcon"
+        ]
+      },
+      "implementation": {
+        "provider": "primeng",
+        "providerName": "PrimeNG",
+        "providerInternalOnly": true,
+        "providerModules": [
+          "primeng/button"
+        ],
+        "providerEscapeHatches": [],
+        "knownLimitations": [
+          "Legacy tone and buttonClick aliases remain during the Candidate compatibility window.",
+          "Figma property mapping and manual screen-reader review remain pending."
+        ]
+      },
+      "variants": {
+        "properties": [
+          {
+            "name": "intent",
+            "values": [
+              "primary",
+              "secondary",
+              "destructive"
+            ]
+          },
+          {
+            "name": "appearance",
+            "values": [
+              "solid",
+              "outlined",
+              "text"
+            ]
+          }
+        ],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "button",
+        "automatedChecks": "complete",
+        "keyboardCoverage": "complete",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "complete",
+          "title": "Design System/Candidates/Button UP",
+          "files": [
+            "apps/qa-remote/src/stories/up-button.stories.ts",
+            "apps/qa-remote/src/stories/opinionated-wrapper-contract.stories.ts"
+          ],
+          "stories": [
+            "Primary",
+            "ToneMatrix",
+            "AppearanceMatrix",
+            "InteractionStateReference",
+            "LightDarkModeMatrix",
+            "CurrentVsCandidate",
+            "ApprovedApi",
+            "SupportedIntentMatrix",
+            "ProviderTranslation",
+            "CompatibilityWindow"
+          ]
+        },
+        "tests": {
+          "status": "complete",
+          "files": [
+            "apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts"
+          ],
+          "behaviors": [
+            "pointer activation",
+            "keyboard activation",
+            "disabled suppression",
+            "loading state",
+            "visible focus",
+            "light and dark mode"
+          ]
+        },
+        "documentation": {
+          "status": "complete",
+          "files": [
+            "docs/design-system/architecture/opinionated-wrapper-contract.md",
+            "docs/design-system/components/up-button-candidate-overview.md",
+            "docs/design-system/components/up-button-candidate-integration-plan.md",
+            "docs/design-system/components/up-button-candidate-developer.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "draft",
+        "pageId": null,
+        "template": "component-candidate"
+      },
+      "governance": {
+        "tier": "candidate",
+        "designReview": "pending",
+        "promotionRequirements": [
+          "Approve the opinionated intent API.",
+          "Remove or time-box legacy Candidate aliases.",
+          "Validate the Figma property mapping.",
+          "Complete manual accessibility review.",
+          "Record the final promotion decision."
+        ]
+      },
+      "health": {
+        "repositoryReadiness": "blocked",
+        "externalDesignBinding": "partial",
+        "blockers": [
+          "Design review is pending.",
+          "Manual screen-reader audit is pending."
+        ],
+        "warnings": [
+          "Legacy Candidate aliases remain visible until current QA examples migrate."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "public-toast-service",
+        "name": "Toast Service",
+        "kind": "service",
+        "exportName": "PublicToastService",
+        "selector": null,
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-toast.service.ts",
+        "description": "Public service API for creating governed toast messages."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "partial",
+        "inputs": [],
+        "outputs": [],
+        "models": [],
+        "publicTypes": []
+      },
+      "implementation": {
+        "provider": "service",
+        "providerName": "None",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": []
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": null,
+        "automatedChecks": "missing",
+        "keyboardCoverage": "missing",
+        "screenReaderAudit": "not-applicable",
+        "knownResponsibilities": []
+      },
+      "evidence": {
+        "storybook": {
+          "status": "not-applicable",
+          "title": null,
+          "files": [],
+          "stories": []
+        },
+        "tests": {
+          "status": "partial",
+          "files": [
+            "apps/qa-remote/src/stories/dialog-toast.acceptance.stories.ts"
+          ],
+          "behaviors": []
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "not-applicable",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "not-applicable",
+        "pageId": null,
+        "template": null
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "health": {
+        "repositoryReadiness": "partial",
+        "externalDesignBinding": "ready",
+        "blockers": [],
+        "warnings": [
+          "Public API inventory is not yet fully extracted from source."
+        ]
+      }
+    }
+  ]
+}

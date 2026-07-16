@@ -18,7 +18,7 @@
     "manifest:build": "node scripts/build-component-manifest.mjs",
     "manifest:check": "node scripts/build-component-manifest.mjs --check",
     "guard:scss": "node scripts/guard-scss.mjs",
-    "start:frontend": "pnpm.cmd nx run-many --target=serve --projects=services-remote,reporting-remote,admin-remote,qa-remote,shell --parallel=5 --outputStyle=stream",
+    "start:frontend": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run-many --target=serve --projects=services-remote,reporting-remote,admin-remote,qa-remote,shell --parallel=5 --outputStyle=stream",
     "start:backend": "node scripts/ensure-platform.mjs",
     "start:all": "pnpm start:backend && pnpm start:frontend",
     "check:dev-ports": "node scripts/check-dev-ports.mjs",
