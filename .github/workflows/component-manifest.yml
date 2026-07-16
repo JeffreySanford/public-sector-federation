@@ -9,6 +9,7 @@ on:
       - 'packages/ui-patterns/**'
       - 'scripts/build-component-manifest.mjs'
       - 'scripts/lint-workspace.mjs'
+      - 'scripts/storybook-e2e.mjs'
       - 'package.json'
       - 'pnpm-lock.yaml'
 
@@ -19,7 +20,7 @@ jobs:
   validate:
     name: Manifest, lint, and Storybook
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - name: Check out repository
@@ -69,3 +70,9 @@ jobs:
 
       - name: Build QA Storybook
         run: pnpm build-storybook:qa
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run built Storybook accessibility gate
+        run: node scripts/storybook-e2e.mjs
