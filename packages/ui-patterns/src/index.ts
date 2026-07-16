@@ -3,6 +3,7 @@ export {
   PublicUpButtonComponent,
   type PublicUpButtonAppearance,
   type PublicUpButtonIcon,
+  type PublicUpButtonIntent,
   type PublicUpButtonTone,
 } from './public-up-button.component';
 export { PublicCardComponent } from './public-card.component';
