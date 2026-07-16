@@ -48,6 +48,7 @@ class DialogToastStressStoryComponent {
 
 const meta: Meta<DialogToastAcceptanceStoryComponent> = {
   title: 'Design System/Acceptance/Dialog Toast',
+  component: DialogToastAcceptanceStoryComponent,
   render: () => ({ moduleMetadata: { imports: [DialogToastAcceptanceStoryComponent] }, template: '<public-dialog-toast-acceptance-story />' }),
   parameters: { layout: 'fullscreen' },
 };

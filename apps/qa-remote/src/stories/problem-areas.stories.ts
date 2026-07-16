@@ -58,6 +58,7 @@ class ProblemAreaStoryComponent {
 
 const meta: Meta<ProblemAreaStoryComponent> = {
   title: 'Design System/Problem Areas',
+  component: ProblemAreaStoryComponent,
   render: (args) => ({
     props: args,
     moduleMetadata: { imports: [ProblemAreaStoryComponent] },

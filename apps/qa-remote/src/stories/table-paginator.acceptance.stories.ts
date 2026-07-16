@@ -262,6 +262,7 @@ class TablePaginatorStressStoryComponent extends TablePaginatorAcceptanceStoryCo
 
 const meta: Meta<TablePaginatorAcceptanceStoryComponent> = {
   title: 'Design System/Acceptance/Table Paginator',
+  component: TablePaginatorAcceptanceStoryComponent,
   render: () => ({
     moduleMetadata: { imports: [TablePaginatorAcceptanceStoryComponent] },
     template: '<public-table-paginator-acceptance-story />',

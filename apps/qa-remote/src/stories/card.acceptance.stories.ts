@@ -22,6 +22,7 @@ class CardAcceptanceStoryComponent {}
 
 const meta: Meta<CardAcceptanceStoryComponent> = {
   title: 'Design System/Acceptance/Card',
+  component: CardAcceptanceStoryComponent,
   render: () => ({ moduleMetadata: { imports: [CardAcceptanceStoryComponent] }, template: '<public-card-acceptance-story />' }),
   parameters: { layout: 'fullscreen' },
 };

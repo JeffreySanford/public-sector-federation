@@ -41,6 +41,7 @@ const pageStyles = `
 
 const meta: Meta = {
   title: 'Design System/Architecture/Opinionated Wrapper Contract',
+  component: PublicUpButtonComponent,
   decorators: [moduleMetadata({ imports: [PublicUpButtonComponent] })],
   parameters: {
     layout: 'fullscreen',

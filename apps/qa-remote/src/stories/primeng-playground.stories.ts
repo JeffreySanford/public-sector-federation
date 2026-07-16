@@ -43,6 +43,7 @@ export class PrimeNgPlaygroundStoryComponent {
 
 const meta: Meta<PrimeNgPlaygroundStoryComponent> = {
   title: 'Design System/PrimeNG Playground',
+  component: PrimeNgPlaygroundStoryComponent,
   render: () => ({ moduleMetadata: { imports: [PrimeNgPlaygroundStoryComponent] }, template: '<public-primeng-playground-story />' }),
   parameters: { layout: 'fullscreen', docs: { source: { type: 'dynamic' } } },
 };

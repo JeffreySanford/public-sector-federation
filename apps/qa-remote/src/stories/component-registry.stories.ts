@@ -4,6 +4,7 @@ import { ComponentRegistryDashboardComponent } from './component-registry-dashbo
 
 const meta: Meta<ComponentRegistryDashboardComponent> = {
   title: 'Design System/Registry/Component Manifest',
+  component: ComponentRegistryDashboardComponent,
   decorators: [moduleMetadata({ imports: [ComponentRegistryDashboardComponent] })],
   render: (args) => ({
     props: args,

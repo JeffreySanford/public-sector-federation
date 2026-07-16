@@ -49,6 +49,9 @@ const preview: Preview = {
     a11y: {
       test: 'todo',
     },
+    docs: {
+      extractArgTypes: () => ({}),
+    },
     options: {
       storySort: {
         order: ['Design System', ['Candidates', 'Acceptance', 'Components', 'PrimeNG Playground', 'Problem Areas']],

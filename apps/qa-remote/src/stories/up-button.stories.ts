@@ -29,6 +29,7 @@ const meta: Meta<PublicUpButtonComponent> = {
   component: PublicUpButtonComponent,
   decorators: [moduleMetadata({ imports: [PublicUpButtonComponent] })],
   render: (args) => ({
+    component: PublicUpButtonComponent,
     props: args,
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
@@ -111,6 +112,7 @@ const meta: Meta<PublicUpButtonComponent> = {
       test: 'error',
     },
     docs: {
+      extractArgTypes: () => ({}),
       description: {
         component:
           'Candidate up-design-system Button wrapper using the repo token contract directly. This is separate from the existing ps-button until the API and token mapping are accepted.',
@@ -120,7 +122,7 @@ const meta: Meta<PublicUpButtonComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<PublicUpButtonComponent>;
+type Story = StoryObj<PublicUpButtonComponent> & { component?: typeof PublicUpButtonComponent };
 
 export const Primary: Story = {};
 
@@ -213,6 +215,7 @@ export const Disabled: Story = {
 };
 
 export const InteractionHarness: Story = {
+  component: PublicUpButtonComponent,
   parameters: {
     layout: 'centered',
     docs: {
@@ -222,6 +225,7 @@ export const InteractionHarness: Story = {
     },
   },
   render: () => ({
+    component: PublicUpButtonComponent,
     props: {
       clickCount: 0,
     },
@@ -265,6 +269,7 @@ export const InteractionHarness: Story = {
 };
 
 export const LongLabel: Story = {
+  component: PublicUpButtonComponent,
   args: {
     label: 'Submit housing assistance eligibility review for North Region queue',
     icon: 'check',
@@ -274,6 +279,7 @@ export const LongLabel: Story = {
     layout: 'fullscreen',
   },
   render: (args) => ({
+    component: PublicUpButtonComponent,
     props: args,
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
@@ -303,6 +309,7 @@ export const LongLabel: Story = {
 };
 
 export const ToneMatrix: Story = {
+  component: PublicUpButtonComponent,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -312,6 +319,7 @@ export const ToneMatrix: Story = {
     },
   },
   render: () => ({
+    component: PublicUpButtonComponent,
     props: { intents },
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
@@ -363,6 +371,7 @@ export const ToneMatrix: Story = {
 };
 
 export const AppearanceMatrix: Story = {
+  component: PublicUpButtonComponent,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -372,6 +381,7 @@ export const AppearanceMatrix: Story = {
     },
   },
   render: () => ({
+    component: PublicUpButtonComponent,
     props: { appearances },
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
@@ -424,6 +434,7 @@ export const AppearanceMatrix: Story = {
 };
 
 export const InteractionStateReference: Story = {
+  component: PublicUpButtonComponent,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -433,6 +444,7 @@ export const InteractionStateReference: Story = {
     },
   },
   render: () => ({
+    component: PublicUpButtonComponent,
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="button-story-shell">
@@ -492,6 +504,7 @@ export const InteractionStateReference: Story = {
 };
 
 export const SizeMatrix: Story = {
+  component: PublicUpButtonComponent,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -501,6 +514,7 @@ export const SizeMatrix: Story = {
     },
   },
   render: () => ({
+    component: PublicUpButtonComponent,
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="button-story-shell">
@@ -575,10 +589,12 @@ export const SizeMatrix: Story = {
 };
 
 export const FocusReference: Story = {
+  component: PublicUpButtonComponent,
   parameters: {
     layout: 'centered',
   },
   render: () => ({
+    component: PublicUpButtonComponent,
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="focus-reference" aria-label="UP Button focus reference">
@@ -600,10 +616,12 @@ export const FocusReference: Story = {
 };
 
 export const LightDarkModeMatrix: Story = {
+  component: PublicUpButtonComponent,
   parameters: {
     layout: 'fullscreen',
   },
   render: () => ({
+    component: PublicUpButtonComponent,
     props: { intents },
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
@@ -682,10 +700,12 @@ export const LightDarkModeMatrix: Story = {
 };
 
 export const ThemeVariantMatrix: Story = {
+  component: PublicUpButtonComponent,
   parameters: {
     layout: 'fullscreen',
   },
   render: () => ({
+    component: PublicUpButtonComponent,
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="variant-matrix" aria-label="UP Button theme variant matrix">
@@ -783,6 +803,7 @@ export const ThemeVariantMatrix: Story = {
 };
 
 export const CurrentVsCandidate: Story = {
+  component: PublicUpButtonComponent,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -793,6 +814,7 @@ export const CurrentVsCandidate: Story = {
     },
   },
   render: () => ({
+    component: PublicUpButtonComponent,
     moduleMetadata: { imports: [PublicButtonComponent, PublicUpButtonComponent] },
     template: `
       <main class="comparison-shell" aria-labelledby="buttonComparisonTitle">
