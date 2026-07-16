@@ -1,9 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
 import { ComponentRegistryDashboardComponent } from './component-registry-dashboard.component';
 
 const meta: Meta<ComponentRegistryDashboardComponent> = {
   title: 'Design System/Registry/Component Manifest',
-  component: ComponentRegistryDashboardComponent,
+  decorators: [moduleMetadata({ imports: [ComponentRegistryDashboardComponent] })],
+  render: (args) => ({
+    props: args,
+    moduleMetadata: { imports: [ComponentRegistryDashboardComponent] },
+    template: `
+      <ps-component-registry-dashboard
+        [mode]="mode"
+        [focusId]="focusId"
+      />
+    `,
+  }),
   args: {
     mode: 'overview',
     focusId: 'ps-up-button',
