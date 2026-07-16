@@ -1,12 +1,10 @@
 # Developer
 
-## Installation and import
+## Preferred usage
 
 ```typescript
 import { PublicUpButtonComponent } from '@public-sector/ui-patterns';
 ```
-
-For a standalone Angular component:
 
 ```typescript
 @Component({
@@ -16,9 +14,9 @@ For a standalone Angular component:
     <ps-up-button
       label="Submit application"
       icon="check"
-      tone="primary"
+      intent="primary"
       appearance="solid"
-      (buttonClick)="submitApplication()"
+      (activated)="submitApplication()"
     />
   `,
 })
@@ -29,189 +27,92 @@ export class ApplicationActionsComponent {
 }
 ```
 
-## Public API
+## Preferred public API
 
-### Inputs
-
-| Input | Type | Default | Purpose |
+| Member | Type | Default | Purpose |
 | --- | --- | --- | --- |
 | `label` | `string` | `Button` | Visible action label. |
-| `icon` | `PublicUpButtonIcon \| undefined` | `undefined` | Provider-neutral icon name mapped internally to the current icon provider. |
-| `tone` | `PublicUpButtonTone` | `primary` | Provider-neutral action tone. |
+| `icon` | `PublicUpButtonIcon \| undefined` | `undefined` | Provider-neutral approved icon name. |
+| `intent` | `primary \| secondary \| destructive` | `primary` | Product-facing action purpose. |
 | `appearance` | `solid \| outlined \| text` | `solid` | Visual emphasis model. |
 | `disabled` | `boolean` | `false` | Prevents activation. |
-| `loading` | `boolean` | `false` | Shows progress, sets busy state, and prevents duplicate activation. |
+| `loading` | `boolean` | `false` | Shows progress and prevents duplicate activation. |
+| `activated` | `void` output | — | Signals that the governed action occurred. |
 
-### Outputs
+PrimeNG severity names, variant flags, `styleClass`, PassThrough configuration,
+unstyled mode, and provider callback payloads are not public Candidate controls.
 
-| Output | Type | Purpose |
-| --- | --- | --- |
-| `buttonClick` | `MouseEvent` | Emits only while the Button is enabled and not loading. |
-
-## Tone type
+## Intent
 
 ```typescript
-export type PublicUpButtonTone =
+export type PublicUpButtonIntent =
   | 'primary'
   | 'secondary'
-  | 'success'
-  | 'info'
-  | 'warning'
-  | 'error'
-  | 'help'
-  | 'contrast';
+  | 'destructive';
 ```
 
-## Appearance type
-
-```typescript
-export type PublicUpButtonAppearance =
-  | 'solid'
-  | 'outlined'
-  | 'text';
-```
-
-## Icon type
-
-```typescript
-export type PublicUpButtonIcon =
-  | 'arrow-right'
-  | 'bolt'
-  | 'check'
-  | 'download'
-  | 'exclamation-triangle'
-  | 'info-circle'
-  | 'lock'
-  | 'question-circle'
-  | 'save'
-  | 'send'
-  | 'times-circle';
-```
-
-The icon names are the public contract. The current implementation maps them to
-PrimeIcons internally so application code does not depend on provider CSS class
-names.
-
-## Usage examples
-
-### Primary action
+Use intent to describe the role of the action, not its provider color name.
 
 ```html
-<ps-up-button
-  label="Submit application"
-  icon="check"
-  tone="primary"
-/>
+<ps-up-button label="Save changes" icon="save" intent="primary" />
+<ps-up-button label="Save draft" icon="save" intent="secondary" appearance="outlined" />
+<ps-up-button label="Delete draft" icon="times-circle" intent="destructive" />
 ```
 
-### Outlined secondary action
+## Provider boundary
 
-```html
-<ps-up-button
-  label="Save draft"
-  icon="save"
-  tone="secondary"
-  appearance="outlined"
-/>
-```
+`ps-up-button` renders PrimeNG internally. The wrapper translates:
 
-### Text action
+- `intent` into UP Button token mappings;
+- `appearance` into the private PrimeNG variant;
+- provider-neutral icon names into PrimeIcons classes;
+- PrimeNG `onClick` into the `activated` output;
+- loading and disabled inputs into provider behavior.
 
-```html
-<ps-up-button
-  label="View details"
-  icon="info-circle"
-  appearance="text"
-/>
-```
+Applications continue to import only `@public-sector/ui-patterns`.
 
-### Loading action
+## Compatibility aliases
 
-```html
-<ps-up-button
-  label="Submitting"
-  icon="send"
-  [loading]="true"
-/>
-```
+The Candidate temporarily retains:
 
-### Disabled action
+| Alias | Replacement | Status |
+| --- | --- | --- |
+| `tone` | `intent` | Deprecated Candidate compatibility alias |
+| `buttonClick` | `activated` | Deprecated Candidate compatibility alias |
 
-```html
-<ps-up-button
-  label="Unavailable action"
-  icon="lock"
-  [disabled]="true"
-/>
-```
+Do not use the aliases in new application examples. They remain only so existing QA
+and Storybook evidence can migrate without an unrelated breaking change.
 
 ## Behavior
 
-- The component renders a native `<button type="button">`.
-- `loading` and `disabled` both disable the native Button.
-- `loading` sets `aria-busy`.
-- `buttonClick` is emitted only while the Button is enabled and not loading.
-- A loading spinner replaces the icon while loading.
-- Hover, active, focus-visible, disabled, and loading treatments are owned by the Candidate implementation.
-
-## Content guidance
-
-- Begin labels with a clear verb.
-- Describe the result of the action, such as `Submit application` or `Save draft`.
-- Avoid vague labels such as `Click here`, `Okay`, or `Go` when a specific action is available.
-- Keep labels concise while allowing wrapping for localization and public-sector program language.
-- Do not rely on an icon as the only accessible name.
+- PrimeNG is the private rendering engine.
+- `loading` and `disabled` suppress activation.
+- `activated` emits no provider or browser event payload.
+- The public icon vocabulary remains provider-neutral.
+- Component tokens map into PrimeNG Button variables at the wrapper boundary.
+- The Candidate does not expose arbitrary application styling hooks.
 
 ## Storybook
 
-Storybook title:
+Use these Storybook areas:
 
 ```text
 Design System / Candidates / Button UP
+Design System / Architecture / Opinionated Wrapper Contract
 ```
 
-Primary comparison story ID:
+The architecture stories explain the API boundary. Candidate stories provide
+visual, interaction, theme, and compatibility evidence.
 
-```text
-design-system-candidates-button-up--current-vs-candidate
-```
+## Promotion guidance
 
-Local Storybook command:
+The stable `ps-button` remains the production component. Candidate promotion still
+requires approved Figma mappings, manual accessibility review, a compatibility
+plan, and a human promotion decision.
 
-```bash
-pnpm storybook:qa
-```
+See:
 
-Local story URL:
-
-```text
-http://localhost:4400/?path=/story/design-system-candidates-button-up--current-vs-candidate
-```
-
-Replace the local URL in Zeroheight with a stable HTTPS Storybook deployment when available. The Zeroheight page should continue to link to Storybook rather than duplicating every interactive example as static documentation.
-
-## Source links
-
-- [Candidate wrapper source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/public-up-button.component.ts)
-- [Candidate Storybook stories](https://github.com/JeffreySanford/public-sector-federation/blob/master/apps/qa-remote/src/stories/up-button.stories.ts)
-- [Candidate integration plan](https://github.com/JeffreySanford/public-sector-federation/blob/master/docs/design-system/components/up-button-candidate-integration-plan.md)
-- [QA Candidates view checklist](https://github.com/JeffreySanford/public-sector-federation/blob/master/docs/design-system/components/up-button-candidates-view-checklist.md)
-
-## Migration guidance
-
-No production migration is currently approved.
-
-If the Candidate is promoted, the preferred target is to preserve the canonical `ps-button` selector while moving approved Candidate API, token, behavior, and styling decisions into the stable implementation.
-
-A promotion proposal must define:
-
-- compatibility for existing `outlined` and `text` inputs;
-- whether those inputs become deprecated aliases for `appearance`;
-- public tone terminology;
-- icon-contract migration;
-- release version and deprecation window;
-- application migration examples.
-
-## Stable alternative
-
-Continue to use `ps-button` for production work until the Candidate promotion decision is approved and released.
+- [Opinionated wrapper contract](../architecture/opinionated-wrapper-contract.md)
+- [Candidate overview](./up-button-candidate-overview.md)
+- [Candidate integration plan](./up-button-candidate-integration-plan.md)
+- [Candidate validation](./up-button-candidate-validation.md)
