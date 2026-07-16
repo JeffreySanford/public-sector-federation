@@ -172,6 +172,8 @@ function entry(seed: EntrySeed): ComponentManifestEntry {
 const buttonStories = ['apps/qa-remote/src/stories/button-tag.acceptance.stories.ts'];
 const dialogToastStories = ['apps/qa-remote/src/stories/dialog-toast.acceptance.stories.ts'];
 const shellTokenEvidence = ['apps/shell/e2e/token-consumption.spec.ts'];
+const publicWrapperStories = ['apps/qa-remote/src/stories/public-wrappers.stories.ts'];
+const publicWrapperStorybookTitle = 'Design System/Components/Public Wrappers';
 
 export const componentRegistry = [
   entry({
@@ -285,18 +287,24 @@ export const componentRegistry = [
     source: 'packages/ui-patterns/src/public-empty-state.component.ts',
     description: 'Composite empty-state pattern using shared tokens and the public button wrapper.',
     kind: 'pattern', provider: 'composite', accessibilityPattern: 'status',
+    storybookStatus: 'complete', storybookTitle: publicWrapperStorybookTitle,
+    storybookFiles: publicWrapperStories, stories: ['EmptyState'],
   }),
   entry({
     id: 'ps-form-section', name: 'Form Section', exportName: 'PublicFormSectionComponent', selector: 'public-form-section',
     source: 'packages/ui-patterns/src/public-form-section.component.ts',
     description: 'Composite form grouping surface with title, description, and projected controls.',
     kind: 'pattern', provider: 'composite', accessibilityPattern: 'group',
+    storybookStatus: 'complete', storybookTitle: publicWrapperStorybookTitle,
+    storybookFiles: publicWrapperStories, stories: ['FormSection'],
   }),
   entry({
     id: 'ps-menu', name: 'Menu', exportName: 'PublicMenuComponent', selector: 'ps-menu',
     source: 'packages/ui-patterns/src/public-menu.component.ts',
     description: 'Governed menu action wrapper that contains PrimeNG overlay behavior.', provider: 'primeng',
     accessibilityPattern: 'menu', testStatus: 'partial', testFiles: shellTokenEvidence,
+    storybookStatus: 'complete', storybookTitle: publicWrapperStorybookTitle,
+    storybookFiles: publicWrapperStories, stories: ['Menu'],
   }),
   entry({
     id: 'ps-paginator',
@@ -319,27 +327,38 @@ export const componentRegistry = [
       { name: 'rowsPerPage', type: 'number', defaultValue: '5' },
     ],
     accessibilityPattern: 'navigation',
+    storybookStatus: 'complete', storybookTitle: 'Design System/Acceptance/Table Paginator',
+    storybookFiles: ['apps/qa-remote/src/stories/table-paginator.acceptance.stories.ts'],
+    stories: ['SortFilterAndPage', 'LoadingAndEmpty'],
   }),
   entry({
     id: 'ps-page-header', name: 'Page Header', exportName: 'PublicPageHeaderComponent', selector: 'public-page-header',
     source: 'packages/ui-patterns/src/public-page-header.component.ts',
     description: 'Composite page title and action-header pattern.', kind: 'pattern', provider: 'composite', accessibilityPattern: 'banner',
+    storybookStatus: 'complete', storybookTitle: publicWrapperStorybookTitle,
+    storybookFiles: publicWrapperStories, stories: ['PageHeader'],
   }),
   entry({
     id: 'ps-popover', name: 'Popover', exportName: 'PublicPopoverComponent', selector: 'ps-popover',
     source: 'packages/ui-patterns/src/public-popover.component.ts',
     description: 'Governed contextual-content wrapper that contains PrimeNG overlay behavior.', provider: 'primeng',
     accessibilityPattern: 'dialog', testStatus: 'partial', testFiles: shellTokenEvidence,
+    storybookStatus: 'complete', storybookTitle: publicWrapperStorybookTitle,
+    storybookFiles: publicWrapperStories, stories: ['Popover'],
   }),
   entry({
     id: 'ps-progress', name: 'Progress', exportName: 'PublicProgressComponent', selector: 'ps-progress',
     source: 'packages/ui-patterns/src/public-progress.component.ts',
     description: 'Native progress indicator using the shared token contract.', provider: 'native', accessibilityPattern: 'progressbar',
+    storybookStatus: 'complete', storybookTitle: publicWrapperStorybookTitle,
+    storybookFiles: publicWrapperStories, stories: ['Progress'],
   }),
   entry({
     id: 'ps-skeleton', name: 'Skeleton', exportName: 'PublicSkeletonComponent', selector: 'ps-skeleton',
     source: 'packages/ui-patterns/src/public-skeleton.component.ts',
     description: 'Native token-driven loading placeholder.', provider: 'native', accessibilityPattern: 'presentation',
+    storybookStatus: 'complete', storybookTitle: publicWrapperStorybookTitle,
+    storybookFiles: publicWrapperStories, stories: ['Skeleton'],
   }),
   entry({
     id: 'ps-select',
@@ -361,11 +380,15 @@ export const componentRegistry = [
     accessibilityPattern: 'combobox',
     testStatus: 'partial',
     testFiles: shellTokenEvidence,
+    storybookStatus: 'complete', storybookTitle: publicWrapperStorybookTitle,
+    storybookFiles: publicWrapperStories, stories: ['Select'],
   }),
   entry({
     id: 'ps-status-card', name: 'Status Card', exportName: 'PublicStatusCardComponent', selector: 'public-status-card',
     source: 'packages/ui-patterns/src/public-status-card.component.ts',
     description: 'Composite metric and status summary pattern.', kind: 'pattern', provider: 'composite', accessibilityPattern: 'region',
+    storybookStatus: 'complete', storybookTitle: publicWrapperStorybookTitle,
+    storybookFiles: publicWrapperStories, stories: ['StatusCard'],
   }),
   entry({
     id: 'ps-tag', name: 'Tag', exportName: 'PublicTagComponent', selector: 'ps-tag',
@@ -379,6 +402,8 @@ export const componentRegistry = [
     source: 'packages/ui-patterns/src/public-tooltip.component.ts',
     description: 'Governed help-text wrapper that contains PrimeNG tooltip behavior.', provider: 'primeng',
     accessibilityPattern: 'tooltip', testStatus: 'partial', testFiles: shellTokenEvidence,
+    storybookStatus: 'complete', storybookTitle: publicWrapperStorybookTitle,
+    storybookFiles: publicWrapperStories, stories: ['Tooltip'],
   }),
   entry({
     id: 'ps-toast', name: 'Toast Region', exportName: 'PublicToastComponent', selector: 'ps-toast',

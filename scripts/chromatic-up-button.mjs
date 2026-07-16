@@ -13,7 +13,6 @@ const result = spawnSync(
   [
     'chromatic',
     '--build-script-name=build-storybook:qa',
-    '--only-story-files=apps/qa-remote/src/stories/up-button.stories.ts',
     '--exit-zero-on-changes',
   ],
   {
