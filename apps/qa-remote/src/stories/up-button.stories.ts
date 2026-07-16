@@ -26,6 +26,7 @@ const icons: PublicUpButtonIcon[] = [
 
 const meta: Meta<PublicUpButtonComponent> = {
   title: 'Design System/Candidates/Button UP',
+  component: PublicUpButtonComponent,
   decorators: [moduleMetadata({ imports: [PublicUpButtonComponent] })],
   render: (args) => ({
     props: args,

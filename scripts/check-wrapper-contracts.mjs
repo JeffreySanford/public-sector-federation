@@ -33,6 +33,14 @@ async function scan(directory) {
 
 for (const directory of scanRoots) await scan(join(root, directory));
 
+const candidateStoryPath = join(root, 'apps/qa-remote/src/stories/up-button.stories.ts');
+const candidateStory = await readFile(candidateStoryPath, 'utf8');
+if (!/component\s*:\s*PublicUpButtonComponent\b/.test(candidateStory)) {
+  violations.push(
+    'apps/qa-remote/src/stories/up-button.stories.ts: candidate metadata must set component: PublicUpButtonComponent for production arg-type extraction',
+  );
+}
+
 if (violations.length) {
   console.error(`Wrapper contract validation failed:\n${violations.join('\n')}`);
   process.exit(1);
