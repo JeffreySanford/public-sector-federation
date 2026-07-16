@@ -43,11 +43,29 @@ jobs:
       - name: Validate component manifest
         run: pnpm manifest:check
 
+      - name: Build portable manifest
+        run: pnpm manifest:build
+
+      - name: Upload component manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: component-manifest
+          path: packages/ui-patterns/generated/component-manifest.json
+          if-no-files-found: error
+
       - name: Run workspace lint
         run: pnpm lint
 
       - name: Typecheck projects
-        run: pnpm typecheck
+        run: pnpm typecheck 2>&1 | tee typecheck.log
+
+      - name: Upload typecheck diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: typecheck-diagnostics
+          path: typecheck.log
+          if-no-files-found: warn
 
       - name: Build QA Storybook
         run: pnpm build-storybook:qa
