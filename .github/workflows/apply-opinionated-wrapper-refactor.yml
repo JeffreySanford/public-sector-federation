@@ -1,0 +1,62 @@
+name: Apply Opinionated Wrapper Refactor
+
+on:
+  push:
+    branches:
+      - feature/opinionated-wrapper-contracts
+    paths:
+      - scripts/apply-opinionated-wrapper-refactor.mjs
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/opinionated-wrapper-contracts
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.2
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Apply refactor
+        run: node scripts/apply-opinionated-wrapper-refactor.mjs
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate manifest and workspace
+        run: |
+          pnpm manifest:check
+          pnpm lint
+          pnpm typecheck
+          pnpm build-storybook:qa
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run built Storybook gate
+        run: node scripts/storybook-e2e.mjs
+
+      - name: Commit refactor
+        run: |
+          git config user.name "OpenAI ChatGPT"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add packages/ui-patterns apps/qa-remote docs scripts
+          git commit -m "feat: add opinionated PrimeNG wrapper contract"
+          git push origin HEAD:feature/opinionated-wrapper-contracts
