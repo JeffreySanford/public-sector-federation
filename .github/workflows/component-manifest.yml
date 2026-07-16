@@ -4,23 +4,42 @@ on:
   pull_request:
     paths:
       - '.github/workflows/component-manifest.yml'
-      - 'apps/qa-remote/**'
+      - 'apps/**'
       - 'docs/design-system/**'
-      - 'packages/ui-patterns/**'
-      - 'scripts/build-component-manifest.mjs'
-      - 'scripts/lint-workspace.mjs'
-      - 'scripts/storybook-e2e.mjs'
+      - 'packages/**'
+      - 'scripts/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
+      - 'nx.json'
+      - 'playwright.config.ts'
+      - 'tsconfig.base.json'
+  push:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/component-manifest.yml'
+      - 'apps/**'
+      - 'docs/design-system/**'
+      - 'packages/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'nx.json'
+      - 'playwright.config.ts'
+      - 'tsconfig.base.json'
+
+concurrency:
+  group: component-contract-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
 
 jobs:
   validate:
-    name: Manifest, lint, and Storybook
+    name: Contract, unit, Storybook, and E2E
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - name: Check out repository
@@ -50,6 +69,9 @@ jobs:
       - name: Build portable manifest
         run: pnpm manifest:build
 
+      - name: Verify generated manifest is current
+        run: git diff --exit-code -- packages/ui-patterns/generated/component-manifest.json
+
       - name: Upload component manifest
         uses: actions/upload-artifact@v4
         with:
@@ -74,11 +96,25 @@ jobs:
           path: typecheck.log
           if-no-files-found: warn
 
+      - name: Run unit tests
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm test 2>&1 | tee unit-tests.log
+
+      - name: Upload unit test diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-diagnostics
+          path: unit-tests.log
+          if-no-files-found: warn
+
       - name: Build QA Storybook
         run: pnpm build-storybook:qa
 
-      - name: Install Chromium
-        run: pnpm exec playwright install --with-deps chromium
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
 
       - name: Run built Storybook accessibility gate
         shell: bash
@@ -94,4 +130,21 @@ jobs:
           path: |
             storybook-e2e.log
             dist/storybook/qa-remote/index.json
+          if-no-files-found: warn
+
+      - name: Run full E2E suite
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm e2e 2>&1 | tee e2e.log
+
+      - name: Upload E2E diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-diagnostics
+          path: |
+            e2e.log
+            playwright-report/
+            test-results/
           if-no-files-found: warn
