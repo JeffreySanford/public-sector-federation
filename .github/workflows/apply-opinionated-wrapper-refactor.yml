@@ -6,6 +6,12 @@ on:
       - feature/opinionated-wrapper-contracts
     paths:
       - scripts/apply-opinionated-wrapper-refactor.mjs
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/apply-opinionated-wrapper-refactor.yml'
+      - 'scripts/apply-opinionated-wrapper-refactor.mjs'
 
 permissions:
   contents: write
