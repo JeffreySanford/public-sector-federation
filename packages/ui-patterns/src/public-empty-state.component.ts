@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { PublicButtonComponent } from './public-button.component';
 
 @Component({
@@ -11,7 +11,7 @@ import { PublicButtonComponent } from './public-button.component';
       <h3>{{ title() }}</h3>
       <p>{{ message() }}</p>
       @if (actionLabel()) {
-        <ps-button [label]="actionLabel()" [outlined]="true" />
+        <ps-button [label]="actionLabel()" appearance="outlined" (activated)="activated.emit()" />
       }
     </section>
   `,
@@ -47,4 +47,5 @@ export class PublicEmptyStateComponent {
   readonly title = input.required<string>();
   readonly message = input.required<string>();
   readonly actionLabel = input('');
+  readonly activated = output<void>();
 }

@@ -310,8 +310,8 @@ export const componentRegistry = [
     source: 'packages/ui-patterns/src/public-empty-state.component.ts',
     description: 'Composite empty-state pattern using shared tokens and the public button wrapper.',
     kind: 'pattern', provider: 'composite', accessibilityPattern: 'status', publicApiStatus: 'complete',
-    inputs: [{ name: 'icon', type: 'string', defaultValue: 'pi pi-inbox' }, { name: 'title', type: 'string', required: true }, { name: 'message', type: 'string', required: true }, { name: 'actionLabel', type: 'string', defaultValue: "''" }],
-    storybookStatus: 'complete', storybookTitle: 'Design System/Components/Empty State', storybookFiles: ['apps/qa-remote/src/stories/empty-state.stories.ts'], stories: ['Default', 'WithoutAction', 'SearchResults', 'LongContent'],
+    inputs: [{ name: 'icon', type: 'string', defaultValue: 'pi pi-inbox' }, { name: 'title', type: 'string', required: true }, { name: 'message', type: 'string', required: true }, { name: 'actionLabel', type: 'string', defaultValue: "''" }], outputs: [{ name: 'activated', type: 'void' }],
+    storybookStatus: 'complete', storybookTitle: 'Design System/Components/Empty State', storybookFiles: ['apps/qa-remote/src/stories/empty-state.stories.ts'], stories: ['Default', 'WithoutAction', 'SearchResults', 'LongContent', 'ActionEvent'],
   }),
   entry({
     id: 'ps-form-section', name: 'Form Section', exportName: 'PublicFormSectionComponent', selector: 'public-form-section',
@@ -319,14 +319,14 @@ export const componentRegistry = [
     description: 'Composite form grouping surface with title, description, and projected controls.',
     kind: 'pattern', provider: 'composite', accessibilityPattern: 'group', publicApiStatus: 'complete',
     inputs: [{ name: 'title', type: 'string', required: true }, { name: 'description', type: 'string', defaultValue: "''" }],
-    storybookStatus: 'complete', storybookTitle: 'Design System/Components/Form Section', storybookFiles: ['apps/qa-remote/src/stories/form-section.stories.ts'], stories: ['CompleteForm', 'WithoutDescription', 'ValidationContent', 'LongResponsiveContent'],
+    storybookStatus: 'complete', storybookTitle: 'Design System/Components/Form Section', storybookFiles: ['apps/qa-remote/src/stories/form-section.stories.ts'], stories: ['CompleteForm', 'WithoutDescription', 'ValidationContent', 'LongResponsiveContent', 'RequiredAndOptionalFields', 'DisabledControls'],
   }),
   entry({
     id: 'ps-menu', name: 'Menu', exportName: 'PublicMenuComponent', selector: 'ps-menu',
     source: 'packages/ui-patterns/src/public-menu.component.ts',
     description: 'Governed menu action wrapper that contains PrimeNG overlay behavior.', provider: 'primeng',
     providerModules: ['primeng/menu'], publicApiStatus: 'complete', inputs: [{ name: 'label', type: 'string', defaultValue: 'Open menu' }, { name: 'icon', type: 'string', defaultValue: 'pi pi-bars' }, { name: 'actions', type: 'PublicMenuAction[]', defaultValue: '[]' }], publicTypes: ['PublicMenuAction'],
-    storybookStatus: 'complete', storybookTitle: 'Design System/Components/Menu', storybookFiles: ['apps/qa-remote/src/stories/menu.stories.ts'], stories: ['Interactive', 'EmptyMenu', 'DisabledAction', 'LongLabels', 'CommandCallbacks'], accessibilityPattern: 'menu', testStatus: 'partial', testFiles: shellTokenEvidence,
+    storybookStatus: 'complete', storybookTitle: 'Design System/Components/Menu', storybookFiles: ['apps/qa-remote/src/stories/menu.stories.ts'], stories: ['Interactive', 'EmptyMenu', 'DisabledAction', 'LongLabels', 'CommandCallbacks', 'GroupedDestructiveActions', 'KeyboardInstructions'], accessibilityPattern: 'menu', testStatus: 'partial', testFiles: shellTokenEvidence,
   }),
   entry({
     id: 'ps-paginator',
@@ -355,7 +355,7 @@ export const componentRegistry = [
     id: 'ps-page-header', name: 'Page Header', exportName: 'PublicPageHeaderComponent', selector: 'public-page-header',
     source: 'packages/ui-patterns/src/public-page-header.component.ts',
     description: 'Composite page title and action-header pattern.', kind: 'pattern', provider: 'composite', accessibilityPattern: 'banner', publicApiStatus: 'complete', inputs: [{ name: 'eyebrow', type: 'string', defaultValue: "''" }, { name: 'title', type: 'string', required: true }, { name: 'description', type: 'string', defaultValue: "''" }],
-    storybookStatus: 'complete', storybookTitle: 'Design System/Components/Page Header', storybookFiles: ['apps/qa-remote/src/stories/page-header.stories.ts'], stories: ['Default', 'TitleOnly', 'WithoutEyebrow', 'LongResponsiveHeading'],
+    storybookStatus: 'complete', storybookTitle: 'Design System/Components/Page Header', storybookFiles: ['apps/qa-remote/src/stories/page-header.stories.ts'], stories: ['Default', 'TitleOnly', 'WithoutEyebrow', 'LongResponsiveHeading', 'PrimaryAndSecondaryActions', 'WrappedMobileActions'],
   }),
   entry({
     id: 'ps-popover', name: 'Popover', exportName: 'PublicPopoverComponent', selector: 'ps-popover',
@@ -366,7 +366,7 @@ export const componentRegistry = [
   entry({
     id: 'ps-progress', name: 'Progress', exportName: 'PublicProgressComponent', selector: 'ps-progress',
     source: 'packages/ui-patterns/src/public-progress.component.ts',
-    description: 'Native progress indicator using the shared token contract.', provider: 'native', accessibilityPattern: 'progressbar', publicApiStatus: 'complete', inputs: [{ name: 'value', type: 'number', defaultValue: '0' }, { name: 'ariaLabel', type: 'string', defaultValue: 'Progress' }], storybookStatus: 'complete', storybookTitle: 'Design System/Components/Progress', storybookFiles: ['apps/qa-remote/src/stories/progress.stories.ts'], stories: ['Interactive', 'Empty', 'Complete', 'LifecycleMatrix'],
+    description: 'Native progress indicator using the shared token contract.', provider: 'native', accessibilityPattern: 'progressbar', publicApiStatus: 'complete', inputs: [{ name: 'value', type: 'number', defaultValue: '0' }, { name: 'ariaLabel', type: 'string', defaultValue: 'Progress' }], storybookStatus: 'complete', storybookTitle: 'Design System/Components/Progress', storybookFiles: ['apps/qa-remote/src/stories/progress.stories.ts'], stories: ['Interactive', 'Empty', 'Complete', 'BelowMinimumIsBounded', 'AboveMaximumIsBounded', 'LifecycleMatrix'],
   }),
   entry({
     id: 'ps-skeleton', name: 'Skeleton', exportName: 'PublicSkeletonComponent', selector: 'ps-skeleton',
@@ -398,7 +398,7 @@ export const componentRegistry = [
   entry({
     id: 'ps-status-card', name: 'Status Card', exportName: 'PublicStatusCardComponent', selector: 'public-status-card',
     source: 'packages/ui-patterns/src/public-status-card.component.ts',
-    description: 'Composite metric and status summary pattern.', kind: 'pattern', provider: 'composite', accessibilityPattern: 'region', publicApiStatus: 'complete', inputs: [{ name: 'label', type: 'string', required: true }, { name: 'value', type: 'string | number', required: true }, { name: 'detail', type: 'string', defaultValue: "''" }, { name: 'status', type: 'string', defaultValue: "''" }, { name: 'tone', type: 'PublicStatusCardTone', defaultValue: 'info' }], publicTypes: ['PublicStatusCardTone'], storybookStatus: 'complete', storybookTitle: 'Design System/Components/Status Card', storybookFiles: ['apps/qa-remote/src/stories/status-card.stories.ts'], stories: ['Default', 'WithoutStatus', 'Warning', 'Critical', 'LongContent', 'OperationalDashboard'],
+    description: 'Composite metric and status summary pattern.', kind: 'pattern', provider: 'composite', accessibilityPattern: 'region', publicApiStatus: 'complete', inputs: [{ name: 'label', type: 'string', required: true }, { name: 'value', type: 'string | number', required: true }, { name: 'detail', type: 'string', defaultValue: "''" }, { name: 'status', type: 'string', defaultValue: "''" }, { name: 'tone', type: 'PublicStatusCardTone', defaultValue: 'info' }], publicTypes: ['PublicStatusCardTone'], variants: [{ name: 'tone', values: ['neutral', 'info', 'success', 'warning', 'error', 'contrast'] }], storybookStatus: 'complete', storybookTitle: 'Design System/Components/Status Card', storybookFiles: ['apps/qa-remote/src/stories/status-card.stories.ts'], stories: ['Default', 'WithoutStatus', 'Warning', 'Critical', 'LongContent', 'OperationalDashboard'],
   }),
   entry({
     id: 'ps-tag', name: 'Tag', exportName: 'PublicTagComponent', selector: 'ps-tag',
@@ -411,7 +411,7 @@ export const componentRegistry = [
     id: 'ps-tooltip', name: 'Tooltip', exportName: 'PublicTooltipComponent', selector: 'ps-tooltip',
     source: 'packages/ui-patterns/src/public-tooltip.component.ts',
     description: 'Governed help-text wrapper that contains PrimeNG tooltip behavior.', provider: 'primeng',
-    providerModules: ['primeng/tooltip'], publicApiStatus: 'complete', inputs: [{ name: 'label', type: 'string', defaultValue: 'More information' }, { name: 'text', type: 'string', defaultValue: "''" }, { name: 'position', type: 'PublicTooltipPosition', defaultValue: 'top' }], publicTypes: ['PublicTooltipPosition'], storybookStatus: 'complete', storybookTitle: 'Design System/Components/Tooltip', storybookFiles: ['apps/qa-remote/src/stories/tooltip.stories.ts'], stories: ['HoverAndFocus', 'LongText', 'EmptyText', 'PositionMatrix', 'MobileFocus'], accessibilityPattern: 'tooltip', testStatus: 'partial', testFiles: shellTokenEvidence,
+    providerModules: ['primeng/tooltip'], publicApiStatus: 'complete', inputs: [{ name: 'label', type: 'string', defaultValue: 'More information' }, { name: 'text', type: 'string', defaultValue: "''" }, { name: 'position', type: 'PublicTooltipPosition', defaultValue: 'top' }], publicTypes: ['PublicTooltipPosition'], storybookStatus: 'complete', storybookTitle: 'Design System/Components/Tooltip', storybookFiles: ['apps/qa-remote/src/stories/tooltip.stories.ts'], stories: ['HoverAndFocus', 'LongText', 'EmptyText', 'PositionMatrix', 'MobileFocus', 'DisabledControlGuidance'], accessibilityPattern: 'tooltip', testStatus: 'partial', testFiles: shellTokenEvidence,
   }),
   entry({
     id: 'ps-toast', name: 'Toast Region', exportName: 'PublicToastComponent', selector: 'ps-toast',

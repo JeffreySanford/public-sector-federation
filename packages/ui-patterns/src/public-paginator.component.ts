@@ -1,4 +1,4 @@
-import { Component, computed, input, model } from '@angular/core';
+import { Component, computed, effect, input, model } from '@angular/core';
 
 @Component({
   selector: 'ps-paginator',
@@ -10,13 +10,13 @@ import { Component, computed, input, model } from '@angular/core';
       </div>
 
       <div class="paginator-controls">
-        <button type="button" class="paginator-btn" [disabled]="currentPage() === 1" (click)="previousPage()">
+        <button type="button" class="paginator-btn" [disabled]="effectivePage() === 1" (click)="previousPage()">
           Previous
         </button>
 
-        <div class="page-info" aria-live="polite">Page {{ currentPage() }} of {{ totalPages() }}</div>
+        <div class="page-info" aria-live="polite">Page {{ effectivePage() }} of {{ totalPages() }}</div>
 
-        <button type="button" class="paginator-btn" [disabled]="currentPage() === totalPages()" (click)="nextPage()">
+        <button type="button" class="paginator-btn" [disabled]="effectivePage() === totalPages()" (click)="nextPage()">
           Next
         </button>
 
@@ -150,15 +150,24 @@ export class PublicPaginatorComponent {
   readonly rowsPerPage = model(5);
 
   readonly totalPages = computed(() => Math.max(1, Math.ceil(this.totalRecords() / this.rowsPerPage())));
-  readonly startRow = computed(() => (this.totalRecords() === 0 ? 0 : (this.currentPage() - 1) * this.rowsPerPage() + 1));
-  readonly endRow = computed(() => Math.min(this.currentPage() * this.rowsPerPage(), this.totalRecords()));
+  readonly effectivePage = computed(() => Math.min(this.totalPages(), Math.max(1, this.currentPage())));
+  readonly startRow = computed(() => (this.totalRecords() === 0 ? 0 : (this.effectivePage() - 1) * this.rowsPerPage() + 1));
+  readonly endRow = computed(() => Math.min(this.effectivePage() * this.rowsPerPage(), this.totalRecords()));
+
+  private readonly synchronizeCurrentPage = effect(() => {
+    const effectivePage = this.effectivePage();
+
+    if (effectivePage !== this.currentPage()) {
+      this.currentPage.set(effectivePage);
+    }
+  });
 
   previousPage(): void {
-    this.currentPage.set(Math.max(1, this.currentPage() - 1));
+    this.currentPage.set(Math.max(1, this.effectivePage() - 1));
   }
 
   nextPage(): void {
-    this.currentPage.set(Math.min(this.totalPages(), this.currentPage() + 1));
+    this.currentPage.set(Math.min(this.totalPages(), this.effectivePage() + 1));
   }
 
   changeRowsPerPage(event: Event): void {

@@ -16,6 +16,7 @@ import { TagModule } from 'primeng/tag';
           <p>{{ description() }}</p>
         }
       </div>
+      <div class="page-header__actions"><ng-content select="[public-page-header-actions]" /></div>
     </header>
   `,
   styles: `
@@ -44,6 +45,16 @@ import { TagModule } from 'primeng/tag';
     .page-header__content {
       position: relative;
       z-index: 1;
+    }
+
+    .page-header__actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 1rem;
     }
 
     h2 {

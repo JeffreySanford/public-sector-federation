@@ -445,7 +445,12 @@
             "defaultValue": "''"
           }
         ],
-        "outputs": [],
+        "outputs": [
+          {
+            "name": "activated",
+            "type": "void"
+          }
+        ],
         "models": [],
         "publicTypes": []
       },
@@ -486,7 +491,8 @@
             "Default",
             "WithoutAction",
             "SearchResults",
-            "LongContent"
+            "LongContent",
+            "ActionEvent"
           ]
         },
         "tests": {
@@ -602,7 +608,9 @@
             "CompleteForm",
             "WithoutDescription",
             "ValidationContent",
-            "LongResponsiveContent"
+            "LongResponsiveContent",
+            "RequiredAndOptionalFields",
+            "DisabledControls"
           ]
         },
         "tests": {
@@ -728,7 +736,9 @@
             "EmptyMenu",
             "DisabledAction",
             "LongLabels",
-            "CommandCallbacks"
+            "CommandCallbacks",
+            "GroupedDestructiveActions",
+            "KeyboardInstructions"
           ]
         },
         "tests": {
@@ -849,7 +859,9 @@
             "Default",
             "TitleOnly",
             "WithoutEyebrow",
-            "LongResponsiveHeading"
+            "LongResponsiveHeading",
+            "PrimaryAndSecondaryActions",
+            "WrappedMobileActions"
           ]
         },
         "tests": {
@@ -1230,6 +1242,8 @@
             "Interactive",
             "Empty",
             "Complete",
+            "BelowMinimumIsBounded",
+            "AboveMaximumIsBounded",
             "LifecycleMatrix"
           ]
         },
@@ -1582,7 +1596,19 @@
         "knownLimitations": []
       },
       "variants": {
-        "properties": [],
+        "properties": [
+          {
+            "name": "tone",
+            "values": [
+              "neutral",
+              "info",
+              "success",
+              "warning",
+              "error",
+              "contrast"
+            ]
+          }
+        ],
         "supportedCombinations": []
       },
       "tokens": {
@@ -1940,7 +1966,8 @@
             "LongText",
             "EmptyText",
             "PositionMatrix",
-            "MobileFocus"
+            "MobileFocus",
+            "DisabledControlGuidance"
           ]
         },
         "tests": {

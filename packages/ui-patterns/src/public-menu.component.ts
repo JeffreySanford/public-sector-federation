@@ -7,6 +7,8 @@ export interface PublicMenuAction {
   label: string;
   icon?: string;
   disabled?: boolean;
+  separator?: boolean;
+  tone?: 'default' | 'destructive';
   action?: () => void;
 }
 
@@ -36,6 +38,8 @@ export class PublicMenuComponent {
       label: action.label,
       icon: action.icon,
       disabled: action.disabled,
+      separator: action.separator,
+      styleClass: action.tone === 'destructive' ? 'ps-menu-action--destructive' : undefined,
       command: () => action.action?.(),
     })),
   );

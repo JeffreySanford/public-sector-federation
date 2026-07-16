@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { PublicEmptyStateComponent } from '@public-sector/ui-patterns';
 
@@ -13,3 +14,5 @@ export const Default: Story = {};
 export const WithoutAction: Story = { args: { title: 'Nothing to review', message: 'Completed reviews will appear here.', actionLabel: '' } };
 export const SearchResults: Story = { args: { title: 'No matching results', message: 'No programs match “regional housing verification”. Clear one or more filters and try again.', icon: 'pi pi-search', actionLabel: 'Clear filters' } };
 export const LongContent: Story = { args: { title: 'No eligibility determinations are ready for supervisory review', message: 'Applications remain here until identity verification, supporting documentation, and program-specific validation have all completed successfully.', actionLabel: 'Review processing guidance' }, parameters: { viewport: { defaultViewport: 'mobile1' } } };
+@Component({ selector: 'empty-action-proof', standalone: true, imports: [PublicEmptyStateComponent], template: `<public-empty-state title="No saved filters" message="Save a filter to reuse it later." actionLabel="Create filter" (activated)="count=count+1" /><output aria-live="polite">Actions: {{count}}</output>` }) class EmptyActionProof { count=0; }
+export const ActionEvent: StoryObj<EmptyActionProof> = { render: () => ({ moduleMetadata: { imports: [EmptyActionProof] }, template: '<empty-action-proof />' }) };
