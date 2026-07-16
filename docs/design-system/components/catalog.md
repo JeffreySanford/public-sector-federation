@@ -6,9 +6,15 @@ Use this catalog as the first stop when choosing a design-system wrapper or
 pattern. New application and remote developers should check this page before
 reaching for PrimeNG directly.
 
-The current source of truth for importable APIs is still
-`packages/ui-patterns/src/index.ts`. This catalog makes those exports easier to
-scan and links each component to its implementation and evidence.
+The current source of truth for importable APIs is
+`packages/ui-patterns/src/index.ts`. The machine-readable registry is maintained in
+`packages/ui-patterns/src/manifest/component-registry.ts`, validated by
+`pnpm manifest:check`, and displayed in Storybook under
+`Design System/Registry/Component Manifest`.
+
+This catalog remains the concise human-readable discovery page. Lifecycle,
+provider, accessibility, Figma, zeroheight, ownership, and evidence status should
+be updated in the registry rather than duplicated here.
 
 ## Current Components
 
@@ -18,6 +24,11 @@ scan and links each component to its implementation and evidence.
   outlined, disabled, or loading actions.
 - Source: `packages/ui-patterns/src/public-button.component.ts`.
 - Evidence: `apps/qa-remote/src/stories/button-tag.acceptance.stories.ts`.
+
+- `PublicUpButtonComponent` / `ps-up-button` is a candidate action API and is not
+  yet the stable replacement for `ps-button`.
+- Source: `packages/ui-patterns/src/public-up-button.component.ts`.
+- Evidence: `apps/qa-remote/src/stories/up-button.stories.ts`.
 
 ### Content Surfaces
 
@@ -33,7 +44,7 @@ scan and links each component to its implementation and evidence.
 
 ### Empty States
 
-- Use `PublicEmptyStateComponent` / `ps-empty-state` for empty or no-results
+- Use `PublicEmptyStateComponent` / `public-empty-state` for empty or no-results
   states.
 - Source: `packages/ui-patterns/src/public-empty-state.component.ts`.
 - Evidence: source-level component proof.
@@ -65,6 +76,14 @@ scan and links each component to its implementation and evidence.
   actions.
 - Source: `packages/ui-patterns/src/public-page-header.component.ts`.
 - Evidence: source-level component proof.
+
+### Pagination
+
+- Use `PublicPaginatorComponent` / `ps-paginator` for previous/next paging,
+  current-page state, and rows-per-page selection.
+- Source: `packages/ui-patterns/src/public-paginator.component.ts`.
+- Evidence: source-level component proof; dedicated Storybook evidence is still
+  tracked as missing in the manifest.
 
 ### Progress
 
@@ -118,8 +137,20 @@ Legacy compatibility is not the same as the target state. Existing PrimeNG in a
 migrated app may continue temporarily, but new shared work should still move
 toward a wrapper.
 
-## Future Improvement
+## Manifest Workflow
 
-The next lighter-weight improvement is a generated registry manifest or catalog
-from wrapper metadata. That would let developers search by use case, selector,
-status, evidence, and owner without reading source files.
+Run the following commands after adding or changing a public component:
+
+```bash
+pnpm manifest:check
+pnpm manifest:build
+pnpm build-storybook:qa
+```
+
+The registry deliberately records missing Storybook stories, incomplete public API
+extraction, unassigned ownership, pending accessibility audits, pending Figma
+bindings, and planned zeroheight pages. Missing information should be made visible,
+not replaced with invented completion.
+
+See `docs/design-system/architecture/component-manifest-prototype.md` for the
+prototype architecture and update path.
