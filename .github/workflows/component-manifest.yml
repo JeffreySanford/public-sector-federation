@@ -122,6 +122,12 @@ jobs:
         if: github.event_name != 'pull_request'
         run: pnpm exec playwright install --with-deps chromium firefox webkit
 
+      - name: Start Docker-backed API
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm start:backend 2>&1 | tee backend.log
+
       - name: Run built Storybook accessibility gate
         shell: bash
         run: |
@@ -152,9 +158,15 @@ jobs:
             typecheck.log
             unit-tests.log
             build.log
+            backend.log
             storybook-e2e.log
             e2e.log
             playwright-report/
             test-results/
             dist/storybook/qa-remote/index.json
           if-no-files-found: warn
+
+      - name: Stop Docker-backed API
+        if: always()
+        continue-on-error: true
+        run: pnpm docker:down
