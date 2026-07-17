@@ -1,7 +1,6 @@
 # Performance Baseline and Tracking
 
-**Status:** Established  
-**Measured:** 2026-07-17
+**Status:** Established | **Measured:** 2026-07-17
 
 ## Verified release run
 
