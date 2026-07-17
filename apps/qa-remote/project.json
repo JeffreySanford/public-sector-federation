@@ -17,6 +17,11 @@
         "assets": [],
         "styles": ["./apps/qa-remote/src/styles.css"],
         "outputHashing": "none"
+      },
+      "configurations": {
+        "storybook": {
+          "polyfills": []
+        }
       }
     },
     "serve": {
@@ -42,7 +47,7 @@
       "executor": "@storybook/angular:start-storybook",
       "options": {
         "configDir": "apps/qa-remote/.storybook",
-        "browserTarget": "qa-remote:build",
+        "browserTarget": "qa-remote:build:storybook",
         "tsConfig": "apps/qa-remote/tsconfig.storybook.json",
         "port": 4400,
         "compodoc": false,
@@ -54,7 +59,7 @@
       "outputs": ["{options.outputDir}"],
       "options": {
         "configDir": "apps/qa-remote/.storybook",
-        "browserTarget": "qa-remote:build",
+        "browserTarget": "qa-remote:build:storybook",
         "tsConfig": "apps/qa-remote/tsconfig.storybook.json",
         "outputDir": "dist/storybook/qa-remote",
         "compodoc": false
