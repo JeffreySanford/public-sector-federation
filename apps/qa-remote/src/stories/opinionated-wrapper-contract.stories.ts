@@ -65,7 +65,7 @@ export const PreferredCandidateApi: Story = {
     template: `
       <main class="contract-page" aria-labelledby="preferredApiTitle">
         <header>
-          <p>Neil and Dan wrapper direction</p>
+          <p>Reference wrapper direction</p>
           <h1 id="preferredApiTitle">Preferred candidate API</h1>
           <span>Consumer need → design-system contract → private PrimeNG mapping</span>
         </header>

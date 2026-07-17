@@ -1,287 +1,93 @@
-# Design System Questions
+# Design-System Adoption Questions
 
-These are targeted questions for Neil and Dan to resolve the token-consumption
-and wrapper implementation path. The goal is not to reopen the architecture
-choice. The federated Web Component runtime is assumed.
+## Purpose
 
-## Already Answered Guidance
+These questions help an adopting organization apply the reference token, wrapper, and federation model. They do not reopen the sample architecture; they identify organization-specific choices that cannot be answered by a sanitized public repository.
 
-These points are treated as settled guidance from Neil and should not be asked
-again as open architecture questions:
+## Settled reference guidance
 
-- Federated Web Components are the required runtime architecture.
-- The observed runtime uses remote modules registered as Web Components.
-- The observed remotes mount in light DOM rather than Shadow DOM.
-- The observed theme context uses `.p-dark` on `html`, allowing CSS variables
-  from `:root` to cascade into remotes.
-- The observed overlays append to `body`, where they can inherit root-level
-  token context.
-- Each observed remote bootstraps its own Angular app and therefore needs its
-  own PrimeNG provider setup.
-- PrimeNG is always wrapped because the component provider may be swapped later.
-- The work is about how design tokens are consumed inside the existing runtime,
-  not whether the runtime is the right choice.
-- The useful deliverable is practical application: token mapping, wrapper
-  consumption, runtime validation, and evidence.
-- Token export and runtime information already exist in prior guidance; the
-  remaining questions should target precise gaps after rereading those inputs.
+The sample assumes:
 
-## Decision Tracker
+- federated Web Components are the runtime composition model;
+- remotes bootstrap independent Angular applications and injector boundaries;
+- light DOM permits semantic CSS variables to cascade through mounted remotes;
+- the integrated theme state is applied at the document level;
+- PrimeNG overlays append to `body` and inherit root token context;
+- each independently running remote registers the approved provider setup;
+- new and target-state work consumes governed wrappers rather than PrimeNG directly;
+- Zeroheight documents status and evidence but does not deliver runtime configuration.
 
-Use this section to track what is settled, what is partially answered, and what
-still needs a decision before implementation.
+## 1. Authoritative token source
 
-- [x] Architecture choice: federated Web Components are required.
-  Owner: Neil. Track: do not reopen.
-- [x] PrimeNG wrapping policy: PrimeNG is always wrapped.
-  Owner: Neil. Track: do not ask if direct PrimeNG usage is acceptable.
-- [x] Runtime DOM model: remotes mount in light DOM.
-  Owner: runtime evidence. Track: validate in source and tests.
-- [x] Theme context: `.p-dark` is applied on `html`; `:root` variables cascade.
-  Owner: runtime evidence. Track: add integration proof.
-- [x] Overlay append target: overlays append to `body` and inherit root context.
-  Owner: runtime evidence. Track: add one overlay proof if in scope.
-- [x] Remote provider setup: each remote bootstraps independently and needs
-  approved PrimeNG setup.
-  Owner: runtime evidence. Track: confirm shared bootstrap helper if one exists.
-- [ ] Wrapper API shape: strict, thin, or tiered wrapper API is not decided.
-  Owner: Neil. Track: blocks wrapper implementation.
-- [ ] First wrapper proof set: Button only, Button plus overlay, or broader set
-  is not decided.
-  Owner: Neil. Track: blocks proof scope.
-- [ ] Token normalization: `danger -> error`, deprecated typography, and
-  hard-coded corrections need approval.
-  Owner: Neil or Dan. Track: blocks token pipeline sign-off.
-- [ ] Preset value strategy: resolved values versus `var(...)` references needs
-  confirmation.
-  Owner: Dan. Track: affects theme mechanics and tests.
-- [ ] Validation acceptance: minimum evidence package is not defined.
-  Owner: Neil or Dan. Track: blocks review readiness.
-- [ ] Canonical integration remote: runtime pattern is known, but target remote
-  is not named.
-  Owner: Dan. Track: blocks exact E2E target.
+- Which Figma or DTCG-compatible export is authoritative?
+- How are duplicate paths and mode precedence resolved?
+- Which primitive, semantic, and component tiers are public?
+- Which source values are deprecated?
+- Who approves normalization and compatibility aliases?
 
-## Critical Path
+## 2. Wrapper contract
 
-### 1. Wrapper Rollout And API
+- Which components require strict provider-neutral APIs?
+- Are any advanced provider configuration types permitted in public APIs?
+- Which semantic markup should remain native rather than wrapped?
+- What is the legacy migration allowlist and its expiration policy?
+- What naming and event conventions must every wrapper follow?
 
-Target: Neil
+## 3. Release and version alignment
 
-- Given Neil's guidance that PrimeNG is always wrapped, which wrappers should be
-  implemented first for proof of direction?
-  <br><span style="color: #0645ad"><strong>Answered guidance:</strong></span>
-  PrimeNG should be wrapped. The remaining question is rollout order, not
-  whether direct PrimeNG consumption is allowed.
-- Should wrappers expose a thin pass-through API, an opinionated design-system
-  API, or a mixed model depending on component complexity?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  Package metadata points toward stable APIs that hide PrimeNG, but it does not
-  define whether wrappers should be thin, opinionated, or mixed.
-- Should the registry completely hide PrimeNG types from application teams, or
-  are some PrimeNG types acceptable in public wrapper APIs?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  Neil's provider-swap guidance implies PrimeNG should not leak through the
-  public wrapper contract. The remaining question is how strict that rule should
-  be for event payloads, option types, and edge-case component APIs.
-- What is the expected first wrapper set for proof of direction: Button only,
-  Button plus form controls, or Button plus one overlay component?
-  <br><span style="color: #b00020"><strong>Not answered:</strong></span>
-  The candidate repo does not define the first wrapper proof scope.
+- Which versions of tokens, preset, wrappers, Angular, and PrimeNG are supported together?
+- How are incompatible changes announced and migrated?
+- Are shell and remote package versions enforced during federation startup?
+- What is the rollback strategy when a shared design package causes a remote regression?
 
-Why this matters: this determines the package structure, public API conventions,
-test scope, Storybook scope, and how much PrimeNG remains visible to consumers.
+## 4. Theme and runtime behavior
 
-### 2. Token Mapping And PrimeNG Preset Strategy
+- Where is the active theme class or attribute owned?
+- How do standalone remotes load the same token and provider contract?
+- How are already-mounted remotes notified of non-CSS theme behavior?
+- Which overlay append targets are permitted?
+- What E2E evidence is required for every overlay family?
 
-Target: Dan and Neil
+## 5. Component evidence
 
-- Should the PrimeNG preset emit resolved values, such as `#1c6fa3`, or CSS
-  variable references, such as `var(--semantic-primary-background)`?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The candidate repo appears to map from generated token artifacts into the
-  PrimeNG preset. It still needs a precise confirmation of whether the preset
-  emits resolved values or `var(...)` references.
-- Should missing PrimeNG ramp steps, such as `50` and `950`, be aliases to the
-  nearest available source token, generated values, or added back in Figma?
-  <br><span style="color: #0645ad"><strong>Full candidate answer:</strong></span>
-  The candidate repo documents aliasing missing ramp endpoints, such as
-  `50 -> 100` and `950 -> 900`.
-- Should source names such as `danger` normalize to `error`, should both coexist
-  as supported semantic aliases, or should the source be corrected?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The candidate repo normalizes `danger` to `error`, but it does not confirm
-  whether that is the desired semantic model or only a compatibility shim.
-- Which token tiers are public for application and wrapper use: primitive,
-  semantic, component, or only semantic?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The candidate repo emphasizes generated token artifacts and semantic mapping,
-  but the public-use boundary between primitive, semantic, and component tokens
-  still needs confirmation.
+- Which lifecycle states are available: experimental, candidate, active, deprecated, or blocked?
+- What evidence is mandatory for each component risk tier?
+- When is shell integration required in addition to Storybook?
+- Which keyboard and automated accessibility checks are required?
+- Who performs and records manual screen-reader review?
+- What is required before a candidate becomes production-approved?
 
-Why this matters: this determines whether wrappers can stay token-agnostic and
-whether theme switching depends on generated preset output or live CSS variable
-resolution.
+## 6. Ownership and governance
 
-### 3. Runtime Bootstrap And Provider Setup
+- Who owns design tokens, the wrapper registry, platform runtime, and application adoption?
+- Who may approve provider escape hatches?
+- How are contribution requests triaged?
+- How are exceptions recorded, reviewed, and retired?
+- Which registry metadata is required before a component may be consumed?
 
-Target: Dan
+## 7. Documentation and Zeroheight
 
-- Does each federated Web Component bootstrap its own Angular application and
-  injector?
-  <br><span style="color: #0645ad"><strong>Answered by runtime evidence:</strong></span>
-  Yes. The observed runtime indicates each remote Web Component bootstraps its
-  own Angular application and therefore has its own injector boundary.
-- Does each remote call `providePrimeNG()` itself, or does the platform runtime
-  provide PrimeNG configuration?
-  <br><span style="color: #0645ad"><strong>Answered by runtime evidence:</strong></span>
-  Each observed remote owns its Angular bootstrap, so each remote should register
-  the approved `providePrimeNG()` preset in its own app setup unless a shared
-  bootstrap helper centralizes that registration.
-- Is there shared bootstrap code that remotes are expected to use?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The runtime pattern implies shared bootstrap guidance would be useful, but the
-  candidate repo does not show whether a shared helper already exists.
-- Do remotes render in light DOM, Shadow DOM, or a mix?
-  <br><span style="color: #0645ad"><strong>Answered by runtime evidence:</strong></span>
-  The observed remotes render in light DOM, not Shadow DOM. That means root CSS
-  variables cascade naturally into mounted remote content.
+- Which generated repository artifacts are published to Zeroheight?
+- Is publication manual, automated, or approval-gated?
+- How are Storybook, source, token, and Playwright evidence linked?
+- Who owns page quality and stale-content review?
+- How is guidance kept separate from runtime configuration?
 
-Why this matters: this determines whether the shell's provider setup reaches
-remotes or whether every remote must register the approved PrimeNG preset itself.
+## 8. Production validation
 
-### 4. Validation Acceptance
+- Does the production shell load the same token CSS path as the sample?
+- Do production remotes import tokens directly, inherit them, or use both methods?
+- Is every remote using the approved provider bootstrap?
+- Are package versions aligned across all deployable applications?
+- Do overlays inherit the active theme in the deployed topology?
+- Are monitoring, security, and rollback controls defined for shared UI releases?
 
-Target: Neil and Dan
+## Recommended decision sequence
 
-- What minimum proof is useful before review: build/typecheck, unit tests,
-  Storybook examples, Playwright shell mount, visual regression, or all of these?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The candidate repo has buildable packages and a playground, but it does not
-  define the accepted proof level for design-system review. Neil has said the
-  priority is a deliverable that is understood and solid, not speed.
-- Is there a canonical remote that should be used for integration testing?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The runtime screenshots identify the relevant remote pattern, but the team
-  still needs to name which remote should become the canonical validation target.
-- Should the first proof validate only a non-overlay component like Button, or
-  should it include an overlay component like Dialog or Select?
-  <br><span style="color: #b00020"><strong>Not answered:</strong></span>
-  The candidate repo does not define whether overlay validation belongs in the
-  first proof.
-- What evidence should be captured for Zeroheight or design-system governance?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The candidate repo has documentation and generated token references, but it
-  does not define the evidence package expected for Zeroheight or governance.
-
-Why this matters: this prevents overbuilding and defines what "done enough to
-review" means.
-
-## Architecture Validation
-
-### 5. Token Source And Export
-
-Target: Dan
-
-- Are the current Figma DTCG exports the intended long-term source format?
-  <br><span style="color: #0645ad"><strong>Full candidate answer:</strong></span>
-  The candidate repo documents Figma DTCG exports as the current token source.
-  The remaining confirmation is whether this is the long-term enterprise source
-  format.
-- Which exported files are authoritative when duplicate token paths exist?
-  <br><span style="color: #0645ad"><strong>Full candidate answer:</strong></span>
-  The candidate repo documents precedence rules, including newer mode files
-  winning over older mode files.
-- Are deprecated typography tokens intentionally still used, or should they be
-  removed from the active token model?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The candidate repo flags deprecated typography tokens, but it does not confirm
-  whether they remain intentional active tokens.
-- Should hard-coded compatibility corrections remain in the build, or should
-  they be fixed at the token source?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The candidate repo documents compatibility corrections, but ownership is still
-  unclear: build shim, source cleanup, or both.
-
-Why this matters: this determines whether the current token export is adequate
-or only temporarily usable.
-
-### 6. Theming And Theme Context
-
-Target: Dan
-
-- Where is the active theme class or attribute applied: `html`, `body`, shell
-  root, Web Component host, or another platform-owned element?
-  <br><span style="color: #0645ad"><strong>Answered by runtime evidence:</strong></span>
-  The observed runtime applies `.p-dark` on `html`. That aligns with the PrimeNG
-  `darkModeSelector: '.p-dark'` configuration and allows theme variables to
-  cascade from `:root`.
-- Can a remote run independently and still resolve the same token contract and
-  theme?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The autonomous Web Component bootstrap supports remote independence, but each
-  remote still needs the token CSS and PrimeNG preset registered in standalone
-  development and test modes.
-- How should theme changes propagate to already-mounted remotes?
-  <br><span style="color: #0645ad"><strong>Answered by runtime evidence:</strong></span>
-  With light DOM remotes and `.p-dark` on `html`, theme changes should propagate
-  through normal CSS cascade to already-mounted remote content.
-- Is the theme context expected to be CSS-only, event-driven, attribute-driven,
-  or a combination?
-  <br><span style="color: #0645ad"><strong>Answered by runtime evidence:</strong></span>
-  Runtime theming appears to be CSS-class-driven for token and PrimeNG styling.
-  Events may still be useful for non-CSS behavior, but token inheritance does
-  not require event propagation in the observed light DOM model.
-
-Why this matters: this determines how token inheritance and theme switching are
-validated across the shell and remotes.
-
-### 7. Overlay Behavior
-
-Target: Dan
-
-- Where do PrimeNG overlays append: `body`, a shell overlay root, a remote host,
-  or a configurable overlay container?
-  <br><span style="color: #0645ad"><strong>Answered by runtime evidence:</strong></span>
-  The observed overlays append to `body`.
-- Do overlays inherit token and theme context from the component that opened
-  them?
-  <br><span style="color: #0645ad"><strong>Answered by runtime evidence:</strong></span>
-  Because overlays append to `body` and token context is rooted at `:root` with
-  `.p-dark` on `html`, overlays should inherit the same token and theme context.
-  This should still be covered by an integration test.
-- Are overlays part of the first validation target or a second validation pass?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  Runtime behavior is now clear enough to include one overlay component in
-  validation if time allows. The remaining decision is whether Neil wants that
-  in the first proof or a second pass.
-- Are there existing platform rules for dialogs, menus, selects, tooltips, and
-  popovers in federated remotes?
-  <br><span style="color: #0645ad"><strong>Partial answer:</strong></span>
-  The append target and inheritance model are clearer, but formal platform rules
-  for each overlay type still need documentation.
-
-Why this matters: overlays are the most likely place for token inheritance and
-theme context to drift from the shell and remote content.
-
-## Suggested Order
-
-Ask in this order if time is limited:
-
-1. Wrapper rollout and API.
-2. Token normalization and source cleanup.
-3. Validation acceptance.
-4. Token mapping and PrimeNG preset value strategy.
-5. Runtime bootstrap implementation details.
-6. Overlay behavior validation scope.
-
-## What These Answers Unlock
-
-| Answer area | Unlocks |
-| --- | --- |
-| Wrapper rollout and API | Registry package design, wrapper conventions, public API rules. |
-| Token mapping strategy | PrimeNG preset implementation and theme-switching model. |
-| Runtime bootstrap | Shell and remote validation strategy. |
-| Validation acceptance | Minimum proof before review. |
-| Token source | Final export validation and cleanup plan. |
-| Theming | CSS variable inheritance and theme propagation tests. |
-| Overlays | Dialog/select/menu validation strategy. |
+1. Approve the authoritative token source and normalization rules.
+2. Approve the public wrapper API conventions.
+3. Define package and theme version alignment.
+4. Assign owners and evidence requirements.
+5. Validate the production shell, remotes, and overlays.
+6. Establish documentation and Zeroheight publication workflow.
+7. Pilot with a small component set before expanding adoption.
