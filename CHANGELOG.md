@@ -10,6 +10,8 @@ All notable changes to the public reference platform are documented here.
 - A complete release verification command and a smaller running-platform smoke check.
 - Public portfolio, architecture, test, and licensing guidance.
 - Explicit documentation of component lifecycle and evidence states.
+- A public-reference guard covering filenames and repository text.
+- Pull-request Chromium validation and scheduled cross-browser release validation.
 
 ### Established
 
@@ -18,9 +20,11 @@ All notable changes to the public reference platform are documented here.
 - Storybook and Chromatic visual evidence.
 - Playwright, accessibility, documentation, type, build, and manifest validation.
 - NestJS, Prisma, and PostgreSQL backend reference implementation.
+- A verified release run of 360 passing Playwright executions.
 
 ### Clarified
 
-- Named-test counts versus browser-expanded Playwright executions.
-- Zeroheight as documentation and governance output rather than runtime delivery.
-- Sample-repository evidence versus organization-specific production validation.
+- Collected Playwright executions replace manually maintained test totals.
+- Zeroheight is documentation and governance output rather than runtime delivery.
+- Sample-repository evidence is distinct from organization-specific production validation.
+- Canonical Storybook story IDs are used without duplicate compatibility stories.
