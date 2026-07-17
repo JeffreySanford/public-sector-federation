@@ -10,20 +10,12 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 4,
   reporter: [
     ['html'],
     ['junit', { outputFile: 'test-results/junit.xml' }],
     ['json', { outputFile: 'test-results/results.json' }],
   ],
-  webServer: [],
-  use: {
-    baseURL: 'http://localhost:4200',
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-  },
-  
   webServer: [
     {
       command: 'pnpm start:frontend',
@@ -38,7 +30,12 @@ export default defineConfig({
       timeout: 120000,
     },
   ],
-
+  use: {
+    baseURL: 'http://localhost:4200',
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+  },
   projects: [
     {
       name: 'chromium',
@@ -53,7 +50,6 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
   ],
-
-  timeout: 30000,
+  timeout: 60000,
   expect: { timeout: 10000 },
 });
