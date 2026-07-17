@@ -85,7 +85,10 @@ jobs:
           if-no-files-found: error
 
       - name: Run workspace lint
-        run: pnpm lint
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm lint 2>&1 | tee lint.log
 
       - name: Validate documentation links
         run: pnpm lint:links
@@ -145,6 +148,7 @@ jobs:
         with:
           name: release-quality-diagnostics
           path: |
+            lint.log
             typecheck.log
             unit-tests.log
             build.log
