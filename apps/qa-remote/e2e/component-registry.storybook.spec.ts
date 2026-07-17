@@ -38,7 +38,7 @@ test.describe('component manifest Storybook registry', () => {
   test('shows PrimeNG, native, composite, and service boundaries', async ({ page }) => {
     await gotoStory(page, 'provider-boundaries');
 
-    await expect(page.getByRole('heading', { name: 'Provider boundaries' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Provider boundaries', exact: true })).toBeVisible();
     await expect(page.getByRole('cell', { name: 'primeng', exact: true }).first()).toBeVisible();
     await expect(page.getByRole('cell', { name: 'native', exact: true }).first()).toBeVisible();
     await expect(page.getByRole('cell', { name: 'composite', exact: true }).first()).toBeVisible();
@@ -56,7 +56,7 @@ test.describe('component manifest Storybook registry', () => {
   test('renders external documentation readiness honestly', async ({ page }) => {
     await gotoStory(page, 'documentation-readiness');
 
-    await expect(page.getByRole('heading', { name: 'Documentation readiness' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Documentation readiness', exact: true })).toBeVisible();
     await expect(page.getByText('pending-access', { exact: true }).first()).toBeVisible();
     await expect(page.getByText('Unassigned', { exact: true }).first()).toBeVisible();
   });

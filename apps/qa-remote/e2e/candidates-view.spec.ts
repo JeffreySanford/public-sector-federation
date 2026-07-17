@@ -38,7 +38,7 @@ for (const surface of surfaces) {
       await expect(comparison.locator('ps-up-button')).toHaveCount(1);
 
       await page.getByLabel('Comparison label').fill('Approve eligibility');
-      await page.getByLabel('Tone').selectOption('success');
+      await page.getByLabel('Intent').selectOption('secondary');
       await page.getByLabel('Appearance').selectOption('outlined');
 
       await expect(
