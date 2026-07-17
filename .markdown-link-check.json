@@ -13,7 +13,7 @@
       "replacement": "file:///d:/repos/public-sector-federation/"
     }
   ],
-  "timeout": 5000,
+  "timeout": "5s",
   "retryOn429": true,
   "aliveStatusCodes": [200, 206]
 }

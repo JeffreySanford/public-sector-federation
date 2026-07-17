@@ -85,7 +85,7 @@ async function apiHealthOk() {
 }
 
 async function ensurePlatform() {
-  const forceRebuild = process.env.PLATFORM_FORCE_REBUILD === 'true';
+  const forceRebuild = process.env.PLATFORM_FORCE_REBUILD === 'true' || process.argv.includes('--rebuild');
 
   console.log('Checking Docker and Compose...');
   await dockerAvailable();
@@ -99,7 +99,9 @@ async function ensurePlatform() {
 
   const postgresReady = isRunning(postgres) && isHealthy(postgres);
   const apiReady = isRunning(api);
-  const imageStale = imageCreated === 0 || sourceMtime > imageCreated;
+  const imageMissing = imageCreated === 0;
+  const imageStale = imageMissing || sourceMtime > imageCreated;
+  const shouldBuild = imageMissing || forceRebuild;
   const healthOk = apiReady ? await apiHealthOk() : false;
 
   if (postgresReady && apiReady && healthOk) {
@@ -108,7 +110,7 @@ async function ensurePlatform() {
     } else if (imageStale) {
       console.log('Docker API and DB are healthy.');
       console.log('API image is stale, but the running container is healthy. Skipping rebuild.');
-      console.log('Run `PLATFORM_FORCE_REBUILD=true pnpm start:backend` when you need a fresh API image.');
+      console.log('Run `pnpm start:backend:rebuild` when you need a fresh API image.');
       return;
     } else {
       console.log('Docker API and DB are already healthy.');
@@ -127,10 +129,19 @@ async function ensurePlatform() {
   );
 
   if (imageStale) {
-    console.log('Rebuilding agile-api image. This can take several minutes on first run...');
+    if (shouldBuild) {
+      console.log('Rebuilding agile-api image. This can take several minutes on first run...');
+    } else {
+      console.log('API image is stale. Starting the existing image to avoid blocking normal startup.');
+      console.log('Run `pnpm start:backend:rebuild` when you need a fresh API image.');
+    }
   }
 
-  await run('docker', ['compose', 'up', '-d', '--build', 'postgres', 'agile-api'], { stdio: 'inherit' });
+  const composeArgs = shouldBuild
+    ? ['compose', 'up', '-d', '--build', 'postgres', 'agile-api']
+    : ['compose', 'up', '-d', 'postgres', 'agile-api'];
+
+  await run('docker', composeArgs, { stdio: 'inherit' });
 
   console.log('Waiting for Agile API health check...');
 

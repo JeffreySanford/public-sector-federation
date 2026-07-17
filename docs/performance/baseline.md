@@ -185,7 +185,7 @@ Investigation: [Notes]
 
 - [Testing Guide](../TESTING.md) - How to run tests
 - [Playwright Docs](https://playwright.dev) - Official docs
-- [Performance Testing](https://playwright.dev/docs/test-performance) - Advanced profiling
+- [Parallelism](https://playwright.dev/docs/test-parallel) - Worker and sharding guidance
 
 **Last Updated**: 2026-07-12
 **Next Review**: After first regression or optimization attempt

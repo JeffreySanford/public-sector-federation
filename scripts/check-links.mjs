@@ -9,6 +9,7 @@ import { promises as fs } from 'fs';
 import { glob } from 'glob';
 import linkCheck from 'markdown-link-check';
 import path from 'path';
+import { pathToFileURL } from 'url';
 
 const configFile = '.markdown-link-check.json';
 let config = {};
@@ -22,7 +23,7 @@ try {
 
 // Find all markdown files
 const pattern = 'docs/**/*.md';
-let files = await glob(pattern);
+let files = await glob(pattern, { ignore: 'docs/reports/**/*.md' });
 
 // Add README.md
 const readmeExists = await fs.stat('README.md').catch(() => null);
@@ -44,28 +45,42 @@ await Promise.all(
   files.map(file =>
     new Promise((resolve) => {
       fs.readFile(file, 'utf-8').then(content => {
-        linkCheck(content, config, (err, results) => {
+        const fileConfig = {
+          ...config,
+          baseUrl: pathToFileURL(`${path.resolve(path.dirname(file))}${path.sep}`).href,
+        };
+
+        try {
+          linkCheck(content, fileConfig, (err, results) => {
+            if (err) {
+              console.error(`Error checking ${file}:`, err);
+              totalIssues++;
+              resolve();
+              return;
+            }
+
+            const brokenLinks = results.filter(r => r.status === 'dead');
+
+            if (brokenLinks.length > 0) {
+              console.log(`\n❌ ${file}`);
+              brokenLinks.forEach(link => {
+                console.log(`  - ${link.link} (${link.status})`);
+                totalIssues++;
+              });
+            } else {
+              console.log(`✅ ${file}`);
+            }
+
+            resolve();
+          });
+        } catch (err) {
           if (err) {
             console.error(`Error checking ${file}:`, err);
             totalIssues++;
             resolve();
             return;
           }
-
-          const brokenLinks = results.filter(r => r.status === 'dead');
-          
-          if (brokenLinks.length > 0) {
-            console.log(`\n❌ ${file}`);
-            brokenLinks.forEach(link => {
-              console.log(`  - ${link.link} (${link.status})`);
-              totalIssues++;
-            });
-          } else {
-            console.log(`✅ ${file}`);
-          }
-          
-          resolve();
-        });
+        }
       });
     })
   )

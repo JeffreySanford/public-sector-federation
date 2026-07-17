@@ -356,5 +356,5 @@ add browser runtime and federation loading metrics.
 - [Performance Baseline Documentation](./baseline.md)
 - [Performance Next Steps](./next-steps.md)
 - [Testing Documentation](../TESTING.md)
-- [Agile API Server](../../apps/agile-api/README.md)
-- [QA Remote App](../../apps/qa-remote/README.md)
+- [Agile API performance module](../../apps/agile-api/src/performance/test-performance.module.ts)
+- [QA Remote performance dashboard](../../apps/qa-remote/src/app/components/performance-dashboard.component.ts)
