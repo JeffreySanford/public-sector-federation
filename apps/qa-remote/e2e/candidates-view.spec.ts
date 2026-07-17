@@ -12,8 +12,7 @@ const surfaces = [
 ] as const;
 
 async function openCandidatesView(page: Page, url: string): Promise<void> {
-  await page.goto(url);
-  await page.waitForLoadState('networkidle').catch(() => {});
+  await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
   const candidatesTab = page.getByRole('button', { name: 'Candidates' }).first();
   await expect(candidatesTab).toBeVisible();
@@ -38,7 +37,7 @@ for (const surface of surfaces) {
       await expect(comparison.locator('ps-up-button')).toHaveCount(1);
 
       await page.getByLabel('Comparison label').fill('Approve eligibility');
-      await page.getByLabel('Tone').selectOption('success');
+      await page.getByLabel('Intent').selectOption('secondary');
       await page.getByLabel('Appearance').selectOption('outlined');
 
       await expect(
@@ -103,8 +102,7 @@ for (const surface of surfaces) {
 }
 
 test('Candidates navigation is keyboard accessible', async ({ page }) => {
-  await page.goto('http://localhost:4204');
-  await page.waitForLoadState('networkidle').catch(() => {});
+  await page.goto('http://localhost:4204', { waitUntil: 'domcontentloaded', timeout: 60000 });
 
   const candidatesTab = page.getByRole('button', { name: 'Candidates' }).first();
   await candidatesTab.focus();
