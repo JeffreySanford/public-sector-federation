@@ -1,108 +1,92 @@
 # Performance Baseline and Tracking
 
 **Status:** Established  
-**Verified:** July 17, 2026
+**Measured:** 2026-07-17
 
-## Current release baseline
+## Verified release run
 
-The reference measurement was captured on a Windows 11 development machine with 16 GB RAM and an SSD.
+The final local release validation completed on Windows 11 with 16 GB RAM and an SSD.
 
-| Stage | Reference result | Guidance |
+| Stage | Result | Reference duration |
+| --- | --- | ---: |
+| Workspace lint | Passed | about 5 seconds |
+| Documentation links | Passed | under 10 seconds |
+| Typecheck | Passed | about 2 seconds with cache |
+| Unit tests | Passed | about 2 seconds with cache |
+| Component manifest | Passed | under 5 seconds |
+| Production builds | Passed | about 7 seconds with cache |
+| Full Playwright browser matrix | 360/360 passed | 6.1 minutes |
+
+The Playwright execution total represents the collected tests across Chromium, Firefox, and WebKit for that verified run. Use `pnpm test:e2e:list` for the authoritative current collection because the total changes as tests and projects evolve.
+
+## Development-server startup
+
+| Component | Typical startup | Notes |
 | --- | ---: | --- |
-| Workspace lint | about 5 seconds | Investigate repeatable runs above 10 seconds. |
-| Unit tests | about 10 seconds | Investigate repeatable runs above 20 seconds. |
-| Shell startup | about 40 seconds | Includes Angular and federation startup. |
-| Storybook startup | about 60 seconds | First startup is slower than cached runs. |
-| Full Playwright suite | 360 passing executions in 6.1 minutes | Chromium, Firefox, and WebKit with four local workers. |
+| Federated frontend group | 40–60 seconds | First build is slower; Nx caching improves subsequent starts. |
+| QA Storybook | about 60 seconds | Subsequent starts benefit from local caches. |
 
-Use the collected Playwright list rather than maintaining a manual test total:
+## Regression guidance
 
-```bash
-pnpm test:e2e:list
-```
+Development-machine timings are diagnostic guidance rather than service-level objectives.
 
-The complete measured release command is:
+- Investigate a repeatable increase above 120% of the local baseline.
+- Treat a repeatable increase above 150% as a release concern.
+- Compare runs from a clean port state and similar cache conditions.
+- Distinguish application regressions from first-run browser installation or Storybook compilation.
 
-```bash
-pnpm verify:release
-```
+For the full browser matrix, the July 17 reference is 6.1 minutes:
 
-## Interpreting results
+- 120% investigation threshold: approximately 7.3 minutes
+- 150% release-concern threshold: approximately 9.2 minutes
 
-Development-machine measurements vary with cache state, browser installation, background processes, and available CPU and memory. Treat these values as regression guidance rather than service-level objectives.
+## Investigation workflow
 
-- **Pass:** within roughly 120% of the reference duration.
-- **Review:** repeatedly above 120% of the reference duration.
-- **Release concern:** repeatedly above 150% without an explained increase in coverage.
-
-For the current full E2E baseline:
-
-- review repeatable runs above about 7.5 minutes;
-- treat repeatable runs above about 9 minutes as a release concern.
-
-## Regression investigation
-
-When a meaningful slowdown appears:
-
-1. Confirm that ports `4200` through `4204` and `4400` are free before startup.
-2. Compare clean and cached runs.
-3. Inspect Playwright traces and browser-specific failures.
-4. Review new network requests, component-tree growth, and server startup logs.
-5. Confirm that worker-count changes have not created resource contention.
-6. Update this baseline only when the performance or coverage change is intentional.
+1. Confirm ports `4200` through `4204` and `4400` are not occupied by stale processes.
+2. Re-run the affected file or browser project with one worker.
+3. Use headed mode or the Playwright inspector for interaction failures.
+4. Review `playwright-report/`, `test-results/`, videos, screenshots, and traces.
+5. Compare build and startup logs before changing application code.
+6. Update this baseline only after an intentional, verified change.
 
 Useful commands:
 
 ```bash
-# Run the complete browser suite
-pnpm test:e2e
-
-# Use a single browser while investigating
+pnpm test:e2e:list
 pnpm exec playwright test --project=chromium --workers=1
-
-# Run visibly
 pnpm exec playwright test --headed
-
-# Open the interactive debugger
-pnpm exec playwright test --debug
-
-# Open the last report
 pnpm exec playwright show-report
 ```
 
-## Continuous integration evidence
-
-The release-quality workflow records and uploads:
-
-- typecheck output;
-- unit-test output;
-- production-build output;
-- built-Storybook validation output;
-- Playwright logs;
-- the Playwright HTML report;
-- test result artifacts.
-
-Pull requests use Chromium for faster feedback. Pushes to `master`, scheduled runs, and manual runs execute the complete Chromium, Firefox, and WebKit matrix.
-
 ## Applied optimizations
 
-- Existing local servers may be reused outside CI.
-- Local Playwright execution is capped at four workers to avoid browser contention.
-- CI uses one worker for repeatability.
-- Screenshots and videos are retained only for failures.
-- Traces are captured on the first retry.
-- Nx caching accelerates unchanged build, typecheck, and unit-test targets.
+- Four local Playwright workers to avoid machine contention
+- One worker in pull-request CI for deterministic feedback
+- Screenshots and video retained on failure
+- Trace collection on retry
+- Nx build and test caching
+- Playwright-managed frontend and Storybook servers
+- Separate focused Chromium commands for Storybook and candidate validation
 
-## Performance goals
+## CI strategy
 
-- Keep the full cross-browser suite dependable before optimizing for minimum duration.
-- Preserve deterministic startup and teardown behavior.
-- Investigate unexplained regressions before raising timeouts.
-- Prefer focused Chromium checks during development and the complete browser matrix for releases.
+Pull requests run the static checks, production builds, Storybook validation, and Chromium E2E for practical feedback time.
+
+Pushes to `master`, scheduled runs, and manual workflow dispatches execute the complete Chromium, Firefox, and WebKit release matrix. Logs, reports, screenshots, videos, and traces are uploaded when failures occur.
+
+## Maintenance
+
+Record a new entry only when one of these changes materially:
+
+- browser matrix;
+- worker configuration;
+- CI operating system or machine class;
+- number or type of federated applications;
+- Storybook build strategy;
+- a repeatable timing improvement or regression.
 
 ## See also
 
 - [Testing and Release Guide](../TESTING.md)
 - [Performance Tracking](./tracking.md)
 - [Performance Next Steps](./next-steps.md)
-- [Playwright parallelism](https://playwright.dev/docs/test-parallel)
