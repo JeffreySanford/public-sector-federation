@@ -4,13 +4,13 @@
 
 ## Counting convention
 
-The verified July 17, 2026 release run completed **360 Playwright test executions with 360 passing** across the configured Chromium, Firefox, and WebKit projects.
-
-Playwright expands applicable test definitions through browser projects, so collected execution counts change as files, projects, and browser coverage evolve. Use the repository command rather than maintaining a hand-counted total:
+Use the collected Playwright output as the authoritative current count:
 
 ```bash
 pnpm test:e2e:list
 ```
+
+The verified July 17, 2026 release run completed **360 browser executions with 360 passing** across Chromium, Firefox, and WebKit. Counts can change as projects and test definitions evolve, so documentation should describe the verified run and point to the collection command rather than maintain a manually calculated total.
 
 ## Primary commands
 
@@ -21,19 +21,20 @@ pnpm verify:release
 # Running-platform federation and accessibility smoke check
 pnpm verify:smoke
 
+# Current Playwright collection
+pnpm test:e2e:list
+
 # Individual quality stages
 pnpm lint
 pnpm lint:links
-pnpm lint:public
 pnpm typecheck
 pnpm test
 pnpm manifest:check
 pnpm build
 pnpm test:e2e
-pnpm test:e2e:list
 ```
 
-`verify:release` runs workspace linting, link and public-reference validation, type checking, unit tests, manifest drift validation, production builds, and the full Playwright suite.
+`verify:release` runs linting, link validation, type checking, unit tests, manifest drift validation, production builds, and the full Playwright suite.
 
 `verify:smoke` expects the integrated platform to be running. It checks development ports and performs the cross-application accessibility scan.
 
@@ -44,8 +45,6 @@ pnpm test:e2e:list
 `pnpm lint` validates workspace JSON, Prisma configuration, Markdown formatting, SCSS conventions, and PrimeNG wrapper boundaries through the repository lint scripts.
 
 `pnpm lint:links` validates Markdown links.
-
-`pnpm lint:public` scans public filenames and text files for prohibited former internal references. It is part of the release gate and continuous integration workflow.
 
 `pnpm manifest:check` regenerates component metadata in check mode and fails when the committed manifest has drifted from its TypeScript source.
 
@@ -83,6 +82,7 @@ The primary browser projects are Chromium, Firefox, and WebKit.
 
 ```bash
 pnpm test:storybook:qa
+pnpm test:storybook:qa:chromium
 pnpm test:storybook:up-button
 pnpm test:storybook:up-button:chromium
 pnpm test:storybook:registry
@@ -99,20 +99,11 @@ pnpm chromatic
 
 Chromatic builds the QA Storybook and publishes visual evidence. Visual changes should be reviewed in Chromatic before the associated component is promoted.
 
-## Continuous integration
-
-The release-quality workflow uses two levels of browser validation:
-
-- pull requests run all static gates, production builds, built-Storybook validation, and the Chromium Playwright project;
-- pushes to `master`, scheduled runs, and manual runs execute the complete Chromium, Firefox, and WebKit suite.
-
-Playwright reports, test results, and diagnostic logs are uploaded even when a browser gate fails.
-
 ## Evidence expectations by risk
 
 | Change | Minimum evidence |
 | --- | --- |
-| Documentation only | Markdown lint, link validation, and public-reference guard |
+| Documentation only | Markdown lint and link validation |
 | Token mapping | Token build, token tests, manifest check, theme evidence |
 | Native presentational pattern | Build, typecheck, Storybook, automated accessibility |
 | Interactive wrapper | Storybook, behavior tests, keyboard coverage, accessibility |
@@ -155,13 +146,7 @@ Automated checks do not replace manual screen-reader review. The component manif
 
 Development-machine measurements vary, so timings are regression guidance rather than CI service-level objectives.
 
-| Stage | Reference duration |
-| --- | ---: |
-| Workspace lint | about 5 seconds |
-| Unit tests | about 10 seconds |
-| Shell startup | about 40 seconds |
-| Storybook startup | about 60 seconds |
-| Full E2E suite | about 4–7 minutes |
+The verified July 17, 2026 local release run completed the full browser matrix in approximately 6.1 minutes. See [the performance baseline](./performance/baseline.md) for the measured environment and regression guidance.
 
 Investigate a repeatable increase above roughly 120% of the local baseline. Treat a repeatable increase above 150% as a release concern.
 
@@ -169,7 +154,6 @@ Investigate a repeatable increase above roughly 120% of the local baseline. Trea
 
 - [ ] `pnpm lint` passes.
 - [ ] `pnpm lint:links` passes.
-- [ ] `pnpm lint:public` passes.
 - [ ] `pnpm typecheck` passes.
 - [ ] `pnpm test` passes.
 - [ ] `pnpm manifest:check` passes.
