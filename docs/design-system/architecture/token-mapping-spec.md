@@ -1,321 +1,142 @@
-# Token Mapping Spec
+# Token Mapping Specification
 
 ## Purpose
 
-This spec describes how token values should move from the enterprise token
-source into the platform runtime contract, PrimeNG preset, registry wrappers,
-Storybook evidence, and Zeroheight documentation.
+This specification defines how design-token values move from a DTCG-compatible source into the shared runtime contract, PrimeNG bridge, governed component wrappers, Storybook evidence, and documentation outputs.
 
-## Authoritative Input Format
+## Input contract
 
-Expected enterprise input:
+The preferred input is one approved Figma-backed DTCG-compatible export, or a small set of exports split by real ownership or domain boundaries.
 
-- Figma is a known initial token input.
-- Figma should export or feed a DTCG-compatible JSON token artifact.
-- Token groups that can be normalized into primitive, semantic, component, and
-  provider-specific tiers
+Zeroheight is not a token-creation source. It consumes generated metadata and evidence after the runtime artifacts have been built and validated.
 
-Not input sources:
+The sample repository currently uses:
 
-- Zeroheight is not a token creation source.
-- Zeroheight should not be described as a Figma-to-token input step unless the
-  team later establishes an active Figma -> Zeroheight -> token workflow.
-- `up-design-system` is outdated reference material only.
+- `packages/tokens/src/tokens/primitives.json` for primitive values;
+- `packages/tokens/src/tokens/themes.json` for semantic theme and mode values;
+- `packages/tokens/src/tokens/figma-dtcg.sample.json` as a representative input fixture;
+- `packages/tokens/src/tokens/mapping-rules.json` for precedence and normalization;
+- `packages/tokens/src/tokens/zeroheight-metadata.json` for documentation metadata;
+- `packages/tokens/src/tokens/component-overrides.css` for stable provider gaps.
 
-Current full token source:
+## Tier model
 
-- `packages/tokens/src/tokens/primitives.json`
-  Current full primitive source for color, radius, spacing, and typography
-  values used by the build.
-- `packages/tokens/src/tokens/themes.json`
-  Current full runtime source for theme and mode selectors. This file emits the
-  semantic `--ps-*` variables and mapped PrimeNG `--p-*` variables used by
-  `tokens.css`, `design-tokens.json`, and `zeroheight-tokens.json`.
-- `packages/tokens/src/tokens/zeroheight-metadata.json`
-  Documentation metadata, token categories, and PrimeNG family metadata.
-- `packages/tokens/src/tokens/component-overrides.css`
-  Stable CSS override layer for PrimeNG component gaps not covered by preset
-  tokens.
-- `packages/tokens/src/tokens/mapping-rules.json`
-  Shared mapping tiers, precedence, input-source assumptions, and
-  normalization rules consumed by the token build and tests.
-
-Current Figma/DTCG sample input:
-
-- `packages/tokens/src/tokens/figma-dtcg.sample.json`
-  Sample Figma-backed DTCG-compatible input fixture used to validate tier and
-  provider mapping assumptions before real enterprise ingestion is wired.
-
-The sample file is intentionally not the full token source yet. The build reads
-it as an input fixture, validates representative mappings against the current
-full source, and stamps generated artifacts with a `figmaDtcgInput.validated`
-record. This proves the Figma/DTCG shape is being honored without pretending
-the sample already contains the complete enterprise token inventory.
-
-Expected future source model:
-
-- A real enterprise Figma/DTCG-compatible token export becomes the approved
-  source for primitive and semantic token values.
-- The registry continues to own component-intent mappings where component
-  behavior is a code contract, not just a design value.
-- PrimeNG provider mappings remain generated from semantic and component
-  intent; they are not public token API.
-- `primitives.json` and `themes.json` either become generated intermediates or
-  are replaced by direct generation from the approved DTCG source.
-
-Component file model:
-
-Not every component should need its own `figma-dtcg` file. The preferred model
-is one approved enterprise DTCG-compatible export, or a small set of exports by
-token domain, containing primitive, semantic, component, and provider-mapping
-tiers. Per-component files should be used only if the Figma export tooling
-forces that shape or if a component has a genuinely separate ownership and
-release boundary.
-
-Expected production shape:
-
-```text
-Figma libraries
-  -> approved DTCG-compatible token export
-  -> token build package
-      -> normalized primitive and semantic model
-      -> registry-owned component intent model
-      -> generated PrimeNG provider mapping
-      -> generated runtime artifacts
-          -> tokens.css
-          -> design-tokens.json
-          -> zeroheight-tokens.json
-          -> TypeScript token metadata/helpers
-          -> PrimeNG preset
-```
-
-In production, the repository should not rely on the sample fixture as the
-source of truth. It should either consume a checked-in enterprise export or pull
-the approved export during a controlled build step. The important production
-contract is not the exact file count; it is that one approved token input path
-feeds the generated CSS variables, documentation JSON, TypeScript metadata, and
-PrimeNG preset.
-
-A likely production file layout is:
-
-```text
-packages/tokens/src/tokens/
-  enterprise-dtcg.json
-  mapping-rules.json
-  zeroheight-metadata.json
-  component-overrides.css
-```
-
-Or, if the export is split by ownership:
-
-```text
-packages/tokens/src/tokens/
-  figma-primitives.dtcg.json
-  figma-semantic.dtcg.json
-  registry-components.dtcg.json
-  mapping-rules.json
-  zeroheight-metadata.json
-  component-overrides.css
-```
-
-Both shapes are acceptable if they produce the same generated runtime contract.
-The split-file model is useful only when it matches real ownership or export
-constraints. It should not become one DTCG file per wrapper by default.
-
-The current learning repo is intentionally one step before that production
-shape: `primitives.json` and `themes.json` are still the full token source,
-while `figma-dtcg.sample.json` validates the expected enterprise input shape.
-
-Adequacy position:
-
-The provided token export format is adequate if it can produce the same four
-tiers listed below and if normalization rules are explicit, versioned, and
-tested. The open enterprise validation is whether the Figma/DTCG-compatible
-JSON export contains enough metadata to distinguish semantic intent from
-provider-specific aliases.
-
-## Tier Model
-
-Tokens should be mapped through these tiers:
-
-| Tier | Example | Purpose |
+| Tier | Example | Responsibility |
 | --- | --- | --- |
-| Primitive | `blue.600`, `radius.md`, `typography.fontFamily` | Raw reusable design values. |
-| Semantic | `--ps-primary-background`, `--ps-surface-card` | Platform intent, independent of PrimeNG. |
-| Component | `--ps-button-background`, `--ps-action-text` | Design-system component intent. |
-| PrimeNG mapping | `--p-primary-color` | Provider-specific bridge consumed by PrimeNG. |
+| Primitive | `blue.600`, `radius.md` | Reusable raw values without product intent. |
+| Semantic | `--ps-primary-background`, `--ps-surface-card` | Platform meaning independent of PrimeNG. |
+| Component intent | `--ps-button-background` | Registry-owned component behavior and presentation. |
+| Provider bridge | `--p-primary-color` | PrimeNG-specific translation kept internal. |
 
-The public design-system API should use semantic or component intent. PrimeNG
-mapping tokens are internal bridge values and should not be app-team API.
+Applications should consume semantic or component intent. Provider bridge names are implementation details.
 
-## Mapping Flow
+## Mapping flow
 
 ```text
-enterprise token export
-  -> primitive token set
-  -> semantic platform tokens
-  -> component intent tokens
-  -> PrimeNG semantic/component preset keys and --p-* variables
+DTCG-compatible source
+  -> primitive model
+  -> semantic --ps-* variables
+  -> component intent
+  -> PrimeNG --p-* bridge and preset
   -> generated runtime artifacts
+  -> wrappers, shell, remotes, Storybook, and documentation
 ```
 
-Generated runtime artifacts:
+Generated artifacts include:
 
-- `packages/tokens/src/tokens.css`
-- `packages/tokens/src/design-tokens.json`
-- `packages/tokens/src/zeroheight-tokens.json`
-- `packages/tokens/src/index.ts`
-- `packages/primeng-preset/src/preset.ts`
+- `packages/tokens/src/tokens.css`;
+- `packages/tokens/src/design-tokens.json`;
+- `packages/tokens/src/zeroheight-tokens.json`;
+- `packages/tokens/src/index.ts`;
+- `packages/primeng-preset/src/preset.ts`.
 
-## Current Worked Example
+## Worked example: primary action
 
-| Step | Value |
+| Step | Example |
 | --- | --- |
-| Primitive | `blue.600` = `#1d4ed8` |
-| Semantic token | `--ps-primary-background: #1d4ed8` |
-| PrimeNG semantic bridge | `--p-primary-color: var(--ps-primary-background)` |
-| PrimeNG component bridge | `--p-button-primary-background: var(--p-primary-color)` |
-| Preset semantic value | `semantic.light.primaryBackground` used as `primary.color` |
-| Wrapper usage | `PublicButtonComponent` exposes design-system inputs. |
+| Primitive | `blue.600 = #1d4ed8` |
+| Semantic | `--ps-primary-background: #1d4ed8` |
+| Provider semantic bridge | `--p-primary-color: var(--ps-primary-background)` |
+| Provider component bridge | `--p-button-primary-background: var(--p-primary-color)` |
+| Wrapper contract | `intent="primary"` |
+| Evidence | Token build, tests, Storybook, shell integration, manifest metadata |
 
-The wrapper exposes `tone`, `outlined`, `text`, and `label`. It does not expose
-PrimeNG token names.
+The application requests product intent. The wrapper and preset translate that intent to provider internals.
 
-This lets the app consume `<ps-button tone="primary" />` while the wrapper and
-PrimeNG preset resolve the visual result through the shared token contract.
+## Worked example: surface and typography
 
-## Approval Table
+A card surface combines semantic background, text, border, radius, and inherited typography values. The registry component uses semantic or provider-bridge variables without exposing provider token names through its public API.
 
-Use this table as the review surface for Neil. Each row should be approved,
-changed, or blocked by missing enterprise token metadata.
+Typography aliases should only be generated when the authoritative export identifies the alias or an approved mapping rule creates it.
 
-| Example | Complexity | Review decision needed |
+## Worked example: danger and error terminology
+
+The sample uses `danger` as public design-system language and maps it to PrimeNG `error` terminology internally where required.
+
+This rule is valid only when it is:
+
+- declared in `mapping-rules.json`;
+- visible in generated metadata;
+- covered by token tests;
+- approved as design language or labeled as compatibility debt.
+
+## Normalization rules
+
+| Rule | Sample status | Requirement |
 | --- | --- | --- |
-| Primary action color | Simple | Confirm the source path and token name are acceptable. |
-| Card surface and typography | Complex | Confirm whether inherited typography is enough for card usage. |
-| Danger status to PrimeNG error | Complex | Approve or reject `danger` to `error` provider normalization. |
+| `danger` to provider `error` | Proposed design normalization | Approve or mark temporary before production adoption. |
+| Typography aliases | Conditional | Generate only from authoritative metadata or approved rules. |
+| Missing ramp aliases | Conditional | Use the nearest approved primitive only with explicit approval. |
+| PrimeNG `--p-*` bridge | Active | Generate from the same semantic source as `--ps-*`. |
+| Component override CSS | Active | Reserve for stable provider gaps not expressible through the preset. |
 
-Primary action color:
+No mapping rule should exist only in prose.
 
-- Source token:
-  sample path `semantic.color.primary.background`; current source
-  `themes.json` `--ps-primary-background`.
-- Runtime token:
-  `--ps-primary-background: #1d4ed8`.
-- Normalization:
-  none.
-- Registry usage:
-  `ps-button` exposes `tone="primary"` through `PublicButtonComponent`.
-- PrimeNG mapping:
-  `--p-primary-color: var(--ps-primary-background)` and
-  `--p-button-primary-background: var(--p-primary-color)`.
-- Evidence:
-  `pnpm build:tokens`, token tests, generated `tokens.css`, and
-  `figmaDtcgInput.validated`.
+## Precedence
 
-Card surface and typography:
+When inputs overlap, apply this order:
 
-- Source token:
-  current source `themes.json` `--ps-surface-card` and `--ps-font-family`;
-  sample paths `semantic.color.surface.background` and
-  `semantic.typography.body.fontFamily`.
-- Runtime token:
-  `--ps-surface-card`, `--ps-font-family`, `--p-content-background`, and
-  `--p-text-color`.
-- Normalization:
-  PrimeNG bridge is active. Typography aliases are proposed only; no old alias
-  should be mapped unless the enterprise export confirms it.
-- Registry usage:
-  `ps-card` consumes `--p-content-background`, `--p-text-color`, and inherited
-  font context through `PublicCardComponent`.
-- PrimeNG mapping:
-  preset `semantic.colorScheme.light.content.background` maps from
-  `semantic.light.surfaceCard`; `semantic.typography.fontFamily` maps from
-  `typography.fontFamily`; `--p-card-background` bridges through content
-  background.
-- Evidence:
-  generated CSS, `packages/primeng-preset/src/preset.ts`, and wrapper CSS.
+1. approved authoritative source values;
+2. approved semantic normalization rules;
+3. registry-owned component intent;
+4. generated provider mappings;
+5. temporary sample or migration fallbacks.
 
-Danger status to PrimeNG error:
+Provider terminology must not override semantic meaning.
 
-- Source token:
-  sample paths `semantic.color.danger.background` and
-  `component.toast.danger.background`; current source `themes.json`
-  `--ps-danger-color`.
-- Runtime token:
-  `--ps-danger-color`, `--p-toast-message-error-background`, and related error
-  bridge variables.
-- Normalization:
-  `danger` to PrimeNG `error` is proposed. This keeps design-system language as
-  danger while mapping to provider terminology internally.
-- Registry usage:
-  `PublicToastService` exposes `severity: 'danger'`; wrappers keep provider
-  terminology out of app code.
-- PrimeNG mapping:
-  PrimeNG toast uses `error` token names, including
-  `--p-toast-message-error-background`; sample provider path maps
-  `toast.error.background` from `component.toast.danger.background`.
-- Evidence:
-  sample validation, generated CSS, and token tests.
+## Registry consumption
 
-## Normalization Rules
+Applications and remotes import governed APIs from `@public-sector/ui-patterns`.
 
-These rules must be tracked as approved or proposed before enterprise adoption.
+Wrappers consume the token contract through:
 
-| Rule | Status | Mapping behavior |
-| --- | --- | --- |
-| `danger` to PrimeNG `error` | Proposed | Wrappers translate design-system intent to provider terminology. |
-| Typography aliases | Proposed | Map only when the active token source confirms aliases. |
-| Missing ramp aliases | Proposed | Map to nearest approved primitive only with design approval. |
-| PrimeNG `--p-*` bridge | Active in sample | Generate from the same theme selector source as `--ps-*`. |
-| Component override CSS | Active in sample | Use for stable provider gaps not expressible through the preset. |
+- semantic `--ps-*` variables for registry-owned markup;
+- the PrimeNG preset and generated `--p-*` bridge when PrimeNG owns internal structure.
 
-No normalization should exist only in documentation. Rules are defined in
-`packages/tokens/src/tokens/mapping-rules.json`, emitted into generated token
-artifacts, and covered by token build tests. If a proposed rule is approved, it
-must be represented in the token build or wrapper implementation.
+Application code should not import PrimeNG modules, pass provider-specific configuration objects, render `<p-*>` selectors, or style `.p-*` internals directly.
 
-## Precedence Rules
+## Adequacy review
 
-When multiple source files overlap, use this precedence:
+An adopting token export is adequate when reviewers can answer:
 
-1. Approved enterprise source tokens.
-2. Approved semantic normalization rules.
-3. Component-intent tokens owned by the registry.
-4. PrimeNG provider mapping derived from semantic/component tokens.
-5. Temporary sample or bootstrap fallback values.
+- Which source path produced the primitive value?
+- Which semantic token represents the intended platform role?
+- Which normalization rule, if any, was applied?
+- Which component intent consumes the value?
+- Which provider key receives the internal bridge?
+- Which generated artifact and automated evidence prove the mapping?
 
-Provider-specific names should not override semantic token meaning. If a
-PrimeNG key needs a value that does not exist in the source, create an explicit
-proposed alias and track it until approved.
+If any answer requires guessing, the export or mapping metadata is incomplete.
 
-## Registry Consumption
+## Zeroheight output
 
-The component registry consumes the contract in two ways:
+Zeroheight should receive generated token metadata plus links to Storybook, Playwright, source, and lifecycle evidence. It should not own runtime values or federation configuration.
 
-- Wrappers use design-system inputs and CSS variables for public behavior.
-- Internal PrimeNG components receive the approved provider preset and mapped
-  `--p-*` variables.
+## Production adoption checks
 
-Application teams should not import PrimeNG modules, pass PrimeNG-specific
-configuration objects, or style `.p-*` selectors directly.
-
-## Zeroheight Output
-
-Zeroheight should document generated token metadata and evidence after that
-publishing workflow is active. It should not own runtime values or participate
-in token creation.
-
-The future Zeroheight documentation artifact is the generated
-`zeroheight-tokens.json` file from the token build, plus links to Storybook and
-Playwright evidence.
-
-## Open Validation
-
-- Confirm the enterprise token export contains enough metadata to identify
-  primitive, semantic, component, and provider-specific tiers.
-- Confirm which normalization rules are approved design-system decisions.
-- Confirm whether the PrimeNG preset should prefer resolved values or CSS
-  variable references for each token family.
-- Promote proposed normalization rules to approved only after design-system
-  confirmation.
+- Confirm the authoritative export and precedence policy.
+- Approve or reject every proposed normalization rule.
+- Confirm public prefixes and package names.
+- Verify preset parity with generated CSS variables.
+- Validate shell, standalone remotes, and overlays in each supported theme.
+- Align token, preset, registry, and theme-contract versions.
