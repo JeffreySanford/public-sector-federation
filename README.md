@@ -1,165 +1,163 @@
 # Public Sector Federation
 
-Public Sector Federation is a reference Angular workspace demonstrating module federation with independently bootstrapped remote web components, a shared PrimeNG theming contract, and a token-driven design system.
+Public Sector Federation is a portfolio-grade Angular reference platform demonstrating runtime module federation, independently bootstrapped Web Components, governed PrimeNG wrappers, design-token delivery, Storybook evidence, and automated accessibility and integration validation.
 
-## What this repository is for
+## Start here
 
-This repo is intended to show how one public-sector frontend platform can be composed from:
+- [Live Storybook and visual QA](https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/)
+- [Five-minute portfolio walkthrough](./docs/PORTFOLIO-OVERVIEW.md)
+- [Testing and release gates](./docs/TESTING.md)
+- [Design-system architecture](./docs/design-system/architecture/reference-architecture-recommendation.md)
+- [Component catalog](./docs/design-system/components/catalog.md)
+- [Generated component manifest](./packages/ui-patterns/generated/component-manifest.json)
 
-- a shell app that loads federated custom-element remotes
-- independently running Angular remote apps for services, reporting, admin, QA, and playground
-- a shared token design system in `packages/tokens`
-- a PrimeNG theme preset in `packages/primeng-preset`
-- a backend API in `apps/agile-api` backed by Prisma/Postgres
+## What this demonstrates
 
-The shell uses `module-federation.manifest.json` to discover and mount remote bundles at runtime.
+- Angular 21 applications composed through an Nx 23 workspace
+- a shell that discovers and mounts independently deployed custom-element remotes
+- shared semantic tokens delivered as CSS variables, JSON, TypeScript, and PrimeNG preset mappings
+- provider-neutral component APIs that keep PrimeNG implementation details inside a governed registry
+- light and dark theme propagation across shell, remotes, and body-appended overlays
+- Storybook, Chromatic, Playwright, axe, type checking, link checks, and manifest validation
+- a NestJS API backed by Prisma and PostgreSQL
+
+```mermaid
+flowchart LR
+  design[Figma or DTCG token source]
+  tokens[Token build package]
+  preset[PrimeNG preset]
+  registry[Governed UI wrappers]
+  shell[Angular shell]
+  remotes[Federated Web Component remotes]
+  storybook[Storybook and Chromatic]
+  tests[Playwright and accessibility evidence]
+
+  design --> tokens
+  tokens --> preset
+  tokens --> registry
+  preset --> registry
+  tokens --> shell
+  shell --> remotes
+  registry --> remotes
+  registry --> storybook
+  shell --> tests
+  storybook --> tests
+```
 
 ## Repository layout
 
-- `apps/shell` - application shell that composes remote custom elements
-- `apps/services-remote` - services remote exposing `<public-services-root>`
-- `apps/reporting-remote` - reporting remote exposing `<public-reporting-root>`
-- `apps/admin-remote` - admin remote exposing `<public-admin-root>`
-- `apps/qa-remote` - QA route and component contract app
-- `apps/playground` - local component playground
-- `apps/agile-api` - NestJS backend API with Prisma and Docker support
-- `packages/tokens` - design token source, CSS variables, and token exports
-- `packages/primeng-preset` - shared PrimeNG provider and theme mapping
-- `docs/` - documentation, design-system guidance, reports, and governance notes
-- `scripts/` - helper scripts for platform checks, reports, and exports
+| Path | Purpose |
+| --- | --- |
+| `apps/shell` | Composes remote custom elements at runtime. |
+| `apps/services-remote` | Public-services remote exposed as `<public-services-root>`. |
+| `apps/reporting-remote` | Reporting remote exposed as `<public-reporting-root>`. |
+| `apps/admin-remote` | Administration remote exposed as `<public-admin-root>`. |
+| `apps/qa-remote` | Stable visual-contract and Storybook evidence surface. |
+| `apps/playground` | Local component and integration playground. |
+| `apps/agile-api` | NestJS API with Prisma and PostgreSQL. |
+| `packages/tokens` | Token source, generated CSS variables, JSON, and TypeScript exports. |
+| `packages/primeng-preset` | Shared PrimeNG theme bridge and provider. |
+| `packages/ui-patterns` | Provider-neutral wrappers, patterns, and component manifest. |
+| `docs` | Architecture, validation, governance, and portfolio documentation. |
+
+The shell reads `module-federation.manifest.json` to discover remote bundles and mount them as custom elements.
+
+## Reference status
+
+Release `1.0.0` is complete as a public architecture and portfolio reference. The repository intentionally contains multiple component lifecycle states—active, candidate, partial, and externally blocked—to demonstrate how governance metadata identifies evidence gaps instead of presenting every component as production-approved.
+
+Production adoption would still require organization-specific validation of the authoritative token export, ownership assignments, deployment topology, and design approvals. Those external decisions are explicitly separated from what this sample proves.
 
 ## Prerequisites
 
-- Node.js and `pnpm`
-- Docker Desktop for the backend API and Postgres support
-- Git for source control
-- Optional: GitHub CLI for repository management
+- Node.js 22 through 26
+- pnpm 10.33.2
+- Docker Desktop for PostgreSQL and the backend API
+- Git
 
-## Install
+## Install and run
 
 ```bash
 pnpm install
-```
-
-## Local development
-
-Start the complete platform locally:
-
-```bash
 pnpm start:all
 ```
 
-This command starts:
+The shell opens at `http://localhost:4200`. Frontend applications use ports `4200` through `4204`; the QA Storybook uses port `4400`.
 
-- the backend API and Postgres via Docker
-- shell and remote frontend apps through Nx on ports `4200` to `4204`
-
-Alternatively, start parts individually:
+Run services individually when needed:
 
 ```bash
 pnpm start:frontend
 pnpm start:backend
-```
-
-Run frontend apps manually:
-
-```bash
 pnpm serve:shell
-pnpm serve:services
-pnpm serve:reporting
-pnpm serve:admin
 pnpm serve:qa
-pnpm serve:playground
+pnpm storybook:qa
 ```
 
-Open the shell at `http://localhost:4200`.
+## Verification
 
-## Backend and database commands
+Use the complete release gate before tagging or merging a release:
 
 ```bash
-pnpm docker:up
-pnpm docker:down
-pnpm docker:logs
-pnpm serve:api
-pnpm api:prisma:generate
-pnpm api:migrate
-pnpm api:seed
+pnpm verify:release
 ```
 
-## Verification and maintenance
+This runs linting, link validation, type checking, unit tests, component-manifest drift checks, production builds, and the Playwright E2E suite.
 
-Common workspace commands:
+Use the smaller running-platform check during development:
 
 ```bash
-pnpm build
-pnpm typecheck
-pnpm lint
-pnpm test
-pnpm graph
-pnpm guard:scss
-pnpm test:a11y
-pnpm check:dev-ports
-pnpm verify:fed
+pnpm verify:smoke
 ```
 
-Reporting and documentation commands:
+Other useful commands:
 
 ```bash
-pnpm screenshots:progress
-pnpm agile:report
-pnpm zeroheight:export
-pnpm zeroheight:publish
+pnpm build:tokens
+pnpm lint:wrappers
+pnpm manifest:check
+pnpm test:storybook:up-button:chromium
+pnpm chromatic
 pnpm report:all
-pnpm report:publish
 ```
 
 ## Testing
 
-This repository includes comprehensive test coverage:
+The documented baseline contains **191 named tests**: 189 E2E definitions and 2 API unit tests. Playwright projects execute the relevant E2E definitions across Chromium, Firefox, and WebKit, so browser-expanded execution totals are higher than the named-test count.
 
-- **Unit Tests**: Linting, Prisma validation, Markdown formatting, JSON validation
-- **E2E Tests**: 189 tests across Chromium, Firefox, and WebKit
-  - 22 federation tests (shell + 4 remotes)
-  - 21 Storybook tests (accessibility, keyboard navigation, performance)
-  - 20 code example validation tests
-- **Code Quality**: TypeScript type checking, SCSS pattern guards
-- **Link Validation**: Markdown link checking with `pnpm lint:links`
+Coverage includes:
 
-**Quick start**:
+- shell and remote federation behavior
+- token inheritance and theme switching
+- PrimeNG overlay behavior
+- Storybook rendering and component states
+- keyboard interaction and automated accessibility checks
+- documentation examples and boundary rules
+- component-registry and generated-manifest integrity
 
-```bash
-# All checks (lint + unit tests)
-pnpm lint && pnpm test
+See [docs/TESTING.md](./docs/TESTING.md) for the authoritative commands and counting convention.
 
-# E2E tests (requires running servers)
-pnpm test:e2e
+## Design-system contract
 
-# Full documentation
-pnpm docs TESTING.md
-```
-
-For detailed testing guide, see [TESTING.md](./docs/TESTING.md) and
-[performance baseline](./docs/performance/baseline.md).
-
----
-
-## Module federation and design-system contract
-
-- Each remote is an independently bootstrapped Angular app.
-- The shell composes remotes as custom elements using `module-federation.manifest.json`.
-- `packages/tokens` provides shared semantic tokens and CSS variable fallbacks.
-- `packages/primeng-preset` exposes `providePublicSectorPrimeNG()`.
-- Every app that renders PrimeNG components must use this shared provider.
-- Do not call raw `providePrimeNG()` directly in the shell or a remote.
-
-Example provider import:
+Applications and remotes consume approved UI APIs from `@public-sector/ui-patterns`. PrimeNG modules, selectors, events, and provider-specific types remain inside the registry and preset packages.
 
 ```ts
-import { providePublicSectorPrimeNG } from '@public-sector/primeng-preset';
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
 ```
 
-## Notes
+The shared runtime contract is:
 
-- The QA route and `qa-remote` are intended as a stable visual contract surface for theme and component coverage.
-- `pnpm verify:fed` is the recommended smoke-check command for shell composition and accessibility.
-- This workspace is built for local exploration of module federation, platform composition, and design-system alignment.
+```text
+DTCG-compatible source
+  -> semantic --ps-* variables
+  -> component intent tokens
+  -> PrimeNG --p-* bridge and preset
+  -> registry wrappers
+  -> shell and independently running remotes
+```
+
+Zeroheight exports are documentation and governance artifacts; they are not a runtime token source or federation configuration mechanism.
+
+## Ownership and license
+
+This is an independently owned public portfolio and reference repository. The source is visible for evaluation and discussion, but no open-source license is granted. See [LICENSE.md](./LICENSE.md).
