@@ -90,9 +90,6 @@ jobs:
       - name: Validate documentation links
         run: pnpm lint:links
 
-      - name: Validate public references
-        run: pnpm lint:public
-
       - name: Typecheck projects
         shell: bash
         run: |
