@@ -102,7 +102,7 @@ Use the complete release gate before tagging or merging a release:
 pnpm verify:release
 ```
 
-This runs workspace linting, link and public-reference validation, type checking, unit tests, component-manifest drift checks, production builds, and the full Playwright E2E suite.
+This runs linting, link validation, type checking, unit tests, component-manifest drift checks, production builds, and the Playwright E2E suite.
 
 Use the smaller running-platform check during development:
 
@@ -114,7 +114,6 @@ Other useful commands:
 
 ```bash
 pnpm build:tokens
-pnpm lint:public
 pnpm lint:wrappers
 pnpm manifest:check
 pnpm test:e2e:list
@@ -125,7 +124,7 @@ pnpm report:all
 
 ## Testing
 
-The verified July 17, 2026 release run completed **360 Playwright test executions with 360 passing** across the configured Chromium, Firefox, and WebKit projects. Because project expansion and test coverage evolve, `pnpm test:e2e:list` is the authoritative way to inspect the current collected tests.
+The verified July 17, 2026 release run completed **360 Playwright executions with 360 passing** across Chromium, Firefox, and WebKit. Use `pnpm test:e2e:list` whenever an exact current collection count is needed rather than maintaining a hand-counted total.
 
 Coverage includes:
 
