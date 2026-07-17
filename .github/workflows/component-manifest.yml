@@ -1,13 +1,14 @@
-name: Component Manifest
+name: Release Quality Gate
 
 on:
   pull_request:
     paths:
-      - '.github/workflows/component-manifest.yml'
+      - '.github/workflows/**'
       - 'apps/**'
-      - 'docs/design-system/**'
+      - 'docs/**'
       - 'packages/**'
       - 'scripts/**'
+      - 'README.md'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'nx.json'
@@ -17,19 +18,23 @@ on:
     branches:
       - master
     paths:
-      - '.github/workflows/component-manifest.yml'
+      - '.github/workflows/**'
       - 'apps/**'
-      - 'docs/design-system/**'
+      - 'docs/**'
       - 'packages/**'
       - 'scripts/**'
+      - 'README.md'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'nx.json'
       - 'playwright.config.ts'
       - 'tsconfig.base.json'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * 1'
 
 concurrency:
-  group: component-contract-${{ github.workflow }}-${{ github.ref }}
+  group: release-quality-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -37,9 +42,9 @@ permissions:
 
 jobs:
   validate:
-    name: Contract, unit, Storybook, and E2E
+    name: Static, build, Storybook, and browser gates
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
 
     steps:
       - name: Check out repository
@@ -82,19 +87,17 @@ jobs:
       - name: Run workspace lint
         run: pnpm lint
 
+      - name: Validate documentation links
+        run: pnpm lint:links
+
+      - name: Validate public references
+        run: pnpm lint:public
+
       - name: Typecheck projects
         shell: bash
         run: |
           set -o pipefail
           pnpm typecheck 2>&1 | tee typecheck.log
-
-      - name: Upload typecheck diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: typecheck-diagnostics
-          path: typecheck.log
-          if-no-files-found: warn
 
       - name: Run unit tests
         shell: bash
@@ -102,18 +105,21 @@ jobs:
           set -o pipefail
           pnpm test 2>&1 | tee unit-tests.log
 
-      - name: Upload unit test diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: unit-test-diagnostics
-          path: unit-tests.log
-          if-no-files-found: warn
+      - name: Build production projects
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm build 2>&1 | tee build.log
 
       - name: Build QA Storybook
         run: pnpm build-storybook:qa
 
-      - name: Install Playwright browsers
+      - name: Install Chromium for pull-request validation
+        if: github.event_name == 'pull_request'
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Install full browser matrix
+        if: github.event_name != 'pull_request'
         run: pnpm exec playwright install --with-deps chromium firefox webkit
 
       - name: Run built Storybook accessibility gate
@@ -122,29 +128,32 @@ jobs:
           set -o pipefail
           node scripts/storybook-e2e.mjs 2>&1 | tee storybook-e2e.log
 
-      - name: Upload Storybook e2e diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: storybook-e2e-diagnostics
-          path: |
-            storybook-e2e.log
-            dist/storybook/qa-remote/index.json
-          if-no-files-found: warn
-
-      - name: Run full E2E suite
+      - name: Run Chromium pull-request gate
+        if: github.event_name == 'pull_request'
         shell: bash
         run: |
           set -o pipefail
-          pnpm e2e 2>&1 | tee e2e.log
+          pnpm exec playwright test --project=chromium --workers=1 2>&1 | tee e2e.log
 
-      - name: Upload E2E diagnostics
+      - name: Run full cross-browser release gate
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm test:e2e 2>&1 | tee e2e.log
+
+      - name: Upload validation diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: e2e-diagnostics
+          name: release-quality-diagnostics
           path: |
+            typecheck.log
+            unit-tests.log
+            build.log
+            storybook-e2e.log
             e2e.log
             playwright-report/
             test-results/
+            dist/storybook/qa-remote/index.json
           if-no-files-found: warn
