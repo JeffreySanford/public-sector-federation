@@ -1,191 +1,108 @@
-# Performance Baseline & Tracking
+# Performance Baseline and Tracking
 
-**Status**: ✅ Established | **Date**: 2026-07-12
+**Status:** Established  
+**Verified:** July 17, 2026
 
----
+## Current release baseline
 
-## Baseline Metrics
+The reference measurement was captured on a Windows 11 development machine with 16 GB RAM and an SSD.
 
-### Test Execution Times
+| Stage | Reference result | Guidance |
+| --- | ---: | --- |
+| Workspace lint | about 5 seconds | Investigate repeatable runs above 10 seconds. |
+| Unit tests | about 10 seconds | Investigate repeatable runs above 20 seconds. |
+| Shell startup | about 40 seconds | Includes Angular and federation startup. |
+| Storybook startup | about 60 seconds | First startup is slower than cached runs. |
+| Full Playwright suite | 360 passing executions in 6.1 minutes | Chromium, Firefox, and WebKit with four local workers. |
 
-**Measured**: 2026-07-12 (Development Environment)
-**Machine**: Windows 11, 16GB RAM, SSD
-**Browsers**: Chromium, Firefox, WebKit
-
-| Test Suite | Duration | Threshold | Status |
-|---|---|---|---|
-| **pnpm lint** | 5s | <10s | ✅ Excellent |
-| **pnpm test** | 10s | <15s | ✅ Excellent |
-| **Federation E2E (66)** | 90s | <120s | ✅ Excellent |
-| **Storybook E2E (63)** | 75s | <120s | ✅ Excellent |
-| **Code Examples (60)** | 60s | <120s | ✅ Excellent |
-| **Full E2E Suite (189)** | 225s | <360s | ✅ Excellent |
-
-### Server Startup Times
-
-| Component | Startup | Build Type | Notes |
-|---|---|---|---|
-| Shell (port 4200) | ~40s | Angular + Federation | Includes module federation build |
-| Storybook (port 4400) | ~60s | Storybook Angular | First run, slower on subsequent |
-
-### Browser Execution Breakdown
-
-**Per Test Average**:
-- Chromium: ~2.5s per test
-- Firefox: ~2.8s per test (slightly slower)
-- WebKit: ~2.6s per test
-
----
-
-## Regression Detection
-
-### Critical Thresholds
-
-🔴 **FAIL**: Test takes >150% of baseline
-- Federation >135s (baseline 90s)
-- Storybook >112s (baseline 75s)
-- Code Examples >90s (baseline 60s)
-- Full suite >337s (baseline 225s)
-
-🟡 **WARN**: Test takes >120% of baseline
-- Federation >108s
-- Storybook >90s
-- Code Examples >72s
-
-✅ **PASS**: Within 120% baseline
-
-### Action Items
-
-If regression detected:
-
-1. **Identify Cause**
-   - New network request added?
-   - Larger component tree?
-   - Slower server startup?
-   - Browser-specific issue?
-
-2. **Investigate**
-   - Run in headed mode: `pnpm playwright test --headed`
-   - Check DevTools Performance tab
-   - Profile with `--trace on`
-   - Check server logs for errors
-
-3. **Optimize**
-   - Reduce DOM complexity
-   - Lazy load non-critical resources
-   - Cache network responses
-   - Optimize image sizes
-   - Split large bundles
-
-4. **Update Baseline** (if intentional improvement)
-   - Document why baseline changed
-   - Update this file
-   - Commit with clear message
-
----
-
-## Monitoring
-
-### CI/CD Tracking
-
-Test execution times are automatically:
-- ✅ Recorded in `test-results/results.json`
-- ✅ Available in Playwright HTML report
-- ✅ Tracked in GitHub Actions (if configured)
-
-### Manual Tracking
+Use the collected Playwright list rather than maintaining a manual test total:
 
 ```bash
-# Run with timing output
-pnpm playwright test --reporter=list
-
-# Save results
-pnpm playwright test > test-results/baseline-$(date +%Y%m%d).txt
-
-# Compare results
-diff test-results/baseline-20260712.txt test-results/baseline-20260712-new.txt
+pnpm test:e2e:list
 ```
 
----
+The complete measured release command is:
 
-## Performance Optimization
-
-### Known Optimizations Applied
-
-- ✅ Server reuse (reuseExistingServer)
-- ✅ Browser reuse across tests
-- ✅ Parallel test execution (3 browsers simultaneously)
-- ✅ Screenshot/video only on failure
-- ✅ Trace only on first retry
-
-### Optimization Opportunities
-
-| Area | Current | Potential | Effort |
-|---|---|---|---|
-| **Network** | Real HTTP | Mock responses | High |
-| **Build Cache** | Standard | Incremental | Medium |
-| **Browser Pools** | Per-project | Shared | Medium |
-| **Screenshot Size** | Full page | Viewport only | Low |
-
----
-
-## Historical Tracking
-
-### Version: 2026-07-12
-
-```
-Baseline Established
-- Federation: 90s
-- Storybook: 75s
-- Code Examples: 60s
-- Total E2E: 225s
-
-Environment: Dev machine, clean state
-Browsers: All 3 (Chromium, Firefox, WebKit)
-Tests: 189 E2E + 2 Unit = 191 total
+```bash
+pnpm verify:release
 ```
 
-### Future Updates
+## Interpreting results
 
-Add entries as baselines change:
+Development-machine measurements vary with cache state, browser installation, background processes, and available CPU and memory. Treat these values as regression guidance rather than service-level objectives.
 
+- **Pass:** within roughly 120% of the reference duration.
+- **Review:** repeatedly above 120% of the reference duration.
+- **Release concern:** repeatedly above 150% without an explained increase in coverage.
+
+For the current full E2E baseline:
+
+- review repeatable runs above about 7.5 minutes;
+- treat repeatable runs above about 9 minutes as a release concern.
+
+## Regression investigation
+
+When a meaningful slowdown appears:
+
+1. Confirm that ports `4200` through `4204` and `4400` are free before startup.
+2. Compare clean and cached runs.
+3. Inspect Playwright traces and browser-specific failures.
+4. Review new network requests, component-tree growth, and server startup logs.
+5. Confirm that worker-count changes have not created resource contention.
+6. Update this baseline only when the performance or coverage change is intentional.
+
+Useful commands:
+
+```bash
+# Run the complete browser suite
+pnpm test:e2e
+
+# Use a single browser while investigating
+pnpm exec playwright test --project=chromium --workers=1
+
+# Run visibly
+pnpm exec playwright test --headed
+
+# Open the interactive debugger
+pnpm exec playwright test --debug
+
+# Open the last report
+pnpm exec playwright show-report
 ```
-### Version: YYYY-MM-DD
 
-Baseline Updated: [Reason]
-- Changed metric from X to Y
+## Continuous integration evidence
 
-Investigation: [Notes]
-- Found performance issue in...
-- Applied optimization...
-```
+The release-quality workflow records and uploads:
 
----
+- typecheck output;
+- unit-test output;
+- production-build output;
+- built-Storybook validation output;
+- Playwright logs;
+- the Playwright HTML report;
+- test result artifacts.
 
-## Goals
+Pull requests use Chromium for faster feedback. Pushes to `master`, scheduled runs, and manual runs execute the complete Chromium, Firefox, and WebKit matrix.
 
-**Short-term** (Next sprint):
-- [ ] Maintain <360s for full E2E suite
-- [ ] No regressions >120% baseline
-- [ ] All tests passing consistently
+## Applied optimizations
 
-**Medium-term** (Next 2 sprints):
-- [ ] Reduce E2E suite to <200s
-- [ ] Parallel execution for faster feedback
-- [ ] Code coverage >70%
+- Existing local servers may be reused outside CI.
+- Local Playwright execution is capped at four workers to avoid browser contention.
+- CI uses one worker for repeatability.
+- Screenshots and videos are retained only for failures.
+- Traces are captured on the first retry.
+- Nx caching accelerates unchanged build, typecheck, and unit-test targets.
 
-**Long-term** (Next quarter):
-- [ ] E2E suite <120s (with mocks)
-- [ ] CI/CD full run <5 minutes
-- [ ] Production monitoring integrated
+## Performance goals
 
----
+- Keep the full cross-browser suite dependable before optimizing for minimum duration.
+- Preserve deterministic startup and teardown behavior.
+- Investigate unexplained regressions before raising timeouts.
+- Prefer focused Chromium checks during development and the complete browser matrix for releases.
 
-## See Also
+## See also
 
-- [Testing Guide](../TESTING.md) - How to run tests
-- [Playwright Docs](https://playwright.dev) - Official docs
-- [Parallelism](https://playwright.dev/docs/test-parallel) - Worker and sharding guidance
-
-**Last Updated**: 2026-07-12
-**Next Review**: After first regression or optimization attempt
+- [Testing and Release Guide](../TESTING.md)
+- [Performance Tracking](./tracking.md)
+- [Performance Next Steps](./next-steps.md)
+- [Playwright parallelism](https://playwright.dev/docs/test-parallel)
