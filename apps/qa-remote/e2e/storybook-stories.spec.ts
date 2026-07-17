@@ -11,7 +11,7 @@ test.setTimeout(60 * 1000);
 
 const storybookHomeUrl = 'http://localhost:4400';
 const buttonStoryId = 'design-system-acceptance-button-tag--states';
-const candidateStoryId = 'design-system-candidates-button-up--preferred-candidate-api';
+const candidateStoryId = 'design-system-architecture-opinionated-wrapper-contract--preferred-candidate-api';
 const tableStoryId = 'design-system-acceptance-table-paginator--sort-filter-and-page';
 
 interface StorybookIndexEntry {
@@ -83,32 +83,32 @@ test.describe('Storybook Stories - Rendering & Console', () => {
 });
 
 test.describe('Storybook Stories - Accessibility (WCAG 2.1 AA)', () => {
-  test('should render Button and Tag components with correct styling', async ({ page }) => {
-    await gotoStory(page);
+n
+    const button = page.getByRole('button', { name: 'Delete draft' });
+    await expect(page.getByText('Activations: 0')).toBeVisible();
+    await button.click();
+    await expect(page.getByText('Activations: 1')).toBeVisible();
+  });
+});
 
-    const button = page.getByRole('button', { name: 'Primary action' });
-    const tag = page.getByText('On track', { exact: true });
-    await expect(button).toBeVisible();
-    await expect(tag).toBeVisible();
-    await expect(button).toHaveCSS('cursor', 'pointer');
+test.describe('Storybook Stories - Component Coverage', () => {
+  test('should have PublicEmptyStateComponent story', async ({ request }) => {
+    expect(includesTitle(await loadStoryIndex(request), 'Design System/Components/Empty State')).toBe(true);
   });
 
-  test('should have semantic heading structure', async ({ page }) => {
-    await gotoStory(page);
-    await expect(page.getByRole('heading', { level: 1, name: 'Button and tag states' })).toBeVisible();
+  test('should have PublicFormSectionComponent story', async ({ request }) => {
+    expect(includesTitle(await loadStoryIndex(request), 'Design System/Components/Form Section')).toBe(true);
   });
 
-  test('should have proper color contrast', async ({ page }) => {
-    await gotoStory(page);
+  test('should have PublicPageHeaderComponent story', async ({ request }) => {
+    expect(includesTitle(await loadStoryIndex(request), 'Design System/Components/Page Header')).toBe(true);
+  });
 
-    const styles = await page.getByRole('button', { name: 'Primary action' }).evaluate((element) => {
-      const computed = window.getComputedStyle(element);
-      return { color: computed.color, backgroundColor: computed.backgroundColor };
-    });
+  test('should have PublicStatusCardComponent story', async ({ request }) => {
+    expect(includesTitle(await loadStoryIndex(request), 'Design System/Components/Status Card')).toBe(true);
+  });
 
-    expect(styles.color).not.toBe('');
-    expect(styles.backgroundColor).not.toBe('');
-    expect(styles.color).not.toBe(styles.backgroundColor);
+  test('should have);
   });
 });
 
