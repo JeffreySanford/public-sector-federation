@@ -31,8 +31,8 @@ type Tone = 'success' | 'info' | 'warn' | 'danger' | 'secondary' | 'contrast';
 })
 class ProblemAreaStoryComponent {
   private readonly toast = inject(PublicToastService);
-  readonly title = input('Problem area evidence');
-  readonly description = input('Focused wrapper validation for a known risk area.');
+  readonly title = input('Overlay and Shadow DOM evidence');
+  readonly description = input('Focused validation for overlay behavior, wrapper boundaries, and Shadow DOM integration.');
   readonly badge = input('Evidence');
   readonly tone = input<Tone>('info');
   readonly qaStatus = input<'Passes Storybook QA' | 'Does not pass Storybook QA'>('Passes Storybook QA');
@@ -57,7 +57,7 @@ class ProblemAreaStoryComponent {
 }
 
 const meta: Meta<ProblemAreaStoryComponent> = {
-  title: 'Design System/Problem Areas',
+  title: 'Design System/Overlay And Shadow DOM',
   component: ProblemAreaStoryComponent,
   render: (args) => ({
     props: args,
@@ -83,7 +83,7 @@ const meta: Meta<ProblemAreaStoryComponent> = {
 
 export default meta;
 type Story = StoryObj<ProblemAreaStoryComponent>;
-export const Overview: Story = { args: { title: 'Problem area overview', badge: 'Overview', tone: 'info' } };
+export const Overview: Story = { args: { title: 'Overlay and Shadow DOM overview', badge: 'Overview', tone: 'info' } };
 export const ToastSeverityStates: Story = { args: { title: 'Toast severity states', badge: 'Toast states', tone: 'success' } };
 export const ToastLongErrorCopy: Story = { args: { title: 'Toast long error copy', badge: 'Long error', tone: 'danger', description: 'Long error copy wraps without clipping or obscuring controls.' } };
 export const DialogOverlayAppend: Story = { args: { title: 'Dialog overlay append', badge: 'Dialog', tone: 'info', dialogHeading: 'Overlay append evidence' } };
@@ -96,14 +96,14 @@ export const ShellMountedRisk: Story = { args: { title: 'Shell mounted risk', ba
 export const ZeroheightGovernance: Story = { args: { title: 'Zeroheight governance', badge: 'Governance', tone: 'success' } };
 export const KnownQaFailure: Story = {
   args: {
-    title: 'Known QA failure',
+    title: 'Blocked promotion evidence',
     badge: 'Blocked component',
     tone: 'danger',
     qaStatus: 'Does not pass Storybook QA',
     primaryHeading: 'Promotion blocked',
     primarySubheading: 'This component is intentionally held back from acceptance stories',
     description: 'This example represents a component with unresolved Storybook QA issues and should not be promoted into the passing acceptance lane.',
-    notes: 'Fails Storybook QA until accessibility, state coverage, and runtime proof are corrected. Keep this story in Problem Areas only.',
+    notes: 'Fails Storybook QA until accessibility, state coverage, and runtime proof are corrected. Keep this story in the overlay and Shadow DOM validation lane only.',
     dialogHeading: 'Blocked promotion evidence',
     dialogBody: 'Do not promote this component into /qa or shell acceptance until the Storybook QA issues are fixed.',
     invalid: true,

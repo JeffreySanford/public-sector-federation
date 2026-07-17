@@ -85,7 +85,7 @@ try {
   }
 
   const storyIds = [
-    'design-system-problem-areas--overview',
+    'design-system-overlay-and-shadow-dom--overview',
     'design-system-primeng-playground--component-families',
     'design-system-candidates-button-up--primary',
     'design-system-registry-component-manifest--overview',
@@ -108,8 +108,8 @@ try {
       waitUntil: 'domcontentloaded',
       timeout: 60000,
     });
-    if (storyId.includes('problem-areas')) {
-      await waitForStory(page.getByText('Problem area overview'), storyId, 'the problem-area heading');
+    if (storyId.includes('overlay-and-shadow-dom')) {
+      await waitForStory(page.getByText('Overlay and Shadow DOM overview'), storyId, 'the overlay and Shadow DOM heading');
     }
     if (storyId.includes('primeng-playground')) {
       await waitForStory(page.getByText('Shared wrapper playground'), storyId, 'the PrimeNG playground heading');
@@ -135,8 +135,8 @@ try {
     }
 
     const bodyText = await page.locator('body').innerText();
-    if (storyId.includes('problem-areas') && !bodyText.includes('Problem area overview')) {
-      throw new Error('Problem Areas overview story did not render expected content.');
+    if (storyId.includes('overlay-and-shadow-dom') && !bodyText.includes('Overlay and Shadow DOM overview')) {
+      throw new Error('Overlay and Shadow DOM overview story did not render expected content.');
     }
     if (storyId.includes('primeng-playground') && !bodyText.includes('Shared wrapper playground')) {
       throw new Error('Shared wrapper playground story did not render expected content.');
