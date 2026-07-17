@@ -60,6 +60,7 @@
     "build-storybook:qa": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run qa-remote:build-storybook",
     "test:a11y": "node scripts/a11y-check.mjs",
     "test:e2e": "playwright test",
+    "test:e2e:list": "playwright test --list",
     "test:code-examples": "playwright test CODE_EXAMPLES.test.ts",
     "test:api": "pnpm nx run agile-api:test",
     "test:storybook:qa": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts",

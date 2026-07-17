@@ -116,6 +116,7 @@ Other useful commands:
 pnpm build:tokens
 pnpm lint:wrappers
 pnpm manifest:check
+pnpm test:e2e:list
 pnpm test:storybook:up-button:chromium
 pnpm chromatic
 pnpm report:all
@@ -123,7 +124,7 @@ pnpm report:all
 
 ## Testing
 
-The documented baseline contains **191 named tests**: 189 E2E definitions and 2 API unit tests. Playwright projects execute the relevant E2E definitions across Chromium, Firefox, and WebKit, so browser-expanded execution totals are higher than the named-test count.
+The verified July 17, 2026 release run completed **360 Playwright executions with 360 passing** across Chromium, Firefox, and WebKit. Use `pnpm test:e2e:list` whenever an exact current collection count is needed rather than maintaining a hand-counted total.
 
 Coverage includes:
 

@@ -4,12 +4,13 @@
 
 ## Counting convention
 
-The baseline contains **191 named tests**:
+Use the collected Playwright output as the authoritative current count:
 
-- 189 E2E test definitions
-- 2 NestJS API unit tests
+```bash
+pnpm test:e2e:list
+```
 
-Playwright executes relevant E2E definitions through Chromium, Firefox, and WebKit projects. Browser-expanded executions are therefore higher than 189, but this guide reports named tests unless it explicitly says “browser executions.”
+The verified July 17, 2026 release run completed **360 browser executions with 360 passing** across Chromium, Firefox, and WebKit. Counts can change as projects and test definitions evolve, so documentation should describe the verified run and point to the collection command rather than maintain a manually calculated total.
 
 ## Primary commands
 
@@ -19,6 +20,9 @@ pnpm verify:release
 
 # Running-platform federation and accessibility smoke check
 pnpm verify:smoke
+
+# Current Playwright collection
+pnpm test:e2e:list
 
 # Individual quality stages
 pnpm lint
@@ -78,6 +82,7 @@ The primary browser projects are Chromium, Firefox, and WebKit.
 
 ```bash
 pnpm test:storybook:qa
+pnpm test:storybook:qa:chromium
 pnpm test:storybook:up-button
 pnpm test:storybook:up-button:chromium
 pnpm test:storybook:registry
@@ -141,13 +146,7 @@ Automated checks do not replace manual screen-reader review. The component manif
 
 Development-machine measurements vary, so timings are regression guidance rather than CI service-level objectives.
 
-| Stage | Reference duration |
-| --- | ---: |
-| Workspace lint | about 5 seconds |
-| Unit tests | about 10 seconds |
-| Shell startup | about 40 seconds |
-| Storybook startup | about 60 seconds |
-| Full E2E suite | about 3–5 minutes |
+The verified July 17, 2026 local release run completed the full browser matrix in approximately 6.1 minutes. See [the performance baseline](./performance/baseline.md) for the measured environment and regression guidance.
 
 Investigate a repeatable increase above roughly 120% of the local baseline. Treat a repeatable increase above 150% as a release concern.
 

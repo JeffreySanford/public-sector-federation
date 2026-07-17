@@ -1,191 +1,91 @@
-# Performance Baseline & Tracking
+# Performance Baseline and Tracking
 
-**Status**: ✅ Established | **Date**: 2026-07-12
+**Status:** Established | **Measured:** 2026-07-17
 
----
+## Verified release run
 
-## Baseline Metrics
+The final local release validation completed on Windows 11 with 16 GB RAM and an SSD.
 
-### Test Execution Times
+| Stage | Result | Reference duration |
+| --- | --- | ---: |
+| Workspace lint | Passed | about 5 seconds |
+| Documentation links | Passed | under 10 seconds |
+| Typecheck | Passed | about 2 seconds with cache |
+| Unit tests | Passed | about 2 seconds with cache |
+| Component manifest | Passed | under 5 seconds |
+| Production builds | Passed | about 7 seconds with cache |
+| Full Playwright browser matrix | 360/360 passed | 6.1 minutes |
 
-**Measured**: 2026-07-12 (Development Environment)
-**Machine**: Windows 11, 16GB RAM, SSD
-**Browsers**: Chromium, Firefox, WebKit
+The Playwright execution total represents the collected tests across Chromium, Firefox, and WebKit for that verified run. Use `pnpm test:e2e:list` for the authoritative current collection because the total changes as tests and projects evolve.
 
-| Test Suite | Duration | Threshold | Status |
-|---|---|---|---|
-| **pnpm lint** | 5s | <10s | ✅ Excellent |
-| **pnpm test** | 10s | <15s | ✅ Excellent |
-| **Federation E2E (66)** | 90s | <120s | ✅ Excellent |
-| **Storybook E2E (63)** | 75s | <120s | ✅ Excellent |
-| **Code Examples (60)** | 60s | <120s | ✅ Excellent |
-| **Full E2E Suite (189)** | 225s | <360s | ✅ Excellent |
+## Development-server startup
 
-### Server Startup Times
+| Component | Typical startup | Notes |
+| --- | ---: | --- |
+| Federated frontend group | 40–60 seconds | First build is slower; Nx caching improves subsequent starts. |
+| QA Storybook | about 60 seconds | Subsequent starts benefit from local caches. |
 
-| Component | Startup | Build Type | Notes |
-|---|---|---|---|
-| Shell (port 4200) | ~40s | Angular + Federation | Includes module federation build |
-| Storybook (port 4400) | ~60s | Storybook Angular | First run, slower on subsequent |
+## Regression guidance
 
-### Browser Execution Breakdown
+Development-machine timings are diagnostic guidance rather than service-level objectives.
 
-**Per Test Average**:
-- Chromium: ~2.5s per test
-- Firefox: ~2.8s per test (slightly slower)
-- WebKit: ~2.6s per test
+- Investigate a repeatable increase above 120% of the local baseline.
+- Treat a repeatable increase above 150% as a release concern.
+- Compare runs from a clean port state and similar cache conditions.
+- Distinguish application regressions from first-run browser installation or Storybook compilation.
 
----
+For the full browser matrix, the July 17 reference is 6.1 minutes:
 
-## Regression Detection
+- 120% investigation threshold: approximately 7.3 minutes
+- 150% release-concern threshold: approximately 9.2 minutes
 
-### Critical Thresholds
+## Investigation workflow
 
-🔴 **FAIL**: Test takes >150% of baseline
-- Federation >135s (baseline 90s)
-- Storybook >112s (baseline 75s)
-- Code Examples >90s (baseline 60s)
-- Full suite >337s (baseline 225s)
+1. Confirm ports `4200` through `4204` and `4400` are not occupied by stale processes.
+2. Re-run the affected file or browser project with one worker.
+3. Use headed mode or the Playwright inspector for interaction failures.
+4. Review `playwright-report/`, `test-results/`, videos, screenshots, and traces.
+5. Compare build and startup logs before changing application code.
+6. Update this baseline only after an intentional, verified change.
 
-🟡 **WARN**: Test takes >120% of baseline
-- Federation >108s
-- Storybook >90s
-- Code Examples >72s
-
-✅ **PASS**: Within 120% baseline
-
-### Action Items
-
-If regression detected:
-
-1. **Identify Cause**
-   - New network request added?
-   - Larger component tree?
-   - Slower server startup?
-   - Browser-specific issue?
-
-2. **Investigate**
-   - Run in headed mode: `pnpm playwright test --headed`
-   - Check DevTools Performance tab
-   - Profile with `--trace on`
-   - Check server logs for errors
-
-3. **Optimize**
-   - Reduce DOM complexity
-   - Lazy load non-critical resources
-   - Cache network responses
-   - Optimize image sizes
-   - Split large bundles
-
-4. **Update Baseline** (if intentional improvement)
-   - Document why baseline changed
-   - Update this file
-   - Commit with clear message
-
----
-
-## Monitoring
-
-### CI/CD Tracking
-
-Test execution times are automatically:
-- ✅ Recorded in `test-results/results.json`
-- ✅ Available in Playwright HTML report
-- ✅ Tracked in GitHub Actions (if configured)
-
-### Manual Tracking
+Useful commands:
 
 ```bash
-# Run with timing output
-pnpm playwright test --reporter=list
-
-# Save results
-pnpm playwright test > test-results/baseline-$(date +%Y%m%d).txt
-
-# Compare results
-diff test-results/baseline-20260712.txt test-results/baseline-20260712-new.txt
+pnpm test:e2e:list
+pnpm exec playwright test --project=chromium --workers=1
+pnpm exec playwright test --headed
+pnpm exec playwright show-report
 ```
 
----
+## Applied optimizations
 
-## Performance Optimization
+- Four local Playwright workers to avoid machine contention
+- One worker in pull-request CI for deterministic feedback
+- Screenshots and video retained on failure
+- Trace collection on retry
+- Nx build and test caching
+- Playwright-managed frontend and Storybook servers
+- Separate focused Chromium commands for Storybook and candidate validation
 
-### Known Optimizations Applied
+## CI strategy
 
-- ✅ Server reuse (reuseExistingServer)
-- ✅ Browser reuse across tests
-- ✅ Parallel test execution (3 browsers simultaneously)
-- ✅ Screenshot/video only on failure
-- ✅ Trace only on first retry
+Pull requests run the static checks, production builds, Storybook validation, and Chromium E2E for practical feedback time.
 
-### Optimization Opportunities
+Pushes to `master`, scheduled runs, and manual workflow dispatches execute the complete Chromium, Firefox, and WebKit release matrix. Logs, reports, screenshots, videos, and traces are uploaded when failures occur.
 
-| Area | Current | Potential | Effort |
-|---|---|---|---|
-| **Network** | Real HTTP | Mock responses | High |
-| **Build Cache** | Standard | Incremental | Medium |
-| **Browser Pools** | Per-project | Shared | Medium |
-| **Screenshot Size** | Full page | Viewport only | Low |
+## Maintenance
 
----
+Record a new entry only when one of these changes materially:
 
-## Historical Tracking
+- browser matrix;
+- worker configuration;
+- CI operating system or machine class;
+- number or type of federated applications;
+- Storybook build strategy;
+- a repeatable timing improvement or regression.
 
-### Version: 2026-07-12
+## See also
 
-```
-Baseline Established
-- Federation: 90s
-- Storybook: 75s
-- Code Examples: 60s
-- Total E2E: 225s
-
-Environment: Dev machine, clean state
-Browsers: All 3 (Chromium, Firefox, WebKit)
-Tests: 189 E2E + 2 Unit = 191 total
-```
-
-### Future Updates
-
-Add entries as baselines change:
-
-```
-### Version: YYYY-MM-DD
-
-Baseline Updated: [Reason]
-- Changed metric from X to Y
-
-Investigation: [Notes]
-- Found performance issue in...
-- Applied optimization...
-```
-
----
-
-## Goals
-
-**Short-term** (Next sprint):
-- [ ] Maintain <360s for full E2E suite
-- [ ] No regressions >120% baseline
-- [ ] All tests passing consistently
-
-**Medium-term** (Next 2 sprints):
-- [ ] Reduce E2E suite to <200s
-- [ ] Parallel execution for faster feedback
-- [ ] Code coverage >70%
-
-**Long-term** (Next quarter):
-- [ ] E2E suite <120s (with mocks)
-- [ ] CI/CD full run <5 minutes
-- [ ] Production monitoring integrated
-
----
-
-## See Also
-
-- [Testing Guide](../TESTING.md) - How to run tests
-- [Playwright Docs](https://playwright.dev) - Official docs
-- [Parallelism](https://playwright.dev/docs/test-parallel) - Worker and sharding guidance
-
-**Last Updated**: 2026-07-12
-**Next Review**: After first regression or optimization attempt
+- [Testing and Release Guide](../TESTING.md)
+- [Performance Tracking](./tracking.md)
+- [Performance Next Steps](./next-steps.md)
