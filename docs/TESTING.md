@@ -1,411 +1,172 @@
-# Testing Guide
+# Testing and Release Guide
 
-**Status**: ✅ Complete | **Tests**: 264+ E2E + Unit Tests | **Coverage**: In-progress
-**Last Updated**: 2026-07-12
+**Release status:** Portfolio reference `1.0.0`
 
----
+## Counting convention
 
-## Quick Start
+The baseline contains **191 named tests**:
 
-### Run All Tests
+- 189 E2E test definitions
+- 2 NestJS API unit tests
+
+Playwright executes relevant E2E definitions through Chromium, Firefox, and WebKit projects. Browser-expanded executions are therefore higher than 189, but this guide reports named tests unless it explicitly says “browser executions.”
+
+## Primary commands
 
 ```bash
-# Linting (JSON, Prisma, Markdown, SCSS)
+# Complete release gate
+pnpm verify:release
+
+# Running-platform federation and accessibility smoke check
+pnpm verify:smoke
+
+# Individual quality stages
 pnpm lint
-
-# Unit tests
-pnpm test
-
-# E2E tests (requires running servers)
-pnpm test:e2e
-
-# Code examples validation
-pnpm test:code-examples
-
-# Link validation (markdown-link-check)
 pnpm lint:links
+pnpm typecheck
+pnpm test
+pnpm manifest:check
+pnpm build
+pnpm test:e2e
 ```
 
----
+`verify:release` runs linting, link validation, type checking, unit tests, manifest drift validation, production builds, and the full Playwright suite.
 
-## Test Suites
+`verify:smoke` expects the integrated platform to be running. It checks development ports and performs the cross-application accessibility scan.
 
-### 1. Linting & Code Quality
+## Test suites
 
-**Command**: `pnpm lint`
+### Repository and documentation validation
 
-Validates:
-- ✅ JSON files (12 files)
-- ✅ Prisma schema validation
-- ✅ Markdown formatting (15 files, line length 120)
-- ✅ SCSS patterns (guard check)
+`pnpm lint` validates workspace JSON, Prisma configuration, Markdown formatting, SCSS conventions, and PrimeNG wrapper boundaries through the repository lint scripts.
 
-**Expected Result**: 0 errors
+`pnpm lint:links` validates Markdown links.
 
-**Duration**: ~5 seconds
+`pnpm manifest:check` regenerates component metadata in check mode and fails when the committed manifest has drifted from its TypeScript source.
 
----
-
-### 2. Unit Tests
-
-**Command**: `pnpm test`
-
-**Coverage**:
-- AgileService: 2 tests
-  - Dashboard work item totals calculation
-  - Status-grouped work item reporting
-
-**Expected Result**: 2 pass
-
-**Duration**: ~10 seconds
-
-**Files**:
-- `apps/agile-api/test/agile.service.test.ts`
-
----
-
-### 3. E2E Tests (189 tests)
-
-**Command**: `pnpm test:e2e`
-
-⚠️ **Note**: Starts servers automatically, runs in background. Use
-`--reporter=dot` for minimal output or `--reporter=list` for detailed progress.
-
-#### Test Suites
-
-**a) Federation Tests (22 tests)**
-- File: `apps/shell/e2e/federation.spec.ts`
-- Coverage: 3 browsers × 22 tests = 66 total
-- Validates: Shell mounting, remote loading, token inheritance, navigation
-
-**b) Storybook Tests (21 tests)**
-- File: `apps/qa-remote/e2e/storybook-stories.spec.ts`
-- Coverage: 3 browsers × 21 tests = 63 total
-- Validates: Story rendering, accessibility (WCAG 2.1 AA), keyboard navigation,
-  performance
-
-**c) QA Remote Component Tests (25+ tests)**
-- File: `apps/qa-remote/e2e/qa-remote.spec.ts`
-- Coverage: 3 browsers × 25+ tests = 75+ total
-- Validates: Tab switching (QA Components ↔ Performance Tracking), lazy
-  loading, component rendering, accessibility, keyboard navigation, semantic
-  HTML
-
-**d) Code Examples Tests (20 tests)**
-- File: `CODE_EXAMPLES.test.ts`
-- Coverage: 3 browsers × 20 tests = 60 total
-- Validates: Documentation examples, federation config patterns, component signals, design system
-
-**Browsers**: Chromium, Firefox, WebKit
-
-**Expected Result**: All tests pass
-
-**Duration**: ~3-5 minutes (first run), ~2-3 minutes (cached)
-
-**Baseline Metrics**:
-- Shell startup: ~40 seconds
-- Storybook startup: ~60 seconds
-- QA remote startup: ~30 seconds
-- Average test: ~2-3 seconds
-- Total E2E suite: ~180-240 seconds
-
----
-
-## Debugging Failed Tests
-
-### 1. Playwright E2E Test Failures
-
-#### View HTML Report
+### Unit tests
 
 ```bash
-# After test run
-pnpm playwright show-report
-
-# Or open directly
-open playwright-report/index.html
+pnpm test
 ```
 
-#### Debug Mode (Step Through)
+The current API unit baseline covers dashboard work-item totals and status-grouped reporting in `apps/agile-api/test/agile.service.test.ts`.
+
+Unit-test breadth is intentionally smaller than the E2E evidence in this architecture sample. Additional service-level coverage should be added when business logic expands.
+
+### Playwright E2E
 
 ```bash
-# Interactive debug mode - pauses at each step
+pnpm test:e2e
+```
+
+The Playwright suite starts its configured web servers and validates:
+
+- shell and remote federation;
+- custom-element mounting and navigation;
+- token inheritance and light/dark theme propagation;
+- PrimeNG dialog, menu, select, popover, and tooltip overlays;
+- QA remote behavior and responsive rendering;
+- Storybook component states and variants;
+- keyboard interaction and automated accessibility checks;
+- documentation examples and architecture boundaries;
+- generated component-registry presentation.
+
+The primary browser projects are Chromium, Firefox, and WebKit.
+
+### Focused Storybook checks
+
+```bash
+pnpm test:storybook:qa
+pnpm test:storybook:up-button
+pnpm test:storybook:up-button:chromium
+pnpm test:storybook:registry
+pnpm test:storybook:registry:chromium
+```
+
+Use the Chromium variants for quicker local iteration. Run the complete E2E suite before a release.
+
+### Chromatic
+
+```bash
+pnpm chromatic
+```
+
+Chromatic builds the QA Storybook and publishes visual evidence. Visual changes should be reviewed in Chromatic before the associated component is promoted.
+
+## Evidence expectations by risk
+
+| Change | Minimum evidence |
+| --- | --- |
+| Documentation only | Markdown lint and link validation |
+| Token mapping | Token build, token tests, manifest check, theme evidence |
+| Native presentational pattern | Build, typecheck, Storybook, automated accessibility |
+| Interactive wrapper | Storybook, behavior tests, keyboard coverage, accessibility |
+| Overlay wrapper | Interactive-wrapper evidence plus shell-mounted theme and append-target validation |
+| Federation or bootstrap | Build plus shell and remote E2E coverage |
+| Candidate promotion | All declared manifest promotion requirements resolved |
+
+## Debugging Playwright
+
+```bash
+# Interactive debugger
 pnpm playwright test --debug
 
-# In browser: Click "Step" button to progress through test
-```
-
-#### Headed Mode (See Browser)
-
-```bash
-# Run tests with visible browser window
+# Visible browser
 pnpm playwright test --headed
 
-# Slower, but you see what's happening
-```
+# One file
+pnpm playwright test apps/shell/e2e/federation.spec.ts
 
-#### Single Test
-
-```bash
-# Run only one test file
-pnpm playwright test federation.spec.ts
-
-# Run only one test
+# One named test
 pnpm playwright test -g "should load shell application"
 
-# Run specific test file + specific test
-pnpm playwright test federation.spec.ts -g "shell"
-```
-
-### 2. Common E2E Failures
-
-#### **Timeout Errors**
-
-**Cause**: Server not starting, network issues, slow machine
-
-**Fix**:
-```bash
-# Increase timeout for specific tests
-test.setTimeout(120 * 1000); // 2 minutes
-
-# Check server is running
-ps aux | grep "pnpm\|node\|next"
-
-# Restart and try again
-pnpm playwright test --headed
-```
-
-#### **Port Already in Use**
-
-**Cause**: Previous test server still running
-
-**Fix**:
-```bash
-# Kill all node/pnpm processes
-pkill -f "node\|pnpm"
-
-# Check ports
-netstat -tuln | grep -E "4200|4400"
-
-# Retry
-pnpm test:e2e
-```
-
-#### **Accessibility Failures**
-
-**Cause**: WCAG 2.1 AA violations in Storybook tests
-
-**Debug**:
-1. Run in headed mode: `pnpm playwright test storybook-stories.spec.ts --headed`
-2. Check browser DevTools > Accessibility panel
-3. Look at axe-core violations in test output
-4. Fix HTML/ARIA attributes in component
-
-#### **Network Idle Failures**
-
-**Cause**: Page resources still loading
-
-**Fix**:
-```typescript
-// Increase wait time or remove constraint
-await page.waitForLoadState('networkidle'); // Default 30s
-// Instead use:
-await page.waitForLoadState('domcontentloaded');
-```
-
-### 3. Unit Test Failures
-
-#### Run Single Test
-
-```bash
-pnpm nx run agile-api:test -- --match "*dashboard*"
-```
-
-#### Debug Output
-
-```bash
-# Verbose test output
-pnpm test -- --verbose
-```
-
----
-
-## Code Coverage
-
-### Generate Coverage Report
-
-```bash
-# E2E tests with coverage (requires instrumentation)
-pnpm test:e2e:coverage
-
-# View coverage report
+# Open the last HTML report
 pnpm playwright show-report
 ```
 
-**Target Thresholds**:
-- Lines: 70%
-- Branches: 65%
-- Functions: 70%
+When a test times out, first confirm that the configured ports are available and that Docker-backed services are healthy. Prefer waiting for a stable application condition over adding arbitrary sleeps.
 
-**Priority Coverage Areas**:
-1. Federation loading logic
-2. Token inheritance system
-3. Remote communication
-4. Error handling paths
+## Accessibility failures
 
----
+1. Re-run the focused test in headed mode.
+2. Inspect the axe violation details in the Playwright output.
+3. Review semantic HTML, accessible names, focus order, and keyboard behavior.
+4. Confirm that overlays inherit theme variables and remain reachable after opening.
+5. Update Storybook and shell integration evidence with the fix.
 
-## Performance Baseline
+Automated checks do not replace manual screen-reader review. The component manifest records manual-review status separately.
 
-### Test Execution Times
+## Performance baseline
 
-**Measured**: 2026-07-12 (Development Machine)
+Development-machine measurements vary, so timings are regression guidance rather than CI service-level objectives.
 
-| Test Suite | Duration | Baseline | Status |
-|---|---|---|---|
-| **Linting** | ~5s | <10s | ✅ Good |
-| **Unit Tests** | ~10s | <15s | ✅ Good |
-| **E2E Federation** | ~90s | <120s | ✅ Good |
-| **E2E Storybook** | ~75s | <120s | ✅ Good |
-| **E2E Code Examples** | ~60s | <120s | ✅ Good |
-| **Total E2E Suite** | ~225s | <360s | ✅ Good |
+| Stage | Reference duration |
+| --- | ---: |
+| Workspace lint | about 5 seconds |
+| Unit tests | about 10 seconds |
+| Shell startup | about 40 seconds |
+| Storybook startup | about 60 seconds |
+| Full E2E suite | about 3–5 minutes |
 
-### Server Startup Times
+Investigate a repeatable increase above roughly 120% of the local baseline. Treat a repeatable increase above 150% as a release concern.
 
-| Server | Time | Note |
-|---|---|---|
-| Shell (localhost:4200) | ~40s | Angular build + federation |
-| Storybook (localhost:4400) | ~60s | Storybook framework build |
+## Pull-request checklist
 
-### Regression Thresholds
+- [ ] `pnpm lint` passes.
+- [ ] `pnpm lint:links` passes.
+- [ ] `pnpm typecheck` passes.
+- [ ] `pnpm test` passes.
+- [ ] `pnpm manifest:check` passes.
+- [ ] `pnpm build` passes.
+- [ ] Focused browser tests cover the changed behavior.
+- [ ] The full E2E suite is run before release.
+- [ ] Documentation and component evidence are updated.
+- [ ] Accessibility and theme behavior are preserved.
+- [ ] No new console errors or unexplained performance regressions appear.
 
-🔴 **Critical**: Any test taking >150% baseline time (e.g., >150s for 100s baseline)
+## Coverage status
 
-🟡 **Warning**: Any test taking >120% baseline time
+Code-coverage instrumentation and enforced percentage thresholds are not currently part of the committed release command. Do not document or invoke a coverage script until instrumentation and a corresponding package script are added.
 
-✅ **Normal**: Within 120% baseline
-
----
-
-## PR Test Checklist
-
-Before submitting a pull request:
-
-- [ ] **Linting Passes**
-  ```bash
-  pnpm lint
-  # Expected: 0 errors
-  ```
-
-- [ ] **Unit Tests Pass**
-  ```bash
-  pnpm test
-  # Expected: All tests pass
-  ```
-
-- [ ] **No Breaking Changes to Examples**
-  - [ ] Federation config still valid
-  - [ ] Component signal API unchanged
-  - [ ] Design tokens intact
-
-- [ ] **E2E Tests Ready** (if testing locally)
-  ```bash
-  pnpm test:e2e --headed
-  # Note: Full suite only required for main branch
-  ```
-
-- [ ] **Documentation Updated**
-  - [ ] Code examples reflect changes
-  - [ ] README updated if needed
-  - [ ] Markdown links valid
-
-- [ ] **Accessibility Maintained**
-  - [ ] No ARIA attributes removed
-  - [ ] Semantic HTML preserved
-  - [ ] Keyboard navigation working
-
-- [ ] **Performance Not Degraded**
-  - [ ] No new timeouts added
-  - [ ] Load times similar to baseline
-  - [ ] No console errors introduced
-
----
-
-## Continuous Integration
-
-### GitHub Actions Workflows
-
-Tests run automatically on:
-
-- ✅ **Every Commit** (push to master)
-  - `pnpm lint` - Code quality checks
-  - Status badge in README
-
-- ✅ **Every Pull Request**
-  - `pnpm lint` - Code quality
-  - `pnpm test` - Unit tests
-  - Reports status on PR
-
-- ✅ **Main Branch** (post-merge)
-  - `pnpm lint`
-  - `pnpm test`
-  - `pnpm test:e2e` - Full E2E suite (if configured)
-  - Deploy reports to GitHub Pages (if configured)
-
----
-
-## Maintenance
-
-### Adding New Tests
-
-1. **E2E Tests**: Add to `**/e2e/*.spec.ts`
-   ```typescript
-   test('should validate new feature', async ({ page }) => {
-     await page.goto('http://localhost:4200/feature');
-     expect(await page.isVisible('selector')).toBeTruthy();
-   });
-   ```
-
-2. **Unit Tests**: Add to `**/test/*.test.ts`
-   ```typescript
-   it('should calculate correctly', () => {
-     const result = calculateThing();
-     expect(result).toEqual(expected);
-   });
-   ```
-
-3. **Update Documentation**
-   - Add test description here
-   - Update checklist if applicable
-
-### Updating Baselines
-
-When intentionally improving performance:
-
-1. Run full suite: `pnpm test:e2e`
-2. Record new times
-3. Update baseline table above
-4. Commit with clear message
-
----
-
-## Resources
-
-- **Playwright Docs**: https://playwright.dev
-- **Axe Testing**: https://www.axe-core.org
-- **WCAG 2.1**: https://www.w3.org/WAI/WCAG21/quickref/
-- **Angular Testing**: https://angular.io/guide/testing
-- **Jest Docs**: https://jestjs.io
-
----
-
-## Questions?
-
-For test failures or setup issues:
-
-1. Check this guide's debugging section
-2. Review test output in Playwright HTML report
-3. Run in debug mode: `pnpm playwright test --debug`
-4. Check GitHub Actions logs for CI failures
-
-**Last Updated**: 2026-07-12
-**Test Count**: 189 (E2E) + 2 (Unit) = 191 total
+Current coverage priorities are federation loading, token inheritance, remote communication, provider-boundary failures, and backend error paths.
