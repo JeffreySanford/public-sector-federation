@@ -1,0 +1,191 @@
+@layer ps-documentation {
+  :root {
+    --sl-font: var(--ps-font-family);
+    --sl-font-system: var(--ps-font-family);
+    --sl-color-accent-low: color-mix(
+      in srgb,
+      var(--ps-primary-background) 12%,
+      var(--ps-surface-card)
+    );
+    --sl-color-accent: var(--ps-primary-background);
+    --sl-color-accent-high: var(--ps-text-primary);
+    --sl-color-white: var(--ps-surface-card);
+    --sl-color-gray-1: var(--ps-text-primary);
+    --sl-color-gray-2: color-mix(
+      in srgb,
+      var(--ps-text-primary) 84%,
+      var(--ps-surface-card)
+    );
+    --sl-color-gray-3: var(--ps-text-secondary);
+    --sl-color-gray-4: color-mix(
+      in srgb,
+      var(--ps-text-secondary) 72%,
+      var(--ps-surface-card)
+    );
+    --sl-color-gray-5: color-mix(
+      in srgb,
+      var(--ps-surface-border) 82%,
+      var(--ps-text-secondary)
+    );
+    --sl-color-gray-6: var(--ps-surface-border);
+    --sl-color-gray-7: var(--ps-surface-card);
+    --sl-color-black: var(--ps-surface-background);
+    --sl-color-bg: var(--ps-surface-background);
+    --sl-color-bg-nav: color-mix(
+      in srgb,
+      var(--ps-surface-background) 94%,
+      transparent
+    );
+    --sl-color-bg-sidebar: var(--ps-surface-background);
+    --sl-color-hairline: var(--ps-surface-border);
+    --sl-color-hairline-light: var(--ps-surface-border);
+    --sl-color-text: var(--ps-text-primary);
+    --sl-color-text-accent: var(--ps-action-text);
+    --sl-content-width: 52rem;
+  }
+
+  html {
+    background: var(--ps-surface-background);
+    color: var(--ps-text-primary);
+    font-family: var(--ps-font-family);
+  }
+
+  body {
+    background:
+      radial-gradient(
+        circle at 85% 8%,
+        color-mix(in srgb, var(--ps-primary-background) 8%, transparent),
+        transparent 24rem
+      ),
+      var(--ps-surface-background);
+  }
+
+  header.header {
+    border-bottom: 1px solid var(--ps-surface-border);
+    background: color-mix(
+      in srgb,
+      var(--ps-surface-background) 92%,
+      transparent
+    );
+    backdrop-filter: blur(18px);
+  }
+
+  .site-title {
+    color: var(--ps-text-primary);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+
+  .sidebar-pane {
+    border-inline-end-color: var(--ps-surface-border);
+    background: color-mix(
+      in srgb,
+      var(--ps-surface-background) 96%,
+      var(--ps-surface-card)
+    );
+  }
+
+  .sl-markdown-content {
+    color: var(--ps-text-primary);
+    line-height: 1.72;
+  }
+
+  .sl-markdown-content > :is(h1, h2, h3) {
+    color: var(--ps-text-primary);
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .sl-markdown-content > h2 {
+    margin-top: calc(var(--ps-space-6) * 2);
+    padding-top: var(--ps-space-4);
+    border-top: 1px solid var(--ps-surface-border);
+  }
+
+  .sl-markdown-content a {
+    color: var(--ps-action-text);
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+  }
+
+  .hero {
+    padding-block: clamp(3rem, 8vw, 6.5rem);
+  }
+
+  .hero h1 {
+    max-width: 15ch;
+    color: var(--ps-text-primary);
+    font-size: clamp(2.75rem, 8vw, 5.6rem);
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .hero .tagline {
+    max-width: 60ch;
+    color: var(--ps-text-secondary);
+    font-size: clamp(1.05rem, 2vw, 1.28rem);
+    line-height: 1.6;
+  }
+
+  .hero .actions {
+    gap: var(--ps-space-2);
+  }
+
+  .hero .actions a {
+    min-height: 2.75rem;
+    border-radius: var(--ps-radius-md);
+    font-weight: 700;
+  }
+
+  .card {
+    border-color: var(--ps-surface-border);
+    border-radius: var(--ps-radius-lg);
+    background: color-mix(
+      in srgb,
+      var(--ps-surface-card) 96%,
+      var(--ps-primary-background)
+    );
+    box-shadow: none;
+  }
+
+  .card-grid {
+    gap: var(--ps-space-4);
+  }
+
+  pre.mermaid {
+    overflow-x: auto;
+    margin-block: var(--ps-space-6);
+    padding: var(--ps-space-6);
+    border: 1px solid var(--ps-surface-border);
+    border-radius: var(--ps-radius-lg);
+    background: var(--ps-surface-card);
+  }
+
+  :is(a, button, input, select, textarea):focus-visible {
+    outline: 2px solid var(--ps-focus-ring-color);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 50rem) {
+    .hero {
+      padding-block: 2.75rem 3.5rem;
+    }
+
+    .hero h1 {
+      max-width: 18ch;
+      font-size: clamp(2.5rem, 14vw, 4rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
