@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "routes": [
+    {
+      "route": "/docs/",
+      "source": "apps/starlight/src/content/docs/index.mdx"
+    },
+    {
+      "route": "/docs/foundations/",
+      "source": "apps/starlight/src/content/docs/foundations/index.md"
+    },
+    {
+      "route": "/docs/components/",
+      "source": "apps/starlight/src/content/docs/components/index.md"
+    },
+    {
+      "route": "/docs/patterns/",
+      "source": "apps/starlight/src/content/docs/patterns/index.md"
+    },
+    {
+      "route": "/docs/accessibility/",
+      "source": "apps/starlight/src/content/docs/accessibility/index.md"
+    },
+    {
+      "route": "/docs/develop/",
+      "source": "apps/starlight/src/content/docs/develop/index.md"
+    },
+    {
+      "route": "/docs/quality/",
+      "source": "apps/starlight/src/content/docs/quality/index.md"
+    },
+    {
+      "route": "/docs/architecture/",
+      "source": "apps/starlight/src/content/docs/architecture/index.md"
+    },
+    {
+      "route": "/docs/exploration/",
+      "source": "apps/starlight/src/content/docs/exploration/index.md"
+    }
+  ],
+  "components": [
+    {
+      "manifestId": "ps-button",
+      "docsRoute": "/docs/components/",
+      "source": "packages/ui-patterns/src/public-button.component.ts",
+      "storybookTitle": "Design System/Acceptance/Button and Tag",
+      "storybookFile": "apps/qa-remote/src/stories/button-tag.acceptance.stories.ts",
+      "figmaStatus": "pending-access"
+    },
+    {
+      "manifestId": "ps-select",
+      "docsRoute": "/docs/components/",
+      "source": "packages/ui-patterns/src/public-select.component.ts",
+      "storybookTitle": "Design System/Components/Select",
+      "storybookFile": "apps/qa-remote/src/stories/select.stories.ts",
+      "figmaStatus": "pending-access"
+    },
+    {
+      "manifestId": "ps-dialog",
+      "docsRoute": "/docs/components/",
+      "source": "packages/ui-patterns/src/public-dialog.component.ts",
+      "storybookTitle": "Design System/Acceptance/Dialog and Toast",
+      "storybookFile": "apps/qa-remote/src/stories/dialog-toast.acceptance.stories.ts",
+      "figmaStatus": "pending-access"
+    }
+  ]
+}
