@@ -30,6 +30,11 @@
     },
     {
       "file": "apps/starlight/src/styles/custom.css",
+      "match": "scroll-behavior: auto !important;",
+      "reason": "Reduced-motion overrides must disable framework and browser smooth scrolling."
+    },
+    {
+      "file": "apps/starlight/src/styles/custom.css",
       "match": "transition-duration: 0.01ms !important;",
       "reason": "Reduced-motion overrides must win over framework component transitions."
     },
