@@ -10,7 +10,15 @@
     "check": "astro check"
   },
   "dependencies": {
-    "@public-sector/tokens": "workspace:*"
+    "@astrojs/starlight": "^0.41.3",
+    "@public-sector/tokens": "workspace:*",
+    "astro": "^7.1.1",
+    "astro-mermaid": "^2.1.0",
+    "mermaid": "^11.16.0",
+    "sharp": "^0.35.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "~5.9.3"
+  }
 }
