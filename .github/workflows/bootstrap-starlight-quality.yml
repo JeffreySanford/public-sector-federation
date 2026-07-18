@@ -1,0 +1,68 @@
+name: Bootstrap Starlight quality assets
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/bootstrap-starlight-quality.yml'
+      - 'apps/starlight/**'
+      - 'scripts/validate-starlight-quality.mjs'
+      - 'scripts/update-starlight-visuals.mjs'
+      - 'package.json'
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out the pull-request branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.2
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Resolve the quality-gate dependency lock
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Build Starlight
+        run: pnpm build:starlight
+
+      - name: Validate content and integrity contracts
+        run: pnpm validate:starlight
+
+      - name: Generate the initial reviewed visual baselines
+        run: pnpm test:starlight:visual:update
+
+      - name: Commit the lockfile and visual baselines
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pnpm-lock.yaml apps/starlight/tests/e2e/*-snapshots/
+          if git diff --cached --quiet; then
+            echo "No bootstrap assets changed."
+            exit 0
+          fi
+          git commit -m "Add Starlight quality baselines"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
