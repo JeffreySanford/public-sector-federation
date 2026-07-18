@@ -1,0 +1,93 @@
+name: Mark Starlight quality progress
+
+on:
+  push:
+    branches:
+      - agent/starlight-quality-gate
+    paths:
+      - '.github/workflows/mark-starlight-quality-progress.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-progress:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the quality-gate branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/starlight-quality-gate
+          fetch-depth: 0
+
+      - name: Mark completed quality-gate work
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('docs/documentation-upgrade/11-prioritized-backlog.md')
+          text = path.read_text(encoding='utf-8')
+
+          replacements = {
+              '- [ ] Add the dedicated Nx `quality-gate` target.':
+                  '- [x] Add the dedicated Nx `quality-gate` target.',
+              '- [ ] Add the component-status summary and canonical status link to the landing page.':
+                  '- [x] Add the component-status summary and canonical status link to the landing page.',
+              '- [ ] Publish pull-request previews for all Starlight changes.':
+                  '- [x] Publish the built Starlight output as a pull-request artifact.\n- [ ] Publish a hosted pull-request preview URL for all Starlight changes.',
+              '- [ ] Add a normal same-origin Documentation link from the Angular workbench to Starlight.':
+                  '- [x] Add a normal same-origin Documentation link from the Angular workbench to Starlight.',
+              '- [ ] Add heading-level, single-`h1`, placeholder, local-path, and public-wording checks.':
+                  '- [x] Add heading-level, single-`h1`, placeholder, local-path, and public-wording checks.',
+              '- [ ] Add documentation link validation.':
+                  '- [x] Add documentation link validation.',
+              '- [ ] Add manifest, Storybook story, source-path, Figma-status, and docs-route integrity validation.':
+                  '- [x] Add manifest, Storybook story, source-path, Figma-status, and docs-route integrity validation.',
+              '- [ ] Add a token/style validator for raw colors, arbitrary spacing, unapproved typography, inline styles, and undocumented exceptions.':
+                  '- [x] Add a token/style validator for raw colors, arbitrary spacing, unapproved typography, inline styles, and undocumented exceptions.',
+              '- [ ] Add Playwright responsive tests at 360, 768, 1024, 1280, and 1440 pixel widths.':
+                  '- [x] Add Playwright responsive tests at 360, 768, 1024, 1280, and 1440 pixel widths.',
+              '- [ ] Add page-level no-overflow, no-clipping, navigation, table, Storybook-frame, light, dark, and 200%-zoom checks.':
+                  '- [x] Add page-level no-overflow, navigation, table, light, dark, and 200%-zoom checks.\n- [ ] Add StoryFrame-specific clipping and embedded-story checks when `StoryFrame` is introduced.',
+              '- [ ] Add Playwright and axe accessibility checks against built Starlight pages.':
+                  '- [x] Add Playwright and axe accessibility checks against built Starlight pages.',
+              '- [ ] Add accessibility-tree snapshots for critical navigation and component-page structures.':
+                  '- [x] Add initial accessibility-tree snapshots for the critical overview heading and primary action.\n- [ ] Extend accessibility-tree snapshots to navigation and flagship component-page structures.',
+              '- [ ] Add page-level visual regression coverage.':
+                  '- [x] Add page-level visual regression coverage.',
+              '- [ ] Add Lighthouse CI scores and resource budgets.':
+                  '- [x] Add Lighthouse CI scores and resource budgets.',
+              '- [ ] Prevent automatic acceptance of changed visual baselines.':
+                  '- [x] Prevent automatic acceptance of changed visual baselines.',
+              '- [ ] Require explicit `polish-approved`, `polish-approved-with-follow-up`, or `polish-changes-required` review status.':
+                  '- [x] Require explicit `polish-approved`, `polish-approved-with-follow-up`, or `polish-changes-required` review status.',
+              '- [ ] Add the Starlight quality gate to `verify:release`.':
+                  '- [x] Add the Starlight quality gate to `verify:release`.',
+              '- [ ] Add `starlight:quality-gate` to `verify:release`.':
+                  '- [x] Add `starlight:quality-gate` to `verify:release`.',
+              '- [ ] Validate manifest documentation paths.':
+                  '- [x] Validate manifest documentation paths.',
+              '- [ ] Add pull-request previews for Starlight and the Angular workbench.':
+                  '- [x] Add a pull-request build artifact for Starlight.\n- [ ] Add hosted pull-request previews for Starlight and the Angular workbench.',
+              '- [ ] Require human polish approval for substantial Starlight visual changes.':
+                  '- [x] Require human polish approval for substantial Starlight visual changes.',
+              '- [ ] Prevent visual baselines from being auto-accepted.':
+                  '- [x] Prevent visual baselines from being auto-accepted.',
+          }
+
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'Missing expected backlog entry: {old}')
+              text = text.replace(old, new, 1)
+
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit progress update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/documentation-upgrade/11-prioritized-backlog.md
+          git commit -m "Mark Starlight quality backlog complete"
+          git push origin HEAD:agent/starlight-quality-gate
