@@ -45,6 +45,14 @@ export default defineConfig({
       credits: false,
       head: [
         {
+          tag: 'link',
+          attrs: {
+            rel: 'icon',
+            type: 'image/svg+xml',
+            href: '/docs/favicon.svg',
+          },
+        },
+        {
           tag: 'meta',
           attrs: {
             name: 'theme-color',
