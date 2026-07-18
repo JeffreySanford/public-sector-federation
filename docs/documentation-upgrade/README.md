@@ -2,13 +2,13 @@
 
 This folder defines the transformation of **Public Sector Federation** into a more focused, portfolio-ready **Public Sector Design System exploration site**.
 
-The plan keeps the repository's strongest engineering work—Angular, Nx, semantic tokens, provider-neutral component contracts, Storybook, Chromatic, Playwright, accessibility checks, the component manifest, and federated adoption evidence—while changing the public story from a broad architecture and QA laboratory into a coherent design-system product.
+The plan keeps the repository's strongest engineering work—Angular, Nx, semantic tokens, provider-neutral component contracts, Storybook, Chromatic, Playwright, accessibility checks, the component manifest, Figma alignment, and federated adoption evidence—while changing the public story from a broad architecture and QA laboratory into a coherent design-system product.
 
 ## North star
 
 A first-time visitor should understand this within approximately 30 seconds:
 
-> Public Sector Design System is an Angular reference system for discovering, documenting, validating, and governing reusable components across complex applications. It combines semantic tokens, provider-neutral component APIs, Storybook, accessibility validation, Chromatic visual review, and manifest-driven documentation.
+> Public Sector Design System is an Angular reference system for discovering, documenting, validating, and governing reusable components across complex applications. It combines semantic tokens, provider-neutral component APIs, Storybook, accessibility validation, Chromatic visual review, Figma design intent, and manifest-driven documentation.
 
 ## Why this upgrade exists
 
@@ -36,15 +36,33 @@ The federation and backend examples remain valuable, but they become supporting 
 | [03 — Target information architecture](./03-target-information-architecture.md) | Defines the site navigation and ownership of each documentation surface. |
 | [04 — Target technical architecture](./04-target-technical-architecture.md) | Describes the recommended Starlight, Storybook, Angular, manifest, and token architecture. |
 | [05 — Component page blueprint](./05-component-page-blueprint.md) | Establishes the standard structure for every component page. |
-| [06 — Manifest-driven documentation](./06-manifest-driven-documentation.md) | Explains how registry metadata can generate catalogs, status dashboards, evidence, and gap reports. |
-| [07 — Storybook and Chromatic upgrade](./07-storybook-and-chromatic-upgrade.md) | Defines how Storybook becomes the interactive component workbench and Chromatic becomes the visual review surface. |
-| [08 — Accessibility and remediation plan](./08-accessibility-and-remediation-plan.md) | Defines accessibility evidence, manual review, gap tracking, and remediation workflow. |
-| [09 — Migration and cleanup plan](./09-migration-and-cleanup-plan.md) | Defines what to rename, archive, retain, and remove from public presentation. |
-| [10 — Prioritized backlog](./10-prioritized-backlog.md) | Provides an actionable P0/P1/P2 implementation backlog. |
-| [11 — Delivery roadmap](./11-delivery-roadmap.md) | Organizes the upgrade into reviewable checkpoints with acceptance criteria. |
-| [12 — Role-proof matrix](./12-role-proof-matrix.md) | Maps the repository evidence to a forensic design-systems engineering role. |
-| [13 — Wayfinder interview guide](./13-wayfinder-interview-guide.md) | Provides an interview-practice format for explaining the work clearly. |
-| [14 — Zeroheight retirement strategy](./14-zeroheight-retirement-strategy.md) | Defines how Zeroheight becomes historical evidence rather than the canonical documentation surface. |
+| [06 — Component manifest contract](./06-component-manifest-contract.md) | Defines the manifest's strict scope, schema domains, validations, generated views, and governance boundaries. |
+| [07 — Figma component intent and manifest integration](./07-figma-component-intent-and-manifest-integration.md) | Defines what a Figma component represents, how it should be created, and how Figma identifiers and alignment status fit into the manifest. |
+| [08 — Storybook and Chromatic upgrade](./08-storybook-and-chromatic-upgrade.md) | Defines how Storybook becomes the interactive component workbench and Chromatic becomes the visual review surface. |
+| [09 — Accessibility and remediation plan](./09-accessibility-and-remediation-plan.md) | Defines accessibility contracts, automated and manual evidence, gap tracking, and remediation workflow. |
+| [10 — Migration and cleanup plan](./10-migration-and-cleanup-plan.md) | Defines what to rename, archive, retain, and remove from public presentation. |
+| [11 — Prioritized backlog](./11-prioritized-backlog.md) | Provides an actionable P0/P1/P2 implementation backlog, including manifest and Figma workstreams. |
+| [12 — Delivery roadmap](./12-delivery-roadmap.md) | Organizes the upgrade into reviewable checkpoints with acceptance criteria. |
+| [13 — Role-proof matrix](./13-role-proof-matrix.md) | Maps the repository evidence to a forensic design-systems engineering role. |
+| [14 — Wayfinder interview guide](./14-wayfinder-interview-guide.md) | Provides an interview-practice format for explaining the work clearly. |
+| [15 — Zeroheight retirement strategy](./15-zeroheight-retirement-strategy.md) | Defines how Zeroheight becomes historical evidence rather than the canonical documentation surface. |
+
+## Core source-of-truth relationship
+
+```mermaid
+flowchart TD
+  Figma[Figma: approved design intent] --> Manifest[Manifest: identity, alignment, evidence, and lifecycle]
+  Code[Angular source: runtime contract] --> Manifest
+  Storybook[Storybook: live isolated behavior] --> Manifest
+  Tests[Tests and accessibility evidence] --> Manifest
+  Tokens[Token source and generated artifacts] --> Code
+  Tokens --> Figma
+  Manifest --> Starlight[Starlight: public guidance and status]
+  Storybook --> Starlight
+  Manifest --> Dashboard[Component health dashboard]
+  Storybook --> Chromatic[Chromatic: visual review and regression]
+  Code --> Apps[Reference applications: integrated adoption proof]
+```
 
 ## Recommended implementation order
 
@@ -52,12 +70,14 @@ The federation and backend examples remain valuable, but they become supporting 
 flowchart TD
   A[Create Starlight docs application] --> B[Publish new landing page]
   B --> C[Complete Button, Select, and Dialog pages]
-  C --> D[Generate catalog from component manifest]
-  D --> E[Create component health dashboard]
-  E --> F[Reorganize Storybook]
-  F --> G[Add forensic inventory and remediation log]
-  G --> H[Archive Zeroheight and QA-specific public language]
-  H --> I[Publish unified portfolio release]
+  C --> D[Finalize manifest contract and validations]
+  D --> E[Add Figma intent and alignment records]
+  E --> F[Generate catalog and health dashboard]
+  F --> G[Reorganize Storybook and Chromatic workflow]
+  G --> H[Add accessibility and remediation evidence]
+  H --> I[Add forensic inventory and case studies]
+  I --> J[Archive Zeroheight and QA-specific public language]
+  J --> K[Publish unified portfolio release]
 ```
 
 ## Definition of success
@@ -69,7 +89,9 @@ The upgrade succeeds when:
 - live Storybook examples appear near the top of component pages;
 - component guidance appears before validation details;
 - design tokens are shown in direct relationship to component decisions;
-- accessibility evidence is honest, structured, and distinguishable from conformance claims;
+- Figma communicates design intent without becoming the runtime source of truth;
+- the manifest records valid Figma identifiers, alignment status, differences, and honest missing states;
+- accessibility evidence is structured and distinguishable from conformance claims;
 - federation is presented as adoption proof, not the main identity;
 - Zeroheight is optional historical evidence rather than a dependency;
 - the component manifest visibly prevents documentation drift;
