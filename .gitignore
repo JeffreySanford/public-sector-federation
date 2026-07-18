@@ -4,6 +4,7 @@ dist/
 tmp/
 .nx/
 .angular/
+.astro/
 .cache/
 coverage/
 playwright-report/
