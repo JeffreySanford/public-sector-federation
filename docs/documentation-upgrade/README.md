@@ -47,6 +47,7 @@ The federation and backend examples remain valuable, but they become supporting 
 | [14 — Wayfinder interview guide](./14-wayfinder-interview-guide.md) | Provides an interview-practice format for explaining the work clearly. |
 | [15 — Zeroheight retirement strategy](./15-zeroheight-retirement-strategy.md) | Defines how Zeroheight becomes historical evidence rather than the canonical documentation surface. |
 | [16 — Main application three-view upgrade](./16-main-application-view-upgrade.md) | Replaces the sample-heavy QA, performance, and candidate views with Component Inventory, Quality & Remediation, and Design Alignment Lab. |
+| [17 — Astro Starlight application and designer-grade quality gate](./17-astro-starlight-application-and-designer-quality-gate.md) | Defines `apps/starlight`, same-origin Angular integration, content architecture, visual discipline, automated checks, and required human polish review. |
 
 ## Core source-of-truth relationship
 
@@ -69,23 +70,27 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[Create Starlight docs application] --> B[Publish new landing page]
-  B --> C[Complete Button, Select, and Dialog pages]
-  C --> D[Finalize manifest contract and validations]
-  D --> E[Upgrade main application to Inventory, Quality, and Alignment views]
-  E --> F[Add Figma intent and alignment records]
-  F --> G[Generate catalog and health dashboard]
-  G --> H[Reorganize Storybook and Chromatic workflow]
-  H --> I[Add accessibility and remediation evidence]
-  I --> J[Add forensic inventory and case studies]
-  J --> K[Archive Zeroheight and QA-specific public language]
-  K --> L[Publish unified portfolio release]
+  A[Create apps/starlight as a real Nx application] --> B[Establish tokens, page shell, and polish contract]
+  B --> C[Add automated Starlight quality gates and PR previews]
+  C --> D[Publish new landing page]
+  D --> E[Complete Button, Select, and Dialog pages]
+  E --> F[Finalize manifest contract and validations]
+  F --> G[Upgrade main application to Inventory, Quality, and Alignment views]
+  G --> H[Add Figma intent and alignment records]
+  H --> I[Generate catalog and health dashboard]
+  I --> J[Reorganize Storybook and Chromatic workflow]
+  J --> K[Add accessibility and remediation evidence]
+  K --> L[Add forensic inventory and case studies]
+  L --> M[Archive Zeroheight and QA-specific public language]
+  M --> N[Publish unified portfolio release]
 ```
 
 ## Definition of success
 
 The upgrade succeeds when:
 
+- `apps/starlight` is a real, independently built documentation application;
+- Starlight is mounted as a first-class route of the same public product and linked directly from Angular;
 - the documentation site, not the README, is the primary public entry point;
 - the first screen communicates a design-system product rather than a portfolio submission;
 - the main application provides Component Inventory, Quality & Remediation, and Design Alignment Lab views;
@@ -96,6 +101,8 @@ The upgrade succeeds when:
 - Figma communicates design intent without becoming the runtime source of truth;
 - the manifest records valid Figma identifiers, alignment status, differences, and honest missing states;
 - accessibility evidence is structured and distinguishable from conformance claims;
+- visual, responsive, accessibility, content, performance, and cross-surface quality checks block regressions;
+- substantial visual changes require explicit human polish approval rather than automatic baseline acceptance;
 - federation is presented as adoption proof, not the main identity;
 - Zeroheight is optional historical evidence rather than a dependency;
 - the component manifest visibly prevents documentation drift;
