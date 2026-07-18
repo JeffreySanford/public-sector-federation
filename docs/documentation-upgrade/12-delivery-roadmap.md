@@ -1,290 +1,477 @@
 # Delivery Roadmap
 
-## Objective
+## Roadmap purpose
 
-Deliver the documentation upgrade in reviewable checkpoints that each produce visible value without requiring a full repository rewrite.
+This roadmap converts the documentation-upgrade package into reviewable implementation checkpoints. Each checkpoint should produce visible evidence, preserve working functionality, and move the repository closer to the north star without requiring one risky all-at-once rewrite.
 
-## Roadmap overview
+The roadmap assumes:
 
-```mermaid
-flowchart LR
-  C1[Checkpoint 1: Public façade] --> C2[Checkpoint 2: Flagship pages]
-  C2 --> C3[Checkpoint 3: Manifest projections]
-  C3 --> C4[Checkpoint 4: Storybook remediation]
-  C4 --> C5[Checkpoint 5: Figma alignment]
-  C5 --> C6[Checkpoint 6: Accessibility evidence]
-  C6 --> C7[Checkpoint 7: Forensic case studies]
-  C7 --> C8[Checkpoint 8: Cleanup and public release]
-```
+- `apps/starlight` becomes the public documentation application;
+- the Angular `qa-remote` evolves into the mission-focused workbench;
+- Storybook remains the isolated component workbench;
+- the manifest connects code, stories, tests, accessibility, Figma, and documentation;
+- visual quality is protected by automated checks plus human polish review;
+- Zeroheight becomes historical rather than canonical.
 
-## Checkpoint 1 — Public façade
-
-### Goal
-
-Create the new Starlight documentation application and establish the design-system identity.
-
-### Deliverables
-
-- `apps/docs` Starlight application;
-- product title and navigation;
-- landing page;
-- Storybook and source links;
-- reusable status and Storybook embed components;
-- docs build and link validation.
-
-### Acceptance criteria
-
-- A first-time visitor understands the system purpose from the first screen.
-- Federation does not dominate the introduction.
-- Storybook and source are reachable in one click.
-- No Zeroheight dependency is required to view the core documentation.
-- The docs application builds in CI.
-
-### Review question
-
-> Does the new front door communicate a real design-system product before asking the visitor to understand the repository architecture?
-
-## Checkpoint 2 — Flagship component pages
-
-### Goal
-
-Prove the component-page model with Button, Select, and Dialog.
-
-### Deliverables
-
-- complete Button page;
-- complete Select page;
-- complete Dialog page;
-- live canonical Storybook embeds;
-- usage, anatomy, behavior, accessibility, tokens, API, and quality sections;
-- decision history at the bottom of each page.
-
-### Acceptance criteria
-
-- Guidance appears before evidence.
-- Live components appear near the top.
-- Keyboard and focus behavior are explicit.
-- Automated and manual accessibility statuses are separate.
-- Token references connect to actual component decisions.
-- Stable and experimental contracts are clearly distinguished.
-
-### Review question
-
-> Could a designer and an Angular engineer independently understand the same component contract from this page?
-
-## Checkpoint 3 — Manifest projections
-
-### Goal
-
-Turn the manifest into public discovery and health views.
-
-### Deliverables
-
-- component catalog;
-- component health dashboard;
-- documentation-gap report;
-- Storybook-gap report;
-- accessibility-gap report;
-- design-alignment-gap report;
-- validated documentation and story references.
-
-### Acceptance criteria
-
-- Public component status is generated from manifest data.
-- Missing evidence is visible.
-- Stable component routes and canonical stories validate.
-- Provider leaks and incomplete API extraction can be queried.
-- Automation reports readiness without promoting components.
-
-### Review question
-
-> Does the manifest reduce drift while remaining understandable and honest?
-
-## Checkpoint 4 — Storybook remediation
-
-### Goal
-
-Make Storybook a clean interactive component workbench.
-
-### Deliverables
-
-- product-facing hierarchy;
-- canonical stories;
-- experiments separated from stable components;
-- light and dark globals;
-- responsive viewports;
-- interaction tests for flagship components;
-- links back to Starlight;
-- Chromatic review workflow documentation.
-
-### Acceptance criteria
-
-- Stable components are easy to locate.
-- Controls expose supported APIs only.
-- Candidate comparisons appear under Experiments.
-- Canonical story IDs match manifest references.
-- Chromatic visual differences are reviewed intentionally.
-
-### Review question
-
-> Would a designer or engineer use this Storybook to explore the system without needing an explanation of the old QA structure?
-
-## Checkpoint 5 — Figma alignment
-
-### Goal
-
-Demonstrate how shipped code and design intent are reconciled.
-
-### Deliverables
-
-- Figma intent model for Button, Select, and Dialog;
-- component or component-set references;
-- anatomy, variants, states, and variable mappings;
-- Figma identifiers in the manifest;
-- code-versus-design comparison records;
-- alignment statuses and known differences;
-- optional Code Connect proof for one component.
-
-### Acceptance criteria
-
-- Figma represents supported product decisions rather than provider internals.
-- Manifest identifiers are valid or honestly missing.
-- Design approval is not inferred from component existence.
-- Known code-versus-design differences are recorded.
-- Figma, docs, Storybook, and manifest use the same public component names.
-
-### Review question
-
-> Could the design team rebuild or correct its library using the documented relationship to shipped code?
-
-## Checkpoint 6 — Accessibility evidence
-
-### Goal
-
-Establish explicit contracts and honest evidence for flagship components.
-
-### Deliverables
-
-- semantic, keyboard, focus, announcement, and visual contracts;
-- keyboard interaction tests;
-- automated accessibility results for representative states;
-- manual review records where completed;
-- accessibility status in the manifest;
-- accessibility gap dashboard;
-- docs-site accessibility review.
-
-### Acceptance criteria
-
-- Automated checks are not described as full conformance.
-- Manual review requires a review record.
-- Known issues prevent misleading completion status.
-- Flagship component keyboard behavior is repeatably tested.
-- Documentation embeds and navigation are accessible.
-
-### Review question
-
-> Can a reviewer tell exactly what was tested, what was manually reviewed, and what remains unknown?
-
-## Checkpoint 7 — Forensic case studies
-
-### Goal
-
-Make the remediation skill visible.
-
-### Deliverables
-
-- existing-system inventory;
-- Button contract case study;
-- selector inconsistency finding;
-- provider-boundary finding;
-- Storybook gap analysis;
-- accessibility gap analysis;
-- design-alignment finding;
-- before-and-after decisions;
-- rejected approaches and tradeoffs.
-
-### Acceptance criteria
-
-- Findings cite observable implementation evidence.
-- Risks are explained without exaggeration.
-- Decisions include tradeoffs.
-- Deferred or external items remain visible.
-- The case studies show remediation, not only greenfield construction.
-
-### Review question
-
-> Does the work demonstrate how the engineer thinks when an existing design system is incomplete or unreliable?
-
-## Checkpoint 8 — Cleanup and public release
-
-### Goal
-
-Retire obsolete public framing and publish a cohesive portfolio release.
-
-### Deliverables
-
-- rewritten root README;
-- Starlight as the primary public entry point;
-- Zeroheight removed from primary navigation;
-- archived Zeroheight and reporting scripts where appropriate;
-- public naming cleanup;
-- coordinated deployment of docs, Storybook, and showcase;
-- release validation and link checks.
-
-### Acceptance criteria
-
-- The repository reads as a design-system product.
-- Historical work remains available without dominating discovery.
-- Federation is clearly supporting proof.
-- The Button experiment has a clear disposition.
-- Public links, docs, stories, manifest references, and builds validate.
-- No person-specific, local-path, or assignment-specific language remains unintentionally public.
-
-### Review question
-
-> Is the final experience memorable as a mature Angular design-system exploration rather than a collection of unrelated experiments?
-
-## Dependencies
+## Delivery sequence
 
 ```mermaid
 flowchart TD
-  DocsShell[Starlight shell] --> ComponentPages[Flagship pages]
-  ComponentPages --> ManifestViews[Manifest projections]
-  Storybook[Canonical Storybook stories] --> ComponentPages
-  ManifestContract[Manifest contract] --> ManifestViews
-  FigmaIntent[Figma intent model] --> FigmaAlignment[Figma alignment records]
-  ComponentPages --> FigmaAlignment
-  AccessibilityContract[Accessibility contracts] --> A11yEvidence[Accessibility evidence]
-  Storybook --> A11yEvidence
-  ManifestViews --> Cleanup[Public cleanup]
-  FigmaAlignment --> Cleanup
-  A11yEvidence --> Cleanup
+  A[Checkpoint 1: Create apps/starlight] --> B[Checkpoint 2: Establish designer-grade quality gate]
+  B --> C[Checkpoint 3: Publish overview and navigation]
+  C --> D[Checkpoint 4: Complete Button, Select, and Dialog pages]
+  D --> E[Checkpoint 5: Finalize manifest contract and projections]
+  E --> F[Checkpoint 6: Upgrade the three Angular workbench views]
+  F --> G[Checkpoint 7: Add Figma alignment records]
+  G --> H[Checkpoint 8: Reorganize Storybook and Chromatic]
+  H --> I[Checkpoint 9: Add accessibility and remediation evidence]
+  I --> J[Checkpoint 10: Publish forensic case studies]
+  J --> K[Checkpoint 11: Relocate sample UI and archive old tooling]
+  K --> L[Checkpoint 12: Unified portfolio release]
 ```
 
-## Risk controls
+## Checkpoint 1 — Create `apps/starlight`
 
-| Risk | Control |
-| --- | --- |
-| Large rename breaks working code | Change public labels first; migrate internal names later. |
-| Docs duplicate manifest data | Generate statuses and links from the manifest. |
-| Storybook IDs break embeds | Validate IDs against the built index. |
-| Figma appears more complete than it is | Use explicit draft, review, partial, and missing statuses. |
-| Accessibility is overstated | Separate automated, keyboard, visual, and manual evidence. |
-| Cleanup removes useful history | Archive before deletion. |
-| Scope expands to every component | Finish three flagship components before broadening. |
-| Federation work is lost | Preserve it as an architecture and adoption case study. |
+### Goal
 
-## Release readiness checklist
+Create Astro Starlight as a real, independently built Nx application rather than a loose Markdown directory.
 
-- [ ] Docs app builds and publishes.
-- [ ] Storybook builds and publishes.
-- [ ] Canonical story embeds resolve.
-- [ ] Manifest validation passes.
-- [ ] Flagship pages are complete.
-- [ ] Accessibility statuses are honest.
-- [ ] Figma alignment statuses are recorded.
-- [ ] Component catalog and health dashboard render.
-- [ ] Public naming review is complete.
-- [ ] Root README points to the docs site.
-- [ ] Zeroheight is not required for the core experience.
-- [ ] Full release validation passes.
+### Deliverables
+
+- `apps/starlight` project;
+- Nx serve, build, preview, and check targets;
+- `/docs/` production base path;
+- public title and navigation;
+- shared token consumption;
+- responsive Starlight shell;
+- search;
+- light and dark appearances;
+- initial pull-request preview;
+- Documentation link from the Angular workbench.
+
+### Acceptance criteria
+
+- `pnpm nx serve starlight` starts the documentation application;
+- `pnpm nx build starlight` creates the expected static output;
+- the production base path works;
+- navigation is keyboard accessible;
+- light and dark modes use shared tokens;
+- the Angular application can navigate to the Starlight route;
+- Starlight remains independently deployable.
+
+### Review question
+
+> Does this feel like a first-class area of the same product without creating a framework-level dependency between Astro and Angular?
+
+## Checkpoint 2 — Establish the designer-grade quality gate
+
+### Goal
+
+Prevent the Starlight application from becoming visually crowded, structurally inconsistent, or evidence-heavy as content grows.
+
+### Deliverables
+
+- content collection schemas;
+- heading and page-structure validation;
+- local-path, placeholder, and public-wording checks;
+- manifest, Storybook, source, Figma-status, and docs-route integrity checks;
+- shared-token and style-discipline validator;
+- Playwright responsive checks;
+- page-level axe checks;
+- critical accessibility-tree snapshots;
+- page visual-regression coverage;
+- reusable Starlight-component visual coverage in Storybook and Chromatic;
+- Lighthouse CI scores and budgets;
+- PR preview template;
+- required human polish-review status;
+- visual-baseline acceptance policy.
+
+### Acceptance criteria
+
+- `pnpm nx run starlight:quality-gate` runs the complete automated gate;
+- the gate fails on broken content references, missing titles, invalid hierarchy, horizontal overflow, new axe violations, or unreviewed visual changes;
+- representative pages are checked at mobile, tablet, and desktop widths;
+- light and dark screenshots exist;
+- visual baselines are not accepted automatically;
+- substantial visual changes require `polish-approved` or `polish-approved-with-follow-up`;
+- the gate is included in `verify:release`.
+
+### Review question
+
+> Would the gate catch the types of drift that previously turned the documentation into a dense collection of panels, status labels, disclaimers, and evidence blocks?
+
+## Checkpoint 3 — Publish overview and navigation
+
+### Goal
+
+Make the design system the unmistakable public product.
+
+### Deliverables
+
+- Overview page;
+- concise north-star statement;
+- links to Components, Storybook, Workbench, Source, Quality, and Architecture;
+- Foundations navigation;
+- Components navigation;
+- Accessibility and Quality navigation;
+- Exploration Log entry point;
+- federation reframed as adoption proof;
+- backend content moved to Reference Applications.
+
+### Acceptance criteria
+
+- a first-time visitor can identify the product purpose within approximately 30 seconds;
+- the opening content does not lead with module federation, backend setup, Zeroheight, exact test totals, or personal skill claims;
+- the page passes the Starlight quality gate;
+- mobile and desktop hierarchy are both intentionally designed;
+- the human polish review is approved.
+
+### Review question
+
+> Does the first screen communicate a maintained design-system product rather than a portfolio assignment?
+
+## Checkpoint 4 — Complete Button, Select, and Dialog pages
+
+### Goal
+
+Prove the standard component-page model with three high-value flagship components.
+
+### Deliverables
+
+For each component:
+
+- purpose and usage guidance;
+- canonical Storybook embed;
+- anatomy;
+- variants and meaningful states;
+- content guidance;
+- interaction behavior;
+- accessibility contract;
+- token mapping;
+- public Angular API;
+- provider boundary;
+- quality evidence;
+- Figma alignment status;
+- decisions and known gaps.
+
+### Acceptance criteria
+
+- live implementation appears near the top;
+- usage guidance appears before large evidence tables;
+- Storybook links resolve;
+- manifest metadata matches the page;
+- light and dark modes are reviewed;
+- responsive and accessibility checks pass;
+- the human polish review is approved;
+- no page becomes a giant candidate-status or evidence dashboard.
+
+### Review question
+
+> Can designers and engineers both understand how to use the component, what is trustworthy, and what remains unresolved?
+
+## Checkpoint 5 — Finalize manifest contract and projections
+
+### Goal
+
+Make the manifest the dependable relationship layer between code, documentation, design, stories, tests, and governance.
+
+### Deliverables
+
+- finalized schema domains;
+- lifecycle vocabulary;
+- provider-boundary status;
+- documentation route fields;
+- Storybook story IDs;
+- source paths;
+- automated and manual accessibility fields;
+- Figma identity and alignment fields;
+- blockers and ownership;
+- catalog projection;
+- health and gap projections;
+- CI integrity validation.
+
+### Acceptance criteria
+
+- stable components have resolvable documentation and canonical story references;
+- missing Figma or manual review states are explicit rather than fabricated;
+- Starlight pages consume projections instead of manually duplicating manifest facts;
+- invalid references fail CI;
+- Component Inventory data can be generated from the manifest.
+
+### Review question
+
+> Does the manifest expose the truth of the system without pretending to own runtime behavior or design intent?
+
+## Checkpoint 6 — Upgrade the three Angular workbench views
+
+### Goal
+
+Replace sample-heavy QA, performance, and candidate screens with mission-focused forensic and remediation workflows.
+
+### Deliverables
+
+#### Component Inventory
+
+- manifest-driven summary;
+- searchable and filterable component table;
+- detail panel;
+- duplicate-contract findings;
+- selector inconsistency findings;
+- Storybook, accessibility, documentation, Figma, and provider gaps.
+
+#### Quality & Remediation
+
+- quality scorecard;
+- prioritized findings queue;
+- evidence coverage;
+- before-and-after remediation cases;
+- technical diagnostics as secondary content.
+
+#### Design Alignment Lab
+
+- Button, Select, and Dialog selection;
+- Figma-to-code anatomy mapping;
+- Figma-property-to-Angular-API mapping;
+- token-chain comparison;
+- live Storybook evidence;
+- decision records and blockers.
+
+### Acceptance criteria
+
+- generic sample walls are removed from primary views;
+- useful samples are relocated before deletion;
+- application tests are updated;
+- each view has one clear mission;
+- primary language contains no UP, SitePen, or Zeroheight dependency;
+- the Documentation navigation reaches Starlight cleanly;
+- responsive, visual, and accessibility checks pass.
+
+### Review question
+
+> Does every prominent component on each page contribute directly to discovery, remediation, or design alignment?
+
+## Checkpoint 7 — Add Figma alignment records
+
+### Goal
+
+Show how approved or draft design intent relates to shipped code without making Figma the runtime source of truth.
+
+### Deliverables
+
+- canonical naming rules;
+- Button component set;
+- Select and Dialog models or reconstruction plans;
+- light and dark variable modes;
+- anatomy records;
+- variant and state records;
+- content constraints;
+- accessibility visual-intent notes;
+- manifest identifiers;
+- alignment statuses;
+- known design-versus-code differences;
+- Design Alignment Lab projections.
+
+### Acceptance criteria
+
+- Figma status is honest;
+- component existence in Figma does not imply code promotion;
+- Figma properties map deliberately to public Angular APIs;
+- decorative design combinations are not mistaken for public API commitments;
+- references resolve from Starlight and the manifest.
+
+### Review question
+
+> Could a designer use these records to rebuild or correct the library based on what actually ships?
+
+## Checkpoint 8 — Reorganize Storybook and Chromatic
+
+### Goal
+
+Make Storybook the trustworthy isolated component workbench and Chromatic the visual-review and regression surface.
+
+### Deliverables
+
+- target Storybook hierarchy;
+- canonical story per stable public component;
+- experiments separated from stable components;
+- light and dark modes;
+- representative responsive viewports;
+- supported controls only;
+- interaction tests;
+- accessibility-addon configuration;
+- Starlight presentation-component stories where useful;
+- documentation backlinks;
+- Chromatic PR review workflow.
+
+### Acceptance criteria
+
+- canonical story IDs match manifest and Starlight references;
+- old acceptance and candidate naming is removed or archived;
+- visual changes require review;
+- Storybook does not duplicate full documentation guidance;
+- Chromatic is presented as testing and review, not only hosting.
+
+### Review question
+
+> Can reviewers distinguish stable components, experiments, visual regressions, and intentional design changes quickly?
+
+## Checkpoint 9 — Add accessibility and remediation evidence
+
+### Goal
+
+Make accessibility responsibilities and remediation progress visible without overstating conformance.
+
+### Deliverables
+
+- accessibility status vocabulary;
+- component-level automated results;
+- page-level Starlight and Angular results;
+- manual-review status;
+- keyboard behavior records;
+- focus-management records;
+- findings queue;
+- before-and-after evidence;
+- unresolved risks;
+- links to verification.
+
+### Acceptance criteria
+
+- automated and manual evidence are separate;
+- new violations block release;
+- known legacy exceptions are explicit;
+- resolved findings link to verification;
+- no page claims complete compliance from axe alone;
+- cognitive density is included in human review.
+
+### Review question
+
+> Does the system make accessibility debt actionable while remaining honest about what has and has not been manually verified?
+
+## Checkpoint 10 — Publish forensic case studies
+
+### Goal
+
+Demonstrate remediation and discovery work rather than only greenfield construction.
+
+### Recommended first cases
+
+1. competing Button contracts;
+2. selector-prefix inconsistency;
+3. Select overlay and accessible naming;
+4. Dialog focus containment and restoration;
+5. missing canonical Storybook stories;
+6. provider leakage and escape hatches;
+7. rebuilding Figma intent from shipped code.
+
+### Required case structure
+
+- observed condition;
+- discovery method;
+- affected users or teams;
+- evidence;
+- options considered;
+- decision;
+- implementation or proposed remediation;
+- verification;
+- remaining limitations.
+
+### Acceptance criteria
+
+- cases are grounded in repository evidence;
+- before-and-after differences are understandable;
+- rejected approaches and tradeoffs are included;
+- the case does not expose employer-sensitive information;
+- the Starlight polish gate passes.
+
+### Review question
+
+> Does the case prove that the engineer can enter an imperfect system, discover reality, and improve it responsibly?
+
+## Checkpoint 11 — Relocate sample UI and archive old tooling
+
+### Goal
+
+Remove obsolete presentation clutter without losing useful test and evidence coverage.
+
+### Deliverables
+
+- sample inventory;
+- sample classification;
+- canonical Storybook relocation;
+- pattern-page relocation;
+- integration-fixture relocation;
+- replacement Playwright tests;
+- sample-only model, handler, and style removal;
+- Zeroheight scripts archived or removed;
+- local paths removed;
+- person- and employer-specific language removed;
+- old story aliases and obsolete navigation retired.
+
+### Acceptance criteria
+
+- no dependent tests are silently lost;
+- primary Angular views contain only mission-relevant UI;
+- Starlight pages do not inherit the old evidence-wall structure;
+- archive content is clearly separated from canonical guidance;
+- release verification passes.
+
+### Review question
+
+> Did the cleanup reduce noise while preserving every important proof responsibility?
+
+## Checkpoint 12 — Unified portfolio release
+
+### Goal
+
+Publish one coherent product experience across Starlight, Angular, Storybook, Chromatic, Figma references, and source.
+
+### Deliverables
+
+- public Starlight URL;
+- public Angular workbench URL;
+- public Storybook URL;
+- coordinated navigation;
+- validated manifests and links;
+- flagship component pages;
+- three upgraded workbench views;
+- accessibility and quality evidence;
+- forensic case studies;
+- polished README entry point;
+- release notes.
+
+### Acceptance criteria
+
+- the first-time visitor journey works without repository archaeology;
+- all major routes share a coherent vocabulary and visual language;
+- the Starlight designer-grade quality gate passes;
+- Angular, Storybook, and manifest quality gates pass;
+- visual changes are reviewed;
+- no canonical route depends on Zeroheight;
+- the product supports the north star clearly.
+
+### Review question
+
+> Can a hiring manager see discovery, remediation, accessibility responsibility, design-to-code translation, governance, and Angular engineering depth in one coherent system?
+
+## Roadmap governance
+
+### Checkpoint review record
+
+Each checkpoint should record:
+
+- scope completed;
+- routes or components affected;
+- automated gate results;
+- visual-review result;
+- polish-review result;
+- unresolved risks;
+- deferred work;
+- next checkpoint dependencies.
+
+### Change-control rule
+
+Do not expand a checkpoint merely because another component or page would be easy to add. Finish the intended product slice, pass its gates, and then expand through the backlog.
+
+### Final roadmap principle
+
+The upgrade should grow through a small number of complete, polished, truthful slices rather than a large number of partially documented surfaces.
