@@ -220,7 +220,8 @@ for (const file of styleFiles) {
     if (spacing && /\d(?:\.\d+)?(?:px|rem|em)\b/.test(spacing[1]) && !/(?:var\(|calc\(|clamp\()/.test(spacing[1])) {
       if (!isException(file, trimmed)) report(file, `Arbitrary spacing requires a documented exception: ${trimmed}`, index + 1);
     }
-    if (/font-family:\s*(?!var\(--ps-font-family\))/.test(trimmed)) {
+    const fontFamily = /^font-family:\s*([^;]+);$/.exec(trimmed);
+    if (fontFamily && fontFamily[1].trim() !== 'var(--ps-font-family)') {
       report(file, `Typography must use the shared font-family token: ${trimmed}`, index + 1);
     }
     if (trimmed.includes('!important') && !isException(file, trimmed)) {
