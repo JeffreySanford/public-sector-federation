@@ -83,21 +83,20 @@ test.describe('Starlight route integrity', () => {
 
 test.describe('responsive navigation and reflow', () => {
   for (const width of [360, 768, 1024, 1280, 1440]) {
-    test(`overview remains usable at ${width}px`, async ({ page }) => {
+    test(`documentation navigation remains usable at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
-      await open(page, '/docs/');
+      await open(page, '/docs/components/');
       await expectNoHorizontalOverflow(page);
-      await expect(page.getByRole('link', { name: 'Explore components' })).toBeVisible();
+      await expect(page.getByRole('heading', { level: 1, name: 'Components' })).toBeVisible();
 
-      const navigation = page.getByRole('navigation').first();
-      await expect(navigation).toBeAttached();
-
-      const expandableMenu = page.locator('button[aria-expanded]').first();
-      if ((await expandableMenu.count()) > 0 && (await expandableMenu.isVisible())) {
-        await expandableMenu.click();
-        await expect(expandableMenu).toHaveAttribute('aria-expanded', 'true');
-        await expect(page.getByRole('link', { name: /Foundations overview/i })).toBeVisible();
+      const menuButton = page
+        .locator('starlight-menu-button button, button[aria-label*="menu" i]')
+        .first();
+      if ((await menuButton.count()) > 0 && (await menuButton.isVisible())) {
+        await menuButton.click();
       }
+
+      await expect(page.getByRole('link', { name: 'Foundations overview' })).toBeVisible();
     });
   }
 
