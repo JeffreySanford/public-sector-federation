@@ -41,11 +41,12 @@ The federation and backend examples remain valuable, but they become supporting 
 | [08 — Storybook and Chromatic upgrade](./08-storybook-and-chromatic-upgrade.md) | Defines how Storybook becomes the interactive component workbench and Chromatic becomes the visual review surface. |
 | [09 — Accessibility and remediation plan](./09-accessibility-and-remediation-plan.md) | Defines accessibility contracts, automated and manual evidence, gap tracking, and remediation workflow. |
 | [10 — Migration and cleanup plan](./10-migration-and-cleanup-plan.md) | Defines what to rename, archive, retain, and remove from public presentation. |
-| [11 — Prioritized backlog](./11-prioritized-backlog.md) | Provides an actionable P0/P1/P2 implementation backlog, including manifest and Figma workstreams. |
+| [11 — Prioritized backlog](./11-prioritized-backlog.md) | Provides an actionable P0/P1/P2 implementation backlog, including the application-view, manifest, and Figma workstreams. |
 | [12 — Delivery roadmap](./12-delivery-roadmap.md) | Organizes the upgrade into reviewable checkpoints with acceptance criteria. |
 | [13 — Role-proof matrix](./13-role-proof-matrix.md) | Maps the repository evidence to a forensic design-systems engineering role. |
 | [14 — Wayfinder interview guide](./14-wayfinder-interview-guide.md) | Provides an interview-practice format for explaining the work clearly. |
 | [15 — Zeroheight retirement strategy](./15-zeroheight-retirement-strategy.md) | Defines how Zeroheight becomes historical evidence rather than the canonical documentation surface. |
+| [16 — Main application three-view upgrade](./16-main-application-view-upgrade.md) | Replaces the sample-heavy QA, performance, and candidate views with Component Inventory, Quality & Remediation, and Design Alignment Lab. |
 
 ## Core source-of-truth relationship
 
@@ -71,13 +72,14 @@ flowchart TD
   A[Create Starlight docs application] --> B[Publish new landing page]
   B --> C[Complete Button, Select, and Dialog pages]
   C --> D[Finalize manifest contract and validations]
-  D --> E[Add Figma intent and alignment records]
-  E --> F[Generate catalog and health dashboard]
-  F --> G[Reorganize Storybook and Chromatic workflow]
-  G --> H[Add accessibility and remediation evidence]
-  H --> I[Add forensic inventory and case studies]
-  I --> J[Archive Zeroheight and QA-specific public language]
-  J --> K[Publish unified portfolio release]
+  D --> E[Upgrade main application to Inventory, Quality, and Alignment views]
+  E --> F[Add Figma intent and alignment records]
+  F --> G[Generate catalog and health dashboard]
+  G --> H[Reorganize Storybook and Chromatic workflow]
+  H --> I[Add accessibility and remediation evidence]
+  I --> J[Add forensic inventory and case studies]
+  J --> K[Archive Zeroheight and QA-specific public language]
+  K --> L[Publish unified portfolio release]
 ```
 
 ## Definition of success
@@ -86,6 +88,8 @@ The upgrade succeeds when:
 
 - the documentation site, not the README, is the primary public entry point;
 - the first screen communicates a design-system product rather than a portfolio submission;
+- the main application provides Component Inventory, Quality & Remediation, and Design Alignment Lab views;
+- visible application components serve the mission of each view rather than acting as generic samples;
 - live Storybook examples appear near the top of component pages;
 - component guidance appears before validation details;
 - design tokens are shown in direct relationship to component decisions;
