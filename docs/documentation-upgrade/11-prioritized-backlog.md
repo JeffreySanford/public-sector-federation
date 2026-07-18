@@ -8,18 +8,46 @@
 - Treat accessibility, Figma alignment, Storybook, and documentation as separate evidence dimensions.
 - Do not block public presentation improvements on large internal renames.
 - Replace sample-heavy application views with mission-focused design-system workbench views.
+- Treat designer-grade documentation quality as a release requirement, not a final cleanup task.
 
 ## P0 — Establish the public design-system identity
 
-### Documentation application
+### Astro Starlight application
 
-- [ ] Create `apps/docs` using Astro Starlight in the Nx workspace.
+See [Astro Starlight Application and Designer-Grade Quality Gate](./17-astro-starlight-application-and-designer-quality-gate.md).
+
+- [ ] Create `apps/starlight` as an independently built Astro Starlight application in Nx.
+- [ ] Configure the production base path at `/docs/` or the approved root route.
+- [ ] Add Nx `serve`, `build`, `preview`, `check`, and `quality-gate` targets.
 - [ ] Configure the public title as **Public Sector Design System**.
 - [ ] Add Overview, Foundations, Components, Patterns, Accessibility, Develop, Quality, Architecture, and Exploration navigation.
-- [ ] Add a landing page with links to Storybook, source, component status, and architecture.
+- [ ] Add a landing page with links to Storybook, source, component status, architecture, and the Angular workbench.
 - [ ] Add search, light/dark appearance, responsive navigation, and code highlighting.
 - [ ] Add Mermaid support or an approved rendering strategy.
-- [ ] Add documentation build and link validation targets.
+- [ ] Consume the shared semantic-token CSS rather than inventing an unrelated documentation theme.
+- [ ] Publish pull-request previews for all Starlight changes.
+- [ ] Add a normal same-origin Documentation link from the Angular workbench to Starlight.
+- [ ] Add an optional Angular documentation gateway route only when useful for navigation continuity.
+- [ ] Keep iframe embedding optional and non-canonical.
+
+### Starlight designer-grade quality gate
+
+- [ ] Add Astro build, type, and framework validation.
+- [ ] Add content collection schemas and required frontmatter validation.
+- [ ] Add heading-level, single-`h1`, placeholder, local-path, and public-wording checks.
+- [ ] Add documentation link validation.
+- [ ] Add manifest, Storybook story, source-path, Figma-status, and docs-route integrity validation.
+- [ ] Add a token/style validator for raw colors, arbitrary spacing, unapproved typography, inline styles, and undocumented exceptions.
+- [ ] Add Playwright responsive tests at 360, 768, 1024, 1280, and 1440 pixel widths.
+- [ ] Add page-level no-overflow, no-clipping, navigation, table, Storybook-frame, light, dark, and 200%-zoom checks.
+- [ ] Add Playwright and axe accessibility checks against built Starlight pages.
+- [ ] Add accessibility-tree snapshots for critical navigation and component-page structures.
+- [ ] Add page-level visual regression coverage.
+- [ ] Use Storybook and Chromatic for reusable Starlight presentation components.
+- [ ] Add Lighthouse CI scores and resource budgets.
+- [ ] Prevent automatic acceptance of changed visual baselines.
+- [ ] Require explicit `polish-approved`, `polish-approved-with-follow-up`, or `polish-changes-required` review status.
+- [ ] Add the Starlight quality gate to `verify:release`.
 
 ### Public framing
 
@@ -29,7 +57,7 @@
 - [ ] Remove Skills Demonstrated from the public product experience.
 - [ ] Reframe federation as adoption evidence.
 - [ ] Move backend details to Reference Applications.
-- [ ] Relabel QA Remote as Component Lab in public navigation.
+- [ ] Relabel QA Remote as Component Lab in temporary public navigation.
 - [ ] Relabel Candidates as Experiments where the old view remains temporarily visible.
 
 ### Main application three-view upgrade
@@ -99,6 +127,8 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Create `AccessibilityStatus`.
 - [ ] Create `FindingCard`.
 - [ ] Create `DecisionRecord`.
+- [ ] Create `LightDarkPreview`.
+- [ ] Add light, dark, responsive, visual, and accessibility coverage for each reusable Starlight component.
 
 ## P0 — Complete three flagship component pages
 
@@ -114,6 +144,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Add API table.
 - [ ] Add quality evidence summary.
 - [ ] Move historical comparison to a final Decisions section.
+- [ ] Pass the Starlight designer-grade quality gate and human polish review.
 
 ### Select
 
@@ -124,6 +155,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Document accessible naming and invalid state.
 - [ ] Show provider-neutral API and private PrimeNG mapping.
 - [ ] Add integration evidence for body-appended overlays.
+- [ ] Pass the Starlight designer-grade quality gate and human polish review.
 
 ### Dialog
 
@@ -134,6 +166,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Document accessible name and description requirements.
 - [ ] Show overlay and surface tokens.
 - [ ] Add integrated application evidence.
+- [ ] Pass the Starlight designer-grade quality gate and human polish review.
 
 ## P0 — Manifest contract
 
@@ -145,7 +178,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Add documentation-route fields.
 - [ ] Add Figma identity and alignment fields.
 - [ ] Validate canonical Storybook story IDs.
-- [ ] Validate documentation routes.
+- [ ] Validate Starlight documentation routes.
 - [ ] Generate a basic component catalog.
 - [ ] Supply the Component Inventory and Design Alignment Lab from manifest projections rather than duplicated view data.
 
@@ -158,7 +191,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Create a concise Figma-property-to-Angular-API mapping.
 - [ ] Record anatomy, variant, state, token, and naming alignment statuses.
 - [ ] Record known code-versus-design differences.
-- [ ] Link Figma components to Storybook and documentation.
+- [ ] Link Figma components to Storybook and Starlight documentation.
 - [ ] Project Figma alignment data into the Design Alignment Lab.
 - [ ] Avoid fabricated Figma approval when only draft design intent exists.
 
@@ -168,9 +201,9 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Document accessibility contracts for Button, Select, and Dialog.
 - [ ] Add keyboard interaction tests for flagship components.
 - [ ] Add automated accessibility checks for representative states.
-- [ ] Add documentation-site accessibility checks.
+- [ ] Add Starlight page-level accessibility checks.
 - [ ] Add accessibility checks for all three main application views.
-- [ ] Ensure every Storybook iframe has a meaningful title.
+- [ ] Ensure every Storybook and optional Starlight-preview iframe has a meaningful title.
 - [ ] Prevent automated checks from being labeled as manual review.
 
 ## P1 — Storybook remediation
@@ -183,8 +216,9 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Add representative responsive viewports.
 - [ ] Limit controls to supported public APIs.
 - [ ] Add component descriptions that match Starlight guidance.
-- [ ] Add links from Storybook back to documentation.
+- [ ] Add links from Storybook back to Starlight documentation.
 - [ ] Relocate generic main-application samples into appropriate canonical stories or patterns.
+- [ ] Add Starlight presentation components to Storybook where visual review benefits from isolation.
 - [ ] Remove obsolete compatibility aliases after migration.
 
 ## P1 — Manifest-driven views
@@ -243,14 +277,16 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 ## P1 — Quality and deployment
 
-- [ ] Add docs build to `verify:release`.
+- [ ] Add `starlight:quality-gate` to `verify:release`.
 - [ ] Validate Storybook embed links.
 - [ ] Validate manifest documentation paths.
-- [ ] Publish docs and Storybook under one domain or coordinated domains.
-- [ ] Add pull-request previews for documentation.
+- [ ] Publish Starlight, Storybook, and Angular under one origin or coordinated domains.
+- [ ] Add pull-request previews for Starlight and the Angular workbench.
 - [ ] Add Chromatic visual review links to pull requests.
-- [ ] Add docs artifacts to CI failure output.
+- [ ] Add documentation and visual-diff artifacts to CI failure output.
 - [ ] Add visual regression coverage for the three upgraded application views.
+- [ ] Require human polish approval for substantial Starlight visual changes.
+- [ ] Prevent visual baselines from being auto-accepted.
 
 ## P2 — Contract normalization
 
@@ -269,6 +305,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Expand manual accessibility review to remaining interactive components.
 - [ ] Add design alignment for the broader component set.
 - [ ] Add pattern pages demonstrating composition.
+- [ ] Apply the Starlight polish contract to every new page rather than allowing one-off layouts.
 
 ## P2 — Documentation automation
 
@@ -276,8 +313,11 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Generate API tables from extracted source metadata.
 - [ ] Generate evidence panels from the manifest.
 - [ ] Generate component status badges.
-- [ ] Add drift checks between Figma identifiers, manifest IDs, Storybook IDs, and docs routes where tooling permits.
+- [ ] Add drift checks between Figma identifiers, manifest IDs, Storybook IDs, and Starlight routes where tooling permits.
 - [ ] Generate release summaries without hard-coding test totals.
+- [ ] Generate a content-density warning report.
+- [ ] Generate a token/style exception report.
+- [ ] Track Lighthouse, accessibility, and visual-regression trends.
 
 ## P2 — Historical retirement
 
@@ -293,17 +333,19 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 ```mermaid
 flowchart TD
-  PR1[PR 1: Add Starlight shell and navigation] --> PR2[PR 2: Rename and frame the three main application views]
-  PR2 --> PR3[PR 3: Button page and StoryFrame]
-  PR3 --> PR4[PR 4: Manifest-driven Component Inventory]
-  PR4 --> PR5[PR 5: Quality and Remediation queue]
-  PR5 --> PR6[PR 6: Select and Dialog pages]
-  PR6 --> PR7[PR 7: Design Alignment Lab for Button, Select, and Dialog]
-  PR7 --> PR8[PR 8: Storybook hierarchy and canonical stories]
-  PR8 --> PR9[PR 9: Figma alignment records]
-  PR9 --> PR10[PR 10: Accessibility dashboard and manual review records]
-  PR10 --> PR11[PR 11: Relocate and remove obsolete sample UI]
-  PR11 --> PR12[PR 12: Public cleanup and Zeroheight archive]
+  PR1[PR 1: Create apps/starlight and shared visual foundation] --> PR2[PR 2: Add Starlight content, responsive, accessibility, visual, and Lighthouse gates]
+  PR2 --> PR3[PR 3: Publish Overview and Angular Documentation navigation]
+  PR3 --> PR4[PR 4: Rename and frame the three main application views]
+  PR4 --> PR5[PR 5: Button page and StoryFrame]
+  PR5 --> PR6[PR 6: Manifest-driven Component Inventory]
+  PR6 --> PR7[PR 7: Quality and Remediation queue]
+  PR7 --> PR8[PR 8: Select and Dialog pages]
+  PR8 --> PR9[PR 9: Design Alignment Lab for Button, Select, and Dialog]
+  PR9 --> PR10[PR 10: Storybook hierarchy and canonical stories]
+  PR10 --> PR11[PR 11: Figma alignment records]
+  PR11 --> PR12[PR 12: Accessibility dashboard and manual review records]
+  PR12 --> PR13[PR 13: Relocate and remove obsolete sample UI]
+  PR13 --> PR14[PR 14: Public cleanup and Zeroheight archive]
 ```
 
 ## Ready-to-start definition
@@ -314,6 +356,7 @@ A backlog item is ready when:
 - its source of truth is identified;
 - its dependencies are named;
 - its acceptance criteria are measurable;
+- its responsive and visual review expectations are known when it affects UI;
 - it does not rely on fabricated external approval;
 - it has a clear documentation, code, design, or evidence owner role.
 
@@ -328,4 +371,6 @@ A backlog item is done when:
 - automated checks pass;
 - known manual or external gaps are recorded;
 - sample UI is removed only after its evidence and test responsibilities are relocated;
+- substantial visual changes receive human polish approval;
+- visual baselines are reviewed rather than automatically accepted;
 - the public wording matches the design-system vocabulary.
