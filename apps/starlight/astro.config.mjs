@@ -23,7 +23,7 @@ const themeSyncScript = `
 
 export default defineConfig({
   base: '/docs',
-  outDir: new URL('../../dist/apps/starlight/', import.meta.url),
+  outDir: '../../dist/apps/starlight',
   integrations: [
     mermaid({
       autoTheme: true,
