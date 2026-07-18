@@ -95,7 +95,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pnpm-lock.yaml apps/starlight/tests/e2e/*-snapshots/
+          mapfile -t snapshots < <(find apps/starlight/tests/e2e -type f -path '*-snapshots/*.png' -print)
+          if [ "${#snapshots[@]}" -eq 0 ]; then
+            echo "No generated Starlight baselines were found."
+            exit 1
+          fi
+          git add pnpm-lock.yaml
+          git add -f "${snapshots[@]}"
+          git status --short
           if git diff --cached --quiet; then
             echo "No bootstrap assets changed."
             exit 0
