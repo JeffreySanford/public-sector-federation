@@ -20,11 +20,6 @@
     },
     {
       "file": "apps/starlight/src/styles/custom.css",
-      "match": "#ffffff",
-      "reason": "The existing brand-mark highlight uses white only as a color-mix endpoint; replacing it requires a dedicated highlight semantic token."
-    },
-    {
-      "file": "apps/starlight/src/styles/custom.css",
       "match": "outline-offset: 3px;",
       "reason": "The focus-ring separation is an accessibility measurement rather than layout spacing."
     },
