@@ -42,12 +42,6 @@ jobs:
           pnpm --dir apps/starlight add astro @astrojs/starlight astro-mermaid mermaid sharp
           pnpm --dir apps/starlight add --save-dev @astrojs/check "typescript@~5.9.0"
 
-      - name: Validate Starlight foundation
-        run: |
-          pnpm nx run starlight:check
-          pnpm nx build starlight
-          pnpm lint
-
       - name: Commit dependency resolution
         run: |
           git config user.name "github-actions[bot]"
@@ -59,3 +53,9 @@ jobs:
             git commit -m "Resolve Starlight dependencies"
             git push origin HEAD:agent/starlight-foundation
           fi
+
+      - name: Validate Starlight foundation
+        run: |
+          pnpm nx run starlight:check
+          pnpm nx build starlight
+          pnpm lint
