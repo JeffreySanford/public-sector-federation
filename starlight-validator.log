@@ -1,0 +1,10 @@
+
+> public-sector-federation@1.0.0 validate:starlight /home/runner/work/public-sector-federation/public-sector-federation
+> node scripts/validate-starlight-quality.mjs
+
+
+Starlight quality validation failed with 2 issue(s):
+
+- quality-policy.json — Documented style exception no longer exists: apps/starlight/src/styles/custom.css → #ffffff
+- apps/starlight/src/styles/custom.css:50 — Typography must use the shared font-family token: font-family: var(--ps-font-family);
+ ELIFECYCLE  Command failed with exit code 1.
