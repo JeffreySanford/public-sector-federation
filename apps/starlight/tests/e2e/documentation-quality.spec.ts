@@ -96,7 +96,9 @@ test.describe('responsive navigation and reflow', () => {
         await menuButton.click();
       }
 
-      await expect(page.getByRole('link', { name: 'Foundations overview' })).toBeVisible();
+      await expect(
+        page.getByRole('link', { name: 'Foundations overview', exact: true }),
+      ).toBeVisible();
     });
   }
 
