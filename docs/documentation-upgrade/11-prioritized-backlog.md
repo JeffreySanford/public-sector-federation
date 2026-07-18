@@ -16,24 +16,26 @@
 
 See [Astro Starlight Application and Designer-Grade Quality Gate](./17-astro-starlight-application-and-designer-quality-gate.md).
 
-- [ ] Create `apps/starlight` as an independently built Astro Starlight application in Nx.
-- [ ] Configure the production base path at `/docs/` or the approved root route.
-- [ ] Add Nx `serve`, `build`, `preview`, `check`, and `quality-gate` targets.
-- [ ] Configure the public title as **Public Sector Design System**.
-- [ ] Add Overview, Foundations, Components, Patterns, Accessibility, Develop, Quality, Architecture, and Exploration navigation.
-- [ ] Add a landing page with links to Storybook, source, component status, architecture, and the Angular workbench.
-- [ ] Add search, light/dark appearance, responsive navigation, and code highlighting.
-- [ ] Add Mermaid support or an approved rendering strategy.
-- [ ] Consume the shared semantic-token CSS rather than inventing an unrelated documentation theme.
+- [x] Create `apps/starlight` as an independently built Astro Starlight application in Nx.
+- [x] Configure the production base path at `/docs/` or the approved root route.
+- [x] Add Nx `serve`, `build`, `preview`, and `check` targets.
+- [ ] Add the dedicated Nx `quality-gate` target.
+- [x] Configure the public title as **Public Sector Design System**.
+- [x] Add Overview, Foundations, Components, Patterns, Accessibility, Develop, Quality, Architecture, and Exploration navigation.
+- [x] Add a landing page with links to Storybook, source, architecture, and the Angular workbench.
+- [ ] Add the component-status summary and canonical status link to the landing page.
+- [x] Add search, light/dark appearance, responsive navigation, and code highlighting.
+- [x] Add Mermaid support or an approved rendering strategy.
+- [x] Consume the shared semantic-token CSS rather than inventing an unrelated documentation theme.
 - [ ] Publish pull-request previews for all Starlight changes.
 - [ ] Add a normal same-origin Documentation link from the Angular workbench to Starlight.
 - [ ] Add an optional Angular documentation gateway route only when useful for navigation continuity.
-- [ ] Keep iframe embedding optional and non-canonical.
+- [x] Keep iframe embedding optional and non-canonical.
 
 ### Starlight designer-grade quality gate
 
-- [ ] Add Astro build, type, and framework validation.
-- [ ] Add content collection schemas and required frontmatter validation.
+- [x] Add Astro build, type, and framework validation.
+- [x] Add content collection schemas and required frontmatter validation.
 - [ ] Add heading-level, single-`h1`, placeholder, local-path, and public-wording checks.
 - [ ] Add documentation link validation.
 - [ ] Add manifest, Storybook story, source-path, Figma-status, and docs-route integrity validation.
