@@ -9,7 +9,7 @@ module.exports = {
         'http://127.0.0.1:4322/docs/architecture/',
       ],
       numberOfRuns: 1,
-      startServerCommand: 'pnpm nx run starlight:preview',
+      startServerCommand: 'pnpm --dir apps/starlight preview',
       startServerReadyPattern: 'Local',
       startServerReadyTimeout: 120000,
       chromePath: chromium.executablePath(),
