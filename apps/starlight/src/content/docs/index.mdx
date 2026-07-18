@@ -1,0 +1,51 @@
+---
+title: Public Sector Design System
+description: Discover, document, validate, and govern reusable Angular components across complex applications.
+template: splash
+hero:
+  title: Components you can understand, trust, and improve.
+  tagline: A governed Angular design system connecting semantic tokens, shipped component contracts, Storybook behavior, accessibility evidence, and design intent.
+  actions:
+    - text: Explore components
+      link: ./components/
+      icon: right-arrow
+    - text: Open Storybook
+      link: https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/
+      icon: external
+      variant: minimal
+    - text: View source
+      link: https://github.com/JeffreySanford/public-sector-federation
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## One system, clear responsibilities
+
+The documentation leads with guidance. Storybook demonstrates isolated behavior. Angular applications prove integrated behavior. The component manifest connects lifecycle, evidence, design alignment, and known gaps without pretending incomplete work is finished.
+
+<CardGrid stagger>
+  <Card title="Discover what ships" icon="open-book">
+    Find the public component contract, lifecycle state, canonical story, provider boundary, and next action without searching through implementation folders.
+  </Card>
+  <Card title="Make quality visible" icon="information">
+    Keep automated checks, manual review, visual baselines, accessibility evidence, and unresolved findings distinct and understandable.
+  </Card>
+  <Card title="Reconcile design and code" icon="setting">
+    Compare Figma intent with Angular APIs, rendered anatomy, semantic tokens, and the behavior that users actually receive.
+  </Card>
+</CardGrid>
+
+## Follow the evidence
+
+<CardGrid>
+  <LinkCard title="Component guidance" href="./components/" />
+  <LinkCard title="Quality model" href="./quality/" />
+  <LinkCard title="System architecture" href="./architecture/" />
+  <LinkCard title="Angular workbench" href="/workbench/" />
+</CardGrid>
+
+## The first implementation focus
+
+Button, Select, and Dialog will establish the full documentation model before the catalog expands. Each flagship page will connect purpose, usage, anatomy, behavior, accessibility, tokens, API decisions, Storybook evidence, and design alignment in one coherent view.

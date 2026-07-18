@@ -1,0 +1,41 @@
+{
+  "name": "starlight",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/starlight/src",
+  "projectType": "application",
+  "implicitDependencies": ["tokens"],
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --dir packages/tokens build && pnpm --dir apps/starlight dev"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/apps/starlight"],
+      "options": {
+        "command": "pnpm --dir packages/tokens build && pnpm --dir apps/starlight build"
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --dir apps/starlight preview"
+      }
+    },
+    "check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --dir packages/tokens build && pnpm --dir apps/starlight check"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm --dir packages/tokens build && pnpm --dir apps/starlight check"
+      }
+    }
+  },
+  "tags": ["scope:documentation", "type:application"]
+}

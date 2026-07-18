@@ -20,6 +20,9 @@ const jsonFiles = [
   'apps/reporting-remote/tsconfig.json',
   'apps/services-remote/tsconfig.json',
   'apps/shell/tsconfig.json',
+  'apps/starlight/package.json',
+  'apps/starlight/project.json',
+  'apps/starlight/tsconfig.json',
   'packages/tokens/package.json',
   'packages/tokens/project.json',
 ];
@@ -86,7 +89,8 @@ run('node', ['scripts/check-wrapper-contracts.mjs']);
 run('node', ['scripts/build-component-manifest.mjs', '--check']);
 run('pnpm', ['db:validate']);
 run('pnpm', ['markdownlint-cli2', 'docs/**/*.md', '!docs/reports/**/*.md']);
+run('pnpm', ['markdownlint-cli2', 'apps/starlight/src/content/docs/**/*.md']);
 
 console.log(
-  `Workspace lint checks passed: ${jsonFiles.length} JSON files, ${storyCount} Storybook stories, component manifest, PrimeNG boundaries, Prisma schema, SCSS guard, and Markdown linting.`,
+  `Workspace lint checks passed: ${jsonFiles.length} JSON files, ${storyCount} Storybook stories, Starlight content, component manifest, PrimeNG boundaries, Prisma schema, SCSS guard, and Markdown linting.`,
 );
