@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - agent/starlight-foundation
+  pull_request:
+    branches:
+      - master
+    paths:
+      - apps/starlight/**
+      - pnpm-lock.yaml
+      - .github/workflows/bootstrap-starlight.yml
 
 permissions:
   contents: write
