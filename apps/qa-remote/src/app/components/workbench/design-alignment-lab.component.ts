@@ -305,7 +305,7 @@ interface ContractMemberRow extends PublicApiMember {
     .token-grid article { padding: 0.85rem; border: 1px solid var(--p-content-border-color); border-radius: 0.65rem; background: color-mix(in srgb, var(--p-content-background) 96%, var(--p-primary-color)); }
     .token-grid ul { margin-bottom: 0; padding-left: 1.2rem; color: var(--p-text-muted-color); line-height: 1.5; }
     @media (max-width: 64rem) { .comparison-grid, .evidence-decision-grid, .token-grid { grid-template-columns: 1fr; } }
-    @media (max-width: 48rem) { .workbench-hero, .panel-heading, .alignment-summary, .case-selector { display: grid; } .workbench-scope, .panel-heading p { min-width: 0; text-align: left; } .case-status { justify-content: flex-start; } }
+    @media (max-width: 48rem) { .workbench-hero, .panel-heading, .alignment-summary, .case-selector { display: grid; } .workbench-scope, .panel-heading p { min-width: 0; text-align: left; } .case-status { justify-content: flex-start; } dl div { grid-template-columns: 1fr; gap: 0.2rem; } dd { overflow-wrap: anywhere; } }
   `,
 })
 export class DesignAlignmentLabComponent {

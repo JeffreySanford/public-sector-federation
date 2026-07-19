@@ -23,6 +23,8 @@ jobs:
       - name: Merge current master and update federation expectations
         shell: bash
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin master
           git merge --no-edit origin/master
           python - <<'PY'
@@ -33,9 +35,10 @@ jobs:
           old = "page.getByRole('heading', { name: /Component and token coverage/i })"
           new = "page.getByRole('heading', { name: 'Forensic Design-System Workbench', exact: true })"
           count = text.count(old)
-          if count != 2:
-              raise SystemExit(f'Expected two legacy QA heading assertions, found {count}.')
-          path.write_text(text.replace(old, new))
+          if count not in (0, 2):
+              raise SystemExit(f'Expected zero or two legacy QA heading assertions, found {count}.')
+          if count:
+              path.write_text(text.replace(old, new))
           PY
 
       - name: Install pnpm

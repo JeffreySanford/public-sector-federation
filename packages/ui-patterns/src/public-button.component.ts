@@ -27,6 +27,7 @@ type PrimeButtonSeverity = 'secondary' | 'success' | 'info' | 'warn' | 'danger' 
     <p-button
       [label]="label()"
       [icon]="icon()"
+      [ariaLabel]="label()"
       [severity]="mappedSeverity()"
       [outlined]="resolvedAppearance() === 'outlined'"
       [text]="resolvedAppearance() === 'text'"

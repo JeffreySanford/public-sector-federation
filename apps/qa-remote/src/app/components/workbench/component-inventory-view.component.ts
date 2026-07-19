@@ -258,7 +258,7 @@ type ProviderFilter = 'all' | ProviderKind;
     .finding--blocked { font-weight: 800; }
     .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
     @media (max-width: 70rem) { .inventory-layout { grid-template-columns: 1fr; } .detail-panel { position: static; } }
-    @media (max-width: 48rem) { .workbench-hero, .panel-heading, .detail-panel__heading { display: grid; } .workbench-scope, .panel-heading p { min-width: 0; text-align: left; } .inventory-controls { grid-template-columns: 1fr; } .evidence-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 48rem) { .workbench-hero, .panel-heading, .detail-panel__heading { display: grid; } .workbench-scope, .panel-heading p { min-width: 0; text-align: left; } .inventory-controls { grid-template-columns: 1fr; } .evidence-grid { grid-template-columns: 1fr; } table { table-layout: fixed; } th, td { padding: 0.5rem; overflow-wrap: anywhere; } th:nth-child(4), td:nth-child(4), th:nth-child(5), td:nth-child(5) { display: none; } .inspect-button { padding-inline: 0.45rem; } }
   `,
 })
 export class ComponentInventoryViewComponent {
