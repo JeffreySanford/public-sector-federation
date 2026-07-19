@@ -31,11 +31,13 @@ The first documentation sequence tracks three flagship components against the ge
 
 ### Dialog
 
-- **Documentation:** Flagship page is queued after Select.
+- **Documentation:** The third flagship page is published in PR #18.
 - **Lifecycle:** Active.
-- **Storybook:** Dialog and toast acceptance evidence is recorded.
-- **Accessibility:** The dialog pattern is identified; focus containment, restoration, and manual review remain incomplete.
+- **Storybook:** Dedicated canonical, destructive-confirmation, long-content, and focus-sequence stories are recorded.
+- **Accessibility:** Labelled modal semantics, predictable initial focus, Tab containment, Escape dismissal, and opener restoration have dedicated automated evidence; manual assistive-technology review, background inertness, and explicit body scroll lock remain open.
 - **Figma:** Pending access and alignment review.
+
+[Read the Dialog guidance](/docs/components/dialog/)
 
 The quality gate cross-checks these relationships against `packages/ui-patterns/generated/component-manifest.json`, recorded source and Storybook files, Starlight routes, canonical story IDs when declared, and Figma status values.
 
@@ -57,4 +59,4 @@ Every completed component page includes:
 - public Angular API and provider-boundary notes;
 - lifecycle, design alignment, evidence, findings, and next actions.
 
-The catalog will expand only after these three pages demonstrate a complete and repeatable model.
+Button, Select, and Dialog now demonstrate the complete flagship page model. Additional catalog pages should reuse the proven structure while remaining grounded in the evidence each component actually owns.
