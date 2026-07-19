@@ -1,258 +1,155 @@
-# Zeroheight Governance Model
+# Historical Zeroheight Governance Model
 
-## Purpose
+## Status
 
-Zeroheight should be the visible governance layer for the design system. It
-answers what teams should use, when they should use it, who owns it, and what
-evidence proves it is ready.
+This document records the governance model explored during the Zeroheight experiment. It is retained because the source-of-truth boundaries, lifecycle vocabulary, evidence expectations, and owner responsibilities remain useful.
 
-It should not be the runtime source of tokens, component code, shell routing, or
-remote loading. Those stay in source-controlled repositories and deployment
-configuration.
+Zeroheight itself is superseded by:
 
-## Recommended Flow
+- Astro Starlight as the canonical public guidance surface;
+- the generated component manifest as the relationship, lifecycle, evidence, and gap layer;
+- Storybook as the live isolated implementation surface;
+- Angular source as runtime truth;
+- repository tests and release gates as verification evidence.
 
-Zeroheight can sit between design and engineering as a human governance and
-handoff layer. That is different from putting Zeroheight in the runtime token
-pipeline.
+Zeroheight must not be required for supported development, CI, release, promotion, or public documentation workflows.
 
-Human governance flow:
+See [Documentation Upgrade Current Status](../../documentation-upgrade/00-current-status.md) and [Zeroheight Retirement Strategy](../../documentation-upgrade/15-zeroheight-retirement-strategy.md).
+
+## Preserved governance flow
+
+The useful governance relationship is tool-neutral:
 
 ```text
 Figma design intent
-  -> owner approval and Zeroheight guidance, status, and handoff
-  -> developer implementation in registry, shell, or subapp
-  -> Storybook, source, and validation evidence linked back to Zeroheight
+  -> human design and accessibility review
+  -> Angular implementation and token mapping
+  -> Storybook isolated behavior
+  -> integration, Playwright, axe, and visual evidence
+  -> component manifest lifecycle and relationship record
+  -> Starlight usage guidance and known-gap explanation
 ```
 
-Runtime delivery flow:
+Runtime delivery remains separate:
 
 ```text
 approved token source
   -> source-controlled token build
   -> CSS variables, JSON metadata, TypeScript exports, and PrimeNG preset
-  -> registry, shell, remotes, Storybook, and tests
+  -> Angular wrappers, shell, remotes, Storybook, and tests
 ```
 
-Design, engineering, platform, and accessibility owners approve. Zeroheight
-documents and communicates the decision. It should not compile production
-tokens or serve runtime assets.
+The documentation surface communicates decisions. It does not compile tokens, implement components, route remotes, or promote components automatically.
 
-The component governance flow is:
+## Source-of-truth split
 
-```text
-Figma design intent
-  -> component or token candidate
-  -> registry implementation and token build
-  -> Storybook isolated evidence
-  -> shell, remote, Playwright, and accessibility validation
-  -> Zeroheight approved guidance
-```
-
-Zeroheight is the front door for approved usage. The repository remains the
-source of implementation truth.
-
-Use this source-of-truth split:
-
-| Surface | Authoritative For |
+| Surface | Authoritative for |
 | --- | --- |
-| Figma | Design assets, anatomy, states, and interaction intent. |
-| Token repository | Runtime token source, generated artifacts, and build validation. |
-| Code repository | Component implementation, APIs, tests, and releases. |
-| Storybook | Live implementation behavior, examples, and states. |
-| Zeroheight | Published guidance, approved usage, lifecycle status, owners, decisions, and evidence links. |
+| Figma | Approved or draft design intent, anatomy, states, and interaction intent |
+| Token source | Runtime design values, generated artifacts, and build validation |
+| Angular source | Component implementation, public APIs, behavior, and releases |
+| Storybook | Live isolated examples, supported states, and interaction behavior |
+| Component manifest | Identity, lifecycle, relationships, evidence, alignment, ownership, blockers, and explicit gaps |
+| Starlight | Public usage guidance, architecture explanations, decisions, and links to evidence |
+| Playwright, axe, visual, and Lighthouse gates | Repeatable automated verification evidence |
+| Human review | Design polish, manual accessibility review, and promotion decisions |
+| Zeroheight | Historical documentation-platform experiment only |
 
-## What Zeroheight Owns
+## Lifecycle vocabulary
 
-Zeroheight should own the governed presentation of:
-
-- contribution decisions and rationale where useful;
-- component and pattern status;
-- usage guidance and anti-patterns;
-- approved variants and states;
-- accessibility expectations;
-- ownership and support contacts;
-- migration and deprecation guidance;
-- release notes or change summaries;
-- links to Figma, Storybook, source, and validation evidence.
-
-## What Zeroheight Does Not Own
-
-Zeroheight should not own:
-
-- runtime token delivery;
-- token creation or normalization rules;
-- `remoteEntry` URLs;
-- shell mounting or routing;
-- component implementation;
-- PrimeNG preset generation;
-- automatic promotion decisions.
-
-Automation can publish or sync documentation later, but promotion should remain
-a governance decision backed by evidence.
-
-Zeroheight can also record why a proposal was kept local, deferred, or routed
-to research. That history helps teams avoid repeating the same debate and makes
-the design system feel like an actively managed product rather than a static
-component catalog.
-
-## Lifecycle Statuses
-
-| Status | Meaning | Use Guidance |
+| Status | Meaning | Use guidance |
 | --- | --- | --- |
-| Idea | Identified need that has not been accepted for discovery. | Track only; do not use in app work. |
-| Proposed | Accepted for discovery and triage, but not yet implemented. | Do not use in app work. |
-| Experimental | Implementation under development; API and guidance may change. | Use only with owner approval. |
-| Candidate | Evidence complete enough for promotion review. | Pilot in limited scope. |
-| Active | Approved, versioned, tested, documented, and supported. | Preferred path for new work. |
-| Deprecated | Still available temporarily with migration guidance. | Do not use for new work. |
-| Retired | No longer supported or distributed. | Use the replacement. |
+| Idea | Identified need not yet accepted for discovery | Track only |
+| Proposed | Accepted for discovery but not implemented | Do not use in application work |
+| Experimental | Implementation under development; API and guidance may change | Use only with explicit owner approval |
+| Candidate | Evidence is sufficient for a bounded promotion review | Pilot in limited scope |
+| Active | Versioned, tested, documented, and supported for its declared scope | Preferred path for new work |
+| Deprecated | Available temporarily with migration guidance | Do not use for new work |
+| Retired | No longer supported or distributed | Use the named replacement |
 
-Technical qualifiers such as `Storybook verified`, `shell verified`,
-`accessibility risk`, or `legacy migration` can be tracked alongside lifecycle
-status.
+Technical qualifiers—such as Storybook verified, automated accessibility pass, manual review pending, Figma partial, provider warning, or legacy migration—must remain separate from lifecycle status.
 
-## Promotion Gates
+## Promotion evidence
 
-A component, token group, or reusable pattern should not move to `Approved`
-until these questions have clear evidence:
+A component, token group, or reusable pattern should not be promoted until the applicable evidence is explicit:
 
-| Gate | Required Evidence |
+| Dimension | Expected evidence |
 | --- | --- |
-| Design intent | Figma reference or design approval. |
-| Implementation | Registry source link or token source link. |
-| Token alignment | Uses approved semantic tokens or generated PrimeNG mapping. |
-| Variants and states | Storybook examples for supported states. |
-| Accessibility | Keyboard, semantics, contrast, and disabled/loading behavior checked. |
-| Theme behavior | Light, dark, and approved theme variants checked where applicable. |
-| Integration | Shell or remote validation when runtime context matters. |
-| Automation | Playwright or repeatable validation for high-risk behavior. |
-| Ownership | Named owner or owning team. |
-| Change notes | Release, migration, or deprecation notes where needed. |
+| Design intent | Figma reference, design decision, or an honest missing/draft state |
+| Implementation | Angular source and package/public API reference |
+| Token alignment | Approved semantic-token chain or a documented exception |
+| Variants and states | Canonical Storybook behavior for supported combinations |
+| Accessibility | Semantics, keyboard behavior, focus, contrast, disabled/loading behavior, automated checks, and manual status |
+| Theme behavior | Light and dark behavior where applicable |
+| Integration | Shell or remote validation when runtime context matters |
+| Automation | Repeatable Playwright or unit coverage for high-risk behavior |
+| Documentation | Starlight route with purpose, usage, behavior, and known gaps |
+| Ownership | Named owner or an explicit unowned state |
+| Change guidance | Release, migration, replacement, or deprecation notes where needed |
 
-Overlays, toasts, dialogs, tables, and forms should require integration
-evidence because they can fail differently in federated remotes.
+Overlays, dialogs, menus, toasts, tables, and forms require integration evidence because their behavior may differ inside federated remotes.
 
-## Component Page Model
+## Canonical component-page model
 
-Each Zeroheight component page should include:
+Each Starlight component page should include:
 
 - purpose;
-- lifecycle status;
-- owner;
-- package and import path;
-- selector or public API;
-- when to use it;
-- when not to use it;
-- approved variants and states;
+- when to use and when not to use;
+- canonical live Storybook behavior near the top;
+- lifecycle and evidence summary;
 - anatomy;
-- behavior;
-- accessibility notes;
-- responsive behavior;
+- supported variants and states;
+- interaction and responsive behavior;
+- accessibility contract and manual-review status;
 - content guidance;
-- token usage notes;
-- examples;
-- migration guidance from direct PrimeNG where relevant;
-- known limitations;
-- Storybook link;
-- Figma link;
-- source link;
-- shell, remote, or Playwright evidence link;
-- release history;
-- release or deprecation notes.
+- semantic and component token relationships;
+- public Angular API and provider boundary;
+- Figma identity or explicit missing/draft status;
+- known limitations and decisions;
+- source, test, Storybook, and design references;
+- migration or deprecation guidance where applicable.
 
-Example page outline:
+The page must guide a user before presenting large evidence tables. The manifest supplies relationship facts; the page explains how and why to use the component.
 
-```text
-Button
+## Owner responsibilities
 
-Status: Approved
-Owner: Design System Team
-Implementation: @public-sector/ui-patterns / ps-button
-Storybook: [link]
-Source: [link]
-Validation: [Playwright or shell evidence link]
-
-Use for:
-- primary actions
-- secondary actions
-- text actions
-- loading actions
-
-Do not use for:
-- custom colors
-- app-level PrimeNG button styling
-- direct p-button usage in new subapps
-```
-
-## Token Page Model
-
-Token pages should be generated or reviewed from source-controlled artifacts,
-not hand-maintained runtime values.
-
-Each token page should explain:
-
-- token purpose;
-- semantic usage;
-- light and dark values;
-- theme variants where applicable;
-- deprecated or alias status;
-- source artifact or package;
-- build or validation evidence;
-- known migration notes from older bootstrap artifacts.
-
-The preferred documentation input is a generated artifact such as
-`zeroheight-tokens.json`, backed by the token build.
-
-## Owner Responsibilities
-
-| Boundary | Owner | Responsibility |
+| Boundary | Owner role | Responsibility |
 | --- | --- | --- |
-| Design | Design owner | Intent, anatomy, variants, states, accessibility notes. |
-| Tokens | Token pipeline owner | Source ingestion, normalization, generated artifacts. |
-| Registry | Registry owner | Wrapper API, lifecycle status, implementation evidence. |
-| Platform | Platform owner | Shell integration, theme context, remote loading evidence. |
-| Subapps | Subapp owner | Adoption, local exceptions, migration debt. |
-| Validation | QA or platform validation owner | Storybook, Playwright, accessibility evidence. |
-| Zeroheight | Governance owner | Published guidance, status, owners, evidence links. |
+| Design | Design owner | Intent, anatomy, variants, states, content, and accessibility intent |
+| Tokens | Token owner | Source ingestion, normalization, aliases, and generated artifacts |
+| Components | Registry/component owner | Wrapper API, lifecycle, implementation, and remediation |
+| Platform | Platform owner | Shell integration, theme context, remote loading, and provider boundaries |
+| Applications | Application owner | Adoption, exceptions, migration debt, and integration evidence |
+| Validation | Quality/accessibility owner | Storybook, Playwright, automated accessibility, visual, and manual-review evidence |
+| Documentation | Documentation owner | Starlight guidance, content quality, decisions, and evidence links |
+| Governance | Product/governance owner | Promotion, deprecation, support, ownership, and prioritization decisions |
 
-Named accountable owners should replace these role owners when the enterprise
-repository and operating model are available.
+Named accountable owners should replace role placeholders when an adopting organization defines its operating model.
 
-## Change Process
+## Change process
 
-1. A designer, platform engineer, or subapp team proposes a token, component, or
-   pattern.
-2. The registry owner checks whether an existing pattern already covers it.
-3. Design confirms anatomy, variants, states, and content expectations.
-4. Engineering implements or updates the token build, wrapper, or pattern.
-5. Storybook captures isolated behavior.
-6. Playwright, accessibility, shell, or remote validation captures runtime
-   evidence where needed.
-7. The governance owner updates the Zeroheight page with status, owner,
-   evidence, and usage guidance.
-8. The component or token moves to the next lifecycle status only when the
-   required evidence is linked.
+1. A need is proposed with an owner and user problem.
+2. The component owner checks for an existing pattern before creating a duplicate.
+3. Design records intent, anatomy, variants, states, and content expectations.
+4. Engineering implements or remediates the token, wrapper, or pattern.
+5. Storybook captures isolated behavior and supported controls.
+6. Tests capture unit, interaction, accessibility, visual, and integration evidence.
+7. The manifest records lifecycle, references, gaps, blockers, and ownership.
+8. Starlight publishes purpose, usage, behavior, accessibility expectations, and decisions.
+9. Human reviewers approve, defer, block, deprecate, or reject the change.
+10. Lifecycle changes only when the required evidence and decision are recorded.
 
-## Legacy PrimeNG Policy
+## Legacy PrimeNG policy
 
-New and target-state subapps should use registry wrappers. Migrated legacy
-subapps may keep direct PrimeNG temporarily when the usage is owned,
-inventoried, and tracked as migration debt.
+New and target-state applications should use governed wrapper APIs. Migrated applications may retain direct PrimeNG temporarily only when the usage is inventoried, owned, time-bounded, and tracked as migration debt.
 
-Zeroheight should make that distinction visible:
+Starlight and the manifest should distinguish:
 
-- approved registry path for new work;
-- temporary legacy exception where applicable;
-- migration guidance from direct PrimeNG to the governed wrapper.
+- the approved wrapper path for new work;
+- temporary provider-specific exceptions;
+- the evidence and deadline for remediation;
+- migration guidance from direct PrimeNG to the governed API.
 
-## Immediate Next Steps
+## Current application
 
-1. Create the initial Zeroheight information architecture:
-   foundations, tokens, components, patterns, accessibility, release notes, and
-   governance.
-2. Define the lifecycle status labels and approval gates in Zeroheight.
-3. Publish one complete component page, such as Button, as the reference model.
-4. Link that page to Figma, Storybook, source, and validation evidence.
-5. Repeat for the first high-risk families: dialog, select, menu, toast, table,
-   and form controls.
+The first implementation of this preserved governance model is the Button + `StoryFrame` slice. It will prove the component-page structure, live behavior boundary, manifest relationship, accessibility contract, visual review, decisions, and explicit Figma/manual-review gaps before the model expands to Select and Dialog.
