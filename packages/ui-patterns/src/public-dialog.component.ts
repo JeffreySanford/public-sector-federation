@@ -151,6 +151,7 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
   private readonly closeButton = viewChild<ElementRef<HTMLButtonElement>>('closeButton');
   private wasVisible = false;
   private focusRequest = 0;
+  private userNavigatedFocus = false;
   private lastFocusedElement: HTMLElement | null = null;
   private restoreFocusTarget: HTMLElement | null = null;
   private readonly handleDocumentFocusIn = (event: FocusEvent) => {
@@ -186,6 +187,7 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
         ? activeElement
         : null;
       this.restoreFocusTarget = activeTarget ?? this.lastFocusedElement;
+      this.userNavigatedFocus = false;
       const request = ++this.focusRequest;
       this.scheduleInitialFocus(request);
     }
@@ -233,6 +235,7 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
     const activeIndex = focusableElements.indexOf(activeElement as HTMLElement);
 
     event.preventDefault();
+    this.userNavigatedFocus = true;
 
     if (event.shiftKey) {
       const previousIndex = activeIndex <= 0 ? focusableElements.length - 1 : activeIndex - 1;
@@ -256,7 +259,7 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
 
   private scheduleInitialFocus(request: number): void {
     const focusIfNeeded = () => {
-      if (request !== this.focusRequest || !this.visible()) return;
+      if (request !== this.focusRequest || !this.visible() || this.userNavigatedFocus) return;
       this.focusInitialElement();
     };
 

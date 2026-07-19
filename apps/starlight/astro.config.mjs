@@ -22,8 +22,14 @@ const themeSyncScript = `
 `;
 
 export default defineConfig({
+  site: 'https://jeffreysanford.github.io',
   base: '/docs',
   outDir: '../../dist/apps/starlight',
+  vite: {
+    build: {
+      chunkSizeWarningLimit: 1_000,
+    },
+  },
   integrations: [
     mermaid({
       autoTheme: true,

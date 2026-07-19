@@ -8,6 +8,7 @@ const child = spawn(
   ['exec', 'playwright', 'test', '--config', 'apps/starlight/playwright.config.ts', '--update-snapshots'],
   {
     stdio: 'inherit',
+    shell: process.platform === 'win32',
     env: {
       ...process.env,
       UPDATE_STARLIGHT_SNAPSHOTS: '1',
