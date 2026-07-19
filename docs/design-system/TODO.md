@@ -36,7 +36,7 @@ This is the short execution dashboard. It does not duplicate detailed acceptance
 ## Now — accessibility remediation
 
 - [ ] Reproduce and classify provisional accessibility findings.
-- [ ] Add stable Button keyboard, loading, and activation evidence.
+- [x] Add stable Button keyboard, loading, and activation evidence.
 - [ ] Record NVDA and Chrome reviews for Button, Select, and Dialog.
 - [ ] Record forced-colors and zoom/reflow reviews.
 - [ ] Add Select required, invalid, help, and error relationships.
