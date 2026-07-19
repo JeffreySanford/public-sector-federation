@@ -4,6 +4,8 @@ _Last aligned: July 19, 2026_
 
 ## Purpose
 
+The typed `componentFindings` registry in `packages/ui-patterns/src/manifest/component-registry.ts` is the operational source for finding identifiers, category, severity, status, affected components, and evidence paths. This page provides the human-readable accessibility rationale and remediation detail.
+
 This register turns accessibility coverage status into actionable findings. It distinguishes confirmed implementation gaps, code-review observations, verification tasks, automated results, and manual assistive-technology evidence.
 
 An automated axe result is evidence for tested states; it is not a conformance claim.
@@ -116,5 +118,5 @@ Each review record must include:
 - [ ] Provisional findings are reproduced and classified.
 - [ ] Confirmed findings link to implementation or a documented decision.
 - [ ] Resolved findings link to automated and, where required, manual verification.
-- [ ] The manifest references finding identifiers and last-review records.
+- [x] The manifest references finding identifiers; last-review records remain pending.
 - [ ] Starlight exposes open risks without presenting them as generic quality badges.
