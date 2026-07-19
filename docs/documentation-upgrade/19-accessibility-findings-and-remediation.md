@@ -37,8 +37,8 @@ A finding cannot be marked resolved without linked verification. Manual review c
 | A11Y-DLG-004 | Dialog | Stacked or nested dialog behavior is undefined | Moderate | Documented limitation | Investigate |
 | A11Y-SEL-001 | Select | Disabled-option ARIA behavior lacks dedicated evidence | Serious pending reproduction | Documentation and evidence gap | Investigate |
 | A11Y-SEL-002 | Select | Required, invalid, error-message, and help-text relationships are absent from the public contract | Serious | API and documentation review | Open |
-| A11Y-BTN-001 | Button | Stable Button keyboard evidence is missing from the manifest despite documented expectations | Moderate evidence risk | Manifest review | Open |
-| A11Y-BTN-002 | Button | Loading announcement and repeated-activation suppression require dedicated stable-component verification | Serious pending reproduction | Evidence gap | Investigate |
+| A11Y-BTN-001 | Button | Stable Button keyboard activation and focus behavior have dedicated automated evidence | Moderate evidence risk | Storybook Playwright verification | Verified |
+| A11Y-BTN-002 | Button | Loading exposes busy semantics and suppresses repeated activation; manual announcement verification remains pending | Serious pending manual review | Storybook Playwright verification | Implemented |
 | A11Y-SYS-001 | Flagship components | Manual screen-reader reviews are not recorded | Serious evidence gap | Manifest review | Open |
 | A11Y-SYS-002 | Flagship components | Windows high-contrast/forced-colors evidence is not recorded | Moderate evidence gap | Documentation review | Open |
 
@@ -76,12 +76,13 @@ A finding cannot be marked resolved without linked verification. Manual review c
 
 **Expected contract:** Loading prevents duplicate activation without erasing the meaningful accessible name or leaving the state unexplained.
 
-**Next action:**
+**Automated evidence:** The stable Button interaction harness verifies pointer, Enter, and Space activation; one event per input; preserved accessible naming; visible focus; disabled state; `aria-busy`; and zero activation while loading.
 
-1. Add a focused stable Button interaction test.
-2. Inspect computed name, role, disabled/busy state, and activation count.
-3. Perform the same flow with NVDA and Chrome.
-4. Record whether API or documentation remediation is required.
+**Remaining action:**
+
+1. Perform the loading flow with NVDA and Chrome.
+2. Record whether the busy-state change is announced sufficiently.
+3. Add API or live-region remediation only if manual evidence identifies a gap.
 
 ## Manual review matrix
 
@@ -115,7 +116,7 @@ Each review record must include:
 ## Completion criteria
 
 - [ ] Flagship manual reviews are recorded.
-- [ ] Provisional findings are reproduced and classified.
+- [ ] Provisional findings are reproduced and classified; stable Button automated findings are classified.
 - [ ] Confirmed findings link to implementation or a documented decision.
 - [ ] Resolved findings link to automated and, where required, manual verification.
 - [x] The manifest references finding identifiers; last-review records remain pending.

@@ -1,3 +1,4 @@
+import { Component, signal } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import {
@@ -8,6 +9,27 @@ import {
 
 const intents: PublicButtonIntent[] = ['primary', 'secondary', 'destructive'];
 const appearances: PublicButtonAppearance[] = ['solid', 'outlined', 'text'];
+
+@Component({
+  selector: 'stable-button-interaction-harness',
+  standalone: true,
+  imports: [PublicButtonComponent],
+  template: `
+    <main class="button-story" aria-labelledby="buttonInteractionTitle">
+      <h1 id="buttonInteractionTitle">Stable Button interaction evidence</h1>
+      <ps-button label="Submit application" (activated)="recordActivation()" />
+      <ps-button label="Submitting application" [loading]="true" (activated)="recordActivation()" />
+      <output aria-live="polite">Activations: {{ activations() }}</output>
+    </main>
+  `,
+})
+class StableButtonInteractionHarnessComponent {
+  readonly activations = signal(0);
+
+  recordActivation(): void {
+    this.activations.update((count) => count + 1);
+  }
+}
 
 const meta: Meta<PublicButtonComponent> = {
   title: 'Design System/Components/Button',
@@ -214,5 +236,13 @@ export const AppearanceReference: Story = {
         }
       `,
     ],
+  }),
+};
+
+export const InteractionHarness: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => ({
+    moduleMetadata: { imports: [StableButtonInteractionHarnessComponent] },
+    template: '<stable-button-interaction-harness />',
   }),
 };

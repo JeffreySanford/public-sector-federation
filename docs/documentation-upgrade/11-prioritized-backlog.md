@@ -17,7 +17,7 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 ### P0 — Complete flagship accessibility evidence
 
 - [ ] Reproduce and classify provisional findings.
-- [ ] Add stable Button interaction and keyboard evidence.
+- [x] Add stable Button interaction and keyboard evidence.
 - [ ] Record NVDA and Chrome reviews for Button, Select, and Dialog.
 - [ ] Record zoom/reflow and forced-colors review.
 - [ ] Link remediations to automated and manual verification.
@@ -31,12 +31,28 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 - [ ] Replace placeholder UI-library test targets with real contract tests.
 - [ ] Produce the Button, Select, and Dialog Figma reconstruction reference.
 
+### P0/P1 — Present evidence in the main application
+
+Machine-readable findings, reports, and manifest metadata are the source layer, not the finished user experience. Every P0 or P1 evidence-producing slice must also determine whether its outcome belongs in the main application's **Component Inventory** or **Quality & Remediation** evidence presentation.
+
+- [ ] Present API, token-boundary, accessibility, consolidation, and verification evidence in the relevant component detail or remediation view.
+- [ ] Show finding identifiers, severity, status, affected components, evidence links, and recommended next action without requiring users to inspect generated JSON.
+- [ ] Distinguish automated evidence, manual review, design approval, and unresolved gaps in the rendered experience.
+- [ ] Keep rendered evidence sourced from the manifest or generated audit artifacts rather than duplicating facts in application code.
+- [ ] Add responsive, keyboard, and accessibility coverage for each new evidence presentation.
+
 ### P1 — Finish Storybook and Chromatic alignment
 
 - [ ] Complete the product-facing hierarchy.
 - [ ] Add appropriate `play` functions for the flagship stories.
 - [ ] Separate experiments, deprecated contracts, and system-health stories.
 - [ ] Add documentation backlinks and Chromatic review evidence.
+
+Stable Button evidence:
+
+- the canonical stable story now includes an interaction harness with an observable activation count;
+- Playwright verifies pointer, Enter, and Space activation, visible focus, disabled behavior, loading busy semantics, and loading activation suppression;
+- automated Button findings are verified or implemented while NVDA announcement review remains open.
 
 Contract-finding evidence:
 
@@ -69,6 +85,7 @@ Authoritative working artifacts:
 - Do not block public presentation improvements on large internal renames.
 - Replace sample-heavy application views with mission-focused design-system workbench views.
 - Treat designer-grade documentation quality as a release requirement, not a final cleanup task.
+- Treat machine-readable evidence as incomplete until relevant findings and verification are presentable in the main application.
 
 ## P0 — Establish the public design-system identity
 
@@ -265,7 +282,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 - [ ] Define accessibility status vocabulary.
 - [x] Document accessibility contracts for Button, Select, and Dialog.
-- [ ] Add keyboard interaction tests for flagship components.
+- [x] Add keyboard interaction tests for flagship components.
 - [x] Add automated accessibility checks for representative flagship states.
 - [x] Add Starlight page-level accessibility checks.
 - [ ] Add accessibility checks for all three main application views.
@@ -441,3 +458,4 @@ A backlog item is done when:
 - substantial visual changes receive human polish approval;
 - visual baselines are reviewed rather than automatically accepted;
 - the public wording matches the design-system vocabulary.
+- relevant P0/P1 evidence is rendered in the main application or explicitly documented as not applicable to that experience.
