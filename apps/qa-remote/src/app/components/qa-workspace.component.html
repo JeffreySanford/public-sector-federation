@@ -20,19 +20,19 @@
       label="Component Inventory"
       icon="pi pi-list-check"
       [styleClass]="activeView() === 'inventory' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
-      (buttonClick)="setActiveView('inventory')"
+      (activated)="setActiveView('inventory')"
     />
     <ps-button
       label="Quality & Remediation"
       icon="pi pi-wrench"
       [styleClass]="activeView() === 'quality' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
-      (buttonClick)="setActiveView('quality')"
+      (activated)="setActiveView('quality')"
     />
     <ps-button
       label="Design Alignment Lab"
       icon="pi pi-sitemap"
       [styleClass]="activeView() === 'alignment' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
-      (buttonClick)="setActiveView('alignment')"
+      (activated)="setActiveView('alignment')"
     />
   </nav>
 
