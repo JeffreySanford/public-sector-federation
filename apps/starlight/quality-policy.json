@@ -3,9 +3,9 @@
   "polishReview": {
     "status": "polish-approved-with-follow-up",
     "reviewer": "Jeffrey Sanford",
-    "reviewedAt": "2026-07-18",
-    "scope": "Flagship Button guidance, reusable StoryFrame presentation, dedicated canonical stable Button story, responsive page hierarchy, light and dark rendering, and explicit evidence boundaries.",
-    "followUp": "Repeat the component-page polish review when Select and Dialog introduce overlay, focus-management, and denser evidence patterns."
+    "reviewedAt": "2026-07-19",
+    "scope": "Flagship Button and Select guidance, reusable StoryFrame presentation, canonical stories, Select body-overlay evidence, responsive page hierarchy, mobile option wrapping, light and dark rendering, and explicit evidence boundaries.",
+    "followUp": "Use the Dialog flagship page to confirm which repeated API, accessibility, token, and evidence sections should become reusable Starlight presentation components."
   },
   "visualBaselines": {
     "automaticAcceptanceAllowed": false,
