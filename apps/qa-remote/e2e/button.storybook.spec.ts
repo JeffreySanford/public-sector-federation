@@ -37,15 +37,21 @@ test.describe('Stable Button accessibility evidence', () => {
   });
 
   test('preserves its accessible name and suppresses activation while loading', async ({ page }) => {
-    await gotoButtonStory(page, 'loading');
+    await gotoButtonStory(page, 'interaction-harness');
 
-    const button = page.getByRole('button', { name: 'Saving changes' });
+    const button = page.getByRole('button', { name: 'Submitting application' });
+    const output = page.getByRole('status');
+
     await expect(button).toBeVisible();
     await expect(button).toBeDisabled();
-    await expect(page.locator('ps-button p-button')).toHaveAttribute('aria-busy', 'true');
+    await expect(page.locator('ps-button').filter({ has: button }).locator('p-button')).toHaveAttribute(
+      'aria-busy',
+      'true',
+    );
+    await expect(output).toHaveText('Activations: 0');
 
     await button.click({ force: true });
-    await expect(button).toBeDisabled();
+    await expect(output).toHaveText('Activations: 0');
   });
 
   test('exposes a visible focus treatment for keyboard users', async ({ page }) => {
