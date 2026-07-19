@@ -7,6 +7,10 @@ export type FigmaStatus = 'linked' | 'pending-access' | 'not-linked' | 'not-appl
 export type ZeroheightStatus = 'published' | 'draft' | 'planned' | 'not-linked' | 'not-applicable';
 export type ReadinessStatus = 'ready' | 'partial' | 'blocked';
 export type AuditDisposition = 'canonical' | 'retain' | 'merge' | 'replace' | 'deprecate' | 'investigate';
+export type FindingCategory = 'api' | 'token' | 'accessibility';
+export type FindingSeverity = 'critical' | 'serious' | 'moderate' | 'minor' | 'advisory';
+export type FindingStatus = 'open' | 'investigate' | 'planned' | 'implemented' | 'verified' | 'resolved';
+export type TokenBoundaryStatus = 'public' | 'provider-managed' | 'provider-coupled' | 'mixed' | 'not-applicable';
 
 export interface PublicApiMember {
   name: string;
@@ -14,6 +18,16 @@ export interface PublicApiMember {
   required?: boolean;
   defaultValue?: string;
   description?: string;
+}
+
+export interface ComponentFinding {
+  id: string;
+  category: FindingCategory;
+  severity: FindingSeverity;
+  status: FindingStatus;
+  componentIds: string[];
+  summary: string;
+  evidence: string[];
 }
 
 export interface ComponentManifestEntry {
@@ -105,6 +119,8 @@ export interface ComponentManifestEntry {
   audit: {
     duplicationCluster: string;
     disposition: AuditDisposition;
+    tokenBoundary: TokenBoundaryStatus;
+    findingIds: string[];
   };
   health: {
     repositoryReadiness: ReadinessStatus;
@@ -118,4 +134,5 @@ export interface ComponentManifest {
   schemaVersion: 1;
   package: '@public-sector/ui-patterns';
   entries: ComponentManifestEntry[];
+  findings: ComponentFinding[];
 }
