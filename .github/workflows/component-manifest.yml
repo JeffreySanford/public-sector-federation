@@ -74,6 +74,16 @@ jobs:
       - name: Verify generated manifest is current
         run: git diff --exit-code -- packages/ui-patterns/generated/component-manifest.json
 
+      - name: Build component usage audit
+        run: pnpm usage:build
+
+      - name: Upload component audit artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: component-audit
+          path: artifacts/component-audit/component-usage-report.json
+          if-no-files-found: error
+
       - name: Upload component manifest
         uses: actions/upload-artifact@v7
         with:
