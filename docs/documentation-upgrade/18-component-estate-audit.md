@@ -80,6 +80,20 @@ The public package mixes `ps-*` and `public-*` selectors. The inconsistency is a
 
 Several native components and stories consume PrimeNG `--p-*` variables directly. This makes nominally native components visually dependent on the provider theme. Public `--ps-*` semantic and component tokens should become the native component contract, with PrimeNG mappings kept private.
 
+### Machine-readable findings
+
+The operational manifest now owns typed API, token, and accessibility findings. Each finding records:
+
+- stable identifier;
+- category;
+- severity;
+- status;
+- affected component identifiers;
+- summary;
+- evidence paths.
+
+Affected manifest entries link back through `audit.findingIds`. Validation fails for unknown identifiers, missing evidence, unknown components, or one-way relationships.
+
 ### Evidence-coverage cluster
 
 The manifest records complete Storybook entries for the exported component catalog, but behavior tests, public API extraction, token references, manual screen-reader reviews, and public documentation remain uneven. Missing evidence must remain visible rather than being inferred from shared integration tests.
@@ -98,7 +112,7 @@ Actual defects and verification tasks are tracked in [19 — Accessibility findi
 - [ ] Populate semantic and provider-bridge token references.
 - [x] Assign every component to a duplication cluster or explicitly mark it unique.
 - [x] Record a preliminary canonical, retain, merge, or investigate disposition for every public entry.
-- [ ] Link open accessibility findings by identifier.
+- [x] Link open accessibility findings by identifier.
 - [ ] Record manual review environments and results for flagship components.
 - [ ] Validate which components designers should rebuild first in Figma.
 
