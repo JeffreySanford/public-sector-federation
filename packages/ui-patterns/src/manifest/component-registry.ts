@@ -48,6 +48,8 @@ interface EntrySeed {
   promotionRequirements?: string[];
   blockers?: string[];
   warnings?: string[];
+  duplicationCluster?: string;
+  disposition?: ComponentManifestEntry['audit']['disposition'];
 }
 
 const genericDocumentation = [
@@ -160,6 +162,10 @@ function entry(seed: EntrySeed): ComponentManifestEntry {
       designReview: seed.designReview ?? (seed.status === 'candidate' ? 'pending' : 'not-started'),
       promotionRequirements: seed.promotionRequirements ?? [],
     },
+    audit: {
+      duplicationCluster: seed.duplicationCluster ?? `unique:${seed.id}`,
+      disposition: seed.disposition ?? 'investigate',
+    },
     health: {
       repositoryReadiness: seed.blockers?.length ? 'blocked' : warnings.length ? 'partial' : 'ready',
       externalDesignBinding: isService ? 'ready' : 'partial',
@@ -177,6 +183,8 @@ const shellTokenEvidence = ['apps/shell/e2e/token-consumption.spec.ts'];
 export const componentRegistry = [
   entry({
     id: 'ps-button',
+    duplicationCluster: 'button-contract',
+    disposition: 'canonical',
     name: 'Button',
     exportName: 'PublicButtonComponent',
     selector: 'ps-button',
@@ -232,6 +240,8 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-up-button',
+    duplicationCluster: 'button-contract',
+    disposition: 'merge',
     name: 'UP Button Candidate',
     exportName: 'PublicUpButtonComponent',
     selector: 'ps-up-button',
@@ -313,6 +323,8 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-dialog',
+    duplicationCluster: 'unique:ps-dialog',
+    disposition: 'retain',
     name: 'Dialog',
     exportName: 'PublicDialogComponent',
     selector: 'ps-dialog',
@@ -438,6 +450,8 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-select',
+    duplicationCluster: 'unique:ps-select',
+    disposition: 'retain',
     name: 'Select',
     exportName: 'PublicSelectComponent',
     selector: 'ps-select',

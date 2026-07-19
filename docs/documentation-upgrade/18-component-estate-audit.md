@@ -20,7 +20,9 @@ The initial inventory is generated from and checked against:
 - provider-boundary metadata;
 - accessibility and Figma status records.
 
-Usage counts and application call sites remain a follow-up discovery task. A component being exported or marked active does not by itself prove broad adoption, complete accessibility review, or design approval.
+`pnpm usage:build` now generates `artifacts/component-audit/component-usage-report.json`. It records distinct consuming files and selector/symbol references by application, library, Storybook, test, documentation, and tooling scope. Application and library scopes form the runtime-adoption count; evidence scopes remain separate so stories and documentation cannot inflate production use.
+
+A component being exported or marked active does not by itself prove broad adoption, complete accessibility review, or design approval.
 
 ## Inventory summary
 
@@ -90,12 +92,12 @@ Actual defects and verification tasks are tracked in [19 — Accessibility findi
 
 ## Required follow-up discovery
 
-- [ ] Generate usage counts and consuming file locations for every public entry.
-- [ ] Identify direct provider imports and allowlisted migration exceptions by application.
+- [x] Generate usage counts and consuming file locations for every public entry.
+- [x] Report direct application PrimeNG imports separately from component consumption.
 - [ ] Complete API extraction for partial entries.
 - [ ] Populate semantic and provider-bridge token references.
-- [ ] Assign every component to a duplication cluster or explicitly mark it unique.
-- [ ] Record an evidence-backed disposition for every public entry.
+- [x] Assign every component to a duplication cluster or explicitly mark it unique.
+- [x] Record a preliminary canonical, retain, merge, or investigate disposition for every public entry.
 - [ ] Link open accessibility findings by identifier.
 - [ ] Record manual review environments and results for flagship components.
 - [ ] Validate which components designers should rebuild first in Figma.
