@@ -196,6 +196,10 @@
         "designReview": "not-started",
         "promotionRequirements": []
       },
+      "audit": {
+        "duplicationCluster": "button-contract",
+        "disposition": "canonical"
+      },
       "health": {
         "repositoryReadiness": "partial",
         "externalDesignBinding": "partial",
@@ -295,6 +299,10 @@
         "tier": "core",
         "designReview": "not-started",
         "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-card",
+        "disposition": "investigate"
       },
       "health": {
         "repositoryReadiness": "partial",
@@ -437,6 +445,10 @@
         "designReview": "not-started",
         "promotionRequirements": []
       },
+      "audit": {
+        "duplicationCluster": "unique:ps-dialog",
+        "disposition": "retain"
+      },
       "health": {
         "repositoryReadiness": "partial",
         "externalDesignBinding": "partial",
@@ -570,6 +582,10 @@
         "designReview": "not-started",
         "promotionRequirements": []
       },
+      "audit": {
+        "duplicationCluster": "unique:ps-empty-state",
+        "disposition": "investigate"
+      },
       "health": {
         "repositoryReadiness": "partial",
         "externalDesignBinding": "partial",
@@ -687,6 +703,10 @@
         "tier": "core",
         "designReview": "not-started",
         "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-form-section",
+        "disposition": "investigate"
       },
       "health": {
         "repositoryReadiness": "partial",
@@ -818,6 +838,10 @@
         "designReview": "not-started",
         "promotionRequirements": []
       },
+      "audit": {
+        "duplicationCluster": "unique:ps-menu",
+        "disposition": "investigate"
+      },
       "health": {
         "repositoryReadiness": "ready",
         "externalDesignBinding": "partial",
@@ -938,6 +962,10 @@
         "tier": "core",
         "designReview": "not-started",
         "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-page-header",
+        "disposition": "investigate"
       },
       "health": {
         "repositoryReadiness": "partial",
@@ -1085,6 +1113,10 @@
         "designReview": "not-started",
         "promotionRequirements": []
       },
+      "audit": {
+        "duplicationCluster": "unique:ps-paginator",
+        "disposition": "investigate"
+      },
       "health": {
         "repositoryReadiness": "partial",
         "externalDesignBinding": "partial",
@@ -1206,6 +1238,10 @@
         "designReview": "not-started",
         "promotionRequirements": []
       },
+      "audit": {
+        "duplicationCluster": "unique:ps-popover",
+        "disposition": "investigate"
+      },
       "health": {
         "repositoryReadiness": "ready",
         "externalDesignBinding": "partial",
@@ -1321,6 +1357,10 @@
         "tier": "core",
         "designReview": "not-started",
         "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-progress",
+        "disposition": "investigate"
       },
       "health": {
         "repositoryReadiness": "partial",
@@ -1478,6 +1518,10 @@
         "designReview": "not-started",
         "promotionRequirements": []
       },
+      "audit": {
+        "duplicationCluster": "unique:ps-select",
+        "disposition": "retain"
+      },
       "health": {
         "repositoryReadiness": "ready",
         "externalDesignBinding": "partial",
@@ -1586,6 +1630,10 @@
         "tier": "core",
         "designReview": "not-started",
         "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-skeleton",
+        "disposition": "investigate"
       },
       "health": {
         "repositoryReadiness": "partial",
@@ -1734,6 +1782,10 @@
         "designReview": "not-started",
         "promotionRequirements": []
       },
+      "audit": {
+        "duplicationCluster": "unique:ps-status-card",
+        "disposition": "investigate"
+      },
       "health": {
         "repositoryReadiness": "partial",
         "externalDesignBinding": "partial",
@@ -1833,6 +1885,10 @@
         "tier": "core",
         "designReview": "not-started",
         "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-tag",
+        "disposition": "investigate"
       },
       "health": {
         "repositoryReadiness": "partial",
@@ -1934,6 +1990,10 @@
         "tier": "core",
         "designReview": "not-started",
         "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-toast",
+        "disposition": "investigate"
       },
       "health": {
         "repositoryReadiness": "partial",
@@ -2064,6 +2124,10 @@
         "tier": "core",
         "designReview": "not-started",
         "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-tooltip",
+        "disposition": "investigate"
       },
       "health": {
         "repositoryReadiness": "ready",
@@ -2254,6 +2318,10 @@
           "Record the final promotion decision."
         ]
       },
+      "audit": {
+        "duplicationCluster": "button-contract",
+        "disposition": "merge"
+      },
       "health": {
         "repositoryReadiness": "blocked",
         "externalDesignBinding": "partial",
@@ -2354,6 +2422,10 @@
         "tier": "core",
         "designReview": "not-started",
         "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:public-toast-service",
+        "disposition": "investigate"
       },
       "health": {
         "repositoryReadiness": "partial",
