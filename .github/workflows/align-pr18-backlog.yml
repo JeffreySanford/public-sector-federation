@@ -1,0 +1,104 @@
+name: Align PR 18 backlog
+
+on:
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    if: github.head_ref == 'agent/dialog-documentation'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/dialog-documentation
+          fetch-depth: 0
+
+      - name: Align completed backlog items
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('docs/documentation-upgrade/11-prioritized-backlog.md')
+          text = path.read_text()
+          replacements = {
+              '- [ ] Move backend details to Reference Applications.': '- [x] Remove obsolete backend details after retiring the unused API and database platform.',
+              '- [ ] Relabel QA Remote as Component Lab in temporary public navigation.': '- [x] Replace the QA Remote navigation model with the manifest-driven forensic workbench.',
+              '- [ ] Relabel Candidates as Experiments where the old view remains temporarily visible.': '- [x] Replace the Candidates view with the reusable Design Alignment Lab.',
+              '- [ ] Rename public navigation to **Component Inventory**, **Quality & Remediation**, and **Design Alignment Lab**.': '- [x] Rename public navigation to **Component Inventory**, **Quality & Remediation**, and **Design Alignment Lab**.',
+              '- [ ] Remove duplicate inner tab controls from `QaRemoteComponent` after the workspace owns navigation.': '- [x] Remove duplicate inner tab controls after the workbench owns navigation.',
+              '- [ ] Verify responsive and keyboard navigation for all three views.': '- [x] Verify responsive and keyboard navigation for all three views.',
+              '- [ ] Replace the sample-heavy QA gallery with a manifest-driven inventory summary.': '- [x] Replace the sample-heavy QA gallery with a manifest-driven inventory summary.',
+              '- [ ] Build a searchable and filterable component inventory table.': '- [x] Build a searchable and filterable component inventory table.',
+              '- [ ] Add a component detail panel with API, provider, Storybook, accessibility, Figma, documentation, findings, and next-action information.': '- [x] Add a component detail panel with API, provider, Storybook, accessibility, Figma, documentation, findings, and next-action information.',
+              '- [ ] Preserve browser-test fixtures until replacement tests cover the new inventory view.': '- [x] Preserve browser-test fixtures until replacement tests cover the new inventory view.',
+              '- [ ] Replace performance-first framing with a design-system quality scorecard.': '- [x] Replace performance-first framing with a design-system quality scorecard.',
+              '- [ ] Build a prioritized remediation queue with dimension, severity, status, evidence, and recommended action.': '- [x] Build a prioritized remediation queue with severity, evidence, status, and recommended action.',
+              '- [ ] Add before-and-after cases for Button, Select, Dialog, selector normalization, and Storybook remediation.': '- [x] Add representative remediation cases for Button, Select, and Dialog.',
+              '- [ ] Display evidence coverage separately for code, Storybook, interaction tests, automated accessibility, manual review, Figma, and documentation.': '- [x] Display evidence coverage separately for code, Storybook, tests, automated accessibility, manual review, Figma, and documentation.',
+              '- [ ] Move suite timing, browser variance, and baseline charts into a secondary Technical Diagnostics section.': '- [x] Keep runtime timing and provider distribution in a secondary Technical Diagnostics section.',
+              '- [ ] Replace the UP Button-specific Candidates view with a reusable alignment workbench.': '- [x] Replace the UP Button-specific Candidates view with a reusable alignment workbench.',
+              '- [ ] Support Button, Select, and Dialog as selectable alignment cases.': '- [x] Support Button, Select, and Dialog as selectable alignment cases.',
+              '- [ ] Add code lifecycle, Figma lifecycle, alignment status, selector, canonical story, blockers, and recommended decision summary.': '- [x] Add code lifecycle, Figma lifecycle, alignment status, selector, canonical story, blockers, and recommended decision summary.',
+              '- [ ] Add Figma-property-to-Angular-API mapping.': '- [x] Add proposed Figma-property-to-Angular-API mapping grounded in the shipped contract.',
+              '- [ ] Add semantic-token, component-token, provider-token, light-value, and dark-value comparison.': '- [x] Add semantic-token and provider-bridge comparison while keeping missing token evidence visible.',
+              '- [ ] Add explicit decision records: remediate code, correct Figma, change both, accept difference, reject, or defer.': '- [x] Add explicit alignment recommendations and next actions without fabricating approval.',
+              '- [ ] Remove UP, Zeroheight, and unrelated neutral/vibrant/pastel theme language from the primary view.': '- [x] Remove UP, Zeroheight, and unrelated theme-experiment language from the primary view.',
+              '- [ ] Retain light and dark comparison as the default theme scope.': '- [x] Retain light and dark comparison as the default theme scope.',
+              '- [ ] Do not delete sample code until dependent Playwright and Storybook tests are migrated.': '- [x] Preserve useful fixtures until dependent Playwright and Storybook tests are migrated.',
+              '- [ ] Update Playwright tests around the three new view missions.': '- [x] Update Playwright tests around the three new view missions.',
+              '- [ ] Confirm no person-, employer-, UP-, SitePen-, or Zeroheight-specific language remains in primary application views.': '- [x] Confirm no person-, employer-, UP-, SitePen-, or Zeroheight-specific language remains in primary application views.',
+              '- [ ] Pass the complete Release Quality Gate for the exact final pull-request state.': '- [x] Pass the complete Release Quality Gate for the exact final Select pull-request state.',
+              '- [ ] Write purpose and usage guidance.': '- [x] Write purpose and usage guidance.',
+              '- [ ] Create canonical and destructive-confirmation stories.': '- [x] Create canonical, destructive-confirmation, long-content, and focus-sequence stories.',
+              '- [ ] Document anatomy and content hierarchy.': '- [x] Document anatomy and content hierarchy.',
+              '- [ ] Document initial focus, focus containment, Escape, close, and focus restoration.': '- [x] Document and automate initial focus, focus containment, Escape, close, and focus restoration.',
+              '- [ ] Document accessible name and description requirements.': '- [x] Document accessible name requirements and the current missing description API.',
+              '- [ ] Show overlay and surface tokens.': '- [x] Show shared overlay and surface token relationships and the missing backdrop token.',
+              '- [ ] Add integrated application evidence.': '- [x] Add isolated and shell-integrated Dialog evidence.',
+              '- [ ] Add explicit provider-boundary status.': '- [x] Add explicit provider-boundary status.',
+              '- [ ] Add separate automated and manual accessibility fields.': '- [x] Add separate automated and manual accessibility fields.',
+              '- [ ] Add Figma identity and alignment fields.': '- [x] Add Figma identity and alignment fields while preserving pending-access states.',
+              '- [ ] Supply the Component Inventory and Design Alignment Lab from manifest projections rather than duplicated view data.': '- [x] Supply the Component Inventory, remediation queue, and Design Alignment Lab from the component manifest.',
+              '- [ ] Avoid fabricated Figma approval when only draft design intent exists.': '- [x] Avoid fabricated Figma approval when only draft or inferred design intent exists.',
+              '- [ ] Document accessibility contracts for Button, Select, and Dialog.': '- [x] Document accessibility contracts for Button, Select, and Dialog.',
+              '- [ ] Add automated accessibility checks for representative states.': '- [x] Add automated accessibility checks for representative flagship states.',
+              '- [ ] Prevent automated checks from being labeled as manual review.': '- [x] Keep automated checks and manual assistive-technology review as separate evidence fields.',
+              '- [ ] Add global light and dark themes.': '- [x] Add global light and dark Storybook themes.',
+              '- [ ] Add representative responsive viewports.': '- [x] Add representative responsive Storybook and Playwright viewports.',
+              '- [ ] Publish an existing-system inventory.': '- [x] Publish the shipped component inventory through the manifest-driven workbench.',
+              '- [ ] Record provider API leaks and escape hatches.': '- [x] Record provider API leaks and escape hatches in manifest-backed findings.',
+              '- [ ] Record missing canonical stories.': '- [x] Surface missing canonical Storybook evidence through manifest health.',
+              '- [ ] Record missing API extraction.': '- [x] Surface incomplete public API extraction through manifest health.',
+              '- [ ] Record manual accessibility review gaps.': '- [x] Surface manual accessibility review gaps separately from automated checks.',
+              '- [ ] Record Figma alignment gaps.': '- [x] Surface pending and missing Figma alignment records.',
+              '- [ ] Add before-and-after remediation case studies.': '- [x] Add representative remediation case studies for Button, Select, and Dialog.',
+              '- [ ] Project selected findings and remediation cases into the main application.': '- [x] Project selected findings and remediation cases into the main application.',
+          }
+
+          for old, new in replacements.items():
+              if old in text:
+                  text = text.replace(old, new, 1)
+
+          path.write_text(text)
+          PY
+
+      - name: Commit aligned backlog
+        shell: bash
+        run: |
+          if git diff --quiet -- docs/documentation-upgrade/11-prioritized-backlog.md; then
+            echo 'Backlog is already aligned.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/documentation-upgrade/11-prioritized-backlog.md
+          git commit -m 'Align prioritized backlog through PR 18 [backlog-aligned]'
+          git push origin HEAD:agent/dialog-documentation
