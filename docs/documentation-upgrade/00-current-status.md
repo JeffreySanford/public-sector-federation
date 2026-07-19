@@ -39,31 +39,46 @@ This page is the authoritative implementation snapshot for the documentation upg
 
 Release Quality Gate run `29665993721` passed for the merged PR #14 state.
 
-## Active slice
+### PR #15 — Button page and StoryFrame
 
-PR #15 implements **Button documentation plus the reusable `StoryFrame` foundation**. Release Quality Gate run #117 (`29667472520`) passed, and the pull request is ready for review.
+- published the first complete flagship component page at `/docs/components/button/`;
+- added the reusable, accessible `StoryFrame` boundary for opt-in live Storybook behavior;
+- added a dedicated canonical stable Button story;
+- documented purpose, usage, anatomy, states, accessibility expectations, tokens, Angular API, provider boundaries, decisions, and known gaps;
+- recorded the Button page, source file, canonical story ID, and Storybook source in the integrity and manifest relationships;
+- added responsive, 200%-zoom-equivalent, StoryFrame interaction, axe, accessibility-tree, visual, and Lighthouse coverage;
+- retained Figma access, manual assistive-technology review, compatibility APIs, and provider-specific escape hatches as explicit open evidence or remediation items.
+
+PR #15 merged to `master` at commit `ef4f201557204f71d17568e9b3f80d97cd0688ad`. Release Quality Gate run #120 (`29667746141`) passed on the final branch. A local post-merge review also confirmed that dependencies installed, the workspace started, and the served documentation rendered successfully.
+
+## Active slice — Select documentation and overlay evidence
+
+The next slice is **Select documentation plus canonical overlay and keyboard evidence**.
 
 The slice should:
 
-- create a reusable, accessible live-story presentation component;
-- publish the first complete flagship component page at `/docs/components/button/`;
-- place purpose and usage guidance before evidence;
-- link or embed the canonical Button story without duplicating runtime behavior;
-- document anatomy, variants, states, interaction behavior, accessibility expectations, token relationships, public Angular API, provider boundary, evidence, Figma status, decisions, and known gaps;
-- extend route, accessibility-tree, visual, responsive, and clipping coverage for the new page and StoryFrame;
-- update the manifest relationship and documentation backlog honestly;
-- pass the existing designer-grade quality gate and human polish review.
+- publish `/docs/components/select/` using the proven Button page sequence;
+- keep purpose, selection guidance, and alternatives ahead of implementation evidence;
+- designate a normal canonical Select story and focused state stories;
+- document the public `label`, `options`, `placeholder`, `disabled`, and `value` contract;
+- document the provider-neutral option model and the private PrimeNG implementation boundary;
+- document accessible naming, combobox semantics, keyboard navigation, selection, disabled options, empty options, and long-option behavior;
+- prove body-appended overlay positioning, clipping, stacking, light/dark theme inheritance, and responsive behavior;
+- add dedicated Storybook interaction and Playwright evidence rather than relying only on shared shell token checks;
+- record current limitations honestly, including the absence of invalid-state, help-text, required-state, and richer option-content APIs;
+- update the component registry, generated manifest, documentation-integrity relationships, TODO, and prioritized backlog in the same pull request;
+- pass the existing designer-grade Starlight gate and human polish review.
 
-## Deferred after the Button slice
+## Following slices
 
-- complete Select and Dialog flagship pages;
-- add hosted pull-request preview URLs rather than build artifacts only;
-- add broader reusable Starlight presentation components and their Storybook/Chromatic coverage;
-- finalize manifest projections and generated catalog/health views;
-- replace sample-heavy Angular workbench views with Component Inventory, Quality & Remediation, and Design Alignment Lab;
-- add complete Figma identity and alignment records;
-- reorganize the full Storybook hierarchy and Chromatic review workflow;
-- retire remaining Zeroheight scripts and primary-language references after evidence is migrated.
+1. Complete the Dialog flagship page and focus-management evidence.
+2. Add hosted pull-request preview URLs rather than build artifacts only.
+3. Add reusable Starlight presentation components only where Select and Dialog prove repeated page needs.
+4. Finalize manifest projections and generated catalog or health views.
+5. Replace sample-heavy Angular workbench views with Component Inventory, Quality & Remediation, and Design Alignment Lab.
+6. Add complete Figma identity and alignment records.
+7. Reorganize the broader Storybook hierarchy and Chromatic review workflow.
+8. Retire remaining Zeroheight scripts and primary-language references after evidence is migrated.
 
 ## Tracking documents
 
