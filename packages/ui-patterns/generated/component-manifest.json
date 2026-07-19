@@ -155,11 +155,16 @@
       "evidence": {
         "storybook": {
           "status": "complete",
-          "title": "Design System/Acceptance/Button and Tag",
+          "title": "Design System/Components/Button",
           "files": [
-            "apps/qa-remote/src/stories/button-tag.acceptance.stories.ts"
+            "apps/qa-remote/src/stories/button.stories.ts"
           ],
-          "stories": []
+          "stories": [
+            "design-system-components-button--default",
+            "design-system-components-button--appearance-reference",
+            "design-system-components-button--loading",
+            "design-system-components-button--disabled"
+          ]
         },
         "tests": {
           "status": "partial",
@@ -167,8 +172,9 @@
           "behaviors": []
         },
         "documentation": {
-          "status": "partial",
+          "status": "complete",
           "files": [
+            "apps/starlight/src/content/docs/components/button/index.mdx",
             "docs/design-system/components/catalog.md",
             "docs/design-system/architecture/registry-consumption-spec.md"
           ]
@@ -1737,7 +1743,7 @@
           "status": "complete",
           "title": "Design System/Acceptance/Button and Tag",
           "files": [
-            "apps/qa-remote/src/stories/button-tag.acceptance.stories.ts"
+            "apps/qa-remote/src/stories/button.stories.ts"
           ],
           "stories": []
         },

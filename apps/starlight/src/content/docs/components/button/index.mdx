@@ -1,0 +1,226 @@
+---
+title: Button
+description: Initiates an immediate action and communicates the relative importance of that action.
+---
+
+import StoryFrame from '../../../../components/StoryFrame.astro';
+
+Buttons initiate immediate actions such as saving, submitting, deleting, or opening a task. Use the smallest set of treatments needed to make action priority clear.
+
+**Lifecycle:** Stable · **Framework:** Angular · **Provider:** PrimeNG adapter · **Accessibility:** Automated evidence exists; manual review is pending · **Figma:** Pending access
+
+[Open the canonical Storybook story](https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/?path=/story/design-system-components-button--default) · [View Angular source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/public-button.component.ts) · [View Storybook source](https://github.com/JeffreySanford/public-sector-federation/blob/master/apps/qa-remote/src/stories/button.stories.ts) · [View manifest source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/manifest/component-registry.ts)
+
+## Live example
+
+<StoryFrame
+  title="Button — default action"
+  storyId="design-system-components-button--default"
+  description="The stable ps-button wrapper using its preferred intent, appearance, and activated contract."
+  size="compact"
+/>
+
+The frame loads only after activation so the documentation remains fast and does not make an external Storybook host part of the initial page load. The full-story link is always available.
+
+## When to use
+
+Use a Button when a person needs to trigger an immediate operation:
+
+- submit or save information;
+- confirm a decision;
+- start, retry, or cancel a process;
+- open a dialog or menu whose purpose is an action;
+- perform a destructive operation with appropriate context and confirmation.
+
+### When not to use
+
+- Use a **link** when the primary result is navigation to another page or resource.
+- Use a **checkbox, switch, or radio group** when the interaction changes a persistent selection or setting.
+- Use a **menu button** when several related actions must share one compact trigger.
+- Do not use disabled Buttons to hide permissions or validation requirements without explaining what must change.
+
+## Choose a treatment
+
+Intent communicates the purpose of the action. Appearance controls visual emphasis. Keep those decisions separate.
+
+| User need | Intent | Recommended appearance |
+| --- | --- | --- |
+| One primary action in the current task | `primary` | `solid` |
+| Supporting or reversible action | `secondary` | `outlined` or `text` |
+| Irreversible or high-consequence action | `destructive` | `solid` or `outlined`, with clear context |
+| Navigation to another destination | Use a link | Not applicable |
+
+Avoid placing several solid primary Buttons in the same action group. When every action is emphasized, hierarchy is lost.
+
+## Content guidance
+
+- Begin with a clear verb: **Save changes**, **Submit application**, or **Delete record**.
+- Describe the action, not the interface: prefer **Download report** over **Click here**.
+- Keep labels concise while preserving meaning outside the immediate visual context.
+- Do not rely on an icon as the only accessible name for important actions.
+- Match destructive wording to the actual consequence. Do not use destructive styling for routine cancellation.
+- Update the label or nearby status when an asynchronous action enters a loading state.
+
+## Variants and states
+
+### Preferred public properties
+
+| Property | Supported values | Purpose |
+| --- | --- | --- |
+| `intent` | `primary`, `secondary`, `destructive` | Communicates product-facing action purpose. |
+| `appearance` | `solid`, `outlined`, `text` | Controls visual emphasis without exposing provider booleans. |
+| `disabled` | `true`, `false` | Prevents activation when the action is unavailable. |
+| `loading` | `true`, `false` | Displays provider-backed progress while the action is processing. |
+| `icon` | string | Adds an icon. The current value is still a provider-specific class string. |
+
+### Compatibility properties
+
+`tone`, `styleClass`, `outlined`, and `text` remain available for existing consumers but are deprecated or transitional. New code should use `intent` and `appearance` and should not depend on provider CSS escape hatches.
+
+The separate `ps-up-button` implementation is an experimental comparison with a richer provider-neutral icon and token model. It has not replaced the stable `ps-button` contract.
+
+## Anatomy
+
+1. **Native action control** — rendered by the provider-backed Button implementation.
+2. **Label** — visible action text and the usual source of the accessible name.
+3. **Optional icon** — supporting visual cue; decorative when the label already names the action.
+4. **Loading indicator** — communicates in-progress state through the provider implementation.
+5. **Focus indicator** — visible keyboard-focus treatment derived from the shared focus tokens.
+6. **Provider adapter boundary** — maps public intent and appearance properties to PrimeNG severity and appearance behavior.
+
+PrimeNG classes and internal markup are implementation details, not public anatomy that application teams should target.
+
+## Behavior and interaction
+
+| Interaction or state | Expected behavior |
+| --- | --- |
+| Pointer activation | Emits the preferred `activated` event when the underlying Button activates. |
+| Enter | Activates the focused Button using native/provider Button behavior. |
+| Space | Activates the focused Button without turning the action into a navigation link. |
+| Loading | Shows provider-backed progress. Consumers should prevent duplicate application work while the operation is pending. |
+| Disabled | Prevents activation and remains visibly distinguishable from an available action. |
+| Focus visible | Displays the shared focus indicator without relying on hover. |
+| `routerLink` | Navigates through Angular Router when available; a normal link remains preferable for navigation semantics. |
+
+`activated` is the provider-neutral output for new code. `buttonClick` remains as a deprecated compatibility event and exposes the provider-level `MouseEvent`.
+
+## Accessibility contract
+
+### Semantic and naming requirements
+
+- The rendered control must expose Button semantics.
+- A visible label should normally provide the accessible name.
+- Icon-only use requires a separate accessible-name design that the current wrapper does not expose directly; avoid icon-only use until that contract is defined.
+- Decorative icons must not replace or repeat the accessible name unnecessarily.
+- Destructive actions need clear wording and appropriate confirmation context.
+
+### Keyboard and focus
+
+- Enter and Space must activate the focused control.
+- The focus indicator must remain visible in light and dark appearances.
+- Disabled and loading states must not create repeated activation.
+- Focus should remain predictable after asynchronous completion or after a Button opens and closes another surface.
+
+### Evidence status
+
+- **Automated checks:** The canonical Storybook story runs with the accessibility addon configured as an error gate.
+- **Page-level checks:** The Starlight page is included in the built-site axe gate.
+- **Keyboard coverage:** Partial; repository evidence exists, but the stable wrapper does not yet have a complete dedicated interaction suite for every state.
+- **Manual assistive-technology review:** Pending.
+- **Conformance claim:** None. Automated checks do not replace manual review.
+
+The Starlight axe scan validates the documentation page and iframe title. It cannot fully audit the cross-origin Storybook document; Storybook owns checks inside the live story.
+
+## Token relationships
+
+Application code should consume the Button API rather than provider token names. The table explains the current mapping boundary.
+
+| Token or layer | Role | Current relationship |
+| --- | --- | --- |
+| `--ps-button-background` | Stable solid Button background | Maps into the provider primary Button background. |
+| `--ps-button-text` | Stable solid Button label and icon color | Maps into the provider inverse color. |
+| `--ps-action-text` | Outlined and text action foreground | Used by provider overrides for lower-emphasis appearances. |
+| `--ps-focus-ring-color` | Keyboard focus indicator | Feeds the provider focus-ring mapping. |
+| `--p-button-*` | Private provider bridge | PrimeNG implementation tokens; applications should not treat these as the public design contract. |
+| `--ps-up-button-*` | Experimental candidate token family | Supports the candidate comparison and is not yet the stable Button token contract. |
+
+The generated token package supplies light and dark values. This page documents relationships rather than copying hard-coded color values.
+
+## Angular API
+
+### Import
+
+```ts
+import { PublicButtonComponent } from '@public-sector/ui-patterns';
+```
+
+### Preferred usage
+
+```html
+<ps-button
+  label="Save changes"
+  intent="primary"
+  appearance="solid"
+  [loading]="isSaving"
+  (activated)="saveChanges()"
+/>
+```
+
+### Inputs
+
+| Input | Type | Default | Guidance |
+| --- | --- | --- | --- |
+| `label` | `string` | `''` | Visible action label. Provide meaningful text. |
+| `icon` | `string \| undefined` | `undefined` | Current provider icon class string; this remains a provider-boundary gap. |
+| `intent` | `primary \| secondary \| destructive` | `primary` | Preferred semantic purpose. |
+| `appearance` | `solid \| outlined \| text` | `solid` | Preferred visual treatment. |
+| `disabled` | `boolean` | `false` | Prevents activation. |
+| `loading` | `boolean` | `false` | Shows provider-backed progress. |
+| `routerLink` | `string \| unknown[] \| null` | `null` | Compatibility navigation behavior; prefer a link for navigation. |
+| `tone` | `PublicButtonTone \| undefined` | `undefined` | Deprecated; use `intent`. |
+| `styleClass` | `string \| undefined` | `undefined` | Deprecated escape hatch retained for migration. |
+| `outlined` | `boolean` | `false` | Deprecated; use `appearance="outlined"`. |
+| `text` | `boolean` | `false` | Deprecated; use `appearance="text"`. |
+
+### Outputs
+
+| Output | Type | Guidance |
+| --- | --- | --- |
+| `activated` | `void` | Preferred provider-neutral activation event. |
+| `buttonClick` | `MouseEvent` | Deprecated provider-level compatibility event. |
+
+## Provider boundary
+
+`ps-button` wraps PrimeNG `p-button`. The wrapper translates `intent="destructive"` to the provider danger severity and maps `appearance` to the provider outlined and text modes.
+
+The current boundary is not fully clean:
+
+- `icon` accepts a PrimeIcons class string;
+- `styleClass` exposes a provider styling escape hatch;
+- `tone`, `outlined`, `text`, and `buttonClick` preserve older provider-shaped contracts;
+- `routerLink` combines action and navigation concerns.
+
+These gaps are documented migration work, not reasons for application teams to bypass the wrapper and use `p-button` directly.
+
+## Quality and evidence
+
+| Dimension | Current status | Evidence or next action |
+| --- | --- | --- |
+| Runtime source | Complete | `PublicButtonComponent` is exported from `@public-sector/ui-patterns`. |
+| Canonical Storybook story | Complete | `Design System/Components/Button — Default`. |
+| Public API inventory | Complete for the current wrapper | Registry metadata records preferred and compatibility members. |
+| Automated accessibility | Partial | Storybook and page-level automated checks exist. |
+| Keyboard coverage | Partial | Add a dedicated stable Button interaction suite for all preferred states. |
+| Manual screen-reader review | Pending | Record a named review before making broader accessibility claims. |
+| Token mapping | Partial | Stable semantic and provider mappings exist; a richer component-token contract remains under comparison. |
+| Figma alignment | Pending access | Do not fabricate component or component-set identifiers. |
+| Documentation | Complete for this slice | This page is the first flagship implementation of the component-page blueprint. |
+
+## Decisions and known gaps
+
+1. **Keep `ps-button` canonical for current consumers.** It is the shipped wrapper and is already used across the reference applications.
+2. **Treat `ps-up-button` as an experiment.** Its cleaner intent, icon, and component-token model informs remediation but does not silently replace the stable contract.
+3. **Prefer `intent`, `appearance`, and `activated`.** Compatibility members remain until consumers migrate.
+4. **Keep provider details private where possible.** The current icon and style escape hatches are explicit debt.
+5. **Do not claim completed Figma or manual accessibility approval.** Both remain visible missing states.
+6. **Use this page model before automating every section.** Select and Dialog will test whether the structure generalizes to overlays and focus-managed components.

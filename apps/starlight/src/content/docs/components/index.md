@@ -7,40 +7,45 @@ Component documentation should help someone choose and use a component before pr
 
 ## Current catalog status
 
-The first documentation slice tracks three flagship components against the generated component manifest. These statuses describe evidence that exists today; they do not imply completed design approval or manual accessibility review.
+The first documentation sequence tracks three flagship components against the generated component manifest. These statuses describe evidence that exists today; they do not imply completed design approval or manual accessibility review.
 
 ### Button
 
-- **Lifecycle:** active and used in production examples.
-- **Storybook:** canonical acceptance evidence is recorded.
-- **Accessibility:** automated checks are partial; keyboard and screen-reader review remain incomplete.
-- **Figma:** pending access and alignment review.
+- **Documentation:** The first complete flagship page is published.
+- **Lifecycle:** Active and used in the reference applications.
+- **Storybook:** A dedicated canonical stable story is recorded.
+- **Accessibility:** Automated checks exist; dedicated keyboard breadth and manual assistive-technology review remain incomplete.
+- **Figma:** Pending access and alignment review.
+
+[Read the Button guidance](/docs/components/button/)
 
 ### Select
 
-- **Lifecycle:** active.
-- **Storybook:** canonical component stories are recorded.
-- **Accessibility:** the combobox pattern is identified; broader integrated keyboard and overlay verification remains incomplete.
-- **Figma:** pending access and alignment review.
+- **Documentation:** Flagship page is queued after Button.
+- **Lifecycle:** Active.
+- **Storybook:** Canonical component stories are recorded.
+- **Accessibility:** The combobox pattern is identified; broader integrated keyboard and overlay verification remains incomplete.
+- **Figma:** Pending access and alignment review.
 
 ### Dialog
 
-- **Lifecycle:** active.
-- **Storybook:** dialog and toast acceptance evidence is recorded.
-- **Accessibility:** the dialog pattern is identified; focus containment, restoration, and manual review remain incomplete.
-- **Figma:** pending access and alignment review.
+- **Documentation:** Flagship page is queued after Button.
+- **Lifecycle:** Active.
+- **Storybook:** Dialog and toast acceptance evidence is recorded.
+- **Accessibility:** The dialog pattern is identified; focus containment, restoration, and manual review remain incomplete.
+- **Figma:** Pending access and alignment review.
 
-The quality gate cross-checks these relationships against `packages/ui-patterns/generated/component-manifest.json`, the recorded source files, Storybook story files, Starlight routes, and Figma status values.
+The quality gate cross-checks these relationships against `packages/ui-patterns/generated/component-manifest.json`, recorded source and Storybook files, Starlight routes, canonical story IDs when declared, and Figma status values.
 
 ## Flagship sequence
 
-1. **Button** establishes action hierarchy, public API decisions, interaction states, token mapping, and the stable-versus-candidate remediation story.
+1. **Button** establishes action hierarchy, public API decisions, interaction states, token mapping, live-story presentation, and the stable-versus-candidate remediation story.
 2. **Select** proves overlay behavior, keyboard navigation, accessible naming, provider abstraction, and theme propagation.
 3. **Dialog** proves focus management, semantic structure, destructive-action patterns, and integrated application behavior.
 
 ## Page contract
 
-Every completed component page will include:
+Every completed component page includes:
 
 - purpose and usage guidance;
 - live canonical Storybook behavior;

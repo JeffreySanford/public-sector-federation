@@ -4,8 +4,8 @@
     "status": "polish-approved-with-follow-up",
     "reviewer": "Jeffrey Sanford",
     "reviewedAt": "2026-07-18",
-    "scope": "Astro Starlight foundation shell, initial information architecture, shared token theme, and local start:all integration.",
-    "followUp": "Repeat human polish review when the reusable documentation components and flagship Button page introduce denser content layouts."
+    "scope": "Flagship Button guidance, reusable StoryFrame presentation, dedicated canonical stable Button story, responsive page hierarchy, light and dark rendering, and explicit evidence boundaries.",
+    "followUp": "Repeat the component-page polish review when Select and Dialog introduce overlay, focus-management, and denser evidence patterns."
   },
   "visualBaselines": {
     "automaticAcceptanceAllowed": false,
