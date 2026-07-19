@@ -13,8 +13,9 @@ The current source of truth for importable APIs is
 `Design System/Registry/Component Manifest`.
 
 This catalog remains the concise human-readable discovery page. Lifecycle,
-provider, accessibility, Figma, zeroheight, ownership, and evidence status should
-be updated in the registry rather than duplicated here.
+provider, accessibility, Figma, Zeroheight, ownership, and evidence status should
+be updated in the registry rather than duplicated here. Starlight owns the full
+public usage guidance for flagship components.
 
 ## Current Components
 
@@ -23,7 +24,8 @@ be updated in the registry rather than duplicated here.
 - Use `PublicButtonComponent` / `ps-button` for primary, secondary, text,
   outlined, disabled, or loading actions.
 - Source: `packages/ui-patterns/src/public-button.component.ts`.
-- Evidence: `apps/qa-remote/src/stories/button-tag.acceptance.stories.ts`.
+- Canonical evidence: `apps/qa-remote/src/stories/button.stories.ts`.
+- Guidance: `apps/starlight/src/content/docs/components/button/index.mdx`.
 
 - `PublicUpButtonComponent` / `ps-up-button` is a candidate action API and is not
   yet the stable replacement for `ps-button`.
@@ -38,9 +40,14 @@ be updated in the registry rather than duplicated here.
 
 ### Dialogs
 
-- Use `PublicDialogComponent` / `ps-dialog` for modal interaction.
+- Use `PublicDialogComponent` / `ps-dialog` for a focused modal decision or compact task.
+- The wrapper owns labelled modal semantics, initial focus, focus containment,
+  Escape dismissal, and focus restoration; applications own meaningful content,
+  validation, asynchronous operation status, and the decision outcome.
 - Source: `packages/ui-patterns/src/public-dialog.component.ts`.
-- Evidence: `apps/qa-remote/src/stories/dialog-toast.acceptance.stories.ts`.
+- Canonical evidence: `apps/qa-remote/src/stories/dialog.stories.ts`.
+- Behavior tests: `apps/qa-remote/e2e/dialog.storybook.spec.ts`.
+- Guidance: `apps/starlight/src/content/docs/components/dialog/index.mdx`.
 
 ### Empty States
 
@@ -55,10 +62,12 @@ be updated in the registry rather than duplicated here.
 - Source: `packages/ui-patterns/src/public-form-section.component.ts`.
 - Evidence: source-level component proof.
 
-- Use `PublicSelectComponent` / `ps-select` for select inputs whose overlay
-  needs the shared body token context.
+- Use `PublicSelectComponent` / `ps-select` for one value from a known collection
+  whose popup needs the shared body token context.
 - Source: `packages/ui-patterns/src/public-select.component.ts`.
-- Evidence: `apps/shell/e2e/token-consumption.spec.ts`.
+- Canonical evidence: `apps/qa-remote/src/stories/select.stories.ts`.
+- Behavior tests: `apps/qa-remote/e2e/select.storybook.spec.ts`.
+- Guidance: `apps/starlight/src/content/docs/components/select/index.mdx`.
 
 ### Menus And Popovers
 
@@ -73,7 +82,7 @@ be updated in the registry rather than duplicated here.
 ### Page Headers
 
 - Use `PublicPageHeaderComponent` / `public-page-header` for page heading and
-  actions.
+actions.
 - Source: `packages/ui-patterns/src/public-page-header.component.ts`.
 - Evidence: source-level component proof.
 
@@ -131,7 +140,7 @@ Use this decision path:
 | PrimeNG behavior is needed | Add or request a wrapper in `packages/ui-patterns`. |
 | API shape is unclear | Mark the wrapper experimental and keep usage local. |
 | Pattern should be shared | Add Storybook or shell evidence before promotion. |
-| Migrated legacy app already uses PrimeNG | Keep it working, track the exception, migrate ad hoc. |
+| Migrated legacy app already uses PrimeNG | Keep it working, track the exception, migrate deliberately. |
 
 Legacy compatibility is not the same as the target state. Existing PrimeNG in a
 migrated app may continue temporarily, but new shared work should still move
@@ -149,8 +158,8 @@ pnpm build-storybook:qa
 
 The registry deliberately records missing Storybook stories, incomplete public API
 extraction, unassigned ownership, pending accessibility audits, pending Figma
-bindings, and planned zeroheight pages. Missing information should be made visible,
-not replaced with invented completion.
+bindings, and historical Zeroheight evidence. Missing information should be made
+visible, not replaced with invented completion.
 
 See `docs/design-system/architecture/component-manifest-prototype.md` for the
 prototype architecture and update path.
