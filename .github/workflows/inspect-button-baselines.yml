@@ -1,0 +1,28 @@
+name: Inspect Button visual baselines
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/inspect-button-baselines.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  baselines:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull-request branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Upload Button baselines
+        uses: actions/upload-artifact@v4
+        with:
+          name: button-documentation-baselines
+          path: apps/starlight/tests/e2e/documentation-quality.spec.ts-snapshots/button-*-chromium-linux.png
+          if-no-files-found: error
+          retention-days: 7
