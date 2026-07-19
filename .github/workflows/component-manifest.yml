@@ -88,7 +88,10 @@ jobs:
           pnpm lint 2>&1 | tee lint.log
 
       - name: Validate documentation links
-        run: pnpm lint:links
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm lint:links 2>&1 | tee links.log
 
       - name: Typecheck projects
         shell: bash
@@ -160,6 +163,7 @@ jobs:
           name: release-quality-diagnostics
           path: |
             lint.log
+            links.log
             typecheck.log
             unit-tests.log
             build.log
