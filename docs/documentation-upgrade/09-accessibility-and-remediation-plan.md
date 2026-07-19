@@ -13,6 +13,8 @@ The upgraded site should show:
 - what remains unknown or unresolved;
 - how issues move from discovery to remediation.
 
+The operational register is [19 — Accessibility findings and remediation](./19-accessibility-findings-and-remediation.md). This plan defines the model; the register owns finding identifiers, severity, status, and verification.
+
 ## Accessibility evidence model
 
 ```mermaid
@@ -306,9 +308,9 @@ The manifest should prevent these invalid states:
 - Add keyboard tests for flagship components.
 - Add iframe titles and docs-site accessibility checks.
 
-### P1
+### P1 — Required flagship completion
 
-- Record manual reviews for flagship components.
+- Record manual reviews for Button, Select, and Dialog.
 - Generate an accessibility gap dashboard.
 - Add contrast and focus review records.
 - Document overlay and live-region patterns.
@@ -316,7 +318,7 @@ The manifest should prevent these invalid states:
 
 ### P2
 
-- Expand manual review to remaining interactive components.
+- Expand manual review beyond the flagship components to remaining interactive components.
 - Add high-contrast and reduced-motion evidence.
 - Add regression scenarios for known historical issues.
 - Generate release summaries from manifest evidence.
