@@ -7,6 +7,56 @@ public-qa-workspace {
   gap: 1.25rem;
 }
 
+.qa-workspace__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--p-content-border-color);
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--p-primary-color) 16%, transparent), transparent 42%),
+    var(--p-content-background);
+  box-shadow: var(--p-card-shadow, none);
+}
+
+.qa-workspace__header h1,
+.qa-workspace__header p {
+  margin-top: 0;
+}
+
+.qa-workspace__header h1 {
+  margin-bottom: 0.55rem;
+  font-size: clamp(2rem, 5vw, 3.7rem);
+  letter-spacing: -0.045em;
+}
+
+.qa-workspace__header > div > p:last-child {
+  max-width: 62rem;
+  margin-bottom: 0;
+  color: var(--p-text-muted-color);
+  line-height: 1.65;
+}
+
+.qa-workspace__eyebrow {
+  margin-bottom: 0.4rem;
+  color: var(--p-primary-color);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.qa-workspace__metadata {
+  display: grid;
+  gap: 0.4rem;
+  min-width: 13rem;
+  color: var(--p-text-muted-color);
+  font-size: 0.8rem;
+  text-align: right;
+}
+
 .qa-workspace__tabs {
   position: sticky;
   top: 0;
@@ -52,16 +102,16 @@ public-qa-workspace {
   min-width: 0;
 }
 
-/*
- * QaRemoteComponent originally owned its own two-view navigation. The workspace
- * now owns QA Components, Performance Tracking, and Candidates, so the legacy
- * switcher is hidden only when QaRemoteComponent is hosted inside this shell.
- */
-.qa-workspace__panel--qa public-qa-remote > .qa-view-tabs {
-  display: none !important;
-}
+@media (max-width: 48rem) {
+  .qa-workspace__header {
+    display: grid;
+  }
 
-@media (max-width: 42rem) {
+  .qa-workspace__metadata {
+    min-width: 0;
+    text-align: left;
+  }
+
   .qa-workspace__tabs {
     position: static;
     display: grid;
