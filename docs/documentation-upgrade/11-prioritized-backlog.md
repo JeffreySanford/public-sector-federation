@@ -17,7 +17,7 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 ### P0 — Complete flagship accessibility evidence
 
 - [ ] Reproduce and classify provisional findings.
-- [ ] Add stable Button interaction and keyboard evidence.
+- [x] Add stable Button interaction and keyboard evidence.
 - [ ] Record NVDA and Chrome reviews for Button, Select, and Dialog.
 - [ ] Record zoom/reflow and forced-colors review.
 - [ ] Link remediations to automated and manual verification.
@@ -37,6 +37,12 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 - [ ] Add appropriate `play` functions for the flagship stories.
 - [ ] Separate experiments, deprecated contracts, and system-health stories.
 - [ ] Add documentation backlinks and Chromatic review evidence.
+
+Stable Button evidence:
+
+- the canonical stable story now includes an interaction harness with an observable activation count;
+- Playwright verifies pointer, Enter, and Space activation, visible focus, disabled behavior, loading busy semantics, and loading activation suppression;
+- automated Button findings are verified or implemented while NVDA announcement review remains open.
 
 Contract-finding evidence:
 
@@ -265,7 +271,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 - [ ] Define accessibility status vocabulary.
 - [x] Document accessibility contracts for Button, Select, and Dialog.
-- [ ] Add keyboard interaction tests for flagship components.
+- [x] Add keyboard interaction tests for flagship components.
 - [x] Add automated accessibility checks for representative flagship states.
 - [x] Add Starlight page-level accessibility checks.
 - [ ] Add accessibility checks for all three main application views.
