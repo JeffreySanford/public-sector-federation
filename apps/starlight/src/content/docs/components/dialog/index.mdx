@@ -1,0 +1,272 @@
+---
+title: Dialog
+description: Presents a focused modal decision or task while keeping keyboard focus contained and returning it to the opener on dismissal.
+---
+
+import StoryFrame from '../../../../components/StoryFrame.astro';
+
+Dialog presents a focused task, decision, or confirmation above the current page. Use it only when a person must address the interruption before continuing the underlying workflow.
+
+**Lifecycle:** Stable · **Framework:** Angular · **Provider:** Native governed wrapper · **Accessibility:** Labelled modal semantics, initial focus, focus containment, Escape dismissal, and focus restoration are automated for this declared scope; manual review remains pending · **Figma:** Pending access
+
+[Open the canonical Storybook story](https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/?path=/story/design-system-components-dialog--default) · [View Angular source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/public-dialog.component.ts) · [View Storybook source](https://github.com/JeffreySanford/public-sector-federation/blob/master/apps/qa-remote/src/stories/dialog.stories.ts) · [View manifest source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/manifest/component-registry.ts)
+
+## Live example
+
+<StoryFrame
+  title="Dialog — review an application"
+  storyId="design-system-components-dialog--default"
+  description="The stable ps-dialog wrapper with a labelled modal surface, close control, body content, footer actions, focus containment, and opener restoration."
+  size="large"
+/>
+
+The frame loads only after activation. Storybook owns interaction inside the cross-origin story; this page owns guidance, lifecycle status, evidence, and known gaps.
+
+## When to use
+
+Use Dialog when:
+
+- a short decision must be completed before the current workflow can continue;
+- important consequences need focused explanation and explicit confirmation;
+- a compact form or review task benefits from preserving the underlying page context;
+- dismissing the surface without saving is a valid and understandable outcome;
+- the task has a clear title, body, and small set of actions.
+
+### When not to use
+
+- Use a normal page when the task is long, multi-step, deeply linked, or needs substantial navigation.
+- Use an inline disclosure when the content is supplementary and does not block progress.
+- Use a popover for brief contextual information anchored to a control.
+- Use a toast or status message for non-blocking feedback.
+- Do not use Dialog to hide routine information that should remain visible on the page.
+- Do not stack dialogs. Resolve or close the current modal before opening another blocking surface.
+
+## Decision guidance
+
+| Situation | Recommended approach |
+| --- | --- |
+| Reversible confirmation | State the outcome and use clear action labels. |
+| Destructive action | Name the object and consequence; keep Cancel available and place the destructive action last. |
+| Compact review form | Keep the field set short and preserve entered data if validation fails. |
+| Long workflow | Move the task to a dedicated page. |
+| Informational acknowledgement | Prefer inline content unless acknowledgement is legally or operationally required. |
+| Background process result | Use a status message or toast instead of interrupting the user. |
+
+## Content guidance
+
+- Write a specific title such as **Delete draft application?** rather than **Warning**.
+- Explain the consequence before the action buttons.
+- Use button labels that name the result: **Approve application**, **Delete draft**, or **Cancel**.
+- Avoid **Yes**, **No**, **OK**, and ambiguous close language.
+- Keep the primary decision visible without requiring a person to interpret icon-only controls.
+- Put detailed policy or supporting information on the underlying page when it is needed beyond the immediate decision.
+- Do not place essential error recovery instructions only in the modal title.
+
+## Anatomy
+
+1. **Backdrop** — visually separates the modal task from the page behind it.
+2. **Dialog surface** — fixed, constrained, scrollable modal container.
+3. **Title** — names the task and labels the `dialog` through `aria-labelledby`.
+4. **Close control** — always exposes the accessible name **Close dialog**.
+5. **Body** — projected explanation, form fields, or review content.
+6. **Footer** — projected actions ordered from safer dismissal to consequential confirmation.
+7. **Initial focus target** — the close control receives focus when the modal opens.
+8. **Focus boundary** — Tab and Shift+Tab cycle through controls inside the dialog.
+9. **Restoration target** — the element that opened the dialog receives focus after dismissal.
+
+The wrapper's class names and internal focus-management implementation are private details. Consumers own meaningful projected content and action labels.
+
+## Supported states
+
+| State | Current support | Guidance |
+| --- | --- | --- |
+| Closed | Supported | Render no modal surface and preserve the page's normal focus order. |
+| Open | Supported | Present one labelled modal and move focus into it. |
+| Standard decision | Supported | Use a clear primary action and a safe dismissal action. |
+| Destructive confirmation | Supported through projected actions | Use the destructive Button intent and describe the irreversible outcome. |
+| Long content | Supported with constrained scrolling | Keep the dialog within the viewport and scroll the modal, not the document behind it. |
+| Narrow viewport | Supported with responsive width evidence | Preserve readable padding and avoid horizontal document overflow. |
+| Disabled action | Supported by projected controls | Explain why progress is unavailable; do not disable every exit. |
+| Validation error | Application-owned | Keep the dialog open, move or announce focus appropriately, and connect messages to fields. |
+| Nested modal | Not supported | Do not open another Dialog over an active Dialog. |
+
+## Behavior and interaction
+
+### Opening
+
+1. Record the element that currently owns focus.
+2. Render the modal surface with `role="dialog"`, `aria-modal="true"`, and a title relationship.
+3. Move focus to the close control. This predictable safe target avoids placing initial focus on a destructive action.
+4. Keep all page content visually behind the backdrop.
+
+### Keyboard contract
+
+| Key or action | Expected behavior |
+| --- | --- |
+| Tab | Moves to the next enabled focusable control inside the Dialog; wraps from the last control to the first. |
+| Shift+Tab | Moves to the previous enabled focusable control; wraps from the first control to the last. |
+| Escape | Closes the Dialog and restores focus to the opener. |
+| Enter or Space | Activates the focused button according to the Button contract. |
+| Close control | Dismisses without recording the confirmation action. |
+| Backdrop activation | Dismisses and restores focus under the current stable contract. |
+| Confirmation action | Performs the application-owned operation, closes when successful, and restores focus. |
+
+### Focus restoration
+
+The wrapper captures the active element when visibility changes from closed to open. Every supported dismissal path—Escape, close control, backdrop, Cancel, confirmation, or an external `visible` model update—returns focus to that connected element after the modal is removed.
+
+Applications should not move or remove the opener while the Dialog is active. When an operation removes the opener as part of success handling, the application must move focus to the next meaningful workflow location.
+
+## Destructive actions
+
+- State what will be deleted, revoked, or replaced.
+- Explain whether recovery is possible.
+- Keep **Cancel** available and visually distinct.
+- Put the destructive action after the safer action in DOM and visual order.
+- Do not automatically focus the destructive action.
+- Require additional typed confirmation only when risk justifies the extra burden.
+- Announce operation failures inside the still-open Dialog and preserve user input.
+
+## Accessibility contract
+
+### Semantics and naming
+
+- The surface exposes `role="dialog"` and `aria-modal="true"`.
+- The visible heading labels the Dialog through a unique `aria-labelledby` relationship.
+- The close control has a stable accessible name independent of its visible × glyph.
+- The title must describe the task; placeholder or body text is not a substitute for the modal name.
+- Projected form fields retain their own labels, descriptions, validation, and required-state semantics.
+- Footer actions must use meaningful text and the governed Button contract.
+
+### Current evidence status
+
+- **Storybook accessibility:** The canonical story uses the accessibility addon as an error gate.
+- **Page-level accessibility:** This Starlight route participates in the built-site axe gate.
+- **Keyboard coverage:** Dedicated tests cover initial focus, forward and reverse wrapping, Escape, and activation paths.
+- **Focus restoration:** Dedicated tests cover Escape, close control, backdrop, and confirmation outcomes.
+- **Responsive behavior:** Narrow viewport and long-content evidence checks modal scrolling and document width.
+- **Theme evidence:** Light and dark stories verify semantic surface and text-token inheritance.
+- **Manual assistive-technology review:** Pending.
+- **Conformance claim:** None. Automated checks do not replace screen-reader and product-context review.
+
+### Known accessibility boundaries
+
+The current wrapper does not yet:
+
+- make the non-modal page subtree inert;
+- lock body scrolling explicitly;
+- expose an `aria-describedby` or description-ID API;
+- expose an application-selected initial-focus target;
+- announce asynchronous confirmation progress or failure;
+- define a stacked-dialog policy beyond prohibiting the pattern.
+
+These are explicit boundaries rather than implied capabilities.
+
+## Token relationships
+
+The stable Dialog is a native wrapper that consumes shared semantic and provider-bridge variables. It does not expose a dedicated public Dialog token family yet.
+
+| Token or layer | Role | Current relationship |
+| --- | --- | --- |
+| `--p-content-background` | Dialog surface | Derived from the shared card surface. |
+| `--p-content-border-color` | Surface, close control, and field borders | Derived from the shared semantic border. |
+| `--p-text-color` | Title, body, and controls | Derived from primary semantic text. |
+| `--p-text-muted-color` | Supporting and secondary copy | Derived from secondary semantic text. |
+| `--ps-focus-ring-color` | Close-control and projected-control focus | Shared focus indication. |
+| `--p-overlay-modal-shadow` | Modal elevation | Provider bridge fallback used by the native surface. |
+| Backdrop color mix | Page separation | Currently uses a fixed dark mixing endpoint; a dedicated semantic backdrop token remains open. |
+
+A future component-token contract may separate backdrop, surface, heading, body, footer, close control, elevation, and motion responsibilities. This page records the shipped relationship without inventing unapproved tokens.
+
+## Angular API
+
+### Import
+
+```ts
+import {
+  PublicButtonComponent,
+  PublicDialogComponent,
+} from '@public-sector/ui-patterns';
+```
+
+### Usage
+
+```ts
+reviewOpen = false;
+```
+
+```html
+<ps-button
+  label="Review application"
+  (activated)="reviewOpen = true"
+/>
+
+<ps-dialog
+  header="Review application"
+  width="36rem"
+  [(visible)]="reviewOpen"
+>
+  <p>Review the application details before recording a decision.</p>
+
+  <div ps-dialog-footer>
+    <ps-button
+      label="Cancel"
+      appearance="outlined"
+      (activated)="reviewOpen = false"
+    />
+    <ps-button
+      label="Approve application"
+      (activated)="approveApplication()"
+    />
+  </div>
+</ps-dialog>
+```
+
+### Inputs and model
+
+| Member | Type | Default | Guidance |
+| --- | --- | --- | --- |
+| `header` | `string` | Empty string | Visible title and accessible modal name. Always provide a specific value. |
+| `width` | `string` | `32rem` | Maximum surface width. Use governed values and preserve narrow-viewport behavior. |
+| `visible` | `model<boolean>` | `false` | Two-way open state; every close path writes `false`. |
+
+### Content slots
+
+| Slot | Purpose |
+| --- | --- |
+| Default content | Explanation, compact fields, review details, and inline validation. |
+| `[ps-dialog-footer]` | Dismissal and confirmation actions. |
+
+## Provider boundary
+
+`ps-dialog` is implemented as a native governed Angular wrapper rather than exposing PrimeNG Dialog. Consumers receive modal semantics, focus handling, visibility state, projected content, and shared tokens without provider events, classes, PassThrough settings, or configuration objects.
+
+The wrapper intentionally keeps this contract compact. It does not expose position presets, maximization, drag, resize, animation configuration, templates, breakpoints, provider-specific style classes, or nested-modal behavior.
+
+## Quality and evidence
+
+| Dimension | Current status | Evidence or next action |
+| --- | --- | --- |
+| Runtime source | Complete for this slice | `PublicDialogComponent` is exported from `@public-sector/ui-patterns`. |
+| Public API inventory | Complete | Registry metadata records `header`, `width`, `visible`, and projected regions. |
+| Canonical Storybook story | Complete | `Design System/Components/Dialog — Default`. |
+| State stories | Complete for the declared scope | Default, destructive confirmation, long content, and focus sequence. |
+| Modal semantics | Automated | Label relationship, modal state, and close-control name are checked. |
+| Keyboard and focus | Automated | Initial focus, containment, Escape, and restoration have dedicated browser evidence. |
+| Responsive behavior | Automated | Long content, modal scrolling, narrow width, and document overflow are checked. |
+| Theme behavior | Automated | Light and dark modal surfaces resolve shared tokens. |
+| Manual screen-reader review | Pending | Record a named review before broader accessibility claims. |
+| Background inertness and scroll lock | Gap | Design and implement only with an explicit cross-application policy. |
+| Token mapping | Partial | Shared semantic values exist; dedicated Dialog and backdrop tokens do not. |
+| Figma alignment | Pending access | Do not fabricate component, component-set, or property identifiers. |
+
+## Decisions and known gaps
+
+1. **Keep `ps-dialog` canonical.** The native wrapper owns a smaller public contract than a provider Dialog and avoids provider leakage.
+2. **Focus the close control first.** The safe predictable target works across standard and destructive tasks.
+3. **Contain focus and restore the opener.** These behaviors are part of the wrapper contract, not optional application code.
+4. **Keep backdrop dismissal for compatibility.** A future product requirement may justify a public dismissal policy, but it should not be exposed accidentally.
+5. **Do not support stacked dialogs.** Nested blocking contexts require a separate architecture and accessibility decision.
+6. **Treat body scroll lock and background inertness as open integration work.** The current fixed backdrop and focus trap do not claim those capabilities.
+7. **Keep validation and operation announcements application-owned.** The wrapper provides structure; the workflow owns field errors and asynchronous status.
+8. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.
