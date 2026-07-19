@@ -1,223 +1,83 @@
-# Design-System Release Status and TODO
+# Design-System Execution Status
 
-_Last aligned: July 19, 2026_
+_Last aligned: July 19, 2026 · mission realignment branch_
 
 ## Purpose
 
-This document separates what the repository currently proves, the active implementation slice, optional evidence improvements, and decisions that belong to an adopting production organization.
+This is the short execution dashboard. It does not duplicate detailed acceptance criteria.
 
-The authoritative upgrade snapshot is [Documentation Upgrade Current Status](../documentation-upgrade/00-current-status.md). The detailed delivery queue is [Prioritized Backlog](../documentation-upgrade/11-prioritized-backlog.md).
+- [Current status](../documentation-upgrade/00-current-status.md) owns what is true now.
+- [Prioritized backlog](../documentation-upgrade/11-prioritized-backlog.md) owns detailed outstanding tasks.
+- [Delivery roadmap](../documentation-upgrade/12-delivery-roadmap.md) owns sequence.
+- [Component estate audit](../documentation-upgrade/18-component-estate-audit.md) owns discovery findings.
+- [Accessibility findings](../documentation-upgrade/19-accessibility-findings-and-remediation.md) owns accessibility risk and verification.
+- [Consolidation proposal](../documentation-upgrade/20-component-consolidation-proposal.md) owns canonical and migration recommendations.
 
-## Canonical documentation model
+## Complete
 
-```text
-DTCG-compatible token source
-  -> normalization and generation
-  -> semantic CSS variables, JSON, and TypeScript
-  -> PrimeNG preset and provider bridge
-  -> governed component wrappers
-  -> shell and independently bootstrapped remotes
-  -> Storybook live behavior and interaction evidence
-  -> generated component manifest relationships and status
-  -> Astro Starlight public guidance
-  -> Playwright, axe, visual, Lighthouse, and release verification
-```
+- [x] Angular/Nx token, provider-boundary, wrapper, manifest, and federation foundation.
+- [x] Astro Starlight public documentation application.
+- [x] Designer-grade documentation quality gate.
+- [x] Canonical flagship documentation for Button, Select, and Dialog.
+- [x] Flagship responsive, reflow, axe, accessibility-tree, visual, and Lighthouse evidence.
+- [x] Dedicated Select overlay and keyboard evidence.
+- [x] Dialog focus entry, containment, Escape dismissal, and opener restoration.
+- [x] Manifest-driven Component Inventory, Quality & Remediation, and Design Alignment Lab.
+- [x] Release and dependency hardening through PR #21.
 
-`apps/starlight` is the canonical public documentation application. Zeroheight documentation and publishing scripts are historical experiment evidence only; they are not required for runtime delivery, release verification, or public guidance.
+## Now — forensic audit
 
-## Complete in this repository
+- [ ] Generate usage counts and consuming paths for all public entries.
+- [ ] Assign duplication clusters and dispositions.
+- [ ] Complete API-pattern and token-boundary findings.
+- [ ] Link audit entries to Storybook, tests, documentation, Figma status, and accessibility findings.
+- [ ] Reconcile public `ps-*` naming with legacy `public-*` selectors.
 
-### Runtime and component foundation
+## Now — accessibility remediation
 
-- [x] Angular shell with four federated custom-element remotes.
-- [x] Independently bootstrapped remote applications.
-- [x] Shared token package with CSS, JSON, TypeScript, and documentation exports.
-- [x] PrimeNG preset derived from the shared token contract.
-- [x] Governed UI wrapper package and generated component manifest.
-- [x] Direct PrimeNG boundary enforcement outside approved integration packages.
-- [x] Legacy allowlist format for tracked migration exceptions.
-- [x] Light and dark theme propagation through shell and remotes.
-- [x] Dialog, menu, select, popover, and tooltip overlay validation.
-- [x] Storybook evidence for the current component catalog.
-- [x] Candidate Button behavior, keyboard, theme, and automated accessibility evidence.
-- [x] Shell-mounted integration and token-consumption tests.
-- [x] Repository release, smoke, report, and manifest-check commands.
-- [x] Replace sample-heavy Angular views with Component Inventory, Quality & Remediation, and Design Alignment Lab in PR #17.
-- [x] Add focused workbench unit tests for filtering, remediation priority, and alignment decisions.
-- [x] Replace obsolete QA, performance, and candidate-view browser assertions with workbench evidence.
+- [ ] Reproduce and classify provisional accessibility findings.
+- [ ] Add stable Button keyboard, loading, and activation evidence.
+- [ ] Record NVDA and Chrome reviews for Button, Select, and Dialog.
+- [ ] Record forced-colors and zoom/reflow reviews.
+- [ ] Add Select required, invalid, help, and error relationships.
+- [ ] Decide and implement Dialog inertness, scroll-lock, and description behavior.
 
-### Documentation foundation
+## Next — consolidation and design reference
 
-- [x] Real Astro Starlight application inside the Nx workspace.
-- [x] `/docs/` production base path, public navigation, search, Mermaid, responsive behavior, and light/dark appearance.
-- [x] Shared semantic-token consumption in Starlight.
-- [x] Normal Documentation navigation from the Angular shell.
-- [x] Component-status entry point for Button, Select, and Dialog.
-- [x] Pull-request Starlight build artifact.
-- [x] Content, heading, wording, local-path, link, route, source, Storybook, manifest, and Figma-status validation.
-- [x] Shared-token and style-discipline validation with explicit exceptions.
-- [x] Built-site responsive checks at 360, 768, 1024, 1280, and 1440 pixels.
-- [x] 320 CSS-pixel reflow coverage as the 200% zoom equivalent.
-- [x] Page-level axe checks and initial accessibility-tree snapshots.
-- [x] Reviewed light desktop, dark desktop, and light mobile visual baselines.
-- [x] Lighthouse category, Core Web Vitals, and resource budgets.
-- [x] Human polish-review status and policy preventing automatic baseline acceptance.
-- [x] Starlight quality gate included in `verify:release`.
-- [x] Separate Starlight and Angular/Storybook Playwright configurations.
+- [ ] Finalize the canonical Button contract and compatibility window.
+- [ ] Record retain, merge, replace, deprecate, or investigate for every public entry.
+- [ ] Document provider-wrapper versus native/Angular CDK tradeoffs.
+- [ ] Move native components from direct PrimeNG `--p-*` variables to public `--ps-*` tokens.
+- [ ] Replace placeholder UI-library test targets with real component contract tests.
+- [ ] Produce the Button, Select, and Dialog Figma reconstruction reference.
 
-## Button page and StoryFrame slice
+## Next — Storybook and Chromatic
 
-- [x] Create a reusable `StoryFrame` component for canonical live Storybook behavior.
-- [x] Give every embedded frame a meaningful accessible title and visible full-story link.
-- [x] Handle loading, failure, clipping, height, responsive, and light/dark presentation states.
-- [x] Add StoryFrame-specific Playwright, axe, accessibility-tree, and visual coverage.
-- [x] Publish `/docs/components/button/` as the first complete flagship component page.
-- [x] Write purpose, usage, and anti-pattern guidance before evidence details.
-- [x] Identify and link the canonical stable Button story.
-- [x] Document anatomy, variants, interaction states, loading, disabled, keyboard, and focus behavior.
-- [x] Document the current public Angular API and provider boundary honestly.
-- [x] Show light and dark token relationships without duplicating token ownership.
-- [x] Add quality evidence, Figma status, decisions, and known gaps.
-- [x] Add the Button route and relationship to documentation-integrity validation.
-- [x] Extend accessibility-tree and visual coverage to the flagship component page.
-- [x] Merge PR #15 after Release Quality Gate run #120 (`29667746141`) passed on the final branch.
-- [x] Confirm dependencies install, the workspace starts, and the served documentation renders in a local post-merge review.
+- [ ] Complete the product-facing hierarchy.
+- [ ] Add appropriate flagship `play` functions.
+- [ ] Separate canonical, experimental, deprecated, and system-health stories.
+- [ ] Add Starlight backlinks and Chromatic review evidence.
+- [ ] Retire remaining acceptance and candidate naming after link migration.
 
-## Select page and overlay evidence
+## Deferred or external
 
-- [x] Publish `/docs/components/select/` using the established flagship page structure.
-- [x] Write purpose, selection guidance, alternatives, and anti-patterns before evidence.
-- [x] Designate a canonical normal Select story and focused state stories.
-- [x] Document the `label`, `options`, `placeholder`, `disabled`, and `value` public contract.
-- [x] Document the provider-neutral `PublicSelectOption` model and private PrimeNG mapping.
-- [x] Document combobox semantics, accessible naming, keyboard navigation, selection, and focus behavior.
-- [x] Cover selected, disabled, empty-option, disabled-option, long-option, and model-binding states.
-- [x] Prove body-appended overlay positioning, clipping, stacking, and responsive behavior.
-- [x] Prove light and dark theme inheritance for the body-appended overlay.
-- [x] Add dedicated Storybook interaction and Playwright evidence instead of relying only on shared shell token checks.
-- [x] Record missing invalid-state, required-state, help-text, richer option-content, manual-review, Figma, and disabled-option ARIA evidence as explicit gaps.
-- [x] Add the Select route, documentation source, canonical story ID, and Storybook source to integrity validation.
-- [x] Update the component registry and generated manifest for the declared Select evidence.
-- [x] Add Select responsive, 200%-zoom-equivalent, axe, accessibility-tree, visual, and Lighthouse coverage.
-- [x] Complete the Select human polish review with a documented follow-up.
-- [x] Merge PR #16 after the complete Release Quality Gate passed for its final state.
-
-## PR #18 platform simplification
-
-- [x] Confirm the manifest-driven workbench no longer consumes the Agile API, database, or performance dashboard.
-- [x] Remove the `apps/agile-api` NestJS application.
-- [x] Remove Prisma schema, migrations, seed data, configuration, and dependencies.
-- [x] Remove PostgreSQL and backend-only runtime dependencies.
-- [x] Remove Docker Compose and backend container commands.
-- [x] Remove the retired performance dashboard, data service, workflows, scripts, tests, and documentation.
-- [x] Regenerate `pnpm-lock.yaml` from the simplified dependency graph.
-- [x] Update `start:all` to launch only the shell, four remotes, and Starlight.
-- [x] Remove Prisma and Docker-backed API lifecycle steps from the Release Quality Gate.
-- [x] Align README, testing, portfolio, current status, and TODO documentation.
-- [ ] Pass the complete Release Quality Gate for the exact final PR #18 state.
-
-## Active slice — Dialog page and focus-management evidence
-
-- [x] Upgrade `ps-dialog` with a unique title relationship and stable close-control accessible name.
-- [x] Add predictable safe initial focus on the close control.
-- [x] Contain forward and reverse Tab navigation inside the open modal.
-- [x] Close with Escape and restore focus to the opener.
-- [x] Restore focus after close-button, backdrop, Cancel, confirmation, and external model dismissal.
-- [x] Publish dedicated Default, Destructive Confirmation, Long Content, and Focus Sequence stories.
-- [x] Add isolated Storybook tests for modal semantics, focus entry, containment, Escape, restoration, destructive confirmation, scrolling, responsive width, theme inheritance, and axe.
-- [x] Publish `/docs/components/dialog/` using the flagship component-page model.
-- [x] Write purpose, alternatives, decision, destructive-action, content, anatomy, state, keyboard, accessibility, token, API, provider-boundary, evidence, and gap guidance.
-- [x] Add Dialog to Starlight navigation, component status, documentation integrity, and Lighthouse routes.
-- [x] Add Dialog responsive, 320 CSS-pixel reflow, StoryFrame, axe, accessibility-tree, and visual tests.
-- [x] Update the component registry and generated manifest with the declared Dialog source, stories, tests, behaviors, documentation, and limitations.
-- [x] Generate the Linux Chromium light desktop, dark desktop, and light mobile baselines.
-- [x] Complete the human visual polish review with a follow-up to extract reusable evidence/disclosure components before broad catalog expansion.
-- [ ] Pass the complete Release Quality Gate for the exact final Dialog state.
-
-## Following slices
-
-- [ ] Add hosted pull-request preview URLs rather than build artifacts only.
-- [ ] Extract reusable `StatusBadge`, `ComponentHeader`, `EvidencePanel`, `TokenTable`, `AccessibilityStatus`, `FindingCard`, `DecisionRecord`, and `LightDarkPreview` components where repeated flagship-page needs justify them.
-- [ ] Add Storybook and Chromatic review coverage for reusable Starlight presentation components.
-- [ ] Finalize manifest lifecycle, documentation, accessibility, provider-boundary, Figma, ownership, and blocker projections.
-- [ ] Generate the public component catalog and health/gap views.
-- [ ] Add complete Figma identity and alignment records for Button, Select, and Dialog.
-- [ ] Reorganize Storybook hierarchy and canonical story IDs.
-- [ ] Migrate useful Zeroheight-era guidance and archive or remove obsolete publishing scripts.
-
-## Optional evidence improvements
-
-These deepen the demonstration but are not hidden runtime blockers:
-
-- [ ] Add complete public API extraction for remaining partial components.
-- [ ] Record dedicated behavior tests for components currently relying on shared integration evidence.
-- [ ] Add manual screen-reader review records for promoted interactive components.
-- [ ] Populate semantic and provider-bridge token references for every manifest entry.
-- [ ] Add named sample owners and stewards where role-based governance needs a demonstration.
-- [ ] Remove compatibility redirect files after all internal links use neutral paths.
-- [ ] Pin remaining package specifiers declared as `latest` with a regenerated lockfile.
-- [ ] Track Lighthouse, accessibility, and visual-regression trends over time.
-
-## Reference component states
-
-The registry intentionally demonstrates more than one lifecycle and evidence state.
-
-| State | Meaning in this reference system |
-| --- | --- |
-| `active` | Exported for current use. It may still have partial governance metadata. |
-| `candidate` | Implementation and evidence exist, but promotion requirements remain visible. |
-| `partial` | Some API, token, documentation, test, accessibility, or design evidence is incomplete. |
-| `blocked` | A declared requirement prevents promotion. |
-| `deprecated` | Retained temporarily with a replacement path. |
-| `ready` | Repository evidence is complete for the declared scope. |
-
-These states do not claim that every active export has completed external design approval, Figma binding, ownership assignment, or manual assistive-technology review.
-
-## Production adoption decisions
-
-An adopting organization must validate or decide:
-
-- authoritative Figma or DTCG-compatible token export;
-- approved token naming and normalization rules;
-- package names, release cadence, and supported version matrix;
-- shell token-loading and remote standalone-import policy;
-- accountable design, platform, registry, documentation, and application owners;
-- temporary legacy PrimeNG allowlist entries and migration deadlines;
-- design review and manual assistive-technology acceptance criteria;
-- production hosting topology for Starlight, Storybook, Angular, and source links;
-- production deployment, security, observability, and operational controls.
-
-An organization may choose a hosted documentation platform, but that is an optional channel decision rather than an architectural dependency.
-
-## Authoritative documents
-
-- [Documentation Upgrade Current Status](../documentation-upgrade/00-current-status.md)
-- [Prioritized Backlog](../documentation-upgrade/11-prioritized-backlog.md)
-- [Delivery Roadmap](../documentation-upgrade/12-delivery-roadmap.md)
-- [Reference Architecture Recommendation](./architecture/reference-architecture-recommendation.md)
-- [Token Mapping Spec](./architecture/token-mapping-spec.md)
-- [Token Delivery Decision](./architecture/token-delivery-decision.md)
-- [Registry Consumption Spec](./architecture/registry-consumption-spec.md)
-- [Component Registry](./architecture/component-registry.md)
-- [Component Catalog](./components/catalog.md)
-- [Governance Overview](./governance/overview.md)
-- [Testing Guide](../TESTING.md)
+- [ ] Record real Figma component identities when access and approved design artifacts exist.
+- [ ] Assign accountable production owners and stewards.
+- [ ] Establish production hosting and release topology.
+- [ ] Add hosted documentation preview URLs.
+- [ ] Retire remaining Zeroheight publishing scripts after useful evidence is migrated.
+- [ ] Expand flagship-level documentation and manual review to the remaining catalog.
 
 ## Verification
 
 ```bash
 pnpm install --frozen-lockfile
-pnpm build:tokens
 pnpm lint
 pnpm lint:links
 pnpm typecheck
 pnpm test
 pnpm manifest:check
 pnpm build
-pnpm validate:starlight
-pnpm check:starlight
-pnpm test:starlight
-pnpm lighthouse:starlight
 pnpm quality:starlight
 pnpm test:e2e
 pnpm verify:release
