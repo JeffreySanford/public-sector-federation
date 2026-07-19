@@ -69,7 +69,7 @@ async function main() {
 
   const sources = await Promise.all(
     files.sort().map(async (absolutePath) => {
-      const path = relative(root, absolutePath).replaceAll('\\\\', '/');
+      const path = relative(root, absolutePath).replaceAll('\\', '/');
       return { path, source: await readFile(absolutePath, 'utf8') };
     }),
   );
