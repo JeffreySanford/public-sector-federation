@@ -34,15 +34,13 @@ pnpm build
 pnpm test:e2e
 ```
 
-`verify:release` runs linting, link validation, type checking, unit tests, manifest drift validation, production builds, and the full Playwright suite.
+`verify:release` runs linting, link validation, type checking, unit tests, manifest drift validation, production builds, the Starlight quality gate, and the full Playwright suite.
 
-`verify:smoke` expects the integrated platform to be running. It checks development ports and performs the cross-application accessibility scan.
+`verify:smoke` expects the integrated frontend platform to be running. It checks development ports and performs the cross-application accessibility scan.
 
 ## Test suites
 
 ### Repository and documentation validation
-
-`pnpm lint` validates workspace JSON, Prisma configuration, Markdown formatting, SCSS conventions, and PrimeNG wrapper boundaries through the repository lint scripts.
 
 `pnpm lint:links` validates Markdown links.
 
@@ -54,9 +52,7 @@ pnpm test:e2e
 pnpm test
 ```
 
-The current API unit baseline covers dashboard work-item totals and status-grouped reporting in `apps/agile-api/test/agile.service.test.ts`.
-
-Unit-test breadth is intentionally smaller than the E2E evidence in this architecture sample. Additional service-level coverage should be added when business logic expands.
+Unit-test breadth is intentionally smaller than the E2E evidence in this architecture sample. Add focused component and transformation tests when behavior expands or a regression can be isolated below the browser layer.
 
 ### Playwright E2E
 
@@ -69,8 +65,8 @@ The Playwright suite starts its configured web servers and validates:
 - shell and remote federation;
 - custom-element mounting and navigation;
 - token inheritance and light/dark theme propagation;
-- PrimeNG dialog, menu, select, popover, and tooltip overlays;
-- QA remote behavior and responsive rendering;
+- dialog, menu, select, popover, and tooltip overlays;
+- manifest-driven workbench behavior and responsive rendering;
 - Storybook component states and variants;
 - keyboard interaction and automated accessibility checks;
 - documentation examples and architecture boundaries;
@@ -107,7 +103,7 @@ Chromatic builds the QA Storybook and publishes visual evidence. Visual changes 
 | Token mapping | Token build, token tests, manifest check, theme evidence |
 | Native presentational pattern | Build, typecheck, Storybook, automated accessibility |
 | Interactive wrapper | Storybook, behavior tests, keyboard coverage, accessibility |
-| Overlay wrapper | Interactive-wrapper evidence plus shell-mounted theme and append-target validation |
+| Overlay wrapper | Interactive-wrapper evidence plus integrated theme and focus validation |
 | Federation or bootstrap | Build plus shell and remote E2E coverage |
 | Candidate promotion | All declared manifest promotion requirements resolved |
 
@@ -130,7 +126,7 @@ pnpm playwright test -g "should load shell application"
 pnpm playwright show-report
 ```
 
-When a test times out, first confirm that the configured ports are available and that Docker-backed services are healthy. Prefer waiting for a stable application condition over adding arbitrary sleeps.
+When a test times out, first confirm that the configured frontend, Starlight, and Storybook ports are available and that each web-server process reached its ready condition. Prefer waiting for a stable application condition over adding arbitrary sleeps.
 
 ## Accessibility failures
 
@@ -142,13 +138,11 @@ When a test times out, first confirm that the configured ports are available and
 
 Automated checks do not replace manual screen-reader review. The component manifest records manual-review status separately.
 
-## Performance baseline
+## Runtime timing
 
-Development-machine measurements vary, so timings are regression guidance rather than CI service-level objectives.
+Development-machine timings are diagnostic rather than CI service-level objectives. The retired database-backed performance dashboard and manually maintained baseline pages were removed in PR #18 because release decisions now come from the current Playwright, Lighthouse, visual-regression, accessibility, typecheck, and build gates.
 
-The verified July 17, 2026 local release run completed the full browser matrix in approximately 6.1 minutes. See [the performance baseline](./performance/baseline.md) for the measured environment and regression guidance.
-
-Investigate a repeatable increase above roughly 120% of the local baseline. Treat a repeatable increase above 150% as a release concern.
+Investigate repeatable increases through current CI logs and artifacts. Record a new benchmark only when its environment, collection method, owner, and decision threshold are explicit and maintained.
 
 ## Pull-request checklist
 
@@ -162,10 +156,10 @@ Investigate a repeatable increase above roughly 120% of the local baseline. Trea
 - [ ] The full E2E suite is run before release.
 - [ ] Documentation and component evidence are updated.
 - [ ] Accessibility and theme behavior are preserved.
-- [ ] No new console errors or unexplained performance regressions appear.
+- [ ] No new console errors or unexplained timing regressions appear.
 
 ## Coverage status
 
 Code-coverage instrumentation and enforced percentage thresholds are not currently part of the committed release command. Do not document or invoke a coverage script until instrumentation and a corresponding package script are added.
 
-Current coverage priorities are federation loading, token inheritance, remote communication, provider-boundary failures, and backend error paths.
+Current coverage priorities are federation loading, token inheritance, workbench behavior, provider-boundary failures, modal and overlay interaction, documentation integrity, and accessibility regressions.

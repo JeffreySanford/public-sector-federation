@@ -316,7 +316,7 @@
         "selector": "ps-dialog",
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-dialog.component.ts",
-        "description": "Modal content pattern with a controlled header, body, footer, and visibility model."
+        "description": "Native governed modal with labelled semantics, contained focus, dismissal, and opener restoration."
       },
       "lifecycle": {
         "status": "active",
@@ -327,10 +327,27 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "header",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "width",
+            "type": "string",
+            "defaultValue": "'32rem'"
+          }
+        ],
         "outputs": [],
-        "models": [],
+        "models": [
+          {
+            "name": "visible",
+            "type": "boolean",
+            "defaultValue": "false"
+          }
+        ],
         "publicTypes": []
       },
       "implementation": {
@@ -339,7 +356,9 @@
         "providerInternalOnly": true,
         "providerModules": [],
         "providerEscapeHatches": [],
-        "knownLimitations": []
+        "knownLimitations": [
+          "Background inertness, explicit body scroll lock, configurable initial focus, aria-describedby, stacked dialogs, Figma alignment, and manual assistive-technology review remain pending."
+        ]
       },
       "variants": {
         "properties": [],
@@ -352,8 +371,8 @@
       },
       "accessibility": {
         "pattern": "dialog",
-        "automatedChecks": "partial",
-        "keyboardCoverage": "missing",
+        "automatedChecks": "complete",
+        "keyboardCoverage": "complete",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
           "Consumers remain responsible for accessible page composition and meaningful content."
@@ -362,20 +381,41 @@
       "evidence": {
         "storybook": {
           "status": "complete",
-          "title": "Design System/Acceptance/Dialog and Toast",
+          "title": "Design System/Components/Dialog",
           "files": [
+            "apps/qa-remote/src/stories/dialog.stories.ts",
             "apps/qa-remote/src/stories/dialog-toast.acceptance.stories.ts"
           ],
-          "stories": []
+          "stories": [
+            "design-system-components-dialog--default",
+            "design-system-components-dialog--destructive-confirmation",
+            "design-system-components-dialog--long-content",
+            "design-system-components-dialog--focus-sequence"
+          ]
         },
         "tests": {
-          "status": "missing",
-          "files": [],
-          "behaviors": []
+          "status": "complete",
+          "files": [
+            "apps/qa-remote/e2e/dialog.storybook.spec.ts",
+            "apps/shell/e2e/token-consumption.spec.ts"
+          ],
+          "behaviors": [
+            "labelled modal semantics",
+            "safe initial focus",
+            "forward and reverse focus containment",
+            "Escape dismissal",
+            "close-button and backdrop dismissal",
+            "focus restoration to the opener",
+            "destructive confirmation ordering",
+            "long-content modal scrolling",
+            "narrow-viewport reflow",
+            "light and dark modal token inheritance"
+          ]
         },
         "documentation": {
-          "status": "partial",
+          "status": "complete",
           "files": [
+            "apps/starlight/src/content/docs/components/dialog/index.mdx",
             "docs/design-system/components/catalog.md",
             "docs/design-system/architecture/registry-consumption-spec.md"
           ]
@@ -402,8 +442,8 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated automated behavior evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
+          "The current modal contract does not make background content inert or explicitly lock body scrolling.",
+          "A dedicated semantic backdrop token is not yet recorded."
         ]
       }
     },

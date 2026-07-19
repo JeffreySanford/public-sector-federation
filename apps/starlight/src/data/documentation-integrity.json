@@ -22,6 +22,10 @@
       "source": "apps/starlight/src/content/docs/components/select/index.mdx"
     },
     {
+      "route": "/docs/components/dialog/",
+      "source": "apps/starlight/src/content/docs/components/dialog/index.mdx"
+    },
+    {
       "route": "/docs/patterns/",
       "source": "apps/starlight/src/content/docs/patterns/index.md"
     },
@@ -69,10 +73,12 @@
     },
     {
       "manifestId": "ps-dialog",
-      "docsRoute": "/docs/components/",
+      "docsRoute": "/docs/components/dialog/",
+      "documentationFile": "apps/starlight/src/content/docs/components/dialog/index.mdx",
       "source": "packages/ui-patterns/src/public-dialog.component.ts",
-      "storybookTitle": "Design System/Acceptance/Dialog and Toast",
-      "storybookFile": "apps/qa-remote/src/stories/dialog-toast.acceptance.stories.ts",
+      "storybookTitle": "Design System/Components/Dialog",
+      "storybookFile": "apps/qa-remote/src/stories/dialog.stories.ts",
+      "canonicalStoryId": "design-system-components-dialog--default",
       "figmaStatus": "pending-access"
     }
   ]

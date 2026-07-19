@@ -65,9 +65,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Generate Prisma client
-        run: pnpm api:prisma:generate
-
       - name: Validate component manifest
         run: pnpm manifest:check
 
@@ -91,7 +88,10 @@ jobs:
           pnpm lint 2>&1 | tee lint.log
 
       - name: Validate documentation links
-        run: pnpm lint:links
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm lint:links 2>&1 | tee links.log
 
       - name: Typecheck projects
         shell: bash
@@ -136,12 +136,6 @@ jobs:
           path: dist/apps/starlight
           if-no-files-found: error
 
-      - name: Start Docker-backed API
-        shell: bash
-        run: |
-          set -o pipefail
-          pnpm start:backend 2>&1 | tee backend.log
-
       - name: Run built Storybook accessibility gate
         shell: bash
         run: |
@@ -169,11 +163,11 @@ jobs:
           name: release-quality-diagnostics
           path: |
             lint.log
+            links.log
             typecheck.log
             unit-tests.log
             build.log
             starlight-quality.log
-            backend.log
             storybook-e2e.log
             e2e.log
             artifacts/lighthouse/
@@ -182,8 +176,3 @@ jobs:
             dist/apps/starlight/
             dist/storybook/qa-remote/index.json
           if-no-files-found: warn
-
-      - name: Stop Docker-backed API
-        if: always()
-        continue-on-error: true
-        run: pnpm docker:down

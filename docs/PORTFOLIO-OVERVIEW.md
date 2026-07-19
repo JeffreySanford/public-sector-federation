@@ -57,7 +57,6 @@ The following remain production-specific decisions:
 - Nx monorepo organization
 - runtime module federation and Angular custom elements
 - RxJS-based application integration
-- NestJS APIs, Prisma, and PostgreSQL
 - design tokens and PrimeNG theming
 - provider-neutral component wrapper design
 - Storybook and Chromatic workflows

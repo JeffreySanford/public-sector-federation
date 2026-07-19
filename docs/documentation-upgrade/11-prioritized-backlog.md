@@ -61,9 +61,9 @@ See [Astro Starlight Application and Designer-Grade Quality Gate](./17-astro-sta
 - [ ] Replace Portfolio Walkthrough with System Overview.
 - [ ] Remove Skills Demonstrated from the public product experience.
 - [ ] Reframe federation as adoption evidence.
-- [ ] Move backend details to Reference Applications.
-- [ ] Relabel QA Remote as Component Lab in temporary public navigation.
-- [ ] Relabel Candidates as Experiments where the old view remains temporarily visible.
+- [x] Remove obsolete backend details after retiring the unused API and database platform.
+- [x] Replace the QA Remote navigation model with the manifest-driven forensic workbench.
+- [x] Replace the Candidates view with the reusable Design Alignment Lab.
 
 ### Main application three-view upgrade
 
@@ -71,56 +71,56 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 #### Shared shell
 
-- [ ] Rename public navigation to **Component Inventory**, **Quality & Remediation**, and **Design Alignment Lab**.
+- [x] Rename public navigation to **Component Inventory**, **Quality & Remediation**, and **Design Alignment Lab**.
 - [ ] Add a shared application header with product purpose, Documentation, Storybook, and Source links.
 - [ ] Add light/dark control and release or commit identification.
-- [ ] Remove duplicate inner tab controls from `QaRemoteComponent` after the workspace owns navigation.
+- [x] Remove duplicate inner tab controls after the workbench owns navigation.
 - [ ] Add explicit sample/generated-data labeling where live production data is unavailable.
-- [ ] Verify responsive and keyboard navigation for all three views.
+- [x] Verify responsive and keyboard navigation for all three views.
 
 #### Component Inventory
 
-- [ ] Replace the sample-heavy QA gallery with a manifest-driven inventory summary.
+- [x] Replace the sample-heavy QA gallery with a manifest-driven inventory summary.
 - [ ] Add stable, beta, experimental, deprecated, missing-story, missing-accessibility, missing-Figma, and provider-warning counts.
-- [ ] Build a searchable and filterable component inventory table.
+- [x] Build a searchable and filterable component inventory table.
 - [ ] Add filters for lifecycle, provider, category, evidence gaps, and blockers.
-- [ ] Add a component detail panel with API, provider, Storybook, accessibility, Figma, documentation, findings, and next-action information.
+- [x] Add a component detail panel with API, provider, Storybook, accessibility, Figma, documentation, findings, and next-action information.
 - [ ] Add duplicate and inconsistency findings for competing Buttons, selector prefixes, provider leaks, and style escape hatches.
 - [ ] Move generic Button matrices, Tag samples, Cards, tables, dialogs, and toasts to canonical Storybook stories or test fixtures.
-- [ ] Preserve browser-test fixtures until replacement tests cover the new inventory view.
+- [x] Preserve browser-test fixtures until replacement tests cover the new inventory view.
 
 #### Quality & Remediation
 
-- [ ] Replace performance-first framing with a design-system quality scorecard.
+- [x] Replace performance-first framing with a design-system quality scorecard.
 - [ ] Add open critical findings, accessibility blockers, visual regressions, missing interaction tests, missing stories, alignment gaps, provider violations, and documentation drift metrics.
-- [ ] Build a prioritized remediation queue with dimension, severity, status, evidence, and recommended action.
-- [ ] Add before-and-after cases for Button, Select, Dialog, selector normalization, and Storybook remediation.
-- [ ] Display evidence coverage separately for code, Storybook, interaction tests, automated accessibility, manual review, Figma, and documentation.
-- [ ] Move suite timing, browser variance, and baseline charts into a secondary Technical Diagnostics section.
+- [x] Build a prioritized remediation queue with severity, evidence, status, and recommended action.
+- [x] Add representative remediation cases for Button, Select, and Dialog.
+- [x] Display evidence coverage separately for code, Storybook, tests, automated accessibility, manual review, Figma, and documentation.
+- [x] Keep runtime timing and provider distribution in a secondary Technical Diagnostics section.
 - [ ] Ensure resolved findings link to verification evidence.
 
 #### Design Alignment Lab
 
-- [ ] Replace the UP Button-specific Candidates view with a reusable alignment workbench.
-- [ ] Support Button, Select, and Dialog as selectable alignment cases.
-- [ ] Add code lifecycle, Figma lifecycle, alignment status, selector, canonical story, blockers, and recommended decision summary.
+- [x] Replace the UP Button-specific Candidates view with a reusable alignment workbench.
+- [x] Support Button, Select, and Dialog as selectable alignment cases.
+- [x] Add code lifecycle, Figma lifecycle, alignment status, selector, canonical story, blockers, and recommended decision summary.
 - [ ] Add a live canonical Storybook implementation for each case.
 - [ ] Add anatomy comparison between Figma, Angular structure, and rendered DOM.
-- [ ] Add Figma-property-to-Angular-API mapping.
-- [ ] Add semantic-token, component-token, provider-token, light-value, and dark-value comparison.
-- [ ] Add explicit decision records: remediate code, correct Figma, change both, accept difference, reject, or defer.
-- [ ] Remove UP, Zeroheight, and unrelated neutral/vibrant/pastel theme language from the primary view.
-- [ ] Retain light and dark comparison as the default theme scope.
+- [x] Add proposed Figma-property-to-Angular-API mapping grounded in the shipped contract.
+- [x] Add semantic-token and provider-bridge comparison while keeping missing token evidence visible.
+- [x] Add explicit alignment recommendations and next actions without fabricating approval.
+- [x] Remove UP, Zeroheight, and unrelated theme-experiment language from the primary view.
+- [x] Retain light and dark comparison as the default theme scope.
 
 #### Sample cleanup and validation
 
 - [ ] Inventory every visible sample component before removal.
 - [ ] Classify each sample as canonical story, pattern example, integration fixture, test-only fixture, or obsolete.
-- [ ] Do not delete sample code until dependent Playwright and Storybook tests are migrated.
+- [x] Preserve useful fixtures until dependent Playwright and Storybook tests are migrated.
 - [ ] Remove sample-only models, handlers, and styles after replacement coverage passes.
-- [ ] Update Playwright tests around the three new view missions.
+- [x] Update Playwright tests around the three new view missions.
 - [ ] Add application accessibility checks for inventory filters, findings tables, detail panels, alignment comparisons, and embedded stories.
-- [ ] Confirm no person-, employer-, UP-, SitePen-, or Zeroheight-specific language remains in primary application views.
+- [x] Confirm no person-, employer-, UP-, SitePen-, or Zeroheight-specific language remains in primary application views.
 
 ### Reusable documentation components
 
@@ -161,17 +161,17 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [x] Show the provider-neutral API and private PrimeNG mapping.
 - [x] Add integration evidence for body-appended overlays, clipping, stacking, focus return, theme inheritance, and mobile wrapping.
 - [x] Complete the Select human polish review.
-- [ ] Pass the complete Release Quality Gate for the exact final pull-request state.
+- [x] Pass the complete Release Quality Gate for the exact final Select pull-request state.
 
 ### Dialog
 
-- [ ] Write purpose and usage guidance.
-- [ ] Create canonical and destructive-confirmation stories.
-- [ ] Document anatomy and content hierarchy.
-- [ ] Document initial focus, focus containment, Escape, close, and focus restoration.
-- [ ] Document accessible name and description requirements.
-- [ ] Show overlay and surface tokens.
-- [ ] Add integrated application evidence.
+- [x] Write purpose and usage guidance.
+- [x] Create canonical, destructive-confirmation, long-content, and focus-sequence stories.
+- [x] Document anatomy and content hierarchy.
+- [x] Document and automate initial focus, focus containment, Escape, close, and focus restoration.
+- [x] Document accessible name requirements and the current missing description API.
+- [x] Show shared overlay and surface token relationships and the missing backdrop token.
+- [x] Add isolated and shell-integrated Dialog evidence.
 - [ ] Pass the Starlight designer-grade quality gate and human polish review.
 
 ## P0 — Manifest contract
@@ -179,14 +179,14 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Publish the manifest scope and source-of-truth rules.
 - [ ] Add public lifecycle translation.
 - [ ] Normalize evidence status values.
-- [ ] Add explicit provider-boundary status.
-- [ ] Add separate automated and manual accessibility fields.
+- [x] Add explicit provider-boundary status.
+- [x] Add separate automated and manual accessibility fields.
 - [ ] Add documentation-route fields.
-- [ ] Add Figma identity and alignment fields.
+- [x] Add Figma identity and alignment fields while preserving pending-access states.
 - [x] Validate canonical Storybook story IDs when a component declares one.
 - [x] Validate Starlight documentation routes and recorded source files.
 - [ ] Generate a basic component catalog.
-- [ ] Supply the Component Inventory and Design Alignment Lab from manifest projections rather than duplicated view data.
+- [x] Supply the Component Inventory, remediation queue, and Design Alignment Lab from the component manifest.
 
 ## P0 — Figma intent model
 
@@ -199,18 +199,18 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Record known code-versus-design differences.
 - [ ] Link Figma components to Storybook and Starlight documentation.
 - [ ] Project Figma alignment data into the Design Alignment Lab.
-- [ ] Avoid fabricated Figma approval when only draft design intent exists.
+- [x] Avoid fabricated Figma approval when only draft or inferred design intent exists.
 
 ## P0 — Accessibility foundation
 
 - [ ] Define accessibility status vocabulary.
-- [ ] Document accessibility contracts for Button, Select, and Dialog.
+- [x] Document accessibility contracts for Button, Select, and Dialog.
 - [ ] Add keyboard interaction tests for flagship components.
-- [ ] Add automated accessibility checks for representative states.
+- [x] Add automated accessibility checks for representative flagship states.
 - [x] Add Starlight page-level accessibility checks.
 - [ ] Add accessibility checks for all three main application views.
 - [ ] Ensure every Storybook and optional Starlight-preview iframe has a meaningful title.
-- [ ] Prevent automated checks from being labeled as manual review.
+- [x] Keep automated checks and manual assistive-technology review as separate evidence fields.
 
 ## P1 — Storybook remediation
 
@@ -218,8 +218,8 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Designate one canonical story per stable public component.
 - [ ] Move candidate comparisons under Experiments.
 - [ ] Rename acceptance stories.
-- [ ] Add global light and dark themes.
-- [ ] Add representative responsive viewports.
+- [x] Add global light and dark Storybook themes.
+- [x] Add representative responsive Storybook and Playwright viewports.
 - [ ] Limit controls to supported public APIs.
 - [ ] Add component descriptions that match Starlight guidance.
 - [ ] Add links from Storybook back to Starlight documentation.
@@ -257,16 +257,16 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 ## P1 — Forensic exploration log
 
-- [ ] Publish an existing-system inventory.
+- [x] Publish the shipped component inventory through the manifest-driven workbench.
 - [ ] Record duplicate Button contracts.
 - [ ] Record selector-prefix inconsistencies.
-- [ ] Record provider API leaks and escape hatches.
-- [ ] Record missing canonical stories.
-- [ ] Record missing API extraction.
-- [ ] Record manual accessibility review gaps.
-- [ ] Record Figma alignment gaps.
-- [ ] Add before-and-after remediation case studies.
-- [ ] Project selected findings and remediation cases into the main application.
+- [x] Record provider API leaks and escape hatches in manifest-backed findings.
+- [x] Surface missing canonical Storybook evidence through manifest health.
+- [x] Surface incomplete public API extraction through manifest health.
+- [x] Surface manual accessibility review gaps separately from automated checks.
+- [x] Surface pending and missing Figma alignment records.
+- [x] Add representative remediation case studies for Button, Select, and Dialog.
+- [x] Project selected findings and remediation cases into the main application.
 - [ ] Add rejected approaches and tradeoffs.
 
 ## P1 — Public cleanup

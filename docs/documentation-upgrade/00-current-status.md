@@ -1,6 +1,6 @@
 # Documentation Upgrade Current Status
 
-_Last aligned: July 18, 2026_
+_Last aligned: July 19, 2026_
 
 ## Purpose
 
@@ -51,32 +51,64 @@ Release Quality Gate run `29665993721` passed for the merged PR #14 state.
 
 PR #15 merged to `master` at commit `ef4f201557204f71d17568e9b3f80d97cd0688ad`. Release Quality Gate run #120 (`29667746141`) passed on the final branch. A local post-merge review also confirmed that dependencies installed, the workspace started, and the served documentation rendered successfully.
 
-## Active slice — PR #16 Select documentation and overlay evidence
+### PR #16 — Select page and overlay evidence
 
-PR #16 completes the Select implementation slice and is in final release validation.
+- published `/docs/components/select/` using the flagship page model;
+- recorded canonical, selected, disabled, disabled-option, empty, long-option, model-binding, and overlay-boundary stories;
+- documented the compact provider-neutral option and value contract;
+- added dedicated keyboard, model, disabled-state, focus-return, and popup behavior tests;
+- proved body-appended overlay relationships, clipping escape, stacking, light/dark token inheritance, and mobile wrapping;
+- added route, manifest, responsive, reflow, axe, accessibility-tree, visual, and Lighthouse evidence;
+- retained invalid state, required state, help text, richer option content, the disabled-option ARIA omission, Figma alignment, and manual assistive-technology review as explicit gaps.
 
-The branch now:
+PR #16 merged to `master` at commit `2d8feb525c2ef92f54effaf702383bfb6a265e77` after its release validation and visual review completed successfully.
 
-- publishes `/docs/components/select/` using the proven flagship page sequence;
-- keeps purpose, selection guidance, alternatives, and content guidance ahead of implementation evidence;
-- records a canonical Select story plus selected, disabled, disabled-option, empty, long-option, model-binding, and overlay-boundary stories;
-- documents the public `label`, `options`, `placeholder`, `disabled`, and `value` contract and the private PrimeNG boundary;
-- verifies keyboard opening, navigation, selection, Escape, model updates, disabled behavior, and focus return through eight dedicated Storybook browser tests;
-- proves body-appended overlay relationships, clipping escape, stacking, light/dark token inheritance, and mobile wrapping;
-- adds route, manifest, responsive, 200%-zoom-equivalent, axe, accessibility-tree, visual, and Lighthouse evidence;
-- records invalid-state, required-state, help-text, richer option content, missing disabled-option `aria-disabled`, Figma alignment, and manual assistive-technology review as explicit gaps;
-- has completed human visual review with a follow-up to evaluate reusable evidence components after Dialog.
+### PR #17 — Manifest-driven forensic workbench
+
+- replaced the sample-first QA remote shell with **Component Inventory**, **Quality & Remediation**, and **Design Alignment Lab** views;
+- made the generated component manifest the runtime source for discovery, evidence coverage, remediation priority, provider boundaries, Figma status, and blockers;
+- added focused unit coverage for inventory filtering, remediation scoring, and alignment decisions;
+- replaced obsolete QA, performance, and candidate-view browser assertions with workbench interaction, keyboard, theme, responsive, and federation coverage;
+- retained useful Storybook and test fixtures while removing the retired application navigation model.
+
+PR #17 merged to `master` at commit `6d743ad4d9fa0cbc91930b825763605cd24d6793` after the complete release gate passed.
+
+## Active slice — PR #18 platform simplification and Dialog
+
+PR #18 combines two tightly related changes: removing the backend platform that became obsolete when PR #17 retired the performance view, and completing the final flagship component page.
+
+### Platform simplification implemented on the branch
+
+- removed the unused NestJS `agile-api` application;
+- removed Prisma, PostgreSQL schema, migrations, seed data, and backend-only dependencies;
+- removed Docker Compose and backend startup, rebuild, migration, seed, log, and shutdown commands;
+- removed the retired performance dashboard, performance data service, workflows, scripts, tests, and documentation;
+- regenerated `pnpm-lock.yaml` from the simplified dependency graph;
+- changed `pnpm start:all` to launch only the shell, four Angular remotes, and Starlight;
+- removed Prisma generation and Docker-backed API lifecycle steps from the Release Quality Gate;
+- aligned the README, testing guide, and portfolio description with the frontend/documentation reference architecture.
+
+### Dialog flagship work implemented on the branch
+
+- publishes `/docs/components/dialog/` with the established flagship sequence;
+- upgrades the native `ps-dialog` wrapper with labelled modal semantics, predictable initial focus, forward and reverse focus containment, Escape dismissal, and opener restoration;
+- records dedicated Default, Destructive Confirmation, Long Content, and Focus Sequence stories;
+- adds isolated Storybook browser evidence for semantics, close naming, focus, dismissal, destructive actions, responsive scrolling, theme inheritance, and axe analysis;
+- adds Starlight responsive, 320 CSS-pixel reflow, StoryFrame, axe, accessibility-tree, visual, and Lighthouse coverage;
+- records the public API, native provider boundary, token relationships, destructive-action guidance, decisions, and limitations;
+- keeps background inertness, explicit body scroll lock, configurable initial focus, `aria-describedby`, stacked dialogs, Figma alignment, and manual assistive-technology review visibly open.
+
+The exact final PR state still needs generated manifest and visual-baseline commits, human visual review, and a complete Release Quality Gate pass before merge.
 
 ## Following slices
 
-1. Complete the Dialog flagship page and focus-management evidence.
-2. Add hosted pull-request preview URLs rather than build artifacts only.
-3. Add reusable Starlight presentation components only where Select and Dialog prove repeated page needs.
-4. Finalize manifest projections and generated catalog or health views.
-5. Replace sample-heavy Angular workbench views with Component Inventory, Quality & Remediation, and Design Alignment Lab.
-6. Add complete Figma identity and alignment records.
-7. Reorganize the broader Storybook hierarchy and Chromatic review workflow.
-8. Retire remaining Zeroheight scripts and primary-language references after evidence is migrated.
+1. Extract reusable Starlight presentation components only where the three flagship pages prove repetition.
+2. Generate public component catalog, lifecycle, evidence-health, and remediation views from the manifest.
+3. Add hosted pull-request preview URLs rather than build artifacts only.
+4. Add complete Figma identity, property, and token alignment records.
+5. Reorganize the broader Storybook hierarchy and Chromatic review workflow.
+6. Complete named manual screen-reader reviews for promoted interactive components.
+7. Retire remaining Zeroheight scripts and primary-language references after useful evidence is migrated.
 
 ## Tracking documents
 
@@ -90,6 +122,7 @@ The branch now:
 
 ```bash
 pnpm install --frozen-lockfile
+pnpm start:all
 pnpm validate:starlight
 pnpm check:starlight
 pnpm build:starlight

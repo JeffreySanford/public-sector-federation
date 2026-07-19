@@ -19,7 +19,6 @@ Public Sector Federation is a portfolio-grade Angular reference platform demonst
 - provider-neutral component APIs that keep PrimeNG implementation details inside a governed registry
 - light and dark theme propagation across shell, remotes, and body-appended overlays
 - Storybook, Chromatic, Playwright, axe, type checking, link checks, and manifest validation
-- a NestJS API backed by Prisma and PostgreSQL
 
 ```mermaid
 flowchart LR
@@ -54,7 +53,6 @@ flowchart LR
 | `apps/admin-remote` | Administration remote exposed as `<public-admin-root>`. |
 | `apps/qa-remote` | Stable visual-contract and Storybook evidence surface. |
 | `apps/playground` | Local component and integration playground. |
-| `apps/agile-api` | NestJS API with Prisma and PostgreSQL. |
 | `packages/tokens` | Token source, generated CSS variables, JSON, and TypeScript exports. |
 | `packages/primeng-preset` | Shared PrimeNG theme bridge and provider. |
 | `packages/ui-patterns` | Provider-neutral wrappers, patterns, and component manifest. |
@@ -72,7 +70,6 @@ Production adoption would still require organization-specific validation of the 
 
 - Node.js 22 through 26
 - pnpm 10.33.2
-- Docker Desktop for PostgreSQL and the backend API
 - Git
 
 ## Install and run
@@ -82,13 +79,12 @@ pnpm install
 pnpm start:all
 ```
 
-The shell opens at `http://localhost:4200`. Frontend applications use ports `4200` through `4204`; the QA Storybook uses port `4400`.
+The shell opens at `http://localhost:4200`. Angular applications use ports `4200` through `4204`, Starlight uses `4321`, and QA Storybook uses `4400`. No database or backend service is required.
 
 Run services individually when needed:
 
 ```bash
 pnpm start:frontend
-pnpm start:backend
 pnpm serve:shell
 pnpm serve:qa
 pnpm storybook:qa
