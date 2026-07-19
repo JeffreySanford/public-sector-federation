@@ -7,7 +7,7 @@ import StoryFrame from '../../../../components/StoryFrame.astro';
 
 Select lets a person choose one value from a known collection. Use it when the available choices are stable, mutually exclusive, and easier to scan in a popup than as persistent controls.
 
-**Lifecycle:** Stable · **Framework:** Angular · **Provider:** PrimeNG adapter · **Accessibility:** Automated evidence exists; dedicated keyboard and manual review remain incomplete · **Figma:** Pending access
+**Lifecycle:** Stable · **Framework:** Angular · **Provider:** PrimeNG adapter · **Accessibility:** Automated keyboard, popup, theme, responsive, and page evidence is complete for this declared scope; manual review remains pending · **Figma:** Pending access
 
 [Open the canonical Storybook story](https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/?path=/story/design-system-components-select--default) · [View Angular source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/public-select.component.ts) · [View Storybook source](https://github.com/JeffreySanford/public-sector-federation/blob/master/apps/qa-remote/src/stories/select.stories.ts) · [View manifest source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/manifest/component-registry.ts)
 
@@ -69,7 +69,7 @@ Use Select when:
 | Disabled field | Supported | Prevent focus and selection when the complete field is unavailable. |
 | Disabled option | Supported by the option model | Keep the option visible but unavailable for selection. |
 | Empty options | Supported as data | Pair the empty list with an explanatory placeholder or nearby message. |
-| Long label or option | Supported with responsive evidence pending completion | Allow wrapping where the provider permits; avoid horizontal clipping. |
+| Long label or option | Supported with responsive evidence | The popup is width-constrained and option labels wrap without horizontal document overflow. |
 | Invalid | Not exposed | The wrapper does not currently expose invalid state, error text, or `aria-describedby`. |
 | Required | Not exposed | Required-state semantics and visible required guidance remain undefined. |
 | Help text | Not exposed | Compose external text cautiously until an explicit description contract exists. |
@@ -134,7 +134,7 @@ The canonical `OverlayBoundary` Storybook story places the field inside an overf
 
 - The interactive trigger must expose `combobox` semantics with popup and expanded-state information.
 - The visible `label` input is also forwarded as the provider `ariaLabel`.
-- The popup must expose listbox semantics and options must expose selected and disabled states.
+- The popup must expose listbox semantics and options must expose selected state. PrimeNG currently suppresses disabled-option activation through provider state but does not emit `aria-disabled` on the rendered option; that omission remains an explicit accessibility/provider gap.
 - The combobox and popup must remain related through provider-managed IDs and ARIA attributes after the popup is appended to the body.
 - Placeholder text is not a substitute for an accessible name.
 - Empty and disabled states need understandable visible context.
@@ -142,9 +142,10 @@ The canonical `OverlayBoundary` Storybook story places the field inside an overf
 ### Current evidence status
 
 - **Storybook accessibility:** The canonical story uses the accessibility addon as an error gate.
-- **Page-level accessibility:** This Starlight route will be included in the built-site axe gate.
-- **Keyboard coverage:** Partial until the dedicated Select Storybook Playwright suite is complete.
-- **Overlay integration:** Partial; shared shell token evidence exists, but the Select-specific clipping and focus sequence need dedicated checks.
+- **Page-level accessibility:** This Starlight route is included in the built-site axe gate.
+- **Keyboard coverage:** Complete for the declared stable contract: keyboard opening, option navigation, selection, Escape, model updates, disabled states, and focus return are verified.
+- **Overlay integration:** Complete for the declared scope: body append, clipping escape, stacking, light/dark token inheritance, long-option wrapping, and mobile document width are verified.
+- **Disabled-option ARIA:** The provider prevents selection but currently omits `aria-disabled` on the option element; this remains a recorded gap.
 - **Manual assistive-technology review:** Pending.
 - **Conformance claim:** None. Automated evidence does not replace manual review.
 
@@ -235,14 +236,15 @@ The wrapper does not currently expose filtering, editable input, clear behavior,
 | Runtime source | Complete | `PublicSelectComponent` is exported from `@public-sector/ui-patterns`. |
 | Public API inventory | Complete | Registry metadata records inputs, option type, and value model. |
 | Canonical Storybook story | Complete | `Design System/Components/Select — Default`. |
-| State stories | Expanded in this slice | Selected, disabled, disabled option, empty options, long options, model binding, and overlay boundary. |
-| Automated accessibility | Partial | Storybook and page-level checks exist; popup states require dedicated interaction checks. |
-| Keyboard coverage | Partial | Add closed-state, open-state, selection, disabled-option, and Escape tests. |
-| Body-overlay integration | Partial | The dedicated boundary story exists; positioning, clipping, focus, and theme assertions remain active work. |
+| State stories | Complete for the current contract | Selected, disabled, disabled option, empty options, long options, model binding, and overlay boundary are recorded. |
+| Automated accessibility | Complete for the declared automated scope | Storybook, page-level axe, and accessibility-tree checks pass. |
+| Keyboard coverage | Complete for the declared stable contract | Dedicated tests cover opening, navigation, selection, Escape, disabled states, model updates, and focus return. |
+| Body-overlay integration | Complete for the declared scope | Tests prove body append, clipping escape, stacking, theme inheritance, focus return, and mobile wrapping. |
+| Disabled-option ARIA | Provider gap | PrimeNG marks the option disabled internally but does not currently emit `aria-disabled`. |
 | Manual screen-reader review | Pending | Record a named review before making broader accessibility claims. |
 | Token mapping | Partial | Shared semantic and provider mappings exist; dedicated Select component tokens do not. |
 | Figma alignment | Pending access | Do not fabricate component or property identifiers. |
-| Documentation | In progress | This page begins the second flagship component slice. |
+| Documentation | Complete for this slice | The page, canonical story, integrity relationships, visual baselines, and Lighthouse route are recorded. |
 
 ## Decisions and known gaps
 
@@ -251,5 +253,6 @@ The wrapper does not currently expose filtering, editable input, clear behavior,
 3. **Keep option records provider-neutral.** Consumers use `label`, `value`, and `disabled`, not PrimeNG option classes or events.
 4. **Do not expose every provider feature automatically.** Filtering, grouping, templates, and virtual scrolling require product and accessibility decisions before becoming public API.
 5. **Treat invalid, required, help-text, and description relationships as real gaps.** They should be designed rather than implied through application CSS.
-6. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.
-7. **Use Dialog next to test focus-managed overlay documentation.** Select proves listbox navigation and body-overlay behavior; Dialog will prove modal focus containment and restoration.
+6. **Track the disabled-option ARIA omission.** The provider blocks activation but does not currently emit `aria-disabled` on the rendered option.
+7. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.
+8. **Use Dialog next to test focus-managed overlay documentation.** Select proves listbox navigation and body-overlay behavior; Dialog will prove modal focus containment and restoration.

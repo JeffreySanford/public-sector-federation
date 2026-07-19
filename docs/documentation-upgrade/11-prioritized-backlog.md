@@ -153,14 +153,15 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 ### Select
 
-- [ ] Write purpose and usage guidance.
-- [ ] Create canonical and state stories.
-- [ ] Document overlay and theme behavior.
-- [ ] Document keyboard navigation and selection model.
-- [ ] Document accessible naming and invalid state.
-- [ ] Show provider-neutral API and private PrimeNG mapping.
-- [ ] Add integration evidence for body-appended overlays.
-- [ ] Pass the Starlight designer-grade quality gate and human polish review.
+- [x] Write purpose and usage guidance.
+- [x] Create canonical and state stories.
+- [x] Document overlay and theme behavior.
+- [x] Document keyboard navigation and the provider-neutral selection model.
+- [x] Document accessible naming, current invalid-state limitations, and the provider's disabled-option ARIA gap.
+- [x] Show the provider-neutral API and private PrimeNG mapping.
+- [x] Add integration evidence for body-appended overlays, clipping, stacking, focus return, theme inheritance, and mobile wrapping.
+- [x] Complete the Select human polish review.
+- [ ] Pass the complete Release Quality Gate for the exact final pull-request state.
 
 ### Dialog
 

@@ -80,23 +80,24 @@ DTCG-compatible token source
 - [x] Merge PR #15 after Release Quality Gate run #120 (`29667746141`) passed on the final branch.
 - [x] Confirm dependencies install, the workspace starts, and the served documentation renders in a local post-merge review.
 
-## Active slice — Select page and overlay evidence
+## Select page and overlay evidence
 
-- [ ] Publish `/docs/components/select/` using the established flagship page structure.
-- [ ] Write purpose, selection guidance, alternatives, and anti-patterns before evidence.
-- [ ] Designate a canonical normal Select story and focused state stories.
-- [ ] Document the `label`, `options`, `placeholder`, `disabled`, and `value` public contract.
-- [ ] Document the provider-neutral `PublicSelectOption` model and private PrimeNG mapping.
-- [ ] Document combobox semantics, accessible naming, keyboard navigation, selection, and focus behavior.
-- [ ] Cover selected, disabled, empty-option, disabled-option, long-option, and model-binding states.
-- [ ] Prove body-appended overlay positioning, clipping, stacking, and responsive behavior.
-- [ ] Prove light and dark theme inheritance for the body-appended overlay.
-- [ ] Add dedicated Storybook interaction and Playwright evidence instead of relying only on shared shell token checks.
-- [ ] Record missing invalid-state, required-state, help-text, and richer option-content APIs as explicit gaps.
-- [ ] Add the Select route, documentation source, canonical story ID, and Storybook source to integrity validation.
-- [ ] Update the component registry and generated manifest for the declared Select evidence.
-- [ ] Add Select responsive, 200%-zoom-equivalent, axe, accessibility-tree, visual, and Lighthouse coverage.
-- [ ] Pass the designer-grade quality gate and human polish review.
+- [x] Publish `/docs/components/select/` using the established flagship page structure.
+- [x] Write purpose, selection guidance, alternatives, and anti-patterns before evidence.
+- [x] Designate a canonical normal Select story and focused state stories.
+- [x] Document the `label`, `options`, `placeholder`, `disabled`, and `value` public contract.
+- [x] Document the provider-neutral `PublicSelectOption` model and private PrimeNG mapping.
+- [x] Document combobox semantics, accessible naming, keyboard navigation, selection, and focus behavior.
+- [x] Cover selected, disabled, empty-option, disabled-option, long-option, and model-binding states.
+- [x] Prove body-appended overlay positioning, clipping, stacking, and responsive behavior.
+- [x] Prove light and dark theme inheritance for the body-appended overlay.
+- [x] Add dedicated Storybook interaction and Playwright evidence instead of relying only on shared shell token checks.
+- [x] Record missing invalid-state, required-state, help-text, richer option-content, manual-review, Figma, and disabled-option ARIA evidence as explicit gaps.
+- [x] Add the Select route, documentation source, canonical story ID, and Storybook source to integrity validation.
+- [x] Update the component registry and generated manifest for the declared Select evidence.
+- [x] Add Select responsive, 200%-zoom-equivalent, axe, accessibility-tree, visual, and Lighthouse coverage.
+- [x] Complete the Select human polish review with a documented follow-up.
+- [ ] Pass the complete Release Quality Gate for the exact final pull-request state.
 
 ## Following slices
 

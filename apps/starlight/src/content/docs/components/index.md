@@ -21,10 +21,10 @@ The first documentation sequence tracks three flagship components against the ge
 
 ### Select
 
-- **Documentation:** The second flagship page is active and currently expanding its overlay and keyboard evidence.
+- **Documentation:** The second complete flagship page is published in PR #16.
 - **Lifecycle:** Active.
-- **Storybook:** A canonical story and focused state or overlay harnesses are recorded.
-- **Accessibility:** The combobox contract is documented; dedicated keyboard, popup, and manual assistive-technology review remain incomplete.
+- **Storybook:** A canonical story, complete state set, model harness, and overlay-boundary harness are recorded.
+- **Accessibility:** Dedicated automated keyboard, popup, axe, and accessibility-tree evidence is complete for the declared scope; manual assistive-technology review and the provider's missing disabled-option `aria-disabled` state remain open.
 - **Figma:** Pending access and alignment review.
 
 [Read the Select guidance](/docs/components/select/)
