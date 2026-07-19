@@ -2,6 +2,7 @@ packages:
   - "apps/*"
   - "packages/*"
 overrides:
+  tmp: 0.2.7
   zone.js: 0.15.1
 allowBuilds:
   '@parcel/watcher': true
