@@ -76,7 +76,7 @@ test.describe('Shell Module Federation', () => {
   test('should allow navigation to QA remote', async ({ page }) => {
     await page.goto('/qa');
     await page.waitForLoadState('networkidle').catch(() => {});
-    await expect(page.getByRole('heading', { name: /Component and token coverage/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Forensic Design-System Workbench', exact: true })).toBeVisible();
 
     const response = await page.goto('/qa');
     expect(response?.status()).toBeLessThan(400);
@@ -249,7 +249,7 @@ test.describe('Remote Loading Performance', () => {
     const startTime = Date.now();
     await page.goto('/qa');
     await page.waitForLoadState('networkidle').catch(() => {});
-    await expect(page.getByRole('heading', { name: /Component and token coverage/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Forensic Design-System Workbench', exact: true })).toBeVisible();
     const loadTime = Date.now() - startTime;
 
     expect(loadTime).toBeLessThan(15000);

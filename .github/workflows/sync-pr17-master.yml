@@ -1,0 +1,86 @@
+name: Sync PR 17 with master
+
+on:
+  push:
+    branches:
+      - feat/design-system-workbench
+    paths:
+      - '.github/workflows/sync-pr17-master.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/design-system-workbench
+          fetch-depth: 0
+
+      - name: Merge current master and update federation expectations
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin master
+          git merge --no-edit origin/master
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('apps/shell/e2e/federation.spec.ts')
+          text = path.read_text()
+          old = "page.getByRole('heading', { name: /Component and token coverage/i })"
+          new = "page.getByRole('heading', { name: 'Forensic Design-System Workbench', exact: true })"
+          count = text.count(old)
+          if count not in (0, 2):
+              raise SystemExit(f'Expected zero or two legacy QA heading assertions, found {count}.')
+          if count:
+              path.write_text(text.replace(old, new))
+          PY
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate focused unit and production builds
+        run: |
+          pnpm nx test qa-remote
+          pnpm nx build qa-remote
+          pnpm nx build shell
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run migrated workbench browser coverage
+        run: >-
+          pnpm exec playwright test
+          apps/qa-remote/e2e/qa-remote.spec.ts
+          apps/qa-remote/e2e/candidates-view.spec.ts
+          apps/shell/e2e/token-consumption.spec.ts
+          apps/shell/e2e/federation.spec.ts
+          --project=chromium
+          --workers=1
+
+      - name: Commit synchronized branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/shell/e2e/federation.spec.ts
+          if git diff --cached --quiet; then
+            echo "No federation expectation updates to commit."
+          else
+            git commit -m "Sync workbench with merged Select foundation"
+            git push origin HEAD:feat/design-system-workbench
+          fi

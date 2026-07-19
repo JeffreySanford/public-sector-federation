@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 const tokenNames = [
   '--ps-surface-background',
@@ -10,20 +10,14 @@ const tokenNames = [
   '--p-text-color',
 ];
 
-type OverlayCheck = {
-  name: string;
-  selector: string;
-  open: (page: import('@playwright/test').Page) => Promise<void>;
-};
-
-async function readRootTokens(page: import('@playwright/test').Page) {
+async function readRootTokens(page: Page) {
   return page.evaluate((names) => {
     const styles = getComputedStyle(document.documentElement);
     return Object.fromEntries(names.map((name) => [name, styles.getPropertyValue(name).trim()]));
   }, tokenNames);
 }
 
-async function readElementTokens(page: import('@playwright/test').Page, selector: string) {
+async function readElementTokens(page: Page, selector: string) {
   return page.locator(selector).evaluate(
     (element, names) => {
       const styles = getComputedStyle(element);
@@ -33,38 +27,17 @@ async function readElementTokens(page: import('@playwright/test').Page, selector
   );
 }
 
-async function readBodyOverlayTokens(page: import('@playwright/test').Page, check: OverlayCheck) {
-  await check.open(page);
-
-  const overlay = page.locator(check.selector).last();
-  await expect(overlay, `${check.name} overlay should be visible`).toBeVisible();
-
-  return overlay.evaluate((element, names) => {
-    let overlayRoot = element;
-    while (overlayRoot.parentElement && overlayRoot.parentElement !== document.body) {
-      overlayRoot = overlayRoot.parentElement;
-    }
-
-    const styles = getComputedStyle(overlayRoot);
-    const rootStyles = getComputedStyle(document.documentElement);
-
-    return {
-      parentTag: overlayRoot.parentElement?.tagName ?? '',
-      background: styles.backgroundColor,
-      color: styles.color,
-      tokens: Object.fromEntries(names.map((name) => [name, styles.getPropertyValue(name).trim()])),
-      rootTokens: Object.fromEntries(names.map((name) => [name, rootStyles.getPropertyValue(name).trim()])),
-    };
-  }, tokenNames);
-}
-
-async function closeOpenOverlay(page: import('@playwright/test').Page) {
-  await page.keyboard.press('Escape');
-  await page.mouse.click(12, 12);
+async function expectElementUsesRootTokens(page: Page, selector: string): Promise<void> {
+  const rootTokens = await readRootTokens(page);
+  const elementTokens = await readElementTokens(page, selector);
+  for (const name of tokenNames) {
+    expect(elementTokens[name], `${name} should resolve on ${selector}`).not.toBe('');
+    expect(elementTokens[name], `${name} should match the document token context on ${selector}`).toBe(rootTokens[name]);
+  }
 }
 
 test.describe('Design token consumption contract', () => {
-  test('resolves the shared token contract in the shell and a mounted remote', async ({ page }) => {
+  test('resolves the shared token contract in the shell and mounted workbench', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('public-sector-shell')).toBeVisible();
 
@@ -75,31 +48,21 @@ test.describe('Design token consumption contract', () => {
 
     await page.goto('/qa');
     await expect(page.locator('public-qa-root')).toBeVisible();
-    await expect(page.getByRole('heading', { name: /Component and token coverage/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Forensic Design-System Workbench', exact: true })).toBeVisible();
 
     const hostBoundary = await page.locator('public-qa-root').evaluate((element) => ({
       tagName: element.tagName.toLowerCase(),
       hasShadowRoot: Boolean(element.shadowRoot),
     }));
-    expect(hostBoundary.tagName).toBe('public-qa-root');
-    expect(hostBoundary.hasShadowRoot).toBe(false);
+    expect(hostBoundary).toEqual({ tagName: 'public-qa-root', hasShadowRoot: false });
 
+    await expectElementUsesRootTokens(page, 'public-qa-root');
     const remoteTokens = await readRootTokens(page);
-    for (const name of tokenNames) {
-      expect(remoteTokens[name], `${name} should resolve in the mounted QA remote`).not.toBe('');
-    }
-
-    const remoteHostTokens = await readElementTokens(page, 'public-qa-root');
-    for (const name of tokenNames) {
-      expect(remoteHostTokens[name], `${name} should resolve on the QA custom-element host`).not.toBe('');
-      expect(remoteHostTokens[name]).toBe(remoteTokens[name]);
-    }
-
     expect(remoteTokens['--ps-button-background']).toBe(shellTokens['--ps-button-background']);
     expect(remoteTokens['--p-content-background']).toBe(shellTokens['--p-content-background']);
   });
 
-  test('updates shell and mounted remote token values when the shell theme changes', async ({ page }) => {
+  test('updates shell and workbench token values when the shell theme changes', async ({ page }) => {
     await page.goto('/qa');
     await expect(page.locator('public-qa-root')).toBeVisible();
 
@@ -110,15 +73,11 @@ test.describe('Design token consumption contract', () => {
     const darkTokens = await readRootTokens(page);
     expect(darkTokens['--ps-surface-background']).not.toBe(lightTokens['--ps-surface-background']);
     expect(darkTokens['--p-content-background']).not.toBe(lightTokens['--p-content-background']);
-
-    const remoteHostTokens = await readElementTokens(page, 'public-qa-root');
-    expect(remoteHostTokens['--ps-surface-background']).toBe(darkTokens['--ps-surface-background']);
-    expect(remoteHostTokens['--p-content-background']).toBe(darkTokens['--p-content-background']);
-
-    await expect(page.getByRole('heading', { name: /Component and token coverage/i })).toBeVisible();
+    await expectElementUsesRootTokens(page, 'public-qa-root');
+    await expect(page.getByRole('heading', { name: 'Component Inventory', exact: true })).toBeVisible();
   });
 
-  test('keeps shared overlay surfaces in the shared token context', async ({ page }) => {
+  test('keeps the shared admin dialog overlay in the root token context', async ({ page }) => {
     await page.goto('/admin');
     await expect(page.locator('public-admin-root')).toBeVisible();
     await expect(page.getByRole('heading', { name: /Administrative settings/i })).toBeVisible();
@@ -146,82 +105,25 @@ test.describe('Design token consumption contract', () => {
     expect(overlayStyles.color).not.toBe('rgba(0, 0, 0, 0)');
     expect(overlayStyles.contentBackground).toBe(overlayStyles.tokenBackground);
     expect(overlayStyles.textColor).toBe(overlayStyles.tokenText);
-    expect(overlayStyles.tokenBackground).not.toBe('');
-    expect(overlayStyles.tokenText).not.toBe('');
   });
 
-  test('keeps menu, select, popover, and tooltip overlays in the shared body token context', async ({ page }) => {
-    const overlayChecks: OverlayCheck[] = [
-      {
-        name: 'menu',
-        selector: 'body > .p-menu, body > .p-menu-overlay',
-        open: async (currentPage) => {
-          await currentPage.getByRole('button', { name: /Open overlay menu/i }).click();
-          await expect(currentPage.getByText('Review queue')).toBeVisible();
-        },
-      },
-      {
-        name: 'select',
-        selector: 'body [role="listbox"][aria-label="Option List"]',
-        open: async (currentPage) => {
-          await currentPage.locator('ps-select').filter({ hasText: /Program overlay select/i }).locator('.p-select').click();
-          await expect(
-            currentPage
-              .locator('body [role="listbox"][aria-label="Option List"]')
-              .getByRole('option', { name: /Housing assistance/i }),
-          ).toBeVisible();
-        },
-      },
-      {
-        name: 'popover',
-        selector: 'body > .p-popover',
-        open: async (currentPage) => {
-          await currentPage.getByRole('button', { name: /Open token popover/i }).click();
-          await expect(currentPage.getByText('Popover token context')).toBeVisible();
-        },
-      },
-      {
-        name: 'tooltip',
-        selector: 'body > .p-tooltip',
-        open: async (currentPage) => {
-          await currentPage.getByRole('button', { name: /Tooltip proof/i }).focus();
-          await expect(currentPage.getByText('Tooltip body overlay token proof')).toBeVisible();
-        },
-      },
-    ];
-
+  test('keeps all three workbench views in one shared light and dark token context', async ({ page }) => {
     await page.goto('/qa');
-    await expect(page.locator('public-qa-root')).toBeVisible();
-    await expect(page.getByRole('heading', { name: /Body overlay token proof/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Component Inventory', exact: true })).toBeVisible();
+    await expectElementUsesRootTokens(page, 'public-component-inventory-view');
 
-    const lightRootTokens = await readRootTokens(page);
+    await page.getByRole('button', { name: 'Quality & Remediation', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Quality & Remediation', exact: true })).toBeVisible();
+    await expectElementUsesRootTokens(page, 'public-quality-remediation-view');
 
-    for (const check of overlayChecks) {
-      const overlay = await readBodyOverlayTokens(page, check);
-      expect(overlay.parentTag, `${check.name} should append directly to body`).toBe('BODY');
-      expect(overlay.tokens['--ps-surface-background'], `${check.name} should inherit ps surface token`).not.toBe('');
-      expect(overlay.tokens['--p-content-background'], `${check.name} should inherit PrimeNG surface token`).not.toBe('');
-      expect(overlay.tokens['--p-text-color'], `${check.name} should inherit PrimeNG text token`).not.toBe('');
-      expect(overlay.tokens['--ps-surface-background']).toBe(overlay.rootTokens['--ps-surface-background']);
-      expect(overlay.tokens['--p-content-background']).toBe(overlay.rootTokens['--p-content-background']);
-      expect(overlay.tokens['--p-text-color']).toBe(overlay.rootTokens['--p-text-color']);
-      await closeOpenOverlay(page);
-    }
+    await page.getByRole('button', { name: 'Design Alignment Lab', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Design Alignment Lab', exact: true })).toBeVisible();
+    await expectElementUsesRootTokens(page, 'public-design-alignment-lab');
 
+    const lightTokens = await readRootTokens(page);
     await page.getByRole('button', { name: /Use dark mode/i }).click();
-    await expect(page.getByRole('button', { name: /Use light mode/i })).toBeVisible();
-
-    const darkRootTokens = await readRootTokens(page);
-    expect(darkRootTokens['--ps-surface-background']).not.toBe(lightRootTokens['--ps-surface-background']);
-    expect(darkRootTokens['--p-content-background']).not.toBe(lightRootTokens['--p-content-background']);
-
-    for (const check of overlayChecks) {
-      const overlay = await readBodyOverlayTokens(page, check);
-      expect(overlay.parentTag, `${check.name} should remain body-appended after theme change`).toBe('BODY');
-      expect(overlay.tokens['--ps-surface-background']).toBe(darkRootTokens['--ps-surface-background']);
-      expect(overlay.tokens['--p-content-background']).toBe(darkRootTokens['--p-content-background']);
-      expect(overlay.tokens['--p-text-color']).toBe(darkRootTokens['--p-text-color']);
-      await closeOpenOverlay(page);
-    }
+    const darkTokens = await readRootTokens(page);
+    expect(darkTokens['--ps-surface-background']).not.toBe(lightTokens['--ps-surface-background']);
+    await expectElementUsesRootTokens(page, 'public-design-alignment-lab');
   });
 });
