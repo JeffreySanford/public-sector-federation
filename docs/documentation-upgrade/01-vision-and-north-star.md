@@ -8,7 +8,16 @@ The repository can retain its existing package names and architectural history d
 
 ## Product statement
 
-> Public Sector Design System is an Angular reference system for discovering, documenting, validating, and governing reusable components across complex applications. It combines semantic tokens, provider-neutral component APIs, Storybook, accessibility validation, Chromatic visual review, and manifest-driven documentation.
+> Public Sector Design System is an Angular reference system for discovering, documenting, validating, remediating, and consolidating reusable components across complex applications. It combines semantic tokens, provider-neutral component APIs, Storybook, accessibility validation, Chromatic visual review, and manifest-driven documentation.
+
+## Mission deliverables
+
+1. **Component workbench** — trustworthy canonical Storybook stories, supported controls, interactions, accessibility evidence, and Chromatic visual review.
+2. **Forensic audit** — an evidence-backed inventory of what ships, where it is used, which contracts overlap, and what is missing or broken.
+3. **Accessibility remediation record** — severity-ranked findings, user impact, implementation decisions, and automated plus manual verification.
+4. **Consolidation and Figma reference proposal** — canonical, merge, retain, deprecate, and investigate decisions grounded in shipped code.
+
+The documentation portal, manifest, tokens, federation examples, and release gates support these deliverables. They are not separate missions.
 
 ## Portfolio statement
 
