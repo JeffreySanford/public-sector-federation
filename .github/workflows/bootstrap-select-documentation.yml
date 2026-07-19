@@ -43,7 +43,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Complete Select manifest relationships and overlay remediation
+      - name: Complete Select manifest relationships
         shell: bash
         run: |
           python - <<'PY'
@@ -119,56 +119,10 @@ jobs:
                 'PrimeNG marks disabled options with provider state but does not currently emit aria-disabled on the rendered option.',
               ],
             }),"""
-          if old not in text:
-              raise SystemExit('Select registry seed block was not found.')
-          registry.write_text(text.replace(old, new, 1))
-
-          overrides = Path('packages/tokens/src/tokens/component-overrides.css')
-          css = overrides.read_text()
-          old_overlay = """.p-select-overlay,
-          .p-dropdown-panel {
-            overflow: hidden;
-            border: 1px solid var(--p-content-border-color) !important;
-            border-radius: var(--p-border-radius-md) !important;
-            background: var(--p-content-background) !important;
-            color: var(--p-text-color) !important;
-            box-shadow: 0 1rem 2rem color-mix(in srgb, var(--ps-text-primary) 16%, transparent) !important;
-          }
-
-          .p-select-option,
-          .p-dropdown-item {
-            padding: 0.65rem 0.85rem !important;
-            color: var(--p-text-color) !important;
-            font-weight: 700;
-          }"""
-          new_overlay = """.p-select-overlay,
-          .p-dropdown-panel {
-            overflow: hidden;
-            max-width: calc(100vw - var(--ps-space-4));
-            border: 1px solid var(--p-content-border-color) !important;
-            border-radius: var(--p-border-radius-md) !important;
-            background: var(--p-content-background) !important;
-            color: var(--p-text-color) !important;
-            box-shadow: 0 1rem 2rem color-mix(in srgb, var(--ps-text-primary) 16%, transparent) !important;
-          }
-
-          .p-select-list-container,
-          .p-dropdown-items-wrapper {
-            max-width: 100%;
-          }
-
-          .p-select-option,
-          .p-dropdown-item {
-            min-width: 0;
-            padding: 0.65rem 0.85rem !important;
-            color: var(--p-text-color) !important;
-            font-weight: 700;
-            overflow-wrap: anywhere;
-            white-space: normal;
-          }"""
-          if old_overlay not in css:
-              raise SystemExit('Select overlay override block was not found.')
-          overrides.write_text(css.replace(old_overlay, new_overlay, 1))
+          if old in text:
+              registry.write_text(text.replace(old, new, 1))
+          elif new not in text:
+              raise SystemExit('Select registry block was not recognized.')
           PY
 
       - name: Build generated token artifacts
@@ -200,7 +154,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add packages/tokens/src/tokens/component-overrides.css
           git add packages/tokens/src/tokens.css
           git add packages/ui-patterns/src/manifest/component-registry.ts
           git add packages/ui-patterns/generated/component-manifest.json
@@ -210,4 +163,5 @@ jobs:
             exit 0
           fi
           git commit -m "Complete Select relationships and visual baselines"
+          git pull --rebase origin ${{ github.event.pull_request.head.ref }}
           git push origin HEAD:${{ github.event.pull_request.head.ref }}
