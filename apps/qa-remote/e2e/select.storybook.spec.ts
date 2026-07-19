@@ -33,20 +33,6 @@ async function openWithKeyboard(page: Page, name: string): Promise<Locator> {
   return combobox;
 }
 
-async function activeOptionText(page: Page): Promise<string> {
-  const focusedOption = optionList(page).locator('[role="option"][data-p-focused="true"]');
-  if ((await focusedOption.count()) === 0) return '';
-  return (await focusedOption.first().textContent())?.trim() ?? '';
-}
-
-async function moveToOption(page: Page, expectedLabel: string): Promise<void> {
-  for (let index = 0; index < 8; index += 1) {
-    if ((await activeOptionText(page)) === expectedLabel) return;
-    await page.keyboard.press('ArrowDown');
-  }
-  expect(await activeOptionText(page)).toBe(expectedLabel);
-}
-
 async function readOverlayTheme(page: Page) {
   const listbox = optionList(page);
   return listbox.evaluate((element) => {
@@ -109,7 +95,8 @@ test.describe('Select isolated Storybook contract', () => {
     await expect(output).toHaveText('Selected value: none');
 
     const combobox = await openWithKeyboard(page, 'Communication preference');
-    await moveToOption(page, 'Postal mail');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
 
     await expect(output).toHaveText('Selected value: mail');
@@ -156,7 +143,9 @@ test.describe('Select isolated Storybook contract', () => {
     const emptyCombobox = page.getByRole('combobox', { name: 'Assigned reviewer' });
     await expect(emptyCombobox).toContainText('No reviewers available');
     await emptyCombobox.click();
-    await expect(optionList(page).getByRole('option')).toHaveCount(0);
+    const listbox = optionList(page);
+    await expect(listbox.locator('.p-select-option')).toHaveCount(0);
+    await expect(listbox.locator('.p-select-empty-message')).toBeVisible();
   });
 
   test('escapes an overflow-hidden application boundary and remains positioned above content', async ({ page }) => {
