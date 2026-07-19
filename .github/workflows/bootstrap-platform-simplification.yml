@@ -1,16 +1,16 @@
 name: Bootstrap platform simplification
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/dialog-documentation
+      - master
 
 permissions:
   contents: write
 
 jobs:
   simplify:
-    if: ${{ !contains(github.event.head_commit.message, '[platform-simplified]') }}
+    if: github.head_ref == 'agent/dialog-documentation'
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
@@ -85,8 +85,7 @@ jobs:
           readme.write_text(text)
 
           portfolio = Path('docs/PORTFOLIO-OVERVIEW.md')
-          text = portfolio.read_text().replace('- NestJS APIs, Prisma, and PostgreSQL\n', '')
-          portfolio.write_text(text)
+          portfolio.write_text(portfolio.read_text().replace('- NestJS APIs, Prisma, and PostgreSQL\n', ''))
 
           lint = Path('scripts/lint-workspace.mjs')
           text = lint.read_text()
@@ -137,6 +136,7 @@ jobs:
       - name: Commit generated cleanup
         shell: bash
         run: |
+          rm -f .github/workflows/bootstrap-platform-simplification.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
