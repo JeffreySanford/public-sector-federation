@@ -1,37 +1,53 @@
 <section class="qa-workspace">
-  <nav class="qa-workspace__tabs" aria-label="QA workspace views">
+  <header class="qa-workspace__header">
+    <div>
+      <p class="qa-workspace__eyebrow">Public Sector Design System</p>
+      <h1>Forensic Design-System Workbench</h1>
+      <p>
+        Trace shipped components from source to Storybook, accessibility evidence,
+        remediation decisions, and reconstructed design intent.
+      </p>
+    </div>
+    <div class="qa-workspace__metadata" aria-label="Workbench metadata">
+      <span>Manifest-driven</span>
+      <span>Light + dark themes</span>
+      <span>Angular runtime evidence</span>
+    </div>
+  </header>
+
+  <nav class="qa-workspace__tabs" aria-label="Design-system workbench views">
     <ps-button
-      label="QA Components"
-      icon="pi pi-th-large"
-      [styleClass]="activeView() === 'qa' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
-      (buttonClick)="setActiveView('qa')"
+      label="Component Inventory"
+      icon="pi pi-list-check"
+      [styleClass]="activeView() === 'inventory' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
+      (buttonClick)="setActiveView('inventory')"
     />
     <ps-button
-      label="Performance Tracking"
-      icon="pi pi-chart-line"
-      [styleClass]="activeView() === 'performance' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
-      (buttonClick)="setActiveView('performance')"
+      label="Quality & Remediation"
+      icon="pi pi-wrench"
+      [styleClass]="activeView() === 'quality' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
+      (buttonClick)="setActiveView('quality')"
     />
     <ps-button
-      label="Candidates"
-      icon="pi pi-flask"
-      [styleClass]="activeView() === 'candidates' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
-      (buttonClick)="setActiveView('candidates')"
+      label="Design Alignment Lab"
+      icon="pi pi-sitemap"
+      [styleClass]="activeView() === 'alignment' ? 'qa-workspace__tab is-active' : 'qa-workspace__tab'"
+      (buttonClick)="setActiveView('alignment')"
     />
   </nav>
 
   <main class="qa-workspace__content" [attr.data-active-view]="activeView()">
-    @if (activeView() === 'qa') {
-      <section class="qa-workspace__panel qa-workspace__panel--qa" aria-label="QA Components view">
-        <public-qa-remote />
+    @if (activeView() === 'inventory') {
+      <section class="qa-workspace__panel" aria-label="Component Inventory view">
+        <public-component-inventory-view />
       </section>
-    } @else if (activeView() === 'performance') {
-      <section class="qa-workspace__panel" aria-label="Performance Tracking view">
-        <public-performance-dashboard />
+    } @else if (activeView() === 'quality') {
+      <section class="qa-workspace__panel" aria-label="Quality and Remediation view">
+        <public-quality-remediation-view />
       </section>
     } @else {
-      <section class="qa-workspace__panel" aria-label="Candidates view">
-        <public-candidates-view />
+      <section class="qa-workspace__panel" aria-label="Design Alignment Lab view">
+        <public-design-alignment-lab />
       </section>
     }
   </main>
