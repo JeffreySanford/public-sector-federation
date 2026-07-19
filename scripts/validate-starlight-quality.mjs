@@ -182,6 +182,22 @@ for (const component of integrity.components) {
   if (!(await pathExists(path.resolve(workspaceRoot, component.storybookFile)))) {
     report('documentation-integrity.json', `${component.manifestId} Storybook file does not exist: ${component.storybookFile}.`);
   }
+  if (component.canonicalStoryId) {
+    if (!/^[a-z0-9-]+--[a-z0-9-]+$/.test(component.canonicalStoryId)) {
+      report('documentation-integrity.json', `${component.manifestId} uses an invalid canonical Storybook ID: ${component.canonicalStoryId}.`);
+    }
+    if (!entry.evidence.storybook.stories.includes(component.canonicalStoryId)) {
+      report('documentation-integrity.json', `${component.manifestId} canonical Storybook ID is not recorded in the generated manifest.`);
+    }
+  }
+  if (component.documentationFile) {
+    if (!entry.evidence.documentation.files.includes(component.documentationFile)) {
+      report('documentation-integrity.json', `${component.manifestId} documentation source is not recorded in the generated manifest.`);
+    }
+    if (!(await pathExists(path.resolve(workspaceRoot, component.documentationFile)))) {
+      report('documentation-integrity.json', `${component.manifestId} documentation source does not exist: ${component.documentationFile}.`);
+    }
+  }
   if (!allowedFigmaStatuses.has(component.figmaStatus)) {
     report('documentation-integrity.json', `${component.manifestId} uses an unsupported Figma status: ${component.figmaStatus}.`);
   }
@@ -207,6 +223,7 @@ function isException(file, match) {
 
 const styleFiles = [
   'apps/starlight/astro.config.mjs',
+  'apps/starlight/src/components/StoryFrame.astro',
   'apps/starlight/src/styles/custom.css',
 ];
 for (const file of styleFiles) {

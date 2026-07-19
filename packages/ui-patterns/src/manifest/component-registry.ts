@@ -169,7 +169,7 @@ function entry(seed: EntrySeed): ComponentManifestEntry {
   };
 }
 
-const buttonStories = ['apps/qa-remote/src/stories/button-tag.acceptance.stories.ts'];
+const buttonStories = ['apps/qa-remote/src/stories/button.stories.ts'];
 const dialogToastStories = ['apps/qa-remote/src/stories/dialog-toast.acceptance.stories.ts'];
 const shellTokenEvidence = ['apps/shell/e2e/token-consumption.spec.ts'];
 
@@ -211,9 +211,21 @@ export const componentRegistry = [
       { name: 'appearance', values: ['solid', 'outlined', 'text'] },
     ],
     storybookStatus: 'complete',
-    storybookTitle: 'Design System/Acceptance/Button and Tag',
+    storybookTitle: 'Design System/Components/Button',
     storybookFiles: buttonStories,
+    stories: [
+      'design-system-components-button--default',
+      'design-system-components-button--appearance-reference',
+      'design-system-components-button--loading',
+      'design-system-components-button--disabled',
+    ],
     testStatus: 'partial',
+    documentationStatus: 'complete',
+    documentationFiles: [
+      'apps/starlight/src/content/docs/components/button/index.mdx',
+      'docs/design-system/components/catalog.md',
+      'docs/design-system/architecture/registry-consumption-spec.md',
+    ],
     accessibilityPattern: 'button',
     warnings: ['Legacy tone, styleClass, outlined, text, routerLink, and buttonClick remain for stable consumer compatibility.'],
   }),
