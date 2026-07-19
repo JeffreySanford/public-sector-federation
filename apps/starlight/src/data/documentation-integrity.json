@@ -14,6 +14,10 @@
       "source": "apps/starlight/src/content/docs/components/index.md"
     },
     {
+      "route": "/docs/components/button/",
+      "source": "apps/starlight/src/content/docs/components/button/index.mdx"
+    },
+    {
       "route": "/docs/patterns/",
       "source": "apps/starlight/src/content/docs/patterns/index.md"
     },
@@ -41,10 +45,11 @@
   "components": [
     {
       "manifestId": "ps-button",
-      "docsRoute": "/docs/components/",
+      "docsRoute": "/docs/components/button/",
       "source": "packages/ui-patterns/src/public-button.component.ts",
-      "storybookTitle": "Design System/Acceptance/Button and Tag",
-      "storybookFile": "apps/qa-remote/src/stories/button-tag.acceptance.stories.ts",
+      "storybookTitle": "Design System/Components/Button",
+      "storybookFile": "apps/qa-remote/src/stories/button.stories.ts",
+      "canonicalStoryId": "design-system-components-button--default",
       "figmaStatus": "pending-access"
     },
     {
