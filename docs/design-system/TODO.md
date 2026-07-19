@@ -129,9 +129,9 @@ DTCG-compatible token source
 - [x] Write purpose, alternatives, decision, destructive-action, content, anatomy, state, keyboard, accessibility, token, API, provider-boundary, evidence, and gap guidance.
 - [x] Add Dialog to Starlight navigation, component status, documentation integrity, and Lighthouse routes.
 - [x] Add Dialog responsive, 320 CSS-pixel reflow, StoryFrame, axe, accessibility-tree, and visual tests.
-- [ ] Update the component registry and generated manifest with the declared Dialog source, stories, tests, behaviors, documentation, and limitations.
-- [ ] Generate the Linux Chromium light desktop, dark desktop, and light mobile baselines.
-- [ ] Complete and record human visual polish review.
+- [x] Update the component registry and generated manifest with the declared Dialog source, stories, tests, behaviors, documentation, and limitations.
+- [x] Generate the Linux Chromium light desktop, dark desktop, and light mobile baselines.
+- [x] Complete the human visual polish review with a follow-up to extract reusable evidence/disclosure components before broad catalog expansion.
 - [ ] Pass the complete Release Quality Gate for the exact final Dialog state.
 
 ## Following slices
