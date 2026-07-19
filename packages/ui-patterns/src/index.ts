@@ -26,8 +26,7 @@ export { PublicTagComponent, type PublicTagTone } from './public-tag.component';
 export { PublicTooltipComponent, type PublicTooltipPosition } from './public-tooltip.component';
 export { PublicToastComponent } from './public-toast.component';
 export { PublicToastService, type PublicToastMessage, type PublicToastSeverity } from './public-toast.service';
-export { componentManifest, componentRegistry } from './manifest/component-registry';
-export { componentFindings } from './manifest/component-findings';
+export { componentFindings, componentManifest, componentRegistry } from './manifest/component-registry';
 export type {
   AuditDisposition,
   ComponentFinding,
