@@ -1,0 +1,82 @@
+name: Bootstrap Dialog evidence
+
+on:
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  evidence:
+    if: github.head_ref == 'agent/dialog-documentation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/dialog-documentation
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.2
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Apply Dialog manifest relationships
+        shell: bash
+        run: |
+          python scripts/update-dialog-evidence.py
+          pnpm manifest:build
+          pnpm manifest:check
+
+      - name: Build QA Storybook
+        run: pnpm build-storybook:qa
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Dialog Storybook behavior evidence
+        run: pnpm exec playwright test apps/qa-remote/e2e/dialog.storybook.spec.ts --project=chromium --workers=1
+
+      - name: Build Starlight
+        run: pnpm build:starlight
+
+      - name: Generate and validate Starlight baselines
+        run: pnpm test:starlight:visual:update
+
+      - name: Upload Dialog visual review artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dialog-visual-baselines
+          path: apps/starlight/tests/e2e/dialog-documentation.spec.ts-snapshots
+          if-no-files-found: error
+
+      - name: Commit generated Dialog evidence
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add packages/ui-patterns/src/manifest/component-registry.ts
+          git add packages/ui-patterns/generated/component-manifest.json
+          git add apps/qa-remote/e2e/dialog.storybook.spec.ts
+          git add apps/starlight/tests/e2e/dialog-documentation.spec.ts-snapshots
+          if git diff --cached --quiet; then
+            echo 'Dialog evidence is already current.'
+            exit 0
+          fi
+          git commit -m 'Generate Dialog manifest and visual evidence'
+          git push origin HEAD:agent/dialog-documentation
