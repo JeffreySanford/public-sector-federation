@@ -556,7 +556,8 @@ export const componentRegistry = [
     storybookFiles: buttonStories, accessibilityPattern: 'status',
   }),
   entry({
-    id: 'ps-tooltip', name: 'Tooltip', exportName: 'PublicTooltipComponent', selector: 'ps-tooltip',
+    id: 'ps-tooltip',
+    tokenBoundary: 'mixed', name: 'Tooltip', exportName: 'PublicTooltipComponent', selector: 'ps-tooltip',
     source: 'packages/ui-patterns/src/public-tooltip.component.ts',
     description: 'Governed help-text wrapper that contains PrimeNG tooltip behavior.', provider: 'primeng',
     providerModules: ['primeng/tooltip'], publicApiStatus: 'complete', inputs: [{ name: 'label', type: 'string', defaultValue: 'More information' }, { name: 'text', type: 'string', defaultValue: "''" }, { name: 'position', type: 'PublicTooltipPosition', defaultValue: 'top' }], publicTypes: ['PublicTooltipPosition'], storybookStatus: 'complete', storybookTitle: 'Design System/Components/Tooltip', storybookFiles: ['apps/qa-remote/src/stories/tooltip.stories.ts'], stories: ['HoverAndFocus', 'LongText', 'EmptyText', 'PositionMatrix', 'MobileFocus', 'DisabledControlGuidance'], accessibilityPattern: 'tooltip', testStatus: 'partial', testFiles: shellTokenEvidence,
