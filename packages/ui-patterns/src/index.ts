@@ -28,6 +28,7 @@ export { PublicToastComponent } from './public-toast.component';
 export { PublicToastService, type PublicToastMessage, type PublicToastSeverity } from './public-toast.service';
 export { componentManifest, componentRegistry } from './manifest/component-registry';
 export type {
+  AuditDisposition,
   ComponentManifest,
   ComponentManifestEntry,
   EvidenceStatus,
