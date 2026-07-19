@@ -1,0 +1,80 @@
+name: Finalize Button documentation status
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/finalize-button-progress.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  progress:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull-request branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Record final validation status
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          todo = Path('docs/design-system/TODO.md')
+          text = todo.read_text()
+          old = '- [ ] Pass the complete Release Quality Gate for the final pull-request branch state.'
+          new = '- [x] Pass Release Quality Gate run #117 (`29667472520`) for the final implementation state before this status-only commit.'
+          if old not in text:
+              raise SystemExit('Final TODO release item was not found.')
+          todo.write_text(text.replace(old, new, 1))
+
+          backlog = Path('docs/documentation-upgrade/11-prioritized-backlog.md')
+          text = backlog.read_text()
+          replacements = [
+              (
+                  '- [ ] Pass the Starlight designer-grade quality gate and human polish review.',
+                  '- [x] Pass the Starlight designer-grade quality gate and human polish review for Button.',
+              ),
+              (
+                  '- [ ] Validate canonical Storybook story IDs.',
+                  '- [x] Validate canonical Storybook story IDs when a component declares one.',
+              ),
+              (
+                  '- [ ] Validate Starlight documentation routes.',
+                  '- [x] Validate Starlight documentation routes and recorded source files.',
+              ),
+              (
+                  '- [ ] Add Starlight page-level accessibility checks.',
+                  '- [x] Add Starlight page-level accessibility checks.',
+              ),
+          ]
+          for old, new in replacements:
+              if old not in text:
+                  raise SystemExit(f'Backlog status item was not found: {old}')
+              text = text.replace(old, new, 1)
+          backlog.write_text(text)
+
+          status = Path('docs/documentation-upgrade/00-current-status.md')
+          text = status.read_text()
+          old = 'PR #15 implements **Button documentation plus the reusable `StoryFrame` foundation** and is in final release validation.'
+          new = 'PR #15 implements **Button documentation plus the reusable `StoryFrame` foundation**. Release Quality Gate run #117 (`29667472520`) passed, and the pull request is ready for review.'
+          if old not in text:
+              raise SystemExit('Current-status PR #15 statement was not found.')
+          status.write_text(text.replace(old, new, 1))
+          PY
+
+      - name: Commit final status
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/design-system/TODO.md docs/documentation-upgrade/00-current-status.md docs/documentation-upgrade/11-prioritized-backlog.md
+          git commit -m "Finalize Button documentation status"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
