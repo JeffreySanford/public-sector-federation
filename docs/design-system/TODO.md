@@ -77,13 +77,32 @@ DTCG-compatible token source
 - [x] Add quality evidence, Figma status, decisions, and known gaps.
 - [x] Add the Button route and relationship to documentation-integrity validation.
 - [x] Extend accessibility-tree and visual coverage to the flagship component page.
-- [x] Pass Release Quality Gate run #117 (`29667472520`) for the final implementation state before this status-only commit.
+- [x] Merge PR #15 after Release Quality Gate run #120 (`29667746141`) passed on the final branch.
+- [x] Confirm dependencies install, the workspace starts, and the served documentation renders in a local post-merge review.
 
-## Next slices
+## Active slice — Select page and overlay evidence
 
-- [ ] Complete Select and Dialog flagship component pages.
+- [ ] Publish `/docs/components/select/` using the established flagship page structure.
+- [ ] Write purpose, selection guidance, alternatives, and anti-patterns before evidence.
+- [ ] Designate a canonical normal Select story and focused state stories.
+- [ ] Document the `label`, `options`, `placeholder`, `disabled`, and `value` public contract.
+- [ ] Document the provider-neutral `PublicSelectOption` model and private PrimeNG mapping.
+- [ ] Document combobox semantics, accessible naming, keyboard navigation, selection, and focus behavior.
+- [ ] Cover selected, disabled, empty-option, disabled-option, long-option, and model-binding states.
+- [ ] Prove body-appended overlay positioning, clipping, stacking, and responsive behavior.
+- [ ] Prove light and dark theme inheritance for the body-appended overlay.
+- [ ] Add dedicated Storybook interaction and Playwright evidence instead of relying only on shared shell token checks.
+- [ ] Record missing invalid-state, required-state, help-text, and richer option-content APIs as explicit gaps.
+- [ ] Add the Select route, documentation source, canonical story ID, and Storybook source to integrity validation.
+- [ ] Update the component registry and generated manifest for the declared Select evidence.
+- [ ] Add Select responsive, 200%-zoom-equivalent, axe, accessibility-tree, visual, and Lighthouse coverage.
+- [ ] Pass the designer-grade quality gate and human polish review.
+
+## Following slices
+
+- [ ] Complete the Dialog flagship component page and focus-management evidence.
 - [ ] Add hosted pull-request preview URLs rather than build artifacts only.
-- [ ] Add reusable `StatusBadge`, `ComponentHeader`, `EvidencePanel`, `TokenTable`, `AccessibilityStatus`, `FindingCard`, `DecisionRecord`, and `LightDarkPreview` components as page needs prove them.
+- [ ] Add reusable `StatusBadge`, `ComponentHeader`, `EvidencePanel`, `TokenTable`, `AccessibilityStatus`, `FindingCard`, `DecisionRecord`, and `LightDarkPreview` components only where repeated page needs justify them.
 - [ ] Add Storybook and Chromatic review coverage for reusable Starlight presentation components.
 - [ ] Finalize manifest lifecycle, documentation, accessibility, provider-boundary, Figma, ownership, and blocker projections.
 - [ ] Generate the public component catalog and health/gap views.
