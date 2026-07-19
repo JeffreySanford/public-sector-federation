@@ -171,7 +171,6 @@
           "status": "complete",
           "files": [
             "apps/qa-remote/e2e/button.storybook.spec.ts",
-            "apps/starlight/e2e/button-page.spec.ts",
             "apps/shell/e2e/token-consumption.spec.ts"
           ],
           "behaviors": [
