@@ -1,0 +1,61 @@
+name: Approve aligned Select visual baselines
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/approve-select-baselines.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  baselines:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out pull-request branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.2
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Build Starlight
+        run: pnpm build:starlight
+
+      - name: Update reviewed visual baselines
+        run: pnpm test:starlight:visual:update
+
+      - name: Commit Select baseline updates
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          find apps/starlight/tests/e2e -path '*-snapshots/select-*.png' -print0 | xargs -0 git add -f
+          if git diff --cached --quiet; then
+            echo "Reviewed Select baselines are already current."
+            exit 0
+          fi
+          git commit -m "Accept aligned Select visual baselines"
+          git pull --rebase origin ${{ github.event.pull_request.head.ref }}
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
