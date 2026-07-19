@@ -18,6 +18,7 @@ const appearances: PublicButtonAppearance[] = ['solid', 'outlined', 'text'];
     <main class="button-story" aria-labelledby="buttonInteractionTitle">
       <h1 id="buttonInteractionTitle">Stable Button interaction evidence</h1>
       <ps-button label="Submit application" (activated)="recordActivation()" />
+      <ps-button label="Submitting application" [loading]="true" (activated)="recordActivation()" />
       <output aria-live="polite">Activations: {{ activations() }}</output>
     </main>
   `,
