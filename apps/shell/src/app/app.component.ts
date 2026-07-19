@@ -17,6 +17,10 @@ export class AppComponent {
     { path: '/admin', label: 'Administration' },
     { path: '/qa', label: 'QA Components' },
   ];
+  readonly documentationUrl =
+    window.location.port === '4200'
+      ? `${window.location.protocol}//${window.location.hostname}:4321/docs/`
+      : '/docs/';
   readonly themeVariants: { label: string; value: PublicSectorThemeVariant }[] = [
     { label: 'Neutral', value: 'neutral' },
     { label: 'Vibrant', value: 'vibrant' },

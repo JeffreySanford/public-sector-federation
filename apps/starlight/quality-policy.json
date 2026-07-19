@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "polishReview": {
+    "status": "polish-approved-with-follow-up",
+    "reviewer": "Jeffrey Sanford",
+    "reviewedAt": "2026-07-18",
+    "scope": "Astro Starlight foundation shell, initial information architecture, shared token theme, and local start:all integration.",
+    "followUp": "Repeat human polish review when the reusable documentation components and flagship Button page introduce denser content layouts."
+  },
+  "visualBaselines": {
+    "automaticAcceptanceAllowed": false,
+    "updateCommand": "pnpm test:starlight:visual:update",
+    "reviewRequirement": "Every changed baseline must be inspected in the pull request and accepted intentionally by a human reviewer."
+  },
+  "styleExceptions": [
+    {
+      "file": "apps/starlight/astro.config.mjs",
+      "match": "#1d4ed8",
+      "reason": "Browser theme-color metadata requires a concrete color value and cannot resolve a CSS custom property."
+    },
+    {
+      "file": "apps/starlight/src/styles/custom.css",
+      "match": "outline-offset: 3px;",
+      "reason": "The focus-ring separation is an accessibility measurement rather than layout spacing."
+    },
+    {
+      "file": "apps/starlight/src/styles/custom.css",
+      "match": "padding-block: 2.75rem 3.5rem;",
+      "reason": "This is an approved responsive hero composition exception until a fluid semantic spacing token is introduced."
+    },
+    {
+      "file": "apps/starlight/src/styles/custom.css",
+      "match": "scroll-behavior: auto !important;",
+      "reason": "Reduced-motion overrides must disable framework and browser smooth scrolling."
+    },
+    {
+      "file": "apps/starlight/src/styles/custom.css",
+      "match": "transition-duration: 0.01ms !important;",
+      "reason": "Reduced-motion overrides must win over framework component transitions."
+    },
+    {
+      "file": "apps/starlight/src/styles/custom.css",
+      "match": "animation-duration: 0.01ms !important;",
+      "reason": "Reduced-motion overrides must win over framework component animations."
+    },
+    {
+      "file": "apps/starlight/src/styles/custom.css",
+      "match": "animation-iteration-count: 1 !important;",
+      "reason": "Reduced-motion overrides must prevent repeated framework animations."
+    }
+  ]
+}

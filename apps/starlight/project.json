@@ -35,6 +35,23 @@
       "options": {
         "command": "pnpm --dir packages/tokens build && pnpm --dir apps/starlight check"
       }
+    },
+    "quality-gate": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "outputs": [
+        "{workspaceRoot}/playwright-report/starlight",
+        "{workspaceRoot}/test-results/starlight",
+        "{workspaceRoot}/artifacts/lighthouse/starlight"
+      ],
+      "options": {
+        "commands": [
+          "node scripts/validate-starlight-quality.mjs",
+          "pnpm exec playwright test --config apps/starlight/playwright.config.ts",
+          "pnpm exec lhci autorun --config apps/starlight/lighthouserc.cjs"
+        ],
+        "parallel": false
+      }
     }
   },
   "tags": ["scope:documentation", "type:application"]

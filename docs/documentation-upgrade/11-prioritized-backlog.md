@@ -19,16 +19,17 @@ See [Astro Starlight Application and Designer-Grade Quality Gate](./17-astro-sta
 - [x] Create `apps/starlight` as an independently built Astro Starlight application in Nx.
 - [x] Configure the production base path at `/docs/` or the approved root route.
 - [x] Add Nx `serve`, `build`, `preview`, and `check` targets.
-- [ ] Add the dedicated Nx `quality-gate` target.
+- [x] Add the dedicated Nx `quality-gate` target.
 - [x] Configure the public title as **Public Sector Design System**.
 - [x] Add Overview, Foundations, Components, Patterns, Accessibility, Develop, Quality, Architecture, and Exploration navigation.
 - [x] Add a landing page with links to Storybook, source, architecture, and the Angular workbench.
-- [ ] Add the component-status summary and canonical status link to the landing page.
+- [x] Add the component-status summary and canonical status link to the landing page.
 - [x] Add search, light/dark appearance, responsive navigation, and code highlighting.
 - [x] Add Mermaid support or an approved rendering strategy.
 - [x] Consume the shared semantic-token CSS rather than inventing an unrelated documentation theme.
-- [ ] Publish pull-request previews for all Starlight changes.
-- [ ] Add a normal same-origin Documentation link from the Angular workbench to Starlight.
+- [x] Publish the built Starlight output as a pull-request artifact.
+- [ ] Publish a hosted pull-request preview URL for all Starlight changes.
+- [x] Add a normal same-origin Documentation link from the Angular workbench to Starlight.
 - [ ] Add an optional Angular documentation gateway route only when useful for navigation continuity.
 - [x] Keep iframe embedding optional and non-canonical.
 
@@ -36,20 +37,22 @@ See [Astro Starlight Application and Designer-Grade Quality Gate](./17-astro-sta
 
 - [x] Add Astro build, type, and framework validation.
 - [x] Add content collection schemas and required frontmatter validation.
-- [ ] Add heading-level, single-`h1`, placeholder, local-path, and public-wording checks.
-- [ ] Add documentation link validation.
-- [ ] Add manifest, Storybook story, source-path, Figma-status, and docs-route integrity validation.
-- [ ] Add a token/style validator for raw colors, arbitrary spacing, unapproved typography, inline styles, and undocumented exceptions.
-- [ ] Add Playwright responsive tests at 360, 768, 1024, 1280, and 1440 pixel widths.
-- [ ] Add page-level no-overflow, no-clipping, navigation, table, Storybook-frame, light, dark, and 200%-zoom checks.
-- [ ] Add Playwright and axe accessibility checks against built Starlight pages.
-- [ ] Add accessibility-tree snapshots for critical navigation and component-page structures.
-- [ ] Add page-level visual regression coverage.
+- [x] Add heading-level, single-`h1`, placeholder, local-path, and public-wording checks.
+- [x] Add documentation link validation.
+- [x] Add manifest, Storybook story, source-path, Figma-status, and docs-route integrity validation.
+- [x] Add a token/style validator for raw colors, arbitrary spacing, unapproved typography, inline styles, and undocumented exceptions.
+- [x] Add Playwright responsive tests at 360, 768, 1024, 1280, and 1440 pixel widths.
+- [x] Add page-level no-overflow, navigation, table, light, dark, and 200%-zoom checks.
+- [ ] Add StoryFrame-specific clipping and embedded-story checks when `StoryFrame` is introduced.
+- [x] Add Playwright and axe accessibility checks against built Starlight pages.
+- [x] Add initial accessibility-tree snapshots for the critical overview heading and primary action.
+- [ ] Extend accessibility-tree snapshots to navigation and flagship component-page structures.
+- [x] Add page-level visual regression coverage.
 - [ ] Use Storybook and Chromatic for reusable Starlight presentation components.
-- [ ] Add Lighthouse CI scores and resource budgets.
-- [ ] Prevent automatic acceptance of changed visual baselines.
-- [ ] Require explicit `polish-approved`, `polish-approved-with-follow-up`, or `polish-changes-required` review status.
-- [ ] Add the Starlight quality gate to `verify:release`.
+- [x] Add Lighthouse CI scores and resource budgets.
+- [x] Prevent automatic acceptance of changed visual baselines.
+- [x] Require explicit `polish-approved`, `polish-approved-with-follow-up`, or `polish-changes-required` review status.
+- [x] Add the Starlight quality gate to `verify:release`.
 
 ### Public framing
 
@@ -279,16 +282,17 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 ## P1 — Quality and deployment
 
-- [ ] Add `starlight:quality-gate` to `verify:release`.
+- [x] Add `starlight:quality-gate` to `verify:release`.
 - [ ] Validate Storybook embed links.
-- [ ] Validate manifest documentation paths.
+- [x] Validate manifest documentation paths.
 - [ ] Publish Starlight, Storybook, and Angular under one origin or coordinated domains.
-- [ ] Add pull-request previews for Starlight and the Angular workbench.
+- [x] Add a pull-request build artifact for Starlight.
+- [ ] Add hosted pull-request previews for Starlight and the Angular workbench.
 - [ ] Add Chromatic visual review links to pull requests.
 - [ ] Add documentation and visual-diff artifacts to CI failure output.
 - [ ] Add visual regression coverage for the three upgraded application views.
-- [ ] Require human polish approval for substantial Starlight visual changes.
-- [ ] Prevent visual baselines from being auto-accepted.
+- [x] Require human polish approval for substantial Starlight visual changes.
+- [x] Prevent visual baselines from being auto-accepted.
 
 ## P2 — Contract normalization
 

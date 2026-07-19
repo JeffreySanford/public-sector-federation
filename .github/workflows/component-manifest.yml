@@ -42,9 +42,9 @@ permissions:
 
 jobs:
   validate:
-    name: Static, build, Storybook, and browser gates
+    name: Static, build, documentation, Storybook, and browser gates
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 75
 
     steps:
       - name: Check out repository
@@ -122,6 +122,20 @@ jobs:
         if: github.event_name != 'pull_request'
         run: pnpm exec playwright install --with-deps chromium firefox webkit
 
+      - name: Run Starlight designer-grade quality gate
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm quality:starlight 2>&1 | tee starlight-quality.log
+
+      - name: Upload Starlight preview artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: starlight-preview
+          path: dist/apps/starlight
+          if-no-files-found: error
+
       - name: Start Docker-backed API
         shell: bash
         run: |
@@ -158,11 +172,14 @@ jobs:
             typecheck.log
             unit-tests.log
             build.log
+            starlight-quality.log
             backend.log
             storybook-e2e.log
             e2e.log
+            artifacts/lighthouse/
             playwright-report/
             test-results/
+            dist/apps/starlight/
             dist/storybook/qa-remote/index.json
           if-no-files-found: warn
 
