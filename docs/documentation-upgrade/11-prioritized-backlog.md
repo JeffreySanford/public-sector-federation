@@ -149,7 +149,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [x] Add API table.
 - [x] Add quality evidence summary.
 - [x] Move historical comparison to a final Decisions section.
-- [ ] Pass the Starlight designer-grade quality gate and human polish review.
+- [x] Pass the Starlight designer-grade quality gate and human polish review for Button.
 
 ### Select
 
@@ -182,8 +182,8 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Add separate automated and manual accessibility fields.
 - [ ] Add documentation-route fields.
 - [ ] Add Figma identity and alignment fields.
-- [ ] Validate canonical Storybook story IDs.
-- [ ] Validate Starlight documentation routes.
+- [x] Validate canonical Storybook story IDs when a component declares one.
+- [x] Validate Starlight documentation routes and recorded source files.
 - [ ] Generate a basic component catalog.
 - [ ] Supply the Component Inventory and Design Alignment Lab from manifest projections rather than duplicated view data.
 
@@ -206,7 +206,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Document accessibility contracts for Button, Select, and Dialog.
 - [ ] Add keyboard interaction tests for flagship components.
 - [ ] Add automated accessibility checks for representative states.
-- [ ] Add Starlight page-level accessibility checks.
+- [x] Add Starlight page-level accessibility checks.
 - [ ] Add accessibility checks for all three main application views.
 - [ ] Ensure every Storybook and optional Starlight-preview iframe has a meaningful title.
 - [ ] Prevent automated checks from being labeled as manual review.

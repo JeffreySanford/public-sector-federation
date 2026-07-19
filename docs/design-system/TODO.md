@@ -77,7 +77,7 @@ DTCG-compatible token source
 - [x] Add quality evidence, Figma status, decisions, and known gaps.
 - [x] Add the Button route and relationship to documentation-integrity validation.
 - [x] Extend accessibility-tree and visual coverage to the flagship component page.
-- [ ] Pass the complete Release Quality Gate for the final pull-request branch state.
+- [x] Pass Release Quality Gate run #117 (`29667472520`) for the final implementation state before this status-only commit.
 
 ## Next slices
 
