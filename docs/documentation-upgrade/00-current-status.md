@@ -51,23 +51,21 @@ Release Quality Gate run `29665993721` passed for the merged PR #14 state.
 
 PR #15 merged to `master` at commit `ef4f201557204f71d17568e9b3f80d97cd0688ad`. Release Quality Gate run #120 (`29667746141`) passed on the final branch. A local post-merge review also confirmed that dependencies installed, the workspace started, and the served documentation rendered successfully.
 
-## Active slice — Select documentation and overlay evidence
+## Active slice — PR #16 Select documentation and overlay evidence
 
-The next slice is **Select documentation plus canonical overlay and keyboard evidence**.
+PR #16 completes the Select implementation slice and is in final release validation.
 
-The slice should:
+The branch now:
 
-- publish `/docs/components/select/` using the proven Button page sequence;
-- keep purpose, selection guidance, and alternatives ahead of implementation evidence;
-- designate a normal canonical Select story and focused state stories;
-- document the public `label`, `options`, `placeholder`, `disabled`, and `value` contract;
-- document the provider-neutral option model and the private PrimeNG implementation boundary;
-- document accessible naming, combobox semantics, keyboard navigation, selection, disabled options, empty options, and long-option behavior;
-- prove body-appended overlay positioning, clipping, stacking, light/dark theme inheritance, and responsive behavior;
-- add dedicated Storybook interaction and Playwright evidence rather than relying only on shared shell token checks;
-- record current limitations honestly, including the absence of invalid-state, help-text, required-state, and richer option-content APIs;
-- update the component registry, generated manifest, documentation-integrity relationships, TODO, and prioritized backlog in the same pull request;
-- pass the existing designer-grade Starlight gate and human polish review.
+- publishes `/docs/components/select/` using the proven flagship page sequence;
+- keeps purpose, selection guidance, alternatives, and content guidance ahead of implementation evidence;
+- records a canonical Select story plus selected, disabled, disabled-option, empty, long-option, model-binding, and overlay-boundary stories;
+- documents the public `label`, `options`, `placeholder`, `disabled`, and `value` contract and the private PrimeNG boundary;
+- verifies keyboard opening, navigation, selection, Escape, model updates, disabled behavior, and focus return through eight dedicated Storybook browser tests;
+- proves body-appended overlay relationships, clipping escape, stacking, light/dark token inheritance, and mobile wrapping;
+- adds route, manifest, responsive, 200%-zoom-equivalent, axe, accessibility-tree, visual, and Lighthouse evidence;
+- records invalid-state, required-state, help-text, richer option content, missing disabled-option `aria-disabled`, Figma alignment, and manual assistive-technology review as explicit gaps;
+- has completed human visual review with a follow-up to evaluate reusable evidence components after Dialog.
 
 ## Following slices
 

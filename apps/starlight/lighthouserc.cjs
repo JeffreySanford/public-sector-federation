@@ -7,6 +7,7 @@ module.exports = {
         'http://127.0.0.1:4322/docs/',
         'http://127.0.0.1:4322/docs/components/',
         'http://127.0.0.1:4322/docs/components/button/',
+        'http://127.0.0.1:4322/docs/components/select/',
         'http://127.0.0.1:4322/docs/architecture/',
       ],
       numberOfRuns: 1,

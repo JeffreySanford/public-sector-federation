@@ -269,6 +269,7 @@
 .p-select-overlay,
 .p-dropdown-panel {
   overflow: hidden;
+  max-width: calc(100vw - var(--ps-space-4));
   border: 1px solid var(--p-content-border-color) !important;
   border-radius: var(--p-border-radius-md) !important;
   background: var(--p-content-background) !important;
@@ -276,11 +277,19 @@
   box-shadow: 0 1rem 2rem color-mix(in srgb, var(--ps-text-primary) 16%, transparent) !important;
 }
 
+.p-select-list-container,
+.p-dropdown-items-wrapper {
+  max-width: 100%;
+}
+
 .p-select-option,
 .p-dropdown-item {
+  min-width: 0;
   padding: 0.65rem 0.85rem !important;
   color: var(--p-text-color) !important;
   font-weight: 700;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .p-select-option:hover,

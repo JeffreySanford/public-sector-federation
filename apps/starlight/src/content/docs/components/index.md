@@ -21,15 +21,17 @@ The first documentation sequence tracks three flagship components against the ge
 
 ### Select
 
-- **Documentation:** Flagship page is queued after Button.
+- **Documentation:** The second complete flagship page is published in PR #16.
 - **Lifecycle:** Active.
-- **Storybook:** Canonical component stories are recorded.
-- **Accessibility:** The combobox pattern is identified; broader integrated keyboard and overlay verification remains incomplete.
+- **Storybook:** A canonical story, complete state set, model harness, and overlay-boundary harness are recorded.
+- **Accessibility:** Dedicated automated keyboard, popup, axe, and accessibility-tree evidence is complete for the declared scope; manual assistive-technology review and the provider's missing disabled-option `aria-disabled` state remain open.
 - **Figma:** Pending access and alignment review.
+
+[Read the Select guidance](/docs/components/select/)
 
 ### Dialog
 
-- **Documentation:** Flagship page is queued after Button.
+- **Documentation:** Flagship page is queued after Select.
 - **Lifecycle:** Active.
 - **Storybook:** Dialog and toast acceptance evidence is recorded.
 - **Accessibility:** The dialog pattern is identified; focus containment, restoration, and manual review remain incomplete.
@@ -40,7 +42,7 @@ The quality gate cross-checks these relationships against `packages/ui-patterns/
 ## Flagship sequence
 
 1. **Button** establishes action hierarchy, public API decisions, interaction states, token mapping, live-story presentation, and the stable-versus-candidate remediation story.
-2. **Select** proves overlay behavior, keyboard navigation, accessible naming, provider abstraction, and theme propagation.
+2. **Select** proves body-appended overlay behavior, keyboard navigation, accessible naming, provider abstraction, and theme propagation.
 3. **Dialog** proves focus management, semantic structure, destructive-action patterns, and integrated application behavior.
 
 ## Page contract

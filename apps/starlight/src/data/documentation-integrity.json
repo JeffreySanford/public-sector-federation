@@ -18,6 +18,10 @@
       "source": "apps/starlight/src/content/docs/components/button/index.mdx"
     },
     {
+      "route": "/docs/components/select/",
+      "source": "apps/starlight/src/content/docs/components/select/index.mdx"
+    },
+    {
       "route": "/docs/patterns/",
       "source": "apps/starlight/src/content/docs/patterns/index.md"
     },
@@ -55,10 +59,12 @@
     },
     {
       "manifestId": "ps-select",
-      "docsRoute": "/docs/components/",
+      "docsRoute": "/docs/components/select/",
+      "documentationFile": "apps/starlight/src/content/docs/components/select/index.mdx",
       "source": "packages/ui-patterns/src/public-select.component.ts",
       "storybookTitle": "Design System/Components/Select",
       "storybookFile": "apps/qa-remote/src/stories/select.stories.ts",
+      "canonicalStoryId": "design-system-components-select--default",
       "figmaStatus": "pending-access"
     },
     {

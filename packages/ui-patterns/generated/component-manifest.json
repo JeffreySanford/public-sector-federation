@@ -1351,9 +1351,14 @@
         "provider": "primeng",
         "providerName": "PrimeNG",
         "providerInternalOnly": true,
-        "providerModules": [],
+        "providerModules": [
+          "primeng/select"
+        ],
         "providerEscapeHatches": [],
-        "knownLimitations": []
+        "knownLimitations": [
+          "Invalid state, required state, help text, aria-describedby, richer option content, Figma alignment, and manual assistive-technology review remain pending.",
+          "PrimeNG marks disabled options with provider state but does not currently emit aria-disabled on the rendered option."
+        ]
       },
       "variants": {
         "properties": [],
@@ -1366,8 +1371,8 @@
       },
       "accessibility": {
         "pattern": "combobox",
-        "automatedChecks": "partial",
-        "keyboardCoverage": "missing",
+        "automatedChecks": "complete",
+        "keyboardCoverage": "complete",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
           "Consumers remain responsible for accessible page composition and meaningful content."
@@ -1381,26 +1386,39 @@
             "apps/qa-remote/src/stories/select.stories.ts"
           ],
           "stories": [
-            "Interactive",
-            "Selected",
-            "Disabled",
-            "EmptyOptions",
-            "LongOptions",
-            "ModelBinding"
+            "design-system-components-select--default",
+            "design-system-components-select--selected",
+            "design-system-components-select--disabled",
+            "design-system-components-select--disabled-option",
+            "design-system-components-select--empty-options",
+            "design-system-components-select--long-options",
+            "design-system-components-select--model-binding",
+            "design-system-components-select--overlay-boundary"
           ]
         },
         "tests": {
-          "status": "partial",
+          "status": "complete",
           "files": [
+            "apps/qa-remote/e2e/select.storybook.spec.ts",
             "apps/shell/e2e/token-consumption.spec.ts"
           ],
-          "behaviors": []
+          "behaviors": [
+            "accessible combobox and listbox relationship",
+            "keyboard opening and option navigation",
+            "provider-neutral model selection",
+            "Escape and focus return",
+            "disabled field and option suppression",
+            "body-appended overlay clipping escape",
+            "light and dark overlay token inheritance",
+            "mobile long-option reflow"
+          ]
         },
         "documentation": {
-          "status": "partial",
+          "status": "complete",
           "files": [
+            "apps/starlight/src/content/docs/components/select/index.mdx",
             "docs/design-system/components/catalog.md",
-            "docs/design-system/architecture/registry-consumption-spec.md"
+            "docs/design-system/architecture/overlay-dom-validation.md"
           ]
         }
       },

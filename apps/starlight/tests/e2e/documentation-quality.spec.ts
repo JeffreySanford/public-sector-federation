@@ -7,6 +7,7 @@ const routes = [
   { name: 'foundations', path: '/docs/foundations/' },
   { name: 'components', path: '/docs/components/' },
   { name: 'button', path: '/docs/components/button/' },
+  { name: 'select', path: '/docs/components/select/' },
   { name: 'patterns', path: '/docs/patterns/' },
   { name: 'accessibility', path: '/docs/accessibility/' },
   { name: 'develop', path: '/docs/develop/' },
@@ -116,6 +117,20 @@ test.describe('responsive navigation and reflow', () => {
       const box = await storyFrame.boundingBox();
       expect(box?.width ?? 0).toBeLessThanOrEqual(width);
     });
+
+    test(`Select guidance and StoryFrame remain usable at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await open(page, '/docs/components/select/');
+      await expectNoHorizontalOverflow(page);
+      await expect(page.getByRole('heading', { level: 1, name: 'Select' })).toBeVisible();
+
+      const storyFrame = page.locator('[data-story-frame]');
+      await expect(storyFrame).toBeVisible();
+      await expect(storyFrame.getByRole('button', { name: 'Load live example' })).toBeVisible();
+      await expect(storyFrame.getByRole('link', { name: 'Open full story' })).toBeVisible();
+      const box = await storyFrame.boundingBox();
+      expect(box?.width ?? 0).toBeLessThanOrEqual(width);
+    });
   }
 
   test('Button content reflows at the 320 CSS-pixel equivalent of 200% zoom', async ({ page }) => {
@@ -125,6 +140,14 @@ test.describe('responsive navigation and reflow', () => {
     await expect(page.getByRole('heading', { level: 1, name: 'Button' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Load live example' })).toBeVisible();
   });
+
+  test('Select content reflows at the 320 CSS-pixel equivalent of 200% zoom', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 900 });
+    await open(page, '/docs/components/select/');
+    await expectNoHorizontalOverflow(page);
+    await expect(page.getByRole('heading', { level: 1, name: 'Select' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Load live example' })).toBeVisible();
+  });
 });
 
 test.describe('StoryFrame contract', () => {
@@ -132,7 +155,7 @@ test.describe('StoryFrame contract', () => {
     await page.route(`${storybookOrigin}/**`, async (route) => route.abort());
   });
 
-  test('loads the canonical story only after activation', async ({ page }) => {
+  test('loads the canonical Button story only after activation', async ({ page }) => {
     await open(page, '/docs/components/button/');
     const storyFrame = page.locator('[data-story-frame]');
     const iframe = storyFrame.locator('iframe');
@@ -148,8 +171,24 @@ test.describe('StoryFrame contract', () => {
     );
   });
 
+  test('loads the canonical Select story only after activation', async ({ page }) => {
+    await open(page, '/docs/components/select/');
+    const storyFrame = page.locator('[data-story-frame]');
+    const iframe = storyFrame.locator('iframe');
+
+    await expect(iframe).toBeHidden();
+    await expect(iframe).toHaveAttribute('title', 'Select — choose a program');
+    await expect(iframe).toHaveAttribute('loading', 'lazy');
+    await storyFrame.getByRole('button', { name: 'Load live example' }).click();
+    await expect(iframe).toBeVisible();
+    await expect(iframe).toHaveAttribute(
+      'src',
+      /design-system-components-select--default.*themeVariant:neutral;themeMode:light/,
+    );
+  });
+
   test('reloads an activated story with the current documentation theme', async ({ page }) => {
-    await open(page, '/docs/components/button/');
+    await open(page, '/docs/components/select/');
     const storyFrame = page.locator('[data-story-frame]');
     const iframe = storyFrame.locator('iframe');
     await storyFrame.getByRole('button', { name: 'Load live example' }).click();
@@ -169,6 +208,7 @@ test.describe('theme and accessibility contracts', () => {
     '/docs/',
     '/docs/components/',
     '/docs/components/button/',
+    '/docs/components/select/',
     '/docs/architecture/',
   ]) {
     test(`${route} has no serious or critical axe violations`, async ({ page }) => {
@@ -202,6 +242,22 @@ test.describe('theme and accessibility contracts', () => {
       - region "Button — default action live example":
         - strong: Button — default action
         - paragraph: The stable ps-button wrapper using its preferred intent, appearance, and activated contract.
+        - link "Open full story"
+        - paragraph: Load the isolated implementation when you are ready to interact with it.
+        - button "Load live example"
+        - paragraph: The live frame is opt-in to keep documentation navigation fast and predictable.
+    `);
+  });
+
+  test('Select page and StoryFrame retain their critical accessibility-tree shape', async ({ page }) => {
+    await open(page, '/docs/components/select/');
+    await expect(page.getByRole('heading', { level: 1 })).toMatchAriaSnapshot(`
+      - heading "Select" [level=1]
+    `);
+    await expect(page.locator('[data-story-frame]')).toMatchAriaSnapshot(`
+      - region "Select — choose a program live example":
+        - strong: Select — choose a program
+        - paragraph: The stable ps-select wrapper with a visible label, placeholder, provider-neutral options, and a nullable string value.
         - link "Open full story"
         - paragraph: Load the isolated implementation when you are ready to interact with it.
         - button "Load live example"
@@ -272,6 +328,39 @@ test.describe('human-reviewed visual baselines', () => {
     await open(page, '/docs/components/button/');
     await setTheme(page, 'light');
     await expect(page).toHaveScreenshot('button-light-mobile.png', {
+      fullPage: true,
+      mask: [page.locator('time')],
+    });
+  });
+
+  test('Select light desktop', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'light' });
+    await open(page, '/docs/components/select/');
+    await setTheme(page, 'light');
+    await expect(page).toHaveScreenshot('select-light-desktop.png', {
+      fullPage: true,
+      mask: [page.locator('time')],
+    });
+  });
+
+  test('Select dark desktop', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'dark' });
+    await open(page, '/docs/components/select/');
+    await setTheme(page, 'dark');
+    await expect(page).toHaveScreenshot('select-dark-desktop.png', {
+      fullPage: true,
+      mask: [page.locator('time')],
+    });
+  });
+
+  test('Select light mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 360, height: 800 });
+    await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'light' });
+    await open(page, '/docs/components/select/');
+    await setTheme(page, 'light');
+    await expect(page).toHaveScreenshot('select-light-mobile.png', {
       fullPage: true,
       mask: [page.locator('time')],
     });
