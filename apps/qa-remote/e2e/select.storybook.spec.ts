@@ -33,22 +33,18 @@ async function openWithKeyboard(page: Page, name: string): Promise<Locator> {
   return combobox;
 }
 
-async function activeOptionText(page: Page, combobox: Locator): Promise<string> {
-  const activeId = await combobox.getAttribute('aria-activedescendant');
-  expect(activeId, 'The open combobox should identify its active option.').toBeTruthy();
-  return (await page.locator(`[id="${activeId}"]`).textContent())?.trim() ?? '';
+async function activeOptionText(page: Page): Promise<string> {
+  const focusedOption = optionList(page).locator('[role="option"][data-p-focused="true"]');
+  await expect(focusedOption, 'The open listbox should identify one focused option.').toHaveCount(1);
+  return (await focusedOption.textContent())?.trim() ?? '';
 }
 
-async function moveToOption(
-  page: Page,
-  combobox: Locator,
-  expectedLabel: string,
-): Promise<void> {
+async function moveToOption(page: Page, expectedLabel: string): Promise<void> {
   for (let index = 0; index < 8; index += 1) {
-    if ((await activeOptionText(page, combobox)) === expectedLabel) return;
+    if ((await activeOptionText(page)) === expectedLabel) return;
     await page.keyboard.press('ArrowDown');
   }
-  expect(await activeOptionText(page, combobox)).toBe(expectedLabel);
+  expect(await activeOptionText(page)).toBe(expectedLabel);
 }
 
 async function readOverlayTheme(page: Page) {
@@ -58,15 +54,18 @@ async function readOverlayTheme(page: Page) {
     while (overlayRoot.parentElement && overlayRoot.parentElement !== document.body) {
       overlayRoot = overlayRoot.parentElement;
     }
-    const styles = getComputedStyle(overlayRoot);
+    const surface =
+      element.closest<HTMLElement>('.p-select-overlay, .p-dropdown-panel') ??
+      (element as HTMLElement);
+    const surfaceStyles = getComputedStyle(surface);
     const rootStyles = getComputedStyle(document.documentElement);
     return {
       parentTag: overlayRoot.parentElement?.tagName ?? '',
-      background: styles.backgroundColor,
-      color: styles.color,
-      zIndex: Number.parseInt(styles.zIndex || '0', 10),
-      contentBackground: styles.getPropertyValue('--p-content-background').trim(),
-      textColor: styles.getPropertyValue('--p-text-color').trim(),
+      background: surfaceStyles.backgroundColor,
+      color: surfaceStyles.color,
+      zIndex: Number.parseInt(getComputedStyle(overlayRoot).zIndex || '0', 10),
+      contentBackground: surfaceStyles.getPropertyValue('--p-content-background').trim(),
+      textColor: surfaceStyles.getPropertyValue('--p-text-color').trim(),
       rootContentBackground: rootStyles.getPropertyValue('--p-content-background').trim(),
       rootTextColor: rootStyles.getPropertyValue('--p-text-color').trim(),
       rootSurface: rootStyles.getPropertyValue('--ps-surface-background').trim(),
@@ -110,7 +109,7 @@ test.describe('Select isolated Storybook contract', () => {
     await expect(output).toHaveText('Selected value: none');
 
     const combobox = await openWithKeyboard(page, 'Communication preference');
-    await moveToOption(page, combobox, 'Postal mail');
+    await moveToOption(page, 'Postal mail');
     await page.keyboard.press('Enter');
 
     await expect(output).toHaveText('Selected value: mail');
@@ -138,10 +137,15 @@ test.describe('Select isolated Storybook contract', () => {
     await expect(disabledCombobox).toHaveAttribute('aria-disabled', 'true');
 
     await gotoSelectStory(page, 'disabled-option');
-    await page.getByRole('combobox', { name: 'Program with archived option' }).click();
+    const combobox = page.getByRole('combobox', { name: 'Program with archived option' });
+    await combobox.click();
     const archived = optionList(page).getByRole('option', { name: 'Archived pilot program' });
     await expect(archived).toBeVisible();
-    await expect(archived).toHaveAttribute('aria-disabled', 'true');
+    await expect(archived).toHaveAttribute('data-p-disabled', 'true');
+    await expect(archived).toHaveAttribute('aria-selected', 'false');
+    expect(await archived.getAttribute('aria-disabled')).toBeNull();
+    await archived.click({ force: true });
+    await expect(combobox).toContainText('Choose an active program');
   });
 
   test('renders selected and empty-option states without fabricating values', async ({ page }) => {
@@ -206,6 +210,7 @@ test.describe('Select isolated Storybook contract', () => {
     expect(dark.parentTag).toBe('BODY');
     expect(dark.contentBackground).toBe(dark.rootContentBackground);
     expect(dark.textColor).toBe(dark.rootTextColor);
+    expect(dark.background).not.toBe('rgba(0, 0, 0, 0)');
     expect(dark.rootSurface).not.toBe(light.rootSurface);
     expect(dark.rootContentBackground).not.toBe(light.rootContentBackground);
   });
