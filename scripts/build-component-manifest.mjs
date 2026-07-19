@@ -70,6 +70,10 @@ function primeNgImports(source) {
   return [...source.matchAll(/from\s+['"](primeng\/[^'"]+)['"]/g)].map((match) => match[1]);
 }
 
+function tokenReferences(source, prefix) {
+  return [...new Set([...source.matchAll(new RegExp(`var\\((--${prefix}-[a-z0-9-]+)`, 'gi'))].map((match) => match[1]))];
+}
+
 function angularSignalMembers(source, sourcePath) {
   const sourceFile = ts.createSourceFile(sourcePath, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const members = { inputs: [], outputs: [], models: [] };
@@ -142,6 +146,22 @@ async function validateManifest(manifest) {
   const manifestExports = new Set(manifest.entries.map((entry) => entry.identity.exportName));
   const ids = new Set();
   const selectors = new Set();
+  const findingIds = new Set();
+  const findingById = new Map();
+
+  for (const finding of manifest.findings) {
+    if (findingIds.has(finding.id)) {
+      addProblem(problems, `Duplicate finding id: ${finding.id}`);
+    }
+    findingIds.add(finding.id);
+    findingById.set(finding.id, finding);
+
+    for (const path of finding.evidence) {
+      if (!(await pathExists(join(root, path)))) {
+        addProblem(problems, `${finding.id}: evidence path does not exist: ${path}`);
+      }
+    }
+  }
 
   for (const exportName of publicExports) {
     if (!manifestExports.has(exportName)) {
@@ -186,6 +206,38 @@ async function validateManifest(manifest) {
       }
     } else if (detectedSelector !== identity.selector) {
       addProblem(problems, `${identity.id}: selector mismatch; metadata=${identity.selector}, source=${detectedSelector}`);
+    }
+
+    const publicTokenReferences = tokenReferences(source, 'ps');
+    const providerTokenReferences = tokenReferences(source, 'p');
+    const tokenBoundary = entry.audit.tokenBoundary;
+
+    if (identity.kind === 'service' && tokenBoundary !== 'not-applicable') {
+      addProblem(problems, `${identity.id}: services must use tokenBoundary: not-applicable.`);
+    }
+    if (publicTokenReferences.length > 0 && providerTokenReferences.length > 0 && tokenBoundary !== 'mixed') {
+      addProblem(problems, `${identity.id}: both --ps-* and --p-* tokens were detected; tokenBoundary must be mixed.`);
+    }
+    if (
+      providerTokenReferences.length > 0
+      && ['native', 'composite'].includes(implementation.provider)
+      && !['provider-coupled', 'mixed'].includes(tokenBoundary)
+    ) {
+      addProblem(problems, `${identity.id}: native/composite --p-* use requires a provider-coupled or mixed token boundary.`);
+    }
+    if (publicTokenReferences.length > 0 && providerTokenReferences.length === 0 && tokenBoundary === 'provider-coupled') {
+      addProblem(problems, `${identity.id}: only --ps-* tokens were detected; provider-coupled is inaccurate.`);
+    }
+
+    for (const findingId of entry.audit.findingIds) {
+      const finding = findingById.get(findingId);
+      if (!finding) {
+        addProblem(problems, `${identity.id}: unknown finding id: ${findingId}`);
+        continue;
+      }
+      if (!finding.componentIds.includes(identity.id)) {
+        addProblem(problems, `${identity.id}: finding ${findingId} does not link back to this component.`);
+      }
     }
 
     const detectedPrimeNgImports = primeNgImports(source);
@@ -267,6 +319,17 @@ async function validateManifest(manifest) {
     }
   }
 
+  for (const finding of manifest.findings) {
+    for (const componentId of finding.componentIds) {
+      const component = manifest.entries.find((entry) => entry.identity.id === componentId);
+      if (!component) {
+        addProblem(problems, `${finding.id}: unknown component id: ${componentId}`);
+      } else if (!component.audit.findingIds.includes(finding.id)) {
+        addProblem(problems, `${finding.id}: component ${componentId} does not link back to the finding.`);
+      }
+    }
+  }
+
   return { problems, warnings };
 }
 
@@ -285,6 +348,8 @@ function summary(manifest) {
     missingStorybook: manifest.entries.filter((entry) => entry.evidence.storybook.status === 'missing').length,
     pendingManualAudits: manifest.entries.filter((entry) => entry.accessibility.screenReaderAudit === 'pending').length,
     pendingFigmaBindings: manifest.entries.filter((entry) => entry.figma.status === 'pending-access').length,
+    findings: manifest.findings.length,
+    openFindings: manifest.findings.filter((finding) => ['open', 'investigate', 'planned'].includes(finding.status)).length,
   };
 }
 
