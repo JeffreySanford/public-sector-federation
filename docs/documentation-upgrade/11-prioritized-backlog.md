@@ -8,8 +8,8 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 
 ### P0 — Establish audit truth
 
-- [ ] Generate usage counts and consuming locations for all public entries.
-- [ ] Assign duplication clusters and evidence-backed dispositions.
+- [x] Generate usage counts and consuming locations for all public entries.
+- [x] Assign duplication clusters and preliminary evidence-backed dispositions.
 - [ ] Complete public API and token-boundary findings.
 - [ ] Link manifest entries to accessibility finding identifiers.
 - [ ] Reconcile stale status and roadmap records.
@@ -37,6 +37,13 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 - [ ] Add appropriate `play` functions for the flagship stories.
 - [ ] Separate experiments, deprecated contracts, and system-health stories.
 - [ ] Add documentation backlinks and Chromatic review evidence.
+
+Implementation evidence:
+
+- `pnpm usage:build` generates `artifacts/component-audit/component-usage-report.json`;
+- the report separates application/library consumers from Storybook, test, and documentation evidence;
+- manifest audit metadata records a duplication cluster and disposition for every public entry;
+- CI publishes the portable component-audit artifact.
 
 Authoritative working artifacts:
 
