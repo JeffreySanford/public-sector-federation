@@ -1,5 +1,7 @@
 # Current-State Audit
 
+> Scope: This document audits repository identity, presentation, and information architecture. The exported component estate, duplication clusters, evidence gaps, and dispositions are tracked separately in [18 — Component estate audit](./18-component-estate-audit.md).
+
 ## Executive assessment
 
 The repository is technically stronger than its public presentation.
@@ -132,7 +134,7 @@ NestJS, Prisma, PostgreSQL, Docker, and backend startup commands prove full-stac
 | Portfolio walkthrough | Private or secondary | Replace with System Overview. |
 | Skills demonstrated | Remove | Let the artifact demonstrate the skills. |
 
-## Specific forensic findings to expose
+## Presentation findings that require forensic follow-up
 
 The upgraded site should not hide the following findings. They are valuable evidence of design-system discovery work:
 
@@ -160,6 +162,12 @@ The upgraded site should not hide the following findings. They are valuable evid
 | Design alignment | Partial | Blocker-heavy | High |
 | Federation proof | Strong | Presented as identity | Medium |
 | Zeroheight | Useful experiment | Overrepresented | High |
+
+## Related mission records
+
+- [Component estate audit](./18-component-estate-audit.md)
+- [Accessibility findings and remediation](./19-accessibility-findings-and-remediation.md)
+- [Component consolidation proposal](./20-component-consolidation-proposal.md)
 
 ## Audit conclusion
 
