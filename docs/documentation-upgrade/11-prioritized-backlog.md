@@ -10,9 +10,9 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 
 - [x] Generate usage counts and consuming locations for all public entries.
 - [x] Assign duplication clusters and preliminary evidence-backed dispositions.
-- [ ] Complete public API and token-boundary findings.
-- [ ] Link manifest entries to accessibility finding identifiers.
-- [ ] Reconcile stale status and roadmap records.
+- [x] Complete public API and token-boundary findings.
+- [x] Link manifest entries to accessibility finding identifiers.
+- [x] Reconcile stale status and roadmap records.
 
 ### P0 — Complete flagship accessibility evidence
 
@@ -37,6 +37,14 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 - [ ] Add appropriate `play` functions for the flagship stories.
 - [ ] Separate experiments, deprecated contracts, and system-health stories.
 - [ ] Add documentation backlinks and Chromatic review evidence.
+
+Contract-finding evidence:
+
+- the manifest now contains one typed findings registry for API, token, and accessibility findings;
+- every finding validates component backlinks and evidence paths;
+- every affected component links to the corresponding finding identifiers;
+- token boundaries distinguish public, provider-managed, provider-coupled, mixed, and not-applicable contracts;
+- native/composite provider-token use is validated against its declared boundary.
 
 Implementation evidence:
 

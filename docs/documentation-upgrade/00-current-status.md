@@ -93,7 +93,7 @@ PR #17 merged to `master` at commit `6d743ad4d9fa0cbc91930b825763605cd24d6793` a
 
 The foundation and three flagship slices are complete. The next work is no longer another component page. It is the set of artifacts required to prove forensic discovery, accessibility remediation, and consolidation:
 
-1. complete the [component estate audit](./18-component-estate-audit.md), including usage counts and duplication clusters;
+1. complete the remaining [component estate audit](./18-component-estate-audit.md) gaps after adding generated usage counts, duplication clusters, dispositions, token-boundary status, and typed findings;
 2. reproduce, rank, remediate, and verify the [accessibility findings](./19-accessibility-findings-and-remediation.md);
 3. perform named manual reviews for Button, Select, and Dialog;
 4. finalize the [component consolidation proposal](./20-component-consolidation-proposal.md);

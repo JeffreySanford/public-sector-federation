@@ -29,8 +29,8 @@ This is the short execution dashboard. It does not duplicate detailed acceptance
 
 - [x] Generate usage counts and consuming paths for all public entries.
 - [x] Assign duplication clusters and preliminary dispositions.
-- [ ] Complete API-pattern and token-boundary findings.
-- [ ] Link audit entries to Storybook, tests, documentation, Figma status, and accessibility findings.
+- [x] Complete API-pattern and token-boundary findings.
+- [x] Link audit entries to API, token, and accessibility findings with validated evidence paths.
 - [ ] Reconcile public `ps-*` naming with legacy `public-*` selectors.
 
 ## Now — accessibility remediation
