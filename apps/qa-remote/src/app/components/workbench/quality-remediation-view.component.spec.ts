@@ -47,7 +47,9 @@ describe('QualityRemediationViewComponent', () => {
 
     for (const finding of component.findings) {
       expect(component.findingNextAction(finding).trim().length).toBeGreaterThan(0);
-      expect(component.evidenceUrl(finding.evidence[0])).toContain(finding.evidence[0]);
+      const evidence = finding.evidence[0];
+      expect(evidence).toBeDefined();
+      if (evidence) expect(component.evidenceUrl(evidence)).toContain(evidence);
     }
   });
 
