@@ -1,6 +1,6 @@
 # Design-System Release Status and TODO
 
-_Last aligned: July 18, 2026_
+_Last aligned: July 19, 2026_
 
 ## Purpose
 
@@ -42,6 +42,9 @@ DTCG-compatible token source
 - [x] Candidate Button behavior, keyboard, theme, and automated accessibility evidence.
 - [x] Shell-mounted integration and token-consumption tests.
 - [x] Repository release, smoke, report, and manifest-check commands.
+- [x] Replace sample-heavy Angular views with Component Inventory, Quality & Remediation, and Design Alignment Lab in PR #17.
+- [x] Add focused workbench unit tests for filtering, remediation priority, and alignment decisions.
+- [x] Replace obsolete QA, performance, and candidate-view browser assertions with workbench evidence.
 
 ### Documentation foundation
 
@@ -97,17 +100,47 @@ DTCG-compatible token source
 - [x] Update the component registry and generated manifest for the declared Select evidence.
 - [x] Add Select responsive, 200%-zoom-equivalent, axe, accessibility-tree, visual, and Lighthouse coverage.
 - [x] Complete the Select human polish review with a documented follow-up.
-- [ ] Pass the complete Release Quality Gate for the exact final pull-request state.
+- [x] Merge PR #16 after the complete Release Quality Gate passed for its final state.
+
+## PR #18 platform simplification
+
+- [x] Confirm the manifest-driven workbench no longer consumes the Agile API, database, or performance dashboard.
+- [x] Remove the `apps/agile-api` NestJS application.
+- [x] Remove Prisma schema, migrations, seed data, configuration, and dependencies.
+- [x] Remove PostgreSQL and backend-only runtime dependencies.
+- [x] Remove Docker Compose and backend container commands.
+- [x] Remove the retired performance dashboard, data service, workflows, scripts, tests, and documentation.
+- [x] Regenerate `pnpm-lock.yaml` from the simplified dependency graph.
+- [x] Update `start:all` to launch only the shell, four remotes, and Starlight.
+- [x] Remove Prisma and Docker-backed API lifecycle steps from the Release Quality Gate.
+- [x] Align README, testing, portfolio, current status, and TODO documentation.
+- [ ] Pass the complete Release Quality Gate for the exact final PR #18 state.
+
+## Active slice — Dialog page and focus-management evidence
+
+- [x] Upgrade `ps-dialog` with a unique title relationship and stable close-control accessible name.
+- [x] Add predictable safe initial focus on the close control.
+- [x] Contain forward and reverse Tab navigation inside the open modal.
+- [x] Close with Escape and restore focus to the opener.
+- [x] Restore focus after close-button, backdrop, Cancel, confirmation, and external model dismissal.
+- [x] Publish dedicated Default, Destructive Confirmation, Long Content, and Focus Sequence stories.
+- [x] Add isolated Storybook tests for modal semantics, focus entry, containment, Escape, restoration, destructive confirmation, scrolling, responsive width, theme inheritance, and axe.
+- [x] Publish `/docs/components/dialog/` using the flagship component-page model.
+- [x] Write purpose, alternatives, decision, destructive-action, content, anatomy, state, keyboard, accessibility, token, API, provider-boundary, evidence, and gap guidance.
+- [x] Add Dialog to Starlight navigation, component status, documentation integrity, and Lighthouse routes.
+- [x] Add Dialog responsive, 320 CSS-pixel reflow, StoryFrame, axe, accessibility-tree, and visual tests.
+- [ ] Update the component registry and generated manifest with the declared Dialog source, stories, tests, behaviors, documentation, and limitations.
+- [ ] Generate the Linux Chromium light desktop, dark desktop, and light mobile baselines.
+- [ ] Complete and record human visual polish review.
+- [ ] Pass the complete Release Quality Gate for the exact final Dialog state.
 
 ## Following slices
 
-- [ ] Complete the Dialog flagship component page and focus-management evidence.
 - [ ] Add hosted pull-request preview URLs rather than build artifacts only.
-- [ ] Add reusable `StatusBadge`, `ComponentHeader`, `EvidencePanel`, `TokenTable`, `AccessibilityStatus`, `FindingCard`, `DecisionRecord`, and `LightDarkPreview` components only where repeated page needs justify them.
+- [ ] Extract reusable `StatusBadge`, `ComponentHeader`, `EvidencePanel`, `TokenTable`, `AccessibilityStatus`, `FindingCard`, `DecisionRecord`, and `LightDarkPreview` components where repeated flagship-page needs justify them.
 - [ ] Add Storybook and Chromatic review coverage for reusable Starlight presentation components.
 - [ ] Finalize manifest lifecycle, documentation, accessibility, provider-boundary, Figma, ownership, and blocker projections.
 - [ ] Generate the public component catalog and health/gap views.
-- [ ] Replace sample-heavy Angular views with Component Inventory, Quality & Remediation, and Design Alignment Lab.
 - [ ] Add complete Figma identity and alignment records for Button, Select, and Dialog.
 - [ ] Reorganize Storybook hierarchy and canonical story IDs.
 - [ ] Migrate useful Zeroheight-era guidance and archive or remove obsolete publishing scripts.
@@ -173,6 +206,7 @@ An organization may choose a hosted documentation platform, but that is an optio
 ## Verification
 
 ```bash
+pnpm install --frozen-lockfile
 pnpm build:tokens
 pnpm lint
 pnpm lint:links
