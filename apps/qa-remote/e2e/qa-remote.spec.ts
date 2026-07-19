@@ -79,6 +79,26 @@ test.describe('Forensic design-system workbench', () => {
     await expect(page.locator('.case-grid')).toContainText('Dialog');
   });
 
+  test('presents typed findings with provenance and next actions', async ({ page }) => {
+    await switchView(page, 'Quality & Remediation');
+
+    const register = page.locator('.findings-panel');
+    await expect(register.getByRole('heading', { name: 'Evidence finding register', exact: true })).toBeVisible();
+    await expect(register.getByText('A11Y-BTN-001', { exact: true })).toBeVisible();
+    await expect(register.getByText('TOKEN-NATIVE-001', { exact: true })).toBeVisible();
+    await expect(register.getByText('API-BTN-001', { exact: true })).toBeVisible();
+
+    const buttonFinding = register.locator('tr[data-finding-id="A11Y-BTN-001"]');
+    await expect(buttonFinding).toContainText('verified');
+    await expect(buttonFinding).toContainText('ps-button');
+    await expect(buttonFinding).toContainText('Preserve the linked verification');
+    await buttonFinding.getByText(/evidence sources?/i).click();
+    await expect(buttonFinding.getByRole('link', { name: /button\.storybook\.spec\.ts/ })).toHaveAttribute(
+      'href',
+      /github\.com\/JeffreySanford\/public-sector-federation\/blob\/master\//,
+    );
+  });
+
   test('changes alignment cases and keeps missing design evidence explicit', async ({ page }) => {
     await switchView(page, 'Design Alignment Lab');
     const caseSelector = page.getByLabel('Component case');
