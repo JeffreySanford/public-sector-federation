@@ -42,7 +42,6 @@ pnpm test:e2e
 
 ### Repository and documentation validation
 
-`pnpm lint` validates workspace JSON, Prisma configuration, Markdown formatting, SCSS conventions, and PrimeNG wrapper boundaries through the repository lint scripts.
 
 `pnpm lint:links` validates Markdown links.
 
@@ -54,7 +53,6 @@ pnpm test:e2e
 pnpm test
 ```
 
-The current API unit baseline covers dashboard work-item totals and status-grouped reporting in `apps/agile-api/test/agile.service.test.ts`.
 
 Unit-test breadth is intentionally smaller than the E2E evidence in this architecture sample. Additional service-level coverage should be added when business logic expands.
 

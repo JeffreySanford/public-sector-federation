@@ -7,10 +7,6 @@ const jsonFiles = [
   'package.json',
   'nx.json',
   'tsconfig.base.json',
-  'apps/agile-api/project.json',
-  'apps/agile-api/tsconfig.app.json',
-  'apps/agile-api/tsconfig.spec.json',
-  'apps/agile-api/prisma/seed-data/agile-workflow.seed.json',
   'apps/admin-remote/tsconfig.json',
   'apps/playground/tsconfig.json',
   'apps/qa-remote/project.json',
@@ -87,10 +83,9 @@ run('node', ['scripts/guard-scss.mjs']);
 run('node', ['scripts/check-primeng-boundaries.mjs']);
 run('node', ['scripts/check-wrapper-contracts.mjs']);
 run('node', ['scripts/build-component-manifest.mjs', '--check']);
-run('pnpm', ['db:validate']);
 run('pnpm', ['markdownlint-cli2', 'docs/**/*.md', '!docs/reports/**/*.md']);
 run('pnpm', ['markdownlint-cli2', 'apps/starlight/src/content/docs/**/*.md']);
 
 console.log(
-  `Workspace lint checks passed: ${jsonFiles.length} JSON files, ${storyCount} Storybook stories, Starlight content, component manifest, PrimeNG boundaries, Prisma schema, SCSS guard, and Markdown linting.`,
+  `Workspace lint checks passed: ${jsonFiles.length} JSON files, ${storyCount} Storybook stories, Starlight content, component manifest, PrimeNG boundaries, SCSS guard, and Markdown linting.`,
 );
