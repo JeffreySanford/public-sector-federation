@@ -27,8 +27,8 @@ This is the short execution dashboard. It does not duplicate detailed acceptance
 
 ## Now — forensic audit
 
-- [ ] Generate usage counts and consuming paths for all public entries.
-- [ ] Assign duplication clusters and dispositions.
+- [x] Generate usage counts and consuming paths for all public entries.
+- [x] Assign duplication clusters and preliminary dispositions.
 - [ ] Complete API-pattern and token-boundary findings.
 - [ ] Link audit entries to Storybook, tests, documentation, Figma status, and accessibility findings.
 - [ ] Reconcile public `ps-*` naming with legacy `public-*` selectors.
