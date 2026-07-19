@@ -1,7 +1,7 @@
-[WebServer] qa-remote: Prebundling has been configured but will not be used because caching has been disabled.
 [WebServer] admin-remote: Prebundling has been configured but will not be used because caching has been disabled.
 [WebServer] reporting-remote: Prebundling has been configured but will not be used because caching has been disabled.
 [WebServer] services-remote: Prebundling has been configured but will not be used because caching has been disabled.
+[WebServer] qa-remote: Prebundling has been configured but will not be used because caching has been disabled.
 [WebServer] shell: Prebundling has been configured but will not be used because caching has been disabled.
 [WebServer] <i> [webpack-dev-middleware] wait until bundle finished
 [WebServer] <s> [webpack.Progress] 3% setup watch run
@@ -108,31 +108,34 @@
 [WebServer] <s> [webpack.Progress] 10% building import loader ./node_modules/.pnpm/mini-css-extract-plugin@2.10.0_webpack@5.105.2_esbuild@0.28.1_lightningcss@1.32.0_postcss@8.5.19_/node_modules/mini-css-extract-plugin/dist/loader.js
 [WebServer] <s> [webpack.Progress] 10% building import loader ./node_modules/.pnpm/css-loader@7.1.3_@rspack+core@1.6.8_webpack@5.105.2_esbuild@0.28.1_lightningcss@1.32.0_postcss@8.5.19_/node_modules/css-loader/dist/cjs.js
 [WebServer] <s> [webpack.Progress] 10% building import loader ./node_modules/.pnpm/postcss-loader@8.2.0_@rspack+core@1.6.8_postcss@8.5.12_typescript@5.9.3_webpack@5.105.2_61e0455d054f23b73d1a4c296e3306d6/node_modules/postcss-loader/dist/cjs.js
-[WebServer] <s> [webpack.Progress] 10% building 0/5 entries 1/5 dependencies 0/1 modules
+[WebServer] <s> [webpack.Progress] 10% building 0/5 entries 2/5 dependencies 0/2 modules
 [WebServer] <s> [webpack.Progress] 10% building import loader ./node_modules/.pnpm/@angular-devkit+build-angular@21.2.19_@angular+compiler-cli@21.2.18_@angular+compiler@2_ed851be8be547eada1bbd7aa83e88fc2/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js
 [WebServer] <s> [webpack.Progress] 10% building 0/5 entries 2/6 dependencies 0/2 modules
 [WebServer] <s> [webpack.Progress] 32% building 0/5 entries 13/28 dependencies 5/12 modules
 [WebServer] <s> [webpack.Progress] 32% building 1/5 entries 13/28 dependencies 5/12 modules
 [WebServer] <s> [webpack.Progress] 35% building 1/5 entries 13/28 dependencies 6/12 modules
 [WebServer] <s> [webpack.Progress] 35% building 2/5 entries 13/28 dependencies 6/12 modules
-[WebServer] <s> [webpack.Progress] 34% building import loader ./node_modules/.pnpm/@ngtools+webpack@21.2.19_@angular+compiler-cli@21.2.18_@angular+compiler@21.2.18_typesc_1d7b912ba88f73d692786772984c0a8d/node_modules/@ngtools/webpack/src/ivy/index.js
-[WebServer] <s> [webpack.Progress] 34% building 2/5 entries 29/64 dependencies 9/20 modules
-[WebServer] <s> [webpack.Progress] 32% building 2/5 entries 61/76 dependencies 11/46 modules
-[WebServer] <s> [webpack.Progress] 35% building 2/5 entries 200/237 dependencies 43/94 modules
-[WebServer] <s> [webpack.Progress] 37% building 2/5 entries 262/300 dependencies 61/120 modules
-[WebServer] <s> [webpack.Progress] 32% building 2/5 entries 601/700 dependencies 72/305 modules
-[WebServer] <s> [webpack.Progress] 42% building 3/5 entries 603/706 dependencies 75/305 modules
-[WebServer] <s> [webpack.Progress] 42% building 3/5 entries 632/800 dependencies 76/313 modules
-[WebServer] <s> [webpack.Progress] 43% building 3/5 entries 917/1000 dependencies 85/348 modules
+[WebServer] <s> [webpack.Progress] 36% building import loader ./node_modules/.pnpm/@ngtools+webpack@21.2.19_@angular+compiler-cli@21.2.18_@angular+compiler@21.2.18_typesc_1d7b912ba88f73d692786772984c0a8d/node_modules/@ngtools/webpack/src/ivy/index.js
+[WebServer] <s> [webpack.Progress] 36% building 2/5 entries 25/37 dependencies 9/19 modules
+[WebServer] <s> [webpack.Progress] 32% building 2/5 entries 65/76 dependencies 11/49 modules
+[WebServer] <s> [webpack.Progress] 44% building 2/5 entries 140/200 dependencies 40/64 modules
+[WebServer] <s> [webpack.Progress] 37% building 2/5 entries 262/300 dependencies 60/120 modules
+[WebServer] <s> [webpack.Progress] 34% building 2/5 entries 264/600 dependencies 61/120 modules
+[WebServer] <s> [webpack.Progress] 31% building 2/5 entries 611/700 dependencies 72/306 modules
+[WebServer] <s> [webpack.Progress] 43% building 3/5 entries 612/712 dependencies 76/306 modules
+[WebServer] <s> [webpack.Progress] 42% building 3/5 entries 892/1000 dependencies 93/370 modules
+[WebServer] <s> [webpack.Progress] 43% building 3/5 entries 986/1046 dependencies 100/384 modules
 [WebServer] <s> [webpack.Progress] 43% building import loader ./node_modules/.pnpm/@ngtools+webpack@21.2.19_@angular+compiler-cli@21.2.18_@angular+compiler@21.2.18_typesc_1d7b912ba88f73d692786772984c0a8d/node_modules/@ngtools/webpack/src/loaders/inline-resource.js
-[WebServer] <s> [webpack.Progress] 43% building 3/5 entries 1157/1202 dependencies 100/387 modules
-[WebServer] <s> [webpack.Progress] 43% building 3/5 entries 1288/1400 dependencies 160/396 modules
-[WebServer] <s> [webpack.Progress] 54% building 4/5 entries 1518/1585 dependencies 286/480 modules
-[WebServer] <s> [webpack.Progress] 54% building 4/5 entries 1600/1619 dependencies 376/529 modules
-[WebServer] <s> [webpack.Progress] 58% building 4/5 entries 1650/1700 dependencies 480/549 modules
-[WebServer] <s> [webpack.Progress] 57% building 4/5 entries 1800/1840 dependencies 508/583 modules
-[WebServer] <s> [webpack.Progress] 54% building 4/5 entries 2049/2100 dependencies 563/711 modules
-[WebServer] <s> [webpack.Progress] 55% building 4/5 entries 2227/2300 dependencies 597/719 modules
+[WebServer] <s> [webpack.Progress] 43% building 3/5 entries 1145/1204 dependencies 112/393 modules
+[WebServer] <s> [webpack.Progress] 43% building 3/5 entries 1227/1300 dependencies 138/398 modules
+[WebServer] <s> [webpack.Progress] 42% building 3/5 entries 1310/1500 dependencies 193/407 modules
+[WebServer] <s> [webpack.Progress] 42% building 3/5 entries 1500/1574 dependencies 226/478 modules
+[WebServer] <s> [webpack.Progress] 54% building 4/5 entries 1513/1613 dependencies 231/486 modules
+[WebServer] <s> [webpack.Progress] 58% building 4/5 entries 1679/1700 dependencies 487/556 modules
+[WebServer] <s> [webpack.Progress] 58% building 4/5 entries 1716/1800 dependencies 495/566 modules
+[WebServer] <s> [webpack.Progress] 57% building 4/5 entries 1800/1826 dependencies 502/584 modules
+[WebServer] <s> [webpack.Progress] 54% building 4/5 entries 1954/2000 dependencies 517/654 modules
+[WebServer] <s> [webpack.Progress] 54% building 4/5 entries 2156/2200 dependencies 537/714 modules
 [WebServer] <s> [webpack.Progress] 65% building 5/5 entries 2312/2312 dependencies 724/724 modules
 [WebServer] <s> [webpack.Progress] 65% building
 [WebServer] <s> [webpack.Progress] 69% building finish
@@ -361,10 +364,12 @@
 [WebServer] <s> [webpack.Progress] 9% setup compilation
 [WebServer] <s> [webpack.Progress] 10% building
 [WebServer] <s> [webpack.Progress] 10% building 0/1 entries 0/0 dependencies 0/0 modules
-[WebServer] <s> [webpack.Progress] 12% building 1/5 entries 39/40 dependencies 34/15 modules
-[WebServer] <s> [webpack.Progress] 13% building 2/5 entries 40/41 dependencies 47/16 modules
-[WebServer] <s> [webpack.Progress] 27% building 3/5 entries 48/48 dependencies 228/24 modules
-[WebServer] <s> [webpack.Progress] 33% building 4/5 entries 48/58 dependencies 313/24 modules
+
+Running 8 tests using 1 worker
+[WebServer] <s> [webpack.Progress] 15% building 1/5 entries 40/44 dependencies 74/16 modules
+[WebServer] <s> [webpack.Progress] 22% building 2/5 entries 44/44 dependencies 164/20 modules
+[WebServer] <s> [webpack.Progress] 27% building 3/5 entries 44/49 dependencies 224/20 modules
+[WebServer] <s> [webpack.Progress] 33% building 4/5 entries 49/55 dependencies 315/24 modules
 [WebServer] <s> [webpack.Progress] 64% building 5/5 entries 231/231 dependencies 721/105 modules
 [WebServer] <s> [webpack.Progress] 65% building
 [WebServer] <s> [webpack.Progress] 69% building finish
@@ -488,38 +493,24 @@
 [WebServer] <s> [webpack.Progress] 99% cache begin idle
 [WebServer] <s> [webpack.Progress] 99% cache begin idle
 [WebServer] <s> [webpack.Progress] 100% 
-
-Running 8 tests using 1 worker
-·F······
+·F··F···
 
   1) [chromium] › apps/qa-remote/e2e/select.storybook.spec.ts:106:7 › Select isolated Storybook contract › supports keyboard navigation and writes the provider-neutral value model 
 
-    Error: The open listbox should identify one focused option.
+    Error: expect(received).toBe(expected) // Object.is equality
 
-    expect(locator).toHaveCount(expected) failed
+    Expected: "Postal mail"
+    Received: "Telephone"
 
-    Locator:  locator('body [role="listbox"][aria-label="Option List"]').last().locator('[role="option"][data-p-focused="true"]')
-    Expected: 1
-    Received: 0
-    Timeout:  10000ms
-
-    Call log:
-      - The open listbox should identify one focused option. with timeout 10000ms
-      - waiting for locator('body [role="listbox"][aria-label="Option List"]').last().locator('[role="option"][data-p-focused="true"]')
-        24 × locator resolved to 0 elements
-           - unexpected value "0"
-
-
-      36 | async function activeOptionText(page: Page): Promise<string> {
-      37 |   const focusedOption = optionList(page).locator('[role="option"][data-p-focused="true"]');
-    > 38 |   await expect(focusedOption, 'The open listbox should identify one focused option.').toHaveCount(1);
-         |                                                                                       ^
-      39 |   return (await focusedOption.textContent())?.trim() ?? '';
-      40 | }
-      41 |
-        at activeOptionText (/home/runner/work/public-sector-federation/public-sector-federation/apps/qa-remote/e2e/select.storybook.spec.ts:38:87)
-        at moveToOption (/home/runner/work/public-sector-federation/public-sector-federation/apps/qa-remote/e2e/select.storybook.spec.ts:44:16)
-        at /home/runner/work/public-sector-federation/public-sector-federation/apps/qa-remote/e2e/select.storybook.spec.ts:112:11
+      45 |     await page.keyboard.press('ArrowDown');
+      46 |   }
+    > 47 |   expect(await activeOptionText(page)).toBe(expectedLabel);
+         |                                        ^
+      48 | }
+      49 |
+      50 | async function readOverlayTheme(page: Page) {
+        at moveToOption (/home/runner/work/public-sector-federation/public-sector-federation/apps/qa-remote/e2e/select.storybook.spec.ts:47:40)
+        at /home/runner/work/public-sector-federation/public-sector-federation/apps/qa-remote/e2e/select.storybook.spec.ts:112:5
 
     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
     test-results/apps-qa-remote-e2e-select.-d19c0-rovider-neutral-value-model-chromium/test-failed-1.png
@@ -531,6 +522,42 @@ Running 8 tests using 1 worker
 
     Error Context: test-results/apps-qa-remote-e2e-select.-d19c0-rovider-neutral-value-model-chromium/error-context.md
 
-  1 failed
+  2) [chromium] › apps/qa-remote/e2e/select.storybook.spec.ts:151:7 › Select isolated Storybook contract › renders selected and empty-option states without fabricating values 
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('body [role="listbox"][aria-label="Option List"]').last().getByRole('option')
+    Expected: 0
+    Received: 1
+    Timeout:  10000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 10000ms
+      - waiting for locator('body [role="listbox"][aria-label="Option List"]').last().getByRole('option')
+        24 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      157 |     await expect(emptyCombobox).toContainText('No reviewers available');
+      158 |     await emptyCombobox.click();
+    > 159 |     await expect(optionList(page).getByRole('option')).toHaveCount(0);
+          |                                                        ^
+      160 |   });
+      161 |
+      162 |   test('escapes an overflow-hidden application boundary and remains positioned above content', async ({ page }) => {
+        at /home/runner/work/public-sector-federation/public-sector-federation/apps/qa-remote/e2e/select.storybook.spec.ts:159:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/apps-qa-remote-e2e-select.-7fe0d--without-fabricating-values-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/apps-qa-remote-e2e-select.-7fe0d--without-fabricating-values-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/apps-qa-remote-e2e-select.-7fe0d--without-fabricating-values-chromium/error-context.md
+
+  2 failed
     [chromium] › apps/qa-remote/e2e/select.storybook.spec.ts:106:7 › Select isolated Storybook contract › supports keyboard navigation and writes the provider-neutral value model 
-  7 passed (1.2m)
+    [chromium] › apps/qa-remote/e2e/select.storybook.spec.ts:151:7 › Select isolated Storybook contract › renders selected and empty-option states without fabricating values 
+  6 passed (1.4m)
