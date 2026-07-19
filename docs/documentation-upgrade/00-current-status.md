@@ -41,7 +41,7 @@ Release Quality Gate run `29665993721` passed for the merged PR #14 state.
 
 ## Active slice
 
-The next implementation slice is **Button documentation plus the reusable `StoryFrame` foundation**.
+PR #15 implements **Button documentation plus the reusable `StoryFrame` foundation** and is in final release validation.
 
 The slice should:
 

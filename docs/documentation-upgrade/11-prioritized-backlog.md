@@ -43,10 +43,10 @@ See [Astro Starlight Application and Designer-Grade Quality Gate](./17-astro-sta
 - [x] Add a token/style validator for raw colors, arbitrary spacing, unapproved typography, inline styles, and undocumented exceptions.
 - [x] Add Playwright responsive tests at 360, 768, 1024, 1280, and 1440 pixel widths.
 - [x] Add page-level no-overflow, navigation, table, light, dark, and 200%-zoom checks.
-- [ ] Add StoryFrame-specific clipping and embedded-story checks when `StoryFrame` is introduced.
+- [x] Add StoryFrame-specific clipping and embedded-story checks when `StoryFrame` is introduced.
 - [x] Add Playwright and axe accessibility checks against built Starlight pages.
 - [x] Add initial accessibility-tree snapshots for the critical overview heading and primary action.
-- [ ] Extend accessibility-tree snapshots to navigation and flagship component-page structures.
+- [x] Extend accessibility-tree snapshots to the flagship Button page and StoryFrame structure.
 - [x] Add page-level visual regression coverage.
 - [ ] Use Storybook and Chromatic for reusable Starlight presentation components.
 - [x] Add Lighthouse CI scores and resource budgets.
@@ -124,7 +124,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 ### Reusable documentation components
 
-- [ ] Create `StoryFrame`.
+- [x] Create `StoryFrame`.
 - [ ] Create `StatusBadge`.
 - [ ] Create `ComponentHeader`.
 - [ ] Create `EvidencePanel`.
@@ -139,16 +139,16 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 ### Button
 
-- [ ] Write purpose and usage guidance.
-- [ ] Choose the canonical stable story.
-- [ ] Document current and proposed public API contracts.
-- [ ] Document variants and interaction states.
-- [ ] Document anatomy.
-- [ ] Document keyboard, focus, loading, and disabled behavior.
-- [ ] Show light and dark token mappings.
-- [ ] Add API table.
-- [ ] Add quality evidence summary.
-- [ ] Move historical comparison to a final Decisions section.
+- [x] Write purpose and usage guidance.
+- [x] Choose the canonical stable story.
+- [x] Document current and proposed public API contracts.
+- [x] Document variants and interaction states.
+- [x] Document anatomy.
+- [x] Document keyboard, focus, loading, and disabled behavior.
+- [x] Show light and dark token mappings.
+- [x] Add API table.
+- [x] Add quality evidence summary.
+- [x] Move historical comparison to a final Decisions section.
 - [ ] Pass the Starlight designer-grade quality gate and human polish review.
 
 ### Select
