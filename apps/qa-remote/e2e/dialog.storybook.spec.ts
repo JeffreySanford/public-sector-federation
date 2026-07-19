@@ -93,7 +93,7 @@ test.describe('Dialog isolated Storybook contract', () => {
     const destructiveAction = dialog.getByRole('button', { name: 'Delete draft', exact: true });
 
     await expect(dialog.getByRole('button', { name: 'Cancel' })).toBeVisible();
-    await expect(destructiveAction.locator('.p-button')).toHaveClass(/p-button-danger/);
+    await expect(destructiveAction).toHaveClass(/p-button-danger/);
     await destructiveAction.click();
 
     await expect(dialog).toBeHidden();
