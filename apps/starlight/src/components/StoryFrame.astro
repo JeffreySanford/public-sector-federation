@@ -1,0 +1,249 @@
+---
+interface Props {
+  storyId: string;
+  title: string;
+  description?: string;
+  size?: 'compact' | 'default' | 'tall';
+}
+
+const {
+  storyId,
+  title,
+  description = 'Live isolated behavior from the canonical Storybook story.',
+  size = 'default',
+} = Astro.props;
+
+const storybookBaseUrl = (
+  import.meta.env.PUBLIC_STORYBOOK_URL ??
+  'https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/'
+).replace(/\/+$/, '');
+const encodedStoryId = encodeURIComponent(storyId);
+const storyUrl = `${storybookBaseUrl}/?path=/story/${encodedStoryId}`;
+const iframeBaseUrl = `${storybookBaseUrl}/iframe.html?id=${encodedStoryId}&viewMode=story&shortcuts=false&singleStory=true`;
+---
+
+<section
+  class:list={['story-frame', `story-frame--${size}`]}
+  data-story-frame
+  data-story-id={storyId}
+  data-iframe-base={iframeBaseUrl}
+  aria-label={`${title} live example`}
+>
+  <div class="story-frame__header">
+    <div>
+      <strong>{title}</strong>
+      <p>{description}</p>
+    </div>
+    <a href={storyUrl} target="_blank" rel="noreferrer">Open full story</a>
+  </div>
+
+  <div class="story-frame__viewport">
+    <div class="story-frame__placeholder" data-story-placeholder>
+      <p>Load the isolated implementation when you are ready to interact with it.</p>
+      <button type="button" data-story-load>Load live example</button>
+    </div>
+    <iframe
+      title={title}
+      data-story-iframe
+      data-loaded="false"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      sandbox="allow-forms allow-modals allow-popups allow-same-origin allow-scripts"
+      hidden
+    ></iframe>
+  </div>
+
+  <p class="story-frame__status" data-story-status aria-live="polite">
+    The live frame is opt-in to keep documentation navigation fast and predictable.
+  </p>
+</section>
+
+<script>
+  function storyFrameUrl(root: HTMLElement): string {
+    const base = root.dataset.iframeBase ?? '';
+    const mode = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+    return `${base}&globals=themeVariant:neutral;themeMode:${mode}`;
+  }
+
+  function loadStoryFrame(root: HTMLElement): void {
+    const iframe = root.querySelector<HTMLIFrameElement>('[data-story-iframe]');
+    const placeholder = root.querySelector<HTMLElement>('[data-story-placeholder]');
+    const status = root.querySelector<HTMLElement>('[data-story-status]');
+    if (!iframe || !placeholder || !status) return;
+
+    status.textContent = 'Loading the live Storybook example…';
+    iframe.src = storyFrameUrl(root);
+    iframe.hidden = false;
+    iframe.dataset.loaded = 'true';
+    placeholder.hidden = true;
+
+    iframe.addEventListener(
+      'load',
+      () => {
+        status.textContent = 'Live Storybook example loaded. Use the full-story link for Storybook controls and documentation.';
+      },
+      { once: true },
+    );
+    iframe.addEventListener(
+      'error',
+      () => {
+        status.textContent = 'The embedded example could not load. Open the full Storybook story instead.';
+      },
+      { once: true },
+    );
+  }
+
+  function synchronizeLoadedFrames(): void {
+    document.querySelectorAll<HTMLElement>('[data-story-frame]').forEach((root) => {
+      const iframe = root.querySelector<HTMLIFrameElement>('[data-story-iframe]');
+      if (!iframe || iframe.dataset.loaded !== 'true') return;
+      const nextUrl = storyFrameUrl(root);
+      if (iframe.src !== nextUrl) iframe.src = nextUrl;
+    });
+  }
+
+  const documentRoot = document.documentElement;
+  if (!documentRoot.hasAttribute('data-story-frame-handler')) {
+    documentRoot.setAttribute('data-story-frame-handler', 'true');
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const button = target.closest<HTMLButtonElement>('[data-story-load]');
+      const root = button?.closest<HTMLElement>('[data-story-frame]');
+      if (root) loadStoryFrame(root);
+    });
+
+    new MutationObserver(synchronizeLoadedFrames).observe(documentRoot, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+  }
+</script>
+
+<style>
+  .story-frame {
+    overflow: hidden;
+    margin-block: var(--ps-space-6);
+    border: 1px solid var(--ps-surface-border);
+    border-radius: var(--ps-radius-lg);
+    background: var(--ps-surface-card);
+  }
+
+  .story-frame__header {
+    display: flex;
+    gap: var(--ps-space-4);
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: var(--ps-space-4);
+    border-bottom: 1px solid var(--ps-surface-border);
+  }
+
+  .story-frame__header div {
+    display: grid;
+    gap: var(--ps-space-2);
+  }
+
+  .story-frame__header strong {
+    color: var(--ps-text-primary);
+    font-size: 1rem;
+  }
+
+  .story-frame__header p,
+  .story-frame__status {
+    margin: 0;
+    color: var(--ps-text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .story-frame__header a {
+    flex: 0 0 auto;
+    color: var(--ps-action-text);
+    font-weight: 700;
+  }
+
+  .story-frame__viewport {
+    min-height: 22rem;
+    background: var(--ps-surface-background);
+  }
+
+  .story-frame--compact .story-frame__viewport {
+    min-height: 16rem;
+  }
+
+  .story-frame--tall .story-frame__viewport {
+    min-height: 30rem;
+  }
+
+  .story-frame__placeholder {
+    display: grid;
+    min-height: inherit;
+    gap: var(--ps-space-4);
+    place-items: center;
+    align-content: center;
+    padding: var(--ps-space-6);
+    color: var(--ps-text-secondary);
+    text-align: center;
+  }
+
+  .story-frame__placeholder p {
+    max-width: 38rem;
+    margin: 0;
+  }
+
+  .story-frame__placeholder button {
+    min-height: 2.75rem;
+    padding: var(--ps-space-2) var(--ps-space-4);
+    border: 1px solid var(--ps-button-background);
+    border-radius: var(--ps-radius-md);
+    background: var(--ps-button-background);
+    color: var(--ps-button-text);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .story-frame__placeholder button:hover {
+    background: var(--p-primary-hover-color);
+  }
+
+  .story-frame__placeholder button:active {
+    background: var(--p-primary-active-color);
+  }
+
+  .story-frame iframe {
+    display: block;
+    width: 100%;
+    min-height: inherit;
+    height: 22rem;
+    border: 0;
+    background: var(--ps-surface-background);
+  }
+
+  .story-frame--compact iframe {
+    height: 16rem;
+  }
+
+  .story-frame--tall iframe {
+    height: 30rem;
+  }
+
+  .story-frame iframe[hidden],
+  .story-frame__placeholder[hidden] {
+    display: none;
+  }
+
+  .story-frame__status {
+    padding: var(--ps-space-2) var(--ps-space-4);
+    border-top: 1px solid var(--ps-surface-border);
+  }
+
+  @media (max-width: 40rem) {
+    .story-frame__header {
+      flex-direction: column;
+    }
+
+    .story-frame__header a {
+      flex-basis: auto;
+    }
+  }
+</style>
