@@ -151,26 +151,43 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
   private readonly closeButton = viewChild<ElementRef<HTMLButtonElement>>('closeButton');
   private wasVisible = false;
   private focusRequest = 0;
+  private lastFocusedElement: HTMLElement | null = null;
   private restoreFocusTarget: HTMLElement | null = null;
+  private readonly handleDocumentFocusIn = (event: FocusEvent) => {
+    if (this.visible()) return;
+    const target = event.target;
+    if (this.isHTMLElement(target) && target !== this.document.body) {
+      this.lastFocusedElement = target;
+    }
+  };
+  private readonly handleDocumentPointerDown = (event: PointerEvent) => {
+    if (this.visible()) return;
+    const target = event.target;
+    if (!this.isHTMLElement(target) || target === this.document.body) return;
+    this.lastFocusedElement = target.closest<HTMLElement>(focusableSelector) ?? target;
+  };
 
   readonly titleId = `ps-dialog-title-${++dialogInstance}`;
   readonly header = input('');
   readonly width = input('32rem');
   readonly visible = model(false);
 
+  constructor() {
+    this.document.addEventListener('focusin', this.handleDocumentFocusIn, true);
+    this.document.addEventListener('pointerdown', this.handleDocumentPointerDown, true);
+  }
+
   ngAfterViewChecked(): void {
     const isVisible = this.visible();
 
     if (isVisible && !this.wasVisible) {
       const activeElement = this.document.activeElement;
-      this.restoreFocusTarget = activeElement && 'focus' in activeElement
-        ? activeElement as HTMLElement
+      const activeTarget = this.isHTMLElement(activeElement) && activeElement !== this.document.body
+        ? activeElement
         : null;
+      this.restoreFocusTarget = activeTarget ?? this.lastFocusedElement;
       const request = ++this.focusRequest;
-      queueMicrotask(() => {
-        if (request !== this.focusRequest || !this.visible()) return;
-        this.focusInitialElement();
-      });
+      this.scheduleInitialFocus(request);
     }
 
     if (!isVisible && this.wasVisible) {
@@ -181,6 +198,8 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.document.removeEventListener('focusin', this.handleDocumentFocusIn, true);
+    this.document.removeEventListener('pointerdown', this.handleDocumentPointerDown, true);
     if (this.wasVisible) this.restoreFocus();
   }
 
@@ -211,17 +230,18 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
     const first = focusableElements[0];
     const last = focusableElements[focusableElements.length - 1];
     const activeElement = this.document.activeElement;
+    const activeIndex = focusableElements.indexOf(activeElement as HTMLElement);
 
-    if (event.shiftKey && (activeElement === first || !dialog.contains(activeElement))) {
-      event.preventDefault();
-      last.focus();
+    event.preventDefault();
+
+    if (event.shiftKey) {
+      const previousIndex = activeIndex <= 0 ? focusableElements.length - 1 : activeIndex - 1;
+      focusableElements[previousIndex].focus({ preventScroll: true });
       return;
     }
 
-    if (!event.shiftKey && activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
+    const nextIndex = activeIndex === -1 || activeElement === last ? 0 : activeIndex + 1;
+    focusableElements[nextIndex].focus({ preventScroll: true });
   }
 
   private focusInitialElement(): void {
@@ -231,7 +251,24 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
     const initialTarget = this.closeButton()?.nativeElement
       ?? this.getFocusableElements(dialog)[0]
       ?? dialog;
-    initialTarget.focus();
+    initialTarget.focus({ preventScroll: true });
+  }
+
+  private scheduleInitialFocus(request: number): void {
+    const focusIfNeeded = () => {
+      if (request !== this.focusRequest || !this.visible()) return;
+      this.focusInitialElement();
+    };
+
+    queueMicrotask(focusIfNeeded);
+
+    const win = this.document.defaultView;
+    if (!win) return;
+
+    win.requestAnimationFrame(() => {
+      focusIfNeeded();
+      win.setTimeout(focusIfNeeded, 0);
+    });
   }
 
   private getFocusableElements(dialog: HTMLElement): HTMLElement[] {
@@ -242,13 +279,29 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
     });
   }
 
+  private isHTMLElement(value: unknown): value is HTMLElement {
+    const HTMLElementCtor = this.document.defaultView?.HTMLElement;
+    return !!HTMLElementCtor && value instanceof HTMLElementCtor;
+  }
+
   private restoreFocus(): void {
     ++this.focusRequest;
     const target = this.restoreFocusTarget;
     this.restoreFocusTarget = null;
 
-    queueMicrotask(() => {
-      if (target?.isConnected) target.focus();
+    const focusTarget = () => {
+      if (target?.isConnected) target.focus({ preventScroll: true });
+    };
+
+    queueMicrotask(focusTarget);
+
+    const win = this.document.defaultView;
+    if (!win) return;
+
+    win.requestAnimationFrame(() => {
+      focusTarget();
+      win.setTimeout(focusTarget, 0);
+      win.setTimeout(focusTarget, 50);
     });
   }
 }

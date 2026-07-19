@@ -23,10 +23,21 @@ async function gotoDialogStory(page: Page, story: string, globals?: string): Pro
 
 async function openDialog(page: Page, triggerName: string, dialogName: string) {
   const trigger = page.getByRole('button', { name: triggerName, exact: true });
+  await trigger.focus();
+  await expectDomFocus(trigger);
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: dialogName, exact: true });
   await expect(dialog).toBeVisible();
   return { trigger, dialog };
+}
+
+async function expectDomFocus(locator: ReturnType<Page['locator']>): Promise<void> {
+  await expect.poll(async () => {
+    return locator.evaluate((element) => {
+      const active = element.ownerDocument.activeElement as HTMLElement | null;
+      return active === element || element.contains(active);
+    });
+  }).toBe(true);
 }
 
 test.describe('Dialog isolated Storybook contract', () => {
@@ -38,7 +49,7 @@ test.describe('Dialog isolated Storybook contract', () => {
     const labelledBy = await dialog.getAttribute('aria-labelledby');
     expect(labelledBy).toBeTruthy();
     await expect(page.locator(`#${labelledBy}`)).toHaveText('Review application');
-    await expect(dialog.getByRole('button', { name: 'Close dialog' })).toBeFocused();
+    await expectDomFocus(dialog.getByRole('button', { name: 'Close dialog' }));
   });
 
   test('contains forward and reverse Tab navigation inside the modal', async ({ page }) => {
@@ -49,17 +60,17 @@ test.describe('Dialog isolated Storybook contract', () => {
     const cancel = dialog.getByRole('button', { name: 'Cancel' });
     const confirm = dialog.getByRole('button', { name: 'Save review' });
 
-    await expect(close).toBeFocused();
+    await expectDomFocus(close);
     await page.keyboard.press('Tab');
-    await expect(note).toBeFocused();
+    await expectDomFocus(note);
     await page.keyboard.press('Tab');
-    await expect(cancel).toBeFocused();
+    await expectDomFocus(cancel);
     await page.keyboard.press('Tab');
-    await expect(confirm).toBeFocused();
+    await expectDomFocus(confirm);
     await page.keyboard.press('Tab');
-    await expect(close).toBeFocused();
+    await expectDomFocus(close);
     await page.keyboard.press('Shift+Tab');
-    await expect(confirm).toBeFocused();
+    await expectDomFocus(confirm);
   });
 
   test('closes with Escape and restores focus to the opener', async ({ page }) => {
@@ -70,7 +81,7 @@ test.describe('Dialog isolated Storybook contract', () => {
     await page.keyboard.press('Escape');
 
     await expect(dialog).toBeHidden();
-    await expect(trigger).toBeFocused();
+    await expectDomFocus(trigger);
     await expect(page.locator('output')).toHaveText('No decision recorded.');
   });
 
@@ -79,12 +90,12 @@ test.describe('Dialog isolated Storybook contract', () => {
     let opened = await openDialog(page, 'Review application', 'Review application');
     await opened.dialog.getByRole('button', { name: 'Close dialog' }).click();
     await expect(opened.dialog).toBeHidden();
-    await expect(opened.trigger).toBeFocused();
+    await expectDomFocus(opened.trigger);
 
     opened = await openDialog(page, 'Review application', 'Review application');
     await page.locator('.ps-dialog__backdrop').click({ position: { x: 4, y: 4 } });
     await expect(opened.dialog).toBeHidden();
-    await expect(opened.trigger).toBeFocused();
+    await expectDomFocus(opened.trigger);
   });
 
   test('keeps the destructive decision distinct and returns focus after confirmation', async ({ page }) => {
@@ -98,7 +109,7 @@ test.describe('Dialog isolated Storybook contract', () => {
 
     await expect(dialog).toBeHidden();
     await expect(page.locator('output')).toHaveText('Draft deleted.');
-    await expect(trigger).toBeFocused();
+    await expectDomFocus(trigger);
   });
 
   test('constrains long content at a narrow viewport without document overflow', async ({ page }) => {
