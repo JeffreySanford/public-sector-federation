@@ -6,6 +6,7 @@ export type ManualAuditStatus = 'passed' | 'failed' | 'pending' | 'not-started' 
 export type FigmaStatus = 'linked' | 'pending-access' | 'not-linked' | 'not-applicable';
 export type ZeroheightStatus = 'published' | 'draft' | 'planned' | 'not-linked' | 'not-applicable';
 export type ReadinessStatus = 'ready' | 'partial' | 'blocked';
+export type AuditDisposition = 'canonical' | 'retain' | 'merge' | 'replace' | 'deprecate' | 'investigate';
 
 export interface PublicApiMember {
   name: string;
@@ -100,6 +101,10 @@ export interface ComponentManifestEntry {
     tier: 'core' | 'candidate' | 'experimental' | 'team-stewarded';
     designReview: 'approved' | 'pending' | 'not-started';
     promotionRequirements: string[];
+  };
+  audit: {
+    duplicationCluster: string;
+    disposition: AuditDisposition;
   };
   health: {
     repositoryReadiness: ReadinessStatus;
