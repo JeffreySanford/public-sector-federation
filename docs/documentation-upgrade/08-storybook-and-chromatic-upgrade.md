@@ -220,6 +220,30 @@ Best for:
 - theme propagation;
 - cross-component workflows.
 
+## Current implementation status
+
+Completed for the flagship scope:
+
+- canonical product-facing Button, Select, and Dialog stories;
+- supported controls for the flagship public APIs;
+- light and dark production token infrastructure;
+- manifest-validated canonical story identifiers;
+- dedicated Select and Dialog keyboard and overlay evidence;
+- accessibility-addon enforcement for representative stories;
+- Starlight `StoryFrame` integration.
+
+Current gaps:
+
+- target hierarchy across the remaining catalog;
+- portable `play` functions for Button, Select, and Dialog;
+- remaining acceptance-story renames;
+- explicit documentation backlinks and Chromatic review links;
+- audit-comparison stories for genuine duplication clusters.
+
+### Audit comparison stories
+
+Use side-by-side stories to expose genuinely duplicated or competing implementations. Record API, behavior, accessibility, and token differences. Keep these under Experiments or System Health so they are not mistaken for recommended usage.
+
 ## Storybook remediation tasks
 
 - [ ] Create the target hierarchy.

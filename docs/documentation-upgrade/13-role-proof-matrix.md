@@ -6,6 +6,24 @@ Map the documentation upgrade and existing repository evidence to the responsibi
 
 The goal is not to mirror a job posting word for word. The goal is to make the relevant capability visible through working artifacts.
 
+## Current proof status
+
+| Capability | Status | Strongest evidence | Remaining gap |
+| --- | --- | --- | --- |
+| Component inventory | Complete foundation | Generated manifest and Component Inventory | Add usage counts and duplication classifications |
+| Storybook extension | Complete flagship scope | Canonical Button, Select, and Dialog stories | Add `play` functions and finish catalog hierarchy |
+| Accessibility contracts | Complete flagship documentation | Starlight guidance and interaction evidence | Manual AT reviews and ranked finding verification |
+| Accessibility remediation | Partial | Dialog focus work and Select overlay evidence | Findings register must link before/after verification |
+| Consolidation | Partial | Button candidate comparison and provider boundaries | Final dispositions and compatibility windows |
+| Figma reconstruction readiness | Partial | Design Alignment Lab and manifest statuses | Produce the reconstruction reference and real identifiers |
+| Durable documentation | Complete foundation | Starlight, StoryFrame, manifest validation, release gates | Hosted preview URLs and remaining catalog projections |
+
+Working mission artifacts:
+
+- [Component estate audit](./18-component-estate-audit.md)
+- [Accessibility findings and remediation](./19-accessibility-findings-and-remediation.md)
+- [Component consolidation proposal](./20-component-consolidation-proposal.md)
+
 ## Role alignment
 
 | Role responsibility | Repository evidence | Upgrade artifact | Interview message |

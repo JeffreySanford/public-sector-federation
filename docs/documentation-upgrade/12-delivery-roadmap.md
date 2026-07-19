@@ -1,5 +1,32 @@
 # Delivery Roadmap
 
+_Last aligned: July 19, 2026 · mission realignment branch_
+
+## Current roadmap state
+
+### Completed foundation
+
+1. Starlight documentation foundation.
+2. Designer-grade documentation quality gate.
+3. Button and StoryFrame flagship slice.
+4. Select flagship and overlay evidence.
+5. Manifest-driven forensic workbench.
+6. Dialog flagship and platform simplification.
+7. Release and dependency hardening.
+
+### Remaining mission checkpoints
+
+8. Component-estate usage audit and duplication classification.
+9. Severity-ranked accessibility findings and manual flagship reviews.
+10. Component consolidation decisions and migration windows.
+11. Code-informed Figma reconstruction reference.
+12. Storybook and Chromatic final alignment.
+13. Semantic token boundary and component-test remediation.
+14. Unified public release.
+
+The numbered checkpoint descriptions below remain detailed target-state references. Where their sequence conflicts with this status, this current roadmap state takes precedence.
+
+
 ## Roadmap purpose
 
 This roadmap converts the documentation-upgrade package into reviewable implementation checkpoints. Each checkpoint should produce visible evidence, preserve working functionality, and move the repository closer to the north star without requiring one risky all-at-once rewrite.

@@ -1,6 +1,6 @@
 # Documentation Upgrade Current Status
 
-_Last aligned: July 19, 2026_
+_Last aligned: July 19, 2026 · mission realignment branch_
 
 ## Purpose
 
@@ -73,42 +73,45 @@ PR #16 merged to `master` at commit `2d8feb525c2ef92f54effaf702383bfb6a265e77` a
 
 PR #17 merged to `master` at commit `6d743ad4d9fa0cbc91930b825763605cd24d6793` after the complete release gate passed.
 
-## Active slice — PR #18 platform simplification and Dialog
+### PR #18 — Platform simplification and Dialog
 
-PR #18 combines two tightly related changes: removing the backend platform that became obsolete when PR #17 retired the performance view, and completing the final flagship component page.
+- removed the obsolete backend, database, performance dashboard, workflows, and supporting dependencies;
+- published the flagship Dialog page and canonical stories;
+- implemented labelled modal semantics, focus entry, containment, Escape dismissal, and opener restoration;
+- recorded background inertness, body scroll locking, description support, stacked dialogs, Figma alignment, and manual assistive-technology review as open work;
+- added responsive, reflow, StoryFrame, axe, accessibility-tree, visual, Lighthouse, and manifest evidence.
 
-### Platform simplification implemented on the branch
+### PRs #19 and #21 — Release and dependency hardening
 
-- removed the unused NestJS `agile-api` application;
-- removed Prisma, PostgreSQL schema, migrations, seed data, and backend-only dependencies;
-- removed Docker Compose and backend startup, rebuild, migration, seed, log, and shutdown commands;
-- removed the retired performance dashboard, performance data service, workflows, scripts, tests, and documentation;
-- regenerated `pnpm-lock.yaml` from the simplified dependency graph;
-- changed `pnpm start:all` to launch only the shell, four Angular remotes, and Starlight;
-- removed Prisma generation and Docker-backed API lifecycle steps from the Release Quality Gate;
-- aligned the README, testing guide, and portfolio description with the frontend/documentation reference architecture.
+- resolved reported transitive dependency advisories;
+- added Windows Starlight visual snapshots;
+- stabilized the full-suite Dialog focus evidence;
+- updated workflow actions and Starlight warning configuration;
+- restored the complete release-quality path after the platform and documentation changes.
 
-### Dialog flagship work implemented on the branch
+## Current mission gaps
 
-- publishes `/docs/components/dialog/` with the established flagship sequence;
-- upgrades the native `ps-dialog` wrapper with labelled modal semantics, predictable initial focus, forward and reverse focus containment, Escape dismissal, and opener restoration;
-- records dedicated Default, Destructive Confirmation, Long Content, and Focus Sequence stories;
-- adds isolated Storybook browser evidence for semantics, close naming, focus, dismissal, destructive actions, responsive scrolling, theme inheritance, and axe analysis;
-- adds Starlight responsive, 320 CSS-pixel reflow, StoryFrame, axe, accessibility-tree, visual, and Lighthouse coverage;
-- records the public API, native provider boundary, token relationships, destructive-action guidance, decisions, and limitations;
-- keeps background inertness, explicit body scroll lock, configurable initial focus, `aria-describedby`, stacked dialogs, Figma alignment, and manual assistive-technology review visibly open.
+The foundation and three flagship slices are complete. The next work is no longer another component page. It is the set of artifacts required to prove forensic discovery, accessibility remediation, and consolidation:
 
-The exact final PR state still needs generated manifest and visual-baseline commits, human visual review, and a complete Release Quality Gate pass before merge.
+1. complete the [component estate audit](./18-component-estate-audit.md), including usage counts and duplication clusters;
+2. reproduce, rank, remediate, and verify the [accessibility findings](./19-accessibility-findings-and-remediation.md);
+3. perform named manual reviews for Button, Select, and Dialog;
+4. finalize the [component consolidation proposal](./20-component-consolidation-proposal.md);
+5. produce the code-informed Figma reconstruction reference;
+6. finish Storybook hierarchy, `play` functions, documentation backlinks, and Chromatic review evidence;
+7. move native component styling from direct PrimeNG `--p-*` consumption to public `--ps-*` tokens;
+8. replace placeholder library test targets with real component contract tests.
 
 ## Following slices
 
-1. Extract reusable Starlight presentation components only where the three flagship pages prove repetition.
-2. Generate public component catalog, lifecycle, evidence-health, and remediation views from the manifest.
-3. Add hosted pull-request preview URLs rather than build artifacts only.
-4. Add complete Figma identity, property, and token alignment records.
-5. Reorganize the broader Storybook hierarchy and Chromatic review workflow.
-6. Complete named manual screen-reader reviews for promoted interactive components.
-7. Retire remaining Zeroheight scripts and primary-language references after useful evidence is migrated.
+1. Component usage discovery and duplication classification.
+2. Accessibility finding reproduction and manual flagship reviews.
+3. Canonical, merge, retain, deprecate, and investigate decisions for all manifest entries.
+4. Figma reconstruction records for Button, Select, and Dialog.
+5. Storybook and Chromatic final alignment.
+6. Semantic token-boundary remediation and real library unit tests.
+7. Zeroheight and obsolete compatibility cleanup.
+8. Unified public release.
 
 ## Tracking documents
 

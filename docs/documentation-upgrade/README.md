@@ -12,10 +12,10 @@ The remaining documents are target-state architecture, governance, page-model, a
 
 Current position:
 
-- the Astro Starlight foundation is merged;
-- the designer-grade Starlight quality gate is merged and included in `verify:release`;
-- Starlight is linked from the Angular shell and published as a pull-request build artifact;
-- the next slice is the flagship Button page plus the reusable `StoryFrame` foundation;
+- the Astro Starlight foundation and designer-grade quality gate are merged;
+- Button, Select, and Dialog are published as flagship component slices;
+- the manifest-driven Component Inventory, Quality & Remediation, and Design Alignment Lab are merged;
+- the current mission is to complete the component-estate audit, accessibility findings, manual flagship reviews, consolidation proposal, and Figma reconstruction reference;
 - Zeroheight is historical evidence, not the canonical documentation surface.
 
 ## North star
@@ -63,6 +63,9 @@ Federation and backend examples remain supporting evidence rather than the homep
 | [15 — Zeroheight retirement strategy](./15-zeroheight-retirement-strategy.md) | Defines Zeroheight as historical evidence rather than the canonical documentation surface. |
 | [16 — Main application three-view upgrade](./16-main-application-view-upgrade.md) | Defines Component Inventory, Quality & Remediation, and Design Alignment Lab. |
 | [17 — Astro Starlight application and designer-grade quality gate](./17-astro-starlight-application-and-designer-quality-gate.md) | Defines `apps/starlight`, same-origin Angular integration, visual discipline, automated checks, and human polish review. |
+| [18 — Component estate audit](./18-component-estate-audit.md) | Records the shipped component surface, duplication clusters, evidence gaps, and preliminary dispositions. |
+| [19 — Accessibility findings and remediation](./19-accessibility-findings-and-remediation.md) | Ranks accessibility findings, defines verification records, and tracks remediation. |
+| [20 — Component consolidation proposal](./20-component-consolidation-proposal.md) | Recommends canonical contracts, deprecations, provider decisions, migration sequence, and the Figma reference set. |
 
 ## Core source-of-truth relationship
 
@@ -85,19 +88,14 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-  A[Complete: Starlight application foundation] --> B[Complete: shared visual foundation]
-  B --> C[Complete: Starlight quality gate and build artifact]
-  C --> D[Complete: overview, status entry point, and Angular Documentation link]
-  D --> E[Active: Button page and StoryFrame]
-  E --> F[Next: Select and Dialog pages]
-  F --> G[Manifest contract and projections]
-  G --> H[Angular Inventory, Quality, and Alignment views]
-  H --> I[Figma alignment records]
-  I --> J[Storybook and Chromatic reorganization]
-  J --> K[Accessibility and remediation evidence]
-  K --> L[Forensic inventory and case studies]
-  L --> M[Zeroheight and sample-UI retirement]
-  M --> N[Unified public release]
+  A[Complete: Starlight and quality gate] --> B[Complete: Button, Select, and Dialog]
+  B --> C[Complete: forensic workbench]
+  C --> D[Active: component-estate audit]
+  D --> E[Accessibility findings and manual reviews]
+  E --> F[Consolidation decisions]
+  F --> G[Figma reconstruction reference]
+  G --> H[Storybook and Chromatic final alignment]
+  H --> I[Unified public release]
 ```
 
 ## Definition of success

@@ -1,5 +1,50 @@
 # Prioritized Backlog
 
+_Last aligned: July 19, 2026 · mission realignment branch_
+
+## Active mission priority
+
+The historical P0/P1/P2 sections below preserve completed foundation work and detailed acceptance criteria. The active execution order is:
+
+### P0 — Establish audit truth
+
+- [ ] Generate usage counts and consuming locations for all public entries.
+- [ ] Assign duplication clusters and evidence-backed dispositions.
+- [ ] Complete public API and token-boundary findings.
+- [ ] Link manifest entries to accessibility finding identifiers.
+- [ ] Reconcile stale status and roadmap records.
+
+### P0 — Complete flagship accessibility evidence
+
+- [ ] Reproduce and classify provisional findings.
+- [ ] Add stable Button interaction and keyboard evidence.
+- [ ] Record NVDA and Chrome reviews for Button, Select, and Dialog.
+- [ ] Record zoom/reflow and forced-colors review.
+- [ ] Link remediations to automated and manual verification.
+
+### P1 — Finalize consolidation
+
+- [ ] Approve one target Button contract and compatibility window.
+- [ ] Decide selector-prefix migration.
+- [ ] Record provider-wrap, native, and Angular CDK tradeoffs.
+- [ ] Move native styling from direct `--p-*` use to public `--ps-*` tokens.
+- [ ] Replace placeholder UI-library test targets with real contract tests.
+- [ ] Produce the Button, Select, and Dialog Figma reconstruction reference.
+
+### P1 — Finish Storybook and Chromatic alignment
+
+- [ ] Complete the product-facing hierarchy.
+- [ ] Add appropriate `play` functions for the flagship stories.
+- [ ] Separate experiments, deprecated contracts, and system-health stories.
+- [ ] Add documentation backlinks and Chromatic review evidence.
+
+Authoritative working artifacts:
+
+- [Component estate audit](./18-component-estate-audit.md)
+- [Accessibility findings and remediation](./19-accessibility-findings-and-remediation.md)
+- [Component consolidation proposal](./20-component-consolidation-proposal.md)
+
+
 ## Backlog principles
 
 - Build the new public façade before removing the old one.
