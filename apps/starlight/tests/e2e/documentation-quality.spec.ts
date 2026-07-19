@@ -1,10 +1,12 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
+const storybookOrigin = 'https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com';
 const routes = [
   { name: 'overview', path: '/docs/' },
   { name: 'foundations', path: '/docs/foundations/' },
   { name: 'components', path: '/docs/components/' },
+  { name: 'button', path: '/docs/components/button/' },
   { name: 'patterns', path: '/docs/patterns/' },
   { name: 'accessibility', path: '/docs/accessibility/' },
   { name: 'develop', path: '/docs/develop/' },
@@ -14,7 +16,7 @@ const routes = [
 ] as const;
 
 async function open(page: Page, route: string) {
-  const response = await page.goto(route, { waitUntil: 'networkidle' });
+  const response = await page.goto(route, { waitUntil: 'domcontentloaded' });
   expect(response, `No response was returned for ${route}.`).not.toBeNull();
   expect(response?.ok(), `${route} returned ${response?.status()}.`).toBeTruthy();
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);
@@ -100,13 +102,59 @@ test.describe('responsive navigation and reflow', () => {
         page.getByRole('link', { name: 'Foundations overview', exact: true }),
       ).toBeVisible();
     });
+
+    test(`Button guidance and StoryFrame remain usable at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await open(page, '/docs/components/button/');
+      await expectNoHorizontalOverflow(page);
+      await expect(page.getByRole('heading', { level: 1, name: 'Button' })).toBeVisible();
+
+      const storyFrame = page.locator('[data-story-frame]');
+      await expect(storyFrame).toBeVisible();
+      await expect(storyFrame.getByRole('button', { name: 'Load live example' })).toBeVisible();
+      await expect(storyFrame.getByRole('link', { name: 'Open full story' })).toBeVisible();
+      const box = await storyFrame.boundingBox();
+      expect(box?.width ?? 0).toBeLessThanOrEqual(width);
+    });
   }
 
-  test('content reflows at the 320 CSS-pixel equivalent of 200% zoom', async ({ page }) => {
+  test('Button content reflows at the 320 CSS-pixel equivalent of 200% zoom', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 });
-    await open(page, '/docs/components/');
+    await open(page, '/docs/components/button/');
     await expectNoHorizontalOverflow(page);
-    await expect(page.getByRole('heading', { level: 1, name: 'Components' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Button' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Load live example' })).toBeVisible();
+  });
+});
+
+test.describe('StoryFrame contract', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route(`${storybookOrigin}/**`, async (route) => route.abort());
+  });
+
+  test('loads the canonical story only after activation', async ({ page }) => {
+    await open(page, '/docs/components/button/');
+    const storyFrame = page.locator('[data-story-frame]');
+    const iframe = storyFrame.locator('iframe');
+
+    await expect(iframe).toBeHidden();
+    await expect(iframe).toHaveAttribute('title', 'Button — default action');
+    await expect(iframe).toHaveAttribute('loading', 'lazy');
+    await storyFrame.getByRole('button', { name: 'Load live example' }).click();
+    await expect(iframe).toBeVisible();
+    await expect(iframe).toHaveAttribute(
+      'src',
+      /design-system-components-button--default.*themeVariant:neutral;themeMode:light/,
+    );
+  });
+
+  test('reloads an activated story with the current documentation theme', async ({ page }) => {
+    await open(page, '/docs/components/button/');
+    const storyFrame = page.locator('[data-story-frame]');
+    const iframe = storyFrame.locator('iframe');
+    await storyFrame.getByRole('button', { name: 'Load live example' }).click();
+    await setTheme(page, 'dark');
+    await expect(iframe).toHaveAttribute('src', /themeMode:dark/);
   });
 });
 
@@ -117,7 +165,12 @@ test.describe('theme and accessibility contracts', () => {
     await setTheme(page, 'light');
   });
 
-  for (const route of ['/docs/', '/docs/components/', '/docs/architecture/']) {
+  for (const route of [
+    '/docs/',
+    '/docs/components/',
+    '/docs/components/button/',
+    '/docs/architecture/',
+  ]) {
     test(`${route} has no serious or critical axe violations`, async ({ page }) => {
       await open(page, route);
       const results = await new AxeBuilder({ page })
@@ -137,6 +190,22 @@ test.describe('theme and accessibility contracts', () => {
     `);
     await expect(page.getByRole('link', { name: 'Explore components' })).toMatchAriaSnapshot(`
       - link "Explore components"
+    `);
+  });
+
+  test('Button page and StoryFrame retain their critical accessibility-tree shape', async ({ page }) => {
+    await open(page, '/docs/components/button/');
+    await expect(page.getByRole('heading', { level: 1 })).toMatchAriaSnapshot(`
+      - heading "Button" [level=1]
+    `);
+    await expect(page.locator('[data-story-frame]')).toMatchAriaSnapshot(`
+      - region "Button — default action live example":
+        - strong: Button — default action
+        - paragraph: The stable ps-button wrapper using its preferred intent, appearance, and activated contract.
+        - link "Open full story"
+        - paragraph: Load the isolated implementation when you are ready to interact with it.
+        - button "Load live example"
+        - paragraph: The live frame is opt-in to keep documentation navigation fast and predictable.
     `);
   });
 });
@@ -170,6 +239,39 @@ test.describe('human-reviewed visual baselines', () => {
     await open(page, '/docs/');
     await setTheme(page, 'light');
     await expect(page).toHaveScreenshot('overview-light-mobile.png', {
+      fullPage: true,
+      mask: [page.locator('time')],
+    });
+  });
+
+  test('Button light desktop', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'light' });
+    await open(page, '/docs/components/button/');
+    await setTheme(page, 'light');
+    await expect(page).toHaveScreenshot('button-light-desktop.png', {
+      fullPage: true,
+      mask: [page.locator('time')],
+    });
+  });
+
+  test('Button dark desktop', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'dark' });
+    await open(page, '/docs/components/button/');
+    await setTheme(page, 'dark');
+    await expect(page).toHaveScreenshot('button-dark-desktop.png', {
+      fullPage: true,
+      mask: [page.locator('time')],
+    });
+  });
+
+  test('Button light mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 360, height: 800 });
+    await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'light' });
+    await open(page, '/docs/components/button/');
+    await setTheme(page, 'light');
+    await expect(page).toHaveScreenshot('button-light-mobile.png', {
       fullPage: true,
       mask: [page.locator('time')],
     });
