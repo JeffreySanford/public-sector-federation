@@ -1,0 +1,255 @@
+---
+title: Select
+description: Lets a person choose one value from a known collection while preserving a compact form layout.
+---
+
+import StoryFrame from '../../../../components/StoryFrame.astro';
+
+Select lets a person choose one value from a known collection. Use it when the available choices are stable, mutually exclusive, and easier to scan in a popup than as persistent controls.
+
+**Lifecycle:** Stable · **Framework:** Angular · **Provider:** PrimeNG adapter · **Accessibility:** Automated evidence exists; dedicated keyboard and manual review remain incomplete · **Figma:** Pending access
+
+[Open the canonical Storybook story](https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/?path=/story/design-system-components-select--default) · [View Angular source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/public-select.component.ts) · [View Storybook source](https://github.com/JeffreySanford/public-sector-federation/blob/master/apps/qa-remote/src/stories/select.stories.ts) · [View manifest source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/manifest/component-registry.ts)
+
+## Live example
+
+<StoryFrame
+  title="Select — choose a program"
+  storyId="design-system-components-select--default"
+  description="The stable ps-select wrapper with a visible label, placeholder, provider-neutral options, and a nullable string value."
+  size="compact"
+/>
+
+The frame loads only after activation. Storybook owns interaction inside the cross-origin story; this page owns guidance, status, and evidence boundaries.
+
+## When to use
+
+Use Select when:
+
+- one value must be chosen from a known set;
+- showing every option at once would consume unnecessary space;
+- option labels are short enough to scan in a popup;
+- the choice can be represented by a stable string value;
+- a default or current selection can be explained clearly.
+
+### When not to use
+
+- Use **radio buttons** when the list is short and comparing all options at once is important.
+- Use **autocomplete** when the collection is large, remote, or benefits from filtering.
+- Use a **checkbox group** when more than one value can be selected.
+- Use a **native select** when platform-native behavior, minimal scripting, or constrained delivery is more important than the governed overlay treatment.
+- Do not use Select for actions. Use a menu or Button when choosing an item immediately performs an operation.
+
+## Selection guidance
+
+| Situation | Recommended approach |
+| --- | --- |
+| Two to four important choices | Prefer radio buttons when space allows. |
+| Moderate known list | Use Select. |
+| Long searchable list | Use autocomplete or a filtered list pattern. |
+| Multi-value choice | Use a multi-select or checkbox group. |
+| No valid choices | Explain the unavailable state; do not rely on an empty popup alone. |
+| Archived or unavailable choice | Mark the option disabled and explain the reason elsewhere when it affects task completion. |
+
+## Content guidance
+
+- Use a concise noun phrase for the label: **Program**, **Service region**, or **Communication preference**.
+- Use a placeholder that describes the expected choice: **Choose a program**.
+- Do not repeat the label word-for-word in the placeholder when a clearer instruction is available.
+- Keep option labels unique and understandable without hidden codes.
+- Avoid putting status, dates, or several independent facts into one option label unless a richer option-content contract is introduced.
+- Preserve meaningful distinctions in long labels rather than truncating them to identical prefixes.
+
+## Supported states
+
+| State | Current support | Guidance |
+| --- | --- | --- |
+| Unselected | Supported | Show the placeholder until a value is chosen. |
+| Selected | Supported | Display the option label associated with the string value. |
+| Disabled field | Supported | Prevent focus and selection when the complete field is unavailable. |
+| Disabled option | Supported by the option model | Keep the option visible but unavailable for selection. |
+| Empty options | Supported as data | Pair the empty list with an explanatory placeholder or nearby message. |
+| Long label or option | Supported with responsive evidence pending completion | Allow wrapping where the provider permits; avoid horizontal clipping. |
+| Invalid | Not exposed | The wrapper does not currently expose invalid state, error text, or `aria-describedby`. |
+| Required | Not exposed | Required-state semantics and visible required guidance remain undefined. |
+| Help text | Not exposed | Compose external text cautiously until an explicit description contract exists. |
+
+## Anatomy
+
+1. **Visible field label** — names the selection task.
+2. **Combobox trigger** — displays the selected label or placeholder and opens the popup.
+3. **Dropdown indicator** — communicates that more choices are available.
+4. **Popup listbox** — body-appended overlay containing the options.
+5. **Option** — selectable label and value record, optionally disabled.
+6. **Active option indicator** — provider-owned visual and accessibility state during keyboard navigation.
+7. **Focus indicator** — shared focus treatment on the combobox trigger.
+8. **Overlay boundary** — provider positioning and stacking behavior that must remain valid outside the component host.
+
+PrimeNG classes, generated IDs, and internal popup markup are private implementation details.
+
+## Behavior and interaction
+
+### Closed combobox
+
+| Key or action | Expected behavior |
+| --- | --- |
+| Tab | Moves focus to the enabled Select. |
+| Space | Opens the popup and moves active focus to the selected or first available option. |
+| Arrow Down | Opens the popup and moves active focus to the selected or first available option. |
+| Arrow Up | Opens the popup and moves active focus to the selected or last available option. |
+| Pointer activation | Opens the popup without moving the field out of its form context. |
+
+### Open popup
+
+| Key or action | Expected behavior |
+| --- | --- |
+| Arrow Down or Arrow Up | Moves active focus among enabled options. |
+| Home or End | Moves to the first or last option in the non-editable Select. |
+| Enter or Space | Selects the active option and closes the popup. |
+| Escape | Closes the popup and returns focus to the combobox. |
+| Printable characters | Moves active focus to an option whose label matches the typed prefix when supported by the provider. |
+| Pointer selection | Updates the public `value` model and closes the popup. |
+
+The public contract is the selected string value, not the provider event object.
+
+## Overlay contract
+
+The wrapper deliberately sets `appendTo="body"`. The popup therefore renders outside the `ps-select` host and outside potentially clipping application panels.
+
+That policy requires evidence for:
+
+- positioning relative to the trigger after scrolling or viewport changes;
+- escaping `overflow: hidden` application boundaries;
+- stacking above application content without covering unrelated global surfaces incorrectly;
+- inheriting light and dark theme variables from the document root;
+- retaining readable option widths for long content;
+- closing without leaving detached or hidden overlays in the document body;
+- maintaining combobox-to-listbox relationships even though the DOM nodes are separated.
+
+The canonical `OverlayBoundary` Storybook story places the field inside an overflow-hidden panel so these responsibilities can be tested directly.
+
+## Accessibility contract
+
+### Semantics and naming
+
+- The interactive trigger must expose `combobox` semantics with popup and expanded-state information.
+- The visible `label` input is also forwarded as the provider `ariaLabel`.
+- The popup must expose listbox semantics and options must expose selected and disabled states.
+- The combobox and popup must remain related through provider-managed IDs and ARIA attributes after the popup is appended to the body.
+- Placeholder text is not a substitute for an accessible name.
+- Empty and disabled states need understandable visible context.
+
+### Current evidence status
+
+- **Storybook accessibility:** The canonical story uses the accessibility addon as an error gate.
+- **Page-level accessibility:** This Starlight route will be included in the built-site axe gate.
+- **Keyboard coverage:** Partial until the dedicated Select Storybook Playwright suite is complete.
+- **Overlay integration:** Partial; shared shell token evidence exists, but the Select-specific clipping and focus sequence need dedicated checks.
+- **Manual assistive-technology review:** Pending.
+- **Conformance claim:** None. Automated evidence does not replace manual review.
+
+The Starlight scan can validate the page and iframe title. It cannot inspect the cross-origin live story; Storybook and its dedicated browser tests own the rendered combobox and popup evidence.
+
+## Token relationships
+
+The current stable Select does not expose a dedicated public component-token family. It consumes shared semantic values through the PrimeNG preset and targeted provider overrides.
+
+| Token or layer | Role | Current relationship |
+| --- | --- | --- |
+| `--ps-surface-card` | Field and popup surface foundation | Feeds the provider content background. |
+| `--ps-surface-border` | Field, popup, and option boundary foundation | Feeds the provider content border. |
+| `--ps-text-primary` | Selected value and option text | Feeds the provider text color. |
+| `--ps-text-secondary` | Placeholder and muted guidance | Feeds the provider muted text color. |
+| `--ps-primary-background` | Selected and highlighted treatment foundation | Feeds the provider primary color. |
+| `--ps-focus-ring-color` | Keyboard focus indication | Feeds the provider focus-ring mapping. |
+| `--p-select-*` and provider classes | Private provider implementation | Applications should not treat these as the public design contract. |
+
+A future component-token layer may make field, popup, option, active, selected, invalid, and disabled responsibilities more explicit. This page records the current semantic-to-provider boundary rather than inventing that contract early.
+
+## Angular API
+
+### Import
+
+```ts
+import {
+  PublicSelectComponent,
+  type PublicSelectOption,
+} from '@public-sector/ui-patterns';
+```
+
+### Usage
+
+```ts
+readonly programOptions: PublicSelectOption[] = [
+  { label: 'Housing assistance', value: 'housing' },
+  { label: 'Food assistance', value: 'food' },
+  { label: 'Archived pilot program', value: 'archive', disabled: true },
+];
+
+selectedProgram: string | null = null;
+```
+
+```html
+<ps-select
+  label="Program"
+  placeholder="Choose a program"
+  [options]="programOptions"
+  [(value)]="selectedProgram"
+/>
+```
+
+### Inputs and model
+
+| Member | Type | Default | Guidance |
+| --- | --- | --- | --- |
+| `label` | `string` | `Select` | Visible field label and accessible name. |
+| `options` | `PublicSelectOption[]` | `[]` | Known provider-neutral option records. |
+| `placeholder` | `string` | `Choose an option` | Prompt before selection. |
+| `disabled` | `boolean` | `false` | Disables the complete field. |
+| `value` | `model<string \| null>` | `null` | Two-way selected value model. |
+
+### Option type
+
+| Property | Type | Required | Guidance |
+| --- | --- | --- | --- |
+| `label` | `string` | Yes | Visible option text. |
+| `value` | `string` | Yes | Stable public value written to the model. |
+| `disabled` | `boolean` | No | Prevents selection while preserving the option in the list. |
+
+## Provider boundary
+
+`ps-select` wraps PrimeNG `p-select` and currently fixes these provider decisions internally:
+
+- `optionLabel="label"`;
+- `optionValue="value"`;
+- `appendTo="body"`;
+- provider `ariaLabel` derived from the public `label`;
+- forms integration through `ngModel` and the public signal model.
+
+The wrapper does not currently expose filtering, editable input, clear behavior, grouping, virtual scrolling, templates, invalid state, required state, help text, or provider PassThrough configuration. Those omissions keep the stable contract compact, but some may need intentional public designs later.
+
+## Quality and evidence
+
+| Dimension | Current status | Evidence or next action |
+| --- | --- | --- |
+| Runtime source | Complete | `PublicSelectComponent` is exported from `@public-sector/ui-patterns`. |
+| Public API inventory | Complete | Registry metadata records inputs, option type, and value model. |
+| Canonical Storybook story | Complete | `Design System/Components/Select — Default`. |
+| State stories | Expanded in this slice | Selected, disabled, disabled option, empty options, long options, model binding, and overlay boundary. |
+| Automated accessibility | Partial | Storybook and page-level checks exist; popup states require dedicated interaction checks. |
+| Keyboard coverage | Partial | Add closed-state, open-state, selection, disabled-option, and Escape tests. |
+| Body-overlay integration | Partial | The dedicated boundary story exists; positioning, clipping, focus, and theme assertions remain active work. |
+| Manual screen-reader review | Pending | Record a named review before making broader accessibility claims. |
+| Token mapping | Partial | Shared semantic and provider mappings exist; dedicated Select component tokens do not. |
+| Figma alignment | Pending access | Do not fabricate component or property identifiers. |
+| Documentation | In progress | This page begins the second flagship component slice. |
+
+## Decisions and known gaps
+
+1. **Keep `ps-select` canonical.** It is the shipped wrapper with a compact string-value contract.
+2. **Keep the popup body-appended for now.** The policy prevents local clipping but requires dedicated positioning, stacking, theme, and focus evidence.
+3. **Keep option records provider-neutral.** Consumers use `label`, `value`, and `disabled`, not PrimeNG option classes or events.
+4. **Do not expose every provider feature automatically.** Filtering, grouping, templates, and virtual scrolling require product and accessibility decisions before becoming public API.
+5. **Treat invalid, required, help-text, and description relationships as real gaps.** They should be designed rather than implied through application CSS.
+6. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.
+7. **Use Dialog next to test focus-managed overlay documentation.** Select proves listbox navigation and body-overlay behavior; Dialog will prove modal focus containment and restoration.
