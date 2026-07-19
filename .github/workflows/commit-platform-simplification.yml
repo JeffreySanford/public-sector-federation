@@ -34,7 +34,10 @@ jobs:
           cache: pnpm
 
       - name: Apply simplification
-        run: python scripts/simplify-platform.py
+        shell: bash
+        run: |
+          python scripts/simplify-platform.py
+          git checkout HEAD -- .github/workflows
 
       - name: Refresh lockfile
         run: pnpm install --lockfile-only
@@ -48,14 +51,11 @@ jobs:
           test ! -e prisma.config.ts
           node -e "const p=require('./package.json'); if(p.scripts['start:backend'] || p.dependencies?.['@nestjs/core'] || p.dependencies?.['@prisma/client']) process.exit(1)"
 
-      - name: Commit cleanup
+      - name: Commit non-workflow cleanup
         shell: bash
         run: |
-          rm -f scripts/simplify-platform.py
-          rm -f .github/workflows/bootstrap-platform-simplification.yml
-          rm -f .github/workflows/commit-platform-simplification.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
+          git add -A -- ':!.github/workflows'
           git commit -m 'Remove obsolete API and database platform [platform-simplified]'
           git push origin HEAD:agent/dialog-documentation
