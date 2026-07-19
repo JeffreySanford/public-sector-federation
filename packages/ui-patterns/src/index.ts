@@ -27,17 +27,23 @@ export { PublicTooltipComponent, type PublicTooltipPosition } from './public-too
 export { PublicToastComponent } from './public-toast.component';
 export { PublicToastService, type PublicToastMessage, type PublicToastSeverity } from './public-toast.service';
 export { componentManifest, componentRegistry } from './manifest/component-registry';
+export { componentFindings } from './manifest/component-findings';
 export type {
   AuditDisposition,
+  ComponentFinding,
   ComponentManifest,
   ComponentManifestEntry,
   EvidenceStatus,
   FigmaStatus,
+  FindingCategory,
+  FindingSeverity,
+  FindingStatus,
   LifecycleStatus,
   ManualAuditStatus,
   ProviderKind,
   PublicApiMember,
   ReadinessStatus,
   RegistryKind,
+  TokenBoundaryStatus,
   ZeroheightStatus,
 } from './manifest/component-meta.types';
