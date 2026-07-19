@@ -1,0 +1,226 @@
+name: Record Select documentation progress
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/record-select-progress.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull-request branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Align Select status and evidence language
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          select_page = Path('apps/starlight/src/content/docs/components/select/index.mdx')
+          text = select_page.read_text()
+          replacements = [
+              (
+                  '**Lifecycle:** Stable · **Framework:** Angular · **Provider:** PrimeNG adapter · **Accessibility:** Automated evidence exists; dedicated keyboard and manual review remain incomplete · **Figma:** Pending access',
+                  '**Lifecycle:** Stable · **Framework:** Angular · **Provider:** PrimeNG adapter · **Accessibility:** Automated keyboard, popup, theme, responsive, and page evidence is complete for this declared scope; manual review remains pending · **Figma:** Pending access',
+              ),
+              (
+                  '| Long label or option | Supported with responsive evidence pending completion | Allow wrapping where the provider permits; avoid horizontal clipping. |',
+                  '| Long label or option | Supported with responsive evidence | The popup is width-constrained and option labels wrap without horizontal document overflow. |',
+              ),
+              (
+                  '- The popup must expose listbox semantics and options must expose selected and disabled states.',
+                  '- The popup must expose listbox semantics and options must expose selected state. PrimeNG currently suppresses disabled-option activation through provider state but does not emit `aria-disabled` on the rendered option; that omission remains an explicit accessibility/provider gap.',
+              ),
+              (
+                  '''- **Storybook accessibility:** The canonical story uses the accessibility addon as an error gate.
+          - **Page-level accessibility:** This Starlight route will be included in the built-site axe gate.
+          - **Keyboard coverage:** Partial until the dedicated Select Storybook Playwright suite is complete.
+          - **Overlay integration:** Partial; shared shell token evidence exists, but the Select-specific clipping and focus sequence need dedicated checks.
+          - **Manual assistive-technology review:** Pending.
+          - **Conformance claim:** None. Automated evidence does not replace manual review.''',
+                  '''- **Storybook accessibility:** The canonical story uses the accessibility addon as an error gate.
+          - **Page-level accessibility:** This Starlight route is included in the built-site axe gate.
+          - **Keyboard coverage:** Complete for the declared stable contract: keyboard opening, option navigation, selection, Escape, model updates, disabled states, and focus return are verified.
+          - **Overlay integration:** Complete for the declared scope: body append, clipping escape, stacking, light/dark token inheritance, long-option wrapping, and mobile document width are verified.
+          - **Disabled-option ARIA:** The provider prevents selection but currently omits `aria-disabled` on the option element; this remains a recorded gap.
+          - **Manual assistive-technology review:** Pending.
+          - **Conformance claim:** None. Automated evidence does not replace manual review.''',
+              ),
+              (
+                  '''| State stories | Expanded in this slice | Selected, disabled, disabled option, empty options, long options, model binding, and overlay boundary. |
+          | Automated accessibility | Partial | Storybook and page-level checks exist; popup states require dedicated interaction checks. |
+          | Keyboard coverage | Partial | Add closed-state, open-state, selection, disabled-option, and Escape tests. |
+          | Body-overlay integration | Partial | The dedicated boundary story exists; positioning, clipping, focus, and theme assertions remain active work. |
+          | Manual screen-reader review | Pending | Record a named review before making broader accessibility claims. |
+          | Token mapping | Partial | Shared semantic and provider mappings exist; dedicated Select component tokens do not. |
+          | Figma alignment | Pending access | Do not fabricate component or property identifiers. |
+          | Documentation | In progress | This page begins the second flagship component slice. |''',
+                  '''| State stories | Complete for the current contract | Selected, disabled, disabled option, empty options, long options, model binding, and overlay boundary are recorded. |
+          | Automated accessibility | Complete for the declared automated scope | Storybook, page-level axe, and accessibility-tree checks pass. |
+          | Keyboard coverage | Complete for the declared stable contract | Dedicated tests cover opening, navigation, selection, Escape, disabled states, model updates, and focus return. |
+          | Body-overlay integration | Complete for the declared scope | Tests prove body append, clipping escape, stacking, theme inheritance, focus return, and mobile wrapping. |
+          | Disabled-option ARIA | Provider gap | PrimeNG marks the option disabled internally but does not currently emit `aria-disabled`. |
+          | Manual screen-reader review | Pending | Record a named review before making broader accessibility claims. |
+          | Token mapping | Partial | Shared semantic and provider mappings exist; dedicated Select component tokens do not. |
+          | Figma alignment | Pending access | Do not fabricate component or property identifiers. |
+          | Documentation | Complete for this slice | The page, canonical story, integrity relationships, visual baselines, and Lighthouse route are recorded. |''',
+              ),
+              (
+                  '6. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.\n7. **Use Dialog next to test focus-managed overlay documentation.** Select proves listbox navigation and body-overlay behavior; Dialog will prove modal focus containment and restoration.',
+                  '6. **Track the disabled-option ARIA omission.** The provider blocks activation but does not currently emit `aria-disabled` on the rendered option.\n7. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.\n8. **Use Dialog next to test focus-managed overlay documentation.** Select proves listbox navigation and body-overlay behavior; Dialog will prove modal focus containment and restoration.',
+              ),
+          ]
+          for old, new in replacements:
+              if old not in text:
+                  raise SystemExit(f'Select page status text was not found: {old[:90]}')
+              text = text.replace(old, new, 1)
+          select_page.write_text(text)
+
+          catalog = Path('apps/starlight/src/content/docs/components/index.md')
+          text = catalog.read_text()
+          old = '''- **Documentation:** The second flagship page is active and currently expanding its overlay and keyboard evidence.
+          - **Lifecycle:** Active.
+          - **Storybook:** A canonical story and focused state or overlay harnesses are recorded.
+          - **Accessibility:** The combobox contract is documented; dedicated keyboard, popup, and manual assistive-technology review remain incomplete.
+          - **Figma:** Pending access and alignment review.'''
+          new = '''- **Documentation:** The second complete flagship page is published in PR #16.
+          - **Lifecycle:** Active.
+          - **Storybook:** A canonical story, complete state set, model harness, and overlay-boundary harness are recorded.
+          - **Accessibility:** Dedicated automated keyboard, popup, axe, and accessibility-tree evidence is complete for the declared scope; manual assistive-technology review and the provider's missing disabled-option `aria-disabled` state remain open.
+          - **Figma:** Pending access and alignment review.'''
+          if old not in text:
+              raise SystemExit('Select catalog status block was not found.')
+          catalog.write_text(text.replace(old, new, 1))
+
+          todo = Path('docs/design-system/TODO.md')
+          text = todo.read_text()
+          old = '''## Active slice — Select page and overlay evidence
+
+          - [ ] Publish `/docs/components/select/` using the established flagship page structure.
+          - [ ] Write purpose, selection guidance, alternatives, and anti-patterns before evidence.
+          - [ ] Designate a canonical normal Select story and focused state stories.
+          - [ ] Document the `label`, `options`, `placeholder`, `disabled`, and `value` public contract.
+          - [ ] Document the provider-neutral `PublicSelectOption` model and private PrimeNG mapping.
+          - [ ] Document combobox semantics, accessible naming, keyboard navigation, selection, and focus behavior.
+          - [ ] Cover selected, disabled, empty-option, disabled-option, long-option, and model-binding states.
+          - [ ] Prove body-appended overlay positioning, clipping, stacking, and responsive behavior.
+          - [ ] Prove light and dark theme inheritance for the body-appended overlay.
+          - [ ] Add dedicated Storybook interaction and Playwright evidence instead of relying only on shared shell token checks.
+          - [ ] Record missing invalid-state, required-state, help-text, and richer option-content APIs as explicit gaps.
+          - [ ] Add the Select route, documentation source, canonical story ID, and Storybook source to integrity validation.
+          - [ ] Update the component registry and generated manifest for the declared Select evidence.
+          - [ ] Add Select responsive, 200%-zoom-equivalent, axe, accessibility-tree, visual, and Lighthouse coverage.
+          - [ ] Pass the designer-grade quality gate and human polish review.'''
+          new = '''## Select page and overlay evidence
+
+          - [x] Publish `/docs/components/select/` using the established flagship page structure.
+          - [x] Write purpose, selection guidance, alternatives, and anti-patterns before evidence.
+          - [x] Designate a canonical normal Select story and focused state stories.
+          - [x] Document the `label`, `options`, `placeholder`, `disabled`, and `value` public contract.
+          - [x] Document the provider-neutral `PublicSelectOption` model and private PrimeNG mapping.
+          - [x] Document combobox semantics, accessible naming, keyboard navigation, selection, and focus behavior.
+          - [x] Cover selected, disabled, empty-option, disabled-option, long-option, and model-binding states.
+          - [x] Prove body-appended overlay positioning, clipping, stacking, and responsive behavior.
+          - [x] Prove light and dark theme inheritance for the body-appended overlay.
+          - [x] Add dedicated Storybook interaction and Playwright evidence instead of relying only on shared shell token checks.
+          - [x] Record missing invalid-state, required-state, help-text, richer option-content, manual-review, Figma, and disabled-option ARIA evidence as explicit gaps.
+          - [x] Add the Select route, documentation source, canonical story ID, and Storybook source to integrity validation.
+          - [x] Update the component registry and generated manifest for the declared Select evidence.
+          - [x] Add Select responsive, 200%-zoom-equivalent, axe, accessibility-tree, visual, and Lighthouse coverage.
+          - [x] Complete the Select human polish review with a documented follow-up.
+          - [ ] Pass the complete Release Quality Gate for the exact final pull-request state.'''
+          if old not in text:
+              raise SystemExit('Select TODO block was not found.')
+          todo.write_text(text.replace(old, new, 1))
+
+          backlog = Path('docs/documentation-upgrade/11-prioritized-backlog.md')
+          text = backlog.read_text()
+          old = '''### Select
+
+          - [ ] Write purpose and usage guidance.
+          - [ ] Create canonical and state stories.
+          - [ ] Document overlay and theme behavior.
+          - [ ] Document keyboard navigation and selection model.
+          - [ ] Document accessible naming and invalid state.
+          - [ ] Show provider-neutral API and private PrimeNG mapping.
+          - [ ] Add integration evidence for body-appended overlays.
+          - [ ] Pass the Starlight designer-grade quality gate and human polish review.'''
+          new = '''### Select
+
+          - [x] Write purpose and usage guidance.
+          - [x] Create canonical and state stories.
+          - [x] Document overlay and theme behavior.
+          - [x] Document keyboard navigation and the provider-neutral selection model.
+          - [x] Document accessible naming, current invalid-state limitations, and the provider's disabled-option ARIA gap.
+          - [x] Show the provider-neutral API and private PrimeNG mapping.
+          - [x] Add integration evidence for body-appended overlays, clipping, stacking, focus return, theme inheritance, and mobile wrapping.
+          - [x] Complete the Select human polish review.
+          - [ ] Pass the complete Release Quality Gate for the exact final pull-request state.'''
+          if old not in text:
+              raise SystemExit('Select backlog block was not found.')
+          backlog.write_text(text.replace(old, new, 1))
+
+          status = Path('docs/documentation-upgrade/00-current-status.md')
+          text = status.read_text()
+          old = '''## Active slice — Select documentation and overlay evidence
+
+          The next slice is **Select documentation plus canonical overlay and keyboard evidence**.
+
+          The slice should:
+
+          - publish `/docs/components/select/` using the proven Button page sequence;
+          - keep purpose, selection guidance, and alternatives ahead of implementation evidence;
+          - designate a normal canonical Select story and focused state stories;
+          - document the public `label`, `options`, `placeholder`, `disabled`, and `value` contract;
+          - document the provider-neutral option model and the private PrimeNG implementation boundary;
+          - document accessible naming, combobox semantics, keyboard navigation, selection, disabled options, empty options, and long-option behavior;
+          - prove body-appended overlay positioning, clipping, stacking, light/dark theme inheritance, and responsive behavior;
+          - add dedicated Storybook interaction and Playwright evidence rather than relying only on shared shell token checks;
+          - record current limitations honestly, including the absence of invalid-state, help-text, required-state, and richer option-content APIs;
+          - update the component registry, generated manifest, documentation-integrity relationships, TODO, and prioritized backlog in the same pull request;
+          - pass the existing designer-grade Starlight gate and human polish review.'''
+          new = '''## Active slice — PR #16 Select documentation and overlay evidence
+
+          PR #16 completes the Select implementation slice and is in final release validation.
+
+          The branch now:
+
+          - publishes `/docs/components/select/` using the proven flagship page sequence;
+          - keeps purpose, selection guidance, alternatives, and content guidance ahead of implementation evidence;
+          - records a canonical Select story plus selected, disabled, disabled-option, empty, long-option, model-binding, and overlay-boundary stories;
+          - documents the public `label`, `options`, `placeholder`, `disabled`, and `value` contract and the private PrimeNG boundary;
+          - verifies keyboard opening, navigation, selection, Escape, model updates, disabled behavior, and focus return through eight dedicated Storybook browser tests;
+          - proves body-appended overlay relationships, clipping escape, stacking, light/dark token inheritance, and mobile wrapping;
+          - adds route, manifest, responsive, 200%-zoom-equivalent, axe, accessibility-tree, visual, and Lighthouse evidence;
+          - records invalid-state, required-state, help-text, richer option content, missing disabled-option `aria-disabled`, Figma alignment, and manual assistive-technology review as explicit gaps;
+          - has completed human visual review with a follow-up to evaluate reusable evidence components after Dialog.'''
+          if old not in text:
+              raise SystemExit('Current Select status block was not found.')
+          status.write_text(text.replace(old, new, 1))
+          PY
+
+      - name: Commit aligned documentation
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            apps/starlight/src/content/docs/components/index.md \
+            apps/starlight/src/content/docs/components/select/index.mdx \
+            docs/design-system/TODO.md \
+            docs/documentation-upgrade/00-current-status.md \
+            docs/documentation-upgrade/11-prioritized-backlog.md
+          git commit -m "Align Select documentation status"
+          git pull --rebase origin ${{ github.event.pull_request.head.ref }}
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
