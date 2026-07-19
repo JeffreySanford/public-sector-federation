@@ -1,0 +1,159 @@
+name: Bootstrap Select documentation evidence
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/bootstrap-select-documentation.yml'
+      - 'apps/qa-remote/src/stories/select.stories.ts'
+      - 'apps/qa-remote/e2e/select.storybook.spec.ts'
+      - 'apps/starlight/**'
+      - 'packages/ui-patterns/src/manifest/component-registry.ts'
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out pull-request branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.2
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Complete Select manifest relationships
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          registry = Path('packages/ui-patterns/src/manifest/component-registry.ts')
+          text = registry.read_text()
+          old = """    provider: 'primeng',
+              publicApiStatus: 'complete',
+              inputs: [
+                { name: 'label', type: 'string', defaultValue: 'Select' },
+                { name: 'options', type: 'PublicSelectOption[]', defaultValue: '[]' },
+                { name: 'placeholder', type: 'string', defaultValue: 'Choose an option' },
+                { name: 'disabled', type: 'boolean', defaultValue: 'false' },
+              ],
+              models: [{ name: 'value', type: 'string | null', defaultValue: 'null' }],
+              publicTypes: ['PublicSelectOption'],
+              storybookStatus: 'complete', storybookTitle: 'Design System/Components/Select', storybookFiles: ['apps/qa-remote/src/stories/select.stories.ts'], stories: ['Interactive', 'Selected', 'Disabled', 'EmptyOptions', 'LongOptions', 'ModelBinding'],
+              accessibilityPattern: 'combobox',
+              testStatus: 'partial',
+              testFiles: shellTokenEvidence,
+            }),"""
+          new = """    provider: 'primeng',
+              providerModules: ['primeng/select'],
+              publicApiStatus: 'complete',
+              inputs: [
+                { name: 'label', type: 'string', defaultValue: 'Select' },
+                { name: 'options', type: 'PublicSelectOption[]', defaultValue: '[]' },
+                { name: 'placeholder', type: 'string', defaultValue: 'Choose an option' },
+                { name: 'disabled', type: 'boolean', defaultValue: 'false' },
+              ],
+              models: [{ name: 'value', type: 'string | null', defaultValue: 'null' }],
+              publicTypes: ['PublicSelectOption'],
+              storybookStatus: 'complete',
+              storybookTitle: 'Design System/Components/Select',
+              storybookFiles: ['apps/qa-remote/src/stories/select.stories.ts'],
+              stories: [
+                'design-system-components-select--default',
+                'design-system-components-select--selected',
+                'design-system-components-select--disabled',
+                'design-system-components-select--disabled-option',
+                'design-system-components-select--empty-options',
+                'design-system-components-select--long-options',
+                'design-system-components-select--model-binding',
+                'design-system-components-select--overlay-boundary',
+              ],
+              accessibilityPattern: 'combobox',
+              automatedChecks: 'complete',
+              keyboardCoverage: 'complete',
+              testStatus: 'complete',
+              testFiles: [
+                'apps/qa-remote/e2e/select.storybook.spec.ts',
+                ...shellTokenEvidence,
+              ],
+              behaviors: [
+                'accessible combobox and listbox relationship',
+                'keyboard opening and option navigation',
+                'provider-neutral model selection',
+                'Escape and focus return',
+                'disabled field and option suppression',
+                'body-appended overlay clipping escape',
+                'light and dark overlay token inheritance',
+                'mobile long-option reflow',
+              ],
+              documentationStatus: 'complete',
+              documentationFiles: [
+                'apps/starlight/src/content/docs/components/select/index.mdx',
+                'docs/design-system/components/catalog.md',
+                'docs/design-system/architecture/overlay-dom-validation.md',
+              ],
+              knownLimitations: [
+                'Invalid state, required state, help text, aria-describedby, richer option content, Figma alignment, and manual assistive-technology review remain pending.',
+              ],
+            }),"""
+          if old not in text:
+              raise SystemExit('Select registry seed block was not found.')
+          registry.write_text(text.replace(old, new, 1))
+          PY
+
+      - name: Build generated component manifest
+        run: pnpm manifest:build
+
+      - name: Validate documentation relationships
+        run: pnpm validate:starlight
+
+      - name: Build QA Storybook
+        run: pnpm build-storybook:qa
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Select Storybook contract
+        run: pnpm exec playwright test apps/qa-remote/e2e/select.storybook.spec.ts --project=chromium
+
+      - name: Build Starlight
+        run: pnpm build:starlight
+
+      - name: Generate and validate Select visual baselines
+        run: pnpm test:starlight:visual:update
+
+      - name: Commit generated relationships and baselines
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add packages/ui-patterns/src/manifest/component-registry.ts
+          git add packages/ui-patterns/generated/component-manifest.json
+          find apps/starlight/tests/e2e -path '*-snapshots/select-*.png' -print0 | xargs -0 git add -f
+          if git diff --cached --quiet; then
+            echo "No generated Select documentation assets changed."
+            exit 0
+          fi
+          git commit -m "Complete Select relationships and visual baselines"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
