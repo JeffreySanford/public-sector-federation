@@ -41,10 +41,33 @@ describe('QualityRemediationViewComponent', () => {
     }
   });
 
+  it('projects every typed finding with a concrete next action', () => {
+    expect(component.findings.length).toBeGreaterThan(0);
+    expect(component.actionableFindings().length + component.verifiedFindings().length).toBe(component.findings.length);
+
+    for (const finding of component.findings) {
+      expect(component.findingNextAction(finding).trim().length).toBeGreaterThan(0);
+      expect(component.evidenceUrl(finding.evidence[0])).toContain(finding.evidence[0]);
+    }
+  });
+
+  it('keeps accessibility, token, and API findings independently countable', () => {
+    expect(component.accessibilityFindings().every((finding) => finding.category === 'accessibility')).toBeTrue();
+    expect(component.tokenFindings().every((finding) => finding.category === 'token')).toBeTrue();
+    expect(component.apiFindings().every((finding) => finding.category === 'api')).toBeTrue();
+    expect(
+      component.accessibilityFindings().length
+        + component.tokenFindings().length
+        + component.apiFindings().length,
+    ).toBe(component.findings.length);
+  });
+
   it('renders the scorecard, queue, cases, and secondary diagnostics', () => {
     fixture.detectChanges();
     const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
     expect(text).toContain('Evidence by component');
+    expect(text).toContain('Evidence finding register');
+    expect(text).toContain('A11Y-BTN-001');
     expect(text).toContain('What should be repaired next');
     expect(text).toContain('Representative remediation cases');
     expect(text).toContain('Technical diagnostics and evidence distribution');
