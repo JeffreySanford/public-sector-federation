@@ -33,6 +33,7 @@ type PrimeButtonSeverity = 'secondary' | 'success' | 'info' | 'warn' | 'danger' 
       [text]="resolvedAppearance() === 'text'"
       [disabled]="disabled()"
       [loading]="loading()"
+      [attr.aria-busy]="loading() ? 'true' : null"
       [styleClass]="styleClass()"
       (onClick)="handleClick($event)"
     />
