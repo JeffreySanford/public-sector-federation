@@ -62,22 +62,22 @@ DTCG-compatible token source
 - [x] Starlight quality gate included in `verify:release`.
 - [x] Separate Starlight and Angular/Storybook Playwright configurations.
 
-## Active slice — Button page and StoryFrame
+## Button page and StoryFrame slice
 
-- [ ] Create a reusable `StoryFrame` component for canonical live Storybook behavior.
-- [ ] Give every embedded frame a meaningful accessible title and visible full-story link.
-- [ ] Handle loading, failure, clipping, height, responsive, and light/dark presentation states.
-- [ ] Add StoryFrame-specific Playwright, axe, accessibility-tree, and visual coverage.
-- [ ] Publish `/docs/components/button/` as the first complete flagship component page.
-- [ ] Write purpose, usage, and anti-pattern guidance before evidence details.
-- [ ] Identify and link the canonical stable Button story.
-- [ ] Document anatomy, variants, interaction states, loading, disabled, keyboard, and focus behavior.
-- [ ] Document the current public Angular API and provider boundary honestly.
-- [ ] Show light and dark token relationships without duplicating token ownership.
-- [ ] Add quality evidence, Figma status, decisions, and known gaps.
-- [ ] Add the Button route and relationship to documentation-integrity validation.
-- [ ] Extend accessibility-tree and visual coverage to the flagship component page.
-- [ ] Pass the Starlight designer-grade quality gate and human polish review.
+- [x] Create a reusable `StoryFrame` component for canonical live Storybook behavior.
+- [x] Give every embedded frame a meaningful accessible title and visible full-story link.
+- [x] Handle loading, failure, clipping, height, responsive, and light/dark presentation states.
+- [x] Add StoryFrame-specific Playwright, axe, accessibility-tree, and visual coverage.
+- [x] Publish `/docs/components/button/` as the first complete flagship component page.
+- [x] Write purpose, usage, and anti-pattern guidance before evidence details.
+- [x] Identify and link the canonical stable Button story.
+- [x] Document anatomy, variants, interaction states, loading, disabled, keyboard, and focus behavior.
+- [x] Document the current public Angular API and provider boundary honestly.
+- [x] Show light and dark token relationships without duplicating token ownership.
+- [x] Add quality evidence, Figma status, decisions, and known gaps.
+- [x] Add the Button route and relationship to documentation-integrity validation.
+- [x] Extend accessibility-tree and visual coverage to the flagship component page.
+- [ ] Pass the complete Release Quality Gate for the final pull-request branch state.
 
 ## Next slices
 
