@@ -41,6 +41,8 @@ async function expectDomFocus(locator: ReturnType<Page['locator']>): Promise<voi
 }
 
 test.describe('Dialog isolated Storybook contract', () => {
+  test.describe.configure({ mode: 'serial' });
+
   test('opens with labelled modal semantics and predictable initial focus', async ({ page }) => {
     await gotoDialogStory(page, 'default');
     const { dialog } = await openDialog(page, 'Review application', 'Review application');

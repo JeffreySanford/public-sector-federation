@@ -48,16 +48,16 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 10.33.2
           run_install: false
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
@@ -75,7 +75,7 @@ jobs:
         run: git diff --exit-code -- packages/ui-patterns/generated/component-manifest.json
 
       - name: Upload component manifest
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: component-manifest
           path: packages/ui-patterns/generated/component-manifest.json
@@ -130,7 +130,7 @@ jobs:
 
       - name: Upload Starlight preview artifact
         if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: starlight-preview
           path: dist/apps/starlight
@@ -158,7 +158,7 @@ jobs:
 
       - name: Upload validation diagnostics
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-quality-diagnostics
           path: |
