@@ -75,6 +75,7 @@ export default defineConfig({
           items: [
             { label: 'Component overview', link: '/components/' },
             { label: 'Button', link: '/components/button/' },
+            { label: 'Select', link: '/components/select/' },
           ],
         },
         {
