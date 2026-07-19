@@ -442,7 +442,6 @@ export const componentRegistry = [
     testStatus: 'complete',
     testFiles: [
       'apps/qa-remote/e2e/button.storybook.spec.ts',
-      'apps/starlight/e2e/button-page.spec.ts',
       ...shellTokenEvidence,
     ],
     behaviors: [
