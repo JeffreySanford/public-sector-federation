@@ -14,7 +14,7 @@ jobs:
   diagnose:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 20
     steps:
       - name: Check out pull-request branch
         uses: actions/checkout@v4
@@ -44,7 +44,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          pnpm exec playwright test apps/qa-remote/e2e/select.storybook.spec.ts --project=chromium 2>&1 | tee select-storybook-diagnostics.txt
+          pnpm exec playwright test apps/qa-remote/e2e/select.storybook.spec.ts --project=chromium --retries=0 --workers=1 --timeout=15000 2>&1 | tee select-storybook-diagnostics.txt
           status=${PIPESTATUS[0]}
           if [ "$status" -eq 0 ]; then
             exit 0
