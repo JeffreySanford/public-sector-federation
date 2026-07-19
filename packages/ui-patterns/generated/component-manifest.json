@@ -145,8 +145,8 @@
       },
       "accessibility": {
         "pattern": "button",
-        "automatedChecks": "partial",
-        "keyboardCoverage": "missing",
+        "automatedChecks": "complete",
+        "keyboardCoverage": "complete",
         "screenReaderAudit": "pending",
         "knownResponsibilities": [
           "Consumers remain responsible for accessible page composition and meaningful content."
@@ -163,13 +163,25 @@
             "design-system-components-button--default",
             "design-system-components-button--appearance-reference",
             "design-system-components-button--loading",
-            "design-system-components-button--disabled"
+            "design-system-components-button--disabled",
+            "design-system-components-button--interaction-harness"
           ]
         },
         "tests": {
-          "status": "partial",
-          "files": [],
-          "behaviors": []
+          "status": "complete",
+          "files": [
+            "apps/qa-remote/e2e/button.storybook.spec.ts",
+            "apps/starlight/e2e/button-page.spec.ts",
+            "apps/shell/e2e/token-consumption.spec.ts"
+          ],
+          "behaviors": [
+            "pointer activation",
+            "Enter and Space activation",
+            "single activation per input",
+            "loading activation suppression",
+            "loading busy semantics",
+            "visible keyboard focus"
+          ]
         },
         "documentation": {
           "status": "complete",
@@ -2527,12 +2539,13 @@
       "id": "A11Y-BTN-001",
       "category": "accessibility",
       "severity": "moderate",
-      "status": "open",
+      "status": "verified",
       "componentIds": [
         "ps-button"
       ],
-      "summary": "Stable Button keyboard evidence is missing from the manifest.",
+      "summary": "Stable Button keyboard activation and focus behavior have dedicated automated evidence.",
       "evidence": [
+        "apps/qa-remote/e2e/button.storybook.spec.ts",
         "packages/ui-patterns/src/manifest/component-registry.ts",
         "docs/documentation-upgrade/19-accessibility-findings-and-remediation.md"
       ]
@@ -2541,12 +2554,13 @@
       "id": "A11Y-BTN-002",
       "category": "accessibility",
       "severity": "serious",
-      "status": "investigate",
+      "status": "implemented",
       "componentIds": [
         "ps-button"
       ],
-      "summary": "Loading announcement and repeated-activation suppression require dedicated stable Button verification.",
+      "summary": "Stable Button exposes loading semantics and suppresses repeated activation; manual announcement verification remains pending.",
       "evidence": [
+        "apps/qa-remote/e2e/button.storybook.spec.ts",
         "apps/qa-remote/src/stories/button.stories.ts",
         "docs/documentation-upgrade/19-accessibility-findings-and-remediation.md"
       ]
