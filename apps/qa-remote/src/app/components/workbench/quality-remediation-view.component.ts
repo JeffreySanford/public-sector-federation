@@ -1,6 +1,7 @@
 import { Component, computed } from '@angular/core';
 import {
   componentManifest,
+  type ComponentFinding,
   type ComponentManifestEntry,
   type EvidenceStatus,
 } from '@public-sector/ui-patterns';
@@ -56,6 +57,10 @@ interface RemediationItem {
           <strong>{{ pendingManualAudits() }}</strong>
           <span>Manual audits pending</span>
         </article>
+        <article>
+          <strong>{{ actionableFindings().length }}</strong>
+          <span>Actionable typed findings</span>
+        </article>
       </section>
 
       <section class="scorecard-panel" aria-labelledby="qualityScorecardTitle">
@@ -88,6 +93,71 @@ interface RemediationItem {
               </dl>
             </article>
           }
+        </div>
+      </section>
+
+      <section class="findings-panel" aria-labelledby="evidenceFindingsTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="workbench-eyebrow">Manifest-backed evidence</p>
+            <h2 id="evidenceFindingsTitle">Evidence finding register</h2>
+          </div>
+          <p>Typed findings connect shipped components to severity, lifecycle, source evidence, and the next verifiable action.</p>
+        </div>
+
+        <div class="finding-summary" aria-label="Finding status summary">
+          <span><strong>{{ actionableFindings().length }}</strong> actionable</span>
+          <span><strong>{{ verifiedFindings().length }}</strong> verified or resolved</span>
+          <span><strong>{{ accessibilityFindings().length }}</strong> accessibility</span>
+          <span><strong>{{ tokenFindings().length }}</strong> token boundary</span>
+          <span><strong>{{ apiFindings().length }}</strong> public API</span>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <caption class="visually-hidden">Manifest-backed API, token, and accessibility findings</caption>
+            <thead>
+              <tr>
+                <th scope="col">Finding</th>
+                <th scope="col">Category</th>
+                <th scope="col">Severity</th>
+                <th scope="col">Status</th>
+                <th scope="col">Affected components</th>
+                <th scope="col">Evidence and next action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (finding of findings; track finding.id) {
+                <tr [attr.data-finding-id]="finding.id">
+                  <th scope="row">
+                    <code>{{ finding.id }}</code>
+                    <span>{{ finding.summary }}</span>
+                  </th>
+                  <td><span class="finding-pill">{{ finding.category }}</span></td>
+                  <td><span class="finding-pill" [attr.data-severity]="finding.severity">{{ finding.severity }}</span></td>
+                  <td><span class="finding-pill" [attr.data-status]="finding.status">{{ finding.status }}</span></td>
+                  <td>
+                    <ul class="compact-list">
+                      @for (componentId of finding.componentIds; track componentId) {
+                        <li><code>{{ componentId }}</code></li>
+                      }
+                    </ul>
+                  </td>
+                  <td>
+                    <p class="next-action">{{ findingNextAction(finding) }}</p>
+                    <details>
+                      <summary>{{ finding.evidence.length }} evidence source{{ finding.evidence.length === 1 ? '' : 's' }}</summary>
+                      <ul class="compact-list evidence-list">
+                        @for (evidence of finding.evidence; track evidence) {
+                          <li><a [href]="evidenceUrl(evidence)" target="_blank" rel="noreferrer">{{ evidence }}</a></li>
+                        }
+                      </ul>
+                    </details>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -214,11 +284,11 @@ interface RemediationItem {
     .workbench-eyebrow { margin-bottom: 0.4rem; color: var(--p-primary-color); font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
     .workbench-scope { display: grid; gap: 0.35rem; min-width: 15rem; color: var(--p-text-muted-color); font-size: 0.82rem; text-align: right; }
     .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.75rem; }
-    .summary-grid article, .scorecard-panel, .queue-panel, .case-panel, .diagnostics-panel { border: 1px solid var(--p-content-border-color); border-radius: 0.9rem; background: var(--p-content-background); box-shadow: var(--p-card-shadow, none); }
+    .summary-grid article, .scorecard-panel, .findings-panel, .queue-panel, .case-panel, .diagnostics-panel { border: 1px solid var(--p-content-border-color); border-radius: 0.9rem; background: var(--p-content-background); box-shadow: var(--p-card-shadow, none); }
     .summary-grid article { padding: 1rem; }
     .summary-grid strong { display: block; font-size: 1.8rem; }
     .summary-grid span { color: var(--p-text-muted-color); }
-    .scorecard-panel, .queue-panel, .case-panel { padding: 1rem; }
+    .scorecard-panel, .findings-panel, .queue-panel, .case-panel { padding: 1rem; }
     .panel-heading p { max-width: 34rem; margin-bottom: 0; color: var(--p-text-muted-color); text-align: right; }
     .scorecard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 0.75rem; margin-top: 1rem; }
     .scorecard-grid article, .case-grid article, .diagnostics-grid article { padding: 0.9rem; border: 1px solid var(--p-content-border-color); border-radius: 0.7rem; background: color-mix(in srgb, var(--p-content-background) 96%, var(--p-primary-color)); }
@@ -241,6 +311,20 @@ interface RemediationItem {
     .priority-pill[data-priority='critical'] { border-color: var(--p-red-500, var(--p-primary-color)); }
     .priority-pill[data-priority='high'] { border-color: var(--p-orange-500, var(--p-primary-color)); }
     .priority-pill[data-priority='medium'] { border-color: var(--p-yellow-500, var(--p-primary-color)); }
+    .finding-summary { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1rem; }
+    .finding-summary span, .finding-pill { display: inline-flex; gap: 0.3rem; align-items: center; padding: 0.3rem 0.55rem; border: 1px solid var(--p-content-border-color); border-radius: 999px; background: color-mix(in srgb, var(--p-content-background) 90%, var(--p-primary-color)); font-size: 0.75rem; text-transform: capitalize; }
+    .finding-pill[data-severity='critical'], .finding-pill[data-severity='serious'] { border-color: var(--p-red-500, var(--p-primary-color)); }
+    .finding-pill[data-severity='moderate'] { border-color: var(--p-orange-500, var(--p-primary-color)); }
+    .finding-pill[data-status='verified'], .finding-pill[data-status='resolved'] { border-color: var(--p-green-500, var(--p-primary-color)); }
+    .findings-panel tbody th code, .findings-panel tbody th span { display: block; }
+    .findings-panel tbody th span { margin-top: 0.35rem; max-width: 28rem; font-weight: 500; line-height: 1.45; }
+    .compact-list { margin: 0; padding-left: 1rem; }
+    .compact-list li + li { margin-top: 0.3rem; }
+    .next-action { margin-bottom: 0.45rem; max-width: 30rem; line-height: 1.45; }
+    .findings-panel details summary { color: var(--p-primary-color); font-weight: 800; cursor: pointer; }
+    .evidence-list { margin-top: 0.5rem; }
+    .evidence-list a { color: var(--p-primary-color); overflow-wrap: anywhere; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
     .empty-cell { padding: 2rem; color: var(--p-text-muted-color); text-align: center; }
     .case-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.9rem; margin-top: 1rem; }
     .case-grid article { display: grid; gap: 0.85rem; }
@@ -258,6 +342,14 @@ interface RemediationItem {
 })
 export class QualityRemediationViewComponent {
   readonly entries = componentManifest.entries;
+  readonly findings = componentManifest.findings;
+  readonly actionableFindings = computed(() => this.findings.filter((finding) =>
+    ['open', 'investigate', 'planned', 'implemented'].includes(finding.status)));
+  readonly verifiedFindings = computed(() => this.findings.filter((finding) =>
+    finding.status === 'verified' || finding.status === 'resolved'));
+  readonly accessibilityFindings = computed(() => this.findings.filter((finding) => finding.category === 'accessibility'));
+  readonly tokenFindings = computed(() => this.findings.filter((finding) => finding.category === 'token'));
+  readonly apiFindings = computed(() => this.findings.filter((finding) => finding.category === 'api'));
 
   readonly rankedEntries = computed(() => [...this.entries].sort((left, right) => this.qualityScore(left) - this.qualityScore(right)));
   readonly overallCoverage = computed(() => {
@@ -364,6 +456,32 @@ export class QualityRemediationViewComponent {
       entry.evidence.documentation.files.length ? `Guidance: ${entry.evidence.documentation.files[0]}` : 'Publish component guidance.',
     ];
     return evidence;
+  }
+
+  findingNextAction(finding: ComponentFinding): string {
+    if (finding.status === 'verified' || finding.status === 'resolved') {
+      return 'Preserve the linked verification and monitor for regression.';
+    }
+    if (finding.status === 'implemented') {
+      return 'Complete the remaining manual or cross-environment verification.';
+    }
+    if (finding.status === 'investigate') {
+      return 'Reproduce the behavior, classify its impact, and record the result.';
+    }
+    if (finding.status === 'planned') {
+      return 'Implement the approved remediation and attach verification evidence.';
+    }
+    if (finding.category === 'accessibility') {
+      return 'Remediate the accessible contract and verify automated and manual behavior separately.';
+    }
+    if (finding.category === 'token') {
+      return 'Move provider token dependencies behind the public semantic token boundary.';
+    }
+    return 'Decide the canonical public contract and document its compatibility path.';
+  }
+
+  evidenceUrl(path: string): string {
+    return `https://github.com/JeffreySanford/public-sector-federation/blob/master/${path}`;
   }
 
   providerCount(provider: ComponentManifestEntry['implementation']['provider']): number {
