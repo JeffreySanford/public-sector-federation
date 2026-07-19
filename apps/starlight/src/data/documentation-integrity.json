@@ -46,6 +46,7 @@
     {
       "manifestId": "ps-button",
       "docsRoute": "/docs/components/button/",
+      "documentationFile": "apps/starlight/src/content/docs/components/button/index.mdx",
       "source": "packages/ui-patterns/src/public-button.component.ts",
       "storybookTitle": "Design System/Components/Button",
       "storybookFile": "apps/qa-remote/src/stories/button.stories.ts",
