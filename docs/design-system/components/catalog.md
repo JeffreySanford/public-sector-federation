@@ -69,6 +69,18 @@ public usage guidance for flagship components.
 - Behavior tests: `apps/qa-remote/e2e/select.storybook.spec.ts`.
 - Guidance: `apps/starlight/src/content/docs/components/select/index.mdx`.
 
+- Use `PublicInputComponent` / `ps-input` for text, search, password, and date
+  entry with help text, invalid, and required states.
+- Source: `packages/ui-patterns/src/public-input.component.ts`.
+- Canonical evidence: `apps/qa-remote/src/stories/input.stories.ts`.
+- Behavior tests: `apps/qa-remote/e2e/input.storybook.spec.ts`.
+
+- Use `PublicCheckboxComponent` / `ps-checkbox` for a checkbox or switch with
+  help text, invalid, and required states.
+- Source: `packages/ui-patterns/src/public-checkbox.component.ts`.
+- Canonical evidence: `apps/qa-remote/src/stories/checkbox.stories.ts`.
+- Behavior tests: `apps/qa-remote/e2e/checkbox.storybook.spec.ts`.
+
 ### Menus And Popovers
 
 - Use `PublicMenuComponent` / `ps-menu` for menu actions.
@@ -112,6 +124,16 @@ actions.
   summaries.
 - Source: `packages/ui-patterns/src/public-status-card.component.ts`.
 - Evidence: source-level component proof.
+
+### Tables
+
+- Use `PublicTableComponent` / `ps-table` for sortable, responsive data
+  display. Row content, status tags, and row actions remain consumer-authored
+  via content projection; the wrapper provides sortable headers, a
+  keyboard-focusable overflow region, and a built-in empty state.
+- Source: `packages/ui-patterns/src/public-table.component.ts`.
+- Canonical evidence: `apps/qa-remote/src/stories/table.stories.ts`.
+- Behavior tests: `apps/qa-remote/e2e/table.storybook.spec.ts`.
 
 ### Tags
 

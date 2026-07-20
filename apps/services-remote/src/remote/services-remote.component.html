@@ -38,14 +38,9 @@
         <p>Token-driven citizen service form</p>
       </div>
 
-      <label for="caseId">Case ID</label>
-      <!-- // GAP: ps-input not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-      <input id="caseId" class="field-control" [(ngModel)]="caseId" aria-describedby="caseId-help" />
-      <small id="caseId-help">Assigned by the intake system when a case is created.</small>
+      <ps-input fieldId="caseId" label="Case ID" [(value)]="caseId" helpText="Assigned by the intake system when a case is created." />
 
-      <label for="applicantName">Applicant name</label>
-      <!-- // GAP: ps-input not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-      <input id="applicantName" class="field-control" [(ngModel)]="applicantName" />
+      <ps-input fieldId="applicantName" label="Applicant name" [(value)]="applicantName" />
 
       <ps-select
         fieldId="serviceType"
@@ -55,17 +50,14 @@
         placeholder="Choose a service"
       />
 
-      <label for="appointmentDate">Appointment date</label>
-      <!-- // GAP: ps-input not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-      <input id="appointmentDate" class="field-control" type="date" [(ngModel)]="appointmentDate" />
+      <ps-input fieldId="appointmentDate" label="Appointment date" type="date" [(value)]="appointmentDate" />
 
-      <label class="inline-control">
-        <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-        <input type="checkbox" class="switch-control" [(ngModel)]="expediteReview" />
-        <span>Expedite review</span>
-      </label>
-
-      <div class="info-message">Use expedited review only for time-sensitive cases or approved accommodations.</div>
+      <ps-checkbox
+        label="Expedite review"
+        variant="switch"
+        [(checked)]="expediteReview"
+        helpText="Use expedited review only for time-sensitive cases or approved accommodations."
+      />
     </section>
 
     <section class="service-panel">
@@ -116,14 +108,11 @@
 
       <div class="eligibility-list">
         <article class="eligibility-item is-complete">
-          <label class="eligibility-check">
-            <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-            <input type="checkbox" [(ngModel)]="documentsVerified" />
-            <span>
-              <strong>Required documents verified</strong>
-              <small>Identity, signed renewal packet, and uploaded proof of benefit period are present.</small>
-            </span>
-          </label>
+          <ps-checkbox
+            label="Required documents verified"
+            [(checked)]="documentsVerified"
+            helpText="Identity, signed renewal packet, and uploaded proof of benefit period are present."
+          />
           <div class="eligibility-meta">
             <span>Source: Upload portal</span>
             <span>Reviewed by Intake</span>
@@ -131,14 +120,11 @@
         </article>
 
         <article class="eligibility-item is-complete">
-          <label class="eligibility-check">
-            <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-            <input type="checkbox" [(ngModel)]="residencyConfirmed" />
-            <span>
-              <strong>Residency confirmed</strong>
-              <small>Address matches state records and service region requirements.</small>
-            </span>
-          </label>
+          <ps-checkbox
+            label="Residency confirmed"
+            [(checked)]="residencyConfirmed"
+            helpText="Address matches state records and service region requirements."
+          />
           <div class="eligibility-meta">
             <span>Source: Address registry</span>
             <span>Verified Jul 8</span>
@@ -146,14 +132,12 @@
         </article>
 
         <article class="eligibility-item is-pending">
-          <label class="eligibility-check">
-            <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-            <input type="checkbox" [(ngModel)]="incomeReviewed" />
-            <span>
-              <strong>Income reviewed</strong>
-              <small>Recent income statement is missing. Request update before final decision.</small>
-            </span>
-          </label>
+          <ps-checkbox
+            label="Income reviewed"
+            [(checked)]="incomeReviewed"
+            invalid
+            errorText="Recent income statement is missing. Request update before final decision."
+          />
           <div class="eligibility-actions">
             <ps-button label="Request document" icon="pi pi-envelope" />
             <ps-button label="Add note" icon="pi pi-file-edit" intent="secondary" appearance="outlined" />
@@ -183,41 +167,29 @@
     <div class="panel-heading">
       <h3>Case queue</h3>
     </div>
-    <!-- // GAP: ps-table not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-    <table class="case-table">
-      <thead>
-        <tr>
-          <th>Case</th>
-          <th>Applicant</th>
-          <th>Program</th>
-          <th>Status</th>
-          <th>Due</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>PS-2026-1042</td>
-          <td>Jordan Avery</td>
-          <td>Benefits renewal</td>
-          <td><ps-tag value="Review" tone="warn" /></td>
-          <td>Today</td>
-        </tr>
-        <tr>
-          <td>PS-2026-1043</td>
-          <td>Sam Rivera</td>
-          <td>Housing assistance</td>
-          <td><ps-tag value="Ready" tone="success" /></td>
-          <td>Tomorrow</td>
-        </tr>
-        <tr>
-          <td>PS-2026-1044</td>
-          <td>Lee Morgan</td>
-          <td>Permit request</td>
-          <td><ps-tag value="Blocked" tone="danger" /></td>
-          <td>Jul 12</td>
-        </tr>
-      </tbody>
-    </table>
+    <ps-table [columns]="caseQueueColumns" ariaLabel="Case queue">
+      <tr>
+        <td>PS-2026-1042</td>
+        <td>Jordan Avery</td>
+        <td>Benefits renewal</td>
+        <td><ps-tag value="Review" tone="warn" /></td>
+        <td>Today</td>
+      </tr>
+      <tr>
+        <td>PS-2026-1043</td>
+        <td>Sam Rivera</td>
+        <td>Housing assistance</td>
+        <td><ps-tag value="Ready" tone="success" /></td>
+        <td>Tomorrow</td>
+      </tr>
+      <tr>
+        <td>PS-2026-1044</td>
+        <td>Lee Morgan</td>
+        <td>Permit request</td>
+        <td><ps-tag value="Blocked" tone="danger" /></td>
+        <td>Jul 12</td>
+      </tr>
+    </ps-table>
   </section>
 
   <section class="service-panel">

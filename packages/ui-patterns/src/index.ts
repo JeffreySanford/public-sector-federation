@@ -11,7 +11,9 @@ export {
   type PublicUpButtonIntent,
 } from './public-up-button.component';
 export { PublicCardComponent } from './public-card.component';
+export { PublicCheckboxComponent, type PublicCheckboxVariant } from './public-checkbox.component';
 export { PublicDialogComponent } from './public-dialog.component';
+export { PublicInputComponent, type PublicInputType } from './public-input.component';
 export { PublicEmptyStateComponent } from './public-empty-state.component';
 export { PublicFormSectionComponent } from './public-form-section.component';
 export { PublicMenuComponent, type PublicMenuAction } from './public-menu.component';
@@ -22,6 +24,7 @@ export { PublicProgressComponent } from './public-progress.component';
 export { PublicSkeletonComponent } from './public-skeleton.component';
 export { PublicSelectComponent, type PublicSelectOption } from './public-select.component';
 export { PublicStatusCardComponent, type PublicStatusCardTone } from './public-status-card.component';
+export { PublicTableComponent, type PublicTableColumn, type PublicTableSortDirection } from './public-table.component';
 export { PublicTagComponent, type PublicTagTone } from './public-tag.component';
 export { PublicTooltipComponent, type PublicTooltipPosition } from './public-tooltip.component';
 export { PublicToastComponent } from './public-toast.component';

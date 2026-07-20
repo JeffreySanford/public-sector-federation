@@ -3,8 +3,12 @@ import { FormsModule } from '@angular/forms';
 import {
   PublicButtonComponent,
   PublicCardComponent,
+  PublicCheckboxComponent,
+  PublicInputComponent,
   PublicProgressComponent,
   PublicSelectComponent,
+  PublicTableColumn,
+  PublicTableComponent,
   PublicTagComponent,
 } from '@public-sector/ui-patterns';
 
@@ -15,8 +19,11 @@ import {
     FormsModule,
     PublicButtonComponent,
     PublicCardComponent,
+    PublicCheckboxComponent,
+    PublicInputComponent,
     PublicProgressComponent,
     PublicSelectComponent,
+    PublicTableComponent,
     PublicTagComponent,
   ],
   templateUrl: './services-remote.component.html',
@@ -39,4 +46,12 @@ export class ServicesRemoteComponent {
 
   selectedService = this.serviceTypes[0].value;
   appointmentDate = '2026-07-09';
+
+  readonly caseQueueColumns: PublicTableColumn[] = [
+    { key: 'case', header: 'Case', sortable: true },
+    { key: 'applicant', header: 'Applicant', sortable: true },
+    { key: 'program', header: 'Program' },
+    { key: 'status', header: 'Status' },
+    { key: 'due', header: 'Due', align: 'end' },
+  ];
 }

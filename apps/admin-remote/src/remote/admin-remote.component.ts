@@ -3,7 +3,9 @@ import { FormsModule } from '@angular/forms';
 import {
   PublicButtonComponent,
   PublicCardComponent,
+  PublicCheckboxComponent,
   PublicDialogComponent,
+  PublicInputComponent,
   PublicTagComponent,
   PublicToastComponent,
   PublicToastService,
@@ -12,7 +14,16 @@ import {
 @Component({
   selector: 'public-admin-remote',
   standalone: true,
-  imports: [FormsModule, PublicButtonComponent, PublicCardComponent, PublicDialogComponent, PublicTagComponent, PublicToastComponent],
+  imports: [
+    FormsModule,
+    PublicButtonComponent,
+    PublicCardComponent,
+    PublicCheckboxComponent,
+    PublicDialogComponent,
+    PublicInputComponent,
+    PublicTagComponent,
+    PublicToastComponent,
+  ],
   templateUrl: './admin-remote.component.html',
   styleUrl: './admin-remote.component.css',
 })

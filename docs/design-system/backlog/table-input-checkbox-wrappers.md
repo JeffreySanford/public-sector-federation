@@ -1,29 +1,41 @@
 # Table, Input, And Checkbox Wrapper Backlog
 
-The remote realignment pass intentionally leaves native table, text input, and
-checkbox or switch controls in place where `@public-sector/ui-patterns` does not
-yet expose a provider-neutral wrapper.
+The remote realignment pass intentionally left native table, text input, and
+checkbox or switch controls in place while `@public-sector/ui-patterns` did not
+yet expose a provider-neutral wrapper. Phase 2 of the UI refresh closed this
+gap: `ps-table`, `ps-input`, and `ps-checkbox` are implemented, documented in
+the component manifest, and have replaced every native usage that carried a
+`// GAP:` comment in `services-remote`, `admin-remote`, and `reporting-remote`.
 
-## Current Gaps
+## Resolved Gaps
 
-- `ps-table`: sortable, responsive data display with status content, empty state,
-  row actions, and keyboard-friendly overflow behavior.
-- `ps-input`: text, search, password, date, help text, invalid state, required
+- `ps-table` (`packages/ui-patterns/src/public-table.component.ts`): sortable,
+  responsive data display with a keyboard-focusable overflow region and a
+  built-in empty state. Row content, status tags, and row actions remain
+  consumer-authored via content projection.
+- `ps-input` (`packages/ui-patterns/src/public-input.component.ts`): text,
+  search, password, and date types with help text, invalid state, required
   state, and `aria-describedby` relationships.
-- `ps-checkbox`: checkbox and switch variants with label, help text, disabled,
-  invalid, and required states.
+- `ps-checkbox` (`packages/ui-patterns/src/public-checkbox.component.ts`):
+  checkbox and switch variants with label, help text, disabled, invalid, and
+  required states.
 
 ## Tracking Rule
 
-Every remaining native usage in product remotes should include a nearby
-`// GAP:` comment that references this file. The comments keep wrapper debt
-greppable without forcing premature wrappers for components that do not yet have
-an accepted public contract.
+No `// GAP:` comments referencing this file remain in `apps/`. If a future
+remote needs a native table, input, or checkbox control that these wrappers
+cannot support, add a new `// GAP:` comment describing the specific
+limitation rather than reopening this file's original scope.
 
 ## Acceptance Notes
 
-- Add wrappers only after the public API is documented in the component manifest.
-- Include Storybook acceptance coverage for default, disabled, invalid, required,
-  long-label, mobile reflow, and forced-colors states.
-- Replace remote-native implementations only after `lint:wrappers`, unit tests,
-  and E2E evidence pass for the new wrapper.
+- Storybook acceptance coverage: `apps/qa-remote/src/stories/table.stories.ts`,
+  `input.stories.ts`, and `checkbox.stories.ts` cover default, disabled,
+  invalid, required, long-label/long-content, and mobile-overflow states.
+- Behavior evidence: `apps/qa-remote/e2e/table.storybook.spec.ts`,
+  `input.storybook.spec.ts`, and `checkbox.storybook.spec.ts`.
+- `lint:wrappers` (manifest validation and usage report) passes with all three
+  components registered in `packages/ui-patterns/src/manifest/component-registry.ts`.
+- Remaining known limitations: Figma property mapping and manual
+  screen-reader review are still pending for all three components, matching
+  the rest of the non-flagship component set.

@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PublicButtonComponent, PublicCardComponent, PublicProgressComponent, PublicTagComponent } from '@public-sector/ui-patterns';
+import {
+  PublicButtonComponent,
+  PublicCardComponent,
+  PublicInputComponent,
+  PublicProgressComponent,
+  PublicTableColumn,
+  PublicTableComponent,
+  PublicTagComponent,
+} from '@public-sector/ui-patterns';
 
 interface ReportRow {
   program: string;
@@ -14,7 +22,15 @@ interface ReportRow {
 @Component({
   selector: 'public-reporting-remote',
   standalone: true,
-  imports: [FormsModule, PublicButtonComponent, PublicCardComponent, PublicProgressComponent, PublicTagComponent],
+  imports: [
+    FormsModule,
+    PublicButtonComponent,
+    PublicCardComponent,
+    PublicInputComponent,
+    PublicProgressComponent,
+    PublicTableComponent,
+    PublicTagComponent,
+  ],
   templateUrl: './reporting-remote.component.html',
   styleUrl: './reporting-remote.component.css',
 })
@@ -49,6 +65,15 @@ export class ReportingRemoteComponent {
     },
   ];
   query = '';
+
+  readonly programColumns: PublicTableColumn[] = [
+    { key: 'program', header: 'Program', sortable: true },
+    { key: 'cases', header: 'Cases', align: 'end' },
+    { key: 'status', header: 'Status' },
+    { key: 'region', header: 'Region' },
+    { key: 'sla', header: 'SLA', align: 'end' },
+    { key: 'owner', header: 'Owner' },
+  ];
 
   severity(status: ReportRow['status']): 'success' | 'warn' | 'danger' {
     return status === 'On track' ? 'success' : status === 'Watch' ? 'warn' : 'danger';

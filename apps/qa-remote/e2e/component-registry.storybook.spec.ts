@@ -24,7 +24,7 @@ test.describe('component manifest Storybook registry', () => {
     await expect(page.getByRole('row', { name: /Paginator/ })).toBeVisible();
     await expect(page.getByRole('row', { name: /Toast Service/ })).toBeVisible();
     await expect(page.getByRole('row', { name: /UP Button Candidate/ })).toBeVisible();
-    await expect(page.getByText('18', { exact: true }).first()).toBeVisible();
+    await expect(page.getByText('21', { exact: true }).first()).toBeVisible();
   });
 
   test('keeps the stable and candidate buttons distinct', async ({ page }) => {

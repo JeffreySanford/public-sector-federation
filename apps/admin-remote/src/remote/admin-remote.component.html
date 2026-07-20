@@ -16,26 +16,19 @@
   <div class="remote__grid">
     <ps-card header="Platform controls">
       <div class="setting-row">
-        <span>Audit logging</span>
-        <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-        <input type="checkbox" role="switch" [(ngModel)]="auditLogging" aria-label="Audit logging" />
+        <ps-checkbox label="Audit logging" variant="switch" [(checked)]="auditLogging" />
       </div>
       <div class="setting-row">
-        <span>Maintenance mode</span>
-        <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-        <input type="checkbox" role="switch" [(ngModel)]="maintenanceMode" aria-label="Maintenance mode" />
+        <ps-checkbox label="Maintenance mode" variant="switch" [(checked)]="maintenanceMode" />
       </div>
 
-      <label class="password-field" for="temporaryPassword">
-        Temporary password
-        <!-- // GAP: ps-input not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
-        <input
-          id="temporaryPassword"
-          type="password"
-          [(ngModel)]="temporaryPassword"
-          placeholder="Generate or enter password"
-        >
-      </label>
+      <ps-input
+        fieldId="temporaryPassword"
+        label="Temporary password"
+        type="password"
+        placeholder="Generate or enter password"
+        [(value)]="temporaryPassword"
+      />
 
       <ps-button label="Save settings" icon="pi pi-save" (activated)="showToast()" />
     </ps-card>
