@@ -582,7 +582,7 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-checkbox',
-    tokenBoundary: 'mixed',
+    tokenBoundary: 'provider-coupled',
     findingIds: [],
     duplicationCluster: 'unique:ps-checkbox',
     disposition: 'canonical',
@@ -630,7 +630,12 @@ export const componentRegistry = [
       'required, invalid, help, and error relationships',
       'long-label reflow',
     ],
-    documentationStatus: 'partial',
+    documentationStatus: 'complete',
+    documentationFiles: [
+      'apps/starlight/src/content/docs/components/checkbox/index.mdx',
+      'docs/design-system/components/catalog.md',
+      'docs/design-system/architecture/registry-consumption-spec.md',
+    ],
     knownLimitations: ['Figma property mapping and manual screen-reader review remain pending.'],
   }),
   entry({
@@ -770,7 +775,12 @@ export const componentRegistry = [
       'required, invalid, help, and error relationships',
       'long-label reflow',
     ],
-    documentationStatus: 'partial',
+    documentationStatus: 'complete',
+    documentationFiles: [
+      'apps/starlight/src/content/docs/components/input/index.mdx',
+      'docs/design-system/components/catalog.md',
+      'docs/design-system/architecture/registry-consumption-spec.md',
+    ],
     knownLimitations: ['Figma property mapping and manual screen-reader review remain pending.'],
   }),
   entry({
@@ -960,7 +970,12 @@ export const componentRegistry = [
       'built-in empty state',
       'mobile horizontal overflow',
     ],
-    documentationStatus: 'partial',
+    documentationStatus: 'complete',
+    documentationFiles: [
+      'apps/starlight/src/content/docs/components/table/index.mdx',
+      'docs/design-system/components/catalog.md',
+      'docs/design-system/architecture/registry-consumption-spec.md',
+    ],
     knownLimitations: [
       'Row content, row actions, and cell formatting remain fully consumer-authored via content projection.',
       'Figma property mapping and manual screen-reader review remain pending.',

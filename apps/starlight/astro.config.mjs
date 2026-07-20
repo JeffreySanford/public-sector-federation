@@ -87,6 +87,9 @@ export default defineConfig({
             { label: 'Button', link: '/components/button/' },
             { label: 'Select', link: '/components/select/' },
             { label: 'Dialog', link: '/components/dialog/' },
+            { label: 'Checkbox', link: '/components/checkbox/' },
+            { label: 'Input', link: '/components/input/' },
+            { label: 'Table', link: '/components/table/' },
           ],
         },
         {

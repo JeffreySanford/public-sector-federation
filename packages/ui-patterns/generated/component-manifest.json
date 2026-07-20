@@ -485,8 +485,9 @@
           ]
         },
         "documentation": {
-          "status": "partial",
+          "status": "complete",
           "files": [
+            "apps/starlight/src/content/docs/components/checkbox/index.mdx",
             "docs/design-system/components/catalog.md",
             "docs/design-system/architecture/registry-consumption-spec.md"
           ]
@@ -511,7 +512,7 @@
       "audit": {
         "duplicationCluster": "unique:ps-checkbox",
         "disposition": "canonical",
-        "tokenBoundary": "mixed",
+        "tokenBoundary": "provider-coupled",
         "findingIds": []
       },
       "health": {
@@ -1112,8 +1113,9 @@
           ]
         },
         "documentation": {
-          "status": "partial",
+          "status": "complete",
           "files": [
+            "apps/starlight/src/content/docs/components/input/index.mdx",
             "docs/design-system/components/catalog.md",
             "docs/design-system/architecture/registry-consumption-spec.md"
           ]
@@ -2427,8 +2429,9 @@
           ]
         },
         "documentation": {
-          "status": "partial",
+          "status": "complete",
           "files": [
+            "apps/starlight/src/content/docs/components/table/index.mdx",
             "docs/design-system/components/catalog.md",
             "docs/design-system/architecture/registry-consumption-spec.md"
           ]

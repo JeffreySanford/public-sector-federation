@@ -54,7 +54,7 @@ let checkboxId = 0;
     }
 
     .ps-checkbox-field__control input[type='checkbox'] {
-      accent-color: var(--ps-button-background, var(--p-primary-color));
+      accent-color: var(--p-primary-color);
       width: 1.125rem;
       height: 1.125rem;
     }

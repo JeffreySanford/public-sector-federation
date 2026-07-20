@@ -39,6 +39,16 @@ The first documentation sequence tracks three flagship components against the ge
 
 [Read the Dialog guidance](/docs/components/dialog/)
 
+### Checkbox, Input, and Table
+
+- **Documentation:** Published as the second catalog wave, closing the table/input/checkbox wrapper backlog recorded for the remote realignment pass.
+- **Lifecycle:** Active and used in the reference remotes (`services-remote`, `admin-remote`, `reporting-remote`).
+- **Storybook:** Dedicated canonical stories plus disabled, required, invalid, long-content, and mobile-overflow states are recorded for each component.
+- **Accessibility:** Automated keyboard and relationship evidence is complete for the declared scope; manual assistive-technology review remains open for all three, matching the flagship trio's current status.
+- **Figma:** Pending access, same as the flagship trio.
+
+[Read the Checkbox guidance](/docs/components/checkbox/) · [Read the Input guidance](/docs/components/input/) · [Read the Table guidance](/docs/components/table/)
+
 The quality gate cross-checks these relationships against `packages/ui-patterns/generated/component-manifest.json`, recorded source and Storybook files, Starlight routes, canonical story IDs when declared, and Figma status values.
 
 ## Flagship sequence
@@ -46,6 +56,10 @@ The quality gate cross-checks these relationships against `packages/ui-patterns/
 1. **Button** establishes action hierarchy, public API decisions, interaction states, token mapping, live-story presentation, and the stable-versus-candidate remediation story.
 2. **Select** proves body-appended overlay behavior, keyboard navigation, accessible naming, provider abstraction, and theme propagation.
 3. **Dialog** proves focus management, semantic structure, destructive-action patterns, and integrated application behavior.
+
+## Second catalog wave
+
+Checkbox, Input, and Table reuse the flagship page model for three native (non-PrimeNG) components. They prove the model generalizes beyond PrimeNG-backed and composite components: a shared field-relationship contract (label, help, required, invalid) across Checkbox and Input, and a projection-based content contract for Table that deliberately does not own row rendering, sorting, or pagination.
 
 ## Page contract
 
