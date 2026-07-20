@@ -54,7 +54,7 @@ export class AdminRemoteComponent {
     this.messages.add({
       severity: 'success',
       summary,
-      detail: 'Shared PrimeNG z-index and overlay policy handled this interaction.',
+      detail: 'Shared overlay policy handled this interaction.',
       life: 4500,
     });
   }

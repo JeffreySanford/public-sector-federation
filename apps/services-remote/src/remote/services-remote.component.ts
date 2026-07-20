@@ -1,10 +1,24 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+  PublicButtonComponent,
+  PublicCardComponent,
+  PublicProgressComponent,
+  PublicSelectComponent,
+  PublicTagComponent,
+} from '@public-sector/ui-patterns';
 
 @Component({
   selector: 'public-services-remote',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    FormsModule,
+    PublicButtonComponent,
+    PublicCardComponent,
+    PublicProgressComponent,
+    PublicSelectComponent,
+    PublicTagComponent,
+  ],
   templateUrl: './services-remote.component.html',
   styleUrl: './services-remote.component.css',
 })

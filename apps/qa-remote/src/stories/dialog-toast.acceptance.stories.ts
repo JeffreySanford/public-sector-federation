@@ -14,7 +14,7 @@ import { PublicButtonComponent, PublicCardComponent, PublicDialogComponent, Publ
         <ps-card header="Dialog overlay" subheader="Native trigger plus shared modal"><ps-button label="Open dialog" icon="pi pi-window-maximize" (buttonClick)="visible = true" /></ps-card>
         <ps-card header="Toast feedback" subheader="Severity and message surface"><ps-button label="Success toast" icon="pi pi-check" (buttonClick)="show('success')" /><ps-button label="Warning toast" icon="pi pi-exclamation-triangle" [outlined]="true" (buttonClick)="show('warn')" /></ps-card>
       </section>
-      <ps-dialog header="Dialog smoke test" [(visible)]="visible"><p>This dialog validates overlay rendering.</p><div ps-dialog-footer><ps-button label="Close" [outlined]="true" (buttonClick)="visible = false" /></div></ps-dialog>
+      <ps-dialog header="Dialog smoke test" [(visible)]="visible"><p>This dialog renders above the Storybook canvas.</p><div ps-dialog-footer><ps-button label="Close" [outlined]="true" (buttonClick)="visible = false" /></div></ps-dialog>
     </main>
   `,
   styles: `.storybook-shell{display:grid;gap:1rem;max-width:72rem;margin:0 auto}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}`,

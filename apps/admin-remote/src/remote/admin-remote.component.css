@@ -27,26 +27,6 @@
   color: var(--p-text-muted-color);
 }
 
-.admin-button {
-  display: inline-flex;
-  width: fit-content;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 0.9rem;
-  border: 1px solid var(--ps-nav-active-background);
-  border-radius: var(--p-border-radius-md);
-  background: var(--ps-nav-active-background);
-  color: var(--ps-nav-foreground);
-  cursor: pointer;
-  font: inherit;
-  font-weight: 800;
-}
-
-.admin-button i,
-.admin-button span {
-  color: inherit;
-}
-
 .remote__grid {
   display: grid;
   grid-template-columns: minmax(24rem, 1fr) minmax(22rem, 0.7fr);
@@ -102,27 +82,8 @@
   width: 100%;
 }
 
-.admin-actions-menu button {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 0.85rem;
-  border: 0;
-  border-radius: var(--p-border-radius-md);
-  background: transparent;
-  color: var(--p-text-color);
-  cursor: pointer;
-  font: inherit;
-  white-space: normal;
-}
-
-.admin-actions-menu button:hover {
-  background: color-mix(in srgb, var(--p-primary-color) 10%, transparent);
-}
-
-.admin-actions-menu i {
-  flex: 0 0 auto;
-  color: var(--p-text-muted-color);
+.admin-actions-menu ps-button {
+  justify-self: start;
 }
 
 @media (max-width: 900px) {

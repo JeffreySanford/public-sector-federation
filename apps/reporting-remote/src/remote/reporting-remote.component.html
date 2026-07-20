@@ -4,8 +4,8 @@
       <ps-tag value="Remote: Reporting" tone="info" />
       <h2>Reporting and analytics</h2>
       <p>
-        PrimeNG data tables and cards are loaded only from this remote to prove
-        token distribution across the web component boundary.
+        Review program performance, SLA health, and operational risk across
+        public service portfolios.
       </p>
     </div>
     <ps-button label="Export" icon="pi pi-download" [outlined]="true" />
@@ -44,6 +44,7 @@
         <strong>Program performance</strong>
         <span>Filter active public programs.</span>
       </div>
+      <!-- // GAP: ps-input not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
       <input
         class="table-search"
         type="search"
@@ -52,6 +53,7 @@
         [(ngModel)]="query"
       />
     </div>
+    <!-- // GAP: ps-table not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
     <div class="table-scroll">
       <table class="report-table">
         <thead>

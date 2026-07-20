@@ -4,38 +4,31 @@
       <span class="remote-tag">Remote: Services</span>
       <h2>Citizen services workspace</h2>
       <p>
-        A web component remote proving shared form, focus, validation, and card
-        styling from the PrimeNG preset.
+        Manage intake, eligibility review, notices, and case progress for public service programs.
       </p>
     </div>
     <div class="header-actions">
-      <button type="button" class="action-button action-button--primary">
-        <i class="pi pi-plus" aria-hidden="true"></i>
-        <span>Create case</span>
-      </button>
-      <button type="button" class="action-button">
-        <i class="pi pi-send" aria-hidden="true"></i>
-        <span>Send notice</span>
-      </button>
+      <ps-button label="Create case" icon="pi pi-plus" />
+      <ps-button label="Send notice" icon="pi pi-send" intent="secondary" appearance="outlined" />
     </div>
   </div>
 
   <section class="metric-grid">
-    <article class="metric-card">
+    <ps-card>
       <span>Open cases</span>
       <strong>128</strong>
       <small>Across citizen services</small>
-    </article>
-    <article class="metric-card">
+    </ps-card>
+    <ps-card>
       <span>Completed today</span>
       <strong>34</strong>
       <small>Notices and renewals</small>
-    </article>
-    <article class="metric-card">
+    </ps-card>
+    <ps-card>
       <span>SLA health</span>
       <strong>92%</strong>
       <small>Trailing 7 days</small>
-    </article>
+    </ps-card>
   </section>
 
   <div class="remote__grid">
@@ -46,29 +39,33 @@
       </div>
 
       <label for="caseId">Case ID</label>
+      <!-- // GAP: ps-input not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
       <input id="caseId" class="field-control" [(ngModel)]="caseId" aria-describedby="caseId-help" />
-      <small id="caseId-help">Uses global input text PassThrough markers.</small>
+      <small id="caseId-help">Assigned by the intake system when a case is created.</small>
 
       <label for="applicantName">Applicant name</label>
+      <!-- // GAP: ps-input not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
       <input id="applicantName" class="field-control" [(ngModel)]="applicantName" />
 
-      <label for="serviceType">Service type</label>
-      <select id="serviceType" class="field-control" [(ngModel)]="selectedService">
-        <option value="benefits-renewal">Benefits renewal</option>
-        <option value="permit-request">Permit request</option>
-        <option value="document-upload">Document upload</option>
-        <option value="housing-assistance">Housing assistance</option>
-      </select>
+      <ps-select
+        fieldId="serviceType"
+        label="Service type"
+        [options]="serviceTypes"
+        [(value)]="selectedService"
+        placeholder="Choose a service"
+      />
 
       <label for="appointmentDate">Appointment date</label>
+      <!-- // GAP: ps-input not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
       <input id="appointmentDate" class="field-control" type="date" [(ngModel)]="appointmentDate" />
 
       <label class="inline-control">
+        <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
         <input type="checkbox" class="switch-control" [(ngModel)]="expediteReview" />
         <span>Expedite review</span>
       </label>
 
-      <div class="info-message">Focus rings, borders, and validation colors come from semantic tokens.</div>
+      <div class="info-message">Use expedited review only for time-sensitive cases or approved accommodations.</div>
     </section>
 
     <section class="service-panel">
@@ -87,16 +84,16 @@
           <strong>Eligibility completion</strong>
           <span>2 of 3 checks complete</span>
         </div>
-        <progress value="67" max="100" aria-label="Eligibility completion progress"></progress>
+        <ps-progress [value]="67" ariaLabel="Eligibility completion progress" />
       </div>
 
       <div class="status-list">
         <span>Identity verified</span>
-        <span class="status-chip status-chip--success">Complete</span>
+        <ps-tag value="Complete" tone="success" />
         <span>Eligibility review</span>
-        <span class="status-chip status-chip--warn">In progress</span>
+        <ps-tag value="In progress" tone="warn" />
         <span>Final notice</span>
-        <span class="status-chip status-chip--info">Pending</span>
+        <ps-tag value="Pending" tone="info" />
       </div>
     </section>
   </div>
@@ -114,12 +111,13 @@
           <strong>2 of 3</strong>
           <small>One evidence item still needs review</small>
         </div>
-        <span class="status-chip status-chip--warn">Needs income review</span>
+        <ps-tag value="Needs income review" tone="warn" />
       </div>
 
       <div class="eligibility-list">
         <article class="eligibility-item is-complete">
           <label class="eligibility-check">
+            <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
             <input type="checkbox" [(ngModel)]="documentsVerified" />
             <span>
               <strong>Required documents verified</strong>
@@ -134,6 +132,7 @@
 
         <article class="eligibility-item is-complete">
           <label class="eligibility-check">
+            <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
             <input type="checkbox" [(ngModel)]="residencyConfirmed" />
             <span>
               <strong>Residency confirmed</strong>
@@ -148,6 +147,7 @@
 
         <article class="eligibility-item is-pending">
           <label class="eligibility-check">
+            <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
             <input type="checkbox" [(ngModel)]="incomeReviewed" />
             <span>
               <strong>Income reviewed</strong>
@@ -155,14 +155,8 @@
             </span>
           </label>
           <div class="eligibility-actions">
-            <button type="button" class="action-button action-button--primary">
-              <i class="pi pi-envelope" aria-hidden="true"></i>
-              <span>Request document</span>
-            </button>
-            <button type="button" class="action-button">
-              <i class="pi pi-file-edit" aria-hidden="true"></i>
-              <span>Add note</span>
-            </button>
+            <ps-button label="Request document" icon="pi pi-envelope" />
+            <ps-button label="Add note" icon="pi pi-file-edit" intent="secondary" appearance="outlined" />
           </div>
         </article>
       </div>
@@ -189,6 +183,7 @@
     <div class="panel-heading">
       <h3>Case queue</h3>
     </div>
+    <!-- // GAP: ps-table not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
     <table class="case-table">
       <thead>
         <tr>
@@ -204,21 +199,21 @@
           <td>PS-2026-1042</td>
           <td>Jordan Avery</td>
           <td>Benefits renewal</td>
-          <td><span class="status-chip status-chip--warn">Review</span></td>
+          <td><ps-tag value="Review" tone="warn" /></td>
           <td>Today</td>
         </tr>
         <tr>
           <td>PS-2026-1043</td>
           <td>Sam Rivera</td>
           <td>Housing assistance</td>
-          <td><span class="status-chip status-chip--success">Ready</span></td>
+          <td><ps-tag value="Ready" tone="success" /></td>
           <td>Tomorrow</td>
         </tr>
         <tr>
           <td>PS-2026-1044</td>
           <td>Lee Morgan</td>
           <td>Permit request</td>
-          <td><span class="status-chip status-chip--danger">Blocked</span></td>
+          <td><ps-tag value="Blocked" tone="danger" /></td>
           <td>Jul 12</td>
         </tr>
       </tbody>
