@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import {
   componentManifest,
   type ComponentFinding,
@@ -145,14 +145,22 @@ interface RemediationItem {
                   </td>
                   <td>
                     <p class="next-action">{{ findingNextAction(finding) }}</p>
-                    <details>
-                      <summary>{{ finding.evidence.length }} evidence source{{ finding.evidence.length === 1 ? '' : 's' }}</summary>
-                      <ul class="compact-list evidence-list">
+                    <button
+                      type="button"
+                      class="evidence-disclosure"
+                      [attr.aria-expanded]="isFindingEvidenceExpanded(finding.id)"
+                      [attr.aria-controls]="evidenceRegionId(finding.id)"
+                      (click)="toggleFindingEvidence(finding.id)"
+                    >
+                      {{ finding.evidence.length }} evidence source{{ finding.evidence.length === 1 ? '' : 's' }}
+                    </button>
+                    @if (isFindingEvidenceExpanded(finding.id)) {
+                      <ul class="compact-list evidence-list" [id]="evidenceRegionId(finding.id)">
                         @for (evidence of finding.evidence; track evidence) {
-                          <li><a [href]="evidenceUrl(evidence)" target="_blank" rel="noreferrer">{{ evidence }}</a></li>
+                          <li><a [href]="evidenceUrl(evidence)" target="_blank" rel="noreferrer" tabindex="0">{{ evidence }}</a></li>
                         }
                       </ul>
-                    </details>
+                    }
                   </td>
                 </tr>
               }
@@ -322,7 +330,8 @@ interface RemediationItem {
     .compact-list { margin: 0; padding-left: 1rem; }
     .compact-list li + li { margin-top: 0.3rem; }
     .next-action { margin-bottom: 0.45rem; max-width: 30rem; line-height: 1.45; }
-    .findings-panel details summary { color: var(--p-primary-color); font-weight: 800; cursor: pointer; }
+    .evidence-disclosure { padding: 0; border: 0; background: transparent; color: var(--p-primary-color); font: inherit; font-weight: 800; text-align: left; cursor: pointer; }
+    .evidence-disclosure:hover, .evidence-disclosure:focus-visible { text-decoration: underline; }
     .evidence-list { margin-top: 0.5rem; }
     .evidence-list a { color: var(--p-primary-color); overflow-wrap: anywhere; }
     .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
@@ -344,6 +353,7 @@ interface RemediationItem {
 export class QualityRemediationViewComponent {
   readonly entries = componentManifest.entries;
   readonly findings = componentManifest.findings;
+  readonly expandedFindingIds = signal<ReadonlySet<string>>(new Set());
   readonly actionableFindings = computed(() => this.findings.filter((finding) =>
     ['open', 'investigate', 'planned', 'implemented'].includes(finding.status)));
   readonly verifiedFindings = computed(() => this.findings.filter((finding) =>
@@ -483,6 +493,26 @@ export class QualityRemediationViewComponent {
 
   evidenceUrl(path: string): string {
     return `https://github.com/JeffreySanford/public-sector-federation/blob/master/${path}`;
+  }
+
+  evidenceRegionId(findingId: string): string {
+    return `evidence-${findingId}`;
+  }
+
+  isFindingEvidenceExpanded(findingId: string): boolean {
+    return this.expandedFindingIds().has(findingId);
+  }
+
+  toggleFindingEvidence(findingId: string): void {
+    this.expandedFindingIds.update((current) => {
+      const next = new Set(current);
+      if (next.has(findingId)) {
+        next.delete(findingId);
+      } else {
+        next.add(findingId);
+      }
+      return next;
+    });
   }
 
   providerCount(provider: ComponentManifestEntry['implementation']['provider']): number {

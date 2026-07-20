@@ -1,3 +1,4 @@
+import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
 const shellQaUrl = 'http://localhost:4200/qa';
@@ -15,6 +16,16 @@ async function switchView(page: Page, name: 'Component Inventory' | 'Quality & R
   await button.click();
   await expect(button).toHaveClass(/is-active/);
   await expect(page.getByRole('heading', { name, exact: true })).toBeVisible();
+}
+
+async function expectNoAxeViolations(page: Page, view: string): Promise<void> {
+  const results = await new AxeBuilder({ page }).analyze();
+  const violations = results.violations.map((violation) => ({
+    id: violation.id,
+    impact: violation.impact,
+    targets: violation.nodes.flatMap((node) => node.target),
+  }));
+  expect(violations, `${view} accessibility violations: ${JSON.stringify(violations, null, 2)}`).toEqual([]);
 }
 
 test.describe('Forensic design-system workbench', () => {
@@ -97,6 +108,31 @@ test.describe('Forensic design-system workbench', () => {
       'href',
       /github\.com\/JeffreySanford\/public-sector-federation\/blob\/master\//,
     );
+  });
+
+  test('has no automated accessibility violations across all three workbench views', async ({ page }) => {
+    await expectNoAxeViolations(page, 'Component Inventory');
+
+    await switchView(page, 'Quality & Remediation');
+    await expectNoAxeViolations(page, 'Quality & Remediation');
+
+    await switchView(page, 'Design Alignment Lab');
+    await expectNoAxeViolations(page, 'Design Alignment Lab');
+  });
+
+  test('supports keyboard disclosure of finding evidence', async ({ page }) => {
+    await switchView(page, 'Quality & Remediation');
+
+    const buttonFinding = page.locator('tr[data-finding-id="A11Y-BTN-001"]');
+    const disclosure = buttonFinding.getByText(/evidence sources?/i);
+    await disclosure.focus();
+    await expect(disclosure).toBeFocused();
+    await page.keyboard.press('Enter');
+
+    const evidenceLink = buttonFinding.getByRole('link', { name: /button\.storybook\.spec\.ts/ });
+    await expect(evidenceLink).toBeVisible();
+    await page.keyboard.press('Tab');
+    await expect(evidenceLink).toBeFocused();
   });
 
   test('changes alignment cases and keeps missing design evidence explicit', async ({ page }) => {

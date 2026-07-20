@@ -39,14 +39,15 @@ Machine-readable findings, reports, and manifest metadata are the source layer, 
 - [x] Show finding identifiers, severity, status, affected components, evidence links, and recommended next action without requiring users to inspect generated JSON.
 - [ ] Distinguish automated evidence, manual review, design approval, and unresolved gaps in the rendered experience.
 - [x] Keep rendered evidence sourced from the manifest or generated audit artifacts rather than duplicating facts in application code.
-- [ ] Add responsive, keyboard, and accessibility coverage for each new evidence presentation.
+- [x] Add responsive, keyboard, and accessibility coverage for each new evidence presentation.
 
 Evidence-presentation progress:
 
 - Quality & Remediation renders the typed manifest finding registry as a presentable evidence table;
 - API, token, and accessibility findings expose identifiers, severity, lifecycle, affected components, next actions, and linked repository evidence;
 - unit and integrated browser coverage protect manifest projection and provenance links;
-- consolidation decisions and dedicated accessibility coverage for the new register remain open.
+- consolidation decisions remain open;
+- axe scans now cover all three workbench views, and the finding evidence disclosure has dedicated keyboard coverage.
 
 ### P1 — Finish Storybook and Chromatic alignment
 
@@ -292,7 +293,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [x] Add keyboard interaction tests for flagship components.
 - [x] Add automated accessibility checks for representative flagship states.
 - [x] Add Starlight page-level accessibility checks.
-- [ ] Add accessibility checks for all three main application views.
+- [x] Add accessibility checks for all three main application views.
 - [ ] Ensure every Storybook and optional Starlight-preview iframe has a meaningful title.
 - [x] Keep automated checks and manual assistive-technology review as separate evidence fields.
 

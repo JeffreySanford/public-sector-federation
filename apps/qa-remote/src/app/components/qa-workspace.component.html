@@ -36,7 +36,7 @@
     />
   </nav>
 
-  <main class="qa-workspace__content" [attr.data-active-view]="activeView()">
+  <div class="qa-workspace__content" [attr.data-active-view]="activeView()">
     @if (activeView() === 'inventory') {
       <section class="qa-workspace__panel" aria-label="Component Inventory view">
         <public-component-inventory-view />
@@ -50,5 +50,5 @@
         <public-design-alignment-lab />
       </section>
     }
-  </main>
+  </div>
 </section>
