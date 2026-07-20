@@ -344,6 +344,186 @@
     {
       "schemaVersion": 1,
       "identity": {
+        "id": "ps-checkbox",
+        "name": "Checkbox",
+        "kind": "component",
+        "exportName": "PublicCheckboxComponent",
+        "selector": "ps-checkbox",
+        "selectorAliases": [],
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-checkbox.component.ts",
+        "description": "Native checkbox and switch wrapper with label, help text, disabled, invalid, and required states."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "label",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "variant",
+            "type": "PublicCheckboxVariant",
+            "defaultValue": "checkbox"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "invalid",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "helpText",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "errorText",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "fieldId",
+            "type": "string",
+            "description": "Stable label and description relationship identifier."
+          }
+        ],
+        "outputs": [],
+        "models": [
+          {
+            "name": "checked",
+            "type": "boolean",
+            "defaultValue": "false"
+          }
+        ],
+        "publicTypes": [
+          "PublicCheckboxVariant"
+        ]
+      },
+      "implementation": {
+        "provider": "native",
+        "providerName": "Native",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": [
+          "Figma property mapping and manual screen-reader review remain pending."
+        ]
+      },
+      "variants": {
+        "properties": [
+          {
+            "name": "variant",
+            "values": [
+              "checkbox",
+              "switch"
+            ]
+          }
+        ],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "checkbox",
+        "automatedChecks": "complete",
+        "keyboardCoverage": "complete",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "complete",
+          "title": "Design System/Components/Checkbox",
+          "files": [
+            "apps/qa-remote/src/stories/checkbox.stories.ts"
+          ],
+          "stories": [
+            "design-system-components-checkbox--default",
+            "design-system-components-checkbox--switch",
+            "design-system-components-checkbox--checked",
+            "design-system-components-checkbox--disabled",
+            "design-system-components-checkbox--required-with-help",
+            "design-system-components-checkbox--invalid-with-error",
+            "design-system-components-checkbox--long-label"
+          ]
+        },
+        "tests": {
+          "status": "complete",
+          "files": [
+            "apps/qa-remote/e2e/checkbox.storybook.spec.ts"
+          ],
+          "behaviors": [
+            "keyboard toggling with Space",
+            "switch role for the switch variant",
+            "disabled suppression",
+            "required, invalid, help, and error relationships",
+            "long-label reflow"
+          ]
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-checkbox",
+        "disposition": "canonical",
+        "tokenBoundary": "mixed",
+        "findingIds": []
+      },
+      "health": {
+        "repositoryReadiness": "ready",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": []
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
         "id": "ps-dialog",
         "name": "Dialog",
         "kind": "component",
@@ -778,6 +958,194 @@
         "warnings": [
           "No dedicated automated behavior evidence is recorded."
         ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-input",
+        "name": "Input",
+        "kind": "component",
+        "exportName": "PublicInputComponent",
+        "selector": "ps-input",
+        "selectorAliases": [],
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-input.component.ts",
+        "description": "Native text field wrapper supporting text, search, password, and date types with help, invalid, and required states."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "label",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "type",
+            "type": "PublicInputType",
+            "defaultValue": "text"
+          },
+          {
+            "name": "placeholder",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "invalid",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "helpText",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "errorText",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "fieldId",
+            "type": "string",
+            "description": "Stable label and description relationship identifier."
+          }
+        ],
+        "outputs": [],
+        "models": [
+          {
+            "name": "value",
+            "type": "string",
+            "defaultValue": "''"
+          }
+        ],
+        "publicTypes": [
+          "PublicInputType"
+        ]
+      },
+      "implementation": {
+        "provider": "native",
+        "providerName": "Native",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": [
+          "Figma property mapping and manual screen-reader review remain pending."
+        ]
+      },
+      "variants": {
+        "properties": [
+          {
+            "name": "type",
+            "values": [
+              "text",
+              "search",
+              "password",
+              "date"
+            ]
+          }
+        ],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "textbox",
+        "automatedChecks": "complete",
+        "keyboardCoverage": "complete",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "complete",
+          "title": "Design System/Components/Input",
+          "files": [
+            "apps/qa-remote/src/stories/input.stories.ts"
+          ],
+          "stories": [
+            "design-system-components-input--default",
+            "design-system-components-input--search",
+            "design-system-components-input--password",
+            "design-system-components-input--date",
+            "design-system-components-input--disabled",
+            "design-system-components-input--required-with-help",
+            "design-system-components-input--invalid-with-error",
+            "design-system-components-input--long-label"
+          ]
+        },
+        "tests": {
+          "status": "complete",
+          "files": [
+            "apps/qa-remote/e2e/input.storybook.spec.ts"
+          ],
+          "behaviors": [
+            "label and input relationship",
+            "type-specific native behavior",
+            "disabled suppression",
+            "required, invalid, help, and error relationships",
+            "long-label reflow"
+          ]
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-input",
+        "disposition": "canonical",
+        "tokenBoundary": "provider-coupled",
+        "findingIds": []
+      },
+      "health": {
+        "repositoryReadiness": "ready",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": []
       }
     },
     {
@@ -1930,6 +2298,169 @@
         "warnings": [
           "No dedicated automated behavior evidence is recorded."
         ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-table",
+        "name": "Table",
+        "kind": "component",
+        "exportName": "PublicTableComponent",
+        "selector": "ps-table",
+        "selectorAliases": [],
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-table.component.ts",
+        "description": "Native sortable data table shell with a keyboard-scrollable overflow region, projected row content, and a built-in empty state."
+      },
+      "lifecycle": {
+        "status": "active",
+        "productionUse": true
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "columns",
+            "type": "PublicTableColumn[]",
+            "defaultValue": "[]"
+          },
+          {
+            "name": "ariaLabel",
+            "type": "string",
+            "defaultValue": "'Data table'"
+          },
+          {
+            "name": "caption",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "empty",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "emptyMessage",
+            "type": "string",
+            "defaultValue": "'No results found.'"
+          }
+        ],
+        "outputs": [],
+        "models": [
+          {
+            "name": "sortKey",
+            "type": "string | null",
+            "defaultValue": "null"
+          },
+          {
+            "name": "sortDirection",
+            "type": "PublicTableSortDirection",
+            "defaultValue": "asc"
+          }
+        ],
+        "publicTypes": [
+          "PublicTableColumn",
+          "PublicTableSortDirection"
+        ]
+      },
+      "implementation": {
+        "provider": "native",
+        "providerName": "Native",
+        "providerInternalOnly": true,
+        "providerModules": [],
+        "providerEscapeHatches": [],
+        "knownLimitations": [
+          "Row content, row actions, and cell formatting remain fully consumer-authored via content projection.",
+          "Figma property mapping and manual screen-reader review remain pending."
+        ]
+      },
+      "variants": {
+        "properties": [],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "table",
+        "automatedChecks": "complete",
+        "keyboardCoverage": "complete",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "complete",
+          "title": "Design System/Components/Table",
+          "files": [
+            "apps/qa-remote/src/stories/table.stories.ts"
+          ],
+          "stories": [
+            "design-system-components-table--default",
+            "design-system-components-table--sortable",
+            "design-system-components-table--with-row-actions",
+            "design-system-components-table--empty",
+            "design-system-components-table--long-content",
+            "design-system-components-table--mobile-overflow"
+          ]
+        },
+        "tests": {
+          "status": "complete",
+          "files": [
+            "apps/qa-remote/e2e/table.storybook.spec.ts"
+          ],
+          "behaviors": [
+            "sortable column header toggling",
+            "keyboard-focusable overflow region",
+            "projected row content",
+            "built-in empty state",
+            "mobile horizontal overflow"
+          ]
+        },
+        "documentation": {
+          "status": "partial",
+          "files": [
+            "docs/design-system/components/catalog.md",
+            "docs/design-system/architecture/registry-consumption-spec.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "zeroheight": {
+        "status": "planned",
+        "pageId": null,
+        "template": "component"
+      },
+      "governance": {
+        "tier": "core",
+        "designReview": "not-started",
+        "promotionRequirements": []
+      },
+      "audit": {
+        "duplicationCluster": "unique:ps-table",
+        "disposition": "canonical",
+        "tokenBoundary": "provider-coupled",
+        "findingIds": []
+      },
+      "health": {
+        "repositoryReadiness": "ready",
+        "externalDesignBinding": "partial",
+        "blockers": [],
+        "warnings": []
       }
     },
     {
