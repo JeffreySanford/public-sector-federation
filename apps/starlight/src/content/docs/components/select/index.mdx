@@ -238,9 +238,10 @@ selectedProgram: string | null = null;
 - `optionValue="value"`;
 - `appendTo="body"`;
 - provider `ariaLabel` derived from the public `label`;
-- forms integration through `ngModel` and the public signal model.
+- forms integration through `ngModel` and the public signal model;
+- required, invalid, help-text, and error-text relationships through provider-neutral wrapper inputs.
 
-The wrapper does not currently expose filtering, editable input, clear behavior, grouping, virtual scrolling, templates, invalid state, required state, help text, or provider PassThrough configuration. Those omissions keep the stable contract compact, but some may need intentional public designs later.
+The wrapper does not currently expose filtering, editable input, clear behavior, grouping, virtual scrolling, templates, or provider PassThrough configuration. Those omissions keep the stable contract compact, but some may need intentional public designs later.
 
 ## Quality and evidence
 
@@ -265,7 +266,7 @@ The wrapper does not currently expose filtering, editable input, clear behavior,
 2. **Keep the popup body-appended for now.** The policy prevents local clipping but requires dedicated positioning, stacking, theme, and focus evidence.
 3. **Keep option records provider-neutral.** Consumers use `label`, `value`, and `disabled`, not PrimeNG option classes or events.
 4. **Do not expose every provider feature automatically.** Filtering, grouping, templates, and virtual scrolling require product and accessibility decisions before becoming public API.
-5. **Treat invalid, required, help-text, and description relationships as real gaps.** They should be designed rather than implied through application CSS.
+5. **Keep validation relationships provider-neutral.** Required, invalid, help text, and error text are supported through wrapper inputs rather than application CSS or provider classes.
 6. **Track the disabled-option ARIA omission.** The provider blocks activation but does not currently emit `aria-disabled` on the rendered option.
 7. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.
 8. **Use Dialog next to test focus-managed overlay documentation.** Select proves listbox navigation and body-overlay behavior; Dialog will prove modal focus containment and restoration.
