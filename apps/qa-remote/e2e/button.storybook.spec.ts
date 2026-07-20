@@ -80,4 +80,24 @@ test.describe('Stable Button accessibility evidence', () => {
     const button = page.getByRole('button', { name: 'Unavailable action' });
     await expect(button).toBeDisabled();
   });
+
+  test('retains a visible boundary and focus indicator in forced-colors mode', async ({ page }) => {
+    await page.emulateMedia({ forcedColors: 'active' });
+    await gotoButtonStory(page, 'default');
+
+    const button = page.getByRole('button', { name: 'Save changes' });
+    await button.focus();
+    const styles = await button.evaluate((element) => {
+      const computed = getComputedStyle(element);
+      return {
+        borderStyle: computed.borderStyle,
+        outlineStyle: computed.outlineStyle,
+        outlineWidth: computed.outlineWidth,
+      };
+    });
+
+    expect(styles.borderStyle).not.toBe('none');
+    expect(styles.outlineStyle).not.toBe('none');
+    expect(styles.outlineWidth).not.toBe('0px');
+  });
 });

@@ -227,4 +227,23 @@ test.describe('Select isolated Storybook contract', () => {
     expect(geometry.scrollWidth).toBeLessThanOrEqual(geometry.clientWidth + 1);
     expect(geometry.documentWidth).toBeLessThanOrEqual(geometry.viewportWidth + 1);
   });
+
+  test('keeps the control, focused option, and overlay distinguishable in forced-colors mode', async ({ page }) => {
+    await page.emulateMedia({ forcedColors: 'active' });
+    await gotoSelectStory(page, 'default');
+    const combobox = await openWithKeyboard(page, 'Program');
+    const focusedOption = optionList(page).locator('.p-focus').first();
+
+    await expect(combobox).toBeFocused();
+    await expect(focusedOption).toBeVisible();
+    const styles = await focusedOption.evaluate((element) => {
+      const computed = getComputedStyle(element);
+      return {
+        outlineStyle: computed.outlineStyle,
+        outlineWidth: computed.outlineWidth,
+      };
+    });
+    expect(styles.outlineStyle).not.toBe('none');
+    expect(styles.outlineWidth).not.toBe('0px');
+  });
 });
