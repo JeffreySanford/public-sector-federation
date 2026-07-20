@@ -21,6 +21,10 @@ const meta: Meta<PublicSelectComponent> = {
     options: programOptions,
     value: null,
     disabled: false,
+    required: false,
+    invalid: false,
+    helpText: '',
+    errorText: '',
   },
   argTypes: {
     label: {
@@ -38,6 +42,26 @@ const meta: Meta<PublicSelectComponent> = {
     disabled: {
       control: 'boolean',
       description: 'Prevents focus and selection when the complete field is unavailable.',
+    },
+    required: {
+      control: 'boolean',
+      description: 'Marks the selection as required in both visible and programmatic form guidance.',
+    },
+    invalid: {
+      control: 'boolean',
+      description: 'Exposes the invalid state without coupling consumers to PrimeNG.',
+    },
+    helpText: {
+      control: 'text',
+      description: 'Persistent guidance associated with the rendered combobox.',
+    },
+    errorText: {
+      control: 'text',
+      description: 'Validation guidance associated with the combobox when invalid is true.',
+    },
+    fieldId: {
+      control: 'text',
+      description: 'Stable identifier used for label and description relationships.',
     },
     value: {
       control: 'select',
@@ -74,6 +98,24 @@ export const DisabledOption: Story = {
   args: {
     label: 'Program with archived option',
     placeholder: 'Choose an active program',
+  },
+};
+
+export const RequiredWithHelp: Story = {
+  args: {
+    fieldId: 'required-program',
+    required: true,
+    helpText: 'Choose the program used for this eligibility decision.',
+  },
+};
+
+export const InvalidWithError: Story = {
+  args: {
+    fieldId: 'invalid-program',
+    required: true,
+    invalid: true,
+    helpText: 'Choose the program used for this eligibility decision.',
+    errorText: 'Select a program before continuing.',
   },
 };
 

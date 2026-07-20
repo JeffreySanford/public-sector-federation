@@ -155,6 +155,30 @@ test.describe('Select isolated Storybook contract', () => {
     await expect(listbox.locator('.p-select-empty-message')).toBeVisible();
   });
 
+  test('associates required, help, invalid, and error guidance with the combobox', async ({ page }) => {
+    await gotoSelectStory(page, 'required-with-help');
+    let combobox = page.getByRole('combobox', { name: 'Program' });
+    await expect(combobox).toHaveAttribute('id', 'required-program');
+    await expect(combobox).toHaveAttribute('aria-required', 'true');
+    await expect(combobox).not.toHaveAttribute('aria-invalid', 'true');
+    await expect(combobox).toHaveAttribute('aria-describedby', 'required-program-help');
+    await expect(page.locator('#required-program-help')).toHaveText(
+      'Choose the program used for this eligibility decision.',
+    );
+
+    await gotoSelectStory(page, 'invalid-with-error');
+    combobox = page.getByRole('combobox', { name: 'Program' });
+    await expect(combobox).toHaveAttribute('aria-required', 'true');
+    await expect(combobox).toHaveAttribute('aria-invalid', 'true');
+    await expect(combobox).toHaveAttribute(
+      'aria-describedby',
+      'invalid-program-help invalid-program-error',
+    );
+    await expect(page.locator('#invalid-program-error')).toHaveText(
+      'Select a program before continuing.',
+    );
+  });
+
   test('escapes an overflow-hidden application boundary and remains positioned above content', async ({ page }) => {
     await page.setViewportSize({ width: 900, height: 720 });
     await gotoSelectStory(page, 'overlay-boundary');

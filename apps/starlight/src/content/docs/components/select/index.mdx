@@ -70,9 +70,9 @@ Use Select when:
 | Disabled option | Supported by the option model | Keep the option visible but unavailable for selection. |
 | Empty options | Supported as data | Pair the empty list with an explanatory placeholder or nearby message. |
 | Long label or option | Supported with responsive evidence | The popup is width-constrained and option labels wrap without horizontal document overflow. |
-| Invalid | Not exposed | The wrapper does not currently expose invalid state, error text, or `aria-describedby`. |
-| Required | Not exposed | Required-state semantics and visible required guidance remain undefined. |
-| Help text | Not exposed | Compose external text cautiously until an explicit description contract exists. |
+| Invalid | Supported | Set `invalid` and provide concise `errorText`; the rendered combobox references the message. |
+| Required | Supported | Set `required` to expose visible and programmatic required-state guidance. |
+| Help text | Supported | Provide persistent `helpText`; it is associated with the rendered combobox. |
 
 ## Anatomy
 
@@ -134,6 +134,8 @@ The canonical `OverlayBoundary` Storybook story places the field inside an overf
 
 - The interactive trigger must expose `combobox` semantics with popup and expanded-state information.
 - The visible `label` input is also forwarded as the provider `ariaLabel`.
+- Required and invalid states are reflected through `aria-required` and `aria-invalid` on the rendered combobox.
+- Help and error messages use stable IDs and an ordered `aria-describedby` relationship; error text is only exposed when the field is invalid.
 - The popup must expose listbox semantics and options must expose selected state. PrimeNG currently suppresses disabled-option activation through provider state but does not emit `aria-disabled` on the rendered option; that omission remains an explicit accessibility/provider gap.
 - The combobox and popup must remain related through provider-managed IDs and ARIA attributes after the popup is appended to the body.
 - Placeholder text is not a substitute for an accessible name.
@@ -146,6 +148,7 @@ The canonical `OverlayBoundary` Storybook story places the field inside an overf
 - **Keyboard coverage:** Complete for the declared stable contract: keyboard opening, option navigation, selection, Escape, model updates, disabled states, and focus return are verified.
 - **Overlay integration:** Complete for the declared scope: body append, clipping escape, stacking, light/dark token inheritance, long-option wrapping, and mobile document width are verified.
 - **Disabled-option ARIA:** The provider prevents selection but currently omits `aria-disabled` on the option element; this remains a recorded gap.
+- **Validation relationships:** Required, invalid, help, and error states have dedicated Storybook stories and browser verification.
 - **Manual assistive-technology review:** Pending.
 - **Conformance claim:** None. Automated evidence does not replace manual review.
 
@@ -192,9 +195,14 @@ selectedProgram: string | null = null;
 
 ```html
 <ps-select
+  fieldId="program"
   label="Program"
   placeholder="Choose a program"
   [options]="programOptions"
+  [required]="true"
+  [invalid]="!selectedProgram"
+  helpText="Choose the program used for this eligibility decision."
+  errorText="Select a program before continuing."
   [(value)]="selectedProgram"
 />
 ```
@@ -207,6 +215,11 @@ selectedProgram: string | null = null;
 | `options` | `PublicSelectOption[]` | `[]` | Known provider-neutral option records. |
 | `placeholder` | `string` | `Choose an option` | Prompt before selection. |
 | `disabled` | `boolean` | `false` | Disables the complete field. |
+| `required` | `boolean` | `false` | Exposes visible and programmatic required state. |
+| `invalid` | `boolean` | `false` | Exposes the invalid state to the provider and rendered combobox. |
+| `helpText` | `string` | Empty | Persistent guidance associated with the combobox. |
+| `errorText` | `string` | Empty | Validation guidance associated when `invalid` is true. |
+| `fieldId` | `string` | Generated | Stable identifier for the label, help, and error relationships. |
 | `value` | `model<string \| null>` | `null` | Two-way selected value model. |
 
 ### Option type
@@ -225,9 +238,10 @@ selectedProgram: string | null = null;
 - `optionValue="value"`;
 - `appendTo="body"`;
 - provider `ariaLabel` derived from the public `label`;
-- forms integration through `ngModel` and the public signal model.
+- forms integration through `ngModel` and the public signal model;
+- required, invalid, help-text, and error-text relationships through provider-neutral wrapper inputs.
 
-The wrapper does not currently expose filtering, editable input, clear behavior, grouping, virtual scrolling, templates, invalid state, required state, help text, or provider PassThrough configuration. Those omissions keep the stable contract compact, but some may need intentional public designs later.
+The wrapper does not currently expose filtering, editable input, clear behavior, grouping, virtual scrolling, templates, or provider PassThrough configuration. Those omissions keep the stable contract compact, but some may need intentional public designs later.
 
 ## Quality and evidence
 
@@ -252,7 +266,7 @@ The wrapper does not currently expose filtering, editable input, clear behavior,
 2. **Keep the popup body-appended for now.** The policy prevents local clipping but requires dedicated positioning, stacking, theme, and focus evidence.
 3. **Keep option records provider-neutral.** Consumers use `label`, `value`, and `disabled`, not PrimeNG option classes or events.
 4. **Do not expose every provider feature automatically.** Filtering, grouping, templates, and virtual scrolling require product and accessibility decisions before becoming public API.
-5. **Treat invalid, required, help-text, and description relationships as real gaps.** They should be designed rather than implied through application CSS.
+5. **Keep validation relationships provider-neutral.** Required, invalid, help text, and error text are supported through wrapper inputs rather than application CSS or provider classes.
 6. **Track the disabled-option ARIA omission.** The provider blocks activation but does not currently emit `aria-disabled` on the rendered option.
 7. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.
 8. **Use Dialog next to test focus-managed overlay documentation.** Select proves listbox navigation and body-overlay behavior; Dialog will prove modal focus containment and restoration.

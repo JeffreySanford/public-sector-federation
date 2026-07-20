@@ -1474,6 +1474,31 @@
             "name": "disabled",
             "type": "boolean",
             "defaultValue": "false"
+          },
+          {
+            "name": "required",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "invalid",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "helpText",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "errorText",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "fieldId",
+            "type": "string",
+            "description": "Stable label and description relationship identifier."
           }
         ],
         "outputs": [],
@@ -1497,7 +1522,7 @@
         ],
         "providerEscapeHatches": [],
         "knownLimitations": [
-          "Invalid state, required state, help text, aria-describedby, richer option content, Figma alignment, and manual assistive-technology review remain pending.",
+          "Richer option content, Figma alignment, and manual assistive-technology review remain pending.",
           "PrimeNG marks disabled options with provider state but does not currently emit aria-disabled on the rendered option."
         ]
       },
@@ -1531,6 +1556,8 @@
             "design-system-components-select--selected",
             "design-system-components-select--disabled",
             "design-system-components-select--disabled-option",
+            "design-system-components-select--required-with-help",
+            "design-system-components-select--invalid-with-error",
             "design-system-components-select--empty-options",
             "design-system-components-select--long-options",
             "design-system-components-select--model-binding",
@@ -1549,6 +1576,7 @@
             "provider-neutral model selection",
             "Escape and focus return",
             "disabled field and option suppression",
+            "required, invalid, help, and error relationships",
             "body-appended overlay clipping escape",
             "light and dark overlay token inheritance",
             "mobile long-option reflow"
@@ -2638,13 +2666,15 @@
       "id": "A11Y-SEL-002",
       "category": "accessibility",
       "severity": "serious",
-      "status": "open",
+      "status": "verified",
       "componentIds": [
         "ps-select"
       ],
-      "summary": "Required, invalid, error-message, and help-text relationships are absent from the public Select contract.",
+      "summary": "Required, invalid, help, and error states use a provider-neutral API with verified combobox relationships.",
       "evidence": [
         "packages/ui-patterns/src/public-select.component.ts",
+        "apps/qa-remote/src/stories/select.stories.ts",
+        "apps/qa-remote/e2e/select.storybook.spec.ts",
         "docs/documentation-upgrade/19-accessibility-findings-and-remediation.md"
       ]
     },
