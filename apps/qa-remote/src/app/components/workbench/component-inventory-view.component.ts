@@ -175,6 +175,9 @@ type DispositionFilter = 'all' | AuditDisposition;
 
             <dl class="detail-list">
               <div><dt>Selector</dt><dd><code>{{ entry.identity.selector || 'Service API' }}</code></dd></div>
+              @if (entry.identity.selectorAliases.length) {
+                <div><dt>Compatibility aliases</dt><dd><code>{{ entry.identity.selectorAliases.join(', ') }}</code> until next major</dd></div>
+              }
               <div><dt>Export</dt><dd><code>{{ entry.identity.exportName }}</code></dd></div>
               <div><dt>Provider boundary</dt><dd>{{ entry.implementation.providerInternalOnly ? 'Internal' : 'Exposed' }}</dd></div>
               <div><dt>Public API inventory</dt><dd>{{ entry.publicApi.status }}</dd></div>

@@ -92,7 +92,7 @@ composition as a starting template:
 
 ```typescript
 <public-page-layout>
-  <public-page-header
+  <ps-page-header
     [title]="'Rates Sheet'"
     [description]="'Review current rates and pricing options'"
   />

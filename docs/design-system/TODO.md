@@ -31,7 +31,7 @@ This is the short execution dashboard. It does not duplicate detailed acceptance
 - [x] Assign duplication clusters and preliminary dispositions.
 - [x] Complete API-pattern and token-boundary findings.
 - [x] Link audit entries to API, token, and accessibility findings with validated evidence paths.
-- [ ] Reconcile public `ps-*` naming with legacy `public-*` selectors.
+- [x] Reconcile public `ps-*` naming with legacy `public-*` selectors.
 
 ## Now — accessibility remediation
 

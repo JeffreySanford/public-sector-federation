@@ -10,6 +10,7 @@
         "kind": "component",
         "exportName": "PublicButtonComponent",
         "selector": "ps-button",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-button.component.ts",
         "description": "Stable PrimeNG-backed action wrapper used by current applications and remotes."
@@ -237,6 +238,7 @@
         "kind": "component",
         "exportName": "PublicCardComponent",
         "selector": "ps-card",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-card.component.ts",
         "description": "Token-driven content surface with optional heading content."
@@ -347,6 +349,7 @@
         "kind": "component",
         "exportName": "PublicDialogComponent",
         "selector": "ps-dialog",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-dialog.component.ts",
         "description": "Native governed modal with labelled semantics, contained focus, dismissal, and opener restoration."
@@ -510,7 +513,10 @@
         "name": "Empty State",
         "kind": "pattern",
         "exportName": "PublicEmptyStateComponent",
-        "selector": "public-empty-state",
+        "selector": "ps-empty-state",
+        "selectorAliases": [
+          "public-empty-state"
+        ],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-empty-state.component.ts",
         "description": "Composite empty-state pattern using shared tokens and the public button wrapper."
@@ -651,7 +657,10 @@
         "name": "Form Section",
         "kind": "pattern",
         "exportName": "PublicFormSectionComponent",
-        "selector": "public-form-section",
+        "selector": "ps-form-section",
+        "selectorAliases": [
+          "public-form-section"
+        ],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-form-section.component.ts",
         "description": "Composite form grouping surface with title, description, and projected controls."
@@ -779,6 +788,7 @@
         "kind": "component",
         "exportName": "PublicMenuComponent",
         "selector": "ps-menu",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-menu.component.ts",
         "description": "Governed menu action wrapper that contains PrimeNG overlay behavior."
@@ -912,7 +922,10 @@
         "name": "Page Header",
         "kind": "pattern",
         "exportName": "PublicPageHeaderComponent",
-        "selector": "public-page-header",
+        "selector": "ps-page-header",
+        "selectorAliases": [
+          "public-page-header"
+        ],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-page-header.component.ts",
         "description": "Composite page title and action-header pattern."
@@ -1045,6 +1058,7 @@
         "kind": "component",
         "exportName": "PublicPaginatorComponent",
         "selector": "ps-paginator",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-paginator.component.ts",
         "description": "Native pagination pattern with current-page and rows-per-page models."
@@ -1199,6 +1213,7 @@
         "kind": "component",
         "exportName": "PublicPopoverComponent",
         "selector": "ps-popover",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-popover.component.ts",
         "description": "Governed contextual-content wrapper that contains PrimeNG overlay behavior."
@@ -1324,6 +1339,7 @@
         "kind": "component",
         "exportName": "PublicProgressComponent",
         "selector": "ps-progress",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-progress.component.ts",
         "description": "Native progress indicator using the shared token contract."
@@ -1450,6 +1466,7 @@
         "kind": "component",
         "exportName": "PublicSelectComponent",
         "selector": "ps-select",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-select.component.ts",
         "description": "Opinionated PrimeNG select facade with an internal body-overlay policy."
@@ -1644,6 +1661,7 @@
         "kind": "component",
         "exportName": "PublicSkeletonComponent",
         "selector": "ps-skeleton",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-skeleton.component.ts",
         "description": "Native token-driven loading placeholder."
@@ -1762,7 +1780,10 @@
         "name": "Status Card",
         "kind": "pattern",
         "exportName": "PublicStatusCardComponent",
-        "selector": "public-status-card",
+        "selector": "ps-status-card",
+        "selectorAliases": [
+          "public-status-card"
+        ],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-status-card.component.ts",
         "description": "Composite metric and status summary pattern."
@@ -1919,6 +1940,7 @@
         "kind": "component",
         "exportName": "PublicTagComponent",
         "selector": "ps-tag",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-tag.component.ts",
         "description": "PrimeNG-backed status label wrapper."
@@ -2028,6 +2050,7 @@
         "kind": "component",
         "exportName": "PublicToastComponent",
         "selector": "ps-toast",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-toast.component.ts",
         "description": "Native toast presentation region backed by the public toast service."
@@ -2138,6 +2161,7 @@
         "kind": "component",
         "exportName": "PublicTooltipComponent",
         "selector": "ps-tooltip",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-tooltip.component.ts",
         "description": "Governed help-text wrapper that contains PrimeNG tooltip behavior."
@@ -2271,6 +2295,7 @@
         "kind": "component",
         "exportName": "PublicUpButtonComponent",
         "selector": "ps-up-button",
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-up-button.component.ts",
         "description": "Opinionated PrimeNG facade exposing product intent while keeping provider controls private."
@@ -2473,6 +2498,7 @@
         "kind": "service",
         "exportName": "PublicToastService",
         "selector": null,
+        "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-toast.service.ts",
         "description": "Public service API for creating governed toast messages."
@@ -2749,15 +2775,16 @@
       "id": "API-NAMING-001",
       "category": "api",
       "severity": "advisory",
-      "status": "open",
+      "status": "implemented",
       "componentIds": [
         "ps-empty-state",
         "ps-form-section",
         "ps-page-header",
         "ps-status-card"
       ],
-      "summary": "The public package mixes ps-* and public-* selector prefixes and requires a staged compatibility decision.",
+      "summary": "The canonical selector family is ps-*; legacy public-* aliases remain supported until the next major release.",
       "evidence": [
+        "docs/design-system/components/selector-prefix-migration.md",
         "packages/ui-patterns/src/public-empty-state.component.ts",
         "packages/ui-patterns/src/public-form-section.component.ts",
         "packages/ui-patterns/src/public-page-header.component.ts",

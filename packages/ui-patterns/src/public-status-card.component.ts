@@ -4,7 +4,7 @@ import { TagModule } from 'primeng/tag';
 export type PublicStatusCardTone = 'neutral' | 'info' | 'success' | 'warning' | 'error' | 'contrast';
 
 @Component({
-  selector: 'public-status-card',
+  selector: 'ps-status-card, public-status-card',
   standalone: true,
   imports: [TagModule],
   template: `

@@ -25,7 +25,7 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 ### P1 — Finalize consolidation
 
 - [x] Approve one target Button contract and compatibility window.
-- [ ] Decide selector-prefix migration.
+- [x] Decide selector-prefix migration.
 - [x] Record provider-wrap, native, and Angular CDK tradeoffs.
 - [ ] Move native styling from direct `--p-*` use to public `--ps-*` tokens.
 - [ ] Replace placeholder UI-library test targets with real contract tests.
@@ -55,6 +55,7 @@ Evidence-presentation progress:
 - Select disabled options now expose wrapper-governed `aria-disabled` semantics while preserving provider selection suppression; manual announcement review remains pending.
 - Button now has an approved provider-neutral target contract; legacy aliases remain supported until the next major release and are presented as planned migration work in Quality & Remediation.
 - Provider-wrapper, native, and Angular CDK selection criteria are recorded for the flagship components and exposed as manifest-backed evidence.
+- `ps-*` is the approved selector family; four legacy `public-*` aliases remain supported until the next major release and are visible in Component Inventory.
 
 ### P1 — Finish Storybook and Chromatic alignment
 

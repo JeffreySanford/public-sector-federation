@@ -62,8 +62,9 @@ function readPublicExports(source) {
   return exports;
 }
 
-function selectorFromSource(source) {
-  return source.match(/selector\s*:\s*['"]([^'"]+)['"]/)?.[1] ?? null;
+function selectorsFromSource(source) {
+  const selector = source.match(/selector\s*:\s*['"]([^'"]+)['"]/)?.[1];
+  return selector?.split(',').map((value) => value.trim()).filter(Boolean) ?? [];
 }
 
 function primeNgImports(source) {
@@ -199,13 +200,15 @@ async function validateManifest(manifest) {
       addProblem(problems, `${identity.id}: ${identity.exportName} was not found in ${identity.source}`);
     }
 
-    const detectedSelector = selectorFromSource(source);
+    const detectedSelectors = selectorsFromSource(source);
     if (identity.kind === 'service') {
       if (identity.selector !== null) {
         addProblem(problems, `${identity.id}: services must use selector: null.`);
       }
-    } else if (detectedSelector !== identity.selector) {
-      addProblem(problems, `${identity.id}: selector mismatch; metadata=${identity.selector}, source=${detectedSelector}`);
+    } else if (detectedSelectors[0] !== identity.selector) {
+      addProblem(problems, `${identity.id}: canonical selector mismatch; metadata=${identity.selector}, source=${detectedSelectors[0] ?? null}`);
+    } else if (JSON.stringify(detectedSelectors.slice(1)) !== JSON.stringify(identity.selectorAliases)) {
+      addProblem(problems, `${identity.id}: selector aliases mismatch; metadata=${identity.selectorAliases.join(',')}, source=${detectedSelectors.slice(1).join(',')}`);
     }
 
     const publicTokenReferences = tokenReferences(source, 'ps');
