@@ -129,15 +129,19 @@ jobs:
         run: pnpm build-storybook:qa
 
       - name: Publish Storybook to Chromatic
-        # Skips gracefully (rather than failing the build) until
-        # CHROMATIC_PROJECT_TOKEN is added as a repository secret.
-        if: |
-          github.event_name == 'push' &&
-          github.ref == 'refs/heads/master' &&
-          secrets.CHROMATIC_PROJECT_TOKEN != ''
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-        run: pnpm chromatic
+        shell: bash
+        run: |
+          # `secrets` cannot be referenced in an `if:` conditional, so the
+          # "skip until the secret is configured" check has to live here
+          # instead, to avoid hard-failing every push to master.
+          if [ -z "$CHROMATIC_PROJECT_TOKEN" ]; then
+            echo "CHROMATIC_PROJECT_TOKEN is not set; skipping Chromatic publish."
+            exit 0
+          fi
+          pnpm chromatic
 
       - name: Install Chromium for pull-request validation
         if: github.event_name == 'pull_request'
