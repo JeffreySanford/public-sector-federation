@@ -8,7 +8,7 @@ The reference architecture uses an Angular shell to discover and mount custom-el
 
 ## What to review first
 
-1. Open the [live Storybook](https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/) to review component states, light and dark themes, and accessibility evidence.
+1. Open the [live Storybook](https://master--6a57d5b6de2da2591d3236aa.chromatic.com/) to review component states, light and dark themes, and accessibility evidence.
 2. Read the [reference architecture recommendation](./design-system/architecture/reference-architecture-recommendation.md) for the token, wrapper, and runtime decisions.
 3. Review the [generated component manifest](../packages/ui-patterns/generated/component-manifest.json) to see how public APIs, providers, evidence, lifecycle, and governance status are represented as data.
 4. Review the shell and remote applications under `apps/` to see the runtime federation pattern.

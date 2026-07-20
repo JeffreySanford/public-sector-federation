@@ -49,6 +49,10 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
+        with:
+          # Chromatic needs enough history to compare against the previous
+          # baseline; a shallow clone can leave it unable to find one.
+          fetch-depth: 0
 
       - name: Install pnpm
         uses: pnpm/action-setup@v6
@@ -124,6 +128,17 @@ jobs:
       - name: Build QA Storybook
         run: pnpm build-storybook:qa
 
+      - name: Publish Storybook to Chromatic
+        # Skips gracefully (rather than failing the build) until
+        # CHROMATIC_PROJECT_TOKEN is added as a repository secret.
+        if: |
+          github.event_name == 'push' &&
+          github.ref == 'refs/heads/master' &&
+          secrets.CHROMATIC_PROJECT_TOKEN != ''
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: pnpm chromatic
+
       - name: Install Chromium for pull-request validation
         if: github.event_name == 'pull_request'
         run: pnpm exec playwright install --with-deps chromium
@@ -150,7 +165,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          node scripts/storybook-e2e.mjs 2>&1 | tee storybook-e2e.log
+          pnpm storybook:e2e 2>&1 | tee storybook-e2e.log
 
       - name: Run Chromium pull-request gate
         if: github.event_name == 'pull_request'

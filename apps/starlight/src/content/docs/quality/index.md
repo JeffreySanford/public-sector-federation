@@ -37,4 +37,4 @@ The documentation application now has a dedicated Nx quality gate that validates
 
 The Starlight gate runs inside `verify:release` and the repository Release Quality Gate. Automated accessibility evidence remains separate from manual review, and Figma status remains explicit rather than inferred.
 
-[Open the live Storybook](https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/)
+[Open the live Storybook](https://master--6a57d5b6de2da2591d3236aa.chromatic.com/)

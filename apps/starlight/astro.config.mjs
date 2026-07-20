@@ -3,7 +3,11 @@ import starlight from '@astrojs/starlight';
 import mermaid from 'astro-mermaid';
 
 const sourceUrl = 'https://github.com/JeffreySanford/public-sector-federation';
-const storybookUrl = 'https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/';
+// Chromatic assigns a new random subdomain to every build (e.g. `<hash>-<random>.chromatic.com`),
+// so linking to a specific build URL goes stale the moment someone republishes. The
+// `<branch>--<appId>` form below is Chromatic's stable alias for "latest published build on
+// this branch" and stays constant across builds: https://www.chromatic.com/docs/permalinks/
+const storybookUrl = process.env.PUBLIC_STORYBOOK_URL ?? 'https://master--6a57d5b6de2da2591d3236aa.chromatic.com/';
 
 const themeSyncScript = `
 (() => {

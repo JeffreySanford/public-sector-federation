@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
-const storybookOrigin = 'https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com';
+const storybookOrigin = 'https://master--6a57d5b6de2da2591d3236aa.chromatic.com';
 const routes = [
   { name: 'overview', path: '/docs/' },
   { name: 'foundations', path: '/docs/foundations/' },

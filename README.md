@@ -4,7 +4,7 @@ Public Sector Federation is a portfolio-grade Angular reference platform demonst
 
 ## Start here
 
-- [Live Storybook and visual QA](https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/)
+- [Live Storybook and visual QA](https://master--6a57d5b6de2da2591d3236aa.chromatic.com/)
 - [Five-minute portfolio walkthrough](./docs/PORTFOLIO-OVERVIEW.md)
 - [Testing and release gates](./docs/TESTING.md)
 - [Design-system architecture](./docs/design-system/architecture/reference-architecture-recommendation.md)
