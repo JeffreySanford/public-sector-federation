@@ -31,9 +31,9 @@ A finding cannot be marked resolved without linked verification. Manual review c
 
 | ID | Component | Finding | Severity | Evidence type | Status |
 | --- | --- | --- | --- | --- | --- |
-| A11Y-DLG-001 | Dialog | Background content is not made inert while the modal is open | Serious | Source review and documented limitation | Open |
-| A11Y-DLG-002 | Dialog | Explicit body scroll locking is not implemented | Moderate | Source review and documented limitation | Open |
-| A11Y-DLG-003 | Dialog | The public API has no accessible-description relationship such as `aria-describedby` | Moderate | Source/API review and documented limitation | Open |
+| A11Y-DLG-001 | Dialog | Background content becomes inert while the modal is open | Serious | Storybook Playwright verification | Verified |
+| A11Y-DLG-002 | Dialog | Body scrolling is locked while the modal is open | Moderate | Storybook Playwright verification | Verified |
+| A11Y-DLG-003 | Dialog | The description input supplies an `aria-describedby` relationship | Moderate | Storybook Playwright verification | Verified |
 | A11Y-DLG-004 | Dialog | Stacked or nested dialog behavior is undefined | Moderate | Documented limitation | Investigate |
 | A11Y-SEL-001 | Select | Disabled options suppress selection but omit `aria-disabled` | Serious | Storybook Playwright reproduction | Open |
 | A11Y-SEL-002 | Select | Required, invalid, help, and error relationships use a provider-neutral contract | Serious | Storybook Playwright verification | Verified |
@@ -55,14 +55,16 @@ disabled state programmatically and the behavior is verified with assistive tech
 
 **Expected contract:** While a modal dialog is active, users should not navigate to or operate background content.
 
-**Current condition:** Focus is contained within the dialog, but background inertness is not implemented.
+**Implemented condition:** The wrapper makes every sibling branch outside the active Dialog host
+inert, preserving each branch's previous inert state. Closing or destroying the Dialog restores
+those values and the opener's focus. The same lifecycle locks and restores body scrolling.
 
 **Next action:**
 
-1. Compare native `inert`, Angular CDK overlay/a11y primitives, and a wrapper-owned implementation.
-2. Verify pointer, keyboard, accessibility-tree, and restoration behavior.
-3. Add Storybook and integrated tests.
-4. Record browser and assistive-technology results.
+1. Retain the isolated Storybook checks for inert background state, scroll lock, and restoration.
+2. Keep nested Dialogs unsupported until a stack-aware isolation manager is intentionally designed.
+3. Verify virtual-cursor isolation in the pending NVDA and Chrome review.
+4. Reopen the finding if application integration exposes a sibling or portal boundary not covered by the host walk.
 
 ### A11Y-SEL-002 — Validation relationships
 

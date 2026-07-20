@@ -40,7 +40,7 @@ This is the short execution dashboard. It does not duplicate detailed acceptance
 - [ ] Record NVDA and Chrome reviews for Button, Select, and Dialog.
 - [x] Record automated forced-colors and zoom/reflow reviews; retain manual environment review separately.
 - [x] Add Select required, invalid, help, and error relationships.
-- [ ] Decide and implement Dialog inertness, scroll-lock, and description behavior.
+- [x] Decide and implement Dialog inertness, scroll-lock, and description behavior.
 
 ## Next — consolidation and design reference
 

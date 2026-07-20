@@ -7,7 +7,7 @@ import StoryFrame from '../../../../components/StoryFrame.astro';
 
 Dialog presents a focused task, decision, or confirmation above the current page. Use it only when a person must address the interruption before continuing the underlying workflow.
 
-**Lifecycle:** Stable · **Framework:** Angular · **Provider:** Native governed wrapper · **Accessibility:** Labelled modal semantics, initial focus, focus containment, Escape dismissal, and focus restoration are automated for this declared scope; manual review remains pending · **Figma:** Pending access
+**Lifecycle:** Stable · **Framework:** Angular · **Provider:** Native governed wrapper · **Accessibility:** Label, description, inert background, scroll lock, initial focus, focus containment, Escape dismissal, and focus restoration are automated for this declared scope; manual review remains pending · **Figma:** Pending access
 
 [Open the canonical Storybook story](https://6a57d5b6de2da2591d3236aa-zpjdyybmmw.chromatic.com/?path=/story/design-system-components-dialog--default) · [View Angular source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/public-dialog.component.ts) · [View Storybook source](https://github.com/JeffreySanford/public-sector-federation/blob/master/apps/qa-remote/src/stories/dialog.stories.ts) · [View manifest source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/manifest/component-registry.ts)
 
@@ -97,7 +97,7 @@ The wrapper's class names and internal focus-management implementation are priva
 1. Record the element that currently owns focus.
 2. Render the modal surface with `role="dialog"`, `aria-modal="true"`, and a title relationship.
 3. Move focus to the close control. This predictable safe target avoids placing initial focus on a destructive action.
-4. Keep all page content visually behind the backdrop.
+4. Make sibling branches outside the Dialog host inert and lock body scrolling.
 
 ### Keyboard contract
 
@@ -114,6 +114,10 @@ The wrapper's class names and internal focus-management implementation are priva
 ### Focus restoration
 
 The wrapper captures the active element when visibility changes from closed to open. Every supported dismissal path—Escape, close control, backdrop, Cancel, confirmation, or an external `visible` model update—returns focus to that connected element after the modal is removed.
+
+The wrapper preserves pre-existing inert state and the body's inline overflow value, restoring both
+when the Dialog closes or is destroyed. This contract supports one active Dialog; stacked Dialogs
+remain intentionally unsupported.
 
 Applications should not move or remove the opener while the Dialog is active. When an operation removes the opener as part of success handling, the application must move focus to the next meaningful workflow location.
 
@@ -133,6 +137,7 @@ Applications should not move or remove the opener while the Dialog is active. Wh
 
 - The surface exposes `role="dialog"` and `aria-modal="true"`.
 - The visible heading labels the Dialog through a unique `aria-labelledby` relationship.
+- The optional `description` input renders concise introductory text and references it through `aria-describedby`.
 - The close control has a stable accessible name independent of its visible × glyph.
 - The title must describe the task; placeholder or body text is not a substitute for the modal name.
 - Projected form fields retain their own labels, descriptions, validation, and required-state semantics.
@@ -144,6 +149,7 @@ Applications should not move or remove the opener while the Dialog is active. Wh
 - **Page-level accessibility:** This Starlight route participates in the built-site axe gate.
 - **Keyboard coverage:** Dedicated tests cover initial focus, forward and reverse wrapping, Escape, and activation paths.
 - **Focus restoration:** Dedicated tests cover Escape, close control, backdrop, and confirmation outcomes.
+- **Modal isolation:** Dedicated tests cover background inertness, body scroll lock, and restoration after close.
 - **Responsive behavior:** Narrow viewport and long-content evidence checks modal scrolling and document width.
 - **Theme evidence:** Light and dark stories verify semantic surface and text-token inheritance.
 - **Manual assistive-technology review:** Pending.
@@ -153,9 +159,6 @@ Applications should not move or remove the opener while the Dialog is active. Wh
 
 The current wrapper does not yet:
 
-- make the non-modal page subtree inert;
-- lock body scrolling explicitly;
-- expose an `aria-describedby` or description-ID API;
 - expose an application-selected initial-focus target;
 - announce asynchronous confirmation progress or failure;
 - define a stacked-dialog policy beyond prohibiting the pattern.
@@ -203,6 +206,7 @@ reviewOpen = false;
 
 <ps-dialog
   header="Review application"
+  description="Review the application details before recording a decision."
   width="36rem"
   [(visible)]="reviewOpen"
 >
@@ -227,6 +231,7 @@ reviewOpen = false;
 | Member | Type | Default | Guidance |
 | --- | --- | --- | --- |
 | `header` | `string` | Empty string | Visible title and accessible modal name. Always provide a specific value. |
+| `description` | `string` | Empty string | Concise modal description referenced through `aria-describedby` when provided. |
 | `width` | `string` | `32rem` | Maximum surface width. Use governed values and preserve narrow-viewport behavior. |
 | `visible` | `model<boolean>` | `false` | Two-way open state; every close path writes `false`. |
 
@@ -248,7 +253,7 @@ The wrapper intentionally keeps this contract compact. It does not expose positi
 | Dimension | Current status | Evidence or next action |
 | --- | --- | --- |
 | Runtime source | Complete for this slice | `PublicDialogComponent` is exported from `@public-sector/ui-patterns`. |
-| Public API inventory | Complete | Registry metadata records `header`, `width`, `visible`, and projected regions. |
+| Public API inventory | Complete | Registry metadata records `header`, `description`, `width`, `visible`, and projected regions. |
 | Canonical Storybook story | Complete | `Design System/Components/Dialog — Default`. |
 | State stories | Complete for the declared scope | Default, destructive confirmation, long content, and focus sequence. |
 | Modal semantics | Automated | Label relationship, modal state, and close-control name are checked. |
@@ -256,7 +261,7 @@ The wrapper intentionally keeps this contract compact. It does not expose positi
 | Responsive behavior | Automated | Long content, modal scrolling, narrow width, and document overflow are checked. |
 | Theme behavior | Automated | Light and dark modal surfaces resolve shared tokens. |
 | Manual screen-reader review | Pending | Record a named review before broader accessibility claims. |
-| Background inertness and scroll lock | Gap | Design and implement only with an explicit cross-application policy. |
+| Background inertness and scroll lock | Automated | The isolated contract verifies application of and restoration from both modal isolation behaviors. |
 | Token mapping | Partial | Shared semantic values exist; dedicated Dialog and backdrop tokens do not. |
 | Figma alignment | Pending access | Do not fabricate component, component-set, or property identifiers. |
 
