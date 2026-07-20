@@ -191,6 +191,19 @@ const flagshipComponents = ['ps-button', 'ps-select', 'ps-dialog'];
 
 export const componentFindings: ComponentFinding[] = [
   {
+    id: 'API-PRIMITIVE-001',
+    category: 'api',
+    severity: 'advisory',
+    status: 'verified',
+    componentIds: flagshipComponents,
+    summary:
+      'Provider-wrapper, native, and Angular CDK selection criteria are recorded for Button, Select, and Dialog.',
+    evidence: [
+      'docs/design-system/architecture/component-primitive-strategy.md',
+      'docs/documentation-upgrade/20-component-consolidation-proposal.md',
+    ],
+  },
+  {
     id: 'API-BTN-001',
     category: 'api',
     severity: 'moderate',
@@ -406,7 +419,7 @@ export const componentRegistry = [
   entry({
     id: 'ps-button',
     tokenBoundary: 'provider-managed',
-    findingIds: ['API-BTN-001', 'A11Y-BTN-001', 'A11Y-BTN-002', 'A11Y-SYS-001', 'A11Y-SYS-002'],
+    findingIds: ['API-PRIMITIVE-001', 'API-BTN-001', 'A11Y-BTN-001', 'A11Y-BTN-002', 'A11Y-SYS-001', 'A11Y-SYS-002'],
     duplicationCluster: 'button-contract',
     disposition: 'canonical',
     name: 'Button',
@@ -567,7 +580,7 @@ export const componentRegistry = [
   entry({
     id: 'ps-dialog',
     tokenBoundary: 'mixed',
-    findingIds: ['TOKEN-NATIVE-001', 'A11Y-DLG-001', 'A11Y-DLG-002', 'A11Y-DLG-003', 'A11Y-DLG-004', 'A11Y-SYS-001', 'A11Y-SYS-002'],
+    findingIds: ['API-PRIMITIVE-001', 'TOKEN-NATIVE-001', 'A11Y-DLG-001', 'A11Y-DLG-002', 'A11Y-DLG-003', 'A11Y-DLG-004', 'A11Y-SYS-001', 'A11Y-SYS-002'],
     duplicationCluster: 'unique:ps-dialog',
     disposition: 'retain',
     name: 'Dialog',
@@ -712,7 +725,7 @@ export const componentRegistry = [
   entry({
     id: 'ps-select',
     tokenBoundary: 'provider-managed',
-    findingIds: ['A11Y-SEL-001', 'A11Y-SEL-002', 'A11Y-SYS-001', 'A11Y-SYS-002'],
+    findingIds: ['API-PRIMITIVE-001', 'A11Y-SEL-001', 'A11Y-SEL-002', 'A11Y-SYS-001', 'A11Y-SYS-002'],
     duplicationCluster: 'unique:ps-select',
     disposition: 'retain',
     name: 'Select',

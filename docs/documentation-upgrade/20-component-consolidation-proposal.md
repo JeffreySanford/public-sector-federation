@@ -112,6 +112,14 @@ Adopt `ps-*` as the canonical selector prefix. Existing `public-*` selectors req
 
 A package test target that exits successfully without executing tests should be replaced with real component tests.
 
+### Primitive-selection boundary
+
+The [component primitive strategy](../design-system/architecture/component-primitive-strategy.md)
+records the provider-wrapper, native, and Angular CDK decision criteria and applies them to Button,
+Select, and Dialog. It preserves the current implementations while defining evidence-based triggers
+for reconsideration; it does not present the current Dialog implementation as permanently exempt
+from CDK evaluation.
+
 ## Preliminary disposition model
 
 | Disposition | Meaning |
@@ -155,7 +163,7 @@ Figma status remains draft or pending until actual component identifiers and des
 - [ ] Every public entry has a documented disposition.
 - [ ] Usage evidence supports removal or migration decisions.
 - [x] Button has one approved target contract.
-- [ ] Provider-backed versus native/CDK decisions include explicit tradeoffs.
+- [x] Provider-backed versus native/CDK decisions include explicit tradeoffs.
 - [ ] Accessibility findings influence promotion and consolidation.
 - [ ] Figma references supported public behavior rather than provider internals.
 - [x] Button deprecations include replacement guidance and a compatibility window; other component deprecations remain pending.
