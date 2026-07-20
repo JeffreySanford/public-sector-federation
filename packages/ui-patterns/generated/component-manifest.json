@@ -198,11 +198,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
-      },
       "governance": {
         "tier": "core",
         "designReview": "not-started",
@@ -311,11 +306,6 @@
         "componentKey": null,
         "componentSetKey": null,
         "propertyMappings": []
-      },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
       },
       "governance": {
         "tier": "core",
@@ -499,11 +489,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
-      },
       "governance": {
         "tier": "core",
         "designReview": "not-started",
@@ -652,11 +637,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
-      },
       "governance": {
         "tier": "core",
         "designReview": "not-started",
@@ -803,11 +783,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
-      },
       "governance": {
         "tier": "core",
         "designReview": "not-started",
@@ -932,11 +907,6 @@
         "componentKey": null,
         "componentSetKey": null,
         "propertyMappings": []
-      },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
       },
       "governance": {
         "tier": "core",
@@ -1127,11 +1097,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
-      },
       "governance": {
         "tier": "core",
         "designReview": "not-started",
@@ -1262,11 +1227,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
-      },
       "governance": {
         "tier": "core",
         "designReview": "not-started",
@@ -1391,11 +1351,6 @@
         "componentKey": null,
         "componentSetKey": null,
         "propertyMappings": []
-      },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
       },
       "governance": {
         "tier": "core",
@@ -1548,11 +1503,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
-      },
       "governance": {
         "tier": "core",
         "designReview": "not-started",
@@ -1678,11 +1628,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
-      },
       "governance": {
         "tier": "core",
         "designReview": "not-started",
@@ -1800,11 +1745,6 @@
         "componentKey": null,
         "componentSetKey": null,
         "propertyMappings": []
-      },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
       },
       "governance": {
         "tier": "core",
@@ -1994,11 +1934,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
-      },
       "governance": {
         "tier": "core",
         "designReview": "not-started",
@@ -2115,11 +2050,6 @@
         "componentKey": null,
         "componentSetKey": null,
         "propertyMappings": []
-      },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
       },
       "governance": {
         "tier": "core",
@@ -2273,11 +2203,6 @@
         "componentKey": null,
         "componentSetKey": null,
         "propertyMappings": []
-      },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
       },
       "governance": {
         "tier": "core",
@@ -2443,11 +2368,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
-      },
       "governance": {
         "tier": "core",
         "designReview": "not-started",
@@ -2547,11 +2467,6 @@
         "componentKey": null,
         "componentSetKey": null,
         "propertyMappings": []
-      },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
       },
       "governance": {
         "tier": "core",
@@ -2657,11 +2572,6 @@
         "componentKey": null,
         "componentSetKey": null,
         "propertyMappings": []
-      },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
       },
       "governance": {
         "tier": "core",
@@ -2797,11 +2707,6 @@
         "componentKey": null,
         "componentSetKey": null,
         "propertyMappings": []
-      },
-      "zeroheight": {
-        "status": "planned",
-        "pageId": null,
-        "template": "component"
       },
       "governance": {
         "tier": "core",
@@ -2989,11 +2894,6 @@
         "componentSetKey": null,
         "propertyMappings": []
       },
-      "zeroheight": {
-        "status": "draft",
-        "pageId": null,
-        "template": "component-candidate"
-      },
       "governance": {
         "tier": "candidate",
         "designReview": "pending",
@@ -3103,11 +3003,6 @@
         "componentKey": null,
         "componentSetKey": null,
         "propertyMappings": []
-      },
-      "zeroheight": {
-        "status": "not-applicable",
-        "pageId": null,
-        "template": null
       },
       "governance": {
         "tier": "core",
