@@ -85,8 +85,8 @@ try {
   }
 
   const storyIds = [
-    'design-system-overlay-and-shadow-dom--overview',
-    'design-system-primeng-playground--component-families',
+    'design-system-acceptance-edge-case-states--overview',
+    'design-system-acceptance-dialog-toast--overlay-and-feedback',
     'design-system-candidates-button-up--primary',
     'design-system-registry-component-manifest--overview',
     'design-system-architecture-opinionated-wrapper-contract--preferred-candidate-api',
@@ -108,11 +108,11 @@ try {
       waitUntil: 'domcontentloaded',
       timeout: 60000,
     });
-    if (storyId.includes('overlay-and-shadow-dom')) {
-      await waitForStory(page.getByText('Overlay and Shadow DOM overview'), storyId, 'the overlay and Shadow DOM heading');
+    if (storyId.includes('edge-case-states')) {
+      await waitForStory(page.getByText('Overlay and Shadow DOM overview'), storyId, 'the edge-case state heading');
     }
-    if (storyId.includes('primeng-playground')) {
-      await waitForStory(page.getByText('Shared wrapper playground'), storyId, 'the PrimeNG playground heading');
+    if (storyId.includes('dialog-toast')) {
+      await waitForStory(page.getByText('Dialog and toast'), storyId, 'the Dialog and Toast heading');
     }
     if (storyId.includes('button-up')) {
       await waitForStory(page.getByRole('button', { name: 'Primary action' }), storyId, 'the primary action');
@@ -135,11 +135,11 @@ try {
     }
 
     const bodyText = await page.locator('body').innerText();
-    if (storyId.includes('overlay-and-shadow-dom') && !bodyText.includes('Overlay and Shadow DOM overview')) {
-      throw new Error('Overlay and Shadow DOM overview story did not render expected content.');
+    if (storyId.includes('edge-case-states') && !bodyText.includes('Overlay and Shadow DOM overview')) {
+      throw new Error('Edge Case States overview story did not render expected content.');
     }
-    if (storyId.includes('primeng-playground') && !bodyText.includes('Shared wrapper playground')) {
-      throw new Error('Shared wrapper playground story did not render expected content.');
+    if (storyId.includes('dialog-toast') && !bodyText.includes('Dialog and toast')) {
+      throw new Error('Dialog Toast acceptance story did not render expected content.');
     }
     if (storyId.includes('button-up') && !bodyText.includes('Primary action')) {
       throw new Error('UP Button candidate primary story did not render expected content.');

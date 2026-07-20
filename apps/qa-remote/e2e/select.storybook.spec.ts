@@ -35,6 +35,12 @@ async function openWithKeyboard(page: Page, name: string): Promise<Locator> {
   const combobox = page.getByRole('combobox', { name });
   await combobox.focus();
   await page.keyboard.press('ArrowDown');
+  if ((await combobox.getAttribute('aria-expanded')) !== 'true') {
+    await page.keyboard.press('Enter');
+  }
+  if ((await combobox.getAttribute('aria-expanded')) !== 'true') {
+    await page.keyboard.press('Alt+ArrowDown');
+  }
   await expect(combobox).toHaveAttribute('aria-expanded', 'true');
   await expect(optionList(page)).toBeVisible();
   return combobox;
