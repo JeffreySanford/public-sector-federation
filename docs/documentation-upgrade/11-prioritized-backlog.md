@@ -36,10 +36,17 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 Machine-readable findings, reports, and manifest metadata are the source layer, not the finished user experience. Every P0 or P1 evidence-producing slice must also determine whether its outcome belongs in the main application's **Component Inventory** or **Quality & Remediation** evidence presentation.
 
 - [ ] Present API, token-boundary, accessibility, consolidation, and verification evidence in the relevant component detail or remediation view.
-- [ ] Show finding identifiers, severity, status, affected components, evidence links, and recommended next action without requiring users to inspect generated JSON.
+- [x] Show finding identifiers, severity, status, affected components, evidence links, and recommended next action without requiring users to inspect generated JSON.
 - [ ] Distinguish automated evidence, manual review, design approval, and unresolved gaps in the rendered experience.
-- [ ] Keep rendered evidence sourced from the manifest or generated audit artifacts rather than duplicating facts in application code.
+- [x] Keep rendered evidence sourced from the manifest or generated audit artifacts rather than duplicating facts in application code.
 - [ ] Add responsive, keyboard, and accessibility coverage for each new evidence presentation.
+
+Evidence-presentation progress:
+
+- Quality & Remediation renders the typed manifest finding registry as a presentable evidence table;
+- API, token, and accessibility findings expose identifiers, severity, lifecycle, affected components, next actions, and linked repository evidence;
+- unit and integrated browser coverage protect manifest projection and provenance links;
+- consolidation decisions and dedicated accessibility coverage for the new register remain open.
 
 ### P1 — Finish Storybook and Chromatic alignment
 
