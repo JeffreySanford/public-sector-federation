@@ -1,6 +1,6 @@
 # Component Consolidation Proposal
 
-_Status: Working proposal · Last aligned: July 19, 2026_
+_Status: Button decision approved; remaining recommendations working · Last aligned: July 20, 2026_
 
 ## Purpose
 
@@ -23,7 +23,8 @@ This proposal is grounded in [18 — Component estate audit](./18-component-esta
 
 ### Button
 
-**Decision:** Keep `ps-button` as the temporary canonical selector and merge the stronger `ps-up-button` contract into it. Do not maintain two permanent Button components.
+**Approved decision:** Keep `ps-button` as the canonical selector and merge the stronger
+`ps-up-button` contract into it. Do not maintain two permanent Button components.
 
 Preferred contract:
 
@@ -45,6 +46,11 @@ Deprecation candidates:
 - `routerLink` on the action component.
 
 Navigation should use a separate Link or link-button presentation contract so semantics do not depend on a Button input.
+
+Compatibility aliases remain supported until the next major release. During that window they are
+deprecated, documented with replacements, and covered against regression. Removal requires usage
+evidence, migration notes, and an intentional major-version change. See the
+[Button API migration contract](../design-system/components/button-api-migration.md).
 
 ### Select
 
@@ -135,7 +141,7 @@ Figma status remains draft or pending until actual component identifiers and des
 
 1. Complete usage discovery and duplication clusters.
 2. Record accessibility findings and manual flagship reviews.
-3. Finalize Button consolidation and compatibility window.
+3. Implement the approved Button consolidation and next-major compatibility window.
 4. Add Select validation semantics.
 5. Choose and implement the Dialog primitive strategy.
 6. Move native components from direct `--p-*` consumption to `--ps-*` tokens.
@@ -148,9 +154,9 @@ Figma status remains draft or pending until actual component identifiers and des
 
 - [ ] Every public entry has a documented disposition.
 - [ ] Usage evidence supports removal or migration decisions.
-- [ ] Button has one approved target contract.
+- [x] Button has one approved target contract.
 - [ ] Provider-backed versus native/CDK decisions include explicit tradeoffs.
 - [ ] Accessibility findings influence promotion and consolidation.
 - [ ] Figma references supported public behavior rather than provider internals.
-- [ ] Deprecations include replacement guidance and a compatibility window.
+- [x] Button deprecations include replacement guidance and a compatibility window; other component deprecations remain pending.
 - [ ] Decisions and unresolved questions are visible in Starlight and the manifest.

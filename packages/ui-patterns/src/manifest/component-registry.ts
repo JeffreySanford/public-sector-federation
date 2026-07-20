@@ -194,13 +194,14 @@ export const componentFindings: ComponentFinding[] = [
     id: 'API-BTN-001',
     category: 'api',
     severity: 'moderate',
-    status: 'open',
+    status: 'planned',
     componentIds: ['ps-button', 'ps-up-button'],
     summary:
-      'The stable Button retains compatibility inputs, a style escape hatch, navigation behavior, PrimeIcons strings, and a DOM-event output while the candidate demonstrates the preferred provider-neutral contract.',
+      'The approved ps-button target uses intent, appearance, disabled, loading, governed icons, and activated; compatibility aliases remain supported until the next major release.',
     evidence: [
       'packages/ui-patterns/src/public-button.component.ts',
       'packages/ui-patterns/src/public-up-button.component.ts',
+      'docs/design-system/components/button-api-migration.md',
       'docs/documentation-upgrade/18-component-estate-audit.md',
       'docs/documentation-upgrade/20-component-consolidation-proposal.md',
     ],
@@ -474,7 +475,7 @@ export const componentRegistry = [
     accessibilityPattern: 'button',
     automatedChecks: 'complete',
     keyboardCoverage: 'complete',
-    warnings: ['Legacy tone, styleClass, outlined, text, routerLink, and buttonClick remain for stable consumer compatibility.'],
+    warnings: ['Legacy tone, styleClass, outlined, text, routerLink, PrimeIcons strings, and buttonClick remain supported only until the next major release.'],
   }),
   entry({
     id: 'ps-up-button',
