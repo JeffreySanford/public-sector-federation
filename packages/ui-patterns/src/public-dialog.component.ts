@@ -34,6 +34,7 @@ const focusableSelector = [
           role="dialog"
           aria-modal="true"
           [attr.aria-labelledby]="titleId"
+          [attr.aria-describedby]="description() ? descriptionId : null"
           [style.max-width]="width()"
           tabindex="-1"
           (click)="$event.stopPropagation()"
@@ -51,6 +52,9 @@ const focusableSelector = [
             </button>
           </header>
           <div class="ps-dialog__body">
+            @if (description()) {
+              <p [id]="descriptionId">{{ description() }}</p>
+            }
             <ng-content />
           </div>
           <footer class="ps-dialog__footer">
@@ -147,6 +151,7 @@ const focusableSelector = [
 })
 export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
   private readonly document = inject(DOCUMENT);
+  private readonly host: ElementRef<HTMLElement> = inject(ElementRef);
   private readonly dialogElement = viewChild<ElementRef<HTMLElement>>('dialogElement');
   private readonly closeButton = viewChild<ElementRef<HTMLButtonElement>>('closeButton');
   private wasVisible = false;
@@ -154,6 +159,8 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
   private userNavigatedFocus = false;
   private lastFocusedElement: HTMLElement | null = null;
   private restoreFocusTarget: HTMLElement | null = null;
+  private readonly inertState = new Map<HTMLElement, boolean>();
+  private previousBodyOverflow: string | null = null;
   private readonly handleDocumentFocusIn = (event: FocusEvent) => {
     if (this.visible()) return;
     const target = event.target;
@@ -169,7 +176,9 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
   };
 
   readonly titleId = `ps-dialog-title-${++dialogInstance}`;
+  readonly descriptionId = `ps-dialog-description-${dialogInstance}`;
   readonly header = input('');
+  readonly description = input('');
   readonly width = input('32rem');
   readonly visible = model(false);
 
@@ -188,11 +197,13 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
         : null;
       this.restoreFocusTarget = activeTarget ?? this.lastFocusedElement;
       this.userNavigatedFocus = false;
+      this.applyModalIsolation();
       const request = ++this.focusRequest;
       this.scheduleInitialFocus(request);
     }
 
     if (!isVisible && this.wasVisible) {
+      this.releaseModalIsolation();
       this.restoreFocus();
     }
 
@@ -202,7 +213,10 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
   ngOnDestroy(): void {
     this.document.removeEventListener('focusin', this.handleDocumentFocusIn, true);
     this.document.removeEventListener('pointerdown', this.handleDocumentPointerDown, true);
-    if (this.wasVisible) this.restoreFocus();
+    if (this.wasVisible) {
+      this.releaseModalIsolation();
+      this.restoreFocus();
+    }
   }
 
   close(): void {
@@ -285,6 +299,39 @@ export class PublicDialogComponent implements AfterViewChecked, OnDestroy {
   private isHTMLElement(value: unknown): value is HTMLElement {
     const HTMLElementCtor = this.document.defaultView?.HTMLElement;
     return !!HTMLElementCtor && value instanceof HTMLElementCtor;
+  }
+
+  private applyModalIsolation(): void {
+    let dialogBranch = this.host.nativeElement;
+    let parent = dialogBranch.parentElement;
+
+    while (parent) {
+      for (const sibling of Array.from(parent.children)) {
+        if (sibling === dialogBranch || !this.isHTMLElement(sibling)) continue;
+        if (!this.inertState.has(sibling)) this.inertState.set(sibling, sibling.inert);
+        sibling.inert = true;
+      }
+      if (parent === this.document.body) break;
+      dialogBranch = parent;
+      parent = parent.parentElement;
+    }
+
+    if (this.previousBodyOverflow === null) {
+      this.previousBodyOverflow = this.document.body.style.overflow;
+      this.document.body.style.overflow = 'hidden';
+    }
+  }
+
+  private releaseModalIsolation(): void {
+    for (const [element, wasInert] of this.inertState) {
+      if (element.isConnected) element.inert = wasInert;
+    }
+    this.inertState.clear();
+
+    if (this.previousBodyOverflow !== null) {
+      this.document.body.style.overflow = this.previousBodyOverflow;
+      this.previousBodyOverflow = null;
+    }
   }
 
   private restoreFocus(): void {

@@ -51,7 +51,28 @@ test.describe('Dialog isolated Storybook contract', () => {
     const labelledBy = await dialog.getAttribute('aria-labelledby');
     expect(labelledBy).toBeTruthy();
     await expect(page.locator(`#${labelledBy}`)).toHaveText('Review application');
+    const describedBy = await dialog.getAttribute('aria-describedby');
+    expect(describedBy).toBeTruthy();
+    await expect(page.locator(`#${describedBy}`)).toContainText(
+      'Review the application details before recording a decision.',
+    );
     await expectDomFocus(dialog.getByRole('button', { name: 'Close dialog' }));
+  });
+
+  test('makes background content inert and locks page scrolling until close', async ({ page }) => {
+    await gotoDialogStory(page, 'default');
+    const { trigger, dialog } = await openDialog(page, 'Review application', 'Review application');
+    const pageHeading = page.locator('.dialog-proof > h1');
+
+    await expect(dialog).toBeVisible();
+    await expect(pageHeading).toHaveAttribute('inert', '');
+    await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe('hidden');
+    await expect(trigger).not.toBeFocused();
+
+    await dialog.getByRole('button', { name: 'Close dialog' }).click();
+    await expect(pageHeading).not.toHaveAttribute('inert', '');
+    await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe('');
+    await expectDomFocus(trigger);
   });
 
   test('contains forward and reverse Tab navigation inside the modal', async ({ page }) => {

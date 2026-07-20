@@ -22,21 +22,10 @@ import {
 
       <ps-dialog
         [header]="dialogHeader()"
+        [description]="dialogDescription()"
         [width]="dialogWidth()"
         [(visible)]="visible"
       >
-        @if (destructive()) {
-          <p>
-            Deleting this draft removes the saved application and cannot be undone.
-            Confirm only when the record is no longer needed.
-          </p>
-        } @else {
-          <p>
-            Review the application details before recording a decision. Closing the
-            dialog leaves the application unchanged.
-          </p>
-        }
-
         <label>
           <span>Reviewer note</span>
           <textarea rows="3" placeholder="Add an optional note"></textarea>
@@ -129,6 +118,9 @@ class DialogStoryProof {
   readonly introduction = input('Open the dialog to review its modal focus and dismissal behavior.');
   readonly triggerLabel = input('Review application');
   readonly dialogHeader = input('Review application');
+  readonly dialogDescription = input(
+    'Review the application details before recording a decision. Closing the dialog leaves the application unchanged.',
+  );
   readonly confirmLabel = input('Approve application');
   readonly destructive = input(false);
   readonly longContent = input(false);
@@ -178,6 +170,7 @@ export const DestructiveConfirmation: Story = {
     introduction: 'The destructive action remains visually and semantically distinct from the safer Cancel action.',
     triggerLabel: 'Delete draft',
     dialogHeader: 'Delete draft application?',
+    dialogDescription: 'Deleting this draft removes the saved application and cannot be undone.',
     confirmLabel: 'Delete draft',
     destructive: true,
   },

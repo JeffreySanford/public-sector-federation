@@ -51,6 +51,7 @@ Evidence-presentation progress:
 - Component Inventory presents disposition, duplication cluster, token boundary, and a disposition-specific next action from manifest audit metadata.
 - Select disabled-option behavior is reproduced and classified, and flagship Storybook contracts now carry automated forced-colors evidence alongside existing 200% zoom-equivalent reflow coverage.
 - Select now exposes provider-neutral required, invalid, help, and error inputs with verified relationships on the rendered combobox; the remediation is visible through the manifest finding register.
+- Dialog now applies reversible background inertness and body scroll locking and exposes a verified accessible-description relationship; nested dialogs remain explicitly unsupported.
 
 ### P1 — Finish Storybook and Chromatic alignment
 
