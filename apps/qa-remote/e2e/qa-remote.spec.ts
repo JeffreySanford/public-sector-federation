@@ -72,7 +72,7 @@ test.describe('Forensic design-system workbench', () => {
   test('presents a prioritized remediation queue and representative casework', async ({ page }) => {
     await switchView(page, 'Quality & Remediation');
     await expect(page.getByRole('heading', { name: 'What should be repaired next', exact: true })).toBeVisible();
-    await expect(page.getByRole('table')).toBeVisible();
+    await expect(page.getByRole('table', { name: 'Prioritized component remediation queue' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Representative remediation cases', exact: true })).toBeVisible();
     await expect(page.locator('.case-grid')).toContainText('Button');
     await expect(page.locator('.case-grid')).toContainText('Select');
