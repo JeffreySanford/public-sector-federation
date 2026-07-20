@@ -1,11 +1,19 @@
 # PR Plan: Scrub PrimeNG-Proving Components & Copy Across All Four Remotes
 
+**Status: ✅ Shipped (Phase 1), plus a completed Phase 2 fast-follow.** The scrub landed on
+`master` (squashed history culminating in `6cea200`), and the table/input/checkbox wrapper
+backlog it deliberately deferred was subsequently built out and merged. See §10 for the Phase 2
+record and §11 for whether a Phase 3 exists. The sections below are left as the original plan for
+historical accuracy; §4's tracker is updated to reflect what actually landed.
+
 **Branch:** `agent/remote-realignment-scrub`
 **Type:** Single large PR (per direction)
 **Scope:** `apps/services-remote`, `apps/reporting-remote`, `apps/admin-remote`, `apps/qa-remote`
 **Explicit non-goal:** No new table/tile patterns in this PR. This PR removes proof-of-concept
 components and copy and routes everything through the *existing* `@public-sector/ui-patterns`
 registry. New business patterns (tables, tiles) are a tracked fast-follow, not part of this change.
+*(Tables and inputs/checkboxes were built in Phase 2 — see §10. "Tiles" was never separately
+scoped; see §11.)*
 
 ---
 
@@ -63,60 +71,70 @@ For all four remotes:
 
 ## 4. Progress tracker (update as work lands)
 
-**Status as of this writing: nothing in this plan has been committed yet — all items below are
-open.** Check items off in this file as commits land on `agent/remote-realignment-scrub`, and
-reference the commit SHA next to each so this stays an honest log, not just a plan.
+**Status: all items below have landed.** `master`'s history was squashed/rewritten during this
+work, so individual commit SHAs for the original Phase 1 copy/migration pass no longer exist as
+discrete commits — the squashed tip is `6cea200` ("Scrub remote provider proving copy"). Every
+`// GAP:` comment this plan called for was later resolved in Phase 2 (§10); a repo-wide search
+confirms zero `// GAP:` comments remain in `apps/` today.
 
 ### Copy pass
-- [ ] `services-remote` header copy rewritten (no "proving" language)
-- [ ] `reporting-remote` header copy rewritten (no "to prove" language)
-- [ ] `admin-remote` header copy rewritten (no "validates" language)
-- [ ] `qa-remote` workbench components audited for leftover "proving" language
+- [x] `services-remote` header copy rewritten (no "proving" language)
+- [x] `reporting-remote` header copy rewritten (no "to prove" language)
+- [x] `admin-remote` header copy rewritten (no "validates" language)
+- [x] `qa-remote` workbench components audited for leftover "proving" language
 
 ### `services-remote` component migration
-- [ ] 3× `metric-card` → `ps-card`
-- [ ] Action buttons (Create case, Send notice, Request document, Add note) → `ps-button`
-- [ ] Status chips → `ps-tag`
-- [ ] `<progress>` → `ps-progress`
-- [ ] `serviceType` select → `ps-select`
-- [ ] `// GAP:` comments added for `caseId`, `applicantName`, `appointmentDate` inputs
-- [ ] `// GAP:` comment added for `expediteReview` checkbox
-- [ ] `// GAP:` comment added for `case-table`
-- [ ] `services-remote.component.css` trimmed to layout-only rules
+- [x] 3× `metric-card` → `ps-card`
+- [x] Action buttons (Create case, Send notice, Request document, Add note) → `ps-button`
+- [x] Status chips → `ps-tag`
+- [x] `<progress>` → `ps-progress`
+- [x] `serviceType` select → `ps-select`
+- [x] `caseId` / `applicantName` / `appointmentDate` inputs — `// GAP:` comments added in Phase 1,
+      then resolved in Phase 2: migrated to `ps-input` (`c4a7807`)
+- [x] `expediteReview` checkbox — `// GAP:` comment added in Phase 1, then resolved in Phase 2:
+      migrated to `ps-checkbox` (`c4a7807`)
+- [x] `case-table` — `// GAP:` comment added in Phase 1, then resolved in Phase 2: migrated to
+      `ps-table` (`c4a7807`)
+- [x] `services-remote.component.css` trimmed to layout-only rules (further dead-CSS pass after
+      Phase 2's migration: 396 → 308 lines, `cec9497`)
 
 ### `reporting-remote` migration
-- [ ] `// GAP:` comment added for `report-table`
-- [ ] `reporting-remote.component.css` audited/trimmed
+- [x] `report-table` — `// GAP:` comment added in Phase 1, then resolved in Phase 2: migrated to
+      `ps-table` with a projected-row content model (`c4a7807`)
+- [x] `reporting-remote.component.css` audited/trimmed (168 → 115 lines, `cec9497`)
 
 ### `admin-remote` component migration
-- [ ] `admin-button` instances (Open dialog, Save settings, action-menu buttons) → `ps-button`
-- [ ] `// GAP:` comments added for audit logging / maintenance mode switches
-- [ ] `// GAP:` comment added for temporary-password input
-- [ ] `admin-remote.component.css` trimmed to layout-only rules
+- [x] `admin-button` instances (Open dialog, Save settings, action-menu buttons) → `ps-button`
+- [x] Audit logging / maintenance mode switches — `// GAP:` comments added in Phase 1, then
+      resolved in Phase 2: migrated to `ps-checkbox` with `variant="switch"` (`c4a7807`)
+- [x] Temporary-password input — `// GAP:` comment added in Phase 1, then resolved in Phase 2:
+      migrated to `ps-input type="password"` (`c4a7807`)
+- [x] `admin-remote.component.css` trimmed to layout-only rules (93 → 63 lines, `cec9497`)
 
 ### `qa-remote` story cleanup
-- [ ] Coverage overlap confirmed between `primeng-playground.stories.ts` and the acceptance
+- [x] Coverage overlap confirmed between `primeng-playground.stories.ts` and the acceptance
       story files (button-tag, dialog-toast)
-- [ ] `primeng-playground.stories.ts` deleted
-- [ ] `problem-areas.stories.ts` renamed to `edge-case-states.stories.ts` with reframed copy
-- [ ] `opinionated-wrapper-contract.stories.ts` copy confirmed clean (no action expected)
+- [x] `primeng-playground.stories.ts` deleted
+- [x] `problem-areas.stories.ts` renamed to `edge-case-states.stories.ts` with reframed copy
+- [x] `opinionated-wrapper-contract.stories.ts` copy confirmed clean (no action needed)
 
 ### Backlog / gap tracking
-- [ ] `docs/design-system/backlog/table-input-checkbox-wrappers.md` created
-- [ ] All `// GAP:` comments reference that backlog doc consistently
-- [ ] `grep -rn "// GAP:" apps/` run and result count sanity-checked against the list above
+- [x] `docs/design-system/backlog/table-input-checkbox-wrappers.md` created
+- [x] All `// GAP:` comments referenced that backlog doc consistently while they existed
+- [x] `grep -rn "// GAP:" apps/` now returns zero results — the backlog doc has been updated
+      (§10) to record that the gaps are resolved rather than open
 
-### Validation gate (run once all of the above is checked off)
-- [ ] `pnpm lint`
-- [ ] `pnpm lint:links`
-- [ ] `pnpm lint:wrappers`
-- [ ] `pnpm typecheck`
-- [ ] `pnpm test`
-- [ ] `pnpm manifest:check`
-- [ ] `pnpm build`
-- [ ] `pnpm test:e2e`
-- [ ] `pnpm chromatic` (visual review of services-remote, reporting-remote, admin-remote)
-- [ ] Manual copy check: no remote's on-screen text says "proving," "validates," or "to prove"
+### Validation gate
+- [x] `pnpm lint`
+- [x] `pnpm lint:links`
+- [x] `pnpm lint:wrappers`
+- [x] `pnpm typecheck`
+- [x] `pnpm test`
+- [x] `pnpm manifest:check`
+- [x] `pnpm build`
+- [x] `pnpm test:e2e`
+- [x] `pnpm chromatic` (Chromatic auto-publishes on every push to `master` as of `3b3b7e7`/`556c7bd`)
+- [x] Manual copy check: no remote's on-screen text says "proving," "validates," or "to prove"
       in reference to PrimeNG
 
 ---
@@ -267,3 +285,76 @@ visible markup in three remotes and Storybook.
 - [ ] Manual check that no remote's on-screen copy still says "proving," "validates," or
       "to prove" in reference to PrimeNG
 ```
+
+---
+
+## 10. Phase 2 (completed): table, input, and checkbox wrapper build-out
+
+The backlog stub this plan created (§7) was picked up and closed. `ps-checkbox`, `ps-input`, and
+`ps-table` now exist in `@public-sector/ui-patterns`, every `// GAP:` comment this plan introduced
+has been replaced with the real component, and the backlog doc has been rewritten to record
+resolution rather than an open gap.
+
+### What shipped
+
+- **New components** — `packages/ui-patterns/src/public-checkbox.component.ts`,
+  `public-input.component.ts`, `public-table.component.ts`, each with a unit spec, a Storybook
+  stories file (`apps/qa-remote/src/stories/{checkbox,input,table}.stories.ts`), and a Playwright
+  e2e spec (`apps/qa-remote/e2e/{checkbox,input,table}.storybook.spec.ts`) — `c4a7807`, `881583e`.
+- **Manifest registration** — all three registered in
+  `packages/ui-patterns/src/manifest/component-registry.ts` (18 → 21 entries) — `881583e`,
+  `ab1fc26`.
+- **Remote wiring** — every native `<input>`, `<table>`, and `role="switch"` checkbox in
+  `services-remote`, `admin-remote`, and `reporting-remote` replaced with the governed wrapper —
+  `c4a7807`.
+- **Second dead-CSS pass** — after the markup swap, the CSS rules that used to style the native
+  elements (`.field-control`, `.case-table`, `.report-table`, `.password-field`, `.eligibility-check`,
+  etc.) were now-dead code; removed across all three remotes (396→308, 93→63, 168→115 lines) —
+  `cec9497`.
+- **`ps-checkbox` token-boundary alignment** — the one `--ps-*`/`--p-*` mix (an `accent-color`
+  fallback) was normalized to the pure `--p-*` pattern `ps-input`/`ps-table` use, so all three
+  siblings are now consistently `provider-coupled` rather than one being `mixed`.
+- **Starlight documentation** — three new guidance pages
+  (`apps/starlight/src/content/docs/components/{checkbox,input,table}/index.mdx`) following the
+  same blueprint as Button/Select/Dialog, added to the sidebar, and referenced from the manifest's
+  `documentationFiles` (`documentationStatus` bumped `partial` → `complete` for all three) —
+  `053f355`, `9c4df05`.
+- **Live-example infrastructure fix** — Starlight's `<StoryFrame>` embeds were pointing at a
+  build-specific Chromatic URL that goes stale on every republish (Chromatic assigns a new random
+  subdomain per build). Repointed all 9 hardcoded references to Chromatic's stable
+  `<branch>--<appId>` alias, which always resolves to the latest published build — `3b3b7e7`.
+- **CI automation** — added an automatic `pnpm chromatic` publish step on every push to `master`
+  (`3b3b7e7`, fixed after an initial `secrets`-in-`if:` conditional broke workflow parsing entirely
+  — `556c7bd`), and closed two real gaps in `verify:release` versus what CI actually checks:
+  it never ran `manifest:build` + a drift check (the exact bug that broke CI twice), and never ran
+  the built-Storybook accessibility gate locally.
+
+### What's still open (carried forward, not unique to this component set)
+
+- Manual assistive-technology review and Figma property mapping remain pending for
+  `ps-checkbox`, `ps-input`, and `ps-table` — the same open item every non-flagship component in
+  the manifest carries (`ps-progress`, `ps-paginator`, `ps-menu`, etc.), not something specific to
+  this backlog.
+
+## 11. Is there a Phase 3?
+
+**No Phase 3 is currently defined anywhere in this repository's docs.** This plan (Phase 1) and
+its fast-follow (Phase 2, §10) are the only phases that exist for the remote-realignment /
+table-input-checkbox story specifically.
+
+Two things worth flagging rather than silently deciding:
+
+1. **The "tiles" pattern this plan's non-goal line mentioned was never separately scoped.**
+   §7's actual backlog stub only recorded `ps-table`, `ps-input`, and `ps-checkbox` — "tiles" never
+   made it into `docs/design-system/backlog/table-input-checkbox-wrappers.md` or anywhere else.
+   It's plausible `ps-card` and `ps-status-card` (both already shipped before this plan existed)
+   already cover what "tile" meant here, but that's an assumption, not a confirmed decision — worth
+   a quick confirmation rather than either building a redundant component or leaving a genuine gap
+   unrecorded.
+2. **A separate, unrelated "Phase 3: Tooling retirement" exists in
+   `docs/documentation-upgrade/10-migration-and-cleanup-plan.md`** (Zeroheight/report-script
+   retirement). It is not part of this story and shouldn't be confused with it.
+
+If you want a Phase 3 for *this* story, the natural candidates are: (a) resolving the "tiles"
+question above, or (b) scheduling the manual screen-reader review and Figma alignment pass that
+every component in the manifest is currently waiting on. Neither is scoped yet.
