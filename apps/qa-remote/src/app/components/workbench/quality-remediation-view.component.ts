@@ -172,6 +172,7 @@ interface RemediationItem {
 
         <div class="table-scroll">
           <table>
+            <caption class="visually-hidden">Prioritized component remediation queue</caption>
             <thead>
               <tr>
                 <th scope="col">Priority</th>
