@@ -1,0 +1,179 @@
+---
+title: Input
+description: Captures a single line of text, search, password, or date entry with shared label, help, invalid, and required guidance.
+---
+
+import StoryFrame from '../../../../components/StoryFrame.astro';
+
+Input captures a single line of value entry: a case ID, a search term, a temporary password, or a date. Use the `type` input to switch the native control type while keeping one shared label, help-text, and validation contract.
+
+**Lifecycle:** Stable · **Framework:** Angular · **Provider:** Native · **Accessibility:** Automated relationship evidence is complete for this declared scope; manual review remains pending · **Figma:** Pending access
+
+[Open the canonical Storybook story](https://master--6a57d5b6de2da2591d3236aa.chromatic.com/?path=/story/design-system-components-input--default) · [View Angular source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/public-input.component.ts) · [View Storybook source](https://github.com/JeffreySanford/public-sector-federation/blob/master/apps/qa-remote/src/stories/input.stories.ts) · [View manifest source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/manifest/component-registry.ts)
+
+## Live example
+
+<StoryFrame
+  title="Input — case ID"
+  storyId="design-system-components-input--default"
+  description="The stable ps-input wrapper with a visible label, placeholder, and a two-way string value."
+  size="compact"
+/>
+
+The frame loads only after activation. Storybook owns interaction inside the cross-origin story; this page owns guidance, status, and evidence boundaries.
+
+## When to use
+
+Use Input when:
+
+- a person needs to type a single line of free-form or lightly structured text;
+- the value is a search term, identifier, password, or date rather than a choice from a known set;
+- the field belongs in a form and needs label, help, required, and invalid relationships.
+
+### When not to use
+
+- Use **Select** when the value must come from a known, bounded collection.
+- Use a **textarea pattern** when multi-line content is expected; the current wrapper only supports single-line native input types.
+- Use **Checkbox** when the value is a boolean rather than text.
+- Do not use `type="search"` purely for visual styling; reserve it for fields that actually filter or query a data set.
+
+## Choose a type
+
+| Situation | Recommended `type` |
+| --- | --- |
+| Free-form identifier or name | `text` |
+| Filtering or querying a visible data set | `search` |
+| Temporary or entered credential | `password` |
+| Calendar date entry | `date` |
+
+## Content guidance
+
+- Use a concise noun phrase for the label: **Case ID**, **Applicant name**, **Temporary password**.
+- Use a placeholder that describes the expected value or action, not a repeat of the label: **Search programs**, **Generate or enter password**.
+- Keep `helpText` for guidance that is always relevant, such as where a value comes from, and reserve `errorText` for validation guidance shown only when `invalid` is true.
+- Do not use the placeholder as the only source of instruction; it disappears once a value is entered.
+
+## Supported states
+
+| State | Current support | Guidance |
+| --- | --- | --- |
+| Text | Supported | Default `type`. |
+| Search | Supported | Set `type="search"`; pair with a visible label even when the field sits in a compact toolbar. |
+| Password | Supported | Set `type="password"`; native browser masking applies. |
+| Date | Supported | Set `type="date"`; native browser date entry applies. |
+| Disabled | Supported | Prevents focus and entry when the field is unavailable. |
+| Required | Supported | Set `required` to expose visible and programmatic required-state guidance. |
+| Invalid | Supported | Set `invalid` and provide concise `errorText`; the rendered control references the message. |
+| Help text | Supported | Provide persistent `helpText`; it is associated with the rendered control. |
+| Long label | Supported with responsive evidence | The label wraps without horizontal document overflow at mobile widths. |
+
+## Anatomy
+
+1. **Visible field label** — names the entry task and is also the accessible name.
+2. **Required indicator** — visible asterisk shown when `required` is set.
+3. **Native input control** — `text`, `search`, `password`, or `date`, styled with shared field tokens.
+4. **Help text** — persistent guidance rendered below the control.
+5. **Error text** — validation guidance rendered only when `invalid` is true and `errorText` is provided.
+
+## Behavior and interaction
+
+| Key or action | Expected behavior |
+| --- | --- |
+| Tab | Moves focus to the enabled control. |
+| Typing | Updates the `value` model on every change. |
+| Disabled | Prevents focus and entry; the control remains visibly distinguishable. |
+| `type="date"` | Uses the browser's native date-entry affordance; the wrapper does not implement a custom calendar. |
+
+## Accessibility contract
+
+### Semantics and naming
+
+- The rendered control must expose textbox (or the type-specific) semantics through the native `input` element.
+- The visible `label` element is associated with the control through a stable generated or supplied `fieldId`.
+- Required and invalid states are reflected through `aria-required` and `aria-invalid` on the native control.
+- Help and error messages use stable IDs and an ordered `aria-describedby` relationship; error text is only exposed when the field is invalid.
+- Placeholder text is not a substitute for the visible label or an accessible name.
+
+### Current evidence status
+
+- **Storybook accessibility:** The canonical story uses the accessibility addon as an error gate.
+- **Page-level accessibility:** This Starlight route is included in the built-site axe gate.
+- **Keyboard coverage:** Complete for the declared stable contract: typing, disabled suppression, and required/invalid/help/error relationships are verified.
+- **Manual assistive-technology review:** Pending.
+- **Conformance claim:** None. Automated evidence does not replace manual review.
+
+## Token relationships
+
+`ps-input` is a native implementation that consumes shared PrimeNG design tokens directly rather than a dedicated public component-token family.
+
+| Token or layer | Role | Current relationship |
+| --- | --- | --- |
+| `--p-text-color` | Label and entered value foreground | Applied directly to the field label and native input text. |
+| `--p-text-muted-color` | Help text foreground | Applied to persistent guidance text. |
+| `--p-red-600` (falling back to `--p-primary-color`) | Required indicator and error text | Applied directly; no dedicated public error token exists yet. |
+| `--p-content-border-color` | Field border | Applied directly to the native input border. |
+| `--p-content-background` | Field background | Applied directly to the native input background. |
+| `--p-border-radius-md` | Field corner radius | Applied directly to the native input. |
+
+A future component-token layer may make the required, invalid, and disabled treatments more explicit. This page records the current native-token relationship rather than inventing that contract early.
+
+## Angular API
+
+### Import
+
+```ts
+import { PublicInputComponent } from '@public-sector/ui-patterns';
+```
+
+### Usage
+
+```html
+<ps-input
+  fieldId="caseId"
+  label="Case ID"
+  [(value)]="caseId"
+  helpText="Assigned by the intake system when a case is created."
+/>
+```
+
+### Inputs and model
+
+| Member | Type | Default | Guidance |
+| --- | --- | --- | --- |
+| `label` | `string` | Required | Visible label and accessible name for the control. |
+| `type` | `'text' \| 'search' \| 'password' \| 'date'` | `text` | Native input type rendered by the wrapper. |
+| `placeholder` | `string` | Empty | Prompt displayed before a value is entered. |
+| `disabled` | `boolean` | `false` | Prevents focus and entry. |
+| `required` | `boolean` | `false` | Exposes visible and programmatic required state. |
+| `invalid` | `boolean` | `false` | Exposes the invalid state on the native control. |
+| `helpText` | `string` | Empty | Persistent guidance associated with the control. |
+| `errorText` | `string` | Empty | Validation guidance associated when `invalid` is true. |
+| `fieldId` | `string` | Generated | Stable identifier for the label and description relationships. |
+| `value` | `model<string>` | `''` | Two-way string value model. |
+
+## Implementation notes
+
+`ps-input` is a native implementation with no PrimeNG dependency. It does not wrap a provider component; the wrapper's responsibility is the label, help/error relationship, and required/invalid/disabled semantics layered onto a plain native `input` element. There is no provider escape hatch to document because there is no provider boundary.
+
+## Quality and evidence
+
+| Dimension | Current status | Evidence or next action |
+| --- | --- | --- |
+| Runtime source | Complete | `PublicInputComponent` is exported from `@public-sector/ui-patterns`. |
+| Public API inventory | Complete | Registry metadata records inputs and the value model. |
+| Canonical Storybook story | Complete | `Design System/Components/Input — Default`. |
+| State stories | Complete for the current contract | Search, password, date, disabled, required-with-help, invalid-with-error, and long-label are recorded. |
+| Automated accessibility | Complete for the declared automated scope | Storybook and page-level axe checks pass. |
+| Keyboard coverage | Complete for the declared stable contract | Dedicated tests cover entry, disabled suppression, and validation relationships. |
+| Manual screen-reader review | Pending | Record a named review before making broader accessibility claims. |
+| Token mapping | Partial | Shared semantic mappings exist; a dedicated Input component-token family does not. |
+| Figma alignment | Pending access | Do not fabricate component or property identifiers. |
+| Documentation | Complete for this slice | This page, the canonical story, and manifest relationships are recorded. |
+
+## Decisions and known gaps
+
+1. **Keep `ps-input` native.** No PrimeNG InputText or password/date component dependency is introduced.
+2. **Cover four types with one contract.** `text`, `search`, `password`, and `date` share the same label, help, required, and invalid relationships; only the native `type` attribute changes.
+3. **Do not implement a custom date picker.** `type="date"` intentionally relies on the browser's native affordance rather than a provider or bespoke calendar.
+4. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.
+5. **Track the remaining public component-token gap.** The control currently consumes shared PrimeNG variables directly; a dedicated `--ps-input-*` family is not yet defined.

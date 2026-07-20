@@ -1,0 +1,176 @@
+---
+title: Checkbox
+description: Captures a boolean choice as a checkbox or a switch, with shared label, help, invalid, and required guidance.
+---
+
+import StoryFrame from '../../../../components/StoryFrame.astro';
+
+Checkbox captures a single boolean value: a document is verified, a setting is enabled, a case should be expedited. Use the `variant` input to render either a checkbox or a switch while keeping one shared label, help-text, and validation contract.
+
+**Lifecycle:** Stable · **Framework:** Angular · **Provider:** Native · **Accessibility:** Automated keyboard and relationship evidence is complete for this declared scope; manual review remains pending · **Figma:** Pending access
+
+[Open the canonical Storybook story](https://master--6a57d5b6de2da2591d3236aa.chromatic.com/?path=/story/design-system-components-checkbox--default) · [View Angular source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/public-checkbox.component.ts) · [View Storybook source](https://github.com/JeffreySanford/public-sector-federation/blob/master/apps/qa-remote/src/stories/checkbox.stories.ts) · [View manifest source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/manifest/component-registry.ts)
+
+## Live example
+
+<StoryFrame
+  title="Checkbox — expedite review"
+  storyId="design-system-components-checkbox--default"
+  description="The stable ps-checkbox wrapper with a visible label and a two-way boolean value."
+  size="compact"
+/>
+
+The frame loads only after activation. Storybook owns interaction inside the cross-origin story; this page owns guidance, status, and evidence boundaries.
+
+## When to use
+
+Use Checkbox when:
+
+- a person needs to toggle a single independent boolean value;
+- the choice does not immediately perform an action by itself;
+- a setting or confirmation can be described by one clear label;
+- the value should persist as part of a form or configuration, not as a one-off command.
+
+### When not to use
+
+- Use a **radio group** when only one of several mutually exclusive options can be chosen.
+- Use **Select** when one value must be chosen from a larger known collection.
+- Use a **Button** when activating the control immediately performs an operation instead of recording a value.
+- Use a **checkbox group pattern** (multiple `ps-checkbox` instances) rather than inventing a new multi-select control when several independent booleans belong together.
+
+## Choose a variant
+
+| Situation | Recommended `variant` |
+| --- | --- |
+| Confirming a discrete fact or requirement (a document was verified) | `checkbox` |
+| Toggling a persistent setting that takes effect immediately (audit logging, maintenance mode) | `switch` |
+| Form-style required acknowledgement | `checkbox` |
+
+Both variants share the same label, help text, required, and invalid contract. Only the rendered control and its `role` differ.
+
+## Content guidance
+
+- State the fact or setting being confirmed, not the interaction: **Audit logging**, not **Toggle audit logging**.
+- For requirement-style checkboxes, phrase the label as the completed state: **Required documents verified**.
+- Use `helpText` for supporting detail that is always relevant, and `errorText` only for guidance that applies when the field is invalid.
+- Keep labels understandable on their own; do not rely on surrounding prose to complete the meaning.
+
+## Supported states
+
+| State | Current support | Guidance |
+| --- | --- | --- |
+| Unchecked / checked | Supported | Two-way `checked` boolean model. |
+| Checkbox variant | Supported | Default `variant`; native `input[type=checkbox]`. |
+| Switch variant | Supported | Set `variant="switch"`; adds `role="switch"` to the native control. |
+| Disabled | Supported | Prevents focus and toggling when the setting is unavailable. |
+| Required | Supported | Set `required` to expose visible and programmatic required-state guidance. |
+| Invalid | Supported | Set `invalid` and provide concise `errorText`; the rendered control references the message. |
+| Help text | Supported | Provide persistent `helpText`; it is associated with the rendered control. |
+| Long label | Supported with responsive evidence | The label wraps without horizontal document overflow at mobile widths. |
+
+## Anatomy
+
+1. **Native control** — `input[type="checkbox"]`, with `role="switch"` added for the switch variant.
+2. **Visible label** — names the setting or fact being confirmed; also the accessible name.
+3. **Required indicator** — visible asterisk shown when `required` is set.
+4. **Help text** — persistent guidance rendered below the control.
+5. **Error text** — validation guidance rendered only when `invalid` is true and `errorText` is provided.
+
+## Behavior and interaction
+
+| Key or action | Expected behavior |
+| --- | --- |
+| Tab | Moves focus to the enabled control. |
+| Space | Toggles the checked value model. |
+| Pointer activation on the control or label | Toggles the checked value model. |
+| Disabled | Prevents focus and toggling; the control remains visibly distinguishable. |
+
+## Accessibility contract
+
+### Semantics and naming
+
+- The native control exposes checkbox semantics by default and switch semantics when `variant="switch"` sets `role="switch"`.
+- The visible label wraps the control so the accessible name is derived from the label text without a separate `aria-label`.
+- Required and invalid states are reflected through `aria-required` and `aria-invalid` on the native control.
+- Help and error messages use stable IDs and an ordered `aria-describedby` relationship; error text is only exposed when the field is invalid.
+
+### Current evidence status
+
+- **Storybook accessibility:** The canonical story uses the accessibility addon as an error gate.
+- **Page-level accessibility:** This Starlight route is included in the built-site axe gate.
+- **Keyboard coverage:** Complete for the declared stable contract: Space toggling, disabled suppression, and required/invalid/help/error relationships are verified.
+- **Manual assistive-technology review:** Pending.
+- **Conformance claim:** None. Automated evidence does not replace manual review.
+
+## Token relationships
+
+`ps-checkbox` is a native implementation that consumes shared PrimeNG design tokens directly rather than a dedicated public component-token family.
+
+| Token or layer | Role | Current relationship |
+| --- | --- | --- |
+| `--p-text-color` | Label and help text foreground | Applied directly to the field label and control text. |
+| `--p-text-muted-color` | Help text foreground | Applied to persistent guidance text. |
+| `--p-red-600` (falling back to `--p-primary-color`) | Required indicator and error text | Applied directly; no dedicated public error token exists yet. |
+| `--p-primary-color` | Native control accent color | Applied through the CSS `accent-color` property. |
+
+A future component-token layer may make the required, invalid, and disabled treatments more explicit. This page records the current native-token relationship rather than inventing that contract early.
+
+## Angular API
+
+### Import
+
+```ts
+import { PublicCheckboxComponent } from '@public-sector/ui-patterns';
+```
+
+### Usage
+
+```html
+<ps-checkbox
+  label="Expedite review"
+  variant="switch"
+  [(checked)]="expediteReview"
+  helpText="Use expedited review only for time-sensitive cases or approved accommodations."
+/>
+```
+
+### Inputs and model
+
+| Member | Type | Default | Guidance |
+| --- | --- | --- | --- |
+| `label` | `string` | Required | Visible label and accessible name for the control. |
+| `variant` | `'checkbox' \| 'switch'` | `checkbox` | Renders a checkbox or a switch-role toggle. |
+| `disabled` | `boolean` | `false` | Prevents focus and toggling. |
+| `required` | `boolean` | `false` | Exposes visible and programmatic required state. |
+| `invalid` | `boolean` | `false` | Exposes the invalid state on the native control. |
+| `helpText` | `string` | Empty | Persistent guidance associated with the control. |
+| `errorText` | `string` | Empty | Validation guidance associated when `invalid` is true. |
+| `fieldId` | `string` | Generated | Stable identifier for the label and description relationships. |
+| `checked` | `model<boolean>` | `false` | Two-way boolean value model. |
+
+## Implementation notes
+
+`ps-checkbox` is a native implementation with no PrimeNG dependency. It does not wrap a provider component; the wrapper's responsibility is the label, help/error relationship, and required/invalid/disabled semantics layered onto a plain native control. There is no provider escape hatch to document because there is no provider boundary.
+
+## Quality and evidence
+
+| Dimension | Current status | Evidence or next action |
+| --- | --- | --- |
+| Runtime source | Complete | `PublicCheckboxComponent` is exported from `@public-sector/ui-patterns`. |
+| Public API inventory | Complete | Registry metadata records inputs and the checked model. |
+| Canonical Storybook story | Complete | `Design System/Components/Checkbox — Default`. |
+| State stories | Complete for the current contract | Switch, checked, disabled, required-with-help, invalid-with-error, and long-label are recorded. |
+| Automated accessibility | Complete for the declared automated scope | Storybook and page-level axe checks pass. |
+| Keyboard coverage | Complete for the declared stable contract | Dedicated tests cover toggling, disabled suppression, and validation relationships. |
+| Manual screen-reader review | Pending | Record a named review before making broader accessibility claims. |
+| Token mapping | Partial | Shared semantic mappings exist; a dedicated Checkbox component-token family does not. |
+| Figma alignment | Pending access | Do not fabricate component or property identifiers. |
+| Documentation | Complete for this slice | This page, the canonical story, and manifest relationships are recorded. |
+
+## Decisions and known gaps
+
+1. **Keep `ps-checkbox` native.** No PrimeNG Checkbox or ToggleSwitch dependency is introduced; the wrapper controls its own markup and tokens directly.
+2. **Share one contract across both variants.** `variant` only changes the rendered role and control sizing, not the label, help, required, or invalid relationships.
+3. **Keep labels mandatory.** `label` is a required input; there is no icon-only or label-less configuration.
+4. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.
+5. **Track the remaining public component-token gap.** The control currently consumes shared PrimeNG variables directly; a dedicated `--ps-checkbox-*` family is not yet defined.

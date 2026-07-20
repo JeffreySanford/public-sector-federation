@@ -1,0 +1,193 @@
+---
+title: Table
+description: A sortable, responsive data table shell with a keyboard-focusable overflow region and a built-in empty state.
+---
+
+import StoryFrame from '../../../../components/StoryFrame.astro';
+
+Table renders tabular data with sortable column headers, an overflow region that stays keyboard-reachable on narrow viewports, and a built-in empty state. Row content — including status tags, formatted cells, and row actions — remains consumer-authored through content projection rather than a bespoke cell-template API.
+
+**Lifecycle:** Stable · **Framework:** Angular · **Provider:** Native · **Accessibility:** Automated relationship evidence is complete for this declared scope; manual review remains pending · **Figma:** Pending access
+
+[Open the canonical Storybook story](https://master--6a57d5b6de2da2591d3236aa.chromatic.com/?path=/story/design-system-components-table--default) · [View Angular source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/public-table.component.ts) · [View Storybook source](https://github.com/JeffreySanford/public-sector-federation/blob/master/apps/qa-remote/src/stories/table.stories.ts) · [View manifest source](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/src/manifest/component-registry.ts)
+
+## Live example
+
+<StoryFrame
+  title="Table — case queue"
+  storyId="design-system-components-table--default"
+  description="The stable ps-table shell with sortable case and applicant columns and two projected rows."
+  size="tall"
+/>
+
+The frame loads only after activation. Storybook owns interaction inside the cross-origin story; this page owns guidance, status, and evidence boundaries.
+
+## When to use
+
+Use Table when:
+
+- several records need to be compared across the same set of columns;
+- at least one column benefits from client-side sorting;
+- the data set may not fit a narrow viewport without horizontal scrolling;
+- rows may need status indicators, formatted values, or inline actions that a generic data-only grid cannot express.
+
+### When not to use
+
+- Use a **card or list pattern** when records do not share a consistent column set, or when each item needs substantially different layout.
+- Use **Paginator** alongside Table when the data set is large enough to need paged navigation; Table itself does not page data.
+- Do not reach for Table to lay out unrelated content in rows and columns; use standard layout primitives instead.
+
+## Content guidance
+
+- Keep column headers short, specific nouns: **Case**, **Applicant**, **Status**, **Due**.
+- Right-align numeric or terminal-state columns (`align: 'end'`) such as counts, percentages, or dates when it improves scannability.
+- Use the projected row content to render status with `ps-tag`, not raw text, so severity is visually and semantically consistent with the rest of the product.
+- Provide a specific `emptyMessage` (for example, **No programs match the current filters.**) rather than the generic default when the empty state has a known cause.
+
+## Supported states
+
+| State | Current support | Guidance |
+| --- | --- | --- |
+| Populated rows | Supported | Project `<tr>` content as children of `ps-table`. |
+| Sortable column | Supported | Set `sortable: true` on a column; clicking the header toggles the `sortKey`/`sortDirection` model. |
+| Non-sortable column | Supported | Omit `sortable` to render a plain header cell. |
+| Column alignment | Supported | Set `align: 'end'` for numeric or terminal-state columns. |
+| Empty state | Supported | Set `[empty]="true"` to render the built-in message instead of projected content. |
+| Row actions | Supported via projection | Place `ps-button` or other interactive content directly in a projected cell. |
+| Long cell content | Supported with responsive evidence | The scroll region contains overflow without expanding the page. |
+| Mobile / narrow viewport | Supported with responsive evidence | The table scrolls horizontally within its own region rather than the page. |
+
+## Anatomy
+
+1. **Overflow region** — a `role="region"` container with a keyboard-focusable (`tabindex="0"`) horizontal scrollbar, so narrow viewports don't force page-level overflow.
+2. **Caption** — optional visible table caption rendered above the header row.
+3. **Column headers** — rendered from the `columns` input; sortable columns render an interactive header button.
+4. **Sort indicator** — a visual arrow and `aria-sort` state reflecting the current `sortKey`/`sortDirection`.
+5. **Body rows** — fully consumer-projected `<tr>` content, including any cell formatting, tags, or row actions.
+6. **Built-in empty row** — a single message row spanning every column, shown when `empty` is true instead of projected content.
+
+## Behavior and interaction
+
+| Key or action | Expected behavior |
+| --- | --- |
+| Tab | Moves focus to the overflow region, then to any interactive projected row content (buttons, links). |
+| Arrow keys (region focused) | Scrolls the overflow region horizontally in browsers that support native scroll-container keyboard handling. |
+| Click / Enter / Space on a sortable header | Toggles `sortKey` to that column and cycles `sortDirection` between ascending and descending. |
+| Pointer or keyboard activation of projected row content | Behaves according to whatever consumer-provided control (button, link) is projected into the cell. |
+
+The public contract is the `sortKey`/`sortDirection` model, not a bespoke sorted-data output; the wrapper does not sort or paginate data itself. Consumers apply sorting to their own data based on the model.
+
+## Accessibility contract
+
+### Semantics and naming
+
+- The rendered markup is a native `<table>` with `<caption>`, `<thead>`, and `<tbody>`, preserving native table semantics for assistive technology.
+- The scrollable wrapper exposes `role="region"` with an `aria-label` (the `ariaLabel` input) so the overflow area itself is identifiable and keyboard-reachable.
+- Sortable headers expose `aria-sort` (`ascending`, `descending`, or `none`) reflecting the current sort state.
+- The empty-state message uses a single cell with `colspan` equal to the column count, so it reads as one row rather than a partial, confusing table.
+- Row content semantics (status tags, action buttons, links) are the consumer's responsibility, since that content is projected rather than owned by the wrapper.
+
+### Current evidence status
+
+- **Storybook accessibility:** The canonical story uses the accessibility addon as an error gate.
+- **Page-level accessibility:** This Starlight route is included in the built-site axe gate.
+- **Keyboard coverage:** Complete for the declared stable contract: sortable header toggling, overflow-region focusability, and the empty state are verified.
+- **Manual assistive-technology review:** Pending.
+- **Conformance claim:** None. Automated evidence does not replace manual review.
+
+## Token relationships
+
+`ps-table` is a native implementation that consumes shared PrimeNG design tokens directly rather than a dedicated public component-token family.
+
+| Token or layer | Role | Current relationship |
+| --- | --- | --- |
+| `--p-text-color` | Header, cell, and caption foreground | Applied directly to table text. |
+| `--p-text-muted-color` | Empty-state message foreground | Applied to the built-in empty row. |
+| `--p-content-border-color` | Row and cell divider | Applied to header and body cell borders. |
+| `--p-primary-color` | Sort-button and overflow-region focus indicator | Applied through the shared focus-visible outline treatment. |
+| `--p-border-radius-md` | Overflow-region corner radius | Applied to the scroll container. |
+
+A future component-token layer may make header, row, and focus treatments more explicit. This page records the current native-token relationship rather than inventing that contract early.
+
+## Angular API
+
+### Import
+
+```ts
+import {
+  PublicTableComponent,
+  type PublicTableColumn,
+} from '@public-sector/ui-patterns';
+```
+
+### Usage
+
+```ts
+readonly caseQueueColumns: PublicTableColumn[] = [
+  { key: 'case', header: 'Case', sortable: true },
+  { key: 'applicant', header: 'Applicant', sortable: true },
+  { key: 'program', header: 'Program' },
+  { key: 'status', header: 'Status' },
+  { key: 'due', header: 'Due', align: 'end' },
+];
+```
+
+```html
+<ps-table [columns]="caseQueueColumns" ariaLabel="Case queue">
+  <tr>
+    <td>PS-2026-1042</td>
+    <td>Jordan Avery</td>
+    <td>Benefits renewal</td>
+    <td><ps-tag value="Review" tone="warn" /></td>
+    <td>Today</td>
+  </tr>
+</ps-table>
+```
+
+### Inputs and model
+
+| Member | Type | Default | Guidance |
+| --- | --- | --- | --- |
+| `columns` | `PublicTableColumn[]` | `[]` | Column key, header text, sortability, and alignment. |
+| `ariaLabel` | `string` | `Data table` | Accessible name for the keyboard-scrollable overflow region. |
+| `caption` | `string` | Empty | Optional visible table caption. |
+| `empty` | `boolean` | `false` | Renders the built-in empty-state row instead of projected content. |
+| `emptyMessage` | `string` | `No results found.` | Message shown by the built-in empty-state row. |
+| `sortKey` | `model<string \| null>` | `null` | Two-way key of the currently sorted column. |
+| `sortDirection` | `model<'asc' \| 'desc'>` | `asc` | Two-way current sort direction. |
+
+### Column type
+
+| Property | Type | Required | Guidance |
+| --- | --- | --- | --- |
+| `key` | `string` | Yes | Stable identifier used for tracking and the sort model. |
+| `header` | `string` | Yes | Visible column header text. |
+| `sortable` | `boolean` | No | Renders an interactive sort button in the header cell. |
+| `align` | `'start' \| 'end'` | No | Right-aligns the header and (by convention) its cells when set to `end`. |
+
+## Implementation notes
+
+`ps-table` is a native implementation with no PrimeNG Table dependency. It owns the header, sort affordance, overflow region, and empty state; it deliberately does **not** own row rendering, cell formatting, sorting the underlying data, or pagination. Consumers project `<tr>` content directly and apply their own sort/filter logic driven by the `sortKey`/`sortDirection` model. This keeps the wrapper generic across very different row shapes (a case queue with a status tag versus a report table with a percentage) without a bespoke cell-template API.
+
+## Quality and evidence
+
+| Dimension | Current status | Evidence or next action |
+| --- | --- | --- |
+| Runtime source | Complete | `PublicTableComponent` is exported from `@public-sector/ui-patterns`. |
+| Public API inventory | Complete | Registry metadata records inputs, the column type, and the sort model. |
+| Canonical Storybook story | Complete | `Design System/Components/Table — Default`. |
+| State stories | Complete for the current contract | Sortable, with-row-actions, empty, long-content, and mobile-overflow are recorded. |
+| Automated accessibility | Complete for the declared automated scope | Storybook and page-level axe checks pass. |
+| Keyboard coverage | Complete for the declared stable contract | Dedicated tests cover sort toggling, overflow-region focus, and the empty state. |
+| Manual screen-reader review | Pending | Record a named review before making broader accessibility claims. |
+| Token mapping | Partial | Shared semantic mappings exist; a dedicated Table component-token family does not. |
+| Figma alignment | Pending access | Do not fabricate component or property identifiers. |
+| Documentation | Complete for this slice | This page, the canonical story, and manifest relationships are recorded. |
+
+## Decisions and known gaps
+
+1. **Keep `ps-table` native.** No PrimeNG Table dependency is introduced; the wrapper controls its own header, sort affordance, and overflow region directly.
+2. **Keep row content fully consumer-projected.** The wrapper does not define a cell-template or data-binding API; this trades a smaller, more mechanical public surface for flexibility across very different row shapes.
+3. **Do not sort or paginate data internally.** `sortKey`/`sortDirection` are a public model for the consumer to act on, not an internal sort implementation.
+4. **Do not claim completed Figma or manual accessibility approval.** Both remain explicit missing evidence.
+5. **Track the remaining public component-token gap.** The shell currently consumes shared PrimeNG variables directly; a dedicated `--ps-table-*` family is not yet defined.
