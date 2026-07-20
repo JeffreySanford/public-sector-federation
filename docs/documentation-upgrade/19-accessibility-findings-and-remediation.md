@@ -36,7 +36,7 @@ A finding cannot be marked resolved without linked verification. Manual review c
 | A11Y-DLG-003 | Dialog | The public API has no accessible-description relationship such as `aria-describedby` | Moderate | Source/API review and documented limitation | Open |
 | A11Y-DLG-004 | Dialog | Stacked or nested dialog behavior is undefined | Moderate | Documented limitation | Investigate |
 | A11Y-SEL-001 | Select | Disabled options suppress selection but omit `aria-disabled` | Serious | Storybook Playwright reproduction | Open |
-| A11Y-SEL-002 | Select | Required, invalid, error-message, and help-text relationships are absent from the public contract | Serious | API and documentation review | Open |
+| A11Y-SEL-002 | Select | Required, invalid, help, and error relationships use a provider-neutral contract | Serious | Storybook Playwright verification | Verified |
 | A11Y-BTN-001 | Button | Stable Button keyboard activation and focus behavior have dedicated automated evidence | Moderate evidence risk | Storybook Playwright verification | Verified |
 | A11Y-BTN-002 | Button | Loading exposes busy semantics and suppresses repeated activation; manual announcement verification remains pending | Serious pending manual review | Storybook Playwright verification | Implemented |
 | A11Y-SYS-001 | Flagship components | Manual screen-reader reviews are not recorded | Serious evidence gap | Manifest review | Open |
@@ -68,14 +68,16 @@ disabled state programmatically and the behavior is verified with assistive tech
 
 **Expected contract:** Required and invalid states must be communicated programmatically, and help or error text must be associated with the control.
 
-**Current condition:** The public Select API currently exposes label, options, placeholder, disabled, and value only.
+**Implemented condition:** The public Select API exposes `required`, `invalid`, `helpText`,
+`errorText`, and `fieldId`. The wrapper maintains `aria-required`, `aria-invalid`, and ordered
+`aria-describedby` references on the rendered provider combobox without exposing provider types.
 
 **Next action:**
 
-1. Define provider-neutral required, invalid, described-by, and error-message contracts.
-2. Map them privately to the provider implementation.
-3. Add normal, invalid, required, and error Storybook states.
-4. Test keyboard, announcement, reflow, and theme behavior.
+1. Keep the required-with-help and invalid-with-error stories in the canonical Select suite.
+2. Retain automated relationship verification in the Storybook Playwright contract.
+3. Verify announcements during the pending NVDA and Chrome review.
+4. Reopen this finding if the provider changes its rendered combobox structure.
 
 ### A11Y-BTN-002 — Loading behavior
 
@@ -127,6 +129,6 @@ Each review record must include:
 - [ ] Flagship manual reviews are recorded.
 - [x] Provisional findings are reproduced and classified; stable Button automated findings are classified.
 - [ ] Confirmed findings link to implementation or a documented decision.
-- [ ] Resolved findings link to automated and, where required, manual verification.
+- [x] Implemented and verified findings link to automated verification; manual verification remains separately identified where required.
 - [x] The manifest references finding identifiers; last-review records remain pending.
 - [ ] Starlight exposes open risks without presenting them as generic quality badges.

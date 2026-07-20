@@ -50,6 +50,7 @@ Evidence-presentation progress:
 - axe scans now cover all three workbench views, and the finding evidence disclosure has dedicated keyboard coverage.
 - Component Inventory presents disposition, duplication cluster, token boundary, and a disposition-specific next action from manifest audit metadata.
 - Select disabled-option behavior is reproduced and classified, and flagship Storybook contracts now carry automated forced-colors evidence alongside existing 200% zoom-equivalent reflow coverage.
+- Select now exposes provider-neutral required, invalid, help, and error inputs with verified relationships on the rendered combobox; the remediation is visible through the manifest finding register.
 
 ### P1 — Finish Storybook and Chromatic alignment
 
