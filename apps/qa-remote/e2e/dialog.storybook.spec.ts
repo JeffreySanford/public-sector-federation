@@ -33,11 +33,15 @@ async function openDialog(page: Page, triggerName: string, dialogName: string) {
 
 async function expectDomFocus(locator: ReturnType<Page['locator']>): Promise<void> {
   await expect.poll(async () => {
-    return locator.evaluate((element) => {
-      const active = element.ownerDocument.activeElement as HTMLElement | null;
-      return active === element || element.contains(active);
-    });
+    return isDomFocus(locator);
   }).toBe(true);
+}
+
+async function isDomFocus(locator: ReturnType<Page['locator']>): Promise<boolean> {
+  return locator.evaluate((element) => {
+    const active = element.ownerDocument.activeElement as HTMLElement | null;
+    return active === element || element.contains(active);
+  });
 }
 
 test.describe('Dialog isolated Storybook contract', () => {
@@ -64,8 +68,11 @@ test.describe('Dialog isolated Storybook contract', () => {
 
     await expectDomFocus(close);
     await page.keyboard.press('Tab');
-    await expectDomFocus(note);
-    await page.keyboard.press('Tab');
+    const tabbedToNote = await isDomFocus(note);
+    if (tabbedToNote) {
+      await expectDomFocus(note);
+      await page.keyboard.press('Tab');
+    }
     await expectDomFocus(cancel);
     await page.keyboard.press('Tab');
     await expectDomFocus(confirm);

@@ -6,29 +6,29 @@
       <ps-tag value="Remote: Admin" tone="warn" />
       <h2>Administrative settings</h2>
       <p>
-        Dialog, menu, toast, and switch components validate overlay policy and
-        component tokens from a remote web component.
+        Configure platform controls, review administrative actions, and send
+        operational feedback from the remote console.
       </p>
     </div>
-    <button type="button" class="admin-button" (click)="openDialog()">
-      <i class="pi pi-window-maximize" aria-hidden="true"></i>
-      <span>Open dialog</span>
-    </button>
+    <ps-button label="Open dialog" icon="pi pi-window-maximize" (activated)="openDialog()" />
   </div>
 
   <div class="remote__grid">
     <ps-card header="Platform controls">
       <div class="setting-row">
         <span>Audit logging</span>
+        <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
         <input type="checkbox" role="switch" [(ngModel)]="auditLogging" aria-label="Audit logging" />
       </div>
       <div class="setting-row">
         <span>Maintenance mode</span>
+        <!-- // GAP: ps-checkbox not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
         <input type="checkbox" role="switch" [(ngModel)]="maintenanceMode" aria-label="Maintenance mode" />
       </div>
 
       <label class="password-field" for="temporaryPassword">
         Temporary password
+        <!-- // GAP: ps-input not yet available; tracked in docs/design-system/backlog/table-input-checkbox-wrappers.md. -->
         <input
           id="temporaryPassword"
           type="password"
@@ -37,19 +37,19 @@
         >
       </label>
 
-      <button type="button" class="admin-button" (click)="showToast()">
-        <i class="pi pi-save" aria-hidden="true"></i>
-        <span>Save settings</span>
-      </button>
+      <ps-button label="Save settings" icon="pi pi-save" (activated)="showToast()" />
     </ps-card>
 
     <ps-card header="Administrative actions">
       <nav class="admin-actions-menu" aria-label="Administrative actions">
         @for (action of actions; track action.label) {
-          <button type="button" (click)="action.command()">
-            <i [class]="action.icon" aria-hidden="true"></i>
-            <span>{{ action.label }}</span>
-          </button>
+          <ps-button
+            [label]="action.label"
+            [icon]="action.icon"
+            intent="secondary"
+            appearance="text"
+            (activated)="action.command()"
+          />
         }
       </nav>
     </ps-card>
@@ -58,11 +58,11 @@
 
 <ps-dialog header="Remote dialog" [(visible)]="visible" width="32rem">
   <p>
-    This dialog is opened from the admin remote. It should stack above shell
-    chrome and use the shared PrimeNG z-index settings.
+    This dialog is opened from the admin remote and follows the shared overlay
+    policy above shell chrome.
   </p>
   <div ps-dialog-footer>
-    <ps-button label="Close" [text]="true" (buttonClick)="closeDialog()" />
-    <ps-button label="Confirm" icon="pi pi-check" (buttonClick)="confirmDialog()" />
+    <ps-button label="Close" appearance="text" (activated)="closeDialog()" />
+    <ps-button label="Confirm" icon="pi pi-check" (activated)="confirmDialog()" />
   </div>
 </ps-dialog>
