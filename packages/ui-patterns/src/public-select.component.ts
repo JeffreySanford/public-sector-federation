@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import { AfterViewChecked, booleanAttribute, Component, computed, ElementRef, inject, input, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
@@ -33,6 +34,7 @@ let selectId = 0;
         [invalid]="invalid()"
         [ariaLabel]="label()"
         appendTo="body"
+        (onShow)="scheduleDisabledOptionSemantics()"
       />
       @if (helpText()) {
         <p class="ps-select-field__help" [id]="helpId()">{{ helpText() }}</p>
@@ -74,6 +76,7 @@ let selectId = 0;
   `,
 })
 export class PublicSelectComponent implements AfterViewChecked {
+  private readonly document = inject(DOCUMENT);
   private readonly host: ElementRef<HTMLElement> = inject(ElementRef);
 
   readonly fieldId = input(`ps-select-${++selectId}`);
@@ -101,6 +104,24 @@ export class PublicSelectComponent implements AfterViewChecked {
       this.invalid() && this.errorText() ? this.errorId() : null,
     ].filter((id): id is string => Boolean(id));
     this.syncAttribute(combobox, 'aria-describedby', descriptions.length ? descriptions.join(' ') : null);
+    this.syncDisabledOptionSemantics(combobox);
+  }
+
+  scheduleDisabledOptionSemantics(): void {
+    queueMicrotask(() => {
+      const combobox = this.host.nativeElement.querySelector<HTMLElement>('[role="combobox"]');
+      if (combobox) this.syncDisabledOptionSemantics(combobox);
+    });
+  }
+
+  private syncDisabledOptionSemantics(combobox: HTMLElement): void {
+    const listboxId = combobox.getAttribute('aria-controls') ?? combobox.getAttribute('aria-owns');
+    if (!listboxId) return;
+
+    const listbox = this.document.getElementById(listboxId);
+    for (const option of listbox?.querySelectorAll<HTMLElement>('[role="option"]') ?? []) {
+      this.syncAttribute(option, 'aria-disabled', option.getAttribute('data-p-disabled') === 'true' ? 'true' : null);
+    }
   }
 
   private syncAttribute(element: HTMLElement, name: string, value: string | null): void {
