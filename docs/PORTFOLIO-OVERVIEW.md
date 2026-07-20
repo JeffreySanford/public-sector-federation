@@ -1,8 +1,8 @@
-# Public Sector Federation: Portfolio Walkthrough
+# Public Sector Design System: System Overview
 
 ## The five-minute version
 
-Public Sector Federation demonstrates how a large Angular platform can combine independently deployed applications without giving up shared design, accessibility, or quality standards.
+Public Sector Design System demonstrates how a large Angular platform can combine independently deployed applications without giving up shared design, accessibility, or quality standards.
 
 The reference architecture uses an Angular shell to discover and mount custom-element remotes. Each remote can run independently, while shared token, PrimeNG preset, and UI wrapper packages keep the integrated experience aligned.
 
@@ -51,7 +51,7 @@ The following remain production-specific decisions:
 - final design and manual assistive-technology approvals;
 - production hosting, monitoring, and security controls.
 
-## Skills demonstrated
+## What this system demonstrates
 
 - Angular and TypeScript platform architecture
 - Nx monorepo organization

@@ -44,6 +44,7 @@
     "serve:playground": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js serve playground",
     "serve:starlight": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run starlight:serve",
     "build:starlight": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run starlight:build",
+    "docs:build": "pnpm build:starlight && pnpm build-storybook:qa && pnpm manifest:build",
     "check:starlight": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run starlight:check",
     "preview:starlight": "node ./node_modules/.pnpm/nx@23.0.1/node_modules/nx/dist/bin/nx.js run starlight:preview",
     "validate:starlight": "node scripts/validate-starlight-quality.mjs",
@@ -60,8 +61,8 @@
     "test:code-examples": "playwright test CODE_EXAMPLES.test.ts",
     "test:storybook:qa": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts",
     "test:storybook:qa:chromium": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts --project=chromium --workers=1",
-    "test:storybook:up-button": "playwright test apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts",
-    "test:storybook:up-button:chromium": "playwright test apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts --project=chromium --workers=1",
+    "test:storybook:up-button": "playwright test apps/qa-remote/e2e/button-candidate.storybook.spec.ts",
+    "test:storybook:up-button:chromium": "playwright test apps/qa-remote/e2e/button-candidate.storybook.spec.ts --project=chromium --workers=1",
     "test:storybook:registry": "playwright test apps/qa-remote/e2e/component-registry.storybook.spec.ts",
     "test:storybook:registry:chromium": "playwright test apps/qa-remote/e2e/component-registry.storybook.spec.ts --project=chromium --workers=1",
     "chromatic": "node scripts/chromatic-up-button.mjs"

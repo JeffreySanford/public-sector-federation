@@ -1,7 +1,7 @@
 import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
 
 const storybookHomeUrl = 'http://localhost:4400';
-const buttonTagStoryId = 'design-system-acceptance-button-tag--states';
+const buttonTagStoryId = 'design-system-interaction-stories-button-and-tag--states';
 const tableStoryId = 'design-system-acceptance-table-paginator--sort-filter-and-page';
 
 function managerStoryUrl(storyId: string): string {

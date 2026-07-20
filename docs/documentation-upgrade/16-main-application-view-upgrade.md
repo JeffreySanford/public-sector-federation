@@ -184,7 +184,7 @@ flowchart TD
   manifest --> duplicateReport[Duplicate and inconsistency report]
 ```
 
-## Portfolio evidence produced
+## Evidence produced
 
 This view demonstrates that Jeffrey can:
 
@@ -315,7 +315,7 @@ Keep existing performance charts and suite metrics here as a collapsible or seco
 
 This preserves the existing work without allowing it to dominate the mission.
 
-## Portfolio evidence produced
+## Evidence produced
 
 This view demonstrates that Jeffrey can:
 
@@ -457,7 +457,7 @@ Every alignment case ends with one of:
 
 The decision must include rationale and evidence.
 
-## Portfolio evidence produced
+## Evidence produced
 
 This view demonstrates that Jeffrey can:
 

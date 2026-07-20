@@ -11,9 +11,9 @@ the repo. The new work is a separate up-design-system Button candidate:
 - selector: `ps-up-button`
 - source: `packages/ui-patterns/src/public-up-button.component.ts`
 - Storybook story: `apps/qa-remote/src/stories/up-button.stories.ts`
-- Storybook title: `Design System / Candidates / Button UP`
-- Storybook navigation: `Candidates` is ordered above `Acceptance` under `Design System`
-- QA remote proof: included in the `/qa` acceptance checkpoint
+- Storybook title: `Design System / Experiments / Button UP`
+- Storybook navigation: `Experiments` is ordered above `Acceptance` under `Design System`
+- Component Lab proof: included in the `/qa` acceptance checkpoint
 
 This is the safer path. It lets us prove the up-design-system token styling,
 cleaner API, Storybook developer experience, Zeroheight evidence model, and

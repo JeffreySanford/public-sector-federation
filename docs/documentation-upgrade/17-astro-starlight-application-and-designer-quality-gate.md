@@ -177,7 +177,7 @@ The gateway should:
 
 ### Optional embedded preview
 
-An optional route may embed Starlight in an iframe for a portfolio walkthrough or internal demonstration:
+An optional route may embed Starlight in an iframe for an overview experience or internal demonstration:
 
 ```text
 /workbench/documentation-preview
@@ -919,7 +919,7 @@ Review questions:
 ### Design-system credibility
 
 - Does this feel like maintained product documentation?
-- Does it avoid portfolio self-promotion inside the product experience?
+- Does it avoid self-referential framing inside the product experience?
 - Is incomplete work represented honestly without dominating the page?
 - Can designers and engineers both find their next step?
 
@@ -1128,7 +1128,7 @@ Suggested template:
 - Add Documentation navigation to the Angular workbench.
 - Mount Starlight under the same public origin.
 - Add an optional DocumentationGatewayComponent.
-- Add an iframe preview only if it materially improves the portfolio walkthrough.
+- Add an iframe preview only if it materially improves the overview experience.
 - Test transitions between Angular, Starlight, and Storybook.
 
 ## PR 7 — Require polish review

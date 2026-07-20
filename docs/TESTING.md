@@ -1,6 +1,6 @@
 # Testing and Release Guide
 
-**Release status:** Portfolio reference `1.0.0`
+**Release status:** Design-system reference `1.0.0`
 
 ## Counting convention
 
@@ -137,6 +137,26 @@ When a test times out, first confirm that the configured frontend, Starlight, an
 5. Update Storybook and shell integration evidence with the fix.
 
 Automated checks do not replace manual screen-reader review. The component manifest records manual-review status separately.
+
+## Windows NVDA workflow
+
+Use this quick workflow for manual keyboard and screen-reader review on Windows.
+
+1. Install NVDA from the official NVDA website and confirm that it launches successfully.
+2. Open the browser you will use for review, such as Edge or Chrome, and ensure the browser is configured to work with screen readers.
+3. Start NVDA, then open the Storybook story, Starlight page, or shell route you want to review.
+4. Navigate with the keyboard only: use Tab, Shift+Tab, Enter, Space, arrow keys, and Escape to confirm that focus order, dialog behavior, and interactive states are understandable.
+5. Use NVDA speech output to confirm that headings, landmarks, labels, link names, and form controls are announced clearly and that focus is not lost.
+6. Record any issues in the component evidence notes or release notes before the public release.
+
+### Manual acceptance checklist
+
+- [ ] page title and main heading are announced correctly;
+- [ ] heading structure is logical and not skipped;
+- [ ] interactive elements can be reached and activated by keyboard;
+- [ ] form labels and button names are announced clearly;
+- [ ] focus order is predictable and visible;
+- [ ] modal or overlay content is announced and can be dismissed without trapping focus.
 
 ## Runtime timing
 

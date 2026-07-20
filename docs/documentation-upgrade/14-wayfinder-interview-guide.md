@@ -125,7 +125,7 @@ You find two Button wrappers: one broad API influenced by the provider and one s
 - choose a deprecation and migration path;
 - validate keyboard, loading, disabled, focus, and visual behavior.
 
-### Strong portfolio direction
+### Strong product direction
 
 Remediate the stable `ps-button` toward the smaller contract while preserving temporary compatibility, rather than permanently teaching users two public Buttons.
 
@@ -255,7 +255,7 @@ Should a component automatically become stable when all manifest evidence fields
 
 ### Prompt
 
-Why keep module federation in a design-system portfolio?
+Why keep module federation in a design-system story?
 
 ### Strong-answer landmarks
 
@@ -278,7 +278,7 @@ Why not keep Zeroheight as the primary documentation platform?
 ### Strong-answer landmarks
 
 - Zeroheight is useful for nontechnical editing and enterprise governance;
-- it is expensive and integration-limited for an individual portfolio;
+- it is expensive and integration-limited for a single-team implementation;
 - Starlight is versioned with the code;
 - pull requests review docs and implementation together;
 - manifest and token projections can be automated;
@@ -287,7 +287,7 @@ Why not keep Zeroheight as the primary documentation platform?
 
 ### Balanced answer
 
-Do not criticize Zeroheight broadly. Explain that tool choice depends on organizational needs and that the portfolio benefits more from owning the integration.
+Do not criticize Zeroheight broadly. Explain that tool choice depends on organizational needs and that the product benefits more from owning the integration.
 
 ## Checkpoint 12 — Incomplete evidence
 

@@ -41,11 +41,11 @@ The first documentation sequence tracks three flagship components against the ge
 
 ### Checkbox, Input, and Table
 
-- **Documentation:** Published as the second catalog wave, closing the table/input/checkbox wrapper backlog recorded for the remote realignment pass.
+- **Documentation:** Published as the second catalog wave, closing the table/input/checkbox wrapper backlog recorded for the remote realignment pass and keeping the remaining follow-up work explicit.
 - **Lifecycle:** Active and used in the reference remotes (`services-remote`, `admin-remote`, `reporting-remote`).
 - **Storybook:** Dedicated canonical stories plus disabled, required, invalid, long-content, and mobile-overflow states are recorded for each component.
 - **Accessibility:** Automated keyboard and relationship evidence is complete for the declared scope; manual assistive-technology review remains open for all three, matching the flagship trio's current status.
-- **Figma:** Pending access, same as the flagship trio.
+- **Figma:** Pending access and design alignment review, same as the flagship trio.
 
 [Read the Checkbox guidance](/docs/components/checkbox/) · [Read the Input guidance](/docs/components/input/) · [Read the Table guidance](/docs/components/table/)
 

@@ -427,7 +427,7 @@ Example:
 
 ## Relationship to Code Connect
 
-Figma Code Connect can strengthen the relationship between Figma and code when available, but it is not required for the initial public portfolio.
+Figma Code Connect can strengthen the relationship between Figma and code when available, but it is not required for the initial public release.
 
 When used, it should:
 

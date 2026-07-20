@@ -15,7 +15,10 @@ The current source of truth for importable APIs is
 This catalog remains the concise human-readable discovery page. Lifecycle,
 provider, accessibility, Figma, Zeroheight, ownership, and evidence status should
 be updated in the registry rather than duplicated here. Starlight owns the full
-public usage guidance for flagship components.
+public usage guidance for flagship components. For the originating remote
+realignment story and the related backlog follow-up, see
+[the remote realignment plan](../../ui-refresh/remote-realignment-scrub-plan.md)
+and [the table/input/checkbox backlog](../backlog/table-input-checkbox-wrappers.md).
 
 ## Current Components
 
@@ -74,12 +77,18 @@ public usage guidance for flagship components.
 - Source: `packages/ui-patterns/src/public-input.component.ts`.
 - Canonical evidence: `apps/qa-remote/src/stories/input.stories.ts`.
 - Behavior tests: `apps/qa-remote/e2e/input.storybook.spec.ts`.
+- Guidance: `apps/starlight/src/content/docs/components/input/index.mdx`.
+- Accessibility/Figma: manual assistive-technology review and design-alignment
+  review remain pending.
 
 - Use `PublicCheckboxComponent` / `ps-checkbox` for a checkbox or switch with
   help text, invalid, and required states.
 - Source: `packages/ui-patterns/src/public-checkbox.component.ts`.
 - Canonical evidence: `apps/qa-remote/src/stories/checkbox.stories.ts`.
 - Behavior tests: `apps/qa-remote/e2e/checkbox.storybook.spec.ts`.
+- Guidance: `apps/starlight/src/content/docs/components/checkbox/index.mdx`.
+- Accessibility/Figma: manual assistive-technology review and design-alignment
+  review remain pending.
 
 ### Menus And Popovers
 
@@ -134,6 +143,9 @@ actions.
 - Source: `packages/ui-patterns/src/public-table.component.ts`.
 - Canonical evidence: `apps/qa-remote/src/stories/table.stories.ts`.
 - Behavior tests: `apps/qa-remote/e2e/table.storybook.spec.ts`.
+- Guidance: `apps/starlight/src/content/docs/components/table/index.mdx`.
+- Accessibility/Figma: manual assistive-technology review and design-alignment
+  review remain pending.
 
 ### Tags
 

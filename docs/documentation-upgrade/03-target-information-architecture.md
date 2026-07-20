@@ -287,7 +287,7 @@ The architecture section should be available for deep review but should not domi
 
 ## Exploration Log
 
-This section is a portfolio differentiator. It shows how the system was discovered and improved.
+This section highlights the system’s evolution and the evidence trail behind it.
 
 Recommended pages:
 

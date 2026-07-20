@@ -46,7 +46,7 @@ mindmap
       NestJS
       Prisma
       PostgreSQL
-    Portfolio
+    Product
       Walkthrough
       Skills demonstrated
       Exact test totals
@@ -86,7 +86,7 @@ The repository does not pretend that automated accessibility checks equal full c
 
 The current product name and opening description emphasize federation. This makes the design-system work appear secondary even though it is the most relevant part for the target role.
 
-### Portfolio language weakens product realism
+### Product language strengthens realism
 
 Terms such as `portfolio-grade`, `portfolio walkthrough`, and `skills demonstrated` make the project feel like a submission rather than a maintained system.
 
@@ -131,7 +131,7 @@ NestJS, Prisma, PostgreSQL, Docker, and backend startup commands prove full-stac
 | Zeroheight | Historical | Archive or document as a tooling experiment. |
 | Candidate Button comparison | Case study | Reframe as API remediation exploration. |
 | Exact test totals | Generated evidence | Remove from evergreen homepage copy. |
-| Portfolio walkthrough | Private or secondary | Replace with System Overview. |
+| Overview walkthrough | Private or secondary | Replace with System Overview. |
 | Skills demonstrated | Remove | Let the artifact demonstrate the skills. |
 
 ## Presentation findings that require forensic follow-up

@@ -238,7 +238,7 @@ Recommended states:
 
 ## Manual review plan
 
-For a portfolio reference, prioritize manual review of the flagship components rather than claiming full-library completion.
+For this design-system reference, prioritize manual review of the flagship components rather than claiming full-library completion. The accessibility plan remains open for the later migration phase, even where some flagship evidence exists.
 
 Recommended initial matrix:
 
@@ -299,6 +299,8 @@ The manifest should prevent these invalid states:
 - stable interactive component missing a keyboard contract without an explicit exception.
 
 ## Accessibility backlog priorities
+
+These items remain part of the later migration and cleanup workstream rather than being treated as already complete just because the flagship documentation model exists.
 
 ### P0
 

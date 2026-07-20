@@ -151,7 +151,7 @@ See [Astro Starlight Application and Designer-Grade Quality Gate](./17-astro-sta
 
 - [ ] Rewrite the primary product statement.
 - [ ] Remove `portfolio-grade` from public opening copy.
-- [ ] Replace Portfolio Walkthrough with System Overview.
+- [ ] Replace the old overview naming with System Overview.
 - [ ] Remove Skills Demonstrated from the public product experience.
 - [ ] Reframe federation as adoption evidence.
 - [x] Remove obsolete backend details after retiring the unused API and database platform.

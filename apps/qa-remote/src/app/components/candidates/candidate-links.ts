@@ -33,7 +33,7 @@ export const candidateLinks: readonly CandidateLink[] = [
   },
   {
     id: 'zeroheight',
-    label: 'Open UP Button Candidate in Zeroheight',
+    label: 'Open Button Candidate in Zeroheight',
     description:
       'Governed Candidate documentation with status, comparison guidance, design and token direction, developer usage, and validation evidence.',
     status: 'Available',
@@ -76,7 +76,7 @@ export const candidateLinks: readonly CandidateLink[] = [
     label: 'UP Button candidate integration plan',
     description: 'Token, Figma, Storybook, testing, Zeroheight, and promotion checklist.',
     status: 'Available',
-    href: `${githubRoot}/docs/design-system/components/up-button-candidate-integration-plan.md`,
+    href: `${githubRoot}/docs/design-system/components/button-candidate-integration-plan.md`,
     external: true,
   },
 ];

@@ -6,6 +6,8 @@ yet expose a provider-neutral wrapper. Phase 2 of the UI refresh closed this
 gap: `ps-table`, `ps-input`, and `ps-checkbox` are implemented, documented in
 the component manifest, and have replaced every native usage that carried a
 `// GAP:` comment in `services-remote`, `admin-remote`, and `reporting-remote`.
+For the originating story and historical context, see
+[the remote realignment plan](../../ui-refresh/remote-realignment-scrub-plan.md).
 
 ## Resolved Gaps
 
@@ -19,6 +21,14 @@ the component manifest, and have replaced every native usage that carried a
 - `ps-checkbox` (`packages/ui-patterns/src/public-checkbox.component.ts`):
   checkbox and switch variants with label, help text, disabled, invalid, and
   required states.
+
+## Open follow-up
+
+The original remote-realignment plan's "tiles" non-goal was never separately
+scoped. This backlog tracks `ps-table`, `ps-input`, and `ps-checkbox` only; if a
+shared tile or card-grid pattern is still needed, it should be captured as a
+separate follow-up rather than assumed to be covered by existing `ps-card` or
+`ps-status-card` usage.
 
 ## Tracking Rule
 

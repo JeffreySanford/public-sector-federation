@@ -90,7 +90,7 @@ mindmap
       Application patterns
 ```
 
-## Strongest portfolio proof points
+## Strongest product proof points
 
 ### 1. Manifest-driven component inventory
 
@@ -163,11 +163,11 @@ Demonstrates:
 | Manual accessibility review is incomplete | Automated coverage may be overread | Separate status fields and prioritized manual reviews. |
 | Naming is inconsistent | `ps-*` and `public-*` selectors coexist | Public naming policy and staged selector migration. |
 | Zeroheight may look like the center | Tool-specific scripts and guidance are extensive | Archive strategy and repository-owned documentation portal. |
-| Portfolio wording feels self-conscious | Skills are explicitly listed | Product language replaces portfolio claims. |
+| Product wording feels self-conscious | Skills are explicitly listed | Product language replaces self-referential framing. |
 
 ## Five-minute review route
 
-Do not label this publicly as a portfolio walkthrough, but use it during interviews.
+Do not label this publicly as a walkthrough, but use it during interviews.
 
 1. Open the Starlight landing page.
 2. Open the Button component page and use the embedded story.
@@ -180,7 +180,7 @@ Do not label this publicly as a portfolio walkthrough, but use it during intervi
 
 ## Evidence-to-answer pattern
 
-Use this structure when describing any portfolio feature:
+Use this structure when describing any product feature:
 
 ### Problem
 

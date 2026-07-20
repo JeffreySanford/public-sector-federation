@@ -3,8 +3,15 @@
 **Status: ✅ Shipped (Phase 1), plus a completed Phase 2 fast-follow.** The scrub landed on
 `master` (squashed history culminating in `6cea200`), and the table/input/checkbox wrapper
 backlog it deliberately deferred was subsequently built out and merged. See §10 for the Phase 2
-record and §11 for whether a Phase 3 exists. The sections below are left as the original plan for
-historical accuracy; §4's tracker is updated to reflect what actually landed.
+record and §11 for the proposed Phase 3 follow-up. The sections below are left as the original
+plan for historical accuracy; §4's tracker is updated to reflect what actually landed.
+
+**Phase 1/2 completion review (verified from the current repo state):** the remote copy cleanup is
+in place in the three business remotes, the remotes now use the expected `ps-*` wrappers
+(`ps-card`, `ps-button`, `ps-tag`, `ps-progress`, `ps-select`, `ps-input`, `ps-checkbox`,
+`ps-table`), the old `// GAP:` markers are gone from `apps/`, and the old QA playground story has
+been removed in favor of the current `edge-case-states` story. The remaining follow-up is the
+Phase 3 work for tiles and the manual accessibility/Figma pass.
 
 **Branch:** `agent/remote-realignment-scrub`
 **Type:** Single large PR (per direction)
@@ -14,6 +21,10 @@ components and copy and routes everything through the *existing* `@public-sector
 registry. New business patterns (tables, tiles) are a tracked fast-follow, not part of this change.
 *(Tables and inputs/checkboxes were built in Phase 2 — see §10. "Tiles" was never separately
 scoped; see §11.)*
+
+Related docs: [the backlog stub](../design-system/backlog/table-input-checkbox-wrappers.md) for the
+follow-up wrapper work, and [the component catalog](../design-system/components/catalog.md) for the
+current component guidance and status.
 
 ---
 
@@ -31,13 +42,14 @@ product UI:
 | `qa-remote` | N/A (Storybook) | `primeng-playground.stories.ts` and `problem-areas.stories.ts` are named and written as internal test rigs, not evidence surfaces a reviewer should read as "the product" |
 
 This reads exactly like what it is — scaffolding used to stand the design system up — and it's the
-right call to scrub it now that the wrapper registry (17 components, all `active` except the
-`candidate` `ps-up-button`) is solid enough to carry real screens.
+right call to scrub it now that the wrapper registry had enough coverage to carry real screens
+without relying on the old proof-of-concept markup.
 
 ## 2. Current registry gap (why some raw HTML has to stay, for now)
 
-`packages/ui-patterns` does **not** currently export a table, text input, or checkbox/switch
-wrapper. Only `ps-select` exists for form controls. That means:
+`packages/ui-patterns` did **not** yet export a table, text input, or checkbox/switch wrapper
+when the original PR landed. At that point, only `ps-select` existed for form controls. That
+meant:
 
 - Raw `<table>` in `services-remote` (`case-table`) and `reporting-remote` (`report-table`) has no
   governed replacement yet.
@@ -336,25 +348,48 @@ resolution rather than an open gap.
   the manifest carries (`ps-progress`, `ps-paginator`, `ps-menu`, etc.), not something specific to
   this backlog.
 
-## 11. Is there a Phase 3?
+## 11. Phase 3 (proposed)
 
-**No Phase 3 is currently defined anywhere in this repository's docs.** This plan (Phase 1) and
-its fast-follow (Phase 2, §10) are the only phases that exist for the remote-realignment /
-table-input-checkbox story specifically.
+A proposed Phase 3 for this story should cover three missing items:
 
-Two things worth flagging rather than silently deciding:
+1. **Tile-pattern confirmation**
+   The "tiles" pattern mentioned in the original non-goal line was never separately scoped. The
+   backlog stub created in §7 only recorded `ps-table`, `ps-input`, and `ps-checkbox`; "tiles"
+   never made it into `docs/design-system/backlog/table-input-checkbox-wrappers.md` or anywhere
+   else. This should be confirmed explicitly: either validate that existing patterns such as
+   `ps-card` and `ps-status-card` already cover the need, or document a genuine gap and decide
+   whether a dedicated tile wrapper should be built.
 
-1. **The "tiles" pattern this plan's non-goal line mentioned was never separately scoped.**
-   §7's actual backlog stub only recorded `ps-table`, `ps-input`, and `ps-checkbox` — "tiles" never
-   made it into `docs/design-system/backlog/table-input-checkbox-wrappers.md` or anywhere else.
-   It's plausible `ps-card` and `ps-status-card` (both already shipped before this plan existed)
-   already cover what "tile" meant here, but that's an assumption, not a confirmed decision — worth
-   a quick confirmation rather than either building a redundant component or leaving a genuine gap
-   unrecorded.
-2. **A separate, unrelated "Phase 3: Tooling retirement" exists in
-   `docs/documentation-upgrade/10-migration-and-cleanup-plan.md`** (Zeroheight/report-script
-   retirement). It is not part of this story and shouldn't be confused with it.
+2. **Manual accessibility and design-alignment pass**
+   The manifest still carries open quality work for components such as `ps-checkbox`, `ps-input`,
+   and `ps-table`, including manual assistive-technology review and Figma property mapping. A
+   dedicated Phase 3 should schedule that review so it is not left as an implicit follow-up.
 
-If you want a Phase 3 for *this* story, the natural candidates are: (a) resolving the "tiles"
-question above, or (b) scheduling the manual screen-reader review and Figma alignment pass that
-every component in the manifest is currently waiting on. Neither is scoped yet.
+3. **Quality-gate tooling and ownership**
+   For the accessibility portion of the work, a practical free option is NVDA on Windows
+   (open-source, free, and widely used for accessibility testing). It is a reasonable substitute
+   for JAWS for many browser-based checks, while VoiceOver (macOS/iOS) and Narrator (Windows)
+   are useful for quick cross-checks. This phase should also assign an owner, define the review
+   scope for `ps-checkbox`, `ps-input`, and `ps-table`, and use a lightweight acceptance checklist
+   (keyboard behavior, naming/help text, focus order, and any notable screen-reader findings) so
+   the review is completed rather than deferred.
+
+A separate, unrelated "Phase 3: Tooling retirement" exists in
+`docs/documentation-upgrade/10-migration-and-cleanup-plan.md` (Zeroheight/report-script
+retirement). That is not part of this story and should not be conflated with the proposed Phase 3
+above.
+
+---
+
+## Phase summary
+
+### Completed
+- [x] Phase 1 copy and component scrub across the four remotes
+- [x] Phase 2 wrapper build-out for `ps-table`, `ps-input`, and `ps-checkbox`
+- [x] Remote markup migrated to the new wrappers where applicable
+- [x] Backlog and catalog documentation updated to reflect the resolved work
+
+### Remaining
+- [ ] Add the different tile states, styles, and variants needed for the pattern and document them
+- [ ] Schedule the manual accessibility review and Figma alignment pass
+- [ ] Assign owners and acceptance criteria for the Phase 3 quality gate

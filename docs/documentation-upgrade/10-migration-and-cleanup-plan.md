@@ -1,5 +1,15 @@
 # Migration and Cleanup Plan
 
+_Last aligned: July 20, 2026._ The Button candidate rename (Phase 1 and Phase 4, below) has
+landed: the public rename map's `UP Button Candidate → Button Contract Exploration` and part of
+`Candidates → Experiments` are complete in the manifest, Storybook title, and
+`docs/design-system/components/button-candidate-*.md` files (the old `up-button-candidate-*.md`
+files were removed, not duplicated). The broader `Acceptance Stories → Interaction Stories` rename
+is only started — `button-tag.acceptance.stories.ts` is renamed; `card.acceptance.stories.ts`,
+`dialog-toast.acceptance.stories.ts`, `edge-case-states.stories.ts`, and
+`table-paginator.acceptance.stories.ts` still use the old `Design System/Acceptance/*` title.
+Everything else below remains open.
+
 ## Objective
 
 Create a clean public design-system experience without discarding working architecture, tests, applications, or historical evidence.
@@ -90,7 +100,7 @@ Target framing:
 | QA Evidence | Quality Evidence |
 | Candidates | Experiments |
 | Acceptance Stories | Component Stories or Interaction Stories |
-| Portfolio Walkthrough | System Overview |
+| Overview Walkthrough | System Overview |
 | Skills Demonstrated | Remove |
 | UP Button Candidate | Button Contract Exploration |
 | Stable vs Candidate | Current Contract vs Proposed Contract |
@@ -192,29 +202,12 @@ Do not block the documentation upgrade on selector renaming.
 
 Two public Button implementations create ambiguity.
 
-Choose one of these strategies:
-
-### Strategy A: Promote the smaller contract
-
-- make the proposed API canonical;
-- migrate stable usages;
-- deprecate the broad API;
-- retain comparison history in the exploration log.
-
-### Strategy B: Remediate the stable implementation in place
+### Remediate the stable implementation in place
 
 - keep `ps-button` as the selector;
 - introduce the smaller public contract;
 - retain compatibility aliases temporarily;
 - remove the separate candidate implementation.
-
-### Strategy C: Preserve the experiment only as a case study
-
-- keep stable `ps-button` unchanged;
-- remove the candidate from the public package;
-- retain stories, diagrams, and decision analysis under Experiments.
-
-For portfolio clarity, Strategy B is likely the strongest long-term direction because it demonstrates remediation without forcing consumers to understand two permanent Buttons.
 
 ## README migration
 
@@ -303,36 +296,88 @@ Each occurrence should be intentionally kept, rewritten, moved to Experiments, o
 
 ## Cleanup phases
 
+The later documentation and release workstreams in 8 and 9 should be carried forward here as open implementation work. This plan is the place where the remaining migration actions are made explicit.
+
 ### Phase 1: Public labels
 
 Low-risk changes:
 
-- product name;
-- landing-page copy;
-- navigation labels;
-- Storybook categories;
-- component status vocabulary.
+- [ ] align the product name, landing-page copy, and navigation labels with the design-system narrative;
+- [ ] rename Storybook categories and component status vocabulary so they no longer imply product or QA-only framing —
+      partial: the Button candidate category moved from `Design System/Candidates/*` to
+      `Design System/Experiments/*`, and one acceptance-stories file moved to
+      `Design System/Interaction Stories/*`; four acceptance-stories files still use the old category;
+- [ ] audit all public-facing labels in the README, manifests, docs, and navigation for consistency —
+      done for the Button candidate surface specifically (manifest `name`, Storybook title, and
+      `docs/design-system/components/button-candidate-*.md`); not yet audited elsewhere.
 
 ### Phase 2: Documentation relocation
 
-- move user guidance into Starlight;
-- move system-health data into generated views;
-- move historical process into the exploration log or archive.
+- [ ] move user guidance into Starlight so it is discoverable from the public docs site;
+- [ ] move system-health and evidence data into generated views that are maintained from the manifest or release pipeline;
+- [ ] move historical process notes, dated progress reports, and internal workflow detail into the exploration log or archive.
 
 ### Phase 3: Tooling retirement
 
-- remove Zeroheight from report scripts;
-- add neutral docs-generation commands;
-- archive publication scripts;
-- remove unused environment variables.
+This phase should be understood as the operational follow-through for the Storybook/Chromatic and accessibility workstreams from 8 and 9, not as a separate afterthought.
+
+- [ ] inventory and remove Zeroheight-specific report and publication logic from the release path;
+- [ ] add neutral docs-generation commands for Starlight, Storybook, and manifest-driven views;
+- [ ] archive or decommission publication scripts and environment variables that only support retired workflows;
+- [ ] finish the Storybook hierarchy so stable components, experiments, and system-health views are clearly separated;
+- [ ] rename the remaining acceptance-style stories and ensure canonical story IDs are manifest-aligned;
+- [ ] add explicit Storybook-to-docs backlinks and Chromatic review links for the public component pages;
+- [ ] document the NVDA setup path for Windows contributors, including install, browser/AT configuration, and launch steps;
+- [ ] define a lightweight manual accessibility acceptance checklist for release validation;
+- [ ] add a short contributor note linking the NVDA workflow to the relevant Storybook, Starlight, and evidence pages;
+- [ ] record the manual accessibility review plan for Button, Select, and Dialog and connect it to the manifest evidence model.
 
 ### Phase 4: Contract normalization
 
-- consolidate Button strategy;
-- normalize selectors;
-- improve API extraction;
-- remove provider leaks and escape hatches;
-- complete flagship design alignment.
+This phase captures the remaining product naming, docs migration, NVDA setup, Button strategy, and selector normalization work that still needs to be executed.
+
+- [ ] document the long-term Button strategy, using the remediated stable contract as the chosen direction;
+- [x] resolve the product naming and public-label migration for the Button comparison and candidate/experiment surfaces —
+      `ps-up-button` now surfaces as "Button Contract Exploration" under
+      `Design System/Experiments/*` everywhere (manifest, Storybook, docs); the underlying
+      `ps-up-button` selector and `PublicUpButtonComponent` export were deliberately left
+      unchanged so the compatibility contract stays stable while only the public label moved;
+- [ ] normalize selectors around a documented public convention and record migration exceptions in the manifest;
+- [ ] improve API extraction so the public contract is easier to document and consume;
+- [ ] remove provider leaks and escape hatches that are no longer needed for the public story;
+- [ ] complete flagship design alignment so the public component experience is coherent across stories, docs, and examples;
+- [ ] finalize the accessibility evidence workflow so automated, keyboard, and manual review results are all represented clearly and honestly in the public docs and manifest.
+
+## Cross-cutting migration checklist
+
+Carry the earlier migration steps through the full release path:
+
+- [ ] update navigation, sidebars, and landing-page entry points so the new public names and routes are visible and retired surfaces are no longer the first impression;
+- [ ] keep the component manifest, Storybook, Starlight, and evidence pages in sync after renaming, archiving, or deprecating content;
+- [ ] keep public component pages and manifest entries aligned on lifecycle status, evidence links, ownership, accessibility status, and Figma status;
+- [ ] preserve compatibility and redirect paths where public links or story IDs may still be referenced externally;
+- [ ] complete ownership, accessibility, and design-alignment follow-up for components that remain in the public catalog;
+- [ ] verify that the public release narrative matches the actual repository state before removing old framing.
+
+## NVDA setup guidance draft
+
+Use this as a lightweight contributor workflow for manual accessibility review on Windows.
+
+1. Install NVDA from the official NVDA website and confirm that it launches successfully.
+2. Open the browser you will use for review, such as Edge or Chrome, and ensure the browser is configured to work with screen readers.
+3. Start NVDA, then open the component page, Storybook story, or Starlight page you want to review.
+4. Navigate with the keyboard only: use Tab, Shift+Tab, Enter, Space, arrow keys, and Escape to confirm that focus order, dialog behavior, and interactive states are understandable.
+5. Use NVDA speech output to confirm that headings, landmarks, labels, link names, and form controls are announced clearly and that focus is not lost.
+6. Record any issues found in the release notes or component evidence notes so they can be tracked before the public release.
+
+### Lightweight acceptance checklist
+
+- [ ] page title and main heading are announced correctly;
+- [ ] heading structure is logical and not skipped;
+- [ ] interactive elements can be reached and activated by keyboard;
+- [ ] form labels and button names are announced clearly;
+- [ ] focus order is predictable and visible;
+- [ ] modal or overlay content is announced and can be dismissed without trapping focus.
 
 ## Safety checks
 
@@ -355,6 +400,7 @@ Before deleting or renaming anything:
 - [ ] Public labels use design-system vocabulary.
 - [ ] Federation and backend remain available as supporting evidence.
 - [ ] Zeroheight is no longer required for documentation publication.
+- [ ] The accessibility-quality-gate setup for NVDA is documented and can be followed by a new contributor.
 - [ ] The Button comparison has a clear long-term disposition.
 - [ ] Selector inconsistency is tracked with a migration path.
 - [ ] README and navigation prioritize the design system.

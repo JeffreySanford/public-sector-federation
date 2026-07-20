@@ -54,7 +54,7 @@ flowchart TD
   H --> I[Checkpoint 9: Add accessibility and remediation evidence]
   I --> J[Checkpoint 10: Publish forensic case studies]
   J --> K[Checkpoint 11: Relocate sample UI and archive old tooling]
-  K --> L[Checkpoint 12: Unified portfolio release]
+  K --> L[Checkpoint 12: Unified release]
 ```
 
 ## Checkpoint 1 — Create `apps/starlight`
@@ -155,7 +155,7 @@ Make the design system the unmistakable public product.
 
 ### Review question
 
-> Does the first screen communicate a maintained design-system product rather than a portfolio assignment?
+> Does the first screen communicate a maintained design-system product rather than a self-referential assignment?
 
 ## Checkpoint 4 — Complete Button, Select, and Dialog pages
 
@@ -446,7 +446,7 @@ Remove obsolete presentation clutter without losing useful test and evidence cov
 
 > Did the cleanup reduce noise while preserving every important proof responsibility?
 
-## Checkpoint 12 — Unified portfolio release
+## Checkpoint 12 — Unified release
 
 ### Goal
 

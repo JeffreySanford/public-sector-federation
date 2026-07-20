@@ -4,7 +4,7 @@
 
 The upgraded public experience should be named and presented as **Public Sector Design System**.
 
-The repository can retain its existing package names and architectural history during migration, but the public-facing documentation should describe a design-system product rather than a federation experiment or personal portfolio package.
+The repository can retain its existing package names and architectural history during migration, but the public-facing documentation should describe a design-system product rather than a federation experiment or personal project package.
 
 ## Product statement
 
@@ -19,7 +19,7 @@ The repository can retain its existing package names and architectural history d
 
 The documentation portal, manifest, tokens, federation examples, and release gates support these deliverables. They are not separate missions.
 
-## Portfolio statement
+## What the work demonstrates
 
 The work should demonstrate that an engineer can enter an existing UI ecosystem and:
 

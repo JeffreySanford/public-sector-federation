@@ -25,7 +25,7 @@ const icons: PublicUpButtonIcon[] = [
 ];
 
 const meta: Meta<PublicUpButtonComponent> = {
-  title: 'Design System/Candidates/Button UP',
+  title: 'Design System/Experiments/Button Contract Exploration',
   component: PublicUpButtonComponent,
   decorators: [moduleMetadata({ imports: [PublicUpButtonComponent] })],
   render: (args) => ({
@@ -34,7 +34,7 @@ const meta: Meta<PublicUpButtonComponent> = {
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="up-button-story" aria-labelledby="upButtonStoryTitle">
-        <h1 id="upButtonStoryTitle">UP Button candidate</h1>
+        <h1 id="upButtonStoryTitle">Button contract exploration</h1>
         <ps-up-button
           [label]="label"
           [icon]="icon"

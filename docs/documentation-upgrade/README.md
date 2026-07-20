@@ -33,7 +33,7 @@ The repository began with several competing public narratives:
 3. design-system component and token library;
 4. QA and visual-validation laboratory;
 5. Zeroheight documentation experiment;
-6. personal portfolio walkthrough.
+6. personal overview walkthrough.
 
 The upgraded documentation tells one primary story:
 
@@ -105,7 +105,7 @@ The upgrade succeeds when:
 - `apps/starlight` remains a real, independently built documentation application;
 - Starlight is mounted as a first-class route and linked directly from Angular;
 - the documentation site, not the README or Zeroheight, is the primary public guidance surface;
-- the first screen communicates a design-system product rather than a portfolio submission;
+- the first screen communicates a design-system product rather than a self-referential submission;
 - flagship component pages place live behavior and usage guidance before evidence;
 - the main application provides Component Inventory, Quality & Remediation, and Design Alignment Lab views;
 - design tokens are shown in direct relationship to component decisions;

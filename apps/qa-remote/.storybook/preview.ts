@@ -54,7 +54,7 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Design System', ['Candidates', 'Acceptance', 'Components', 'PrimeNG Playground', 'Problem Areas']],
+        order: ['Design System', ['Experiments', 'Interaction Stories', 'Components', 'PrimeNG Playground', 'Problem Areas']],
       },
     },
   },

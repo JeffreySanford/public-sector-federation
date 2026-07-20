@@ -21,9 +21,9 @@ It should no longer be:
 
 ## Why retire it as the center
 
-### Portfolio economics
+### Product economics
 
-A paid hosted documentation platform is difficult to justify for an individual portfolio when the strongest integrations may require higher-tier access.
+A paid hosted documentation platform is difficult to justify for a single-team design-system reference when the strongest integrations may require higher-tier access.
 
 ### Engineering value
 
@@ -245,11 +245,11 @@ Zeroheight becomes one possible projection, not the authority.
 - update README and contribution guidance;
 - verify the complete release gate.
 
-## Balanced portfolio explanation
+## Balanced product explanation
 
 Use this framing in interviews:
 
-> Zeroheight was useful for exploring how designers, developers, QA, accessibility, and governance audiences might consume one component record. For the public portfolio, I moved the canonical guidance into a repository-owned Starlight application so the documentation can be reviewed and versioned with the Angular components, Storybook stories, tokens, tests, and manifest metadata. The architecture still allows Zeroheight or another enterprise platform to consume the same governed data later.
+> Zeroheight was useful for exploring how designers, developers, QA, accessibility, and governance audiences might consume one component record. For the public design-system experience, I moved the canonical guidance into a repository-owned Starlight application so the documentation can be reviewed and versioned with the Angular components, Storybook stories, tokens, tests, and manifest metadata. The architecture still allows Zeroheight or another enterprise platform to consume the same governed data later.
 
 ## Retirement acceptance criteria
 

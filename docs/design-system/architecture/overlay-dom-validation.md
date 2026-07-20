@@ -12,7 +12,7 @@ to inherit the active token contract.
 The shell Playwright token spec validates:
 
 - Shell and mounted remote resolve the same `--ps-*` and `--p-*` variables.
-- Theme changes update the shell and mounted QA remote.
+- Theme changes update the shell and mounted Component Lab.
 - Dialog overlay surfaces resolve root PrimeNG variables.
 - Menu, select, popover, and tooltip overlays append directly under `body`.
 - Menu, select, popover, and tooltip overlays resolve root `--ps-*` and `--p-*`
@@ -25,7 +25,7 @@ Primary evidence:
 
 ## Wrapper Coverage
 
-The QA route opens overlays through strict `@public-sector/ui-patterns`
+The Component Lab route opens overlays through strict `@public-sector/ui-patterns`
 wrappers:
 
 | Wrapper | PrimeNG internal | App-facing contract |

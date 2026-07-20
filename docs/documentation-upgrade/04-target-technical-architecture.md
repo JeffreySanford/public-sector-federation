@@ -6,7 +6,7 @@ Add a real Astro Starlight application at `apps/starlight` inside the existing N
 
 Build Starlight, Storybook, the Angular workbench, and the Angular federation examples as sibling application outputs that share source data, design tokens, and one public product origin.
 
-The Angular workbench should link directly to the same-origin Starlight route. A thin Angular documentation gateway may navigate to `/docs/`, and an iframe preview may exist for a portfolio walkthrough, but iframe embedding must not become the canonical documentation architecture.
+The Angular workbench should link directly to the same-origin Starlight route. A thin Angular documentation gateway may navigate to `/docs/`, and an iframe preview may exist for an overview experience, but iframe embedding must not become the canonical documentation architecture.
 
 See [Astro Starlight Application and Designer-Grade Quality Gate](./17-astro-starlight-application-and-designer-quality-gate.md) for the detailed application contract and release gate.
 
@@ -202,7 +202,7 @@ The Angular navigation should use a normal same-origin link.
 
 An optional `DocumentationGatewayComponent` may exist to provide route continuity or transition messaging, but it should navigate to the Starlight route rather than duplicate the Starlight application inside Angular.
 
-An iframe preview is permitted only when it materially improves a guided portfolio walkthrough. It must include a title, fallback link, same-origin hosting, responsive validation, and independent accessibility tests of the underlying Starlight pages.
+An iframe preview is permitted only when it materially improves a guided overview experience. It must include a title, fallback link, same-origin hosting, responsive validation, and independent accessibility tests of the underlying Starlight pages.
 
 ## Storybook responsibilities
 
@@ -233,7 +233,7 @@ Chromatic should provide:
 - visual and accessibility regression evidence where configured;
 - page-level review when the Playwright integration is adopted.
 
-Chromatic should not be described merely as hosting. Its portfolio value is the review and visual-regression workflow.
+Chromatic should not be described merely as hosting. Its product value is the review and visual-regression workflow.
 
 ## Manifest projection architecture
 

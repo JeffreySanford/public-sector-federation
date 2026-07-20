@@ -74,7 +74,7 @@ class ButtonContractStoryComponent {
 }
 
 const meta: Meta<ButtonTagAcceptanceStoryComponent> = {
-  title: 'Design System/Acceptance/Button Tag',
+  title: 'Design System/Interaction Stories/Button and Tag',
   component: ButtonTagAcceptanceStoryComponent,
   render: () => ({ moduleMetadata: { imports: [ButtonTagAcceptanceStoryComponent] }, template: '<public-button-tag-acceptance-story />' }),
   parameters: { layout: 'fullscreen' },

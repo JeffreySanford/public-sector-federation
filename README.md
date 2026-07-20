@@ -1,11 +1,11 @@
-# Public Sector Federation
+# Public Sector Design System
 
-Public Sector Federation is a portfolio-grade Angular reference platform demonstrating runtime module federation, independently bootstrapped Web Components, governed PrimeNG wrappers, design-token delivery, Storybook evidence, and automated accessibility and integration validation.
+Public Sector Design System is an Angular design-system reference demonstrating runtime module federation, independently bootstrapped Web Components, governed PrimeNG wrappers, design-token delivery, Storybook evidence, and automated accessibility and integration validation.
 
 ## Start here
 
 - [Live Storybook and visual QA](https://master--6a57d5b6de2da2591d3236aa.chromatic.com/)
-- [Five-minute portfolio walkthrough](./docs/PORTFOLIO-OVERVIEW.md)
+- [Five-minute system overview](./docs/PORTFOLIO-OVERVIEW.md)
 - [Testing and release gates](./docs/TESTING.md)
 - [Design-system architecture](./docs/design-system/architecture/reference-architecture-recommendation.md)
 - [Component catalog](./docs/design-system/components/catalog.md)
@@ -51,7 +51,7 @@ flowchart LR
 | `apps/services-remote` | Public-services remote exposed as `<public-services-root>`. |
 | `apps/reporting-remote` | Reporting remote exposed as `<public-reporting-root>`. |
 | `apps/admin-remote` | Administration remote exposed as `<public-admin-root>`. |
-| `apps/qa-remote` | Stable visual-contract and Storybook evidence surface. |
+| `apps/qa-remote` | Component Lab for component composition, overlay, and validation workflows. |
 | `apps/playground` | Local component and integration playground. |
 | `packages/tokens` | Token source, generated CSS variables, JSON, and TypeScript exports. |
 | `packages/primeng-preset` | Shared PrimeNG theme bridge and provider. |
@@ -157,4 +157,4 @@ Zeroheight exports are documentation and governance artifacts; they are not a ru
 
 ## Ownership and license
 
-This is an independently owned public portfolio and reference repository. The source is visible for evaluation and discussion, but no open-source license is granted. See [LICENSE.md](./LICENSE.md).
+This is an independently owned public design-system reference repository. The source is visible for evaluation and discussion, but no open-source license is granted. See [LICENSE.md](./LICENSE.md).

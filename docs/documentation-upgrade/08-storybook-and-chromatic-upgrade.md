@@ -232,13 +232,15 @@ Completed for the flagship scope:
 - accessibility-addon enforcement for representative stories;
 - Starlight `StoryFrame` integration.
 
-Current gaps:
+This document is not complete merely because the flagship stories are in place. The broader Storybook and Chromatic upgrade remains open as part of the later migration workstream, including:
 
 - target hierarchy across the remaining catalog;
 - portable `play` functions for Button, Select, and Dialog;
 - remaining acceptance-story renames;
 - explicit documentation backlinks and Chromatic review links;
 - audit-comparison stories for genuine duplication clusters.
+
+These items should be tracked alongside the migration and cleanup work in [10 — Migration and cleanup plan](./10-migration-and-cleanup-plan.md), not treated as finished simply because the flagship scope is in place.
 
 ### Audit comparison stories
 
