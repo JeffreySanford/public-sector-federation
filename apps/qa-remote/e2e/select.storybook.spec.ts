@@ -24,6 +24,13 @@ function optionList(page: Page): Locator {
   return page.locator('body [role="listbox"][aria-label="Option List"]').last();
 }
 
+async function activeOption(page: Page, combobox: Locator): Promise<Locator> {
+  await expect(combobox).toHaveAttribute('aria-activedescendant', /.+/);
+  const activeOptionId = await combobox.getAttribute('aria-activedescendant');
+  expect(activeOptionId).toBeTruthy();
+  return page.locator(`[id="${activeOptionId}"]`);
+}
+
 async function openWithKeyboard(page: Page, name: string): Promise<Locator> {
   const combobox = page.getByRole('combobox', { name });
   await combobox.focus();
@@ -232,7 +239,8 @@ test.describe('Select isolated Storybook contract', () => {
     await page.emulateMedia({ forcedColors: 'active' });
     await gotoSelectStory(page, 'default');
     const combobox = await openWithKeyboard(page, 'Program');
-    const focusedOption = optionList(page).locator('.p-focus').first();
+    await page.keyboard.press('ArrowDown');
+    const focusedOption = await activeOption(page, combobox);
 
     await expect(combobox).toBeFocused();
     await expect(focusedOption).toBeVisible();

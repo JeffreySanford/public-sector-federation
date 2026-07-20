@@ -298,6 +298,14 @@
   color: var(--ps-action-text) !important;
 }
 
+.p-select-option.p-focus,
+.p-dropdown-item.p-focus,
+.p-select-option:focus-visible,
+.p-dropdown-item:focus-visible {
+  outline: var(--p-focus-ring-width) var(--p-focus-ring-style) var(--p-focus-ring-color) !important;
+  outline-offset: calc(-1 * var(--p-focus-ring-offset));
+}
+
 .p-select-option.p-selected,
 .p-dropdown-item.p-highlight {
   background: var(--ps-button-background) !important;
