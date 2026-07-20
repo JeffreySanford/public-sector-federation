@@ -66,6 +66,10 @@ test.describe('Forensic design-system workbench', () => {
     const detail = page.locator('.detail-panel');
     await expect(detail.getByRole('heading', { name: 'Select', exact: true })).toBeVisible();
     await expect(detail.getByRole('heading', { name: 'Evidence coverage', exact: true })).toBeVisible();
+    await expect(detail.getByRole('heading', { name: 'Consolidation decision', exact: true })).toBeVisible();
+    await expect(detail).toContainText('retain');
+    await expect(detail).toContainText('unique:ps-select');
+    await expect(detail).toContainText('provider-managed');
     await expect(detail).toContainText('PrimeNG');
   });
 
@@ -78,6 +82,20 @@ test.describe('Forensic design-system workbench', () => {
     const rows = page.getByRole('table').first().locator('tbody tr');
     expect(await rows.count()).toBeGreaterThan(0);
     await expect(page.getByRole('table').first()).toContainText('PrimeNG');
+  });
+
+  test('filters the inventory by consolidation disposition', async ({ page }) => {
+    await page.getByLabel('Disposition').selectOption('canonical');
+
+    const table = page.getByRole('table', {
+      name: 'Shipped component inventory and consolidation dispositions',
+    });
+    await expect(table).toBeVisible();
+    const rows = table.locator('tbody tr').filter({ has: page.getByRole('button', { name: /^Inspect / }) });
+    expect(await rows.count()).toBeGreaterThan(0);
+    for (let index = 0; index < (await rows.count()); index += 1) {
+      await expect(rows.nth(index)).toContainText('canonical');
+    }
   });
 
   test('presents a prioritized remediation queue and representative casework', async ({ page }) => {

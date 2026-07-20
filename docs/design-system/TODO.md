@@ -45,7 +45,7 @@ This is the short execution dashboard. It does not duplicate detailed acceptance
 ## Next — consolidation and design reference
 
 - [ ] Finalize the canonical Button contract and compatibility window.
-- [ ] Record retain, merge, replace, deprecate, or investigate for every public entry.
+- [x] Record retain, merge, replace, deprecate, or investigate for every public entry.
 - [ ] Document provider-wrapper versus native/Angular CDK tradeoffs.
 - [ ] Move native components from direct PrimeNG `--p-*` variables to public `--ps-*` tokens.
 - [ ] Replace placeholder UI-library test targets with real component contract tests.
