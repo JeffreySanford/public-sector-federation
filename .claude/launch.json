@@ -1,0 +1,53 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "shell",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nx", "run", "shell:serve"],
+      "port": 4200
+    },
+    {
+      "name": "services-remote",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nx", "run", "services-remote:serve"],
+      "port": 4201
+    },
+    {
+      "name": "reporting-remote",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nx", "run", "reporting-remote:serve"],
+      "port": 4202
+    },
+    {
+      "name": "admin-remote",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nx", "run", "admin-remote:serve"],
+      "port": 4203
+    },
+    {
+      "name": "qa-remote",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nx", "run", "qa-remote:serve"],
+      "port": 4204
+    },
+    {
+      "name": "qa-remote-storybook",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nx", "run", "qa-remote:storybook"],
+      "port": 4400
+    },
+    {
+      "name": "playground",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nx", "run", "playground:serve"],
+      "port": 4210
+    },
+    {
+      "name": "starlight",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nx", "run", "starlight:serve"],
+      "port": 4321
+    }
+  ]
+}
