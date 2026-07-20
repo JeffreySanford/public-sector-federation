@@ -212,6 +212,7 @@
         "disposition": "canonical",
         "tokenBoundary": "provider-managed",
         "findingIds": [
+          "API-PRIMITIVE-001",
           "API-BTN-001",
           "A11Y-BTN-001",
           "A11Y-BTN-002",
@@ -482,6 +483,7 @@
         "disposition": "retain",
         "tokenBoundary": "mixed",
         "findingIds": [
+          "API-PRIMITIVE-001",
           "TOKEN-NATIVE-001",
           "A11Y-DLG-001",
           "A11Y-DLG-002",
@@ -1620,6 +1622,7 @@
         "disposition": "retain",
         "tokenBoundary": "provider-managed",
         "findingIds": [
+          "API-PRIMITIVE-001",
           "A11Y-SEL-001",
           "A11Y-SEL-002",
           "A11Y-SYS-001",
@@ -2777,6 +2780,22 @@
       "evidence": [
         "packages/ui-patterns/src/manifest/component-registry.ts",
         "packages/ui-patterns/generated/component-manifest.json"
+      ]
+    },
+    {
+      "id": "API-PRIMITIVE-001",
+      "category": "api",
+      "severity": "advisory",
+      "status": "verified",
+      "componentIds": [
+        "ps-button",
+        "ps-select",
+        "ps-dialog"
+      ],
+      "summary": "Provider-wrapper, native, and Angular CDK selection criteria are recorded for Button, Select, and Dialog.",
+      "evidence": [
+        "docs/design-system/architecture/component-primitive-strategy.md",
+        "docs/documentation-upgrade/20-component-consolidation-proposal.md"
       ]
     },
     {
