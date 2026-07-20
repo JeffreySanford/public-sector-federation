@@ -136,8 +136,8 @@ test.describe('Select isolated Storybook contract', () => {
     const archived = optionList(page).getByRole('option', { name: 'Archived pilot program' });
     await expect(archived).toBeVisible();
     await expect(archived).toHaveAttribute('data-p-disabled', 'true');
+    await expect(archived).toHaveAttribute('aria-disabled', 'true');
     await expect(archived).toHaveAttribute('aria-selected', 'false');
-    expect(await archived.getAttribute('aria-disabled')).toBeNull();
     await archived.click({ force: true });
     await expect(combobox).toContainText('Choose an active program');
   });

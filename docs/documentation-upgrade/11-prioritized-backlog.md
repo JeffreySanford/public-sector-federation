@@ -52,6 +52,7 @@ Evidence-presentation progress:
 - Select disabled-option behavior is reproduced and classified, and flagship Storybook contracts now carry automated forced-colors evidence alongside existing 200% zoom-equivalent reflow coverage.
 - Select now exposes provider-neutral required, invalid, help, and error inputs with verified relationships on the rendered combobox; the remediation is visible through the manifest finding register.
 - Dialog now applies reversible background inertness and body scroll locking and exposes a verified accessible-description relationship; nested dialogs remain explicitly unsupported.
+- Select disabled options now expose wrapper-governed `aria-disabled` semantics while preserving provider selection suppression; manual announcement review remains pending.
 
 ### P1 — Finish Storybook and Chromatic alignment
 
@@ -261,7 +262,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [x] Document accessible name requirements and the current missing description API.
 - [x] Show shared overlay and surface token relationships and the missing backdrop token.
 - [x] Add isolated and shell-integrated Dialog evidence.
-- [ ] Pass the Starlight designer-grade quality gate and human polish review.
+- [x] Pass the Starlight designer-grade quality gate and human polish review.
 
 ## P0 — Manifest contract
 

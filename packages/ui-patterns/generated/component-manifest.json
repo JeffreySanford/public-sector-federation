@@ -1531,7 +1531,7 @@
         "providerEscapeHatches": [],
         "knownLimitations": [
           "Richer option content, Figma alignment, and manual assistive-technology review remain pending.",
-          "PrimeNG marks disabled options with provider state but does not currently emit aria-disabled on the rendered option."
+          "The wrapper synchronizes aria-disabled from PrimeNG provider state because the rendered option omits it."
         ]
       },
       "variants": {
@@ -2662,12 +2662,13 @@
       "id": "A11Y-SEL-001",
       "category": "accessibility",
       "severity": "serious",
-      "status": "open",
+      "status": "verified",
       "componentIds": [
         "ps-select"
       ],
-      "summary": "Disabled options suppress selection, but the rendered option does not expose aria-disabled to assistive technology.",
+      "summary": "Disabled options suppress selection and expose aria-disabled through the governed wrapper.",
       "evidence": [
+        "packages/ui-patterns/src/public-select.component.ts",
         "apps/qa-remote/e2e/select.storybook.spec.ts",
         "apps/qa-remote/src/stories/select.stories.ts",
         "docs/documentation-upgrade/19-accessibility-findings-and-remediation.md"

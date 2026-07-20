@@ -35,7 +35,7 @@ A finding cannot be marked resolved without linked verification. Manual review c
 | A11Y-DLG-002 | Dialog | Body scrolling is locked while the modal is open | Moderate | Storybook Playwright verification | Verified |
 | A11Y-DLG-003 | Dialog | The description input supplies an `aria-describedby` relationship | Moderate | Storybook Playwright verification | Verified |
 | A11Y-DLG-004 | Dialog | Stacked or nested dialog behavior is undefined | Moderate | Documented limitation | Investigate |
-| A11Y-SEL-001 | Select | Disabled options suppress selection but omit `aria-disabled` | Serious | Storybook Playwright reproduction | Open |
+| A11Y-SEL-001 | Select | Disabled options suppress selection and expose `aria-disabled` | Serious | Storybook Playwright verification | Verified |
 | A11Y-SEL-002 | Select | Required, invalid, help, and error relationships use a provider-neutral contract | Serious | Storybook Playwright verification | Verified |
 | A11Y-BTN-001 | Button | Stable Button keyboard activation and focus behavior have dedicated automated evidence | Moderate evidence risk | Storybook Playwright verification | Verified |
 | A11Y-BTN-002 | Button | Loading exposes busy semantics and suppresses repeated activation; manual announcement verification remains pending | Serious pending manual review | Storybook Playwright verification | Implemented |
@@ -44,10 +44,10 @@ A finding cannot be marked resolved without linked verification. Manual review c
 
 “Pending reproduction” means severity is provisional until behavior is observed in the declared browser and assistive-technology environment.
 
-The initial provisional Select finding is now reproduced and classified. PrimeNG prevents the
-disabled option from changing the model, but its rendered `option` role exposes provider state
-without `aria-disabled`. The finding remains open until the provider or wrapper exposes the
-disabled state programmatically and the behavior is verified with assistive technology.
+The initial provisional Select finding was reproduced and remediated. PrimeNG prevents a disabled
+option from changing the model but exposes the state only through provider metadata. The governed
+wrapper now mirrors that state to `aria-disabled`, with Storybook browser verification retaining
+the provider behavior and public accessibility contract.
 
 ## Remediation records
 
@@ -65,6 +65,21 @@ those values and the opener's focus. The same lifecycle locks and restores body 
 2. Keep nested Dialogs unsupported until a stack-aware isolation manager is intentionally designed.
 3. Verify virtual-cursor isolation in the pending NVDA and Chrome review.
 4. Reopen the finding if application integration exposes a sibling or portal boundary not covered by the host walk.
+
+### A11Y-SEL-001 — Disabled-option semantics
+
+**Expected contract:** A disabled option must remain unavailable for selection and expose that
+state programmatically.
+
+**Implemented condition:** The wrapper retains PrimeNG's selection suppression and mirrors its
+rendered `data-p-disabled` state to `aria-disabled` on each listbox option. The provider-specific
+DOM translation remains private to `ps-select`.
+
+**Next action:**
+
+1. Retain the disabled-option Storybook contract for state, selection suppression, and ARIA.
+2. Verify disabled-option announcement in the pending NVDA and Chrome review.
+3. Remove the compatibility synchronization if a future PrimeNG release supplies equivalent semantics.
 
 ### A11Y-SEL-002 — Validation relationships
 
