@@ -23,7 +23,7 @@ test.describe('component manifest Storybook registry', () => {
     await expect(page.getByRole('heading', { name: 'Component Registry' })).toBeVisible();
     await expect(page.getByRole('row', { name: /Paginator/ })).toBeVisible();
     await expect(page.getByRole('row', { name: /Toast Service/ })).toBeVisible();
-    await expect(page.getByRole('row', { name: /UP Button Candidate/ })).toBeVisible();
+    await expect(page.getByRole('row', { name: /Button Contract Exploration/ })).toBeVisible();
     await expect(page.getByText('21', { exact: true }).first()).toBeVisible();
   });
 
@@ -31,7 +31,7 @@ test.describe('component manifest Storybook registry', () => {
     await gotoStory(page, 'lifecycle-status');
 
     await expect(page.getByText('Button', { exact: true })).toBeVisible();
-    await expect(page.getByText('UP Button Candidate', { exact: true })).toBeVisible();
+    await expect(page.getByText('Button Contract Exploration', { exact: true })).toBeVisible();
     await expect(page.getByText('Candidate replacement for ps-button')).toBeVisible();
   });
 
@@ -64,7 +64,7 @@ test.describe('component manifest Storybook registry', () => {
   test('renders UP Button promotion evidence and blockers', async ({ page }) => {
     await gotoStory(page, 'up-button-promotion-readiness');
 
-    await expect(page.getByRole('heading', { name: 'UP Button Candidate' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Button Contract Exploration' })).toBeVisible();
     await expect(page.getByText('Design review is pending.')).toBeVisible();
     await expect(page.getByText('Manual screen-reader audit is pending.')).toBeVisible();
     await expect(page.getByText('pending-access', { exact: true })).toBeVisible();

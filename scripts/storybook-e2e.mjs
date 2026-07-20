@@ -87,7 +87,7 @@ try {
   const storyIds = [
     'design-system-acceptance-edge-case-states--overview',
     'design-system-acceptance-dialog-toast--overlay-and-feedback',
-    'design-system-candidates-button-up--primary',
+    'design-system-experiments-button-contract-exploration--primary',
     'design-system-registry-component-manifest--overview',
     'design-system-architecture-opinionated-wrapper-contract--preferred-candidate-api',
   ];
