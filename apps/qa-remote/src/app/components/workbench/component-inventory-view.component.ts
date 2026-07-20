@@ -1,6 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 import {
   componentManifest,
+  type AuditDisposition,
   type ComponentManifestEntry,
   type LifecycleStatus,
   type ProviderKind,
@@ -8,6 +9,7 @@ import {
 
 type LifecycleFilter = 'all' | LifecycleStatus;
 type ProviderFilter = 'all' | ProviderKind;
+type DispositionFilter = 'all' | AuditDisposition;
 
 @Component({
   selector: 'public-component-inventory-view',
@@ -50,6 +52,10 @@ type ProviderFilter = 'all' | ProviderKind;
           <strong>{{ entriesWithEvidenceGaps() }}</strong>
           <span>Evidence gaps</span>
         </article>
+        <article>
+          <strong>{{ investigateCount() }}</strong>
+          <span>Consolidation decisions pending</span>
+        </article>
       </section>
 
       <section class="inventory-controls" aria-label="Inventory filters">
@@ -82,6 +88,18 @@ type ProviderFilter = 'all' | ProviderKind;
             <option value="service">Service</option>
           </select>
         </label>
+        <label>
+          <span>Disposition</span>
+          <select [value]="dispositionFilter()" (change)="setDispositionFilter($event)">
+            <option value="all">All dispositions</option>
+            <option value="canonical">Canonical</option>
+            <option value="retain">Retain</option>
+            <option value="merge">Merge</option>
+            <option value="replace">Replace</option>
+            <option value="deprecate">Deprecate</option>
+            <option value="investigate">Investigate</option>
+          </select>
+        </label>
       </section>
 
       <div class="inventory-layout">
@@ -96,11 +114,13 @@ type ProviderFilter = 'all' | ProviderKind;
 
           <div class="table-scroll">
             <table>
+              <caption class="visually-hidden">Shipped component inventory and consolidation dispositions</caption>
               <thead>
                 <tr>
                   <th scope="col">Component</th>
                   <th scope="col">Lifecycle</th>
                   <th scope="col">Provider</th>
+                  <th scope="col">Disposition</th>
                   <th scope="col">Repository</th>
                   <th scope="col">Evidence gaps</th>
                   <th scope="col"><span class="visually-hidden">Inspect</span></th>
@@ -115,6 +135,7 @@ type ProviderFilter = 'all' | ProviderKind;
                     </th>
                     <td><span class="status-pill">{{ entry.lifecycle.status }}</span></td>
                     <td>{{ entry.implementation.providerName }}</td>
+                    <td><span class="status-pill">{{ entry.audit.disposition }}</span></td>
                     <td>{{ entry.health.repositoryReadiness }}</td>
                     <td>{{ evidenceGapCount(entry) }}</td>
                     <td>
@@ -131,7 +152,7 @@ type ProviderFilter = 'all' | ProviderKind;
                   </tr>
                 } @empty {
                   <tr>
-                    <td colspan="6" class="empty-cell">No manifest entries match these filters.</td>
+                    <td colspan="7" class="empty-cell">No manifest entries match these filters.</td>
                   </tr>
                 }
               </tbody>
@@ -171,6 +192,16 @@ type ProviderFilter = 'all' | ProviderKind;
                 <span><strong>Keyboard</strong>{{ entry.accessibility.keyboardCoverage }}</span>
                 <span><strong>Screen reader</strong>{{ entry.accessibility.screenReaderAudit }}</span>
               </div>
+            </section>
+
+            <section>
+              <h3>Consolidation decision</h3>
+              <dl class="detail-list">
+                <div><dt>Disposition</dt><dd><span class="status-pill">{{ entry.audit.disposition }}</span></dd></div>
+                <div><dt>Duplication cluster</dt><dd><code>{{ entry.audit.duplicationCluster }}</code></dd></div>
+                <div><dt>Token boundary</dt><dd>{{ entry.audit.tokenBoundary }}</dd></div>
+              </dl>
+              <p class="decision-action">{{ consolidationAction(entry) }}</p>
             </section>
 
             <section>
@@ -222,7 +253,7 @@ type ProviderFilter = 'all' | ProviderKind;
     .summary-grid article { padding: 1rem; }
     .summary-grid strong { display: block; font-size: 1.8rem; }
     .summary-grid span { color: var(--p-text-muted-color); }
-    .inventory-controls { display: grid; grid-template-columns: minmax(16rem, 2fr) repeat(2, minmax(10rem, 1fr)); gap: 0.8rem; padding: 1rem; border: 1px solid var(--p-content-border-color); border-radius: 0.9rem; background: var(--p-content-background); }
+    .inventory-controls { display: grid; grid-template-columns: minmax(16rem, 2fr) repeat(3, minmax(10rem, 1fr)); gap: 0.8rem; padding: 1rem; border: 1px solid var(--p-content-border-color); border-radius: 0.9rem; background: var(--p-content-background); }
     label { display: grid; gap: 0.35rem; color: var(--p-text-muted-color); font-size: 0.78rem; font-weight: 800; }
     input, select { min-height: 2.7rem; width: 100%; padding: 0.6rem 0.75rem; border: 1px solid var(--p-content-border-color); border-radius: 0.55rem; background: var(--p-content-background); color: var(--p-text-color); font: inherit; }
     input:focus-visible, select:focus-visible, button:focus-visible { outline: 0.2rem solid color-mix(in srgb, var(--p-primary-color) 55%, transparent); outline-offset: 0.15rem; }
@@ -252,6 +283,7 @@ type ProviderFilter = 'all' | ProviderKind;
     .detail-panel h3 { margin-bottom: 0.65rem; font-size: 1rem; }
     .detail-panel ul { margin: 0; padding-left: 1.2rem; }
     .detail-panel li + li { margin-top: 0.4rem; }
+    .decision-action { margin: 0.7rem 0 0; color: var(--p-text-muted-color); line-height: 1.5; }
     .evidence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.55rem; }
     .evidence-grid span { display: grid; gap: 0.15rem; padding: 0.55rem; border: 1px solid var(--p-content-border-color); border-radius: 0.45rem; color: var(--p-text-muted-color); font-size: 0.78rem; }
     .evidence-grid strong { color: var(--p-text-color); }
@@ -266,17 +298,20 @@ export class ComponentInventoryViewComponent {
   readonly query = signal('');
   readonly lifecycleFilter = signal<LifecycleFilter>('all');
   readonly providerFilter = signal<ProviderFilter>('all');
+  readonly dispositionFilter = signal<DispositionFilter>('all');
   readonly selectedId = signal(this.entries[0]?.identity.id ?? '');
 
   readonly activeCount = computed(() => this.entries.filter((entry) => entry.lifecycle.status === 'active').length);
   readonly candidateCount = computed(() => this.entries.filter((entry) => entry.lifecycle.status === 'candidate').length);
   readonly blockedCount = computed(() => this.entries.filter((entry) => entry.health.repositoryReadiness === 'blocked').length);
   readonly entriesWithEvidenceGaps = computed(() => this.entries.filter((entry) => this.evidenceGapCount(entry) > 0).length);
+  readonly investigateCount = computed(() => this.entries.filter((entry) => entry.audit.disposition === 'investigate').length);
 
   readonly filteredEntries = computed(() => {
     const query = this.query().trim().toLowerCase();
     const lifecycle = this.lifecycleFilter();
     const provider = this.providerFilter();
+    const disposition = this.dispositionFilter();
 
     return this.entries.filter((entry) => {
       const searchable = [
@@ -291,7 +326,8 @@ export class ComponentInventoryViewComponent {
 
       return (!query || searchable.includes(query))
         && (lifecycle === 'all' || entry.lifecycle.status === lifecycle)
-        && (provider === 'all' || entry.implementation.provider === provider);
+        && (provider === 'all' || entry.implementation.provider === provider)
+        && (disposition === 'all' || entry.audit.disposition === disposition);
     });
   });
 
@@ -314,8 +350,29 @@ export class ComponentInventoryViewComponent {
     this.providerFilter.set((event.target as HTMLSelectElement).value as ProviderFilter);
   }
 
+  setDispositionFilter(event: Event): void {
+    this.dispositionFilter.set((event.target as HTMLSelectElement).value as DispositionFilter);
+  }
+
   selectEntry(id: string): void {
     this.selectedId.set(id);
+  }
+
+  consolidationAction(entry: ComponentManifestEntry): string {
+    switch (entry.audit.disposition) {
+      case 'canonical':
+        return 'Treat this shipped contract as the current reference while completing its recorded remediation.';
+      case 'retain':
+        return 'Keep the implementation and close its named evidence or accessibility gaps.';
+      case 'merge':
+        return 'Move the preferred contract decisions into the canonical component, then publish migration guidance.';
+      case 'replace':
+        return 'Name the replacement, compatibility period, and migration evidence before removal.';
+      case 'deprecate':
+        return 'Publish replacement guidance and retain support through the approved compatibility window.';
+      case 'investigate':
+        return 'Gather usage and behavior evidence before making a canonical, retain, merge, replace, or deprecate decision.';
+    }
   }
 
   evidenceGapCount(entry: ComponentManifestEntry): number {

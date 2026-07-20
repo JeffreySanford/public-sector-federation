@@ -29,6 +29,17 @@ describe('ComponentInventoryViewComponent', () => {
     expect(results.every((entry) => entry.implementation.provider === 'primeng')).toBeTrue();
   });
 
+  it('filters and explains consolidation dispositions from manifest audit metadata', () => {
+    component.dispositionFilter.set('canonical');
+    const canonicalEntries = component.filteredEntries();
+    expect(canonicalEntries.length).toBeGreaterThan(0);
+    expect(canonicalEntries.every((entry) => entry.audit.disposition === 'canonical')).toBeTrue();
+
+    for (const entry of component.entries) {
+      expect(component.consolidationAction(entry).trim().length).toBeGreaterThan(0);
+    }
+  });
+
   it('selects a visible entry and falls back when filtering removes it', () => {
     component.selectEntry('ps-select');
     expect(component.selectedEntry()?.identity.id).toBe('ps-select');
@@ -48,7 +59,8 @@ describe('ComponentInventoryViewComponent', () => {
     const element: HTMLElement = fixture.nativeElement;
 
     expect(element.querySelector('input[type="search"]')).not.toBeNull();
-    expect(element.querySelectorAll('select').length).toBe(2);
+    expect(element.querySelectorAll('select').length).toBe(3);
     expect(element.querySelector('button[aria-label^="Inspect "]')).not.toBeNull();
+    expect(element.textContent).toContain('Consolidation decision');
   });
 });
