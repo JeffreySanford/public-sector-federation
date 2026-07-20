@@ -49,10 +49,12 @@
     <ps-table
       [columns]="programColumns"
       ariaLabel="Program performance"
+      [(sortKey)]="sortKey"
+      [(sortDirection)]="sortDirection"
       [empty]="filteredRows().length === 0"
       emptyMessage="No programs match the current filters."
     >
-      @for (row of filteredRows(); track row.program) {
+      @for (row of pagedRows(); track row.program) {
         <tr>
           <td>{{ row.program }}</td>
           <td>{{ row.cases }}</td>
@@ -65,6 +67,13 @@
         </tr>
       }
     </ps-table>
+    <ps-paginator
+      [totalRecords]="filteredRows().length"
+      itemLabel="programs"
+      ariaLabel="Program performance pagination"
+      [(currentPage)]="currentPage"
+      [(rowsPerPage)]="rowsPerPage"
+    />
   </ps-card>
 
   <ps-card header="Report notes">

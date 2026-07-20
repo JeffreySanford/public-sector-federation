@@ -18,9 +18,11 @@ test.describe('Shell Module Federation', () => {
   });
 
   test('should render shell navigation', async ({ page }) => {
-    // Look for navigation elements (adjust selectors based on actual markup)
-    const nav = page.locator('nav, [role="navigation"]');
-    await expect(nav).toBeVisible();
+    // Scoped to the shell's own federation nav by accessible name: remotes can
+    // (and do, e.g. services-remote's paginator) render their own <nav>
+    // landmarks, so a generic `nav, [role="navigation"]` locator is not
+    // guaranteed to resolve to a single element.
+    await expect(page.getByRole('navigation', { name: 'Federated modules' })).toBeVisible();
   });
 
   test('should expose remotes in window object', async ({ page }) => {

@@ -240,6 +240,42 @@ test.describe('Storybook Stories - Table Paginator Functionality', () => {
     const { dataRows } = await getTableStory(page);
     await expect(dataRows).toHaveCount(5);
   });
+
+  test('should support 5, 10, and 15 rows-per-page options', async ({ page }) => {
+    const { paginator } = await getTableStory(page);
+    const rowsSelect = paginator.locator('select');
+    const optionValues = await rowsSelect
+      .locator('option')
+      .evaluateAll((options) => options.map((option) => (option as HTMLOptionElement).value));
+    expect(optionValues).toEqual(['5', '10', '15']);
+
+    await rowsSelect.selectOption('15');
+    await expect(paginator.locator('.paginator-info')).toContainText('Showing 1 to 10 of 10 programs');
+  });
+
+  test('should sort a string column ascending and descending', async ({ page }) => {
+    const { dataRows } = await getTableStory(page);
+    const programHeader = page.getByRole('columnheader', { name: 'Program' });
+
+    await programHeader.getByRole('button').click();
+    await expect(programHeader).toHaveAttribute('aria-sort', 'ascending');
+    await expect(dataRows.first()).toContainText('Benefits renewal');
+
+    await programHeader.getByRole('button').click();
+    await expect(programHeader).toHaveAttribute('aria-sort', 'descending');
+    await expect(dataRows.first()).toContainText('Transit assistance');
+  });
+
+  test('should sort a numeric column by value, not string order', async ({ page }) => {
+    const { dataRows } = await getTableStory(page);
+    const casesHeader = page.getByRole('columnheader', { name: 'Cases' });
+
+    await casesHeader.getByRole('button').click();
+    await expect(casesHeader).toHaveAttribute('aria-sort', 'ascending');
+    // Ascending numeric order starts at 72 (Permit inspections); a naive string
+    // sort would incorrectly place "137" or "158" before "72".
+    await expect(dataRows.first()).toContainText('Permit inspections');
+  });
 });
 
 test.describe('Storybook Stories - Error Handling', () => {

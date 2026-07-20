@@ -167,29 +167,34 @@
     <div class="panel-heading">
       <h3>Case queue</h3>
     </div>
-    <ps-table [columns]="caseQueueColumns" ariaLabel="Case queue">
-      <tr>
-        <td>PS-2026-1042</td>
-        <td>Jordan Avery</td>
-        <td>Benefits renewal</td>
-        <td><ps-tag value="Review" tone="warn" /></td>
-        <td>Today</td>
-      </tr>
-      <tr>
-        <td>PS-2026-1043</td>
-        <td>Sam Rivera</td>
-        <td>Housing assistance</td>
-        <td><ps-tag value="Ready" tone="success" /></td>
-        <td>Tomorrow</td>
-      </tr>
-      <tr>
-        <td>PS-2026-1044</td>
-        <td>Lee Morgan</td>
-        <td>Permit request</td>
-        <td><ps-tag value="Blocked" tone="danger" /></td>
-        <td>Jul 12</td>
-      </tr>
+    <div class="table-toolbar">
+      <ps-input fieldId="caseQueueSearch" label="Search case queue" type="search" [(value)]="caseQueueQuery" />
+    </div>
+    <ps-table
+      [columns]="caseQueueColumns"
+      ariaLabel="Case queue"
+      [(sortKey)]="caseQueueSortKey"
+      [(sortDirection)]="caseQueueSortDirection"
+      [empty]="filteredCaseQueueRows().length === 0"
+      emptyMessage="No cases match the current filters."
+    >
+      @for (row of pagedCaseQueueRows(); track row.case) {
+        <tr>
+          <td>{{ row.case }}</td>
+          <td>{{ row.applicant }}</td>
+          <td>{{ row.program }}</td>
+          <td><ps-tag [value]="row.status" [tone]="row.statusTone" /></td>
+          <td>{{ row.due }}</td>
+        </tr>
+      }
     </ps-table>
+    <ps-paginator
+      [totalRecords]="filteredCaseQueueRows().length"
+      itemLabel="cases"
+      ariaLabel="Case queue pagination"
+      [(currentPage)]="caseQueueCurrentPage"
+      [(rowsPerPage)]="caseQueueRowsPerPage"
+    />
   </section>
 
   <section class="service-panel">

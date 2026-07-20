@@ -4,6 +4,7 @@ import {
   PublicButtonComponent,
   PublicCardComponent,
   PublicInputComponent,
+  PublicPaginatorComponent,
   PublicProgressComponent,
   PublicTableColumn,
   PublicTableComponent,
@@ -27,6 +28,7 @@ interface ReportRow {
     PublicButtonComponent,
     PublicCardComponent,
     PublicInputComponent,
+    PublicPaginatorComponent,
     PublicProgressComponent,
     PublicTableComponent,
     PublicTagComponent,
@@ -65,14 +67,18 @@ export class ReportingRemoteComponent {
     },
   ];
   query = '';
+  sortKey: string | null = null;
+  sortDirection: 'asc' | 'desc' = 'asc';
+  currentPage = 1;
+  rowsPerPage = 5;
 
   readonly programColumns: PublicTableColumn[] = [
     { key: 'program', header: 'Program', sortable: true },
-    { key: 'cases', header: 'Cases', align: 'end' },
-    { key: 'status', header: 'Status' },
-    { key: 'region', header: 'Region' },
-    { key: 'sla', header: 'SLA', align: 'end' },
-    { key: 'owner', header: 'Owner' },
+    { key: 'cases', header: 'Cases', align: 'end', sortable: true },
+    { key: 'status', header: 'Status', sortable: true },
+    { key: 'region', header: 'Region', sortable: true },
+    { key: 'sla', header: 'SLA', align: 'end', sortable: true },
+    { key: 'owner', header: 'Owner', sortable: true },
   ];
 
   severity(status: ReportRow['status']): 'success' | 'warn' | 'danger' {
@@ -81,12 +87,34 @@ export class ReportingRemoteComponent {
 
   filteredRows(): ReportRow[] {
     const query = this.query.trim().toLowerCase();
-    if (!query) {
-      return this.rows;
+    const rows = query
+      ? this.rows.filter((row) =>
+          [row.program, row.status, row.owner, row.region].some((value) => value.toLowerCase().includes(query)),
+        )
+      : this.rows;
+
+    const sortKey = this.sortKey;
+    if (!sortKey || !this.isReportRowKey(sortKey)) {
+      return rows;
     }
 
-    return this.rows.filter((row) =>
-      [row.program, row.status, row.owner, row.region].some((value) => value.toLowerCase().includes(query)),
-    );
+    const direction = this.sortDirection === 'asc' ? 1 : -1;
+    return [...rows].sort((left, right) => {
+      const leftValue = left[sortKey];
+      const rightValue = right[sortKey];
+      if (typeof leftValue === 'number' && typeof rightValue === 'number') {
+        return direction * (leftValue - rightValue);
+      }
+      return direction * String(leftValue).localeCompare(String(rightValue));
+    });
+  }
+
+  pagedRows(): ReportRow[] {
+    const start = (this.currentPage - 1) * this.rowsPerPage;
+    return this.filteredRows().slice(start, start + this.rowsPerPage);
+  }
+
+  private isReportRowKey(key: string): key is keyof ReportRow {
+    return key === 'program' || key === 'cases' || key === 'status' || key === 'region' || key === 'sla' || key === 'owner';
   }
 }

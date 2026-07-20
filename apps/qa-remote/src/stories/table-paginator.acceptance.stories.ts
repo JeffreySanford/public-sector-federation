@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import type { Meta, StoryObj } from '@storybook/angular';
-import { PublicButtonComponent, PublicPaginatorComponent, PublicTagComponent } from '@public-sector/ui-patterns';
+import {
+  PublicButtonComponent,
+  PublicInputComponent,
+  PublicPaginatorComponent,
+  type PublicTableColumn,
+  PublicTableComponent,
+  PublicTagComponent,
+} from '@public-sector/ui-patterns';
 
 interface Row {
   program: string;
@@ -23,113 +30,104 @@ const rows: Row[] = [
   { program: 'Food assistance', cases: 376, status: 'On track', region: 'West', sla: 95 },
 ];
 
+const columns: PublicTableColumn[] = [
+  { key: 'program', header: 'Program', sortable: true },
+  { key: 'cases', header: 'Cases', align: 'end', sortable: true },
+  { key: 'status', header: 'Status', sortable: true },
+  { key: 'region', header: 'Region', sortable: true },
+  { key: 'sla', header: 'SLA', align: 'end', sortable: true },
+];
+
+function isRowKey(key: string): key is keyof Row {
+  return key === 'program' || key === 'cases' || key === 'status' || key === 'region' || key === 'sla';
+}
+
 @Component({
   selector: 'public-table-paginator-acceptance-story',
   standalone: true,
-  imports: [PublicPaginatorComponent, PublicTagComponent],
+  imports: [PublicInputComponent, PublicPaginatorComponent, PublicTableComponent, PublicTagComponent],
   template: `
     <main class="storybook-shell">
       <header class="story-header">
-        <ps-tag value="Acceptance: Table / Paginator" tone="info" />
+        <ps-tag value="Acceptance: Table / Input / Paginator" tone="info" />
         <div>
           <h1>Filter and page through active programs</h1>
-          <p>Search narrows the dataset before pagination, and the paginator exposes 5, 10, and 15 rows per page.</p>
+          <p>Search narrows the dataset, every column is sortable, and the paginator exposes 5, 10, and 15 rows per page.</p>
         </div>
       </header>
 
-      <div class="toolbar">
-        <div>
-          <strong>Program performance</strong>
-          <span>Filter by program name, status, region, cases, or SLA.</span>
-        </div>
-        <input
-          type="search"
-          placeholder="Search programs"
-          aria-label="Search programs"
-          [value]="query"
-          (input)="onQueryChange(($any($event.target).value ?? '').toString())"
-        />
-      </div>
+      <ps-input fieldId="programSearch" label="Search programs" type="search" [(value)]="query" />
 
-      <div class="table-shell">
-        <table class="story-table">
-          <thead>
+      <ps-table
+        [columns]="columns"
+        ariaLabel="Story program table"
+        [(sortKey)]="sortKey"
+        [(sortDirection)]="sortDirection"
+        [empty]="filteredRows.length === 0"
+        emptyMessage="No programs match the current filters."
+      >
+        @for (row of pagedRows; track row.program) {
           <tr>
-            <th>Program</th>
-            <th>Cases</th>
-            <th>Status</th>
-            <th>Region</th>
-            <th>SLA</th>
+            <td><strong>{{ row.program }}</strong></td>
+            <td>{{ row.cases }}</td>
+            <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
+            <td>{{ row.region }}</td>
+            <td>{{ row.sla }}%</td>
           </tr>
-          </thead>
-          <tbody>
-            @if (pagedRows.length > 0) {
-              @for (row of pagedRows; track row.program) {
-                <tr>
-                  <td><strong>{{ row.program }}</strong></td>
-                  <td>{{ row.cases }}</td>
-                  <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
-                  <td>{{ row.region }}</td>
-                  <td>{{ row.sla }}%</td>
-                </tr>
-              }
-            } @else {
-              <tr>
-                <td colspan="5">No programs match the current filters.</td>
-              </tr>
-            }
-          </tbody>
-        </table>
-        <ps-paginator
-          ariaLabel="Story program pagination"
-          itemLabel="programs"
-          [totalRecords]="filteredRows.length"
-          [(currentPage)]="currentPage"
-          [(rowsPerPage)]="rowsPerPage"
-          [rowsPerPageOptions]="[5, 10, 15]"
-        />
-      </div>
+        }
+      </ps-table>
+
+      <ps-paginator
+        ariaLabel="Story program pagination"
+        itemLabel="programs"
+        [totalRecords]="filteredRows.length"
+        [(currentPage)]="currentPage"
+        [(rowsPerPage)]="rowsPerPage"
+      />
     </main>
   `,
   styles: `
     .storybook-shell{display:grid;gap:1rem;max-width:72rem;margin:0 auto}
     .story-header{display:grid;gap:.5rem}
-    .toolbar{display:flex;flex-wrap:wrap;gap:1rem;align-items:end;justify-content:space-between}
-    .toolbar div{display:grid;gap:.25rem}
-    input{min-height:2.5rem;min-width:min(100%,20rem);padding:.6rem .75rem;border:1px solid var(--p-content-border-color);border-radius:.5rem;background:var(--p-content-background);color:var(--p-text-color)}
-    .table-shell{display:grid;gap:1rem}
-    .story-table{width:100%;border-collapse:collapse}
-    .story-table th,.story-table td{padding:.8rem;border-bottom:1px solid var(--p-content-border-color);text-align:left}
-    .story-table th{background:color-mix(in srgb,var(--p-content-background) 86%,var(--p-primary-color));font-size:.8rem;text-transform:uppercase}
   `,
 })
 class TablePaginatorAcceptanceStoryComponent {
-  readonly rows = rows;
+  readonly columns = columns;
   query = '';
+  sortKey: string | null = null;
+  sortDirection: 'asc' | 'desc' = 'asc';
   currentPage = 1;
   rowsPerPage = 5;
 
   get filteredRows(): Row[] {
     const query = this.query.trim().toLowerCase();
-    if (!query) {
-      return this.rows;
+    const filtered = query
+      ? rows.filter((row) =>
+          [row.program, row.status, row.region, String(row.cases), String(row.sla)].some((value) =>
+            value.toLowerCase().includes(query),
+          ),
+        )
+      : rows;
+
+    const sortKey = this.sortKey;
+    if (!sortKey || !isRowKey(sortKey)) {
+      return filtered;
     }
 
-    return this.rows.filter((row) =>
-      [row.program, row.status, row.region, String(row.cases), String(row.sla)].some((value) =>
-        value.toLowerCase().includes(query),
-      ),
-    );
+    const direction = this.sortDirection === 'asc' ? 1 : -1;
+    return [...filtered].sort((left, right) => {
+      const leftValue = left[sortKey];
+      const rightValue = right[sortKey];
+      if (typeof leftValue === 'number' && typeof rightValue === 'number') {
+        return direction * (leftValue - rightValue);
+      }
+      return direction * String(leftValue).localeCompare(String(rightValue));
+    });
   }
 
   get pagedRows(): Row[] {
     const start = (this.currentPage - 1) * this.rowsPerPage;
     return this.filteredRows.slice(start, start + this.rowsPerPage);
-  }
-
-  onQueryChange(query: string): void {
-    this.query = query;
-    this.currentPage = 1;
   }
 
   severity(status: Row['status']): 'success' | 'warn' | 'danger' {
@@ -140,7 +138,7 @@ class TablePaginatorAcceptanceStoryComponent {
 @Component({
   selector: 'public-table-paginator-stress-story',
   standalone: true,
-  imports: [PublicButtonComponent, PublicPaginatorComponent, PublicTagComponent],
+  imports: [PublicButtonComponent, PublicPaginatorComponent, PublicTableComponent, PublicTagComponent],
   template: `
     <main class="storybook-shell">
       <header class="story-header">
@@ -156,64 +154,53 @@ class TablePaginatorAcceptanceStoryComponent {
           [label]="loading ? 'Hide loading state' : 'Show loading state'"
           icon="pi pi-spinner"
           [outlined]="true"
-          (buttonClick)="toggleLoading()"
+          (activated)="toggleLoading()"
         />
         <ps-button
           [label]="showEmpty ? 'Restore dataset' : 'Show empty dataset'"
           icon="pi pi-inbox"
           [outlined]="true"
-          (buttonClick)="toggleEmpty()"
+          (activated)="toggleEmpty()"
         />
       </div>
 
-      <div class="table-shell" [attr.aria-busy]="loading">
+      <div [attr.aria-busy]="loading">
         @if (loading) {
           <div class="loading-banner" aria-live="polite">
             <strong>Loading table rows...</strong>
             <span>Stress state is active so the table stays in a visible loading mode.</span>
           </div>
         }
-        <table class="story-table">
-          <thead>
-          <tr>
-            <th>Program</th>
-            <th>Cases</th>
-            <th>Status</th>
-            <th>Region</th>
-            <th>SLA</th>
-          </tr>
-          </thead>
-          <tbody>
-            @if (loading) {
-              @for (row of loadingRows; track row) {
-                <tr>
-                  <td colspan="5" class="loading-cell">Loading table rows...</td>
-                </tr>
-              }
-            } @else if (activePagedRows.length > 0) {
-              @for (row of activePagedRows; track row.program) {
-                <tr>
-                  <td><strong>{{ row.program }}</strong></td>
-                  <td>{{ row.cases }}</td>
-                  <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
-                  <td>{{ row.region }}</td>
-                  <td>{{ row.sla }}%</td>
-                </tr>
-              }
-            } @else {
+        <ps-table
+          [columns]="columns"
+          ariaLabel="Stress story program table"
+          [empty]="!loading && activeRows.length === 0"
+          emptyMessage="No programs are available for the selected reporting period."
+        >
+          @if (loading) {
+            @for (row of loadingRows; track row) {
               <tr>
-                <td colspan="5">No programs are available for the selected reporting period.</td>
+                <td colspan="5" class="loading-cell">Loading table rows...</td>
               </tr>
             }
-          </tbody>
-        </table>
+          } @else {
+            @for (row of activePagedRows; track row.program) {
+              <tr>
+                <td><strong>{{ row.program }}</strong></td>
+                <td>{{ row.cases }}</td>
+                <td><ps-tag [value]="row.status" [tone]="severity(row.status)" /></td>
+                <td>{{ row.region }}</td>
+                <td>{{ row.sla }}%</td>
+              </tr>
+            }
+          }
+        </ps-table>
         <ps-paginator
           ariaLabel="Stress story pagination"
           itemLabel="programs"
           [totalRecords]="activeRows.length"
           [(currentPage)]="currentPage"
           [(rowsPerPage)]="rowsPerPage"
-          [rowsPerPageOptions]="[5, 10, 15]"
         />
       </div>
     </main>
@@ -223,10 +210,6 @@ class TablePaginatorAcceptanceStoryComponent {
     .story-header{display:grid;gap:.5rem}
     .toolbar{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
     .toolbar--actions{justify-content:flex-start}
-    .table-shell{display:grid;gap:1rem}
-    .story-table{width:100%;border-collapse:collapse}
-    .story-table th,.story-table td{padding:.8rem;border-bottom:1px solid var(--p-content-border-color);text-align:left}
-    .story-table th{background:color-mix(in srgb,var(--p-content-background) 86%,var(--p-primary-color));font-size:.8rem;text-transform:uppercase}
     .loading-banner{display:grid;gap:.25rem;padding:.85rem 1rem;border:1px solid var(--p-content-border-color);border-radius:.75rem;background:color-mix(in srgb,var(--p-primary-color) 8%,var(--p-content-background))}
     .loading-cell{color:var(--p-text-muted-color);font-style:italic}
   `,
@@ -241,7 +224,7 @@ class TablePaginatorStressStoryComponent extends TablePaginatorAcceptanceStoryCo
       return [];
     }
 
-    return this.showEmpty ? [] : this.rows;
+    return this.showEmpty ? [] : rows;
   }
 
   get activePagedRows(): Row[] {

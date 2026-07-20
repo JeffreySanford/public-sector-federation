@@ -300,6 +300,12 @@ small {
   display: block;
 }
 
+.table-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 1rem;
+}
+
 @media (max-width: 900px) {
   .metric-grid,
   .remote__grid {
