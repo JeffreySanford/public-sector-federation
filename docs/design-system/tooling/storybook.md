@@ -22,5 +22,5 @@ subapplication or shell-composed runtime.
 
 Storybook proves component behavior in isolation. Shell validation proves the
 same component works after integration. Playwright makes the evidence
-repeatable. Zeroheight explains when to use the component and links to the
+repeatable. Starlight explains when to use the component and links to the
 evidence.

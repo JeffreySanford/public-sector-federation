@@ -5,7 +5,7 @@
 > **Candidate selector:** `ps-up-button`
 > **Package:** `@public-sector/ui-patterns`
 > **Scope:** Button only; this is not a migration of the broader public-sector design system.
-> **Live Zeroheight page:** [Button Candidate](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-Candidate)
+> **Live documentation page:** Button Candidate (Starlight)
 
 ## Introduction
 
@@ -15,13 +15,13 @@ The existing `ps-button` remains the stable public-sector Button wrapper. The ex
 
 The Candidate is deliberately narrow. Only Button-related UP Design System information and shared foundations required by the Button are in scope. Card, Table, Dialog, Toast, navigation, form controls, and other wrappers continue to use the existing public-sector contract.
 
-The live Zeroheight page is the governed documentation destination:
+The live Starlight page is the governed documentation destination:
 
-- [Open the Button Candidate page in Zeroheight](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-Candidate)
+- Open the Button Candidate page on the Starlight documentation site.
 
-The repository remains the implementation and validation source of truth. Zeroheight communicates status, approved guidance, ownership, limitations, and evidence.
+The repository remains the implementation and validation source of truth. Starlight communicates status, approved guidance, ownership, limitations, and evidence.
 
-## Recommended Zeroheight tabs
+## Recommended Starlight tabs
 
 Use four tabs. Four provides enough separation for design, development, and governance audiences without forcing readers to click through many small fragments.
 
@@ -34,11 +34,11 @@ Use four tabs. Four provides enough separation for design, development, and gove
 
 Do not create a separate tab for every short section. Keep related sections together so readers can scan one complete subject area.
 
-If the Zeroheight workspace does not support the desired tab presentation, use the same four labels as major headings or child pages.
+If the Starlight workspace does not support the desired tab presentation, use the same four labels as major headings or child pages.
 
 ## Status tag
 
-Use the custom **Candidate** status when it is available. If the workspace currently provides only the default statuses shown in Zeroheight, use **BETA** temporarily and display **Candidate** prominently in the page introduction. Replace the temporary tag after the governed lifecycle vocabulary is configured.
+Use the custom **Candidate** status when it is available. If the workspace currently provides only the default statuses shown in Starlight, use **BETA** temporarily and display **Candidate** prominently in the page introduction. Replace the temporary tag after the governed lifecycle vocabulary is configured.
 
 ## Source-of-truth boundaries
 
@@ -49,10 +49,9 @@ Use the custom **Candidate** status when it is available. If the workspace curre
 | Code repository | Wrapper API, implementation, tests, releases, and migration history. |
 | Storybook | Live isolated behavior, variants, states, interactions, and accessibility evidence. |
 | Component Lab and shell | Runtime integration, themes, modes, federation, and comparison evidence. |
-| Zeroheight | Lifecycle, approved guidance, ownership, limitations, and evidence links. |
+| Starlight | Lifecycle, approved guidance, ownership, limitations, and evidence links. |
 
 ## Related documentation
 
 - [Button Candidate integration plan](./button-candidate-integration-plan.md)
 - [Experiments view checklist](./button-candidates-view-checklist.md)
-- [Zeroheight governance model](../governance/zeroheight-governance-model.md)

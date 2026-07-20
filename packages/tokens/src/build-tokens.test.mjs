@@ -19,7 +19,7 @@ describe('token build artifacts', () => {
 
     assert.equal(sample.$extensions['public-sector'].source, 'Figma');
     assert.equal(sample.$extensions['public-sector'].artifact, 'DTCG-compatible JSON');
-    assert.match(sample.$extensions['public-sector'].purpose, /Zeroheight is not part of token creation/);
+    assert.match(sample.$extensions['public-sector'].purpose, /No external documentation platform is part of token creation/);
     assert.deepEqual(sample.$extensions['public-sector'].tiers, [
       'primitive',
       'semantic',
@@ -48,32 +48,6 @@ describe('token build artifacts', () => {
 
     assert.ok(css.includes('Stable PrimeNG component overrides'), 'component override section should be present');
     assert.ok(css.includes('--p-datatable-header-cell-background'), 'PrimeNG datatable overrides should be emitted');
-  });
-
-  it('creates a Zeroheight token export with metadata and PrimeNG family mapping', async () => {
-    const themes = await readJson(join('tokens', 'themes.json'));
-    const mappingRules = await readJson(join('tokens', 'mapping-rules.json'));
-    const zeroheight = await readJson('zeroheight-tokens.json');
-    const expectedCount = themes.selectors.reduce((count, selector) => count + Object.keys(selector.tokens).length, 0);
-
-    assert.equal(zeroheight.generatedFrom, 'packages/tokens/src/tokens/*.json');
-    assert.equal(zeroheight.mappingRulesVersion, mappingRules.version);
-    assert.deepEqual(zeroheight.authoritativeInput, mappingRules.authoritativeInput);
-    assert.equal(zeroheight.figmaDtcgInput.file, 'packages/tokens/src/tokens/figma-dtcg.sample.json');
-    assert.equal(zeroheight.figmaDtcgInput.source, 'Figma');
-    assert.equal(zeroheight.figmaDtcgInput.artifact, 'DTCG-compatible JSON');
-    assert.equal(zeroheight.figmaDtcgInput.validated, true);
-    assert.ok(zeroheight.figmaDtcgInput.validationChecks.includes('primeng-button-primary-background'));
-    assert.deepEqual(zeroheight.normalizationRules, mappingRules.normalizationRules);
-    assert.equal(zeroheight.tokenCount, expectedCount);
-    assert.equal(zeroheight.tokens.length, expectedCount);
-
-    const buttonToken = zeroheight.tokens.find((token) => token.name === '--p-button-primary-background');
-    assert.ok(buttonToken, 'button background token should be exported');
-    assert.equal(buttonToken.primeNgFamily, 'Button');
-    assert.equal(buttonToken.cssVariable, '--p-button-primary-background');
-    assert.equal(buttonToken.mappingRulesVersion, mappingRules.version);
-    assert.ok(buttonToken.description.length > 0);
   });
 
   it('creates DTCG-compatible design tokens for primitive and importable theme values', async () => {
@@ -105,16 +79,11 @@ describe('token build artifacts', () => {
 
   it('keeps every documented normalization rule represented in generated artifacts', async () => {
     const mappingRules = await readJson(join('tokens', 'mapping-rules.json'));
-    const zeroheight = await readJson('zeroheight-tokens.json');
     const designTokens = await readJson('design-tokens.json');
     const css = await readText('tokens.css');
 
     assert.deepEqual(
       designTokens.$extensions['public-sector'].normalizationRules.map((rule) => rule.id),
-      mappingRules.normalizationRules.map((rule) => rule.id),
-    );
-    assert.deepEqual(
-      zeroheight.normalizationRules.map((rule) => rule.id),
       mappingRules.normalizationRules.map((rule) => rule.id),
     );
 

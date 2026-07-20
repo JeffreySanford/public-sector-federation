@@ -11,5 +11,5 @@ This writes `component-manifest.json` from the typed registry at
 
 Do not hand-edit the JSON artifact. Storybook reads the typed registry directly so
 local and CI builds do not depend on a committed generated file. The JSON projection
-exists for external consumers such as future zeroheight automation, governance
-reports, and agent tooling.
+exists for external consumers such as future documentation-platform automation,
+governance reports, and agent tooling.

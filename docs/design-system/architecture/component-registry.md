@@ -51,7 +51,7 @@ and documentation evidence visible.
     "title": "Design System/Status Card",
     "url": "/?path=/story/design-system-status-card--states"
   },
-  "zeroheight": {
+  "documentation": {
     "page": "Components / Status Card",
     "documents": ["usage", "accessibility", "content guidance"]
   },

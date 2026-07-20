@@ -1,7 +1,7 @@
 export type CandidateLinkStatus = 'Available' | 'Local' | 'Pending';
 
 export interface CandidateLink {
-  id: 'storybook' | 'zeroheight' | 'figma' | 'source' | 'stories' | 'tests' | 'plan';
+  id: 'storybook' | 'figma' | 'source' | 'stories' | 'tests' | 'plan';
   label: string;
   description: string;
   status: CandidateLinkStatus;
@@ -29,15 +29,6 @@ export const candidateLinks: readonly CandidateLink[] = [
       'Runs locally on port 4400 and opens the Current vs Candidate story with the Storybook toolbar and addons.',
     status: 'Local',
     href: UP_BUTTON_STORYBOOK_URL,
-    external: true,
-  },
-  {
-    id: 'zeroheight',
-    label: 'Open Button Candidate in Zeroheight',
-    description:
-      'Governed Candidate documentation with status, comparison guidance, design and token direction, developer usage, and validation evidence.',
-    status: 'Available',
-    href: 'https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-Candidate',
     external: true,
   },
   {
@@ -74,7 +65,7 @@ export const candidateLinks: readonly CandidateLink[] = [
   {
     id: 'plan',
     label: 'UP Button candidate integration plan',
-    description: 'Token, Figma, Storybook, testing, Zeroheight, and promotion checklist.',
+    description: 'Token, Figma, Storybook, testing, and promotion checklist.',
     status: 'Available',
     href: `${githubRoot}/docs/design-system/components/button-candidate-integration-plan.md`,
     external: true,

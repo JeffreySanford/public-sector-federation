@@ -4,7 +4,6 @@ export type ProviderKind = 'primeng' | 'native' | 'composite' | 'service';
 export type EvidenceStatus = 'complete' | 'partial' | 'missing' | 'not-applicable';
 export type ManualAuditStatus = 'passed' | 'failed' | 'pending' | 'not-started' | 'not-applicable';
 export type FigmaStatus = 'linked' | 'pending-access' | 'not-linked' | 'not-applicable';
-export type ZeroheightStatus = 'published' | 'draft' | 'planned' | 'not-linked' | 'not-applicable';
 export type ReadinessStatus = 'ready' | 'partial' | 'blocked';
 export type AuditDisposition = 'canonical' | 'retain' | 'merge' | 'replace' | 'deprecate' | 'investigate';
 export type FindingCategory = 'api' | 'token' | 'accessibility';
@@ -106,11 +105,6 @@ export interface ComponentManifestEntry {
     componentKey: string | null;
     componentSetKey: string | null;
     propertyMappings: Array<{ figmaProperty: string; publicApiProperty: string }>;
-  };
-  zeroheight: {
-    status: ZeroheightStatus;
-    pageId: string | null;
-    template: string | null;
   };
   governance: {
     tier: 'core' | 'candidate' | 'experimental' | 'team-stewarded';

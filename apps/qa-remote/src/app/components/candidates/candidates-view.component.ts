@@ -201,12 +201,6 @@ export class CandidatesViewComponent {
       status: 'In review',
     },
     {
-      evidence: 'Zeroheight Button page',
-      currentState:
-        'Portal is available; component-specific curated guidance is not yet published.',
-      status: 'Pending',
-    },
-    {
       evidence: 'Figma Button source',
       currentState:
         'Approved UP Button component and variable URLs still need to be recorded.',
@@ -240,7 +234,7 @@ export class CandidatesViewComponent {
     'Candidate ps-up-button renders beside the stable Button with identical comparison inputs.',
     'Neutral, vibrant, and pastel variants work in light and dark modes.',
     'Storybook comparison and source links remain available when the iframe is unavailable.',
-    'Zeroheight and Figma publication states are visible without becoming runtime dependencies.',
+    'Figma publication status is visible without becoming a runtime dependency.',
     'Keyboard, focus, disabled, loading, long-label, and responsive behavior are reviewed.',
     'Direct QA remote and shell-composed Playwright checks pass.',
     'Promotion remains blocked until verified UP Button token values replace sample assumptions.',

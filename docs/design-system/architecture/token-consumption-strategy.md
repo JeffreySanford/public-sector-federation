@@ -2,7 +2,7 @@
 
 Given the required federated Web Component architecture, design tokens should be
 treated as a versioned runtime contract shared by the shell and each remote.
-They should not be owned by Zeroheight, and they should not be treated as
+They should not be owned by Starlight, and they should not be treated as
 shell-only styling.
 
 ## Recommendation
@@ -32,7 +32,7 @@ tokens package
   -> component registry
   -> shell and federated Web Components
   -> Storybook / shell validation / Playwright evidence
-  -> Zeroheight documentation
+  -> Starlight documentation
 ```
 
 The shell and each remote should resolve the same semantic token names. Remotes
@@ -54,14 +54,14 @@ is rooted at `:root` and the theme class is on `html`, overlays should inherit
 the same token and theme context. This should still be covered by integration
 tests.
 
-Zeroheight should document the token contract and evidence, but it should not
+Starlight should document the token contract and evidence, but it should not
 own runtime styling or subapplication configuration. `remoteEntry` remains
 subapplication configuration.
 
 ## Evidence Model
 
 Storybook should prove isolated behavior. Shell-mounted routes should prove
-integrated behavior. Playwright should make the evidence repeatable. Zeroheight
+integrated behavior. Playwright should make the evidence repeatable. Starlight
 should document approved usage, lifecycle status, token guidance, and evidence
 links, but it should not be the runtime source of truth.
 

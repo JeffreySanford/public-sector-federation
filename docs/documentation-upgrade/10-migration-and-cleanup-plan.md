@@ -28,7 +28,7 @@ flowchart TD
   Facade --> Flagship[Publish flagship component pages]
   Flagship --> Generated[Generate manifest-driven catalog]
   Generated --> Relabel[Relabel public QA and candidate surfaces]
-  Relabel --> Archive[Archive Zeroheight and assignment-specific artifacts]
+  Relabel --> Archive[Archive assignment-specific artifacts]
   Archive --> Normalize[Normalize names and selectors over time]
   Normalize --> Release[Publish design-system-focused release]
 ```
@@ -85,7 +85,7 @@ Target public framing:
 
 Current framing:
 
-> UP Button Candidate with promotion blockers and Zeroheight guidance.
+> UP Button Candidate with promotion blockers and Starlight guidance.
 
 Target framing:
 
@@ -104,7 +104,6 @@ Target framing:
 | Skills Demonstrated | Remove |
 | UP Button Candidate | Button Contract Exploration |
 | Stable vs Candidate | Current Contract vs Proposed Contract |
-| Zeroheight Governance | Documentation Platform Experiment |
 | externally blocked | awaiting external decision, when user-facing |
 
 Internal project names may remain temporarily while public labels change.
@@ -116,14 +115,11 @@ Move or copy historical content into clearly marked archive locations before del
 ### Tooling archive
 
 ```text
-tools/archive/zeroheight/
 tools/archive/reporting/
 ```
 
 Candidates:
 
-- Zeroheight export scripts;
-- Zeroheight publish scripts;
 - screenshot ZIP workflows;
 - progress screenshot automation;
 - report publication scripts;
@@ -132,14 +128,12 @@ Candidates:
 ### Documentation archive
 
 ```text
-docs/archive/zeroheight/
 docs/archive/candidate-button/
 docs/archive/internal-process/
 ```
 
 Candidates:
 
-- Zeroheight-specific page assembly instructions;
 - tab-layout instructions;
 - subscription or Enterprise-access limitations;
 - UP-specific governance notes;
@@ -167,7 +161,6 @@ Do not remove:
 - legacy selectors without a compatibility plan;
 - stable component APIs solely to simplify documentation;
 - story aliases still used by published links;
-- Zeroheight files before the new docs site contains equivalent useful guidance;
 - backend or federation applications merely because they are secondary to the new homepage.
 
 ## Selector normalization
@@ -245,7 +238,6 @@ and automated visual and interaction validation.
 - `portfolio-grade`;
 - `skills demonstrated`;
 - exact dated test totals;
-- Zeroheight references;
 - broad disclaimers.
 
 ## Storybook migration
@@ -263,7 +255,7 @@ and automated visual and interaction validation.
 
 ```mermaid
 flowchart LR
-  Old[Existing Markdown and Zeroheight sources] --> Classify{Classify content}
+  Old[Existing Markdown sources] --> Classify{Classify content}
   Classify --> Guidance[User guidance]
   Classify --> Architecture[Architecture]
   Classify --> Evidence[Quality evidence]
@@ -279,7 +271,6 @@ flowchart LR
 Before the public release, search all public content for:
 
 - SitePen
-- Zeroheight
 - UP
 - Neil
 - Dan
@@ -321,7 +312,7 @@ Low-risk changes:
 
 This phase should be understood as the operational follow-through for the Storybook/Chromatic and accessibility workstreams from 8 and 9, not as a separate afterthought.
 
-- [ ] inventory and remove Zeroheight-specific report and publication logic from the release path;
+- [x] inventory and remove third-party documentation-platform report and publication logic from the release path;
 - [ ] add neutral docs-generation commands for Starlight, Storybook, and manifest-driven views;
 - [ ] archive or decommission publication scripts and environment variables that only support retired workflows;
 - [ ] finish the Storybook hierarchy so stable components, experiments, and system-health views are clearly separated;
@@ -399,7 +390,7 @@ Before deleting or renaming anything:
 - [ ] Historical evidence is archived rather than silently lost.
 - [ ] Public labels use design-system vocabulary.
 - [ ] Federation and backend remain available as supporting evidence.
-- [ ] Zeroheight is no longer required for documentation publication.
+- [x] The retired third-party documentation platform is no longer required for documentation publication.
 - [ ] The accessibility-quality-gate setup for NVDA is documented and can be followed by a new contributor.
 - [ ] The Button comparison has a clear long-term disposition.
 - [ ] Selector inconsistency is tracked with a migration path.

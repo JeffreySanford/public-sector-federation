@@ -24,7 +24,7 @@ request or opportunity
   -> technical review gate
   -> validation evidence
   -> promotion decision
-  -> Zeroheight publication
+  -> Starlight publication
 ```
 
 ## Contribution Proposal
@@ -299,12 +299,12 @@ specific status model is approved.
 Promotion should be evidence-backed, not automatic. A successful build is not
 the same as an approved shared component.
 
-## Zeroheight Publication
+## Starlight Publication
 
-Zeroheight publishes the governed adoption guidance after the required evidence
+Starlight publishes the governed adoption guidance after the required evidence
 exists.
 
-Zeroheight should show:
+Starlight should show:
 
 - usage guidance;
 - approved variants;
@@ -317,7 +317,7 @@ Zeroheight should show:
 - change history;
 - migration guidance.
 
-Zeroheight becomes the institutional memory for adoption decisions. It does not
+Starlight becomes the institutional memory for adoption decisions. It does not
 replace source control, tests, the token build, or the component registry.
 
 ## InnerSource Rule

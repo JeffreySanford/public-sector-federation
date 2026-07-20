@@ -62,7 +62,7 @@ to replace assumptions with verified implementation details.
 - [ ] Record that each Web Component host has no shadow root at runtime.
 - [ ] Record that PrimeNG overlays append to `body`, including dialogs, menus,
   selects, popovers, and tooltips.
-- [ ] Record how Zeroheight receives generated token documentation artifacts.
+- [ ] Record how Starlight receives generated token documentation artifacts.
 
 ### Pass Criteria
 
@@ -88,7 +88,7 @@ to replace assumptions with verified implementation details.
 - [ ] Confirm theme switching updates shell and mounted remote token values.
 - [ ] Confirm theme switching updates PrimeNG overlays.
 - [ ] Confirm package versions cannot silently drift between shell and remotes.
-- [ ] Confirm Zeroheight receives generated token/documentation artifacts, not
+- [ ] Confirm Starlight receives generated token/documentation artifacts, not
   runtime application CSS.
 
 ## Styling

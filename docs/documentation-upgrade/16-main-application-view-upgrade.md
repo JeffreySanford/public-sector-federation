@@ -349,7 +349,7 @@ Remove or reduce:
 
 - repeated UP-specific language;
 - repeated statements that only Button is in scope;
-- public dependence on Zeroheight;
+- public dependence on any third-party documentation platform;
 - neutral, vibrant, and pastel theme matrices unless those themes remain product requirements;
 - long side-by-side matrices of every Button state;
 - repeated lifecycle and publication tables;
@@ -592,7 +592,7 @@ The application is a projection and workbench. It must not become a second manua
 - update Playwright coverage around the new view missions;
 - update manifest and documentation links;
 - perform accessibility and responsive review;
-- confirm no SitePen, UP, or Zeroheight-specific language remains on the primary views.
+- confirm no SitePen, UP, or third-party documentation-platform-specific language remains on the primary views.
 
 ```mermaid
 flowchart TD
@@ -627,7 +627,7 @@ flowchart TD
 - Button, Select, and Dialog can be selected as alignment cases.
 - Each case compares Figma intent, public Angular API, rendered behavior, tokens, and accessibility expectations.
 - Each case ends with a documented decision.
-- UP and Zeroheight are not required to understand the view.
+- UP-specific naming and third-party documentation platforms are not required to understand the view.
 - Light and dark coverage is available without unrelated theme clutter.
 
 ## Whole application

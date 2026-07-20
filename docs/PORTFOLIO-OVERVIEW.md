@@ -26,7 +26,7 @@ The reference architecture uses an Angular shell to discover and mount custom-el
 ### Design-system delivery
 
 - A DTCG-compatible source is normalized into semantic `--ps-*` tokens.
-- Generated artifacts include CSS variables, JSON, TypeScript helpers, and Zeroheight-oriented exports.
+- Generated artifacts include CSS variables, JSON, TypeScript helpers, and documentation-oriented metadata exports.
 - The PrimeNG preset maps the same resolved contract into provider tokens.
 - Applications consume provider-neutral APIs from `@public-sector/ui-patterns` rather than importing PrimeNG directly.
 - Boundary checks prevent applications and remotes from bypassing the wrapper package.

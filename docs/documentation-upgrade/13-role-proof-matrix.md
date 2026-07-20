@@ -162,7 +162,7 @@ Demonstrates:
 | Two Button contracts are confusing | Stable and candidate APIs coexist | Exploration case study plus a consolidation decision. |
 | Manual accessibility review is incomplete | Automated coverage may be overread | Separate status fields and prioritized manual reviews. |
 | Naming is inconsistent | `ps-*` and `public-*` selectors coexist | Public naming policy and staged selector migration. |
-| Zeroheight may look like the center | Tool-specific scripts and guidance are extensive | Archive strategy and repository-owned documentation portal. |
+| The retired third-party documentation platform may look like the center | Tool-specific scripts and guidance were extensive | Full removal and a repository-owned documentation portal. |
 | Product wording feels self-conscious | Skills are explicitly listed | Product language replaces self-referential framing. |
 
 ## Five-minute review route

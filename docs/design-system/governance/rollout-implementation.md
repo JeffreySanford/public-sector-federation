@@ -50,7 +50,7 @@ evidence-backed proposal
   -> Storybook proof
   -> runtime validation
   -> promotion decision
-  -> Zeroheight publication
+  -> Starlight publication
   -> adoption feedback
 ```
 

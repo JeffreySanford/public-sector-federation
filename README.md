@@ -153,7 +153,7 @@ DTCG-compatible source
   -> shell and independently running remotes
 ```
 
-Zeroheight exports are documentation and governance artifacts; they are not a runtime token source or federation configuration mechanism.
+Starlight and the component manifest are documentation and governance surfaces; they are not a runtime token source or federation configuration mechanism.
 
 ## Ownership and license
 

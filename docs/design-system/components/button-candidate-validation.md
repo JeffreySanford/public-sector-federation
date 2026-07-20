@@ -13,7 +13,7 @@ The view provides:
 - neutral, vibrant, and pastel theme controls;
 - light and dark validation;
 - Storybook integration;
-- Zeroheight, Figma, source, story, test, and plan links;
+- Starlight, Figma, source, story, test, and plan links;
 - lifecycle and promotion-blocker information.
 
 Validation surfaces:
@@ -106,7 +106,7 @@ The Candidate must remain Candidate until:
 - accessibility checks pass;
 - the direct Component Lab and shell-composed route pass;
 - no Candidate styles leak into stable or unrelated components;
-- Zeroheight guidance and evidence are complete;
+- Starlight guidance and evidence are complete;
 - design, engineering, accessibility, platform, and governance owners record the promotion decision.
 
 ## Decision outcomes
@@ -122,7 +122,7 @@ The review may result in:
 
 | Date | Status | Change |
 | --- | --- | --- |
-| 2026-07 | Candidate | Initial native Button wrapper, Storybook stories, QA comparison workspace, governance plan, and Zeroheight page created. |
+| 2026-07 | Candidate | Initial native Button wrapper, Storybook stories, QA comparison workspace, governance plan, and Starlight page created. |
 
 ## Ownership
 
@@ -133,8 +133,8 @@ The review may result in:
 | Angular wrapper and registry API | Public Sector Design System engineering |
 | Storybook and QA validation | Public Sector Design System engineering |
 | Accessibility review | To be assigned |
-| Zeroheight publication and status | Public Sector Design System governance |
+| Starlight publication and status | Public Sector Design System governance |
 
 ## Live documentation
 
-[Open the Button Candidate page in Zeroheight](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-Candidate)
+Open the Button Candidate page on the Starlight documentation site.

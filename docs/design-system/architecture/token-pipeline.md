@@ -17,10 +17,10 @@ Figma or authoritative design-token source
   -> PrimeNG semantic token preset
   -> component registry, shell, and subapplications
   -> Storybook and Playwright validation evidence
-  -> Zeroheight documentation and governance
+  -> Starlight documentation and governance
 ```
 
-Zeroheight documents the token contract and evidence. It does not provide
+Starlight documents the token contract and evidence. It does not provide
 runtime token delivery or `remoteEntry` configuration.
 
 ## Responsibilities
@@ -33,7 +33,7 @@ runtime token delivery or `remoteEntry` configuration.
   tokens.
 - Storybook and shell validation prove that tokens work in isolated and
   integrated contexts.
-- Zeroheight displays token guidance and examples; it does not serve production
+- Starlight displays token guidance and examples; it does not serve production
   runtime tokens.
 
 ## Required Implementation Constraints
@@ -43,7 +43,7 @@ The token pipeline should fit that architecture instead of arguing for another
 mounting model.
 
 - The token source of truth should live in a versioned package or equivalent
-  enterprise artifact, not in Zeroheight and not only in the shell.
+  enterprise artifact, not in Starlight and not only in the shell.
 - The shell or platform runtime should establish active theme context.
 - Each remote should resolve the same token contract, either through direct
   dependency for isolated development or shell-provided runtime context when
@@ -56,7 +56,7 @@ mounting model.
   and document-level theme classes should cascade into mounted content.
 - Runtime evidence indicates PrimeNG overlays append to `body`, so they should
   inherit `:root` token values and `html.p-dark` theme context.
-- Zeroheight should document token guidance and evidence links; it should not
+- Starlight should document token guidance and evidence links; it should not
   supply runtime tokens.
 
 ## Recommended Consumption Model
@@ -93,7 +93,7 @@ The sample repository is aligned to this model in these places:
 - `packages/tokens` owns the source token files and generated artifacts.
 - `packages/tokens/src/tokens.css` exposes runtime CSS custom properties.
 - `packages/tokens/src/design-tokens.json` and
-  `packages/tokens/src/zeroheight-tokens.json` provide tooling and
+  `packages/tokens/src/tokens/token-metadata.json` provide tooling and
   documentation metadata.
 - `packages/tokens/src/index.ts` exports derived token data from generated
   artifacts instead of maintaining a second hardcoded token copy.
@@ -158,9 +158,9 @@ The overlay strategy should confirm:
 - whether z-index, focus management, and keyboard behavior remain stable in the
   shell-mounted route and the isolated remote.
 
-## Zeroheight Documentation Export
+## Starlight Documentation Export
 
-Zeroheight should receive token data from generated repo artifacts, not from
+Starlight should receive token data from generated repo artifacts, not from
 runtime application CSS. The repository remains the source of truth, and the
 token package produces documentation-friendly outputs during its build.
 
@@ -168,21 +168,21 @@ token package produces documentation-friendly outputs during its build.
 packages/tokens source files
   -> token build script
   -> tokens.css
-  -> zeroheight-tokens.json
+  -> token-metadata.json
   -> design-tokens.json
-  -> Zeroheight import or sync
+  -> Starlight content build
 ```
 
-`zeroheight-tokens.json` is the preferred documentation export for Zeroheight.
+`token-metadata.json` is the preferred documentation export for Starlight.
 It should carry token names, values, descriptions, categories, and any metadata
 needed for designers and engineers to understand approved usage. Production
 applications should consume CSS variables, package exports, or PrimeNG preset
-mapping instead of reading Zeroheight data at runtime.
+mapping instead of reading Starlight data at runtime.
 
-The delivery mechanism should be explicit. Viable options include manual upload,
-CI artifact review, API-based sync, or a scheduled publishing job. For governed
+The delivery mechanism should be explicit. Viable options include a repository
+import step, CI artifact review, or a scheduled content build. For governed
 systems, prefer a CI-generated export with a review or release step so
-Zeroheight reflects versioned repository state instead of hand-maintained token
+Starlight reflects versioned repository state instead of hand-maintained token
 values.
 
 ## Component Registry Token Consumption
@@ -197,7 +197,7 @@ packages/tokens
   -> generated TypeScript or JSON helpers
   -> PrimeNG preset mapping
   -> packages/ui-patterns registry components
-  -> Storybook, shell, remotes, and Zeroheight examples
+  -> Storybook, shell, remotes, and Starlight examples
 ```
 
 Registry components should prefer semantic CSS variables and approved PrimeNG
@@ -210,7 +210,7 @@ The registry should document which tokens a component depends on, but the token
 values should stay in `packages/tokens`. Storybook should render registry
 components using the generated token CSS and PrimeNG preset, while tests should
 verify that component styles still resolve when mounted inside the shell or a
-remote application. If Zeroheight documents a registry component, it should link
+remote application. If Starlight documents a registry component, it should link
 to the component guidance and token names, not create independent token values.
 
 ## Runtime Considerations
@@ -276,4 +276,4 @@ integration coverage before token delivery is treated as complete.
 - Do remotes bundle tokens, inherit them from the shell, or both?
 - How are runtime themes changed?
 - How are fallback values handled when a remote version lags behind the shell?
-- How does Zeroheight receive token data for documentation?
+- How does Starlight receive token data for documentation?

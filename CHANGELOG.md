@@ -23,7 +23,7 @@ All notable changes to the public reference platform are documented here.
 ### Clarified
 
 - Verified browser-execution results and performance baselines.
-- Zeroheight as documentation and governance output rather than runtime delivery.
+- The third-party documentation platform as documentation and governance output rather than runtime delivery (later fully retired; see [15 — Zeroheight retirement](./docs/documentation-upgrade/15-zeroheight-retirement-strategy.md)).
 - Sample-repository evidence versus organization-specific production validation.
 
 ### Finalized

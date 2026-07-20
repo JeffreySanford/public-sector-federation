@@ -6,13 +6,13 @@
       "authoritativeInput": {
         "source": "Figma",
         "artifact": "DTCG-compatible JSON",
-        "notes": "Figma is the known design input. Zeroheight is documentation output, not token creation input."
+        "notes": "Figma is the known design input. Documentation platforms are output, not token creation input."
       },
       "figmaDtcgInput": {
         "file": "packages/tokens/src/tokens/figma-dtcg.sample.json",
         "source": "Figma",
         "artifact": "DTCG-compatible JSON",
-        "purpose": "Input fixture only. Zeroheight is not part of token creation.",
+        "purpose": "Input fixture only. No external documentation platform is part of token creation.",
         "validationChecks": [
           "source-metadata",
           "primitive-primary-blue",

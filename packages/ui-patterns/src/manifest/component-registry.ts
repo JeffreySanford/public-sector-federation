@@ -43,8 +43,6 @@ interface EntrySeed {
   accessibilityPattern?: string;
   automatedChecks?: EvidenceStatus;
   keyboardCoverage?: EvidenceStatus;
-  zeroheightStatus?: ComponentManifestEntry['zeroheight']['status'];
-  zeroheightTemplate?: string;
   governanceTier?: ComponentManifestEntry['governance']['tier'];
   designReview?: ComponentManifestEntry['governance']['designReview'];
   promotionRequirements?: string[];
@@ -156,11 +154,6 @@ function entry(seed: EntrySeed): ComponentManifestEntry {
       componentKey: null,
       componentSetKey: null,
       propertyMappings: [],
-    },
-    zeroheight: {
-      status: seed.zeroheightStatus ?? (isService ? 'not-applicable' : 'planned'),
-      pageId: null,
-      template: seed.zeroheightTemplate ?? (isService ? null : 'component'),
     },
     governance: {
       tier: seed.governanceTier ?? (seed.status === 'candidate' ? 'candidate' : 'core'),
@@ -558,8 +551,6 @@ export const componentRegistry = [
     accessibilityPattern: 'button',
     automatedChecks: 'complete',
     keyboardCoverage: 'complete',
-    zeroheightStatus: 'draft',
-    zeroheightTemplate: 'component-candidate',
     governanceTier: 'candidate',
     designReview: 'pending',
     promotionRequirements: [

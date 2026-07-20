@@ -14,7 +14,7 @@ This page is the authoritative implementation snapshot for the documentation upg
 4. The generated component manifest owns relationships, lifecycle, evidence, and explicit missing states.
 5. `docs/documentation-upgrade` owns target-state architecture and the prioritized delivery plan.
 6. `docs/design-system` contains engineering reference material and historical operating-model records.
-7. Zeroheight material is historical evidence only; it is not the canonical documentation surface or a supported publication dependency.
+7. The retired third-party documentation platform is not a dependency anywhere in this repository.
 
 ## Completed checkpoints
 
@@ -110,7 +110,7 @@ The foundation and three flagship slices are complete. The next work is no longe
 4. Figma reconstruction records for Button, Select, and Dialog.
 5. Storybook and Chromatic final alignment.
 6. Semantic token-boundary remediation and real library unit tests.
-7. Zeroheight and obsolete compatibility cleanup.
+7. Obsolete compatibility cleanup.
 8. Unified public release.
 
 ## Tracking documents
@@ -118,7 +118,7 @@ The foundation and three flagship slices are complete. The next work is no longe
 - [Prioritized backlog](./11-prioritized-backlog.md)
 - [Delivery roadmap](./12-delivery-roadmap.md)
 - [Astro Starlight application and designer-grade quality gate](./17-astro-starlight-application-and-designer-quality-gate.md)
-- [Zeroheight retirement strategy](./15-zeroheight-retirement-strategy.md)
+- [Zeroheight retirement — complete](./15-zeroheight-retirement-strategy.md)
 - [Design-system release TODO](../design-system/TODO.md)
 
 ## Verification commands

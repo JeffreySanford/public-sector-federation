@@ -7,24 +7,24 @@ validation evidence, and documentation should move through the platform.
 
 ```text
 Figma design intent
-  -> Zeroheight governance and handoff
+  -> Starlight governance and handoff
       -> approved usage, status, owners, evidence links
   -> approved DTCG-compatible token export
   -> source-controlled token build
       -> tokens.css
       -> design-tokens.json
       -> TypeScript token exports
-      -> zeroheight-tokens.json
+      -> token-metadata.json
   -> packages/primeng-preset
   -> packages/ui-patterns registry wrappers
   -> shell, subapps, Storybook, and Playwright
   -> promotion lifecycle evidence
-  -> Zeroheight guidance and governance pages
+  -> Starlight guidance and governance pages
 ```
 
-Zeroheight can sit between design and engineering as the human governance and
+Starlight can sit between design and engineering as the human governance and
 handoff layer. The repository and generated artifacts remain the implementation
-source of truth. Zeroheight receives documentation-ready outputs and evidence
+source of truth. Starlight receives documentation-ready outputs and evidence
 links; it does not compile runtime tokens or configure applications.
 
 ## Figma And DTCG Input
@@ -39,9 +39,9 @@ Token input:
 
 - Should happen: the token repo consumes a Figma-backed DTCG-compatible JSON
   artifact.
-- Should happen: Zeroheight records the approved decision and links the source
+- Should happen: Starlight records the approved decision and links the source
   artifact, if the team uses it for handoff.
-- Should not happen: Zeroheight becomes the token compiler or the only source
+- Should not happen: Starlight becomes the token compiler or the only source
   of production token values.
 
 Validation:
@@ -63,7 +63,7 @@ Feedback:
 | `tokens.css` | Shell, remotes, Storybook, tests | Runtime CSS custom properties and theme variables. |
 | `design-tokens.json` | Tooling, docs, tests | Machine-readable token metadata. |
 | TypeScript exports | PrimeNG preset, tests, tooling | Shared values without duplicating token data. |
-| `zeroheight-tokens.json` | Zeroheight export or upload process | Documentation-ready token data. |
+| `token-metadata.json` | Starlight content build process | Documentation-ready token data. |
 | PrimeNG preset mapping | `packages/primeng-preset` | Maps tokens into PrimeNG semantic and component tokens. |
 
 The same resolved values should feed runtime CSS, PrimeNG preset values, wrapper
@@ -82,18 +82,18 @@ New and target-state subapps consume `@public-sector/ui-patterns`, not PrimeNG
 directly. Migrated legacy subapps may keep direct PrimeNG temporarily when the
 path is allowlisted, owned, and tracked as migration debt.
 
-## Zeroheight Flow
+## Starlight Flow
 
-| Flows Into Zeroheight | Does Not Flow Into Zeroheight |
+| Flows Into Starlight | Does Not Flow Into Starlight |
 | --- | --- |
-| Generated token documentation artifacts such as `zeroheight-tokens.json` | Runtime token delivery |
+| Generated token documentation artifacts such as `token-metadata.json` | Runtime token delivery |
 | Component usage guidance | `remoteEntry` URLs |
 | Lifecycle status and ownership | Shell mounting configuration |
 | Storybook, Playwright, source, and Figma links | Application routing |
 | Migration guidance from direct PrimeNG to wrappers | Component implementation source of truth |
 | Release notes and deprecation notes | PrimeNG preset generation |
 
-Zeroheight is a governed communication surface. It should explain approved
+Starlight is a governed communication surface. It should explain approved
 usage and link evidence, not become a runtime dependency.
 
 ## Evidence And Promotion Flow
@@ -105,7 +105,7 @@ Wrapper or token change
   -> shell-mounted or remote Playwright proof
   -> accessibility and theme checks
   -> registry lifecycle update
-  -> Zeroheight guidance update
+  -> Starlight guidance update
 ```
 
 | Stage | Evidence |
@@ -132,7 +132,7 @@ then, use these role owners for accountability:
 | Registry | Component registry owner | Wrapper API, PrimeNG encapsulation, lifecycle, Storybook, migration guidance. |
 | Subapps | Subapp team owner | Wrapper use, local bootstrap, route behavior, legacy PrimeNG allowlist entries. |
 | Quality evidence | QA or platform validation owner | Playwright, accessibility, overlay proof, evidence links. |
-| Zeroheight | Design system governance owner | Guidance, owners, evidence, lifecycle, deprecation notes. |
+| Starlight | Design system governance owner | Guidance, owners, evidence, lifecycle, deprecation notes. |
 
 Enterprise validation should replace role owners with named accountable owners
 or team aliases before the platform documentation is treated as final.

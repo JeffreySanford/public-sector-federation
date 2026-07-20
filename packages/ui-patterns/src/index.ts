@@ -47,5 +47,4 @@ export type {
   ReadinessStatus,
   RegistryKind,
   TokenBoundaryStatus,
-  ZeroheightStatus,
 } from './manifest/component-meta.types';

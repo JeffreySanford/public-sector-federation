@@ -11,7 +11,7 @@ The recommended model is:
 - keep PrimeNG behind provider-neutral wrapper APIs for new and target-state work;
 - let the shell establish the integrated theme context while remotes import the token package for isolated development and tests;
 - use Storybook, Playwright, accessibility checks, and manifest evidence before promoting a component;
-- use Zeroheight as documentation, governance, status, and evidence output—not as runtime delivery.
+- use Starlight as documentation, governance, status, and evidence output—not as runtime delivery.
 
 ## Token mapping
 
@@ -85,7 +85,7 @@ Partial states are intentional and useful. They make missing evidence visible ra
 - body-appended overlays inherit the active theme;
 - wrapper candidates can carry Storybook, automated behavior, accessibility, and governance evidence;
 - the component manifest can be generated and checked for drift;
-- the architecture works as a public reference without depending on Zeroheight at runtime.
+- the architecture works as a public reference without depending on Starlight at runtime.
 
 ## What production adoption must decide
 

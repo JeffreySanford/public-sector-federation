@@ -13,7 +13,7 @@ The current source of truth for importable APIs is
 `Design System/Registry/Component Manifest`.
 
 This catalog remains the concise human-readable discovery page. Lifecycle,
-provider, accessibility, Figma, Zeroheight, ownership, and evidence status should
+provider, accessibility, Figma, Starlight, ownership, and evidence status should
 be updated in the registry rather than duplicated here. Starlight owns the full
 public usage guidance for flagship components. For the originating remote
 realignment story and the related backlog follow-up, see
@@ -192,7 +192,7 @@ pnpm build-storybook:qa
 
 The registry deliberately records missing Storybook stories, incomplete public API
 extraction, unassigned ownership, pending accessibility audits, pending Figma
-bindings, and historical Zeroheight evidence. Missing information should be made
+bindings, and historical Starlight evidence. Missing information should be made
 visible, not replaced with invented completion.
 
 See `docs/design-system/architecture/component-manifest-prototype.md` for the

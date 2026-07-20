@@ -39,7 +39,7 @@ mindmap
       Performance dashboard
       Evidence reports
     Documentation experiment
-      Zeroheight
+      Third-party documentation platform
       Export scripts
       Publication workflows
     Full-stack reference
@@ -94,9 +94,9 @@ Terms such as `portfolio-grade`, `portfolio walkthrough`, and `skills demonstrat
 
 Names such as `qa-remote`, `QA Evidence`, `acceptance stories`, and `Candidates` are understandable internally but do not match the vocabulary most designers and application engineers expect.
 
-### Zeroheight is overrepresented
+### The third-party documentation platform is overrepresented
 
-Zeroheight export scripts, publish scripts, governance documents, metadata, and component-specific instructions create the impression that the design system depends on a paid documentation product.
+Export scripts, publish scripts, governance documents, metadata, and component-specific instructions create the impression that the design system depends on a paid documentation product.
 
 ### Component discovery is source-oriented
 
@@ -128,7 +128,7 @@ NestJS, Prisma, PostgreSQL, Docker, and backend startup commands prove full-stac
 | Federation | Secondary | Reframe as adoption proof. |
 | Backend API | Tertiary | Move to reference applications. |
 | Performance dashboard | Secondary | Place under system quality or experiments. |
-| Zeroheight | Historical | Archive or document as a tooling experiment. |
+| Third-party documentation platform | Historical | Archive or document as a tooling experiment. |
 | Candidate Button comparison | Case study | Reframe as API remediation exploration. |
 | Exact test totals | Generated evidence | Remove from evergreen homepage copy. |
 | Overview walkthrough | Private or secondary | Replace with System Overview. |
@@ -144,7 +144,7 @@ The upgraded site should not hide the following findings. They are valuable evid
 4. Automated accessibility coverage is more complete than manual assistive-technology review.
 5. Figma bindings and final design ownership are incomplete.
 6. Several components expose different levels of provider abstraction.
-7. Documentation metadata is distributed across Markdown, source, manifest data, Storybook, tests, and Zeroheight-specific files.
+7. Documentation metadata is distributed across Markdown, source, manifest data, Storybook, and tests.
 8. The current documentation was organized around QA and promotion evidence rather than user education.
 
 ## Audit scorecard
@@ -161,7 +161,7 @@ The upgraded site should not hide the following findings. They are valuable evid
 | Visual polish | Developing | Inconsistent | Critical |
 | Design alignment | Partial | Blocker-heavy | High |
 | Federation proof | Strong | Presented as identity | Medium |
-| Zeroheight | Useful experiment | Overrepresented | High |
+| Third-party documentation platform | Useful experiment | Overrepresented | High |
 
 ## Related mission records
 

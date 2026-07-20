@@ -15,7 +15,7 @@ The sample assumes:
 - PrimeNG overlays append to `body` and inherit root token context;
 - each independently running remote registers the approved provider setup;
 - new and target-state work consumes governed wrappers rather than PrimeNG directly;
-- Zeroheight documents status and evidence but does not deliver runtime configuration.
+- Starlight documents status and evidence but does not deliver runtime configuration.
 
 ## 1. Authoritative token source
 
@@ -65,9 +65,9 @@ The sample assumes:
 - How are exceptions recorded, reviewed, and retired?
 - Which registry metadata is required before a component may be consumed?
 
-## 7. Documentation and Zeroheight
+## 7. Documentation and Starlight
 
-- Which generated repository artifacts are published to Zeroheight?
+- Which generated repository artifacts are published to Starlight?
 - Is publication manual, automated, or approval-gated?
 - How are Storybook, source, token, and Playwright evidence linked?
 - Who owns page quality and stale-content review?
@@ -89,5 +89,5 @@ The sample assumes:
 3. Define package and theme version alignment.
 4. Assign owners and evidence requirements.
 5. Validate the production shell, remotes, and overlays.
-6. Establish documentation and Zeroheight publication workflow.
+6. Establish documentation and Starlight publication workflow.
 7. Pilot with a small component set before expanding adoption.

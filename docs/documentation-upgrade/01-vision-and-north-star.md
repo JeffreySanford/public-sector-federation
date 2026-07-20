@@ -136,7 +136,6 @@ It should not lead with:
 - exact test totals;
 - local development ports;
 - NestJS or database setup;
-- Zeroheight workflows;
 - module-federation implementation detail;
 - personal skill claims;
 - long disclaimers.

@@ -65,7 +65,6 @@ This is the short execution dashboard. It does not duplicate detailed acceptance
 - [ ] Assign accountable production owners and stewards.
 - [ ] Establish production hosting and release topology.
 - [ ] Add hosted documentation preview URLs.
-- [ ] Retire remaining Zeroheight publishing scripts after useful evidence is migrated.
 - [ ] Expand flagship-level documentation and manual review to the remaining catalog.
 
 ## Verification

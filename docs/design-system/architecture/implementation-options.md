@@ -42,7 +42,7 @@ Keep the design-system contract portable across viable options:
 - Registry components should work in normal Angular applications first.
 - Storybook should prove isolated component behavior.
 - Shell validation should prove integration behavior.
-- Zeroheight should document approved usage and link to evidence.
+- Starlight should document approved usage and link to evidence.
 
 Federated Angular routes or ES module remotes can still be appropriate in other
 contexts when the shell intentionally owns routing, providers, or a tighter

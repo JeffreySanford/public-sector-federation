@@ -63,7 +63,7 @@ Recommended evidence for an interactive wrapper includes:
 | Token normalization | Explicit, tested mapping rules | Which mappings are approved or temporary |
 | Runtime delivery | Shared package plus shell theme context and remote imports | Exact loading, sharing, and rollback policy |
 | Validation | Risk-based evidence and visible lifecycle states | Required evidence and approvers |
-| Documentation | Repository-generated evidence with Zeroheight as output | Publishing workflow and page ownership |
+| Documentation | Repository-generated evidence with Starlight as output | Publishing workflow and page ownership |
 
 ## Recommended order
 

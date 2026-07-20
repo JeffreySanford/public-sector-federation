@@ -375,8 +375,8 @@ A proposed Phase 3 for this story should cover three missing items:
    the review is completed rather than deferred.
 
 A separate, unrelated "Phase 3: Tooling retirement" exists in
-`docs/documentation-upgrade/10-migration-and-cleanup-plan.md` (Zeroheight/report-script
-retirement). That is not part of this story and should not be conflated with the proposed Phase 3
+`docs/documentation-upgrade/10-migration-and-cleanup-plan.md` (third-party documentation
+platform and report-script retirement). That is not part of this story and should not be conflated with the proposed Phase 3
 above.
 
 ---

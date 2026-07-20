@@ -2,9 +2,9 @@ import { existsSync } from 'fs';
 import { resolve } from 'path';
 import { spawnSync } from 'child_process';
 
-const screenshotsDir = resolve('docs', 'reports', 'zeroheight', 'latest', 'reports', 'agile-progress', 'screenshots');
+const screenshotsDir = resolve('docs', 'reports', 'agile-progress', 'latest', 'screenshots');
 const date = new Date().toISOString().slice(0, 10);
-const outputZip = resolve('docs', 'reports', 'zeroheight', 'latest', `screenshots-${date}.zip`);
+const outputZip = resolve('docs', 'reports', 'agile-progress', 'latest', `screenshots-${date}.zip`);
 
 if (!existsSync(screenshotsDir)) {
   console.error(`Screenshot directory not found: ${screenshotsDir}`);

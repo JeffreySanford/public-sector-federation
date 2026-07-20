@@ -2,7 +2,7 @@
 
 ## Design intent
 
-The Candidate should use the same vocabulary across Figma, Zeroheight, Storybook, Angular, tests, and release documentation.
+The Candidate should use the same vocabulary across Figma, Starlight, Storybook, Angular, tests, and release documentation.
 
 Recommended property vocabulary:
 

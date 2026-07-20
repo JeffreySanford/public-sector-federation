@@ -38,7 +38,7 @@ The roadmap assumes:
 - Storybook remains the isolated component workbench;
 - the manifest connects code, stories, tests, accessibility, Figma, and documentation;
 - visual quality is protected by automated checks plus human polish review;
-- Zeroheight becomes historical rather than canonical.
+- the retired third-party documentation platform is fully removed rather than canonical.
 
 ## Delivery sequence
 
@@ -148,7 +148,7 @@ Make the design system the unmistakable public product.
 ### Acceptance criteria
 
 - a first-time visitor can identify the product purpose within approximately 30 seconds;
-- the opening content does not lead with module federation, backend setup, Zeroheight, exact test totals, or personal skill claims;
+- the opening content does not lead with module federation, backend setup, third-party documentation-platform history, exact test totals, or personal skill claims;
 - the page passes the Starlight quality gate;
 - mobile and desktop hierarchy are both intentionally designed;
 - the human polish review is approved.
@@ -269,7 +269,7 @@ Replace sample-heavy QA, performance, and candidate screens with mission-focused
 - useful samples are relocated before deletion;
 - application tests are updated;
 - each view has one clear mission;
-- primary language contains no UP, SitePen, or Zeroheight dependency;
+- primary language contains no UP, SitePen, or third-party documentation-platform dependency;
 - the Documentation navigation reaches Starlight cleanly;
 - responsive, visual, and accessibility checks pass.
 
@@ -429,7 +429,7 @@ Remove obsolete presentation clutter without losing useful test and evidence cov
 - integration-fixture relocation;
 - replacement Playwright tests;
 - sample-only model, handler, and style removal;
-- Zeroheight scripts archived or removed;
+- retired third-party documentation-platform scripts removed;
 - local paths removed;
 - person- and employer-specific language removed;
 - old story aliases and obsolete navigation retired.
@@ -473,7 +473,7 @@ Publish one coherent product experience across Starlight, Angular, Storybook, Ch
 - the Starlight designer-grade quality gate passes;
 - Angular, Storybook, and manifest quality gates pass;
 - visual changes are reviewed;
-- no canonical route depends on Zeroheight;
+- no canonical route depends on the retired third-party documentation platform;
 - the product supports the north star clearly.
 
 ### Review question

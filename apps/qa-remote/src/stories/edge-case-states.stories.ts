@@ -93,7 +93,7 @@ export const TableEmptyEvidence: Story = { args: { title: 'Table empty evidence'
 export const LongLabelStress: Story = { args: { title: 'Long label stress', badge: 'Long labels', tone: 'warn', description: 'Long labels and dense text should wrap cleanly.' } };
 export const TokenThemeEvidence: Story = { args: { title: 'Token theme evidence', badge: 'Theme', tone: 'contrast' } };
 export const ShellMountedRisk: Story = { args: { title: 'Shell mounted risk', badge: 'Shell route', tone: 'warn' } };
-export const ZeroheightGovernance: Story = { args: { title: 'Zeroheight governance', badge: 'Governance', tone: 'success' } };
+export const ExternalDocsGovernance: Story = { args: { title: 'External docs governance', badge: 'Governance', tone: 'success' } };
 export const KnownQaFailure: Story = {
   args: {
     title: 'Blocked state example',

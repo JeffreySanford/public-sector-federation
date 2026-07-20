@@ -90,7 +90,7 @@ The design system should not become part of the shell. It should provide:
 - Registry components and reusable patterns
 - Navigation, page header, card, form, table, and status patterns
 - Accessibility rules and validation evidence
-- Storybook and Zeroheight documentation
+- Storybook and Starlight documentation
 
 The shell consumes those assets and uses them to assemble a specific platform
 experience. When a shell-specific pattern becomes reusable across multiple

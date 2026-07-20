@@ -5,10 +5,10 @@
 This prototype introduces a machine-readable registry for the public
 `@public-sector/ui-patterns` surface. It turns information that was previously
 spread across source files, Storybook stories, tests, architecture notes, and
-zeroheight drafts into one reviewable contract.
+Starlight drafts into one reviewable contract.
 
 The manifest is not a replacement for component source, Storybook, tests, Figma,
-or zeroheight. It is the spine that identifies those surfaces and records their
+or Starlight. It is the spine that identifies those surfaces and records their
 current relationship.
 
 ```text
@@ -23,7 +23,7 @@ component source + governed metadata
  Storybook registry   CI validation
         |
         v
- future zeroheight and Figma projections
+ future Starlight and Figma projections
 ```
 
 ## Prototype boundaries
@@ -36,7 +36,7 @@ The prototype deliberately does not:
 
 - invent Figma component or component-set keys;
 - claim that a pending design binding is complete;
-- publish or update zeroheight pages;
+- publish or update Starlight pages;
 - treat automated accessibility checks as WCAG conformance;
 - promote the UP Button candidate;
 - remove existing PrimeNG escape hatches;
@@ -82,7 +82,6 @@ Each registry entry includes:
 - automated, keyboard, and manual accessibility evidence;
 - Storybook, test, and documentation paths;
 - Figma binding status;
-- zeroheight publication status;
 - design review and promotion requirements;
 - computed blockers and advisory warnings.
 
@@ -119,7 +118,6 @@ These require accountable human judgment:
 - provider escape-hatch acceptance;
 - accessibility audit verdicts;
 - Figma property mappings;
-- zeroheight page status;
 - design approval;
 - promotion and deprecation decisions.
 
@@ -147,7 +145,7 @@ The validator checks that:
 The workspace lint runs this validator directly, without recursively invoking
 `pnpm lint`.
 
-Pending Figma access, zeroheight publication, ownership, and manual accessibility
+Pending Figma access, ownership, and manual accessibility
 audits are advisory states. They are intentionally visible but are not treated as
 false build failures.
 
@@ -168,7 +166,7 @@ Storybook is a view over the contract. It is not another place to manually maint
 status. A lifecycle or evidence change belongs in the registry and appears in every
 projection automatically.
 
-The dashboard is intentionally useful before Figma or zeroheight Enterprise access
+The dashboard is intentionally useful before Figma Enterprise access
 exists. It exposes what is known, what is pending, and which decisions still require
 human review.
 
@@ -197,7 +195,7 @@ A new public entry is not complete until:
 4. its provider boundary is recorded honestly;
 5. its lifecycle and production-use policy are explicit;
 6. evidence status is recorded, including missing evidence;
-7. Figma and zeroheight fields reflect the real integration state;
+7. Figma fields reflect the real integration state;
 8. `pnpm manifest:check` passes.
 
 ## Lifecycle promotion
@@ -212,7 +210,6 @@ For a candidate such as `ps-up-button`, promotion should include:
 - Storybook behavioral and visual evidence;
 - automated accessibility evidence;
 - recorded manual keyboard and screen-reader review;
-- zeroheight documentation readiness;
 - an explicit final promotion decision.
 
 ## Future enrichment
@@ -222,13 +219,6 @@ For a candidate such as `ps-up-button`, promotion should include:
 Figma can later provide verified component keys, component-set keys, property
 mappings, variables, and design revision provenance. Those values should enrich the
 existing manifest fields rather than create a separate component inventory.
-
-### zeroheight
-
-zeroheight Enterprise can later consume manifest facts to populate prescribed page
-templates, lifecycle banners, API tables, evidence links, and Storybook embeds. The
-manifest remains authoritative for machine-readable facts; zeroheight remains the
-human-facing documentation projection.
 
 ### Source extraction
 
@@ -244,7 +234,6 @@ completeness.
 - Ownership is unassigned.
 - Manual screen-reader audits are pending.
 - Figma bindings require Enterprise access and real design assets.
-- zeroheight statuses are planning or draft states, not live API verification.
 - The dashboard reports readiness but does not edit the manifest.
 
 These are visible design constraints, not hidden failures. The prototype exists to

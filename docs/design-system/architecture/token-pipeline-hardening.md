@@ -12,7 +12,7 @@ This document separates the hardened sample pipeline from validation that belong
 | `packages/tokens/src/tokens/themes.json` | Theme selectors and semantic runtime variables. |
 | `packages/tokens/src/tokens/figma-dtcg.sample.json` | Representative DTCG-compatible fixture. |
 | `packages/tokens/src/tokens/mapping-rules.json` | Tier, precedence, and normalization rules. |
-| `packages/tokens/src/tokens/zeroheight-metadata.json` | Documentation metadata. |
+| `packages/tokens/src/tokens/token-metadata.json` | Documentation metadata. |
 | `packages/tokens/src/tokens/component-overrides.css` | Stable provider-gap overrides. |
 
 The fixture proves the expected input shape without pretending to be a complete external design source.

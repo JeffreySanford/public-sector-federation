@@ -5,7 +5,7 @@
 This file captures lightweight decisions and cleanup notes that come from design
 system implementation conversations. Keep entries sanitized, dated, and tied to
 an implementation impact so they can be reconciled later with source control,
-Zeroheight, or the authoritative token source.
+Starlight, or the authoritative token source.
 
 ## 2026-07-13: PrimeNG Wrapper Boundary
 
@@ -46,24 +46,6 @@ Open follow-up:
 - Add a token audit note when the authoritative source confirms which typography
   or status tokens are active, aliases, or retired.
 
-## 2026-07-13: Zeroheight Onboarding Status
-
-The Zeroheight TSP request was expected to complete by the next SLA date, with
-contract completion following after that.
-
-Procurement was later reported as approved. The next operational step is
-registering Zeroheight in the required asset registries, including compliance
-tracking, before final acquisition can move forward.
-
-Implementation impact:
-
-- Keep Zeroheight documentation content ready, but avoid treating publish steps
-  as unblocked until access and contract setup are complete.
-- Continue using local markdown and Storybook evidence as the working source
-  until Zeroheight publishing is available.
-- Treat Zeroheight as approved in principle, but not yet available as an
-  operational publishing channel until registry and acquisition steps complete.
-
 ## 2026-07-13: DU And Pricing Architecture Review Scope
 
 A target-state solution architecture was raised for Desktop Underwriter
@@ -77,7 +59,7 @@ Current design-system assessment:
   shell routes, workflow states, data-display patterns, form states, or status
   semantics to support that integration.
 - If the integration is backend/API orchestration only, the wrapper, token, and
-  Zeroheight guidance work should continue unchanged.
+  Starlight guidance work should continue unchanged.
 - It is reasonable to record "no Marketpoint UI design-system concerns found"
   only after confirming the target-state architecture does not introduce new UI
   states, components, or governance requirements.
@@ -89,7 +71,7 @@ Implementation impact:
 - Review the architecture only for UI-facing workflow changes before saying it
   has no Marketpoint UI impact.
 - If new loan-import, pricing, or exception states are added, capture them as
-  Storybook evidence and Zeroheight guidance candidates.
+  Storybook evidence and Starlight guidance candidates.
 
 ## 2026-07-13: Component And Token Prefix
 

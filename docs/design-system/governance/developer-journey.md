@@ -12,9 +12,9 @@ from the consumer's perspective.
 
 ## The Developer's Experience: Eight Steps
 
-### 1. Start in Zeroheight
+### 1. Start in Starlight
 
-The developer goes to Zeroheight to answer:
+The developer goes to Starlight to answer:
 
 - Which page-layout pattern is approved?
 - Which header, card, form, table, status, and navigation patterns should I use?
@@ -35,8 +35,8 @@ For a new Rates Sheet view, they might find:
 ✅ Empty state: Active
 ```
 
-Zeroheight is the starting point for discovery, but not the code source. The
-Zeroheight page should link directly to:
+Starlight is the starting point for discovery, but not the code source. The
+Starlight page should link directly to:
 
 - Storybook story with working examples
 - Figma design reference
@@ -87,7 +87,7 @@ At this point, the developer has:
 
 The developer should not invent the view from scratch.
 
-They navigate to the Storybook story linked from Zeroheight and copy a proven
+They navigate to the Storybook story linked from Starlight and copy a proven
 composition as a starting template:
 
 ```typescript
@@ -272,7 +272,7 @@ Submit this proposal as an issue or through the contribution portal.
 The developer should know in advance:
 
 - **Who reviews?** Named maintainers and decision owners
-- **What evidence is required?** Links to Zeroheight and component-promotion.md
+- **What evidence is required?** Links to Starlight and component-promotion.md
 - **Expected turnaround?** Published SLA (e.g., 5 business days for Minor, 10 for Major)
 - **What is the decision?** One of five outcomes (see below)
 - **Exception path?** Link to exception-handling process
@@ -283,7 +283,7 @@ team toward the right implementation path:
 
 | Decision | Response | Next Step |
 | --- | --- | --- |
-| **Reuse** | Use existing component X instead | Link to Zeroheight page, Storybook example, documentation |
+| **Reuse** | Use existing component X instead | Link to Starlight page, Storybook example, documentation |
 | **Extend** | Propose an additive variant of existing Y | Minor change approval, extend Storybook, update docs |
 | **Create** | This should become a shared component | Route to InnerSource contribution process with timeline |
 | **Keep Local** | Domain-specific; implement in the application | Provide pattern guidance but no shared promotion |
@@ -307,7 +307,7 @@ Candidate (ready for review)
 Active (supported, published, discoverable)
 ```
 
-Zeroheight is updated only after the shared capability is promoted to Active.
+Starlight is updated only after the shared capability is promoted to Active.
 
 ---
 
@@ -316,7 +316,7 @@ Zeroheight is updated only after the shared capability is promoted to Active.
 ### Happy Path: Using Approved Patterns (90% of work)
 
 ```
-Find approved pattern in Zeroheight
+Find approved pattern in Starlight
   ↓
 Copy Storybook example
   ↓
@@ -350,7 +350,7 @@ Platform validation (shell, remotes, Playwright)
   ↓
 Promotion decision review
   ↓
-Zeroheight publication
+Starlight publication
   ↓
 Enterprise adoption
 ```
@@ -365,7 +365,7 @@ Enterprise adoption
 
 ### For the Developer
 
-- ✅ I found what I need in Zeroheight in < 5 minutes
+- ✅ I found what I need in Starlight in < 5 minutes
 - ✅ I can copy a working Storybook example without modification
 - ✅ My view works without overriding approved CSS
 - ✅ My keyboard navigation works out of the box
@@ -389,7 +389,7 @@ For the developer journey to feel seamless, the design system must provide:
 
 ### Discovery
 
-- Searchable, current Zeroheight documentation
+- Searchable, current Starlight documentation
 - Clear guidance on when to use each pattern
 - Links to Storybook examples and Figma reference
 - Lifecycle status visible upfront (Active vs. Experimental)
@@ -425,7 +425,7 @@ For the developer journey to feel seamless, the design system must provide:
 
 ### Broken discovery
 
-- ❌ Zeroheight is out of sync with actual implementation
+- ❌ Starlight is out of sync with actual implementation
 - ❌ Developers cannot find approved patterns easily
 - ❌ Status is unclear (Active? Experimental? Deprecated?)
 - ❌ No Storybook link or broken link

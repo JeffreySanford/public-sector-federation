@@ -62,7 +62,7 @@ These versions and runtime settings must move together:
 ## What This Repo Proves
 
 - `packages/tokens` generates `tokens.css`, `design-tokens.json`,
-  `zeroheight-tokens.json`, and TypeScript token exports.
+  `token-metadata.json`, and TypeScript token exports.
 - `packages/primeng-preset` consumes `@public-sector/tokens`.
 - `packages/ui-patterns` consumes the token contract through wrappers.
 - Lint blocks direct PrimeNG usage from apps and remotes.

@@ -202,7 +202,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [x] Add proposed Figma-property-to-Angular-API mapping grounded in the shipped contract.
 - [x] Add semantic-token and provider-bridge comparison while keeping missing token evidence visible.
 - [x] Add explicit alignment recommendations and next actions without fabricating approval.
-- [x] Remove UP, Zeroheight, and unrelated theme-experiment language from the primary view.
+- [x] Remove UP, third-party documentation-platform, and unrelated theme-experiment language from the primary view.
 - [x] Retain light and dark comparison as the default theme scope.
 
 #### Sample cleanup and validation
@@ -213,7 +213,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [ ] Remove sample-only models, handlers, and styles after replacement coverage passes.
 - [x] Update Playwright tests around the three new view missions.
 - [ ] Add application accessibility checks for inventory filters, findings tables, detail panels, alignment comparisons, and embedded stories.
-- [x] Confirm no person-, employer-, UP-, SitePen-, or Zeroheight-specific language remains in primary application views.
+- [x] Confirm no person-, employer-, UP-, SitePen-, or third-party documentation-platform-specific language remains in primary application views.
 
 ### Reusable documentation components
 
@@ -364,14 +364,14 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 ## P1 — Public cleanup
 
-- [ ] Remove Zeroheight from primary navigation.
+- [x] Remove the retired third-party documentation platform from primary navigation.
 - [ ] Remove local drive paths from public documentation.
 - [ ] Remove person-specific references.
 - [ ] Replace UP naming in general public surfaces.
 - [ ] Replace QA terminology where it is not specifically about testing.
 - [ ] Remove exact dated test totals from evergreen homepage copy.
 - [ ] Move full-stack startup details lower in the README.
-- [ ] Archive Zeroheight page-assembly instructions.
+- [x] Remove the retired third-party documentation platform's page-assembly instructions.
 - [ ] Remove generic sample-component walls from the main application after evidence is relocated.
 
 ## P1 — Quality and deployment
@@ -421,8 +421,8 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 ## P2 — Historical retirement
 
-- [ ] Archive or remove Zeroheight export scripts.
-- [ ] Archive or remove Zeroheight publish scripts.
+- [x] Remove the retired third-party documentation platform's export scripts.
+- [x] Remove the retired third-party documentation platform's publish scripts.
 - [ ] Replace report commands with neutral documentation and evidence commands.
 - [ ] Remove obsolete environment variables.
 - [ ] Remove old story aliases.
@@ -445,7 +445,7 @@ flowchart TD
   PR10 --> PR11[PR 11: Figma alignment records]
   PR11 --> PR12[PR 12: Accessibility dashboard and manual review records]
   PR12 --> PR13[PR 13: Relocate and remove obsolete sample UI]
-  PR13 --> PR14[PR 14: Public cleanup and Zeroheight archive]
+  PR13 --> PR14[PR 14: Public cleanup and third-party documentation platform retirement]
 ```
 
 ## Ready-to-start definition

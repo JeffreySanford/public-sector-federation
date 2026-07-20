@@ -6,7 +6,7 @@
 - [x] Direction established: build a separate UP-styled Button candidate before changing the existing `ps-button`.
 - [x] Existing `PublicButtonComponent` remains the current stable wrapper during candidate validation.
 - [x] Candidate lifecycle status selected: **Candidate**.
-- [x] Zeroheight documentation approach selected: curated guidance with links or embeds to Figma, Storybook, GitHub source, and test evidence.
+- [x] Documentation approach selected: curated guidance with links or embeds to Figma, Storybook, GitHub source, and test evidence.
 - [x] Dedicated Storybook surface selected for the candidate Button.
 - [x] Candidate is intended to appear in the Component Lab for side-by-side and federated-runtime validation.
 - [x] Candidate refactored into an opinionated PrimeNG facade with preferred `intent` and `activated` APIs.
@@ -24,7 +24,7 @@ This document is the build, validation, documentation, and promotion checklist f
 The candidate is intended to prove both sides of the design-system workflow:
 
 1. **Developer experience**
-   - discover the Button in Zeroheight;
+   - discover the Button in the repository-owned documentation site;
    - inspect the design in Figma;
    - interact with the live Angular implementation in Storybook;
    - copy the governed `ps-*` wrapper API;
@@ -50,15 +50,15 @@ The candidate is intended to prove both sides of the design-system workflow:
 - [x] Use the Component Lab to compare the existing and candidate Buttons.
 - [x] Use Figma as design intent and token-input evidence.
 - [x] Use Storybook as live component behavior and isolated validation evidence.
-- [x] Use Zeroheight as the governed documentation and discovery surface.
+- [x] Use the repository-owned Starlight site as the governed documentation and discovery surface.
 - [x] Use GitHub as implementation, test, history, and release evidence.
 
 ### Non-goals for the candidate phase
 
 - [x] Do not remove or break the existing `ps-button`.
 - [x] Do not expose `primeng/button`, `ButtonModule`, PrimeNG severity types, or `.p-*` CSS selectors to application teams.
-- [x] Do not make Zeroheight a runtime dependency.
-- [x] Do not make Zeroheight the design-token source.
+- [x] Do not make the documentation platform a runtime dependency.
+- [x] Do not make the documentation platform the design-token source.
 - [x] Do not claim that sanitized UP Design System notes are verified production values.
 - [x] Do not globally change every existing PrimeNG Button before the candidate is approved.
 - [x] Do not promote the component to Active solely because it compiles or visually resembles the design.
@@ -76,7 +76,7 @@ UP Design System Figma library or approved DTCG export
   -> ps-up-button Candidate wrapper
   -> Storybook stories and interaction/accessibility tests
   -> Component Lab and shell integration tests
-  -> Zeroheight curated guidance and evidence links
+  -> Starlight curated guidance and evidence links
   -> approval decision
   -> optional promotion into the canonical ps-button implementation
 ```
@@ -87,11 +87,11 @@ UP Design System Figma library or approved DTCG export
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | UP Design System / Figma | Design intent, anatomy, variants, states, source token names, mode values, and approved visual decisions.                 | Angular implementation, CI status, runtime federation behavior.                        |
 | Token package            | Versioned source inventory, normalization, generated CSS variables, JSON, TypeScript metadata, and provider mappings.     | Usage prose and component approval.                                                    |
-| `ui-patterns`            | Public wrapper API, event normalization, provider isolation, component behavior, and exports.                             | Figma source values and Zeroheight page layout.                                        |
+| `ui-patterns`            | Public wrapper API, event normalization, provider isolation, component behavior, and exports.                             | Figma source values and documentation page layout.                                        |
 | Storybook                | Live isolated implementation, controls, examples, interaction evidence, accessibility evidence, and theme demonstrations. | Production runtime delivery and final governance approval.                             |
 | Component Lab / shell        | Runtime integration, token inheritance, theme propagation, Web Component behavior, and federation proof.                  | Token authorship and design approval.                                                  |
 | GitHub and CI            | Source code, test execution, review history, releases, and deployable artifacts.                                          | Design intent and human governance decisions.                                          |
-| Zeroheight               | Governed guidance, lifecycle status, ownership, usage rules, anti-patterns, migration guidance, and evidence links.       | Runtime token delivery, component compilation, shell routing, and automatic promotion. |
+| Starlight               | Governed guidance, lifecycle status, ownership, usage rules, anti-patterns, migration guidance, and evidence links.       | Runtime token delivery, component compilation, shell routing, and automatic promotion. |
 
 ## Current implementation inventory
 
@@ -137,7 +137,7 @@ The following items are verified in the local workspace. They still need to be c
 ### Candidate phase
 
 - [x] Use an obviously experimental selector such as `ps-up-button` while visual and API decisions are still under review.
-- [x] Show lifecycle status as Candidate in Storybook and Zeroheight.
+- [x] Show lifecycle status as Candidate in Storybook and the component manifest.
 - [x] Keep the current `ps-button` as the stable comparison baseline.
 
 ### Promotion phase
@@ -362,7 +362,7 @@ Checklist:
 - [ ] Convert color values to runtime-safe values.
 - [ ] Convert dimension values to CSS-compatible values.
 - [ ] Validate that no unresolved `{...}` aliases remain.
-- [ ] Generate CSS, JSON, TypeScript, and Zeroheight documentation artifacts from the same resolved model.
+- [ ] Generate CSS, JSON, and TypeScript documentation artifacts from the same resolved model.
 
 ## Current public-sector sample token information relevant to Button
 
@@ -651,7 +651,7 @@ Example direction:
 - [ ] Avoid PrimeNG severity terms in Figma.
 - [ ] Align `Appearance`, `Tone`, `Size`, `State`, and icon-position vocabulary with Storybook Controls.
 - [ ] Link the Figma component from Storybook docs.
-- [ ] Link the Figma component from Zeroheight.
+- [ ] Link the Figma component from the Starlight component page.
 - [ ] Add a token-name annotation or Dev Mode notes for each visual property.
 - [ ] Confirm the design owner has approved the code mapping.
 
@@ -713,7 +713,7 @@ Example direction:
 - [x] Do not rely on `component` metadata until Storybook signal extraction supports this candidate without argtype/rendering issues.
 - [ ] Add `tags: ['autodocs']` when API documentation is accurate.
 - [ ] Add component and story descriptions.
-- [ ] Add links to Figma, source, QA route, and Zeroheight.
+- [ ] Add links to Figma, source, QA route, and the Starlight component page.
 
 ### Controls
 
@@ -859,7 +859,7 @@ The QA Storybook already supports neutral, vibrant, and pastel theme variants pl
 - [ ] Alias cycles fail.
 - [ ] No unresolved aliases remain.
 - [ ] Light and dark Button token sets are complete.
-- [ ] CSS, JSON, TypeScript, preset, and Zeroheight outputs agree.
+- [ ] CSS, JSON, TypeScript, and preset outputs agree.
 
 ### Wrapper unit tests
 
@@ -974,11 +974,11 @@ These tests are the current candidate-specific Storybook evidence path. They run
 - [ ] Run shell/federation Playwright tests.
 - [ ] Publish test reports or artifacts from CI.
 - [ ] Deploy Storybook to a stable HTTPS URL.
-- [ ] Add the deployed Storybook URL to Zeroheight.
+- [ ] Add the deployed Storybook URL to the Starlight component page.
 - [ ] Add links from Storybook back to GitHub and Figma.
 - [ ] Add a status badge or evidence link for the candidate test workflow.
 
-## Zeroheight checklist
+## Starlight component page checklist
 
 ### Page structure
 
@@ -1039,7 +1039,7 @@ Components
 - [ ] Migration guidance from direct PrimeNG.
 - [ ] Migration guidance from current `ps-button`, if the candidate changes API.
 - [ ] Link to live Storybook controls.
-- [ ] Embed the Storybook iframe when allowed by hosting and Zeroheight security settings.
+- [ ] Embed the Storybook iframe through the `StoryFrame` boundary when allowed by hosting security settings.
 
 ### Evidence links
 
@@ -1058,11 +1058,11 @@ Components
 - [ ] CI workflow run.
 - [ ] Release notes.
 
-### Zeroheight token documentation
+### Token documentation
 
 - [ ] Generate token documentation from the token build.
-- [ ] Use `zeroheight-tokens.json` or an approved replacement as the documentation input.
-- [ ] Do not hand-maintain runtime values only in Zeroheight.
+- [ ] Use `design-tokens.json` as the documentation input.
+- [ ] Do not hand-maintain runtime token values only in a documentation page.
 - [ ] Explain primitive, semantic, component, and provider tiers.
 - [ ] Show provider mappings as implementation evidence, not application API.
 - [ ] Record normalization rules and statuses.
@@ -1073,7 +1073,7 @@ Components
 
 The final demonstration should be executable in this order:
 
-- [ ] Open Zeroheight Button Candidate page.
+- [ ] Open the Starlight Button Candidate page.
 - [ ] Read status, ownership, usage, and limitations.
 - [ ] Open or inspect the embedded Figma component.
 - [ ] Show that Figma properties match wrapper and Storybook names.
@@ -1147,7 +1147,7 @@ The UP Button candidate must remain Candidate until all required gates are compl
 
 ### Governance gate
 
-- [ ] Zeroheight page complete.
+- [ ] Starlight component page complete.
 - [ ] Owner named.
 - [ ] Evidence linked.
 - [ ] Known limitations recorded.
@@ -1179,7 +1179,7 @@ The UP Button candidate must remain Candidate until all required gates are compl
 9. [ ] Complete strict axe validation and any remaining Storybook matrix coverage.
 10. [ ] Complete Component Lab side-by-side and shell-mounted integration proof.
 11. [ ] Publish Storybook to a stable HTTPS URL.
-12. [ ] Create the Zeroheight Candidate page and connect Figma, Storybook, GitHub, QA, and CI evidence.
+12. [ ] Create the Starlight Candidate page and connect Figma, Storybook, GitHub, QA, and CI evidence.
 13. [ ] Review the promotion gates and decide whether to move the candidate into the canonical `ps-button`.
 
 ## Final recommendation
@@ -1194,5 +1194,5 @@ The important safeguards are:
 - map tokens through primitive, semantic, component, and provider tiers;
 - scope candidate provider variables so they do not globally restyle existing Buttons;
 - prove behavior first with isolated Storybook iframe tests, then with Component Lab and federated shell validation;
-- publish curated guidance and evidence in Zeroheight;
+- publish curated guidance and evidence in the repository-owned Starlight site;
 - promote the candidate into the canonical `ps-button` only after design, token, API, accessibility, runtime, and governance gates are complete.

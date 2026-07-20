@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "description": "Documentation metadata applied to generated Zeroheight token exports.",
+  "description": "Documentation metadata applied to the generated design-tokens.json export.",
   "groups": {
     "surface": {
       "match": ["surface", "content-background", "content-border"],

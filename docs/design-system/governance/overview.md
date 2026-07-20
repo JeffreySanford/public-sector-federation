@@ -30,12 +30,12 @@ That means the model is neither fully centralized nor fully open-ended:
 | Too decentralized | Apps create duplicate components, variants, and themes. |
 | InnerSource governance | Teams contribute; maintainers approve shared contracts. |
 
-## Zeroheight Recommendation
+## Starlight Recommendation
 
-Zeroheight should be the governed front door for approved design-system
-guidance, lifecycle status, ownership, migration information, and evidence. It
-should record and communicate decisions made by the responsible design,
-engineering, platform, and accessibility owners.
+The repository-owned Starlight site should be the governed front door for
+approved design-system guidance, lifecycle status, ownership, migration
+information, and evidence. It should record and communicate decisions made by
+the responsible design, engineering, platform, and accessibility owners.
 
 It should not create runtime tokens, compile packages, configure `remoteEntry`
 URLs, or automatically approve promotion.
@@ -46,7 +46,7 @@ Use this compact operating model:
 People decide
 Repositories implement
 Tests provide evidence
-Zeroheight publishes the governed result
+Starlight publishes the governed result
 ```
 
 ## Governance Flow
@@ -61,7 +61,7 @@ request or opportunity
   -> technical review
   -> Storybook and runtime validation
   -> promotion decision
-  -> Zeroheight publication
+  -> Starlight publication
   -> enterprise adoption
 ```
 
@@ -167,7 +167,7 @@ participation:
 
 | Level | What It Means | Permissions | Path to Next Level |
 | --- | --- | --- | --- |
-| **User** | Uses the design system | Read access to repos and Zeroheight | Become a Contributor |
+| **User** | Uses the design system | Read access to repos and Starlight | Become a Contributor |
 | **Contributor** | Submits PRs and proposals | Create branches, submit PRs | 3+ quality contributions |
 | **Repeat Contributor** | Proven regular contributor | Domain PR review | Maintainer nomination |
 | **Trusted Committer** | Recognized reviewer | Scoped review and merge | Council appointment |
@@ -246,11 +246,11 @@ Promotion should depend on evidence, not just completion of code.
 | Technical review | API, token usage, PrimeNG mapping, maintainability, security. |
 | Storybook contract | Supported states, variants, content, theme behavior. |
 | Runtime validation | Shell, remote, Playwright, accessibility, overlay proof when needed. |
-| Publication | Zeroheight page with owner, status, guidance, evidence, change notes. |
+| Publication | Starlight page with owner, status, guidance, evidence, change notes. |
 
-## Zeroheight Role
+## Starlight Role
 
-Zeroheight is the visible governance and adoption layer.
+The repository-owned Starlight site is the visible governance and adoption layer.
 
 A useful source-of-truth split is:
 
@@ -259,7 +259,7 @@ A useful source-of-truth split is:
 | Figma | Design assets, anatomy, interaction intent, and design exploration. |
 | Source repository | Component implementation, token build, tests, and release artifacts. |
 | Storybook | Live implementation examples, states, and component behavior. |
-| Zeroheight | Published guidance, approved usage, lifecycle status, owners, decisions, and evidence links. |
+| Starlight | Published guidance, approved usage, lifecycle status, owners, decisions, and evidence links. |
 
 It should show:
 
@@ -273,11 +273,11 @@ It should show:
 - migration and deprecation guidance;
 - change history.
 
-Zeroheight can be the human handoff bridge between Figma and engineering. It
+Starlight can be the human handoff bridge between Figma and engineering. It
 records decisions and links evidence; people approve, repositories implement,
 and tests prove behavior.
 
-Proposed future policy: once the organization approves Zeroheight as the
+Proposed future policy: once the organization approves Starlight as the
 governance channel, guidance that has not been published there should be
 treated as experimental or not yet approved for broad product-team consumption.
 Until then, agreed repository documentation should serve as the interim
@@ -297,7 +297,7 @@ token proposal
   -> generated CSS and PrimeNG adapter
   -> automated validation
   -> versioned release
-  -> Zeroheight token guidance and change notice
+  -> Starlight token guidance and change notice
 ```
 
 Token review should answer:
@@ -321,7 +321,7 @@ Token review should answer:
 | Deprecated | Still available temporarily with migration guidance. |
 | Retired | No longer supported or distributed. |
 
-Lifecycle status should be visible in Zeroheight and backed by registry
+Lifecycle status should be visible in Starlight and backed by registry
 metadata or source-controlled documentation. See
 [Component Promotion](./component-promotion.md) for promotion evidence and
 decision rules.
@@ -415,7 +415,7 @@ Product teams should:
 - use existing components before requesting new ones;
 - avoid local modifications of system components;
 - submit enhancement requests instead of creating forks;
-- follow published Zeroheight usage guidance;
+- follow published Starlight usage guidance;
 - request exceptions when local needs conflict with shared standards.
 
 Exceptions should be approved, owned, time-bound where possible, and documented.
@@ -446,8 +446,8 @@ Delivery:
 
 Documentation:
 
-- Zeroheight coverage;
-- Zeroheight page views;
+- Starlight coverage;
+- Starlight page views;
 - Storybook usage;
 - documented owner coverage.
 
@@ -468,7 +468,6 @@ Documentation:
 | [Contribution Process](./contribution-process.md) | Detailed intake, triage, evidence, and promotion process. |
 | [InnerSource Contribution Model](./innersource-contribution-model.md) | Team participation and maintainer approval model. |
 | [Component Promotion](./component-promotion.md) | Lifecycle statuses and promotion evidence. |
-| [Zeroheight Governance Model](./zeroheight-governance-model.md) | Zeroheight page model, ownership, and publication guidance. |
 | [Governance Flow Map](./flow-map.md) | End-to-end flow between design, tokens, registry, validation, and docs. |
 | [Adoption And Team Buy-In](./adoption-and-team-buy-in.md) | Participation, support, and adoption measures. |
 | [Rollout Implementation](./rollout-implementation.md) | Gradual rollout sequence and risk-based approval. |

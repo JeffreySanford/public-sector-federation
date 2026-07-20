@@ -6,7 +6,7 @@ This document is the UI implementation companion to:
 
 - [`button-candidate-integration-plan.md`](./button-candidate-integration-plan.md)
 
-The main plan owns the full UP Button candidate workflow: token discovery, wrapper design, Figma, Storybook, testing, Zeroheight, governance, and promotion.
+The main plan owns the full UP Button candidate workflow: token discovery, wrapper design, Figma, Storybook, testing, governance, and promotion.
 
 This document focuses specifically on the requested **Experiments** view in the Component Lab.
 
@@ -22,8 +22,6 @@ This document focuses specifically on the requested **Experiments** view in the 
 - [X] Show the current stable `ps-button` and the new `ps-up-button` candidate together.
 - [X] Do not replace the existing `ps-button` as part of creating this view.
 - [X] Integrate Storybook through a live embedded story when framing is available, with a normal external link as the required fallback.
-- [X] Add Zeroheight links when a stable Button candidate page URL is available.
-- [X] Do not make the Component Lab depend on Zeroheight being online.
 
 ## Current QA navigation pattern
 
@@ -164,7 +162,6 @@ It should answer these questions immediately:
 - How do the current and candidate components behave under identical inputs?
 - Where are the Storybook stories?
 - Where is the Figma design?
-- Where is the Zeroheight guidance?
 - Where are the source, tests, and validation results?
 - What remains before promotion?
 
@@ -345,7 +342,6 @@ export interface CandidateDocumentationLinks {
   stableButtonStoryId: string;
   candidateButtonStoryId: string;
   candidateButtonMatrixStoryId?: string;
-  zeroheightButtonUrl?: string;
   figmaButtonUrl?: string;
   sourceUrl: string;
   tokenPlanUrl: string;
@@ -394,40 +390,6 @@ http://localhost:4400/iframe.html?id=<confirmed-candidate-story-id>&viewMode=sto
 - [ ] Replace `<confirmed-candidate-story-id>` after inspecting the generated Storybook index.
 - [ ] Do not commit a guessed ID as final evidence.
 
-## Zeroheight integration
-
-### Required behavior
-
-- [ ] Add an `Open Button Candidate in Zeroheight` link when the component page exists.
-- [ ] Add an `Open Design System Portal` link as a temporary fallback when only the Zeroheight root URL is known.
-- [ ] Keep the link optional in configuration.
-- [ ] Hide or disable the component-page link when no stable URL exists.
-- [ ] Label the link `Planned` rather than presenting a nonexistent page as published.
-- [ ] Do not embed Zeroheight unless its security policy explicitly allows framing.
-- [ ] Do not make the view fail when Zeroheight is unavailable.
-
-### Recommended display states
-
-- [ ] `Published` — a stable Button candidate page URL exists.
-- [ ] `Portal only` — the Zeroheight site exists but the Button page link is not finalized.
-- [ ] `Planned` — the candidate page has not yet been created.
-- [ ] `Unavailable` — configuration is intentionally absent.
-
-### Zeroheight content expected for this candidate
-
-- [ ] Candidate lifecycle status.
-- [ ] Stable-versus-candidate relationship.
-- [ ] Button-only scope statement.
-- [ ] Usage and anti-pattern guidance.
-- [ ] Public wrapper API.
-- [ ] UP Button token-source qualification.
-- [ ] Figma link.
-- [ ] Storybook link or embed.
-- [ ] GitHub source link.
-- [ ] Experiments view link.
-- [ ] Test and accessibility evidence.
-- [ ] Promotion checklist.
-
 ## Figma integration
 
 - [ ] Add an `Open UP Button design in Figma` link when a stable component URL is available.
@@ -446,14 +408,13 @@ The candidate tile should have a compact evidence toolbar.
 - [ ] Candidate token mapping plan.
 - [ ] Main candidate integration plan.
 - [ ] Figma Button component.
-- [ ] Zeroheight Button candidate page.
 - [ ] CI/test run.
 - [ ] Accessibility report.
 
 Recommended UI:
 
 ```text
-Storybook | Zeroheight | Figma | Candidate source | Stable source | Token plan | Tests
+Storybook | Figma | Candidate source | Stable source | Token plan | Tests
 ```
 
 - [ ] Use actual anchors for navigation rather than clickable `div` elements.
@@ -470,7 +431,6 @@ Storybook | Zeroheight | Figma | Candidate source | Stable source | Token plan |
 - [ ] Show accessibility status.
 - [ ] Show QA direct-remote status.
 - [ ] Show shell-mounted status.
-- [ ] Show Zeroheight publication status.
 - [ ] Show promotion decision status.
 
 Recommended initial values:
@@ -485,7 +445,6 @@ Recommended initial values:
 | Accessibility | Candidate-specific strict gate pending. |
 | QA direct remote | Candidate reported locally; verify after commit. |
 | Shell mounted | Pending. |
-| Zeroheight candidate page | Planned unless a stable URL is supplied. |
 | Promotion | Not eligible; remains Candidate. |
 
 ## User interaction evidence
@@ -556,8 +515,6 @@ Recommended initial values:
 - [ ] Candidate click event is handled.
 - [ ] Optional Storybook links render when configured.
 - [ ] Storybook unavailable state renders when not configured.
-- [ ] Optional Zeroheight link renders when configured.
-- [ ] Zeroheight planned/unavailable state renders when not configured.
 - [ ] Optional Figma link behaves the same way.
 
 ## Playwright/E2E checklist
@@ -577,7 +534,6 @@ Recommended initial values:
 - [ ] Trigger candidate Button and verify evidence.
 - [ ] Verify disabled behavior.
 - [ ] Verify Storybook external link.
-- [ ] Verify Zeroheight link or planned state.
 - [ ] Run axe on the Experiments view.
 
 ### Shell-composed Component Lab
@@ -601,16 +557,6 @@ The Experiments view does not replace Storybook.
 - [ ] Candidates links to the full story set for deeper review.
 - [ ] Storybook interaction/a11y evidence is linked from the candidate tile.
 
-## Zeroheight relationship
-
-The Experiments view does not replace Zeroheight.
-
-- [X] Zeroheight remains the governed usage and lifecycle documentation surface.
-- [X] Candidates remains the runtime comparison and integration evidence surface.
-- [ ] Candidates links to Zeroheight when a stable page exists.
-- [ ] Zeroheight links back to the Experiments view when a stable deployed QA URL exists.
-- [ ] Both surfaces use the same Candidate lifecycle label.
-
 ## Definition of done for the first Experiments view
 
 - [ ] Third **Experiments** navigation Button appears to the right of **Performance Tracking**.
@@ -626,7 +572,6 @@ The Experiments view does not replace Zeroheight.
 - [ ] Storybook candidate link works.
 - [ ] Storybook stable-story link works.
 - [ ] Embedded Storybook story works or displays a graceful fallback.
-- [ ] Zeroheight Button link works or displays `Planned`/`Portal only` accurately.
 - [ ] Figma link works or displays `Pending verification` accurately.
 - [ ] Source and token-plan links work.
 - [ ] Direct Component Lab tests pass.
@@ -647,7 +592,7 @@ The Experiments view does not replace Zeroheight.
 9. [ ] Confirm Storybook story IDs from generated `index.json`.
 10. [ ] Add Storybook external links.
 11. [ ] Add Storybook iframe with graceful fallback.
-12. [ ] Add optional Zeroheight and Figma links.
+12. [ ] Add an optional Figma link.
 13. [ ] Add source, plan, and test-evidence links.
 14. [ ] Add responsive and theme-aware styling.
 15. [ ] Add unit tests for the three-view navigation.
@@ -655,7 +600,7 @@ The Experiments view does not replace Zeroheight.
 17. [ ] Add direct QA Playwright coverage.
 18. [ ] Add shell-composed Playwright coverage.
 19. [ ] Run axe and resolve findings.
-20. [ ] Record the Experiments view as integration evidence in the main candidate plan and Zeroheight page.
+20. [ ] Record the Experiments view as integration evidence in the main candidate plan.
 
 ## Final decision
 
@@ -672,9 +617,6 @@ Experiments view
 
 Shell-composed QA
   -> federation and theme propagation evidence
-
-Zeroheight
-  -> curated usage, ownership, lifecycle, and approval guidance
 
 GitHub/CI
   -> source, tests, review, and release evidence

@@ -273,12 +273,12 @@ Federation is proof of durability, not the homepage identity.
 
 ### Prompt
 
-Why not keep Zeroheight as the primary documentation platform?
+Why not keep a paid third-party documentation platform as the primary documentation surface?
 
 ### Strong-answer landmarks
 
-- Zeroheight is useful for nontechnical editing and enterprise governance;
-- it is expensive and integration-limited for a single-team implementation;
+- third-party documentation platforms are useful for nontechnical editing and enterprise governance;
+- they are expensive and integration-limited for a single-team implementation;
 - Starlight is versioned with the code;
 - pull requests review docs and implementation together;
 - manifest and token projections can be automated;
@@ -287,7 +287,7 @@ Why not keep Zeroheight as the primary documentation platform?
 
 ### Balanced answer
 
-Do not criticize Zeroheight broadly. Explain that tool choice depends on organizational needs and that the product benefits more from owning the integration.
+Do not criticize any specific third-party documentation platform broadly. Explain that tool choice depends on organizational needs and that the product benefits more from owning the integration.
 
 ## Checkpoint 12 — Incomplete evidence
 

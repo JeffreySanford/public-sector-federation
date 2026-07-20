@@ -284,7 +284,7 @@ can depend on the wrapper.
 | Active | Approved for app/remotes. | Lint, typecheck, Storybook, and shell proof. |
 | Deprecated | Supported only for migration. | Replacement, migration note, and removal window. |
 
-Promotion should be evidence-backed, not automatic. Zeroheight can document the
+Promotion should be evidence-backed, not automatic. Starlight can document the
 status after publishing is available, but it does not decide promotion by
 itself.
 

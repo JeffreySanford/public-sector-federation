@@ -14,7 +14,6 @@ Use the documentation surfaces according to these boundaries:
 4. **Generated component manifest** — lifecycle, relationships, evidence, alignment status, and explicit missing states.
 5. **`docs/documentation-upgrade`** — target architecture, roadmap, backlog, and current implementation status.
 6. **This folder** — detailed engineering references and historical operating-model decisions.
-7. **Zeroheight records** — historical experiment evidence only, not canonical guidance.
 
 Start with:
 
@@ -46,8 +45,7 @@ Still target-state work:
 - generated component catalog and health views;
 - Component Inventory, Quality & Remediation, and Design Alignment Lab;
 - complete Figma alignment records;
-- broader Storybook/Chromatic reorganization;
-- migration and archival of remaining Zeroheight-era tooling and language.
+- broader Storybook/Chromatic reorganization.
 
 ## Engineering reference path
 
@@ -68,8 +66,6 @@ Still target-state work:
 15. [Rollout implementation](./governance/rollout-implementation.md)
 16. [Repository review checklist](./validation/repository-review-checklist.md)
 
-The old [Zeroheight governance model](./governance/zeroheight-governance-model.md) is retained as a historical decision record and is superseded by Starlight plus the component manifest.
-
 ## Tool and surface responsibilities
 
 | Tool or surface | Primary role |
@@ -84,7 +80,6 @@ The old [Zeroheight governance model](./governance/zeroheight-governance-model.m
 | Playwright and axe | Repeatable browser and automated accessibility evidence |
 | Astro Starlight | Canonical public guidance and component documentation |
 | Chromatic | Storybook visual review and regression workflow |
-| Zeroheight | Historical documentation-platform experiment only |
 | Shell configuration | Remote locations and runtime integration |
 
 ## Supporting diagrams

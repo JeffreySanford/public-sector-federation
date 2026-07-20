@@ -49,7 +49,7 @@ Request or opportunity
   -> Storybook contract
   -> runtime validation
   -> component registry promotion
-  -> Zeroheight governance publication
+  -> Starlight governance publication
   -> enterprise adoption
 ```
 
@@ -244,13 +244,13 @@ Idea
 
 Lifecycle status definitions are maintained in
 [Component Promotion](./component-promotion.md). Use those definitions when
-recording registry metadata or publishing Zeroheight status.
+recording registry metadata or publishing Starlight status.
 
-## Stage 7: Zeroheight Publication
+## Stage 7: Starlight Publication
 
-Zeroheight publishes the governed adoption guidance.
+Starlight publishes the governed adoption guidance.
 
-Zeroheight should show:
+Starlight should show:
 
 - when to use the component;
 - when not to use it;
@@ -264,7 +264,7 @@ Zeroheight should show:
 - validation evidence;
 - migration or deprecation guidance.
 
-Zeroheight is the adoption front door. It does not replace the source
+Starlight is the adoption front door. It does not replace the source
 repository, token build, component registry, or validation suite.
 
 ## Roles And Responsibilities
@@ -315,4 +315,4 @@ The expected result:
 - reusable improvements flow back into the shared system;
 - application-specific features stay in applications;
 - approved shared components have clear owners, evidence, and lifecycle status;
-- Zeroheight shows teams what is approved and how to adopt it.
+- Starlight shows teams what is approved and how to adopt it.

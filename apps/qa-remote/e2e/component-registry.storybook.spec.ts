@@ -68,6 +68,5 @@ test.describe('component manifest Storybook registry', () => {
     await expect(page.getByText('Design review is pending.')).toBeVisible();
     await expect(page.getByText('Manual screen-reader audit is pending.')).toBeVisible();
     await expect(page.getByText('pending-access', { exact: true })).toBeVisible();
-    await expect(page.getByText('draft', { exact: true })).toBeVisible();
   });
 });

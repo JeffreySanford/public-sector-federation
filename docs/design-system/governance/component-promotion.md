@@ -37,7 +37,7 @@ for other teams to trust it:
 - Direct subapplication validation
 - Shell-mounted validation
 - Playwright evidence where appropriate
-- Zeroheight guidance
+- Starlight guidance
 - Named owner
 - Release notes or migration notes
 

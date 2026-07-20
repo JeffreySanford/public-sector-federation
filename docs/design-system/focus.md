@@ -16,7 +16,7 @@ mounted remotes, and PrimeNG overlays append to `body`. Each remote bootstraps
 independently and needs the approved PrimeNG provider setup unless shared
 bootstrap code handles it.
 
-Zeroheight is not part of runtime delivery. It can document tokens and link to
+Starlight is not part of runtime delivery. It can document tokens and link to
 evidence, but `remoteEntry` belongs to subapplication configuration.
 
 ## Current Focus
@@ -68,7 +68,7 @@ against the real framework details before treating the recommendation as final.
 - [ ] Add integration proof that overlays inherit token values.
 - [ ] Confirm how token package versions are kept aligned between shell and
   remotes.
-- [ ] Confirm how Zeroheight receives generated token documentation artifacts.
+- [ ] Confirm how Starlight receives generated token documentation artifacts.
 
 ## System Diagram
 
@@ -78,14 +78,14 @@ The diagram shows five separate flows:
 
 - Generated output flow from token source files into CSS variables, JSON,
   TypeScript helpers, the PrimeNG preset, shell, subapps, Storybook, and
-  Zeroheight documentation.
+  Starlight documentation.
 - Runtime flow from the shell to subapp configuration, the Web Component host,
   and the mounted subapplication.
 - Registry consumption showing that registry components may be used by the
   shell and subapps and should be validated in Storybook.
 - Validation flow through `/qa` and Playwright before evidence is linked into
-  Zeroheight.
-- Documentation flow showing Zeroheight as guidance and governance, not runtime
+  Starlight.
+- Documentation flow showing Starlight as guidance and governance, not runtime
   delivery.
 
 ## Methods To Compare

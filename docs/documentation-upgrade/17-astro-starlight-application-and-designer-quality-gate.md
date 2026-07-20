@@ -642,7 +642,7 @@ Automated checks should validate:
 - meaningful image alternative text;
 - meaningful iframe title;
 - no local machine paths;
-- no employer-, person-, UP-, SitePen-, or Zeroheight-specific language in canonical pages;
+- no employer-, person-, UP-, SitePen-, or third-party documentation-platform-specific language in canonical pages;
 - no unresolved placeholder text such as `TODO`, `TBD`, or `lorem ipsum` in public routes;
 - no duplicate introductory disclaimer blocks;
 - no direct copying of generated manifest fields into authored content when a projection component exists.

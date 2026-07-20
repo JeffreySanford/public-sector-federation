@@ -16,7 +16,7 @@ the repo. The new work is a separate up-design-system Button candidate:
 - Component Lab proof: included in the `/qa` acceptance checkpoint
 
 This is the safer path. It lets us prove the up-design-system token styling,
-cleaner API, Storybook developer experience, Zeroheight evidence model, and
+cleaner API, Storybook developer experience, Starlight evidence model, and
 Figma mapping without breaking existing consumers of `ps-button`. Once the
 candidate is accepted, the team can either promote this implementation into the
 canonical `ps-button` or keep it as a migration target while older usage is
@@ -39,7 +39,7 @@ The candidate must stay Candidate until these are done:
 - `/qa` shows the candidate next to existing wrapper evidence.
 - Static Storybook e2e validates the primary story iframe.
 - Accessibility checks are blocking for the candidate story.
-- Zeroheight has curated guidance and evidence links.
+- Starlight has curated guidance and evidence links.
 - The team decides whether `ps-up-button` replaces the current `ps-button`.
 
 ## Source Material
@@ -59,8 +59,7 @@ Relevant files:
 | `docs/design-system/architecture/up-design-system/critical-design-decisions.md` | Tracks unresolved API, token, and validation decisions. |
 | `packages/tokens/src/tokens/figma-dtcg.sample.json` | Sample DTCG-compatible token source. |
 | `packages/tokens/src/tokens/themes.json` | Current runtime CSS variable source for neutral, vibrant, pastel, light, and dark. |
-| `packages/tokens/src/tokens/zeroheight-metadata.json` | Documentation metadata for token export. |
-| `packages/tokens/src/zeroheight-tokens.json` | Generated Zeroheight-friendly token export. |
+| `packages/tokens/src/tokens/token-metadata.json` | Documentation metadata for token export. |
 
 ## Token Source Shape
 
@@ -109,7 +108,7 @@ Open token decisions:
 
 The candidate Button currently uses the token values already present in
 `packages/tokens/src/tokens/themes.json`. These are the concrete values that
-should be represented in Figma variables and Zeroheight token tables.
+should be represented in Figma variables and Starlight token tables.
 
 Validation note from July 15, 2026: these runtime values are the current
 public-sector candidate values, not exact copies of the generated local
@@ -424,7 +423,7 @@ Figma component variants:
 - icon: none, leading icon;
 - label: normal and long-label stress.
 
-## Zeroheight Steps
+## Starlight Steps
 
 Create:
 
@@ -517,6 +516,6 @@ Promote from Candidate only when:
 - Storybook and `/qa` both show the candidate;
 - static Storybook e2e passes;
 - accessibility checks are blocking;
-- Zeroheight links Figma, Storybook, GitHub source, and test results;
+- Starlight links Figma, Storybook, GitHub source, and test results;
 - migration from existing `ps-button` is documented.
 

@@ -4,7 +4,7 @@
     "public-sector": {
       "source": "Figma",
       "artifact": "DTCG-compatible JSON",
-      "purpose": "Input fixture only. Zeroheight is not part of token creation.",
+      "purpose": "Input fixture only. No external documentation platform is part of token creation.",
       "tiers": [
         "primitive",
         "semantic",

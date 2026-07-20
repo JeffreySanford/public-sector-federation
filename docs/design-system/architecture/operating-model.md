@@ -15,11 +15,11 @@ Figma design intent
   -> direct subapplication validation
   -> shell-mounted validation
   -> Playwright verification
-  -> Zeroheight guidance and governance
+  -> Starlight guidance and governance
 ```
 
 The important separation is that runtime assets come from source-controlled
-packages and build outputs. Zeroheight documents the system and links to
+packages and build outputs. Starlight documents the system and links to
 evidence; it does not supply runtime tokens, components, or remote URLs.
 
 ## Runtime Flow
@@ -53,7 +53,7 @@ PrimeNG setup unless shared bootstrap code provides it.
 | DOM model | Answered | Observed remotes mount in light DOM. |
 | CSS variables | Proposed contract | Custom properties inherit through hosts/shadows. |
 | Overlays | Answered, validate | Observed overlays append to `body` and inherit root context. |
-| Zeroheight | Proposed governance | Document status, usage, evidence, ownership. |
+| Starlight | Proposed governance | Document status, usage, evidence, ownership. |
 
 ## Review Goal
 

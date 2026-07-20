@@ -51,13 +51,6 @@ Token package version alignment:
 - Enterprise status: pending production package, lockfile, and federation
   sharing review.
 
-Zeroheight ingestion path:
-
-- Sample status: confirmed in sample export tooling.
-- Evidence: `pnpm zeroheight:export` runs `pnpm build:tokens` and packages
-  generated token artifacts.
-- Enterprise status: pending production upload, bridge, or publish workflow.
-
 Sanitized `up-design-system` reconciliation:
 
 - Sample status: partially confirmed.
@@ -107,13 +100,11 @@ packages/primeng-preset/src/theme.ts
   -> toggles ps-theme-vibrant and ps-theme-pastel on document.documentElement
 ```
 
-Zeroheight export:
+Token build output:
 
 ```text
-pnpm zeroheight:export
-  -> scripts/export-zeroheight-package.mjs
-  -> pnpm build:tokens
-  -> packages generated tokens.css, zeroheight-tokens.json, design-tokens.json,
+pnpm build:tokens
+  -> packages generated tokens.css, token-metadata.json, design-tokens.json,
      primitives, themes, metadata, and component override artifacts
 ```
 
@@ -125,7 +116,6 @@ pnpm zeroheight:export
 - Production per-remote provider setup or approved shared bootstrap helper.
 - Published package names, versions, dependency ranges, lockfile behavior, and
   federation sharing rules for tokens, preset, and registry packages.
-- Actual Zeroheight publishing or upload path for generated artifacts.
 - Real screenshots, product names, component prefixes, package paths, and
   implementation names to reconcile the sanitized `up-design-system` notes.
 

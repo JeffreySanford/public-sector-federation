@@ -33,7 +33,6 @@ public-sector-federation/
 ├── tools/
 │   ├── docs/                    # Content, polish, link, and integrity validators
 │   └── archive/
-│       ├── zeroheight/
 │       └── reporting/
 └── docs/
     ├── documentation-upgrade/
@@ -358,7 +357,7 @@ flowchart LR
 - Do not break current package imports during the documentation-first phase.
 - Do not rename every selector as a prerequisite to publishing the new site.
 - Do not move working tests only to achieve a cleaner folder tree.
-- Do not make Figma or Zeroheight runtime dependencies.
+- Do not make Figma or Starlight runtime dependencies.
 - Do not duplicate manifest data manually inside Markdown.
 - Do not claim manual accessibility approval when only automated evidence exists.
 - Do not make iframe embedding the canonical Starlight experience.

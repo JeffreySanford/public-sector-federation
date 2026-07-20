@@ -24,7 +24,7 @@ export type RegistryDashboardMode =
         <p>
           This Storybook surface projects governed component metadata. Update the
           manifest source, not this dashboard, when lifecycle, evidence, ownership,
-          Figma, or zeroheight status changes.
+          or Figma status changes.
         </p>
       </header>
 
@@ -66,7 +66,6 @@ export type RegistryDashboardMode =
                     <th scope="col">Storybook</th>
                     <th scope="col">Accessibility</th>
                     <th scope="col">Figma</th>
-                    <th scope="col">zeroheight</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -82,7 +81,6 @@ export type RegistryDashboardMode =
                       <td>{{ entry.evidence.storybook.status }}</td>
                       <td>{{ entry.accessibility.screenReaderAudit }}</td>
                       <td>{{ entry.figma.status }}</td>
-                      <td>{{ entry.zeroheight.status }}</td>
                     </tr>
                   }
                 </tbody>
@@ -230,7 +228,6 @@ export type RegistryDashboardMode =
                     <div><dt>Storybook</dt><dd>{{ entry.evidence.storybook.status }}</dd></div>
                     <div><dt>Repository docs</dt><dd>{{ entry.evidence.documentation.status }}</dd></div>
                     <div><dt>Figma</dt><dd>{{ entry.figma.status }}</dd></div>
-                    <div><dt>zeroheight</dt><dd>{{ entry.zeroheight.status }}</dd></div>
                     <div><dt>Owner</dt><dd>{{ entry.ownership.owner || 'Unassigned' }}</dd></div>
                   </dl>
                   <code>{{ entry.identity.source }}</code>
@@ -309,7 +306,6 @@ export type RegistryDashboardMode =
                 <h3>External surfaces</h3>
                 <dl>
                   <div><dt>Figma</dt><dd>{{ entry.figma.status }}</dd></div>
-                  <div><dt>zeroheight</dt><dd>{{ entry.zeroheight.status }}</dd></div>
                   <div><dt>Design review</dt><dd>{{ entry.governance.designReview }}</dd></div>
                   <div><dt>Owner</dt><dd>{{ entry.ownership.owner || 'Unassigned' }}</dd></div>
                 </dl>

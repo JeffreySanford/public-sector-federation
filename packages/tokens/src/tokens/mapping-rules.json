@@ -5,7 +5,7 @@
   "authoritativeInput": {
     "source": "Figma",
     "artifact": "DTCG-compatible JSON",
-    "notes": "Figma is the known design input. Zeroheight is documentation output, not token creation input."
+    "notes": "Figma is the known design input. Documentation platforms are output, not token creation input."
   },
   "providerPrefix": "--p-",
   "systemPrefix": "--ps-",

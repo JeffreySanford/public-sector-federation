@@ -9,7 +9,7 @@ const readJson = async (fileName) => JSON.parse(await readFile(join(tokensDir, f
 
 const themes = await readJson('themes.json');
 const primitives = await readJson('primitives.json');
-const metadata = await readJson('zeroheight-metadata.json');
+const metadata = await readJson('token-metadata.json');
 const mappingRules = await readJson('mapping-rules.json');
 const figmaDtcgSample = await readJson('figma-dtcg.sample.json');
 const componentOverrides = await readFile(join(tokensDir, 'component-overrides.css'), 'utf8');
@@ -166,27 +166,6 @@ const importableTokenType = (value, name) => {
   return null;
 };
 
-const zeroheightTokens = themes.selectors.flatMap(({ selector, theme, mode, tokens }) =>
-  Object.entries(tokens).map(([name, value]) => {
-    const docs = matchMetadata(name);
-
-    return {
-      name,
-      value,
-      selector,
-      theme,
-      mode,
-      tier: name.startsWith(mappingRules.providerPrefix) ? 'primeng-mapping' : docs.tier,
-      category: docs.category,
-      usage: docs.usage,
-      description: metadata.tokenDescriptions[name] ?? `${name} for ${theme} ${mode}.`,
-      primeNgFamily: primeNgFamily(name),
-      cssVariable: name,
-      mappingRulesVersion: mappingRules.version,
-    };
-  }),
-);
-
 const designTokens = {
   $description: 'DTCG-compatible token import generated from packages/tokens/src/tokens/*.json.',
   $extensions: {
@@ -279,26 +258,12 @@ for (const { selector, theme, mode, tokens } of themes.selectors) {
   }
 }
 
+const tokenCount = themes.selectors.reduce((count, { tokens }) => count + Object.keys(tokens).length, 0);
+
 await writeFile(join(sourceDir, 'tokens.css'), css);
-await writeFile(
-  join(sourceDir, 'zeroheight-tokens.json'),
-  `${JSON.stringify(
-    {
-      generatedFrom: 'packages/tokens/src/tokens/*.json',
-      mappingRulesVersion: mappingRules.version,
-      authoritativeInput: mappingRules.authoritativeInput,
-      figmaDtcgInput,
-      normalizationRules: mappingRules.normalizationRules,
-      tokenCount: zeroheightTokens.length,
-      tokens: zeroheightTokens,
-    },
-    null,
-    2,
-  )}\n`,
-);
 await writeFile(join(sourceDir, 'design-tokens.json'), `${JSON.stringify(designTokens, null, 2)}\n`);
 
 console.log(
-  `Generated tokens.css, zeroheight-tokens.json, and design-tokens.json from ${zeroheightTokens.length} token values. ` +
+  `Generated tokens.css and design-tokens.json from ${tokenCount} token values. ` +
     `Validated ${figmaDtcgInput.file}.`,
 );

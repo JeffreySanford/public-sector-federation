@@ -16,7 +16,7 @@ Current position:
 - Button, Select, and Dialog are published as flagship component slices;
 - the manifest-driven Component Inventory, Quality & Remediation, and Design Alignment Lab are merged;
 - the current mission is to complete the component-estate audit, accessibility findings, manual flagship reviews, consolidation proposal, and Figma reconstruction reference;
-- Zeroheight is historical evidence, not the canonical documentation surface.
+- the retired third-party documentation platform is not a dependency anywhere in this repository.
 
 ## North star
 
@@ -32,8 +32,7 @@ The repository began with several competing public narratives:
 2. public-sector application platform;
 3. design-system component and token library;
 4. QA and visual-validation laboratory;
-5. Zeroheight documentation experiment;
-6. personal overview walkthrough.
+5. personal overview walkthrough.
 
 The upgraded documentation tells one primary story:
 
@@ -60,7 +59,7 @@ Federation and backend examples remain supporting evidence rather than the homep
 | [12 — Delivery roadmap](./12-delivery-roadmap.md) | Organizes the upgrade into reviewable checkpoints with acceptance criteria. |
 | [13 — Role-proof matrix](./13-role-proof-matrix.md) | Maps repository evidence to forensic design-systems engineering responsibilities. |
 | [14 — Wayfinder interview guide](./14-wayfinder-interview-guide.md) | Provides an interview-practice format for explaining the work clearly. |
-| [15 — Zeroheight retirement strategy](./15-zeroheight-retirement-strategy.md) | Defines Zeroheight as historical evidence rather than the canonical documentation surface. |
+| [15 — Zeroheight retirement](./15-zeroheight-retirement-strategy.md) | Records the completed retirement of the Zeroheight documentation platform. |
 | [16 — Main application three-view upgrade](./16-main-application-view-upgrade.md) | Defines Component Inventory, Quality & Remediation, and Design Alignment Lab. |
 | [17 — Astro Starlight application and designer-grade quality gate](./17-astro-starlight-application-and-designer-quality-gate.md) | Defines `apps/starlight`, same-origin Angular integration, visual discipline, automated checks, and human polish review. |
 | [18 — Component estate audit](./18-component-estate-audit.md) | Records the shipped component surface, duplication clusters, evidence gaps, and preliminary dispositions. |
@@ -104,7 +103,7 @@ The upgrade succeeds when:
 
 - `apps/starlight` remains a real, independently built documentation application;
 - Starlight is mounted as a first-class route and linked directly from Angular;
-- the documentation site, not the README or Zeroheight, is the primary public guidance surface;
+- the documentation site, not the README, is the primary public guidance surface;
 - the first screen communicates a design-system product rather than a self-referential submission;
 - flagship component pages place live behavior and usage guidance before evidence;
 - the main application provides Component Inventory, Quality & Remediation, and Design Alignment Lab views;
@@ -115,6 +114,5 @@ The upgrade succeeds when:
 - visual, responsive, accessibility, content, performance, and cross-surface checks block regressions;
 - substantial visual changes require explicit human polish approval rather than automatic baseline acceptance;
 - federation is presented as adoption proof, not the main identity;
-- Zeroheight remains optional historical evidence rather than a dependency;
 - the component manifest visibly prevents documentation drift;
 - a reviewer can see discovery, remediation, governance, design-to-code translation, and engineering depth in one coherent system.

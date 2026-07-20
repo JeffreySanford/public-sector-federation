@@ -9,7 +9,7 @@ how applications should consume design tokens inside that framework.
 
 Treat design tokens as a versioned runtime contract shared by the shell and each
 remote application. The token package, or equivalent enterprise artifact, should
-be the source of truth, not the shell and not Zeroheight.
+be the source of truth, not the shell and not Starlight.
 
 The token package should produce:
 
@@ -64,7 +64,7 @@ The sample repository now models this direction:
 - `packages/tokens` owns token source files and generated artifacts.
 - `packages/tokens/src/tokens.css` provides runtime CSS custom properties.
 - `packages/tokens/src/design-tokens.json` and
-  `packages/tokens/src/zeroheight-tokens.json` provide generated metadata.
+  `packages/tokens/src/tokens/token-metadata.json` provide generated metadata.
 - `packages/tokens/src/index.ts` exports derived data from generated artifacts
   instead of duplicating hardcoded token values.
 - `packages/primeng-preset` maps from `@public-sector/tokens`.
@@ -75,12 +75,12 @@ The sample repository now models this direction:
   resolution, Web Component host token resolution, theme propagation, and
   PrimeNG overlay token context.
 
-## Zeroheight Role
+## Starlight Role
 
-Zeroheight should document the token contract, usage guidance, examples, and
+Starlight should document the token contract, usage guidance, examples, and
 validation evidence. It should receive generated token metadata from the
 repository. It should not be the runtime source of truth for application styling.
-`remoteEntry` remains subapplication configuration, not Zeroheight content.
+`remoteEntry` remains subapplication configuration, not Starlight content.
 
 ## Summary
 

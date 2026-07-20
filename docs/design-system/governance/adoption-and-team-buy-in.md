@@ -43,7 +43,7 @@ to:
 - request exceptions;
 - influence roadmap priority.
 
-The design-system team should make that path visible in Zeroheight and in the
+The design-system team should make that path visible in Starlight and in the
 repository contribution docs.
 
 ## Maintainer Support

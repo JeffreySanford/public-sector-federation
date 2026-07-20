@@ -8,7 +8,7 @@ This specification defines how design-token values move from a DTCG-compatible s
 
 The preferred input is one approved Figma-backed DTCG-compatible export, or a small set of exports split by real ownership or domain boundaries.
 
-Zeroheight is not a token-creation source. It consumes generated metadata and evidence after the runtime artifacts have been built and validated.
+Starlight is not a token-creation source. It consumes generated metadata and evidence after the runtime artifacts have been built and validated.
 
 The sample repository currently uses:
 
@@ -16,7 +16,7 @@ The sample repository currently uses:
 - `packages/tokens/src/tokens/themes.json` for semantic theme and mode values;
 - `packages/tokens/src/tokens/figma-dtcg.sample.json` as a representative input fixture;
 - `packages/tokens/src/tokens/mapping-rules.json` for precedence and normalization;
-- `packages/tokens/src/tokens/zeroheight-metadata.json` for documentation metadata;
+- `packages/tokens/src/tokens/token-metadata.json` for documentation metadata;
 - `packages/tokens/src/tokens/component-overrides.css` for stable provider gaps.
 
 ## Tier model
@@ -46,7 +46,6 @@ Generated artifacts include:
 
 - `packages/tokens/src/tokens.css`;
 - `packages/tokens/src/design-tokens.json`;
-- `packages/tokens/src/zeroheight-tokens.json`;
 - `packages/tokens/src/index.ts`;
 - `packages/primeng-preset/src/preset.ts`.
 
@@ -128,9 +127,9 @@ An adopting token export is adequate when reviewers can answer:
 
 If any answer requires guessing, the export or mapping metadata is incomplete.
 
-## Zeroheight output
+## Starlight output
 
-Zeroheight should receive generated token metadata plus links to Storybook, Playwright, source, and lifecycle evidence. It should not own runtime values or federation configuration.
+Starlight should receive generated token metadata plus links to Storybook, Playwright, source, and lifecycle evidence. It should not own runtime values or federation configuration.
 
 ## Production adoption checks
 

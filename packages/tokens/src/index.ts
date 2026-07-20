@@ -1,5 +1,4 @@
 import designTokens from './design-tokens.json';
-import zeroheightTokens from './zeroheight-tokens.json';
 
 type TokenLeaf = {
   $value: string;
@@ -30,7 +29,7 @@ const valuesOf = <T extends Record<string, unknown>>(tokens: T): TokenValueTree<
 const neutralLight = designTokens.theme['neutral-light'].ps;
 const neutralDark = designTokens.theme['neutral-dark'].ps;
 
-export { designTokens, zeroheightTokens };
+export { designTokens };
 
 export const primitive = {
   ...valuesOf(designTokens.primitive.color),

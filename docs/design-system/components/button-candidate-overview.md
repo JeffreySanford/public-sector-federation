@@ -45,7 +45,7 @@ The Candidate evaluates:
 - explicit hover, pressed, focus, disabled, and loading styling;
 - an opinionated PrimeNG facade rather than a mirrored provider API;
 - accessibility ownership;
-- shared Figma, Storybook, Zeroheight, and Angular vocabulary;
+- shared Figma, Storybook, Starlight, and Angular vocabulary;
 - QA and federated-shell behavior;
 - promotion evidence and governance.
 
@@ -98,4 +98,4 @@ Until design, token, accessibility, Storybook, QA, shell-integration, and govern
 
 ## Live documentation
 
-[Open the Button Candidate page in Zeroheight](https://jeffreysanford.zeroheight.com/styleguide/s/143938/p/238541-up-button-Candidate)
+Open the Button Candidate page on the Starlight documentation site.
