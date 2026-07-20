@@ -113,47 +113,8 @@ label {
   font-weight: 700;
 }
 
-input,
-ps-select,
-p-datepicker {
+ps-select {
   width: 100%;
-}
-
-.field-control {
-  width: 100%;
-  min-height: 2.6rem;
-  padding: 0.65rem 0.75rem;
-  border: 1px solid var(--p-content-border-color);
-  border-radius: var(--p-border-radius-md);
-  background: var(--p-content-background);
-  color: var(--p-text-color);
-  font: inherit;
-}
-
-.field-control:focus {
-  border-color: var(--p-primary-color);
-  box-shadow: var(--p-focus-ring-shadow);
-  outline: 0;
-}
-
-.inline-control {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.switch-control {
-  width: 1.1rem;
-  height: 1.1rem;
-}
-
-.info-message {
-  margin-top: 1rem;
-  padding: 0.75rem 0.85rem;
-  border: 1px solid color-mix(in srgb, var(--p-primary-color) 28%, var(--p-content-border-color));
-  border-radius: var(--p-border-radius-md);
-  background: color-mix(in srgb, var(--p-primary-color) 9%, var(--p-content-background));
-  color: var(--p-text-color);
 }
 
 small {
@@ -279,35 +240,6 @@ small {
   background: color-mix(in srgb, #f59e0b 7%, var(--p-content-background));
 }
 
-.eligibility-check {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.85rem;
-  align-items: start;
-  margin: 0;
-}
-
-.eligibility-check input {
-  width: 1.1rem;
-  height: 1.1rem;
-  margin-top: 0.2rem;
-}
-
-.eligibility-check span {
-  display: grid;
-  gap: 0.3rem;
-}
-
-.eligibility-check strong {
-  color: var(--p-text-color);
-}
-
-.eligibility-check small {
-  max-width: 44rem;
-  margin: 0;
-  line-height: 1.45;
-}
-
 .eligibility-meta,
 .eligibility-actions {
   display: flex;
@@ -338,26 +270,6 @@ small {
   margin: 0;
   padding: 0 1rem 1rem;
   color: var(--p-text-muted-color);
-}
-
-.case-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.case-table th,
-.case-table td {
-  padding: 0.8rem;
-  border-bottom: 1px solid var(--p-content-border-color);
-  text-align: left;
-}
-
-.case-table th {
-  background: color-mix(in srgb, var(--p-content-background) 86%, var(--p-primary-color));
-  color: var(--p-text-color);
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 
 .case-timeline {

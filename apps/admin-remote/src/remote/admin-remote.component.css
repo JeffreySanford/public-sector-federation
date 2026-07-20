@@ -46,36 +46,6 @@
   margin-bottom: 1rem;
 }
 
-.password-field {
-  display: grid;
-  gap: 0.5rem;
-  margin: 1.25rem 0;
-  font-weight: 700;
-}
-
-.password-field input {
-  width: min(100%, 28rem);
-  min-height: 2.75rem;
-  padding: 0.65rem 0.85rem;
-  border: 1px solid var(--p-content-border-color);
-  border-radius: var(--p-border-radius-md);
-  background: var(--p-content-background);
-  color: var(--p-text-color);
-  font: inherit;
-}
-
-.password-field input:focus {
-  border-color: var(--p-primary-color);
-  box-shadow: var(--p-focus-ring-shadow);
-  outline: 0;
-}
-
-.setting-row input[role='switch'] {
-  width: 2.75rem;
-  height: 1.45rem;
-  accent-color: var(--p-primary-color);
-}
-
 .admin-actions-menu {
   display: grid;
   gap: 0.35rem;
