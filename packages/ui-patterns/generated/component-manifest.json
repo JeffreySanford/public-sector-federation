@@ -2825,7 +2825,7 @@
       "schemaVersion": 1,
       "identity": {
         "id": "ps-up-button",
-        "name": "UP Button Candidate",
+        "name": "Button Contract Exploration",
         "kind": "component",
         "exportName": "PublicUpButtonComponent",
         "selector": "ps-up-button",
@@ -2941,7 +2941,7 @@
       "evidence": {
         "storybook": {
           "status": "complete",
-          "title": "Design System/Candidates/Button UP",
+          "title": "Design System/Experiments/Button Contract Exploration",
           "files": [
             "apps/qa-remote/src/stories/up-button.stories.ts",
             "apps/qa-remote/src/stories/opinionated-wrapper-contract.stories.ts"
@@ -2962,7 +2962,7 @@
         "tests": {
           "status": "complete",
           "files": [
-            "apps/qa-remote/e2e/up-button-candidate.storybook.spec.ts"
+            "apps/qa-remote/e2e/button-candidate.storybook.spec.ts"
           ],
           "behaviors": [
             "pointer activation",
@@ -2977,9 +2977,9 @@
           "status": "complete",
           "files": [
             "docs/design-system/architecture/opinionated-wrapper-contract.md",
-            "docs/design-system/components/up-button-candidate-overview.md",
-            "docs/design-system/components/up-button-candidate-integration-plan.md",
-            "docs/design-system/components/up-button-candidate-developer.md"
+            "docs/design-system/components/button-candidate-overview.md",
+            "docs/design-system/components/button-candidate-integration-plan.md",
+            "docs/design-system/components/button-candidate-developer.md"
           ]
         }
       },
