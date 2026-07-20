@@ -24,7 +24,7 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 
 ### P1 — Finalize consolidation
 
-- [ ] Approve one target Button contract and compatibility window.
+- [x] Approve one target Button contract and compatibility window.
 - [ ] Decide selector-prefix migration.
 - [ ] Record provider-wrap, native, and Angular CDK tradeoffs.
 - [ ] Move native styling from direct `--p-*` use to public `--ps-*` tokens.
@@ -53,6 +53,7 @@ Evidence-presentation progress:
 - Select now exposes provider-neutral required, invalid, help, and error inputs with verified relationships on the rendered combobox; the remediation is visible through the manifest finding register.
 - Dialog now applies reversible background inertness and body scroll locking and exposes a verified accessible-description relationship; nested dialogs remain explicitly unsupported.
 - Select disabled options now expose wrapper-governed `aria-disabled` semantics while preserving provider selection suppression; manual announcement review remains pending.
+- Button now has an approved provider-neutral target contract; legacy aliases remain supported until the next major release and are presented as planned migration work in Quality & Remediation.
 
 ### P1 — Finish Storybook and Chromatic alignment
 
