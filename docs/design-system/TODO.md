@@ -35,10 +35,10 @@ This is the short execution dashboard. It does not duplicate detailed acceptance
 
 ## Now — accessibility remediation
 
-- [ ] Reproduce and classify provisional accessibility findings.
+- [x] Reproduce and classify provisional accessibility findings.
 - [x] Add stable Button keyboard, loading, and activation evidence.
 - [ ] Record NVDA and Chrome reviews for Button, Select, and Dialog.
-- [ ] Record forced-colors and zoom/reflow reviews.
+- [x] Record automated forced-colors and zoom/reflow reviews; retain manual environment review separately.
 - [ ] Add Select required, invalid, help, and error relationships.
 - [ ] Decide and implement Dialog inertness, scroll-lock, and description behavior.
 

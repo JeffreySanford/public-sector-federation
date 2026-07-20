@@ -177,4 +177,22 @@ test.describe('Dialog isolated Storybook contract', () => {
     const results = await new AxeBuilder({ page }).analyze();
     expect(results.violations).toEqual([]);
   });
+
+  test('keeps the modal boundary and focused close action visible in forced-colors mode', async ({ page }) => {
+    await page.emulateMedia({ forcedColors: 'active' });
+    await gotoDialogStory(page, 'default');
+    const { dialog } = await openDialog(page, 'Review application', 'Review application');
+    const close = dialog.getByRole('button', { name: 'Close dialog' });
+
+    await expectDomFocus(close);
+    const styles = await close.evaluate((element) => {
+      const computed = getComputedStyle(element);
+      return {
+        outlineStyle: computed.outlineStyle,
+        outlineWidth: computed.outlineWidth,
+      };
+    });
+    expect(styles.outlineStyle).not.toBe('none');
+    expect(styles.outlineWidth).not.toBe('0px');
+  });
 });

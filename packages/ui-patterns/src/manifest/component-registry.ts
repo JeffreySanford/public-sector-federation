@@ -316,10 +316,12 @@ export const componentFindings: ComponentFinding[] = [
     id: 'A11Y-SEL-001',
     category: 'accessibility',
     severity: 'serious',
-    status: 'investigate',
+    status: 'open',
     componentIds: ['ps-select'],
-    summary: 'Disabled-option ARIA behavior lacks dedicated evidence.',
+    summary:
+      'Disabled options suppress selection, but the rendered option does not expose aria-disabled to assistive technology.',
     evidence: [
+      'apps/qa-remote/e2e/select.storybook.spec.ts',
       'apps/qa-remote/src/stories/select.stories.ts',
       'docs/documentation-upgrade/19-accessibility-findings-and-remediation.md',
     ],
@@ -380,10 +382,15 @@ export const componentFindings: ComponentFinding[] = [
     id: 'A11Y-SYS-002',
     category: 'accessibility',
     severity: 'moderate',
-    status: 'open',
+    status: 'verified',
     componentIds: flagshipComponents,
-    summary: 'Windows forced-colors evidence is not recorded for the flagship components.',
-    evidence: ['docs/documentation-upgrade/19-accessibility-findings-and-remediation.md'],
+    summary: 'Automated forced-colors evidence verifies visible boundaries and focus for the flagship components.',
+    evidence: [
+      'apps/qa-remote/e2e/button.storybook.spec.ts',
+      'apps/qa-remote/e2e/select.storybook.spec.ts',
+      'apps/qa-remote/e2e/dialog.storybook.spec.ts',
+      'docs/documentation-upgrade/19-accessibility-findings-and-remediation.md',
+    ],
   },
 ];
 

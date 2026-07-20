@@ -16,10 +16,10 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 
 ### P0 — Complete flagship accessibility evidence
 
-- [ ] Reproduce and classify provisional findings.
+- [x] Reproduce and classify provisional findings.
 - [x] Add stable Button interaction and keyboard evidence.
 - [ ] Record NVDA and Chrome reviews for Button, Select, and Dialog.
-- [ ] Record zoom/reflow and forced-colors review.
+- [x] Record automated zoom/reflow and forced-colors review; retain manual environment review separately.
 - [ ] Link remediations to automated and manual verification.
 
 ### P1 — Finalize consolidation
@@ -49,6 +49,7 @@ Evidence-presentation progress:
 - consolidation decisions remain open;
 - axe scans now cover all three workbench views, and the finding evidence disclosure has dedicated keyboard coverage.
 - Component Inventory presents disposition, duplication cluster, token boundary, and a disposition-specific next action from manifest audit metadata.
+- Select disabled-option behavior is reproduced and classified, and flagship Storybook contracts now carry automated forced-colors evidence alongside existing 200% zoom-equivalent reflow coverage.
 
 ### P1 — Finish Storybook and Chromatic alignment
 

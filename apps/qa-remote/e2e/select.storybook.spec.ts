@@ -24,6 +24,13 @@ function optionList(page: Page): Locator {
   return page.locator('body [role="listbox"][aria-label="Option List"]').last();
 }
 
+async function activeOption(page: Page, combobox: Locator): Promise<Locator> {
+  await expect(combobox).toHaveAttribute('aria-activedescendant', /.+/);
+  const activeOptionId = await combobox.getAttribute('aria-activedescendant');
+  expect(activeOptionId).toBeTruthy();
+  return page.locator(`[id="${activeOptionId}"]`);
+}
+
 async function openWithKeyboard(page: Page, name: string): Promise<Locator> {
   const combobox = page.getByRole('combobox', { name });
   await combobox.focus();
@@ -226,5 +233,25 @@ test.describe('Select isolated Storybook contract', () => {
     });
     expect(geometry.scrollWidth).toBeLessThanOrEqual(geometry.clientWidth + 1);
     expect(geometry.documentWidth).toBeLessThanOrEqual(geometry.viewportWidth + 1);
+  });
+
+  test('keeps the control, focused option, and overlay distinguishable in forced-colors mode', async ({ page }) => {
+    await page.emulateMedia({ forcedColors: 'active' });
+    await gotoSelectStory(page, 'default');
+    const combobox = await openWithKeyboard(page, 'Program');
+    await page.keyboard.press('ArrowDown');
+    const focusedOption = await activeOption(page, combobox);
+
+    await expect(combobox).toBeFocused();
+    await expect(focusedOption).toBeVisible();
+    const styles = await focusedOption.evaluate((element) => {
+      const computed = getComputedStyle(element);
+      return {
+        outlineStyle: computed.outlineStyle,
+        outlineWidth: computed.outlineWidth,
+      };
+    });
+    expect(styles.outlineStyle).not.toBe('none');
+    expect(styles.outlineWidth).not.toBe('0px');
   });
 });

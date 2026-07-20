@@ -35,14 +35,19 @@ A finding cannot be marked resolved without linked verification. Manual review c
 | A11Y-DLG-002 | Dialog | Explicit body scroll locking is not implemented | Moderate | Source review and documented limitation | Open |
 | A11Y-DLG-003 | Dialog | The public API has no accessible-description relationship such as `aria-describedby` | Moderate | Source/API review and documented limitation | Open |
 | A11Y-DLG-004 | Dialog | Stacked or nested dialog behavior is undefined | Moderate | Documented limitation | Investigate |
-| A11Y-SEL-001 | Select | Disabled-option ARIA behavior lacks dedicated evidence | Serious pending reproduction | Documentation and evidence gap | Investigate |
+| A11Y-SEL-001 | Select | Disabled options suppress selection but omit `aria-disabled` | Serious | Storybook Playwright reproduction | Open |
 | A11Y-SEL-002 | Select | Required, invalid, error-message, and help-text relationships are absent from the public contract | Serious | API and documentation review | Open |
 | A11Y-BTN-001 | Button | Stable Button keyboard activation and focus behavior have dedicated automated evidence | Moderate evidence risk | Storybook Playwright verification | Verified |
 | A11Y-BTN-002 | Button | Loading exposes busy semantics and suppresses repeated activation; manual announcement verification remains pending | Serious pending manual review | Storybook Playwright verification | Implemented |
 | A11Y-SYS-001 | Flagship components | Manual screen-reader reviews are not recorded | Serious evidence gap | Manifest review | Open |
-| A11Y-SYS-002 | Flagship components | Windows high-contrast/forced-colors evidence is not recorded | Moderate evidence gap | Documentation review | Open |
+| A11Y-SYS-002 | Flagship components | Automated forced-colors checks preserve visible boundaries and focus | Moderate evidence risk | Storybook Playwright verification | Verified |
 
 “Pending reproduction” means severity is provisional until behavior is observed in the declared browser and assistive-technology environment.
+
+The initial provisional Select finding is now reproduced and classified. PrimeNG prevents the
+disabled option from changing the model, but its rendered `option` role exposes provider state
+without `aria-disabled`. The finding remains open until the provider or wrapper exposes the
+disabled state programmatically and the behavior is verified with assistive technology.
 
 ## Remediation records
 
@@ -92,6 +97,10 @@ A finding cannot be marked resolved without linked verification. Manual review c
 | Select | Required | Required | Required | Required | Pending |
 | Dialog | Required | Required | Required | Required | Pending |
 
+Automated evidence now covers 320 CSS-pixel reflow for all three flagship documentation pages
+and forced-colors boundaries and focus indicators in their isolated Storybook contracts. These
+checks reduce regression risk but do not satisfy the environment-specific manual review below.
+
 Each review record must include:
 
 - reviewer;
@@ -116,7 +125,7 @@ Each review record must include:
 ## Completion criteria
 
 - [ ] Flagship manual reviews are recorded.
-- [ ] Provisional findings are reproduced and classified; stable Button automated findings are classified.
+- [x] Provisional findings are reproduced and classified; stable Button automated findings are classified.
 - [ ] Confirmed findings link to implementation or a documented decision.
 - [ ] Resolved findings link to automated and, where required, manual verification.
 - [x] The manifest references finding identifiers; last-review records remain pending.
