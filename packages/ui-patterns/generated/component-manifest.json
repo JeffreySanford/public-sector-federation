@@ -367,6 +367,11 @@
             "defaultValue": "''"
           },
           {
+            "name": "description",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
             "name": "width",
             "type": "string",
             "defaultValue": "'32rem'"
@@ -389,7 +394,7 @@
         "providerModules": [],
         "providerEscapeHatches": [],
         "knownLimitations": [
-          "Background inertness, explicit body scroll lock, configurable initial focus, aria-describedby, stacked dialogs, Figma alignment, and manual assistive-technology review remain pending."
+          "Configurable initial focus, stacked dialogs, Figma alignment, and manual assistive-technology review remain pending."
         ]
       },
       "variants": {
@@ -433,6 +438,9 @@
           ],
           "behaviors": [
             "labelled modal semantics",
+            "accessible description relationship",
+            "background inertness and restoration",
+            "body scroll lock and restoration",
             "safe initial focus",
             "forward and reverse focus containment",
             "Escape dismissal",
@@ -488,7 +496,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "The current modal contract does not make background content inert or explicitly lock body scrolling.",
+          "Stacked or nested dialogs are unsupported.",
           "A dedicated semantic backdrop token is not yet recorded."
         ]
       }
@@ -2596,13 +2604,14 @@
       "id": "A11Y-DLG-001",
       "category": "accessibility",
       "severity": "serious",
-      "status": "open",
+      "status": "verified",
       "componentIds": [
         "ps-dialog"
       ],
-      "summary": "Background content is not made inert while the modal is open.",
+      "summary": "Background content is made inert while the modal is open and restored on close.",
       "evidence": [
         "packages/ui-patterns/src/public-dialog.component.ts",
+        "apps/qa-remote/e2e/dialog.storybook.spec.ts",
         "docs/documentation-upgrade/19-accessibility-findings-and-remediation.md"
       ]
     },
@@ -2610,13 +2619,14 @@
       "id": "A11Y-DLG-002",
       "category": "accessibility",
       "severity": "moderate",
-      "status": "open",
+      "status": "verified",
       "componentIds": [
         "ps-dialog"
       ],
-      "summary": "Explicit body scroll locking is not implemented.",
+      "summary": "Body scrolling is locked while the modal is open and restored on close.",
       "evidence": [
         "packages/ui-patterns/src/public-dialog.component.ts",
+        "apps/qa-remote/e2e/dialog.storybook.spec.ts",
         "docs/documentation-upgrade/19-accessibility-findings-and-remediation.md"
       ]
     },
@@ -2624,13 +2634,14 @@
       "id": "A11Y-DLG-003",
       "category": "accessibility",
       "severity": "moderate",
-      "status": "open",
+      "status": "verified",
       "componentIds": [
         "ps-dialog"
       ],
-      "summary": "The public Dialog API has no accessible-description relationship.",
+      "summary": "The public Dialog description input provides a verified aria-describedby relationship.",
       "evidence": [
         "packages/ui-patterns/src/public-dialog.component.ts",
+        "apps/qa-remote/e2e/dialog.storybook.spec.ts",
         "docs/documentation-upgrade/19-accessibility-findings-and-remediation.md"
       ]
     },
