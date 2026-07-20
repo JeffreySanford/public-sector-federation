@@ -40,7 +40,7 @@ and documentation evidence visible.
 
 ```json
 {
-  "id": "public-status-card",
+  "id": "ps-status-card",
   "name": "PublicStatusCard",
   "package": "@public-sector/ui-patterns",
   "status": "candidate",

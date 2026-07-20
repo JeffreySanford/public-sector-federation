@@ -84,14 +84,14 @@ Current exported wrappers and services:
 | `PublicCardComponent` | `ps-card` | Card wrapper using content/card tokens. |
 | `PublicDialogComponent` | `ps-dialog` | Dialog wrapper for modal content. |
 | `PublicEmptyStateComponent` | `ps-empty-state` | Composite empty-state pattern. |
-| `PublicFormSectionComponent` | `public-form-section` | Form section/card pattern. |
+| `PublicFormSectionComponent` | `ps-form-section` | Form section/card pattern. |
 | `PublicMenuComponent` | `ps-menu` | Menu overlay wrapper with body append policy. |
-| `PublicPageHeaderComponent` | `public-page-header` | Page title and action header. |
+| `PublicPageHeaderComponent` | `ps-page-header` | Page title and action header. |
 | `PublicPopoverComponent` | `ps-popover` | Popover overlay wrapper with projected content. |
 | `PublicProgressComponent` | `ps-progress` | Progress indicator wrapper. |
 | `PublicSkeletonComponent` | `ps-skeleton` | Loading skeleton wrapper. |
 | `PublicSelectComponent` | `ps-select` | Select overlay wrapper with token inheritance proof. |
-| `PublicStatusCardComponent` | `public-status-card` | Status summary pattern. |
+| `PublicStatusCardComponent` | `ps-status-card` | Status summary pattern. |
 | `PublicTagComponent` | `ps-tag` | Status/tag wrapper. |
 | `PublicTooltipComponent` | `ps-tooltip` | Tooltip wrapper with body append policy. |
 | `PublicToastComponent` | `ps-toast` | Toast region component. |

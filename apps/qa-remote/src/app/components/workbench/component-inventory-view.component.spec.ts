@@ -63,4 +63,14 @@ describe('ComponentInventoryViewComponent', () => {
     expect(element.querySelector('button[aria-label^="Inspect "]')).not.toBeNull();
     expect(element.textContent).toContain('Consolidation decision');
   });
+
+  it('presents canonical selectors and compatibility aliases from the manifest', () => {
+    component.selectEntry('ps-empty-state');
+    fixture.detectChanges();
+    const text = (fixture.nativeElement as HTMLElement).textContent ?? '';
+
+    expect(text).toContain('ps-empty-state');
+    expect(text).toContain('public-empty-state');
+    expect(text).toContain('until next major');
+  });
 });

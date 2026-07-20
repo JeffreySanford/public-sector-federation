@@ -2,7 +2,7 @@ import { Component, input, output } from '@angular/core';
 import { PublicButtonComponent } from './public-button.component';
 
 @Component({
-  selector: 'public-empty-state',
+  selector: 'ps-empty-state, public-empty-state',
   standalone: true,
   imports: [PublicButtonComponent],
   template: `

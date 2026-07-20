@@ -51,14 +51,14 @@ public usage guidance for flagship components.
 
 ### Empty States
 
-- Use `PublicEmptyStateComponent` / `public-empty-state` for empty or no-results
+- Use `PublicEmptyStateComponent` / `ps-empty-state` for empty or no-results
   states.
 - Source: `packages/ui-patterns/src/public-empty-state.component.ts`.
 - Evidence: source-level component proof.
 
 ### Forms
 
-- Use `PublicFormSectionComponent` / `public-form-section` for form grouping.
+- Use `PublicFormSectionComponent` / `ps-form-section` for form grouping.
 - Source: `packages/ui-patterns/src/public-form-section.component.ts`.
 - Evidence: source-level component proof.
 
@@ -81,7 +81,7 @@ public usage guidance for flagship components.
 
 ### Page Headers
 
-- Use `PublicPageHeaderComponent` / `public-page-header` for page heading and
+- Use `PublicPageHeaderComponent` / `ps-page-header` for page heading and
 actions.
 - Source: `packages/ui-patterns/src/public-page-header.component.ts`.
 - Evidence: source-level component proof.
@@ -108,7 +108,7 @@ actions.
 
 ### Status Summaries
 
-- Use `PublicStatusCardComponent` / `public-status-card` for metric or status
+- Use `PublicStatusCardComponent` / `ps-status-card` for metric or status
   summaries.
 - Source: `packages/ui-patterns/src/public-status-card.component.ts`.
 - Evidence: source-level component proof.

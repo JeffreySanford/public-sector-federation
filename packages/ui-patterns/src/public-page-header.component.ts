@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { TagModule } from 'primeng/tag';
 
 @Component({
-  selector: 'public-page-header',
+  selector: 'ps-page-header, public-page-header',
   standalone: true,
   imports: [TagModule],
   template: `

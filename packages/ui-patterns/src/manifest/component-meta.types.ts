@@ -38,6 +38,7 @@ export interface ComponentManifestEntry {
     kind: RegistryKind;
     exportName: string;
     selector: string | null;
+    selectorAliases: string[];
     package: '@public-sector/ui-patterns';
     source: string;
     description: string;

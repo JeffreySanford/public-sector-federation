@@ -13,6 +13,7 @@ interface EntrySeed {
   name: string;
   exportName: string;
   selector: string | null;
+  selectorAliases?: string[];
   source: string;
   description: string;
   provider: ProviderKind;
@@ -92,6 +93,7 @@ function entry(seed: EntrySeed): ComponentManifestEntry {
       kind: seed.kind ?? 'component',
       exportName: seed.exportName,
       selector: seed.selector,
+      selectorAliases: seed.selectorAliases ?? [],
       package: '@public-sector/ui-patterns',
       source: seed.source,
       description: seed.description,
@@ -223,11 +225,12 @@ export const componentFindings: ComponentFinding[] = [
     id: 'API-NAMING-001',
     category: 'api',
     severity: 'advisory',
-    status: 'open',
+    status: 'implemented',
     componentIds: ['ps-empty-state', 'ps-form-section', 'ps-page-header', 'ps-status-card'],
     summary:
-      'The public package mixes ps-* and public-* selector prefixes and requires a staged compatibility decision.',
+      'The canonical selector family is ps-*; legacy public-* aliases remain supported until the next major release.',
     evidence: [
+      'docs/design-system/components/selector-prefix-migration.md',
       'packages/ui-patterns/src/public-empty-state.component.ts',
       'packages/ui-patterns/src/public-form-section.component.ts',
       'packages/ui-patterns/src/public-page-header.component.ts',
@@ -645,7 +648,7 @@ export const componentRegistry = [
   entry({
     id: 'ps-empty-state',
     tokenBoundary: 'provider-coupled',
-    findingIds: ['API-NAMING-001', 'TOKEN-NATIVE-001'], name: 'Empty State', exportName: 'PublicEmptyStateComponent', selector: 'public-empty-state',
+    findingIds: ['API-NAMING-001', 'TOKEN-NATIVE-001'], name: 'Empty State', exportName: 'PublicEmptyStateComponent', selector: 'ps-empty-state', selectorAliases: ['public-empty-state'],
     source: 'packages/ui-patterns/src/public-empty-state.component.ts',
     description: 'Composite empty-state pattern using shared tokens and the public button wrapper.',
     kind: 'pattern', provider: 'composite', accessibilityPattern: 'status', publicApiStatus: 'complete',
@@ -655,7 +658,7 @@ export const componentRegistry = [
   entry({
     id: 'ps-form-section',
     tokenBoundary: 'mixed',
-    findingIds: ['API-NAMING-001', 'TOKEN-NATIVE-001'], name: 'Form Section', exportName: 'PublicFormSectionComponent', selector: 'public-form-section',
+    findingIds: ['API-NAMING-001', 'TOKEN-NATIVE-001'], name: 'Form Section', exportName: 'PublicFormSectionComponent', selector: 'ps-form-section', selectorAliases: ['public-form-section'],
     source: 'packages/ui-patterns/src/public-form-section.component.ts',
     description: 'Composite form grouping surface with title, description, and projected controls.',
     kind: 'pattern', provider: 'composite', accessibilityPattern: 'group', publicApiStatus: 'complete',
@@ -697,7 +700,7 @@ export const componentRegistry = [
   entry({
     id: 'ps-page-header',
     tokenBoundary: 'mixed',
-    findingIds: ['API-NAMING-001', 'TOKEN-NATIVE-001'], name: 'Page Header', exportName: 'PublicPageHeaderComponent', selector: 'public-page-header',
+    findingIds: ['API-NAMING-001', 'TOKEN-NATIVE-001'], name: 'Page Header', exportName: 'PublicPageHeaderComponent', selector: 'ps-page-header', selectorAliases: ['public-page-header'],
     source: 'packages/ui-patterns/src/public-page-header.component.ts',
     description: 'Composite page title and action-header pattern.', kind: 'pattern', provider: 'composite', accessibilityPattern: 'banner', publicApiStatus: 'complete', inputs: [{ name: 'eyebrow', type: 'string', defaultValue: "''" }, { name: 'title', type: 'string', required: true }, { name: 'description', type: 'string', defaultValue: "''" }],
     storybookStatus: 'complete', storybookTitle: 'Design System/Components/Page Header', storybookFiles: ['apps/qa-remote/src/stories/page-header.stories.ts'], stories: ['Default', 'TitleOnly', 'WithoutEyebrow', 'LongResponsiveHeading', 'PrimaryAndSecondaryActions', 'WrappedMobileActions'],
@@ -797,7 +800,7 @@ export const componentRegistry = [
   entry({
     id: 'ps-status-card',
     tokenBoundary: 'mixed',
-    findingIds: ['API-NAMING-001', 'TOKEN-NATIVE-001'], name: 'Status Card', exportName: 'PublicStatusCardComponent', selector: 'public-status-card',
+    findingIds: ['API-NAMING-001', 'TOKEN-NATIVE-001'], name: 'Status Card', exportName: 'PublicStatusCardComponent', selector: 'ps-status-card', selectorAliases: ['public-status-card'],
     source: 'packages/ui-patterns/src/public-status-card.component.ts',
     description: 'Composite metric and status summary pattern.', kind: 'pattern', provider: 'composite', accessibilityPattern: 'region', publicApiStatus: 'complete', inputs: [{ name: 'label', type: 'string', required: true }, { name: 'value', type: 'string | number', required: true }, { name: 'detail', type: 'string', defaultValue: "''" }, { name: 'status', type: 'string', defaultValue: "''" }, { name: 'tone', type: 'PublicStatusCardTone', defaultValue: 'info' }], publicTypes: ['PublicStatusCardTone'], variants: [{ name: 'tone', values: ['neutral', 'info', 'success', 'warning', 'error', 'contrast'] }], storybookStatus: 'complete', storybookTitle: 'Design System/Components/Status Card', storybookFiles: ['apps/qa-remote/src/stories/status-card.stories.ts'], stories: ['Default', 'WithoutStatus', 'Warning', 'Critical', 'LongContent', 'OperationalDashboard'],
   }),

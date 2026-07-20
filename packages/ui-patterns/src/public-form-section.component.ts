@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 
 @Component({
-  selector: 'public-form-section',
+  selector: 'ps-form-section, public-form-section',
   standalone: true,
   template: `
     <section class="form-card">

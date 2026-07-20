@@ -93,13 +93,11 @@ Native components should consume public `--ps-*` semantic and component tokens. 
 
 ### Selector naming
 
-Adopt `ps-*` as the canonical selector prefix. Existing `public-*` selectors require:
-
-1. usage inventory;
-2. replacement selector;
-3. compatibility period;
-4. documented migration;
-5. removal only at an intentional major boundary.
+`ps-*` is the approved canonical selector prefix. `ps-empty-state`, `ps-form-section`,
+`ps-page-header`, and `ps-status-card` replace the corresponding `public-*` names in new code.
+The legacy selectors remain compatibility aliases until the next major release. Removal requires
+usage evidence, migration notes, and the intentional major boundary recorded in the
+[selector-prefix migration](../design-system/components/selector-prefix-migration.md).
 
 ### Testing boundary
 
