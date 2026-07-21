@@ -370,9 +370,29 @@ This phase captures the remaining product naming, docs migration, NVDA setup, Bu
       everywhere (manifest, Storybook, docs), and its underlying selector and export were renamed
       from `ps-up-button`/`PublicUpButtonComponent` to `ps-button-candidate`/
       `PublicButtonCandidateComponent` so the internal naming matches the public label;
-- [ ] normalize selectors around a documented public convention and record migration exceptions in the manifest;
-- [ ] improve API extraction so the public contract is easier to document and consume;
-- [ ] remove provider leaks and escape hatches that are no longer needed for the public story;
+- [x] normalize selectors around a documented public convention and record migration exceptions in the manifest —
+      already complete: `ps-empty-state`, `ps-form-section`, `ps-page-header`, and `ps-status-card`
+      are canonical with `public-*` compatibility aliases tracked via `selectorAliases` in the
+      manifest and finding `API-NAMING-001`, documented in
+      [selector-prefix-migration.md](../design-system/components/selector-prefix-migration.md),
+      surfaced in the Component Inventory UI, and enforced by manifest generation. A repo-wide
+      search confirms zero remaining consumers of the `public-*` alias form anywhere in this
+      repository — but per that doc's own stated policy, removal is deliberately deferred to an
+      intentional major-version boundary, not done ad hoc;
+- [x] improve API extraction so the public contract is easier to document and consume —
+      `ps-card`, `ps-tag`, `ps-toast`, and `public-toast-service` had empty manifest
+      `inputs`/`outputs` metadata despite having real public APIs; all four now document their
+      actual inputs, outputs, or service methods and public types, resolving finding
+      `API-PARTIAL-001`;
+- [ ] remove provider leaks and escape hatches that are no longer needed for the public story —
+      investigated: the only manifest-tracked escape hatch is `ps-button`'s `styleClass` input
+      (`providerEscapeHatches: ['styleClass']`), and a repo-wide search confirms zero live
+      consumers of it, the same as the selector aliases above. It is intentionally deferred by the
+      same policy as [button-api-migration.md](../design-system/components/button-api-migration.md)'s
+      compatibility window: legacy surfaces (`tone`, `styleClass`, `outlined`, `text`, `buttonClick`,
+      `routerLink`, the raw PrimeIcons `icon` string) are removed only at an intentional
+      major-version boundary, not ad hoc. Nothing further to remove right now without breaking
+      that stated policy;
 - [ ] complete flagship design alignment so the public component experience is coherent across stories, docs, and examples;
 - [ ] finalize the accessibility evidence workflow so automated, keyboard, and manual review results are all represented clearly and honestly in the public docs and manifest.
 

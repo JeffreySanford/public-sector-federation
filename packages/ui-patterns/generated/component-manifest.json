@@ -454,8 +454,19 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "header",
+            "type": "string",
+            "defaultValue": "''"
+          },
+          {
+            "name": "subheader",
+            "type": "string",
+            "defaultValue": "''"
+          }
+        ],
         "outputs": [],
         "models": [],
         "publicTypes": []
@@ -533,8 +544,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated automated behavior evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
+          "No dedicated automated behavior evidence is recorded."
         ]
       }
     },
@@ -2615,17 +2625,32 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
-        "inputs": [],
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "value",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "tone",
+            "type": "PublicTagTone",
+            "defaultValue": "info"
+          }
+        ],
         "outputs": [],
         "models": [],
-        "publicTypes": []
+        "publicTypes": [
+          "PublicTagTone"
+        ]
       },
       "implementation": {
         "provider": "primeng",
         "providerName": "PrimeNG",
         "providerInternalOnly": true,
-        "providerModules": [],
+        "providerModules": [
+          "primeng/tag"
+        ],
         "providerEscapeHatches": [],
         "knownLimitations": []
       },
@@ -2693,8 +2718,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated automated behavior evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
+          "No dedicated automated behavior evidence is recorded."
         ]
       }
     },
@@ -2720,7 +2744,7 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
+        "status": "complete",
         "inputs": [],
         "outputs": [],
         "models": [],
@@ -2799,8 +2823,7 @@
         "externalDesignBinding": "partial",
         "blockers": [],
         "warnings": [
-          "No dedicated automated behavior evidence is recorded.",
-          "Public API inventory is not yet fully extracted from source."
+          "No dedicated automated behavior evidence is recorded."
         ]
       }
     },
@@ -2944,7 +2967,7 @@
         "selectorAliases": [],
         "package": "@public-sector/ui-patterns",
         "source": "packages/ui-patterns/src/public-toast.service.ts",
-        "description": "Public service API for creating governed toast messages."
+        "description": "Public service API for creating governed toast messages via add(message: PublicToastMessage) and remove(id: number); messages() exposes the current queue as a readonly signal."
       },
       "lifecycle": {
         "status": "active",
@@ -2955,11 +2978,14 @@
         "steward": null
       },
       "publicApi": {
-        "status": "partial",
+        "status": "complete",
         "inputs": [],
         "outputs": [],
         "models": [],
-        "publicTypes": []
+        "publicTypes": [
+          "PublicToastMessage",
+          "PublicToastSeverity"
+        ]
       },
       "implementation": {
         "provider": "service",
@@ -3027,12 +3053,10 @@
         ]
       },
       "health": {
-        "repositoryReadiness": "partial",
+        "repositoryReadiness": "ready",
         "externalDesignBinding": "ready",
         "blockers": [],
-        "warnings": [
-          "Public API inventory is not yet fully extracted from source."
-        ]
+        "warnings": []
       }
     }
   ],
@@ -3234,14 +3258,14 @@
       "id": "API-PARTIAL-001",
       "category": "api",
       "severity": "advisory",
-      "status": "open",
+      "status": "resolved",
       "componentIds": [
         "ps-card",
         "ps-tag",
         "ps-toast",
         "public-toast-service"
       ],
-      "summary": "Public API extraction remains partial for four exported entries.",
+      "summary": "Public API extraction was partial for four exported entries; all four now have complete documented inputs, outputs, or service methods and public types in the manifest.",
       "evidence": [
         "packages/ui-patterns/src/manifest/component-registry.ts",
         "packages/ui-patterns/generated/component-manifest.json"

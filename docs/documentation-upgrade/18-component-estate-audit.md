@@ -108,7 +108,9 @@ Actual defects and verification tasks are tracked in [19 — Accessibility findi
 
 - [x] Generate usage counts and consuming file locations for every public entry.
 - [x] Report direct application PrimeNG imports separately from component consumption.
-- [ ] Complete API extraction for partial entries.
+- [x] Complete API extraction for partial entries — `ps-card`, `ps-tag`, `ps-toast`, and
+      `public-toast-service` now have documented inputs/outputs/service methods and public types;
+      finding `API-PARTIAL-001` is resolved.
 - [ ] Populate semantic and provider-bridge token references.
 - [x] Assign every component to a duplication cluster or explicitly mark it unique.
 - [x] Record a preliminary canonical, retain, merge, or investigate disposition for every public entry.
