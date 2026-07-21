@@ -2,7 +2,7 @@ import { expect, test, type APIRequestContext, type Page } from '@playwright/tes
 
 const storybookHomeUrl = 'http://localhost:4400';
 const buttonTagStoryId = 'design-system-interaction-stories-button-and-tag--states';
-const tableStoryId = 'design-system-acceptance-table-paginator--sort-filter-and-page';
+const tableStoryId = 'design-system-interaction-stories-table-paginator--sort-filter-and-page';
 
 function managerStoryUrl(storyId: string): string {
   return `${storybookHomeUrl}/?path=/story/${storyId}`;

@@ -44,6 +44,16 @@ intentional major-version change after repository usage evidence confirms the mi
 
 ## Evidence status
 
-The contract and compatibility window are approved. Implementation migration is planned. Existing
-Button keyboard, focus, loading, disabled, and activation evidence remains applicable; manual NVDA
-and Chrome review and approved Figma identity remain pending.
+The contract and compatibility window are approved. `ps-button` now carries every element of the
+target contract: `intent`, `appearance`, `disabled`, `loading`, `activated`, and a governed
+`iconName: PublicButtonIcon` identifier absorbed from `ps-up-button` (canonical `GovernedIcon`
+story in `apps/qa-remote/src/stories/button.stories.ts`). The legacy `icon` PrimeIcons class string,
+`tone`, `styleClass`, `outlined`, `text`, `buttonClick`, and `routerLink` remain supported
+compatibility aliases per the table above; none were removed.
+
+`ps-up-button` itself has not been removed yet. Per delivery rule 5, removal is only in scope once
+its remaining evidence (the Experiments comparison stories and the
+`opinionated-wrapper-contract` case study) has been inventoried and either absorbed into `ps-button`
+or intentionally retired as a documented case study. Existing Button keyboard, focus, loading,
+disabled, and activation evidence remains applicable; manual NVDA and Chrome review and approved
+Figma identity remain pending.

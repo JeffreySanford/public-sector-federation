@@ -4,11 +4,25 @@ import { moduleMetadata } from '@storybook/angular';
 import {
   PublicButtonComponent,
   type PublicButtonAppearance,
+  type PublicButtonIcon,
   type PublicButtonIntent,
 } from '@public-sector/ui-patterns';
 
 const intents: PublicButtonIntent[] = ['primary', 'secondary', 'destructive'];
 const appearances: PublicButtonAppearance[] = ['solid', 'outlined', 'text'];
+const governedIcons: PublicButtonIcon[] = [
+  'arrow-right',
+  'bolt',
+  'check',
+  'download',
+  'exclamation-triangle',
+  'info-circle',
+  'lock',
+  'question-circle',
+  'save',
+  'send',
+  'times-circle',
+];
 
 @Component({
   selector: 'stable-button-interaction-harness',
@@ -51,7 +65,12 @@ const meta: Meta<PublicButtonComponent> = {
     },
     icon: {
       control: 'text',
-      description: 'Current compatibility API accepts a PrimeIcons class string.',
+      description: 'Deprecated PrimeIcons class string compatibility surface; prefer iconName.',
+    },
+    iconName: {
+      control: 'select',
+      options: [undefined, ...governedIcons],
+      description: 'Governed icon identifier absorbed from ps-up-button. PrimeIcons class strings stay private.',
     },
     intent: {
       control: 'select',
@@ -92,7 +111,7 @@ const meta: Meta<PublicButtonComponent> = {
       extractArgTypes: () => ({}),
       description: {
         component:
-          'Stable PrimeNG-backed Button wrapper. New usage should prefer intent, appearance, and activated while compatibility aliases remain during migration.',
+          'Stable PrimeNG-backed Button wrapper. New usage should prefer intent, appearance, iconName, and activated while compatibility aliases (tone, styleClass, outlined, text, icon, buttonClick, routerLink) remain during migration.',
       },
     },
   },
@@ -105,6 +124,7 @@ const meta: Meta<PublicButtonComponent> = {
         <ps-button
           [label]="label"
           [icon]="icon"
+          [iconName]="iconName"
           [intent]="intent"
           [appearance]="appearance"
           [disabled]="disabled"
@@ -172,6 +192,14 @@ export const Disabled: Story = {
     label: 'Unavailable action',
     icon: 'pi pi-lock',
     disabled: true,
+  },
+};
+
+export const GovernedIcon: Story = {
+  args: {
+    label: 'Send notice',
+    icon: undefined,
+    iconName: 'send',
   },
 };
 

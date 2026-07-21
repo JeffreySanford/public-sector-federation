@@ -1,6 +1,7 @@
 export {
   PublicButtonComponent,
   type PublicButtonAppearance,
+  type PublicButtonIcon,
   type PublicButtonIntent,
   type PublicButtonTone,
 } from './public-button.component';

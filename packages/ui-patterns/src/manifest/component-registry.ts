@@ -429,7 +429,8 @@ export const componentRegistry = [
     publicApiStatus: 'complete',
     inputs: [
       { name: 'label', type: 'string', defaultValue: "''" },
-      { name: 'icon', type: 'string | undefined' },
+      { name: 'icon', type: 'string | undefined', description: 'Deprecated PrimeIcons class string; use iconName.' },
+      { name: 'iconName', type: 'PublicButtonIcon | undefined', description: 'Governed icon identifier absorbed from ps-up-button.' },
       { name: 'intent', type: 'PublicButtonIntent', defaultValue: 'primary' },
       { name: 'appearance', type: 'PublicButtonAppearance', defaultValue: 'solid' },
       { name: 'tone', type: 'PublicButtonTone | undefined', description: 'Deprecated compatibility alias; use intent.' },
@@ -444,7 +445,7 @@ export const componentRegistry = [
       { name: 'activated', type: 'void', description: 'Preferred provider-neutral activation event.' },
       { name: 'buttonClick', type: 'MouseEvent', description: 'Deprecated compatibility event; use activated.' },
     ],
-    publicTypes: ['PublicButtonIntent', 'PublicButtonAppearance', 'PublicButtonTone'],
+    publicTypes: ['PublicButtonIntent', 'PublicButtonAppearance', 'PublicButtonTone', 'PublicButtonIcon'],
     variants: [
       {
         name: 'tone',
@@ -457,6 +458,7 @@ export const componentRegistry = [
     storybookFiles: buttonStories,
     stories: [
       'design-system-components-button--default',
+      'design-system-components-button--governed-icon',
       'design-system-components-button--appearance-reference',
       'design-system-components-button--loading',
       'design-system-components-button--disabled',
@@ -568,7 +570,7 @@ export const componentRegistry = [
     findingIds: ['API-PARTIAL-001', 'TOKEN-NATIVE-001'], name: 'Card', exportName: 'PublicCardComponent', selector: 'ps-card',
     source: 'packages/ui-patterns/src/public-card.component.ts',
     description: 'Token-driven content surface with optional heading content.', provider: 'native',
-    storybookStatus: 'complete', storybookTitle: 'Design System/Acceptance/Card',
+    storybookStatus: 'complete', storybookTitle: 'Design System/Interaction Stories/Card',
     storybookFiles: ['apps/qa-remote/src/stories/card.acceptance.stories.ts'], accessibilityPattern: 'region',
   }),
   entry({
@@ -978,7 +980,7 @@ export const componentRegistry = [
     findingIds: ['API-PARTIAL-001'], name: 'Tag', exportName: 'PublicTagComponent', selector: 'ps-tag',
     source: 'packages/ui-patterns/src/public-tag.component.ts',
     description: 'PrimeNG-backed status label wrapper.', provider: 'primeng',
-    storybookStatus: 'complete', storybookTitle: 'Design System/Acceptance/Button and Tag',
+    storybookStatus: 'complete', storybookTitle: 'Design System/Interaction Stories/Button and Tag',
     storybookFiles: buttonStories, accessibilityPattern: 'status',
   }),
   entry({
@@ -994,7 +996,7 @@ export const componentRegistry = [
     findingIds: ['API-PARTIAL-001', 'TOKEN-NATIVE-001'], name: 'Toast Region', exportName: 'PublicToastComponent', selector: 'ps-toast',
     source: 'packages/ui-patterns/src/public-toast.component.ts',
     description: 'Native toast presentation region backed by the public toast service.', provider: 'native',
-    storybookStatus: 'complete', storybookTitle: 'Design System/Acceptance/Dialog and Toast',
+    storybookStatus: 'complete', storybookTitle: 'Design System/Interaction Stories/Dialog and Toast',
     storybookFiles: dialogToastStories, accessibilityPattern: 'status',
   }),
   entry({

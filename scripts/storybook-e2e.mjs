@@ -85,8 +85,8 @@ try {
   }
 
   const storyIds = [
-    'design-system-acceptance-edge-case-states--overview',
-    'design-system-acceptance-dialog-toast--overlay-and-feedback',
+    'design-system-interaction-stories-edge-case-states--overview',
+    'design-system-interaction-stories-dialog-and-toast--overlay-and-feedback',
     'design-system-experiments-button-contract-exploration--primary',
     'design-system-registry-component-manifest--overview',
     'design-system-architecture-opinionated-wrapper-contract--preferred-candidate-api',
@@ -111,10 +111,10 @@ try {
     if (storyId.includes('edge-case-states')) {
       await waitForStory(page.getByText('Overlay and Shadow DOM overview'), storyId, 'the edge-case state heading');
     }
-    if (storyId.includes('dialog-toast')) {
+    if (storyId.includes('dialog-and-toast')) {
       await waitForStory(page.getByText('Dialog and toast'), storyId, 'the Dialog and Toast heading');
     }
-    if (storyId.includes('button-up')) {
+    if (storyId.includes('button-contract-exploration')) {
       await waitForStory(page.getByRole('button', { name: 'Primary action' }), storyId, 'the primary action');
     }
     if (storyId.includes('component-manifest')) {
@@ -138,11 +138,11 @@ try {
     if (storyId.includes('edge-case-states') && !bodyText.includes('Overlay and Shadow DOM overview')) {
       throw new Error('Edge Case States overview story did not render expected content.');
     }
-    if (storyId.includes('dialog-toast') && !bodyText.includes('Dialog and toast')) {
+    if (storyId.includes('dialog-and-toast') && !bodyText.includes('Dialog and toast')) {
       throw new Error('Dialog Toast acceptance story did not render expected content.');
     }
-    if (storyId.includes('button-up') && !bodyText.includes('Primary action')) {
-      throw new Error('UP Button candidate primary story did not render expected content.');
+    if (storyId.includes('button-contract-exploration') && !bodyText.includes('Primary action')) {
+      throw new Error('Button Contract Exploration primary story did not render expected content.');
     }
     if (storyId.includes('component-manifest') && (!bodyText.includes('Paginator') || !bodyText.includes('Toast Service'))) {
       throw new Error('Component Manifest overview did not render the expected public registry entries.');

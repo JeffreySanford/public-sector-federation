@@ -33,7 +33,13 @@
           },
           {
             "name": "icon",
-            "type": "string | undefined"
+            "type": "string | undefined",
+            "description": "Deprecated PrimeIcons class string; use iconName."
+          },
+          {
+            "name": "iconName",
+            "type": "PublicButtonIcon | undefined",
+            "description": "Governed icon identifier absorbed from ps-up-button."
           },
           {
             "name": "intent",
@@ -96,7 +102,8 @@
         "publicTypes": [
           "PublicButtonIntent",
           "PublicButtonAppearance",
-          "PublicButtonTone"
+          "PublicButtonTone",
+          "PublicButtonIcon"
         ]
       },
       "implementation": {
@@ -162,6 +169,7 @@
           ],
           "stories": [
             "design-system-components-button--default",
+            "design-system-components-button--governed-icon",
             "design-system-components-button--appearance-reference",
             "design-system-components-button--loading",
             "design-system-components-button--disabled",
@@ -282,7 +290,7 @@
       "evidence": {
         "storybook": {
           "status": "complete",
-          "title": "Design System/Acceptance/Card",
+          "title": "Design System/Interaction Stories/Card",
           "files": [
             "apps/qa-remote/src/stories/card.acceptance.stories.ts"
           ],
@@ -2443,7 +2451,7 @@
       "evidence": {
         "storybook": {
           "status": "complete",
-          "title": "Design System/Acceptance/Button and Tag",
+          "title": "Design System/Interaction Stories/Button and Tag",
           "files": [
             "apps/qa-remote/src/stories/button.stories.ts"
           ],
@@ -2548,7 +2556,7 @@
       "evidence": {
         "storybook": {
           "status": "complete",
-          "title": "Design System/Acceptance/Dialog and Toast",
+          "title": "Design System/Interaction Stories/Dialog and Toast",
           "files": [
             "apps/qa-remote/src/stories/dialog-toast.acceptance.stories.ts"
           ],

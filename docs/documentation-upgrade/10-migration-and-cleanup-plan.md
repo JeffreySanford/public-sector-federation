@@ -4,11 +4,13 @@ _Last aligned: July 20, 2026._ The Button candidate rename (Phase 1 and Phase 4,
 landed: the public rename map's `UP Button Candidate → Button Contract Exploration` and part of
 `Candidates → Experiments` are complete in the manifest, Storybook title, and
 `docs/design-system/components/button-candidate-*.md` files (the old `up-button-candidate-*.md`
-files were removed, not duplicated). The broader `Acceptance Stories → Interaction Stories` rename
-is only started — `button-tag.acceptance.stories.ts` is renamed; `card.acceptance.stories.ts`,
+files were removed, not duplicated). The `Acceptance Stories → Interaction Stories` rename is
+now complete: `button-tag.acceptance.stories.ts`, `card.acceptance.stories.ts`,
 `dialog-toast.acceptance.stories.ts`, `edge-case-states.stories.ts`, and
-`table-paginator.acceptance.stories.ts` still use the old `Design System/Acceptance/*` title.
-Everything else below remains open.
+`table-paginator.acceptance.stories.ts` all use `Design System/Interaction Stories/*`, and the
+matching manifest `storybookTitle` entries and hardcoded story IDs in
+`apps/qa-remote/e2e/storybook-stories.spec.ts` and `scripts/storybook-e2e.mjs` were updated to
+match. Everything else below remains open.
 
 ## Objective
 
@@ -294,10 +296,10 @@ The later documentation and release workstreams in 8 and 9 should be carried for
 Low-risk changes:
 
 - [ ] align the product name, landing-page copy, and navigation labels with the design-system narrative;
-- [ ] rename Storybook categories and component status vocabulary so they no longer imply product or QA-only framing —
-      partial: the Button candidate category moved from `Design System/Candidates/*` to
-      `Design System/Experiments/*`, and one acceptance-stories file moved to
-      `Design System/Interaction Stories/*`; four acceptance-stories files still use the old category;
+- [x] rename Storybook categories and component status vocabulary so they no longer imply product or QA-only framing —
+      the Button candidate category moved from `Design System/Candidates/*` to
+      `Design System/Experiments/*`, and all five acceptance-stories files moved to
+      `Design System/Interaction Stories/*`;
 - [ ] audit all public-facing labels in the README, manifests, docs, and navigation for consistency —
       done for the Button candidate surface specifically (manifest `name`, Storybook title, and
       `docs/design-system/components/button-candidate-*.md`); not yet audited elsewhere.
@@ -316,7 +318,7 @@ This phase should be understood as the operational follow-through for the Storyb
 - [ ] add neutral docs-generation commands for Starlight, Storybook, and manifest-driven views;
 - [ ] archive or decommission publication scripts and environment variables that only support retired workflows;
 - [ ] finish the Storybook hierarchy so stable components, experiments, and system-health views are clearly separated;
-- [ ] rename the remaining acceptance-style stories and ensure canonical story IDs are manifest-aligned;
+- [x] rename the remaining acceptance-style stories and ensure canonical story IDs are manifest-aligned;
 - [ ] add explicit Storybook-to-docs backlinks and Chromatic review links for the public component pages;
 - [ ] document the NVDA setup path for Windows contributors, including install, browser/AT configuration, and launch steps;
 - [ ] define a lightweight manual accessibility acceptance checklist for release validation;

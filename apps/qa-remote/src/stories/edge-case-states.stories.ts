@@ -57,7 +57,7 @@ class EdgeCaseStateStoryComponent {
 }
 
 const meta: Meta<EdgeCaseStateStoryComponent> = {
-  title: 'Design System/Acceptance/Edge Case States',
+  title: 'Design System/Interaction Stories/Edge Case States',
   component: EdgeCaseStateStoryComponent,
   render: (args) => ({
     props: args,
