@@ -27,8 +27,17 @@ The historical P0/P1/P2 sections below preserve completed foundation work and de
 - [x] Approve one target Button contract and compatibility window.
 - [x] Decide selector-prefix migration.
 - [x] Record provider-wrap, native, and Angular CDK tradeoffs.
-- [ ] Move native styling from direct `--p-*` use to public `--ps-*` tokens.
-- [ ] Replace placeholder UI-library test targets with real contract tests.
+- [ ] Move native styling from direct `--p-*` use to public `--ps-*` tokens — partial: 6 PrimeNG
+      variables confirmed as exact `--ps-*` aliases and swapped across 16 components (see
+      [token-boundary-remediation.md](../design-system/backlog/token-boundary-remediation.md));
+      severity-color and paginator-specific `--p-*` usages remain open pending a `--ps-danger-*` /
+      `--ps-overlay-shadow` token-schema decision.
+- [x] Replace placeholder UI-library test targets with real contract tests —
+      `ui-patterns` and `qa-remote`'s `test` targets now run via `@angular/build:unit-test` with
+      the Vitest runner instead of a typecheck-only stub (92 real TestBed-rendered tests total: 63
+      in `ui-patterns` across 7 components, 29 in `qa-remote` across 5 workbench/candidates
+      components). Not every component has a spec file yet — this closes the "placeholder target"
+      gap, not full coverage.
 - [ ] Produce the Button, Select, and Dialog Figma reconstruction reference.
 
 ### P0/P1 — Present evidence in the main application
@@ -424,7 +433,11 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 - [x] Remove the retired third-party documentation platform's export scripts.
 - [x] Remove the retired third-party documentation platform's publish scripts.
 - [ ] Replace report commands with neutral documentation and evidence commands.
-- [ ] Remove obsolete environment variables.
+- [x] Remove obsolete environment variables — `AGILE_API_URL`, `PERFORMANCE_API_URL`, and
+      `DATABASE_URL` (leftovers from the retired backend/database/performance-dashboard) had zero
+      code references anywhere in the repo; removed from `.env.sample` and `.env.example`.
+      `SCREENSHOT_BASE_URL` and `A11Y_BASE_URL` remain — both are genuinely used by
+      `scripts/capture-progress-screenshots.mjs` and `scripts/a11y-check.mjs`.
 - [ ] Remove old story aliases.
 - [ ] Remove old selector aliases in a planned major release.
 - [ ] Retain a concise documentation-platform case study if useful.
