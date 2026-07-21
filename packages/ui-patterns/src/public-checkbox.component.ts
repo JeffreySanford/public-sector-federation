@@ -42,7 +42,7 @@ let checkboxId = 0;
     .ps-checkbox-field {
       display: grid;
       gap: 0.35rem;
-      color: var(--p-text-color);
+      color: var(--ps-text-primary);
     }
 
     .ps-checkbox-field__control {
@@ -54,7 +54,7 @@ let checkboxId = 0;
     }
 
     .ps-checkbox-field__control input[type='checkbox'] {
-      accent-color: var(--p-primary-color);
+      accent-color: var(--ps-primary-background);
       width: 1.125rem;
       height: 1.125rem;
     }
@@ -66,7 +66,7 @@ let checkboxId = 0;
 
     .ps-checkbox-field__required,
     .ps-checkbox-field__error {
-      color: var(--p-red-600, var(--p-primary-color));
+      color: var(--p-red-600, var(--ps-primary-background));
     }
 
     .ps-checkbox-field__help,
@@ -78,7 +78,7 @@ let checkboxId = 0;
     }
 
     .ps-checkbox-field__help {
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
     }
   `,
 })

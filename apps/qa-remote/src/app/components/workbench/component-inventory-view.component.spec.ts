@@ -16,7 +16,7 @@ describe('ComponentInventoryViewComponent', () => {
     expect(component.filteredEntries().map((entry) => entry.identity.id)).toEqual(['ps-select']);
 
     component.query.set('button');
-    expect(component.filteredEntries().some((entry) => entry.identity.id === 'ps-button')).toBeTrue();
+    expect(component.filteredEntries().some((entry) => entry.identity.id === 'ps-button')).toBe(true);
   });
 
   it('combines lifecycle and provider filters', () => {
@@ -25,15 +25,15 @@ describe('ComponentInventoryViewComponent', () => {
 
     const results = component.filteredEntries();
     expect(results.length).toBeGreaterThan(0);
-    expect(results.every((entry) => entry.lifecycle.status === 'active')).toBeTrue();
-    expect(results.every((entry) => entry.implementation.provider === 'primeng')).toBeTrue();
+    expect(results.every((entry) => entry.lifecycle.status === 'active')).toBe(true);
+    expect(results.every((entry) => entry.implementation.provider === 'primeng')).toBe(true);
   });
 
   it('filters and explains consolidation dispositions from manifest audit metadata', () => {
     component.dispositionFilter.set('canonical');
     const canonicalEntries = component.filteredEntries();
     expect(canonicalEntries.length).toBeGreaterThan(0);
-    expect(canonicalEntries.every((entry) => entry.audit.disposition === 'canonical')).toBeTrue();
+    expect(canonicalEntries.every((entry) => entry.audit.disposition === 'canonical')).toBe(true);
 
     for (const entry of component.entries) {
       expect(component.consolidationAction(entry).trim().length).toBeGreaterThan(0);

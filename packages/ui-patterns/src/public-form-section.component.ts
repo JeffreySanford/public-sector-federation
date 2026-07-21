@@ -19,20 +19,20 @@ import { Component, input } from '@angular/core';
   styles: `
     .form-card {
       padding: 1.25rem;
-      border: 1px solid var(--p-content-border-color);
+      border: 1px solid var(--ps-surface-border);
       border-radius: 1.25rem;
-      background: var(--p-content-background);
+      background: var(--ps-surface-card);
       box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--ps-text-primary) 7%, transparent);
     }
 
     h3 {
       margin: 0 0 0.35rem;
-      color: var(--p-text-color);
+      color: var(--ps-text-primary);
     }
 
     p {
       margin: 0 0 1rem;
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
     }
 
     .form-section {

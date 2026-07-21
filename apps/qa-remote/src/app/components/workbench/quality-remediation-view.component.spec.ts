@@ -13,7 +13,7 @@ describe('QualityRemediationViewComponent', () => {
 
   it('keeps quality scores bounded and computes an aggregate', () => {
     const scores = component.entries.map((entry) => component.qualityScore(entry));
-    expect(scores.every((score) => score >= 0 && score <= 100)).toBeTrue();
+    expect(scores.every((score) => score >= 0 && score <= 100)).toBe(true);
     expect(component.overallCoverage()).toBeGreaterThanOrEqual(0);
     expect(component.overallCoverage()).toBeLessThanOrEqual(100);
   });
@@ -54,9 +54,9 @@ describe('QualityRemediationViewComponent', () => {
   });
 
   it('keeps accessibility, token, and API findings independently countable', () => {
-    expect(component.accessibilityFindings().every((finding) => finding.category === 'accessibility')).toBeTrue();
-    expect(component.tokenFindings().every((finding) => finding.category === 'token')).toBeTrue();
-    expect(component.apiFindings().every((finding) => finding.category === 'api')).toBeTrue();
+    expect(component.accessibilityFindings().every((finding) => finding.category === 'accessibility')).toBe(true);
+    expect(component.tokenFindings().every((finding) => finding.category === 'token')).toBe(true);
+    expect(component.apiFindings().every((finding) => finding.category === 'api')).toBe(true);
     expect(
       component.accessibilityFindings().length
         + component.tokenFindings().length

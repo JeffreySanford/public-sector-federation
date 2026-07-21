@@ -16,9 +16,9 @@ import { Component, input } from '@angular/core';
       border-radius: 0.5rem;
       background: linear-gradient(
         90deg,
-        var(--p-content-border-color),
-        color-mix(in srgb, var(--p-content-border-color) 60%, var(--p-content-background)),
-        var(--p-content-border-color)
+        var(--ps-surface-border),
+        color-mix(in srgb, var(--ps-surface-border) 60%, var(--ps-surface-card)),
+        var(--ps-surface-border)
       );
       background-size: 200% 100%;
       animation: ps-skeleton-pulse 1.4s ease-in-out infinite;

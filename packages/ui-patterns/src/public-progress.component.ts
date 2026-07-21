@@ -13,7 +13,7 @@ import { Component, computed, input, numberAttribute } from '@angular/core';
 
     progress {
       height: 0.75rem;
-      accent-color: var(--ps-button-background, var(--p-primary-color));
+      accent-color: var(--ps-button-background, var(--ps-primary-background));
     }
   `,
 })

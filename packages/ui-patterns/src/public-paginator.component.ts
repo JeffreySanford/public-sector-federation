@@ -44,13 +44,13 @@ import { Component, computed, effect, input, model } from '@angular/core';
       align-items: center;
       gap: 1rem;
       padding-top: 1rem;
-      border-top: 1px solid var(--p-content-border-color);
+      border-top: 1px solid var(--ps-surface-border);
       flex-wrap: wrap;
     }
 
     .paginator-info {
       font-size: 0.875rem;
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
     }
 
     .paginator-controls {
@@ -66,10 +66,10 @@ import { Component, computed, effect, input, model } from '@angular/core';
       min-width: 7.25rem;
       min-height: 2.75rem;
       padding: 0.5rem 1rem;
-      border: 1px solid var(--p-content-border-color);
-      background: var(--p-content-background);
-      color: var(--p-text-color);
-      border-radius: var(--p-border-radius-md);
+      border: 1px solid var(--ps-surface-border);
+      background: var(--ps-surface-card);
+      color: var(--ps-text-primary);
+      border-radius: var(--ps-radius-md);
       cursor: pointer;
       font-size: 0.875rem;
       font-weight: 600;
@@ -85,14 +85,14 @@ import { Component, computed, effect, input, model } from '@angular/core';
     .paginator-btn:hover:not(:disabled) {
       background: var(--p-paginator-nav-button-hover-background);
       color: var(--p-paginator-nav-button-hover-color);
-      border-color: color-mix(in srgb, var(--p-primary-color) 28%, var(--p-content-border-color));
+      border-color: color-mix(in srgb, var(--ps-primary-background) 28%, var(--ps-surface-border));
     }
 
     .paginator-btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
-      background: color-mix(in srgb, var(--p-content-background) 92%, var(--p-content-border-color));
-      color: var(--p-text-muted-color);
+      background: color-mix(in srgb, var(--ps-surface-card) 92%, var(--ps-surface-border));
+      color: var(--ps-text-secondary);
     }
 
     .page-info {
@@ -104,16 +104,16 @@ import { Component, computed, effect, input, model } from '@angular/core';
       font-weight: 600;
       min-width: 100px;
       text-align: center;
-      color: var(--p-text-color);
+      color: var(--ps-text-primary);
     }
 
     .rows-select {
       min-height: 2.75rem;
       padding: 0.5rem 0.75rem;
-      border: 1px solid var(--p-content-border-color);
-      background: var(--p-content-background);
-      color: var(--p-text-color);
-      border-radius: var(--p-border-radius-md);
+      border: 1px solid var(--ps-surface-border);
+      background: var(--ps-surface-card);
+      color: var(--ps-text-primary);
+      border-radius: var(--ps-radius-md);
       cursor: pointer;
       font-size: 0.875rem;
       font-weight: 600;

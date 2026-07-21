@@ -23,14 +23,14 @@ describe('DesignAlignmentLabComponent', () => {
   it('recomputes contract members when the selected case changes', () => {
     component.selectCase({ target: { value: 'ps-select' } } as unknown as Event);
     expect(component.selectedEntry()?.identity.id).toBe('ps-select');
-    expect(component.contractMembers().some((member) => member.name === 'value' && member.direction === 'model')).toBeTrue();
-    expect(component.contractMembers().some((member) => member.name === 'options')).toBeTrue();
+    expect(component.contractMembers().some((member) => member.name === 'value' && member.direction === 'model')).toBe(true);
+    expect(component.contractMembers().some((member) => member.name === 'options')).toBe(true);
   });
 
   it('distinguishes recorded and proposed Figma mappings', () => {
     const rows = component.mappingRows();
     expect(rows.length).toBeGreaterThan(0);
-    expect(rows.every((row) => row.status === 'recorded' || row.status === 'proposed')).toBeTrue();
+    expect(rows.every((row) => row.status === 'recorded' || row.status === 'proposed')).toBe(true);
   });
 
   it('does not claim alignment while design evidence is incomplete', () => {

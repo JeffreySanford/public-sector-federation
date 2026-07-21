@@ -16,6 +16,7 @@ describe('PublicFormSectionComponent', () => {
     fixture = TestBed.createComponent(PublicFormSectionComponent);
     component = fixture.componentInstance;
     compiled = fixture.debugElement;
+    fixture.componentRef.setInput('title', 'Contact details');
     fixture.detectChanges();
   });
 

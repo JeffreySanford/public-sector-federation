@@ -11,9 +11,11 @@
       }
     },
     "test": {
-      "executor": "nx:run-commands",
+      "executor": "@angular/build:unit-test",
       "options": {
-        "command": "echo 'UI patterns tests are run via Angular TestBed in app tests' && exit 0"
+        "buildTarget": "qa-remote:build",
+        "tsConfig": "packages/ui-patterns/tsconfig.spec.json",
+        "runner": "vitest"
       }
     },
     "typecheck": {

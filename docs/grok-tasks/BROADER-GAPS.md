@@ -23,8 +23,8 @@
 
 4. **Other Potential Improvements** (lower priority)
    - Selector standardization progress tracking. ✅ Confirmed already complete and intentionally tracked (`selectorAliases`, finding `API-NAMING-001`, a dedicated migration doc, a live UI test).
-   - Real component contract unit tests (beyond E2E). ❌ Still a real gap — `qa-remote`'s `test` target is typecheck-only, not actual unit tests.
-   - Token-boundary remediation (native styling to `--ps-*`). ❌ Not started — native components still consume PrimeNG `--p-*` directly in places.
+   - Real component contract unit tests (beyond E2E). ✅ Fixed July 21, 2026 — both `qa-remote:test` and `ui-patterns:test` were no-op/typecheck-only stubs; wired up `@angular/build:unit-test` with Vitest for both. This surfaced and fixed 4 real pre-existing bugs (a spec referencing a renamed component property, and 3 components whose specs never set required inputs before `detectChanges()`) that had never actually run before. 92 tests now execute for real (63 in `ui-patterns`, 29 in `qa-remote`).
+   - Token-boundary remediation (native styling to `--ps-*`). 🟡 Substantially progressed July 21, 2026 — 6 exact-alias PrimeNG variables (verified via the preset source mapping and live computed-style checks in light/dark mode) were swapped for their `--ps-*` equivalents across 16 components; `ps-empty-state`, `ps-skeleton`, and `ps-table` are now fully clean. What remains (severity colors, shadows, PrimeNG-specific sub-part tokens with no confirmed alias) is recorded in [token-boundary-remediation.md](../design-system/backlog/token-boundary-remediation.md).
    - Long-term: Release 1.0.0 tagging/publishing if not done. ✅ Already done; README states release 1.0.0 is complete.
    - License/ownership clarity (visible but restrictive). ✅ `LICENSE.md` exists and is linked from the README.
 

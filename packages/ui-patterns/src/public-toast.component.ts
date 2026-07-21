@@ -36,11 +36,11 @@ import { PublicToastService } from './public-toast.service';
       gap: 0.75rem;
       align-items: start;
       padding: 1rem;
-      border: 1px solid var(--p-content-border-color);
-      border-left: 0.35rem solid var(--p-primary-color);
+      border: 1px solid var(--ps-surface-border);
+      border-left: 0.35rem solid var(--ps-primary-background);
       border-radius: 0.5rem;
-      background: var(--p-content-background);
-      color: var(--p-text-color);
+      background: var(--ps-surface-card);
+      color: var(--ps-text-primary);
       box-shadow: var(--p-overlay-popover-shadow, 0 0.75rem 2rem color-mix(in srgb, #000 20%, transparent));
     }
 
@@ -63,14 +63,14 @@ import { PublicToastService } from './public-toast.service';
 
     p {
       margin-top: 0.25rem;
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
       line-height: 1.45;
     }
 
     button {
       border: 0;
       background: transparent;
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
       cursor: pointer;
       font: inherit;
     }

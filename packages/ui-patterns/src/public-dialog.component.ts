@@ -82,10 +82,10 @@ const focusableSelector = [
       max-height: min(90vh, 42rem);
       overflow: auto;
       padding: 1.25rem;
-      border: 1px solid var(--p-content-border-color);
+      border: 1px solid var(--ps-surface-border);
       border-radius: 0.5rem;
-      background: var(--p-content-background);
-      color: var(--p-text-color);
+      background: var(--ps-surface-card);
+      color: var(--ps-text-primary);
       box-shadow: var(--p-overlay-modal-shadow, 0 1rem 3rem color-mix(in srgb, #000 25%, transparent));
     }
 
@@ -129,16 +129,16 @@ const focusableSelector = [
       flex: 0 0 auto;
       width: 2rem;
       height: 2rem;
-      border: 1px solid var(--p-content-border-color);
+      border: 1px solid var(--ps-surface-border);
       border-radius: 999px;
       background: transparent;
-      color: var(--p-text-color);
+      color: var(--ps-text-primary);
       font: inherit;
       cursor: pointer;
     }
 
     button:focus-visible {
-      outline: 0.2rem solid var(--ps-focus-ring-color, var(--p-primary-color));
+      outline: 0.2rem solid var(--ps-focus-ring-color, var(--ps-primary-background));
       outline-offset: 0.15rem;
     }
 

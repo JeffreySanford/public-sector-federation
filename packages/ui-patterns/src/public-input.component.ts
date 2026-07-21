@@ -41,7 +41,7 @@ let inputFieldId = 0;
     .ps-input-field {
       display: grid;
       gap: 0.35rem;
-      color: var(--p-text-color);
+      color: var(--ps-text-primary);
       font-weight: 700;
     }
 
@@ -49,10 +49,10 @@ let inputFieldId = 0;
       font: inherit;
       font-weight: 400;
       padding: 0.5rem 0.75rem;
-      border-radius: var(--p-border-radius-md, 6px);
-      border: 1px solid var(--p-content-border-color, currentColor);
-      background: var(--p-content-background, transparent);
-      color: var(--p-text-color);
+      border-radius: var(--ps-radius-md, 6px);
+      border: 1px solid var(--ps-surface-border, currentColor);
+      background: var(--ps-surface-card, transparent);
+      color: var(--ps-text-primary);
     }
 
     .ps-input-field input:disabled {
@@ -62,7 +62,7 @@ let inputFieldId = 0;
 
     .ps-input-field__required,
     .ps-input-field__error {
-      color: var(--p-red-600, var(--p-primary-color));
+      color: var(--p-red-600, var(--ps-primary-background));
     }
 
     .ps-input-field__help,
@@ -74,7 +74,7 @@ let inputFieldId = 0;
     }
 
     .ps-input-field__help {
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
     }
   `,
 })

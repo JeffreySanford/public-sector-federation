@@ -21,14 +21,14 @@ import { PublicButtonComponent } from './public-button.component';
       gap: 0.75rem;
       justify-items: center;
       padding: 2rem;
-      border: 1px dashed var(--p-content-border-color);
+      border: 1px dashed var(--ps-surface-border);
       border-radius: 1rem;
-      background: var(--p-content-background);
+      background: var(--ps-surface-card);
       text-align: center;
     }
 
     i {
-      color: var(--p-primary-color);
+      color: var(--ps-primary-background);
       font-size: 2rem;
     }
 
@@ -38,7 +38,7 @@ import { PublicButtonComponent } from './public-button.component';
     }
 
     p {
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
     }
   `,
 })

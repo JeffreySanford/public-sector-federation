@@ -38,8 +38,9 @@ against that doc and the live manifest rather than left stale._
 - [x] Accessibility audit status — automated evidence complete for Button/Select/Dialog; manual
       NVDA review has a workflow ready ([nvda-manual-accessibility-review.md](./POST-SCRUB-CHECKLIST.md))
       but no completed review records yet
-- [ ] Test coverage (unit + E2E) — `qa-remote`'s `test` target is typecheck-only, not real unit
-      tests (a known, undocumented-until-now gap; see doc 20 acceptance criteria)
+- [x] Test coverage (unit + E2E) — `qa-remote:test` and `ui-patterns:test` were no-op/typecheck-only
+      stubs; both now run real unit tests via `@angular/build:unit-test` + Vitest (92 tests total),
+      which caught and fixed 4 real pre-existing bugs the stubs had been silently hiding
 - [ ] Chromatic visual regression status — not reviewed in this pass
 - [x] Playwright results — `verify:release`'s e2e suite passes (479-480/480 across every run this
       session; the 1-2 occasional failures were confirmed transient WebKit/Select timing flakes)

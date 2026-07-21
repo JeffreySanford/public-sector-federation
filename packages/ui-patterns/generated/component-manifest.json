@@ -533,7 +533,7 @@
       "audit": {
         "duplicationCluster": "unique:ps-card",
         "disposition": "investigate",
-        "tokenBoundary": "provider-coupled",
+        "tokenBoundary": "mixed",
         "findingIds": [
           "API-PARTIAL-001",
           "TOKEN-NATIVE-001"
@@ -714,7 +714,7 @@
       "audit": {
         "duplicationCluster": "unique:ps-checkbox",
         "disposition": "canonical",
-        "tokenBoundary": "provider-coupled",
+        "tokenBoundary": "mixed",
         "findingIds": []
       },
       "health": {
@@ -1008,7 +1008,7 @@
       "audit": {
         "duplicationCluster": "unique:ps-empty-state",
         "disposition": "investigate",
-        "tokenBoundary": "provider-coupled",
+        "tokenBoundary": "public",
         "findingIds": [
           "API-NAMING-001",
           "TOKEN-NATIVE-001"
@@ -1322,7 +1322,7 @@
       "audit": {
         "duplicationCluster": "unique:ps-input",
         "disposition": "canonical",
-        "tokenBoundary": "provider-coupled",
+        "tokenBoundary": "mixed",
         "findingIds": []
       },
       "health": {
@@ -1728,7 +1728,7 @@
       "audit": {
         "duplicationCluster": "unique:ps-paginator",
         "disposition": "investigate",
-        "tokenBoundary": "provider-coupled",
+        "tokenBoundary": "mixed",
         "findingIds": [
           "TOKEN-NATIVE-001"
         ]
@@ -2159,7 +2159,7 @@
       "audit": {
         "duplicationCluster": "unique:ps-select",
         "disposition": "retain",
-        "tokenBoundary": "provider-managed",
+        "tokenBoundary": "mixed",
         "findingIds": [
           "API-PRIMITIVE-001",
           "A11Y-SEL-001",
@@ -2276,7 +2276,7 @@
       "audit": {
         "duplicationCluster": "unique:ps-skeleton",
         "disposition": "investigate",
-        "tokenBoundary": "provider-coupled",
+        "tokenBoundary": "public",
         "findingIds": [
           "TOKEN-NATIVE-001"
         ]
@@ -2593,7 +2593,7 @@
       "audit": {
         "duplicationCluster": "unique:ps-table",
         "disposition": "canonical",
-        "tokenBoundary": "provider-coupled",
+        "tokenBoundary": "public",
         "findingIds": []
       },
       "health": {
@@ -2812,7 +2812,7 @@
       "audit": {
         "duplicationCluster": "unique:ps-toast",
         "disposition": "investigate",
-        "tokenBoundary": "provider-coupled",
+        "tokenBoundary": "mixed",
         "findingIds": [
           "API-PARTIAL-001",
           "TOKEN-NATIVE-001"

@@ -53,13 +53,13 @@ let selectId = 0;
     .ps-select-field {
       display: grid;
       gap: 0.35rem;
-      color: var(--p-text-color);
+      color: var(--ps-text-primary);
       font-weight: 700;
     }
 
     .ps-select-field__required,
     .ps-select-field__error {
-      color: var(--p-red-600, var(--p-primary-color));
+      color: var(--p-red-600, var(--ps-primary-background));
     }
 
     .ps-select-field__help,
@@ -71,7 +71,7 @@ let selectId = 0;
     }
 
     .ps-select-field__help {
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
     }
   `,
 })

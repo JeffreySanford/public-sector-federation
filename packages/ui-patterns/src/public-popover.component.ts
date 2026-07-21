@@ -23,7 +23,7 @@ import { PublicButtonComponent } from './public-button.component';
       display: grid;
       max-width: 18rem;
       gap: 0.5rem;
-      color: var(--p-text-color);
+      color: var(--ps-text-primary);
       line-height: 1.45;
     }
   `,

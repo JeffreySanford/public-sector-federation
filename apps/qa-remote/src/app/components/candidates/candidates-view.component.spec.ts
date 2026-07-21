@@ -45,8 +45,8 @@ describe('CandidatesViewComponent', () => {
     expect(component.label()).toBe('Approve request');
     expect(component.intent()).toBe('secondary');
     expect(component.appearance()).toBe('outlined');
-    expect(component.disabled()).toBeTrue();
-    expect(component.loading()).toBeTrue();
+    expect(component.disabled()).toBe(true);
+    expect(component.loading()).toBe(true);
   });
 
   it('tracks activations independently for the stable and candidate wrappers', () => {
@@ -63,31 +63,31 @@ describe('CandidatesViewComponent', () => {
     component.setDarkMode(true);
 
     expect(component.theme.variant()).toBe('vibrant');
-    expect(component.theme.isDark()).toBeTrue();
+    expect(component.theme.isDark()).toBe(true);
     expect(
       document.documentElement.classList.contains('ps-theme-vibrant'),
-    ).toBeTrue();
-    expect(document.documentElement.classList.contains('p-dark')).toBeTrue();
+    ).toBe(true);
+    expect(document.documentElement.classList.contains('p-dark')).toBe(true);
 
     component.setThemeVariant('pastel');
     component.setDarkMode(false);
 
     expect(
       document.documentElement.classList.contains('ps-theme-vibrant'),
-    ).toBeFalse();
+    ).toBe(false);
     expect(
       document.documentElement.classList.contains('ps-theme-pastel'),
-    ).toBeTrue();
-    expect(document.documentElement.classList.contains('p-dark')).toBeFalse();
+    ).toBe(true);
+    expect(document.documentElement.classList.contains('p-dark')).toBe(false);
   });
 
   it('keeps Storybook embedding optional and preserves the fallback link', () => {
-    expect(component.showStorybookPreview()).toBeFalse();
+    expect(component.showStorybookPreview()).toBe(false);
     expect(component.storybookUrl).toContain('current-vs-candidate');
 
     component.toggleStorybookPreview();
 
-    expect(component.showStorybookPreview()).toBeTrue();
+    expect(component.showStorybookPreview()).toBe(true);
   });
 
   it('maps lifecycle status values to display classes', () => {

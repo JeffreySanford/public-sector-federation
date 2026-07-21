@@ -16,6 +16,7 @@ describe('PublicPageHeaderComponent', () => {
     fixture = TestBed.createComponent(PublicPageHeaderComponent);
     component = fixture.componentInstance;
     compiled = fixture.debugElement;
+    fixture.componentRef.setInput('title', 'Case queue');
     fixture.detectChanges();
   });
 

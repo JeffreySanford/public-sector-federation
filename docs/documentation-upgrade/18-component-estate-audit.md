@@ -111,7 +111,11 @@ Actual defects and verification tasks are tracked in [19 — Accessibility findi
 - [x] Complete API extraction for partial entries — `ps-card`, `ps-tag`, `ps-toast`, and
       `public-toast-service` now have documented inputs/outputs/service methods and public types;
       finding `API-PARTIAL-001` is resolved.
-- [ ] Populate semantic and provider-bridge token references.
+- [ ] Populate semantic and provider-bridge token references — partially addressed July 21, 2026 by
+      the token-boundary remediation pass (see
+      [token-boundary-remediation.md](../design-system/backlog/token-boundary-remediation.md)); the
+      `tokenBoundary` classification is now accurate for every native component, but per-token
+      references are not yet fully catalogued in the manifest schema.
 - [x] Assign every component to a duplication cluster or explicitly mark it unique.
 - [x] Record a preliminary canonical, retain, merge, or investigate disposition for every public entry.
 - [x] Link open accessibility findings by identifier.

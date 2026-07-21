@@ -57,18 +57,18 @@ export type PublicTableSortDirection = 'asc' | 'desc';
 
     .ps-table-scroll {
       overflow-x: auto;
-      border-radius: var(--p-border-radius-md, 6px);
+      border-radius: var(--ps-radius-md, 6px);
     }
 
     .ps-table-scroll:focus-visible {
-      outline: 2px solid var(--p-primary-color);
+      outline: 2px solid var(--ps-primary-background);
       outline-offset: 2px;
     }
 
     .ps-table {
       width: 100%;
       border-collapse: collapse;
-      color: var(--p-text-color);
+      color: var(--ps-text-primary);
     }
 
     .ps-table__caption {
@@ -81,7 +81,7 @@ export type PublicTableSortDirection = 'asc' | 'desc';
     .ps-table td {
       text-align: left;
       padding: 0.6rem 0.75rem;
-      border-bottom: 1px solid var(--p-content-border-color, currentColor);
+      border-bottom: 1px solid var(--ps-surface-border, currentColor);
       white-space: nowrap;
     }
 
@@ -103,13 +103,13 @@ export type PublicTableSortDirection = 'asc' | 'desc';
     }
 
     .ps-table__sort-button:focus-visible {
-      outline: 2px solid var(--p-primary-color);
+      outline: 2px solid var(--ps-primary-background);
       outline-offset: 2px;
     }
 
     .ps-table__empty {
       text-align: center;
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
       white-space: normal;
     }
   `,

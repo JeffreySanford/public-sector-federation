@@ -108,7 +108,11 @@ usage evidence, migration notes, and the intentional major boundary recorded in 
 - Chromatic owns human-reviewed visual baselines and regressions.
 - Manual reviews own assistive-technology evidence.
 
-A package test target that exits successfully without executing tests should be replaced with real component tests.
+A package test target that exits successfully without executing tests should be replaced with real
+component tests. **Done July 21, 2026:** `ui-patterns:test` was `echo ... && exit 0` and
+`qa-remote:test` was `tsc --noEmit` on spec files — neither ever executed a test. Both now run
+real Angular `TestBed` tests via `@angular/build:unit-test` with Vitest (92 tests total), which
+surfaced 4 real pre-existing bugs the stubs had silently hidden.
 
 ### Primitive-selection boundary
 

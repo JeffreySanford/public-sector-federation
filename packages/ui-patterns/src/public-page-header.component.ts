@@ -24,11 +24,11 @@ import { TagModule } from 'primeng/tag';
       position: relative;
       overflow: hidden;
       padding: 1.5rem;
-      border: 1px solid var(--p-content-border-color);
+      border: 1px solid var(--ps-surface-border);
       border-radius: 1.25rem;
       background:
-        radial-gradient(circle at top right, color-mix(in srgb, var(--p-primary-color) 22%, transparent), transparent 34rem),
-        linear-gradient(135deg, var(--p-content-background), color-mix(in srgb, var(--p-content-background) 82%, var(--p-primary-color)));
+        radial-gradient(circle at top right, color-mix(in srgb, var(--ps-primary-background) 22%, transparent), transparent 34rem),
+        linear-gradient(135deg, var(--ps-surface-card), color-mix(in srgb, var(--ps-surface-card) 82%, var(--ps-primary-background)));
       box-shadow: 0 1.25rem 3rem color-mix(in srgb, var(--ps-text-primary) 10%, transparent);
     }
 
@@ -38,7 +38,7 @@ import { TagModule } from 'primeng/tag';
       width: 14rem;
       height: 14rem;
       border-radius: 999px;
-      background: color-mix(in srgb, var(--p-primary-color) 18%, transparent);
+      background: color-mix(in srgb, var(--ps-primary-background) 18%, transparent);
       content: '';
     }
 
@@ -67,7 +67,7 @@ import { TagModule } from 'primeng/tag';
     p {
       max-width: 56rem;
       margin: 0;
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
     }
   `,
 })

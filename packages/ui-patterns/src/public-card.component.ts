@@ -30,10 +30,10 @@ import { Component, input } from '@angular/core';
       gap: 1rem;
       height: 100%;
       padding: 1.25rem;
-      border: 1px solid var(--p-content-border-color);
+      border: 1px solid var(--ps-surface-border);
       border-radius: 0.5rem;
-      background: var(--p-content-background);
-      color: var(--p-text-color);
+      background: var(--ps-surface-card);
+      color: var(--ps-text-primary);
       box-shadow: var(--p-card-shadow, none);
     }
 
@@ -53,7 +53,7 @@ import { Component, input } from '@angular/core';
     }
 
     p {
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
       line-height: 1.5;
     }
 

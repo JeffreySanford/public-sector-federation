@@ -568,7 +568,7 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-card',
-    tokenBoundary: 'provider-coupled',
+    tokenBoundary: 'mixed',
     findingIds: ['API-PARTIAL-001', 'TOKEN-NATIVE-001'], name: 'Card', exportName: 'PublicCardComponent', selector: 'ps-card',
     source: 'packages/ui-patterns/src/public-card.component.ts',
     description: 'Token-driven content surface with optional heading content.', provider: 'native',
@@ -582,7 +582,7 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-checkbox',
-    tokenBoundary: 'provider-coupled',
+    tokenBoundary: 'mixed',
     findingIds: [],
     duplicationCluster: 'unique:ps-checkbox',
     disposition: 'canonical',
@@ -705,7 +705,7 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-empty-state',
-    tokenBoundary: 'provider-coupled',
+    tokenBoundary: 'public',
     findingIds: ['API-NAMING-001', 'TOKEN-NATIVE-001'], name: 'Empty State', exportName: 'PublicEmptyStateComponent', selector: 'ps-empty-state', selectorAliases: ['public-empty-state'],
     source: 'packages/ui-patterns/src/public-empty-state.component.ts',
     description: 'Composite empty-state pattern using shared tokens and the public button wrapper.',
@@ -725,7 +725,7 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-input',
-    tokenBoundary: 'provider-coupled',
+    tokenBoundary: 'mixed',
     findingIds: [],
     duplicationCluster: 'unique:ps-input',
     disposition: 'canonical',
@@ -792,7 +792,7 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-paginator',
-    tokenBoundary: 'provider-coupled',
+    tokenBoundary: 'mixed',
     findingIds: ['TOKEN-NATIVE-001'],
     name: 'Paginator',
     exportName: 'PublicPaginatorComponent',
@@ -838,14 +838,14 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-skeleton',
-    tokenBoundary: 'provider-coupled',
+    tokenBoundary: 'public',
     findingIds: ['TOKEN-NATIVE-001'], name: 'Skeleton', exportName: 'PublicSkeletonComponent', selector: 'ps-skeleton',
     source: 'packages/ui-patterns/src/public-skeleton.component.ts',
     description: 'Native token-driven loading placeholder.', provider: 'native', accessibilityPattern: 'presentation', publicApiStatus: 'complete', inputs: [{ name: 'height', type: 'string', defaultValue: '1rem' }], storybookStatus: 'complete', storybookTitle: 'Design System/Components/Skeleton', storybookFiles: ['apps/qa-remote/src/stories/skeleton.stories.ts'], stories: ['TextLine', 'Heading', 'MediaBlock', 'CompositeLoadingCard'],
   }),
   entry({
     id: 'ps-select',
-    tokenBoundary: 'provider-managed',
+    tokenBoundary: 'mixed',
     findingIds: ['API-PRIMITIVE-001', 'A11Y-SEL-001', 'A11Y-SEL-002', 'A11Y-SYS-001', 'A11Y-SYS-002'],
     duplicationCluster: 'unique:ps-select',
     disposition: 'retain',
@@ -924,7 +924,7 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-table',
-    tokenBoundary: 'provider-coupled',
+    tokenBoundary: 'public',
     findingIds: [],
     duplicationCluster: 'unique:ps-table',
     disposition: 'canonical',
@@ -1007,7 +1007,7 @@ export const componentRegistry = [
   }),
   entry({
     id: 'ps-toast',
-    tokenBoundary: 'provider-coupled',
+    tokenBoundary: 'mixed',
     findingIds: ['API-PARTIAL-001', 'TOKEN-NATIVE-001'], name: 'Toast Region', exportName: 'PublicToastComponent', selector: 'ps-toast',
     source: 'packages/ui-patterns/src/public-toast.component.ts',
     description: 'Native toast presentation region backed by the public toast service.', provider: 'native',

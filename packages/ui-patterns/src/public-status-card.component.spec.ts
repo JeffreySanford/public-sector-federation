@@ -16,6 +16,8 @@ describe('PublicStatusCardComponent', () => {
     fixture = TestBed.createComponent(PublicStatusCardComponent);
     component = fixture.componentInstance;
     compiled = fixture.debugElement;
+    fixture.componentRef.setInput('label', 'Open cases');
+    fixture.componentRef.setInput('value', 42);
     fixture.detectChanges();
   });
 
@@ -75,8 +77,8 @@ describe('PublicStatusCardComponent', () => {
       expect(typeof component.status).toBe('function');
     });
 
-    it('should have severity signal', () => {
-      expect(typeof component.severity).toBe('function');
+    it('should have tone signal', () => {
+      expect(typeof component.tone).toBe('function');
     });
   });
 

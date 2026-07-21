@@ -29,10 +29,10 @@ export type PublicStatusCardTone = 'neutral' | 'info' | 'success' | 'warning' | 
       position: relative;
       overflow: hidden;
       min-height: 12rem;
-      border: 1px solid var(--p-content-border-color);
+      border: 1px solid var(--ps-surface-border);
       border-radius: 1.25rem;
       background:
-        linear-gradient(160deg, color-mix(in srgb, var(--p-content-background) 94%, var(--p-primary-color)), var(--p-content-background));
+        linear-gradient(160deg, color-mix(in srgb, var(--ps-surface-card) 94%, var(--ps-primary-background)), var(--ps-surface-card));
       box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--ps-text-primary) 8%, transparent);
     }
 
@@ -40,7 +40,7 @@ export type PublicStatusCardTone = 'neutral' | 'info' | 'success' | 'warning' | 
       position: absolute;
       inset: 0 0 auto;
       height: 0.35rem;
-      background: linear-gradient(90deg, var(--p-primary-color), var(--ps-focus-ring-color));
+      background: linear-gradient(90deg, var(--ps-primary-background), var(--ps-focus-ring-color));
     }
 
     .status-card__body {
@@ -50,7 +50,7 @@ export type PublicStatusCardTone = 'neutral' | 'info' | 'success' | 'warning' | 
     }
 
     .status-card__label {
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
       font-size: 0.8rem;
       font-weight: 800;
       letter-spacing: 0.08em;
@@ -59,7 +59,7 @@ export type PublicStatusCardTone = 'neutral' | 'info' | 'success' | 'warning' | 
 
     strong {
       display: block;
-      color: var(--p-text-color);
+      color: var(--ps-text-primary);
       font-size: clamp(2rem, 4vw, 3rem);
       letter-spacing: -0.06em;
     }
@@ -67,7 +67,7 @@ export type PublicStatusCardTone = 'neutral' | 'info' | 'success' | 'warning' | 
     .status-card__detail {
       display: block;
       margin-bottom: 0.75rem;
-      color: var(--p-text-muted-color);
+      color: var(--ps-text-secondary);
     }
   `,
 })

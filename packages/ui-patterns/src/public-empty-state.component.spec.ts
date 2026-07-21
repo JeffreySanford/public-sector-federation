@@ -16,6 +16,8 @@ describe('PublicEmptyStateComponent', () => {
     fixture = TestBed.createComponent(PublicEmptyStateComponent);
     component = fixture.componentInstance;
     compiled = fixture.debugElement;
+    fixture.componentRef.setInput('title', 'No results found');
+    fixture.componentRef.setInput('message', 'Try adjusting your filters.');
     fixture.detectChanges();
   });
 

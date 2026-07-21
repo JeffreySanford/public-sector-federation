@@ -33,9 +33,11 @@
       }
     },
     "test": {
-      "executor": "nx:run-commands",
+      "executor": "@angular/build:unit-test",
       "options": {
-        "command": "tsc --noEmit -p apps/qa-remote/tsconfig.spec.json"
+        "buildTarget": "qa-remote:build",
+        "tsConfig": "apps/qa-remote/tsconfig.spec.json",
+        "runner": "vitest"
       }
     },
     "storybook": {
