@@ -9,6 +9,7 @@ This directory contains expanded, actionable checklists created with Grok assist
 - [BROADER-GAPS.md](./BROADER-GAPS.md) — Overall gaps and recommendations
 - [STEP19-ACCESSIBILITY-CHECKLIST.md](./STEP19-ACCESSIBILITY-CHECKLIST.md)
 - [STEP20-CONSOLIDATION-CHECKLIST.md](./STEP20-CONSOLIDATION-CHECKLIST.md)
+- [POST-SCRUB-CHECKLIST.md](./POST-SCRUB-CHECKLIST.md) — Proprietary/confidential-content removal tracking
 - (More will be added as needed)
 
 **Broader Context & Gaps** (from Grok analysis):
