@@ -1,0 +1,85 @@
+---
+import manifest from '../../../../packages/ui-patterns/generated/component-manifest.json';
+import StatusBadge from './StatusBadge.astro';
+
+interface ManifestEntry {
+  identity: { id: string; source: string };
+  lifecycle: { status: string };
+  implementation: { provider: string; providerName: string };
+  accessibility: { automatedChecks: string; screenReaderAudit: string };
+  figma: { status: string };
+  evidence: {
+    storybook: { files: string[]; stories: string[] };
+  };
+}
+
+interface Props {
+  componentId: string;
+  accessibilityNote?: string;
+}
+
+const { componentId, accessibilityNote } = Astro.props;
+
+const entries = manifest.entries as unknown as ManifestEntry[];
+const entry = entries.find((candidate) => candidate.identity.id === componentId);
+
+if (!entry) {
+  throw new Error(`ComponentHeader: no manifest entry found for "${componentId}".`);
+}
+
+const githubRoot = 'https://github.com/JeffreySanford/public-sector-federation/blob/master';
+const canonicalStoryId = entry.evidence.storybook.stories[0];
+const storybookBaseUrl = (
+  import.meta.env.PUBLIC_STORYBOOK_URL ??
+  'https://master--6a57d5b6de2da2591d3236aa.chromatic.com/'
+).replace(/\/+$/, '');
+const storyUrl = canonicalStoryId
+  ? `${storybookBaseUrl}/?path=/story/${encodeURIComponent(canonicalStoryId)}`
+  : undefined;
+const storybookSourceFile = entry.evidence.storybook.files[0];
+
+const providerLabel =
+  entry.implementation.provider === 'native' ? 'Native' : `${entry.implementation.providerName} adapter`;
+const defaultAccessibilityNote =
+  entry.accessibility.screenReaderAudit === 'pending'
+    ? 'Automated evidence exists; manual review is pending.'
+    : `Automated evidence exists; manual review ${entry.accessibility.screenReaderAudit}.`;
+---
+
+<p class="ps-component-header__summary">
+  <strong>Lifecycle:</strong> <StatusBadge status={entry.lifecycle.status} /> ·
+  <strong>Framework:</strong> Angular ·
+  <strong>Provider:</strong> {providerLabel} ·
+  <strong>Accessibility:</strong> {accessibilityNote ?? defaultAccessibilityNote} ·
+  <strong>Figma:</strong> <StatusBadge status={entry.figma.status} />
+</p>
+
+<p class="ps-component-header__links">
+  {storyUrl && <a href={storyUrl} target="_blank" rel="noreferrer">Open the canonical Storybook story</a>}
+  {storyUrl && ' · '}
+  <a href={`${githubRoot}/${entry.identity.source}`} target="_blank" rel="noreferrer">View Angular source</a>
+  {storybookSourceFile && ' · '}
+  {storybookSourceFile && (
+    <a href={`${githubRoot}/${storybookSourceFile}`} target="_blank" rel="noreferrer">View Storybook source</a>
+  )}
+  ·
+  <a href={`${githubRoot}/packages/ui-patterns/src/manifest/component-registry.ts`} target="_blank" rel="noreferrer">
+    View manifest source
+  </a>
+</p>
+
+<style>
+  .ps-component-header__summary,
+  .ps-component-header__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.5rem;
+    margin: 0 0 var(--ps-space-2);
+  }
+
+  .ps-component-header__links a {
+    color: var(--ps-action-text);
+    font-weight: 700;
+  }
+</style>

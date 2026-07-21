@@ -1,0 +1,122 @@
+---
+import manifest from '../../../../packages/ui-patterns/generated/component-manifest.json';
+import StatusBadge from './StatusBadge.astro';
+
+interface Finding {
+  id: string;
+  category: string;
+  severity: string;
+  status: string;
+  componentIds: string[];
+  summary: string;
+}
+
+interface ManifestEntry {
+  identity: { id: string };
+  accessibility: {
+    pattern: string;
+    automatedChecks: string;
+    keyboardCoverage: string;
+    screenReaderAudit: string;
+  };
+}
+
+interface Props {
+  componentId: string;
+}
+
+const { componentId } = Astro.props;
+
+const entries = manifest.entries as unknown as ManifestEntry[];
+const entry = entries.find((candidate) => candidate.identity.id === componentId);
+
+if (!entry) {
+  throw new Error(`AccessibilityStatus: no manifest entry found for "${componentId}".`);
+}
+
+const findings = (manifest.findings as unknown as Finding[]).filter(
+  (finding) => finding.category === 'accessibility' && finding.componentIds.includes(componentId),
+);
+---
+
+<div class="ps-a11y-status">
+  <dl>
+    <div>
+      <dt>ARIA pattern</dt>
+      <dd><code>{entry.accessibility.pattern}</code></dd>
+    </div>
+    <div>
+      <dt>Automated checks</dt>
+      <dd><StatusBadge status={entry.accessibility.automatedChecks} /></dd>
+    </div>
+    <div>
+      <dt>Keyboard coverage</dt>
+      <dd><StatusBadge status={entry.accessibility.keyboardCoverage} /></dd>
+    </div>
+    <div>
+      <dt>Manual screen-reader audit</dt>
+      <dd>
+        <StatusBadge status={entry.accessibility.screenReaderAudit} />
+        {entry.accessibility.screenReaderAudit === 'pending' && (
+          <a
+            href="https://github.com/JeffreySanford/public-sector-federation/blob/master/docs/design-system/validation/nvda-manual-accessibility-review.md"
+            target="_blank"
+            rel="noreferrer"
+          >
+            review workflow
+          </a>
+        )}
+      </dd>
+    </div>
+  </dl>
+
+  {findings.length > 0 && (
+    <>
+      <p class="ps-a11y-status__findings-label">Linked accessibility findings</p>
+      <ul class="ps-a11y-status__findings">
+        {findings.map((finding) => (
+          <li>
+            <code>{finding.id}</code> <StatusBadge status={finding.status} /> — {finding.summary}
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+</div>
+
+<style>
+  .ps-a11y-status dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.4rem 1rem;
+    margin: 0;
+  }
+
+  .ps-a11y-status dt {
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+  }
+
+  .ps-a11y-status dd {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ps-a11y-status__findings-label {
+    margin: 1rem 0 0.35rem;
+    font-weight: 700;
+    font-size: var(--sl-text-sm);
+  }
+
+  .ps-a11y-status__findings {
+    margin: 0;
+    padding-left: 1.2rem;
+    font-size: var(--sl-text-sm);
+  }
+
+  .ps-a11y-status__findings li {
+    margin-bottom: 0.35rem;
+  }
+</style>

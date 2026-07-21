@@ -3,6 +3,8 @@ title: Accessibility
 description: Explicit interaction contracts, automated evidence, manual review status, and unresolved accessibility risk.
 ---
 
+import AccessibilityStatus from '../../../components/AccessibilityStatus.astro';
+
 Accessibility is a component and pattern responsibility, not a final audit added after implementation.
 
 ## Evidence model
@@ -18,3 +20,20 @@ The documentation keeps these dimensions separate:
 - known issues, blockers, and remediation decisions.
 
 Automated checks provide useful evidence, but they are never presented as complete conformance. A component can be technically testable and still require manual review or design correction.
+
+## Flagship component status
+
+Read directly from the generated manifest at build time, so it always matches
+`packages/ui-patterns/generated/component-manifest.json`.
+
+### Button
+
+<AccessibilityStatus componentId="ps-button" />
+
+### Select
+
+<AccessibilityStatus componentId="ps-select" />
+
+### Dialog
+
+<AccessibilityStatus componentId="ps-dialog" />

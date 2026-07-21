@@ -3,6 +3,8 @@ title: Foundations
 description: Semantic tokens and shared visual decisions that keep Angular, Storybook, and documentation aligned.
 ---
 
+import TokenTable from '../../../components/TokenTable.astro';
+
 Foundations define the visual language shared by documentation, component stories, the Angular workbench, and reference applications.
 
 ## Source of truth
@@ -17,6 +19,17 @@ The `@public-sector/tokens` package owns authored token data and generated outpu
 - PrimeNG mappings kept behind the provider boundary;
 - generated CSS, JSON, and TypeScript artifacts.
 
+## Semantic tokens (neutral theme, light mode)
+
+The table below is read directly from `packages/tokens/src/design-tokens.json` at build time, so it
+cannot drift from the generated token package. It shows only semantic-tier tokens (surfaces, text,
+actions, feedback); component-specific tokens such as `--ps-button-candidate-*` are scoped to their
+own component page instead.
+
+<TokenTable theme="neutral-light" tier="semantic" />
+
 ## Current scope
 
-This foundation slice proves shared token consumption and theme synchronization. Detailed visual reference pages will be added after the Button documentation establishes the standard page model.
+This foundation slice proves shared token consumption and theme synchronization. Additional theme
+variants (vibrant, pastel) and dark-mode tables can be added the same way by passing a different
+`theme` prop to `TokenTable`.

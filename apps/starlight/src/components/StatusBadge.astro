@@ -1,0 +1,76 @@
+---
+export type StatusTone = 'success' | 'warn' | 'danger' | 'neutral';
+
+interface Props {
+  status: string;
+  tone?: StatusTone;
+  label?: string;
+}
+
+const { status, tone, label } = Astro.props;
+
+const toneByStatus: Record<string, StatusTone> = {
+  // lifecycle
+  active: 'success',
+  candidate: 'warn',
+  experimental: 'neutral',
+  deprecated: 'danger',
+  // evidence / audit status
+  complete: 'success',
+  passed: 'success',
+  verified: 'success',
+  implemented: 'success',
+  resolved: 'success',
+  partial: 'warn',
+  pending: 'warn',
+  planned: 'warn',
+  investigate: 'warn',
+  open: 'warn',
+  missing: 'danger',
+  failed: 'danger',
+  blocked: 'danger',
+  'not-started': 'neutral',
+  'not-applicable': 'neutral',
+  'pending-access': 'neutral',
+  'not-linked': 'neutral',
+};
+
+const resolvedTone: StatusTone = tone ?? toneByStatus[status] ?? 'neutral';
+const displayText = label ?? status;
+---
+
+<span class="ps-status-badge" data-tone={resolvedTone}>{displayText}</span>
+
+<style>
+  .ps-status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: var(--sl-text-xs);
+    font-weight: 700;
+    text-transform: capitalize;
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+
+  .ps-status-badge[data-tone='success'] {
+    background: color-mix(in srgb, var(--ps-success-color) 18%, transparent);
+    color: var(--ps-success-text);
+  }
+
+  .ps-status-badge[data-tone='warn'] {
+    background: color-mix(in srgb, var(--ps-warn-text) 18%, transparent);
+    color: var(--ps-warn-text);
+  }
+
+  .ps-status-badge[data-tone='danger'] {
+    background: color-mix(in srgb, var(--ps-danger-color) 18%, transparent);
+    color: var(--ps-danger-text);
+  }
+
+  .ps-status-badge[data-tone='neutral'] {
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-gray-2);
+  }
+</style>

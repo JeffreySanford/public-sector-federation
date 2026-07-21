@@ -7,7 +7,7 @@
     },
     {
       "route": "/docs/foundations/",
-      "source": "apps/starlight/src/content/docs/foundations/index.md"
+      "source": "apps/starlight/src/content/docs/foundations/index.mdx"
     },
     {
       "route": "/docs/components/",
@@ -31,7 +31,7 @@
     },
     {
       "route": "/docs/accessibility/",
-      "source": "apps/starlight/src/content/docs/accessibility/index.md"
+      "source": "apps/starlight/src/content/docs/accessibility/index.mdx"
     },
     {
       "route": "/docs/develop/",

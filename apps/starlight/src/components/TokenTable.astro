@@ -1,0 +1,131 @@
+---
+import tokens from '../../../../packages/tokens/src/design-tokens.json';
+
+interface TokenLeaf {
+  $type: string;
+  $value: string;
+  $description?: string;
+  $extensions?: {
+    'public-sector'?: {
+      cssVariable?: string;
+      category?: string;
+      usage?: string;
+      tier?: string;
+    };
+  };
+}
+
+interface Props {
+  theme?: string;
+  category?: string;
+  tier?: string;
+}
+
+const { theme = 'neutral-light', category, tier } = Astro.props;
+
+function isTokenLeaf(value: unknown): value is TokenLeaf {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    '$value' in value &&
+    '$type' in value
+  );
+}
+
+function collectLeaves(node: unknown, acc: TokenLeaf[] = []): TokenLeaf[] {
+  if (isTokenLeaf(node)) {
+    acc.push(node);
+    return acc;
+  }
+  if (typeof node === 'object' && node !== null) {
+    for (const value of Object.values(node)) {
+      collectLeaves(value, acc);
+    }
+  }
+  return acc;
+}
+
+const themeTokens = (tokens as any).theme?.[theme]?.ps;
+const allLeaves = themeTokens ? collectLeaves(themeTokens) : [];
+const leaves = allLeaves.filter((leaf) => {
+  const ext = leaf.$extensions?.['public-sector'];
+  if (category && !ext?.category?.includes(category)) return false;
+  if (tier && ext?.tier !== tier) return false;
+  return true;
+});
+
+leaves.sort((a, b) =>
+  (a.$extensions?.['public-sector']?.cssVariable ?? '').localeCompare(
+    b.$extensions?.['public-sector']?.cssVariable ?? '',
+  ),
+);
+---
+
+<div class="ps-token-table">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Token</th>
+        <th scope="col">Value</th>
+        <th scope="col">Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      {leaves.map((leaf) => (
+        <tr>
+          <th scope="row"><code>{leaf.$extensions?.['public-sector']?.cssVariable}</code></th>
+          <td>
+            {leaf.$type === 'color' ? (
+              <span class="ps-token-table__swatch" style={`background:${leaf.$value}`} aria-hidden="true" />
+            ) : null}
+            <code>{leaf.$value}</code>
+          </td>
+          <td>{leaf.$extensions?.['public-sector']?.usage ?? leaf.$description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="ps-token-table__note">
+    Generated at build time from <code>packages/tokens/src/design-tokens.json</code> (theme: <code>{theme}</code>).
+  </p>
+</div>
+
+<style>
+  .ps-token-table {
+    margin-block: 1.5rem;
+  }
+
+  .ps-token-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--sl-text-sm);
+  }
+
+  .ps-token-table th,
+  .ps-token-table td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--sl-color-gray-5);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .ps-token-table thead th {
+    background: var(--sl-color-gray-6);
+  }
+
+  .ps-token-table__swatch {
+    display: inline-block;
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-right: 0.35rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.2rem;
+    vertical-align: middle;
+  }
+
+  .ps-token-table__note {
+    margin-top: 0.75rem;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+</style>

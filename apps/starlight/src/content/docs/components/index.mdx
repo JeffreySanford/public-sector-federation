@@ -4,6 +4,7 @@ description: Public component contracts, usage guidance, lifecycle status, and l
 ---
 
 import ComponentStatusTable from '../../../components/ComponentStatusTable.astro';
+import StatusBadge from '../../../components/StatusBadge.astro';
 
 Component documentation should help someone choose and use a component before presenting implementation evidence.
 
@@ -14,40 +15,40 @@ The first documentation sequence tracks three flagship components against the ge
 ### Button
 
 - **Documentation:** The first complete flagship page is published.
-- **Lifecycle:** Active and used in the reference applications.
+- **Lifecycle:** <StatusBadge status="active" /> and used in the reference applications.
 - **Storybook:** A dedicated canonical stable story is recorded.
 - **Accessibility:** Automated checks exist; dedicated keyboard breadth and manual assistive-technology review remain incomplete.
-- **Figma:** Pending access and alignment review.
+- **Figma:** <StatusBadge status="pending-access" label="Pending access" /> and alignment review.
 
 [Read the Button guidance](/docs/components/button/)
 
 ### Select
 
 - **Documentation:** The second complete flagship page is published in PR #16.
-- **Lifecycle:** Active.
+- **Lifecycle:** <StatusBadge status="active" />.
 - **Storybook:** A canonical story, complete state set, model harness, and overlay-boundary harness are recorded.
 - **Accessibility:** Dedicated automated keyboard, popup, axe, and accessibility-tree evidence is complete for the declared scope; manual assistive-technology review and the provider's missing disabled-option `aria-disabled` state remain open.
-- **Figma:** Pending access and alignment review.
+- **Figma:** <StatusBadge status="pending-access" label="Pending access" /> and alignment review.
 
 [Read the Select guidance](/docs/components/select/)
 
 ### Dialog
 
 - **Documentation:** The third flagship page is published in PR #18.
-- **Lifecycle:** Active.
+- **Lifecycle:** <StatusBadge status="active" />.
 - **Storybook:** Dedicated canonical, destructive-confirmation, long-content, and focus-sequence stories are recorded.
 - **Accessibility:** Labelled modal semantics, predictable initial focus, Tab containment, Escape dismissal, and opener restoration have dedicated automated evidence; manual assistive-technology review, background inertness, and explicit body scroll lock remain open.
-- **Figma:** Pending access and alignment review.
+- **Figma:** <StatusBadge status="pending-access" label="Pending access" /> and alignment review.
 
 [Read the Dialog guidance](/docs/components/dialog/)
 
 ### Checkbox, Input, and Table
 
 - **Documentation:** Published as the second catalog wave, closing the table/input/checkbox wrapper backlog recorded for the remote realignment pass and keeping the remaining follow-up work explicit.
-- **Lifecycle:** Active and used in the reference remotes (`services-remote`, `admin-remote`, `reporting-remote`).
+- **Lifecycle:** <StatusBadge status="active" /> and used in the reference remotes (`services-remote`, `admin-remote`, `reporting-remote`).
 - **Storybook:** Dedicated canonical stories plus disabled, required, invalid, long-content, and mobile-overflow states are recorded for each component.
 - **Accessibility:** Automated keyboard and relationship evidence is complete for the declared scope; manual assistive-technology review remains open for all three, matching the flagship trio's current status.
-- **Figma:** Pending access and design alignment review, same as the flagship trio.
+- **Figma:** <StatusBadge status="pending-access" label="Pending access" /> and design alignment review, same as the flagship trio.
 
 [Read the Checkbox guidance](/docs/components/checkbox/) · [Read the Input guidance](/docs/components/input/) · [Read the Table guidance](/docs/components/table/)
 
