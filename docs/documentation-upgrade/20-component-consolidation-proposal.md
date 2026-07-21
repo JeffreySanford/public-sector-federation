@@ -158,7 +158,8 @@ Figma status remains draft or pending until actual component identifiers and des
 
 ## Proposal acceptance criteria
 
-- [ ] Every public entry has a documented disposition.
+- [x] Every public entry has a documented disposition — all 21 manifest entries carry an
+      `audit.disposition` (4 canonical, 1 merge, 14 investigate, 2 retain).
 - [ ] Usage evidence supports removal or migration decisions.
 - [x] Button has one approved target contract.
 - [x] Provider-backed versus native/CDK decisions include explicit tradeoffs.
