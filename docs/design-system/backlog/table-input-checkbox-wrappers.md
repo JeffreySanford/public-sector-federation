@@ -7,7 +7,7 @@ gap: `ps-table`, `ps-input`, and `ps-checkbox` are implemented, documented in
 the component manifest, and have replaced every native usage that carried a
 `// GAP:` comment in `services-remote`, `admin-remote`, and `reporting-remote`.
 For the originating story and historical context, see
-[the remote realignment plan](../../ui-refresh/remote-realignment-scrub-plan.md).
+[the remote realignment plan](../../archive/internal-process/remote-realignment-scrub-plan.md).
 
 ## Resolved Gaps
 

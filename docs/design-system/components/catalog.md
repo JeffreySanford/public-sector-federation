@@ -17,7 +17,7 @@ provider, accessibility, Figma, Starlight, ownership, and evidence status should
 be updated in the registry rather than duplicated here. Starlight owns the full
 public usage guidance for flagship components. For the originating remote
 realignment story and the related backlog follow-up, see
-[the remote realignment plan](../../ui-refresh/remote-realignment-scrub-plan.md)
+[the remote realignment plan](../../archive/internal-process/remote-realignment-scrub-plan.md)
 and [the table/input/checkbox backlog](../backlog/table-input-checkbox-wrappers.md).
 
 ## Current Components

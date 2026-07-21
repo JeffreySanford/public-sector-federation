@@ -1,5 +1,12 @@
 # PR Plan: Scrub PrimeNG-Proving Components & Copy Across All Four Remotes
 
+> **Archived.** This is a completed internal PR-planning record, moved here per
+> [10 — Migration and cleanup plan](../../documentation-upgrade/10-migration-and-cleanup-plan.md)'s
+> documentation archive convention. It is kept for historical accuracy, not as an active plan —
+> [the component catalog](../../design-system/components/catalog.md) and
+> [the backlog record](../../design-system/backlog/table-input-checkbox-wrappers.md) are the current
+> reference for what actually shipped.
+
 **Status: ✅ Shipped (Phase 1), plus a completed Phase 2 fast-follow.** The scrub landed on
 `master` (squashed history culminating in `6cea200`), and the table/input/checkbox wrapper
 backlog it deliberately deferred was subsequently built out and merged. See §10 for the Phase 2
@@ -22,8 +29,8 @@ registry. New business patterns (tables, tiles) are a tracked fast-follow, not p
 *(Tables and inputs/checkboxes were built in Phase 2 — see §10. "Tiles" was never separately
 scoped; see §11.)*
 
-Related docs: [the backlog stub](../design-system/backlog/table-input-checkbox-wrappers.md) for the
-follow-up wrapper work, and [the component catalog](../design-system/components/catalog.md) for the
+Related docs: [the backlog stub](../../design-system/backlog/table-input-checkbox-wrappers.md) for the
+follow-up wrapper work, and [the component catalog](../../design-system/components/catalog.md) for the
 current component guidance and status.
 
 ---

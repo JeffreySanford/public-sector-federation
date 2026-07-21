@@ -350,9 +350,15 @@ Low-risk changes:
       the hand-authored `documentation-integrity.json` and flagship prose already could. The
       flagship narrative for Button/Select/Dialog/Checkbox/Input/Table remains hand-authored
       prose, by design — only the full-catalog status table is generated;
-- [ ] move historical process notes, dated progress reports, and internal workflow detail into the exploration log or archive —
-      not started; the `exploration/index.md` Starlight page and `docs/documentation-upgrade/` /
-      `docs/design-system/` trees still hold this material in place rather than a dedicated archive.
+- [x] move historical process notes, dated progress reports, and internal workflow detail into the exploration log or archive —
+      `docs/ui-refresh/remote-realignment-scrub-plan.md` (a completed PR-planning narrative for a
+      squashed/shipped change) moved to `docs/archive/internal-process/` per the "Archive
+      candidates" convention above, with an archive banner added and both referencing links
+      (`catalog.md`, the resolved backlog record) repointed. `docs/reports/agile-progress/` was
+      checked and found already entirely gitignored — ephemeral local report output, never
+      committed, nothing to archive there. `docs/design-system/TODO.md` and
+      `docs/documentation-upgrade/00-current-status.md` were checked and are live, actively
+      maintained status trackers, not historical notes — correctly left in place.
 
 ### Phase 3: Tooling retirement
 
