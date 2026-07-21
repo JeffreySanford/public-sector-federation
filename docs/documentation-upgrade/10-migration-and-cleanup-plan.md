@@ -345,10 +345,16 @@ This phase should be understood as the operational follow-through for the Storyb
 - [ ] finish the Storybook hierarchy so stable components, experiments, and system-health views are clearly separated;
 - [x] rename the remaining acceptance-style stories and ensure canonical story IDs are manifest-aligned;
 - [ ] add explicit Storybook-to-docs backlinks and Chromatic review links for the public component pages;
-- [ ] document the NVDA setup path for Windows contributors, including install, browser/AT configuration, and launch steps;
-- [ ] define a lightweight manual accessibility acceptance checklist for release validation;
-- [ ] add a short contributor note linking the NVDA workflow to the relevant Storybook, Starlight, and evidence pages;
-- [ ] record the manual accessibility review plan for Button, Select, and Dialog and connect it to the manifest evidence model.
+- [x] document the NVDA setup path for Windows contributors, including install, browser/AT configuration, and launch steps —
+      see [nvda-manual-accessibility-review.md](../design-system/validation/nvda-manual-accessibility-review.md);
+- [x] define a lightweight manual accessibility acceptance checklist for release validation — per-component
+      checklists for Button, Select, and Dialog in the same doc;
+- [x] add a short contributor note linking the NVDA workflow to the relevant Storybook, Starlight, and evidence pages —
+      the doc links direct Storybook iframe URLs for each flagship component's canonical stories;
+- [ ] record the manual accessibility review plan for Button, Select, and Dialog and connect it to the manifest evidence model —
+      the review-record template and workflow are ready; actual reviews have not yet been performed
+      (manifest `accessibility.screenReaderAudit` remains `pending` for all three until a completed
+      record exists).
 
 ### Phase 4: Contract normalization
 

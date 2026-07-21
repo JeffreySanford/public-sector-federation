@@ -120,6 +120,12 @@ Automated evidence now covers 320 CSS-pixel reflow for all three flagship docume
 and forced-colors boundaries and focus indicators in their isolated Storybook contracts. These
 checks reduce regression risk but do not satisfy the environment-specific manual review below.
 
+The NVDA setup steps, direct Storybook story URLs, per-component checklists, and the fillable
+review-record template live in
+[nvda-manual-accessibility-review.md](../design-system/validation/nvda-manual-accessibility-review.md).
+Completed review records are appended there; once a record exists for a component, update its
+manifest `accessibility.screenReaderAudit` status from `pending` and update the matrix above.
+
 Each review record must include:
 
 - reviewer;

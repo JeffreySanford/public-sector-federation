@@ -65,6 +65,7 @@ Still target-state work:
 14. [Adoption and team buy-in](./governance/adoption-and-team-buy-in.md)
 15. [Rollout implementation](./governance/rollout-implementation.md)
 16. [Repository review checklist](./validation/repository-review-checklist.md)
+17. [NVDA manual accessibility review](./validation/nvda-manual-accessibility-review.md)
 
 ## Tool and surface responsibilities
 
