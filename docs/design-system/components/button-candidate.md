@@ -2,7 +2,7 @@
 
 > **Lifecycle:** Candidate
 > **Stable alternative:** `ps-button`
-> **Candidate selector:** `ps-up-button`
+> **Candidate selector:** `ps-button-candidate`
 > **Package:** `@public-sector/ui-patterns`
 > **Scope:** Button only; this is not a migration of the broader public-sector design system.
 > **Live documentation page:** Button Candidate (Starlight)
@@ -11,7 +11,7 @@
 
 The Button Contract Exploration is the first component-level proof for connecting design intent, design tokens, an Angular wrapper, Storybook, the federated Component Lab workspace, automated validation, and governed documentation.
 
-The existing `ps-button` remains the stable public-sector Button wrapper. The experimental `ps-up-button` exists to evaluate a more design-system-owned Button API, opinionated PrimeNG facade, token mapping, normalized events, accessibility ownership, and promotion process.
+The existing `ps-button` remains the stable public-sector Button wrapper. The experimental `ps-button-candidate` exists to evaluate a more design-system-owned Button API, opinionated PrimeNG facade, token mapping, normalized events, accessibility ownership, and promotion process.
 
 The Candidate is deliberately narrow. Only Button-related design information and shared foundations required by the Button are in scope. Card, Table, Dialog, Toast, navigation, form controls, and other wrappers continue to use the existing public-sector contract.
 
@@ -27,7 +27,7 @@ The repository remains the implementation and validation source of truth. Starli
 
 ## Key differences from the stable Button
 
-| Area | Current `ps-button` | Candidate `ps-up-button` |
+| Area | Current `ps-button` | Candidate `ps-button-candidate` |
 | --- | --- | --- |
 | Lifecycle | Stable | Candidate |
 | API shape | Uses `outlined` and `text` booleans (plus `appearance`) | Uses one `appearance` input |
@@ -38,7 +38,7 @@ The repository remains the implementation and validation source of truth. Starli
 
 ## When to use
 
-Use `ps-up-button` only for:
+Use `ps-button-candidate` only for:
 
 - the Experiments view;
 - Storybook candidate stories;
@@ -49,7 +49,7 @@ Use `ps-up-button` only for:
 
 ## When not to use
 
-Do not use `ps-up-button` for:
+Do not use `ps-button-candidate` for:
 
 - general production application work;
 - replacing `ps-button` without an approved promotion decision;

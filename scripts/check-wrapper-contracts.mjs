@@ -3,7 +3,7 @@ import { extname, join } from 'node:path';
 
 const root = process.cwd();
 const scanRoots = ['apps', 'packages'];
-const candidateSelector = /<ps-up-button\b[\s\S]*?>/g;
+const candidateSelector = /<ps-button-candidate\b[\s\S]*?>/g;
 const violations = [];
 
 async function scan(directory) {
@@ -25,7 +25,7 @@ async function scan(directory) {
       ].filter(([, pattern]) => pattern.test(tag));
       for (const [reason] of forbidden) {
         const line = source.slice(0, match.index).split(/\r?\n/).length;
-        violations.push(`${path.slice(root.length + 1)}:${line}: ps-up-button exposes forbidden ${reason}`);
+        violations.push(`${path.slice(root.length + 1)}:${line}: ps-button-candidate exposes forbidden ${reason}`);
       }
     }
   }
@@ -33,11 +33,11 @@ async function scan(directory) {
 
 for (const directory of scanRoots) await scan(join(root, directory));
 
-const candidateStoryPath = join(root, 'apps/qa-remote/src/stories/up-button.stories.ts');
+const candidateStoryPath = join(root, 'apps/qa-remote/src/stories/button-candidate.stories.ts');
 const candidateStory = await readFile(candidateStoryPath, 'utf8');
-if (!/component\s*:\s*PublicUpButtonComponent\b/.test(candidateStory)) {
+if (!/component\s*:\s*PublicButtonCandidateComponent\b/.test(candidateStory)) {
   violations.push(
-    'apps/qa-remote/src/stories/up-button.stories.ts: candidate metadata must set component: PublicUpButtonComponent for production arg-type extraction',
+    'apps/qa-remote/src/stories/button-candidate.stories.ts: candidate metadata must set component: PublicButtonCandidateComponent for production arg-type extraction',
   );
 }
 
@@ -46,4 +46,4 @@ if (violations.length) {
   process.exit(1);
 }
 
-console.log('Wrapper contract validation passed: ps-up-button uses only the provider-neutral candidate API.');
+console.log('Wrapper contract validation passed: ps-button-candidate uses only the provider-neutral candidate API.');

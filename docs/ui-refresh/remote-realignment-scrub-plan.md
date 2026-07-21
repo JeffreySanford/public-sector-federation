@@ -60,7 +60,7 @@ Per direction, **this PR does not build those wrappers.** Where a governed repla
 (`ps-button`, `ps-card`, `ps-tag`, `ps-progress`, `ps-dialog`, `ps-toast`, `ps-menu`), we migrate to
 it and delete the local CSS that reinvented it. Where no wrapper exists, we leave the native
 element in place **but tag it explicitly** (see §5) so the manifest/backlog carries the gap forward
-instead of hiding it — consistent with how this repo already treats `ps-up-button` as `candidate`
+instead of hiding it — consistent with how this repo already treats `ps-button-candidate` as `candidate`
 rather than pretending it's done.
 
 ## 3. What "scrub" means, concretely
@@ -205,7 +205,7 @@ confirms zero `// GAP:` comments remain in `apps/` today.
   something like `edge-case-states.stories.ts` and adjust copy so it reads as intentional
   state-coverage, not a leftover scratchpad.
 - `src/stories/opinionated-wrapper-contract.stories.ts` — **keep**, it's a legitimate
-  canonical-contract page (this is the `ps-up-button` candidate contract surface). No action
+  canonical-contract page (this is the `ps-button-candidate` candidate contract surface). No action
   beyond confirming its copy doesn't slip into "prove PrimeNG" language.
 - `src/app/components/workbench/*` — audit `design-alignment-lab.component.ts` and
   `quality-remediation-view.component.ts` for the same "proving" language pattern; these are

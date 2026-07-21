@@ -70,7 +70,7 @@ const meta: Meta<PublicButtonComponent> = {
     iconName: {
       control: 'select',
       options: [undefined, ...governedIcons],
-      description: 'Governed icon identifier absorbed from ps-up-button. PrimeIcons class strings stay private.',
+      description: 'Governed icon identifier absorbed from ps-button-candidate. PrimeIcons class strings stay private.',
     },
     intent: {
       control: 'select',

@@ -240,7 +240,7 @@ export type RegistryDashboardMode =
           <ng-container *ngTemplateOutlet="detail; context: { $implicit: focusedEntry() }" />
         }
         @case ('promotion') {
-          <ng-container *ngTemplateOutlet="detail; context: { $implicit: upButtonEntry() }" />
+          <ng-container *ngTemplateOutlet="detail; context: { $implicit: buttonCandidateEntry() }" />
         }
       }
 
@@ -375,7 +375,7 @@ export type RegistryDashboardMode =
 })
 export class ComponentRegistryDashboardComponent {
   readonly mode = input<RegistryDashboardMode>('overview');
-  readonly focusId = input('ps-up-button');
+  readonly focusId = input('ps-button-candidate');
   readonly entries = componentManifest.entries;
   readonly lifecycleStatuses = ['experimental', 'candidate', 'active', 'deprecated'] as const;
 
@@ -397,7 +397,7 @@ export class ComponentRegistryDashboardComponent {
   readonly pendingAuditCount = computed(() => this.entries.filter((entry) => entry.accessibility.screenReaderAudit === 'pending').length);
   readonly pendingFigmaCount = computed(() => this.entries.filter((entry) => entry.figma.status === 'pending-access').length);
   readonly focusedEntry = computed(() => this.entries.find((entry) => entry.identity.id === this.focusId()) ?? this.entries[0]);
-  readonly upButtonEntry = computed(() => this.entries.find((entry) => entry.identity.id === 'ps-up-button'));
+  readonly buttonCandidateEntry = computed(() => this.entries.find((entry) => entry.identity.id === 'ps-button-candidate'));
 
   entriesForLifecycle(status: ComponentManifestEntry['lifecycle']['status']): ComponentManifestEntry[] {
     return this.entries.filter((entry) => entry.lifecycle.status === status);

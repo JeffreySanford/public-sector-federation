@@ -62,7 +62,7 @@ test.describe('component manifest Storybook registry', () => {
   });
 
   test('renders Button candidate promotion evidence and blockers', async ({ page }) => {
-    await gotoStory(page, 'up-button-promotion-readiness');
+    await gotoStory(page, 'button-candidate-promotion-readiness');
 
     await expect(page.getByRole('heading', { name: 'Button Contract Exploration' })).toBeVisible();
     await expect(page.getByText('Design review is pending.')).toBeVisible();

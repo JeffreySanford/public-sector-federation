@@ -42,7 +42,7 @@ Lifecycle status currently records 17 active entries and one candidate entry. Th
 | Component | Provider | Current evidence | Principal finding | Preliminary disposition |
 | --- | --- | --- | --- | --- |
 | `ps-button` | PrimeNG | Canonical Storybook and Starlight guidance; partial behavior and keyboard evidence | Preferred semantic API coexists with compatibility inputs, a style escape hatch, PrimeIcons strings, navigation behavior, and a DOM-event output | Retain as the temporary canonical implementation; migrate the stronger candidate contract into it |
-| `ps-up-button` | PrimeNG | Candidate stories, tests, documentation, and automated accessibility evidence | Represents the cleaner API direction but duplicates the stable Button contract | Merge decisions into `ps-button`; do not promote a second permanent Button |
+| `ps-button-candidate` | PrimeNG | Candidate stories, tests, documentation, and automated accessibility evidence | Represents the cleaner API direction but duplicates the stable Button contract | Merge decisions into `ps-button`; do not promote a second permanent Button |
 | `ps-select` | PrimeNG | Complete declared Storybook, test, keyboard, documentation, overlay, responsive, and automated evidence | Strong provider façade; invalid, required, help-text, disabled-option ARIA, and manual AT evidence remain incomplete | Retain and remediate |
 | `ps-dialog` | Native | Complete declared Storybook, keyboard, focus, responsive, documentation, and automated evidence | Focus behavior is substantially remediated; background inertness, body scroll lock, description support, stacked dialogs, and manual AT review remain open | Retain and remediate; evaluate Angular CDK primitives before expanding scope |
 

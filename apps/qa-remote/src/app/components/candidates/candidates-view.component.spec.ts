@@ -30,7 +30,7 @@ describe('CandidatesViewComponent', () => {
       element.querySelector('[data-testid="live-button-comparison"] ps-button'),
     ).not.toBeNull();
     expect(
-      element.querySelector('[data-testid="live-button-comparison"] ps-up-button'),
+      element.querySelector('[data-testid="live-button-comparison"] ps-button-candidate'),
     ).not.toBeNull();
     expect(element.textContent).toContain('Current Button vs Button candidate');
   });

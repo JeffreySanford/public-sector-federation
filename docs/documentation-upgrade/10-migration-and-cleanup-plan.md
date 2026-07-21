@@ -1,6 +1,6 @@
 # Migration and Cleanup Plan
 
-_Last aligned: July 20, 2026._ The Button candidate rename (Phase 1 and Phase 4, below) has
+_Last aligned: July 21, 2026._ The Button candidate rename (Phase 1 and Phase 4, below) has
 landed: the public rename map's `Button Candidate → Button Contract Exploration` and part of
 `Candidates → Experiments` are complete in the manifest, Storybook title, and
 `docs/design-system/components/button-candidate-*.md` files (the old `up-button-candidate-*.md`
@@ -10,7 +10,21 @@ now complete: `button-tag.acceptance.stories.ts`, `card.acceptance.stories.ts`,
 `table-paginator.acceptance.stories.ts` all use `Design System/Interaction Stories/*`, and the
 matching manifest `storybookTitle` entries and hardcoded story IDs in
 `apps/qa-remote/e2e/storybook-stories.spec.ts` and `scripts/storybook-e2e.mjs` were updated to
-match. Everything else below remains open.
+match. The README opening, primary links, and narrative already use the target framing below
+(no further README migration work is open). A full proprietary-content scrub also landed: every
+`up-design-system` reference, the UP-Button token/path comparison docs, and the mortgage-domain
+navigation examples (Point of Entry, Rates Sheet, Loan Pipeline, Committed Loans, Capital
+Markets, etc.) named in "Search-and-review terms" below were removed or neutralized — see
+[docs/grok-tasks/POST-SCRUB-CHECKLIST.md](../grok-tasks/POST-SCRUB-CHECKLIST.md) for the full
+record. Git history still contains the deleted material — no history rewrite has been done.
+The Button contract itself has also moved: `ps-button` now carries the full target API
+(`intent`, `appearance`, `disabled`, `loading`, `activated`, and a governed `iconName` identifier
+absorbed from `ps-button-candidate`) alongside its still-supported deprecated aliases. The
+candidate's selector, class name, exported types, and source/story file names have also been
+renamed from `ps-up-button`/`PublicUpButtonComponent` to `ps-button-candidate`/
+`PublicButtonCandidateComponent` throughout the manifest, Storybook, e2e suites, and docs;
+`ps-button-candidate` itself has not been removed — see Phase 4 and the Button consolidation
+decision below for its disposition. Everything else below remains open.
 
 ## Objective
 
@@ -270,22 +284,29 @@ flowchart LR
 
 ## Search-and-review terms
 
-Before the public release, search all public content for:
+_Swept July 21, 2026 — see [POST-SCRUB-CHECKLIST.md](../grok-tasks/POST-SCRUB-CHECKLIST.md) for
+the full record of what was removed, rewritten, or archived._
 
-- SitePen
-- UP
-- Neil
-- Dan
-- QA
-- Candidate
-- acceptance
-- portfolio-grade
-- skills demonstrated
-- local drive paths
-- unpublished internal URLs
-- Enterprise access limitations
+- [x] SitePen
+- [x] UP / UP Design System / UP Button (prose and source-visible strings, and the
+      `ps-up-button` selector, `PublicUpButtonComponent` class, exported types, and source/story
+      file names — all renamed to `ps-button-candidate` / `PublicButtonCandidateComponent`)
+- [x] Neil (no matches found repo-wide as of July 21, 2026)
+- [x] Dan (no matches found repo-wide as of July 21, 2026)
+- [ ] QA
+- [ ] Candidate
+- [ ] acceptance
+- [ ] portfolio-grade
+- [ ] skills demonstrated
+- [x] local drive paths (`D:\repos\up-design-system` and similar)
+- [ ] unpublished internal URLs
+- [x] Enterprise access limitations (`enterprise machine access`, `enterprise repository`,
+      mortgage-domain navigation examples)
 
-Each occurrence should be intentionally kept, rewritten, moved to Experiments, or archived.
+Each occurrence should be intentionally kept, rewritten, moved to Experiments, or archived. Note
+that `QA`, `Candidate`, and `acceptance` are checked as not-yet-searched here specifically for
+person names, unpublished URLs, and remaining `QA`/`Candidate`/`acceptance` vocabulary sweeps —
+those are distinct from the proprietary-content terms above and remain genuinely open.
 
 ## Cleanup phases
 
@@ -295,14 +316,18 @@ The later documentation and release workstreams in 8 and 9 should be carried for
 
 Low-risk changes:
 
-- [ ] align the product name, landing-page copy, and navigation labels with the design-system narrative;
+- [x] align the product name, landing-page copy, and navigation labels with the design-system narrative — the README opening, primary links, and narrative already match the target framing above;
 - [x] rename Storybook categories and component status vocabulary so they no longer imply product or QA-only framing —
       the Button candidate category moved from `Design System/Candidates/*` to
       `Design System/Experiments/*`, and all five acceptance-stories files moved to
       `Design System/Interaction Stories/*`;
-- [ ] audit all public-facing labels in the README, manifests, docs, and navigation for consistency —
-      done for the Button candidate surface specifically (manifest `name`, Storybook title, and
-      `docs/design-system/components/button-candidate-*.md`); not yet audited elsewhere.
+- [x] audit all public-facing labels in the README, manifests, docs, and navigation for consistency —
+      done for the Button candidate surface (manifest `name`, Storybook title, and
+      `docs/design-system/components/button-candidate-*.md`) and, via the proprietary-content
+      scrub, across the rest of `docs/design-system/` and `apps/qa-remote` (see
+      [POST-SCRUB-CHECKLIST.md](../grok-tasks/POST-SCRUB-CHECKLIST.md)); the `ps-up-button`
+      selector, class name, and exported types have since been renamed to `ps-button-candidate` /
+      `PublicButtonCandidateComponent`.
 
 ### Phase 2: Documentation relocation
 
@@ -329,12 +354,16 @@ This phase should be understood as the operational follow-through for the Storyb
 
 This phase captures the remaining product naming, docs migration, NVDA setup, Button strategy, and selector normalization work that still needs to be executed.
 
-- [ ] document the long-term Button strategy, using the remediated stable contract as the chosen direction;
+- [x] document the long-term Button strategy, using the remediated stable contract as the chosen direction —
+      see the "Long-term disposition" section of
+      [button-api-migration.md](../design-system/components/button-api-migration.md): retire
+      `ps-button-candidate` as a documented case study, do not merge it further or promote it to a
+      second permanent Button;
 - [x] resolve the product naming and public-label migration for the Button comparison and candidate/experiment surfaces —
-      `ps-up-button` now surfaces as "Button Contract Exploration" under
-      `Design System/Experiments/*` everywhere (manifest, Storybook, docs); the underlying
-      `ps-up-button` selector and `PublicUpButtonComponent` export were deliberately left
-      unchanged so the compatibility contract stays stable while only the public label moved;
+      the candidate now surfaces as "Button Contract Exploration" under `Design System/Experiments/*`
+      everywhere (manifest, Storybook, docs), and its underlying selector and export were renamed
+      from `ps-up-button`/`PublicUpButtonComponent` to `ps-button-candidate`/
+      `PublicButtonCandidateComponent` so the internal naming matches the public label;
 - [ ] normalize selectors around a documented public convention and record migration exceptions in the manifest;
 - [ ] improve API extraction so the public contract is easier to document and consume;
 - [ ] remove provider leaks and escape hatches that are no longer needed for the public story;

@@ -644,18 +644,16 @@
                 "primeNgFamily": null
               }
             }
-          }
-        },
-        "up": {
-          "button": {
+          },
+          "candidate": {
             "success": {
               "foreground": {
                 "$type": "color",
                 "$value": "#ffffff",
-                "$description": "--ps-up-button-success-foreground for neutral light.",
+                "$description": "--ps-button-candidate-success-foreground for neutral light.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-success-foreground",
+                    "cssVariable": "--ps-button-candidate-success-foreground",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -671,10 +669,10 @@
                 "foreground": {
                   "$type": "color",
                   "$value": "#ffffff",
-                  "$description": "--ps-up-button-success-hover-foreground for neutral light.",
+                  "$description": "--ps-button-candidate-success-hover-foreground for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-success-hover-foreground",
+                      "cssVariable": "--ps-button-candidate-success-hover-foreground",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -691,10 +689,10 @@
                 "foreground": {
                   "$type": "color",
                   "$value": "#ffffff",
-                  "$description": "--ps-up-button-success-active-foreground for neutral light.",
+                  "$description": "--ps-button-candidate-success-active-foreground for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-success-active-foreground",
+                      "cssVariable": "--ps-button-candidate-success-active-foreground",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -712,10 +710,10 @@
               "background": {
                 "$type": "color",
                 "$value": "#f59e0b",
-                "$description": "--ps-up-button-warning-background for neutral light.",
+                "$description": "--ps-button-candidate-warning-background for neutral light.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-warning-background",
+                    "cssVariable": "--ps-button-candidate-warning-background",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -730,10 +728,10 @@
               "foreground": {
                 "$type": "color",
                 "$value": "#431407",
-                "$description": "--ps-up-button-warning-foreground for neutral light.",
+                "$description": "--ps-button-candidate-warning-foreground for neutral light.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-warning-foreground",
+                    "cssVariable": "--ps-button-candidate-warning-foreground",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -749,10 +747,10 @@
                 "color": {
                   "$type": "color",
                   "$value": "#f59e0b",
-                  "$description": "--ps-up-button-warning-border-color for neutral light.",
+                  "$description": "--ps-button-candidate-warning-border-color for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-warning-border-color",
+                      "cssVariable": "--ps-button-candidate-warning-border-color",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -769,10 +767,10 @@
                 "background": {
                   "$type": "color",
                   "$value": "#d97706",
-                  "$description": "--ps-up-button-warning-hover-background for neutral light.",
+                  "$description": "--ps-button-candidate-warning-hover-background for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-warning-hover-background",
+                      "cssVariable": "--ps-button-candidate-warning-hover-background",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -787,10 +785,10 @@
                 "foreground": {
                   "$type": "color",
                   "$value": "#431407",
-                  "$description": "--ps-up-button-warning-hover-foreground for neutral light.",
+                  "$description": "--ps-button-candidate-warning-hover-foreground for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-warning-hover-foreground",
+                      "cssVariable": "--ps-button-candidate-warning-hover-foreground",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -806,10 +804,10 @@
                   "color": {
                     "$type": "color",
                     "$value": "#d97706",
-                    "$description": "--ps-up-button-warning-hover-border-color for neutral light.",
+                    "$description": "--ps-button-candidate-warning-hover-border-color for neutral light.",
                     "$extensions": {
                       "public-sector": {
-                        "cssVariable": "--ps-up-button-warning-hover-border-color",
+                        "cssVariable": "--ps-button-candidate-warning-hover-border-color",
                         "selector": ":root",
                         "theme": "neutral",
                         "mode": "light",
@@ -827,10 +825,10 @@
                 "background": {
                   "$type": "color",
                   "$value": "#b45309",
-                  "$description": "--ps-up-button-warning-active-background for neutral light.",
+                  "$description": "--ps-button-candidate-warning-active-background for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-warning-active-background",
+                      "cssVariable": "--ps-button-candidate-warning-active-background",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -845,10 +843,10 @@
                 "foreground": {
                   "$type": "color",
                   "$value": "#ffffff",
-                  "$description": "--ps-up-button-warning-active-foreground for neutral light.",
+                  "$description": "--ps-button-candidate-warning-active-foreground for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-warning-active-foreground",
+                      "cssVariable": "--ps-button-candidate-warning-active-foreground",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -864,10 +862,10 @@
                   "color": {
                     "$type": "color",
                     "$value": "#b45309",
-                    "$description": "--ps-up-button-warning-active-border-color for neutral light.",
+                    "$description": "--ps-button-candidate-warning-active-border-color for neutral light.",
                     "$extensions": {
                       "public-sector": {
-                        "cssVariable": "--ps-up-button-warning-active-border-color",
+                        "cssVariable": "--ps-button-candidate-warning-active-border-color",
                         "selector": ":root",
                         "theme": "neutral",
                         "mode": "light",
@@ -886,10 +884,10 @@
               "foreground": {
                 "$type": "color",
                 "$value": "#ffffff",
-                "$description": "--ps-up-button-error-foreground for neutral light.",
+                "$description": "--ps-button-candidate-error-foreground for neutral light.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-error-foreground",
+                    "cssVariable": "--ps-button-candidate-error-foreground",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -905,10 +903,10 @@
                 "foreground": {
                   "$type": "color",
                   "$value": "#ffffff",
-                  "$description": "--ps-up-button-error-hover-foreground for neutral light.",
+                  "$description": "--ps-button-candidate-error-hover-foreground for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-error-hover-foreground",
+                      "cssVariable": "--ps-button-candidate-error-hover-foreground",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -925,10 +923,10 @@
                 "foreground": {
                   "$type": "color",
                   "$value": "#ffffff",
-                  "$description": "--ps-up-button-error-active-foreground for neutral light.",
+                  "$description": "--ps-button-candidate-error-active-foreground for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-error-active-foreground",
+                      "cssVariable": "--ps-button-candidate-error-active-foreground",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -946,10 +944,10 @@
               "background": {
                 "$type": "color",
                 "$value": "#7c3aed",
-                "$description": "--ps-up-button-help-background for neutral light.",
+                "$description": "--ps-button-candidate-help-background for neutral light.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-help-background",
+                    "cssVariable": "--ps-button-candidate-help-background",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -964,10 +962,10 @@
               "foreground": {
                 "$type": "color",
                 "$value": "#ffffff",
-                "$description": "--ps-up-button-help-foreground for neutral light.",
+                "$description": "--ps-button-candidate-help-foreground for neutral light.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-help-foreground",
+                    "cssVariable": "--ps-button-candidate-help-foreground",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -983,10 +981,10 @@
                 "color": {
                   "$type": "color",
                   "$value": "#7c3aed",
-                  "$description": "--ps-up-button-help-border-color for neutral light.",
+                  "$description": "--ps-button-candidate-help-border-color for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-help-border-color",
+                      "cssVariable": "--ps-button-candidate-help-border-color",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -1003,10 +1001,10 @@
                 "background": {
                   "$type": "color",
                   "$value": "#6d28d9",
-                  "$description": "--ps-up-button-help-hover-background for neutral light.",
+                  "$description": "--ps-button-candidate-help-hover-background for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-help-hover-background",
+                      "cssVariable": "--ps-button-candidate-help-hover-background",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -1021,10 +1019,10 @@
                 "foreground": {
                   "$type": "color",
                   "$value": "#ffffff",
-                  "$description": "--ps-up-button-help-hover-foreground for neutral light.",
+                  "$description": "--ps-button-candidate-help-hover-foreground for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-help-hover-foreground",
+                      "cssVariable": "--ps-button-candidate-help-hover-foreground",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -1040,10 +1038,10 @@
                   "color": {
                     "$type": "color",
                     "$value": "#6d28d9",
-                    "$description": "--ps-up-button-help-hover-border-color for neutral light.",
+                    "$description": "--ps-button-candidate-help-hover-border-color for neutral light.",
                     "$extensions": {
                       "public-sector": {
-                        "cssVariable": "--ps-up-button-help-hover-border-color",
+                        "cssVariable": "--ps-button-candidate-help-hover-border-color",
                         "selector": ":root",
                         "theme": "neutral",
                         "mode": "light",
@@ -1061,10 +1059,10 @@
                 "background": {
                   "$type": "color",
                   "$value": "#5b21b6",
-                  "$description": "--ps-up-button-help-active-background for neutral light.",
+                  "$description": "--ps-button-candidate-help-active-background for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-help-active-background",
+                      "cssVariable": "--ps-button-candidate-help-active-background",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -1079,10 +1077,10 @@
                 "foreground": {
                   "$type": "color",
                   "$value": "#ffffff",
-                  "$description": "--ps-up-button-help-active-foreground for neutral light.",
+                  "$description": "--ps-button-candidate-help-active-foreground for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-help-active-foreground",
+                      "cssVariable": "--ps-button-candidate-help-active-foreground",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -1098,10 +1096,10 @@
                   "color": {
                     "$type": "color",
                     "$value": "#5b21b6",
-                    "$description": "--ps-up-button-help-active-border-color for neutral light.",
+                    "$description": "--ps-button-candidate-help-active-border-color for neutral light.",
                     "$extensions": {
                       "public-sector": {
-                        "cssVariable": "--ps-up-button-help-active-border-color",
+                        "cssVariable": "--ps-button-candidate-help-active-border-color",
                         "selector": ":root",
                         "theme": "neutral",
                         "mode": "light",
@@ -1120,10 +1118,10 @@
               "width": {
                 "$type": "dimension",
                 "$value": "1px",
-                "$description": "--ps-up-button-border-width for neutral light.",
+                "$description": "--ps-button-candidate-border-width for neutral light.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-border-width",
+                    "cssVariable": "--ps-button-candidate-border-width",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -1143,7 +1141,7 @@
                 "$description": "Button candidate minimum interactive height.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-min-height",
+                    "cssVariable": "--ps-button-candidate-min-height",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -1163,7 +1161,7 @@
                 "$description": "Button candidate vertical padding.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-padding-block",
+                    "cssVariable": "--ps-button-candidate-padding-block",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -1181,7 +1179,7 @@
                 "$description": "Button candidate horizontal padding.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-padding-inline",
+                    "cssVariable": "--ps-button-candidate-padding-inline",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -1201,7 +1199,7 @@
                 "$description": "Button candidate icon, spinner, and label gap.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-content-gap",
+                    "cssVariable": "--ps-button-candidate-content-gap",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -1221,7 +1219,7 @@
                 "$description": "Button candidate label font size.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-font-size",
+                    "cssVariable": "--ps-button-candidate-font-size",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -1241,7 +1239,7 @@
                 "$description": "Button candidate icon size.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-icon-size",
+                    "cssVariable": "--ps-button-candidate-icon-size",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -1258,10 +1256,10 @@
               "size": {
                 "$type": "dimension",
                 "$value": "1rem",
-                "$description": "--ps-up-button-spinner-size for neutral light.",
+                "$description": "--ps-button-candidate-spinner-size for neutral light.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-spinner-size",
+                    "cssVariable": "--ps-button-candidate-spinner-size",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -1277,10 +1275,10 @@
                 "width": {
                   "$type": "dimension",
                   "$value": "2px",
-                  "$description": "--ps-up-button-spinner-border-width for neutral light.",
+                  "$description": "--ps-button-candidate-spinner-border-width for neutral light.",
                   "$extensions": {
                     "public-sector": {
-                      "cssVariable": "--ps-up-button-spinner-border-width",
+                      "cssVariable": "--ps-button-candidate-spinner-border-width",
                       "selector": ":root",
                       "theme": "neutral",
                       "mode": "light",
@@ -1298,10 +1296,10 @@
               "width": {
                 "$type": "dimension",
                 "$value": "2px",
-                "$description": "--ps-up-button-focus-width for neutral light.",
+                "$description": "--ps-button-candidate-focus-width for neutral light.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-focus-width",
+                    "cssVariable": "--ps-button-candidate-focus-width",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",
@@ -1316,10 +1314,10 @@
               "offset": {
                 "$type": "dimension",
                 "$value": "2px",
-                "$description": "--ps-up-button-focus-offset for neutral light.",
+                "$description": "--ps-button-candidate-focus-offset for neutral light.",
                 "$extensions": {
                   "public-sector": {
-                    "cssVariable": "--ps-up-button-focus-offset",
+                    "cssVariable": "--ps-button-candidate-focus-offset",
                     "selector": ":root",
                     "theme": "neutral",
                     "mode": "light",

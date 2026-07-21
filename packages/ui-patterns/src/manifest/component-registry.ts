@@ -203,12 +203,12 @@ export const componentFindings: ComponentFinding[] = [
     category: 'api',
     severity: 'moderate',
     status: 'planned',
-    componentIds: ['ps-button', 'ps-up-button'],
+    componentIds: ['ps-button', 'ps-button-candidate'],
     summary:
       'The approved ps-button target uses intent, appearance, disabled, loading, governed icons, and activated; compatibility aliases remain supported until the next major release.',
     evidence: [
       'packages/ui-patterns/src/public-button.component.ts',
-      'packages/ui-patterns/src/public-up-button.component.ts',
+      'packages/ui-patterns/src/public-button-candidate.component.ts',
       'docs/design-system/components/button-api-migration.md',
       'docs/documentation-upgrade/18-component-estate-audit.md',
       'docs/documentation-upgrade/20-component-consolidation-proposal.md',
@@ -430,7 +430,7 @@ export const componentRegistry = [
     inputs: [
       { name: 'label', type: 'string', defaultValue: "''" },
       { name: 'icon', type: 'string | undefined', description: 'Deprecated PrimeIcons class string; use iconName.' },
-      { name: 'iconName', type: 'PublicButtonIcon | undefined', description: 'Governed icon identifier absorbed from ps-up-button.' },
+      { name: 'iconName', type: 'PublicButtonIcon | undefined', description: 'Governed icon identifier absorbed from ps-button-candidate.' },
       { name: 'intent', type: 'PublicButtonIntent', defaultValue: 'primary' },
       { name: 'appearance', type: 'PublicButtonAppearance', defaultValue: 'solid' },
       { name: 'tone', type: 'PublicButtonTone | undefined', description: 'Deprecated compatibility alias; use intent.' },
@@ -489,15 +489,15 @@ export const componentRegistry = [
     warnings: ['Legacy tone, styleClass, outlined, text, routerLink, PrimeIcons strings, and buttonClick remain supported only until the next major release.'],
   }),
   entry({
-    id: 'ps-up-button',
+    id: 'ps-button-candidate',
     tokenBoundary: 'public',
     findingIds: ['API-BTN-001'],
     duplicationCluster: 'button-contract',
     disposition: 'merge',
     name: 'Button Contract Exploration',
-    exportName: 'PublicUpButtonComponent',
-    selector: 'ps-up-button',
-    source: 'packages/ui-patterns/src/public-up-button.component.ts',
+    exportName: 'PublicButtonCandidateComponent',
+    selector: 'ps-button-candidate',
+    source: 'packages/ui-patterns/src/public-button-candidate.component.ts',
     description: 'Opinionated PrimeNG facade exposing product intent while keeping provider controls private.',
     status: 'candidate',
     productionUse: false,
@@ -508,16 +508,16 @@ export const componentRegistry = [
     publicApiStatus: 'complete',
     inputs: [
       { name: 'label', type: 'string', defaultValue: 'Button' },
-      { name: 'icon', type: 'PublicUpButtonIcon | undefined' },
-      { name: 'intent', type: 'PublicUpButtonIntent', defaultValue: 'primary', description: 'Preferred consumer-driven action purpose.' },
-      { name: 'appearance', type: 'PublicUpButtonAppearance', defaultValue: 'solid' },
+      { name: 'icon', type: 'PublicButtonCandidateIcon | undefined' },
+      { name: 'intent', type: 'PublicButtonCandidateIntent', defaultValue: 'primary', description: 'Preferred consumer-driven action purpose.' },
+      { name: 'appearance', type: 'PublicButtonCandidateAppearance', defaultValue: 'solid' },
       { name: 'disabled', type: 'boolean', defaultValue: 'false' },
       { name: 'loading', type: 'boolean', defaultValue: 'false' },
     ],
     outputs: [
       { name: 'activated', type: 'void', description: 'High-level action event.' },
     ],
-    publicTypes: ['PublicUpButtonIntent', 'PublicUpButtonAppearance', 'PublicUpButtonIcon'],
+    publicTypes: ['PublicButtonCandidateIntent', 'PublicButtonCandidateAppearance', 'PublicButtonCandidateIcon'],
     variants: [
       { name: 'intent', values: ['primary', 'secondary', 'destructive'] },
       { name: 'appearance', values: ['solid', 'outlined', 'text'] },
@@ -525,7 +525,7 @@ export const componentRegistry = [
     storybookStatus: 'complete',
     storybookTitle: 'Design System/Experiments/Button Contract Exploration',
     storybookFiles: [
-      'apps/qa-remote/src/stories/up-button.stories.ts',
+      'apps/qa-remote/src/stories/button-candidate.stories.ts',
       'apps/qa-remote/src/stories/opinionated-wrapper-contract.stories.ts',
     ],
     stories: [

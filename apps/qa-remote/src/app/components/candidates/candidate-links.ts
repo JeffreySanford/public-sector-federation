@@ -41,9 +41,9 @@ export const candidateLinks: readonly CandidateLink[] = [
   {
     id: 'source',
     label: 'Candidate wrapper source',
-    description: 'Angular ps-up-button implementation in the governed ui-patterns package.',
+    description: 'Angular ps-button-candidate implementation in the governed ui-patterns package.',
     status: 'Available',
-    href: `${githubRoot}/packages/ui-patterns/src/public-up-button.component.ts`,
+    href: `${githubRoot}/packages/ui-patterns/src/public-button-candidate.component.ts`,
     external: true,
   },
   {
@@ -51,13 +51,13 @@ export const candidateLinks: readonly CandidateLink[] = [
     label: 'Candidate Storybook source',
     description: 'All candidate variants, matrices, interaction harness, and current-versus-candidate story.',
     status: 'Available',
-    href: `${githubRoot}/apps/qa-remote/src/stories/up-button.stories.ts`,
+    href: `${githubRoot}/apps/qa-remote/src/stories/button-candidate.stories.ts`,
     external: true,
   },
   {
     id: 'tests',
-    label: 'Candidate QA and federation tests',
-    description: 'Direct QA remote and shell-composed Playwright coverage for the Candidates view.',
+    label: 'Candidate Component Lab and federation tests',
+    description: 'Direct Component Lab and shell-composed Playwright coverage for the Candidates view.',
     status: 'Available',
     href: `${githubRoot}/apps/qa-remote/e2e/candidates-view.spec.ts`,
     external: true,

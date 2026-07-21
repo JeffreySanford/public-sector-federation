@@ -3,15 +3,15 @@
 ## Preferred usage
 
 ```typescript
-import { PublicUpButtonComponent } from '@public-sector/ui-patterns';
+import { PublicButtonCandidateComponent } from '@public-sector/ui-patterns';
 ```
 
 ```typescript
 @Component({
   standalone: true,
-  imports: [PublicUpButtonComponent],
+  imports: [PublicButtonCandidateComponent],
   template: `
-    <ps-up-button
+    <ps-button-candidate
       label="Submit application"
       icon="check"
       intent="primary"
@@ -32,7 +32,7 @@ export class ApplicationActionsComponent {
 | Member | Type | Default | Purpose |
 | --- | --- | --- | --- |
 | `label` | `string` | `Button` | Visible action label. |
-| `icon` | `PublicUpButtonIcon \| undefined` | `undefined` | Provider-neutral approved icon name. |
+| `icon` | `PublicButtonCandidateIcon \| undefined` | `undefined` | Provider-neutral approved icon name. |
 | `intent` | `primary \| secondary \| destructive` | `primary` | Product-facing action purpose. |
 | `appearance` | `solid \| outlined \| text` | `solid` | Visual emphasis model. |
 | `disabled` | `boolean` | `false` | Prevents activation. |
@@ -45,7 +45,7 @@ unstyled mode, and provider callback payloads are not public Candidate controls.
 ## Intent
 
 ```typescript
-export type PublicUpButtonIntent =
+export type PublicButtonCandidateIntent =
   | 'primary'
   | 'secondary'
   | 'destructive';
@@ -54,14 +54,14 @@ export type PublicUpButtonIntent =
 Use intent to describe the role of the action, not its provider color name.
 
 ```html
-<ps-up-button label="Save changes" icon="save" intent="primary" />
-<ps-up-button label="Save draft" icon="save" intent="secondary" appearance="outlined" />
-<ps-up-button label="Delete draft" icon="times-circle" intent="destructive" />
+<ps-button-candidate label="Save changes" icon="save" intent="primary" />
+<ps-button-candidate label="Save draft" icon="save" intent="secondary" appearance="outlined" />
+<ps-button-candidate label="Delete draft" icon="times-circle" intent="destructive" />
 ```
 
 ## Provider boundary
 
-`ps-up-button` renders PrimeNG internally. The wrapper translates:
+`ps-button-candidate` renders PrimeNG internally. The wrapper translates:
 
 - `intent` into component-owned token mappings;
 - `appearance` into the private PrimeNG variant;

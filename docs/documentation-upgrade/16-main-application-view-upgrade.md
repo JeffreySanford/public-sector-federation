@@ -159,7 +159,7 @@ Selecting a component should reveal a focused detail panel or drawer with:
 
 Add a dedicated section for findings such as:
 
-- `ps-button` and `ps-up-button` overlap;
+- `ps-button` and `ps-button-candidate` overlap;
 - mixed selector prefixes (`ps-*` and `public-*`);
 - broad style escape hatches;
 - direct provider concepts in public APIs;

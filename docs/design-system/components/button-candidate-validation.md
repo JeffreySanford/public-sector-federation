@@ -7,7 +7,7 @@ The Component Lab workspace contains a dedicated **Experiments** view after **Co
 The view provides:
 
 - shared label, tone, appearance, disabled, and loading controls;
-- stable `ps-button` and Candidate `ps-up-button` examples;
+- stable `ps-button` and Candidate `ps-button-candidate` examples;
 - activation counters;
 - a side-by-side scenario matrix;
 - neutral, vibrant, and pastel theme controls;

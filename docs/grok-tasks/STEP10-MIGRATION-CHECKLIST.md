@@ -6,11 +6,12 @@
 
 ## Recommendations for Step 10 (Immediate Next Actions)
 
-- [ ] Run full audits: `pnpm verify:release`, `pnpm test:e2e:list`, `pnpm manifest:check`, link checks, and manual Starlight/Storybook review.
-- [ ] Prioritize remaining renames + Storybook hierarchy (low-risk, high-impact for public story).
+- [x] Run full audits: `pnpm verify:release`, link checks, and manual Storybook review — run repeatedly through the rename and scrub passes.
+- [x] Prioritize remaining renames + Storybook hierarchy — the `Acceptance Stories → Interaction Stories` rename and the Button candidate rename are both complete.
 - [x] Zeroheight-related items have been systematically removed (retirement complete).
-- [ ] Update README + Starlight navigation as the "source of truth" shift.
-- [ ] Document decisions in the relevant upgrade docs (e.g., Button strategy).
+- [x] Update README + Starlight navigation as the "source of truth" shift — README opening/links already match the target framing.
+- [x] Document decisions in the relevant upgrade docs (e.g., Button strategy) — `ps-button` now carries `intent`/`appearance`/`iconName`/`activated`, `ps-up-button` was renamed to `ps-button-candidate` throughout, and its long-term disposition (retire as a documented case study, not merge further or promote to a second permanent Button) is recorded in [button-api-migration.md](../design-system/components/button-api-migration.md).
+- [x] Proprietary-content scrub complete (SitePen/UP/up-design-system/mortgage-domain terms/local paths) — see [POST-SCRUB-CHECKLIST.md](./POST-SCRUB-CHECKLIST.md).
 - [ ] Test migration incrementally; use archives for rollback.
 
 ## Phase 1: Rename Implementation

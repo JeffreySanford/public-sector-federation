@@ -60,7 +60,7 @@ approved external design source
   -> source inventory
   -> primitive tokens
   -> semantic action tokens
-  -> ps-up-button component tokens
+  -> ps-button-candidate component tokens
   -> Candidate CSS implementation
 ```
 
@@ -69,20 +69,20 @@ The Candidate must not require application teams to use PrimeNG provider tokens 
 Recommended Candidate component-token namespace:
 
 ```text
---ps-up-button-background
---ps-up-button-foreground
---ps-up-button-border-color
---ps-up-button-hover-background
---ps-up-button-active-background
---ps-up-button-focus-color
---ps-up-button-border-radius
---ps-up-button-padding-inline
---ps-up-button-padding-block
---ps-up-button-content-gap
---ps-up-button-font-size
---ps-up-button-font-weight
---ps-up-button-icon-size
---ps-up-button-transition-duration
+--ps-button-candidate-background
+--ps-button-candidate-foreground
+--ps-button-candidate-border-color
+--ps-button-candidate-hover-background
+--ps-button-candidate-active-background
+--ps-button-candidate-focus-color
+--ps-button-candidate-border-radius
+--ps-button-candidate-padding-inline
+--ps-button-candidate-padding-block
+--ps-button-candidate-content-gap
+--ps-button-candidate-font-size
+--ps-button-candidate-font-weight
+--ps-button-candidate-icon-size
+--ps-button-candidate-transition-duration
 ```
 
 ## Token information to collect from an approved external design source

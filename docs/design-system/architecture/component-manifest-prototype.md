@@ -203,7 +203,7 @@ A new public entry is not complete until:
 Promotion is evidence-backed and human-approved. The manifest can report readiness,
 but it does not promote a component automatically.
 
-For a candidate such as `ps-up-button`, promotion should include:
+For a candidate such as `ps-button-candidate`, promotion should include:
 
 - approved public API;
 - approved design and Figma property mapping;

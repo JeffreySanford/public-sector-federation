@@ -58,11 +58,11 @@
     "test:code-examples": "playwright test CODE_EXAMPLES.test.ts",
     "test:storybook:qa": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts",
     "test:storybook:qa:chromium": "playwright test apps/qa-remote/e2e/storybook-stories.spec.ts --project=chromium --workers=1",
-    "test:storybook:up-button": "playwright test apps/qa-remote/e2e/button-candidate.storybook.spec.ts",
-    "test:storybook:up-button:chromium": "playwright test apps/qa-remote/e2e/button-candidate.storybook.spec.ts --project=chromium --workers=1",
+    "test:storybook:button-candidate": "playwright test apps/qa-remote/e2e/button-candidate.storybook.spec.ts",
+    "test:storybook:button-candidate:chromium": "playwright test apps/qa-remote/e2e/button-candidate.storybook.spec.ts --project=chromium --workers=1",
     "test:storybook:registry": "playwright test apps/qa-remote/e2e/component-registry.storybook.spec.ts",
     "test:storybook:registry:chromium": "playwright test apps/qa-remote/e2e/component-registry.storybook.spec.ts --project=chromium --workers=1",
-    "chromatic": "node scripts/chromatic-up-button.mjs"
+    "chromatic": "node scripts/chromatic-button-candidate.mjs"
   },
   "devDependencies": {
     "@angular-devkit/core": "^21.0.0",

@@ -37,10 +37,10 @@ test.describe('Button Contract Exploration isolated Storybook iframe', () => {
         borderRadius: computed.borderRadius,
         color: computed.color,
         fontWeight: computed.fontWeight,
-        tokenBackground: computed.getPropertyValue('--ps-up-button-background').trim(),
-        tokenForeground: computed.getPropertyValue('--ps-up-button-foreground').trim(),
-        tokenBorderColor: computed.getPropertyValue('--ps-up-button-border-color').trim(),
-        tokenMinHeight: computed.getPropertyValue('--ps-up-button-min-height').trim(),
+        tokenBackground: computed.getPropertyValue('--ps-button-candidate-background').trim(),
+        tokenForeground: computed.getPropertyValue('--ps-button-candidate-foreground').trim(),
+        tokenBorderColor: computed.getPropertyValue('--ps-button-candidate-border-color').trim(),
+        tokenMinHeight: computed.getPropertyValue('--ps-button-candidate-min-height').trim(),
       };
     });
 
@@ -77,7 +77,7 @@ test.describe('Button Contract Exploration isolated Storybook iframe', () => {
       return {
         backgroundColor: computed.backgroundColor,
         borderColor: computed.borderColor,
-        tokenBackground: computed.getPropertyValue('--ps-up-button-hover-background').trim(),
+        tokenBackground: computed.getPropertyValue('--ps-button-candidate-hover-background').trim(),
       };
     });
 
@@ -90,7 +90,7 @@ test.describe('Button Contract Exploration isolated Storybook iframe', () => {
       return {
         backgroundColor: computed.backgroundColor,
         borderColor: computed.borderColor,
-        tokenBackground: computed.getPropertyValue('--ps-up-button-active-background').trim(),
+        tokenBackground: computed.getPropertyValue('--ps-button-candidate-active-background').trim(),
       };
     });
     await page.mouse.up();
@@ -134,7 +134,7 @@ test.describe('Button Contract Exploration isolated Storybook iframe', () => {
     const button = page.getByRole('button', { name: 'Submitting' });
     await expect(button).toBeVisible();
     await expect(button).toBeDisabled();
-    await expect(page.locator('ps-up-button')).toHaveAttribute('aria-busy', 'true');
+    await expect(page.locator('ps-button-candidate')).toHaveAttribute('aria-busy', 'true');
   });
 
   test('shows visible focus treatment', async ({ page }) => {
@@ -189,7 +189,7 @@ test.describe('Button Contract Exploration isolated Storybook iframe', () => {
     await gotoCandidateStory(page, 'interaction-state-reference');
     await expect(page.getByRole('button', { name: 'Default' })).toBeVisible();
     await expect(page.getByRole('button', { name: 'Disabled' })).toBeDisabled();
-    await expect(page.locator('ps-up-button').filter({ has: page.getByRole('button', { name: 'Loading' }) })).toHaveAttribute('aria-busy', 'true');
+    await expect(page.locator('ps-button-candidate').filter({ has: page.getByRole('button', { name: 'Loading' }) })).toHaveAttribute('aria-busy', 'true');
 
     await gotoCandidateStory(page, 'size-matrix');
     await expect(page.getByRole('button', { name: /Compact$/ })).toBeVisible();
@@ -230,8 +230,8 @@ test.describe('Button Contract Exploration isolated Storybook iframe', () => {
         variantClass: document.documentElement.classList.contains('ps-theme-vibrant'),
         buttonBackground: computed.getPropertyValue('--ps-button-background').trim(),
         buttonText: computed.getPropertyValue('--ps-button-text').trim(),
-        candidateButtonBackground: computed.getPropertyValue('--ps-up-button-background').trim(),
-        candidateButtonForeground: computed.getPropertyValue('--ps-up-button-foreground').trim(),
+        candidateButtonBackground: computed.getPropertyValue('--ps-button-candidate-background').trim(),
+        candidateButtonForeground: computed.getPropertyValue('--ps-button-candidate-foreground').trim(),
       };
     });
 

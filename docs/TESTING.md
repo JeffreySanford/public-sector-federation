@@ -79,8 +79,8 @@ The primary browser projects are Chromium, Firefox, and WebKit.
 ```bash
 pnpm test:storybook:qa
 pnpm test:storybook:qa:chromium
-pnpm test:storybook:up-button
-pnpm test:storybook:up-button:chromium
+pnpm test:storybook:button-candidate
+pnpm test:storybook:button-candidate:chromium
 pnpm test:storybook:registry
 pnpm test:storybook:registry:chromium
 ```

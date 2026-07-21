@@ -39,7 +39,7 @@
           {
             "name": "iconName",
             "type": "PublicButtonIcon | undefined",
-            "description": "Governed icon identifier absorbed from ps-up-button."
+            "description": "Governed icon identifier absorbed from ps-button-candidate."
           },
           {
             "name": "intent",
@@ -230,6 +230,205 @@
         "blockers": [],
         "warnings": [
           "Legacy tone, styleClass, outlined, text, routerLink, PrimeIcons strings, and buttonClick remain supported only until the next major release."
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "identity": {
+        "id": "ps-button-candidate",
+        "name": "Button Contract Exploration",
+        "kind": "component",
+        "exportName": "PublicButtonCandidateComponent",
+        "selector": "ps-button-candidate",
+        "selectorAliases": [],
+        "package": "@public-sector/ui-patterns",
+        "source": "packages/ui-patterns/src/public-button-candidate.component.ts",
+        "description": "Opinionated PrimeNG facade exposing product intent while keeping provider controls private."
+      },
+      "lifecycle": {
+        "status": "candidate",
+        "productionUse": false,
+        "replacementFor": "ps-button"
+      },
+      "ownership": {
+        "owner": null,
+        "steward": null
+      },
+      "publicApi": {
+        "status": "complete",
+        "inputs": [
+          {
+            "name": "label",
+            "type": "string",
+            "defaultValue": "Button"
+          },
+          {
+            "name": "icon",
+            "type": "PublicButtonCandidateIcon | undefined"
+          },
+          {
+            "name": "intent",
+            "type": "PublicButtonCandidateIntent",
+            "defaultValue": "primary",
+            "description": "Preferred consumer-driven action purpose."
+          },
+          {
+            "name": "appearance",
+            "type": "PublicButtonCandidateAppearance",
+            "defaultValue": "solid"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "defaultValue": "false"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "defaultValue": "false"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "activated",
+            "type": "void",
+            "description": "High-level action event."
+          }
+        ],
+        "models": [],
+        "publicTypes": [
+          "PublicButtonCandidateIntent",
+          "PublicButtonCandidateAppearance",
+          "PublicButtonCandidateIcon"
+        ]
+      },
+      "implementation": {
+        "provider": "primeng",
+        "providerName": "PrimeNG",
+        "providerInternalOnly": true,
+        "providerModules": [
+          "primeng/button"
+        ],
+        "providerEscapeHatches": [],
+        "knownLimitations": [
+          "Figma property mapping and manual screen-reader review remain pending."
+        ]
+      },
+      "variants": {
+        "properties": [
+          {
+            "name": "intent",
+            "values": [
+              "primary",
+              "secondary",
+              "destructive"
+            ]
+          },
+          {
+            "name": "appearance",
+            "values": [
+              "solid",
+              "outlined",
+              "text"
+            ]
+          }
+        ],
+        "supportedCombinations": []
+      },
+      "tokens": {
+        "semantic": [],
+        "providerBridge": [],
+        "status": "partial"
+      },
+      "accessibility": {
+        "pattern": "button",
+        "automatedChecks": "complete",
+        "keyboardCoverage": "complete",
+        "screenReaderAudit": "pending",
+        "knownResponsibilities": [
+          "Consumers remain responsible for accessible page composition and meaningful content."
+        ]
+      },
+      "evidence": {
+        "storybook": {
+          "status": "complete",
+          "title": "Design System/Experiments/Button Contract Exploration",
+          "files": [
+            "apps/qa-remote/src/stories/button-candidate.stories.ts",
+            "apps/qa-remote/src/stories/opinionated-wrapper-contract.stories.ts"
+          ],
+          "stories": [
+            "Primary",
+            "ToneMatrix",
+            "AppearanceMatrix",
+            "InteractionStateReference",
+            "LightDarkModeMatrix",
+            "CurrentVsCandidate",
+            "PreferredCandidateApi",
+            "SupportedIntentMatrix",
+            "ProviderTranslation",
+            "CandidateContractBoundary"
+          ]
+        },
+        "tests": {
+          "status": "complete",
+          "files": [
+            "apps/qa-remote/e2e/button-candidate.storybook.spec.ts"
+          ],
+          "behaviors": [
+            "pointer activation",
+            "keyboard activation",
+            "disabled suppression",
+            "loading state",
+            "visible focus",
+            "light and dark mode"
+          ]
+        },
+        "documentation": {
+          "status": "complete",
+          "files": [
+            "docs/design-system/architecture/opinionated-wrapper-contract.md",
+            "docs/design-system/components/button-candidate.md",
+            "docs/design-system/components/button-candidate-design-tokens.md",
+            "docs/design-system/components/button-candidate-developer.md",
+            "docs/design-system/components/button-candidate-validation.md"
+          ]
+        }
+      },
+      "figma": {
+        "status": "pending-access",
+        "componentKey": null,
+        "componentSetKey": null,
+        "propertyMappings": []
+      },
+      "governance": {
+        "tier": "candidate",
+        "designReview": "pending",
+        "promotionRequirements": [
+          "Approve the opinionated intent API.",
+          "Validate the Figma property mapping.",
+          "Complete manual accessibility review.",
+          "Record the final promotion decision."
+        ]
+      },
+      "audit": {
+        "duplicationCluster": "button-contract",
+        "disposition": "merge",
+        "tokenBoundary": "public",
+        "findingIds": [
+          "API-BTN-001"
+        ]
+      },
+      "health": {
+        "repositoryReadiness": "blocked",
+        "externalDesignBinding": "partial",
+        "blockers": [
+          "Design review is pending.",
+          "Manual screen-reader audit is pending."
+        ],
+        "warnings": [
+          "The contract is proposed and remains pending design-system approval."
         ]
       }
     },
@@ -2737,205 +2936,6 @@
     {
       "schemaVersion": 1,
       "identity": {
-        "id": "ps-up-button",
-        "name": "Button Contract Exploration",
-        "kind": "component",
-        "exportName": "PublicUpButtonComponent",
-        "selector": "ps-up-button",
-        "selectorAliases": [],
-        "package": "@public-sector/ui-patterns",
-        "source": "packages/ui-patterns/src/public-up-button.component.ts",
-        "description": "Opinionated PrimeNG facade exposing product intent while keeping provider controls private."
-      },
-      "lifecycle": {
-        "status": "candidate",
-        "productionUse": false,
-        "replacementFor": "ps-button"
-      },
-      "ownership": {
-        "owner": null,
-        "steward": null
-      },
-      "publicApi": {
-        "status": "complete",
-        "inputs": [
-          {
-            "name": "label",
-            "type": "string",
-            "defaultValue": "Button"
-          },
-          {
-            "name": "icon",
-            "type": "PublicUpButtonIcon | undefined"
-          },
-          {
-            "name": "intent",
-            "type": "PublicUpButtonIntent",
-            "defaultValue": "primary",
-            "description": "Preferred consumer-driven action purpose."
-          },
-          {
-            "name": "appearance",
-            "type": "PublicUpButtonAppearance",
-            "defaultValue": "solid"
-          },
-          {
-            "name": "disabled",
-            "type": "boolean",
-            "defaultValue": "false"
-          },
-          {
-            "name": "loading",
-            "type": "boolean",
-            "defaultValue": "false"
-          }
-        ],
-        "outputs": [
-          {
-            "name": "activated",
-            "type": "void",
-            "description": "High-level action event."
-          }
-        ],
-        "models": [],
-        "publicTypes": [
-          "PublicUpButtonIntent",
-          "PublicUpButtonAppearance",
-          "PublicUpButtonIcon"
-        ]
-      },
-      "implementation": {
-        "provider": "primeng",
-        "providerName": "PrimeNG",
-        "providerInternalOnly": true,
-        "providerModules": [
-          "primeng/button"
-        ],
-        "providerEscapeHatches": [],
-        "knownLimitations": [
-          "Figma property mapping and manual screen-reader review remain pending."
-        ]
-      },
-      "variants": {
-        "properties": [
-          {
-            "name": "intent",
-            "values": [
-              "primary",
-              "secondary",
-              "destructive"
-            ]
-          },
-          {
-            "name": "appearance",
-            "values": [
-              "solid",
-              "outlined",
-              "text"
-            ]
-          }
-        ],
-        "supportedCombinations": []
-      },
-      "tokens": {
-        "semantic": [],
-        "providerBridge": [],
-        "status": "partial"
-      },
-      "accessibility": {
-        "pattern": "button",
-        "automatedChecks": "complete",
-        "keyboardCoverage": "complete",
-        "screenReaderAudit": "pending",
-        "knownResponsibilities": [
-          "Consumers remain responsible for accessible page composition and meaningful content."
-        ]
-      },
-      "evidence": {
-        "storybook": {
-          "status": "complete",
-          "title": "Design System/Experiments/Button Contract Exploration",
-          "files": [
-            "apps/qa-remote/src/stories/up-button.stories.ts",
-            "apps/qa-remote/src/stories/opinionated-wrapper-contract.stories.ts"
-          ],
-          "stories": [
-            "Primary",
-            "ToneMatrix",
-            "AppearanceMatrix",
-            "InteractionStateReference",
-            "LightDarkModeMatrix",
-            "CurrentVsCandidate",
-            "PreferredCandidateApi",
-            "SupportedIntentMatrix",
-            "ProviderTranslation",
-            "CandidateContractBoundary"
-          ]
-        },
-        "tests": {
-          "status": "complete",
-          "files": [
-            "apps/qa-remote/e2e/button-candidate.storybook.spec.ts"
-          ],
-          "behaviors": [
-            "pointer activation",
-            "keyboard activation",
-            "disabled suppression",
-            "loading state",
-            "visible focus",
-            "light and dark mode"
-          ]
-        },
-        "documentation": {
-          "status": "complete",
-          "files": [
-            "docs/design-system/architecture/opinionated-wrapper-contract.md",
-            "docs/design-system/components/button-candidate.md",
-            "docs/design-system/components/button-candidate-design-tokens.md",
-            "docs/design-system/components/button-candidate-developer.md",
-            "docs/design-system/components/button-candidate-validation.md"
-          ]
-        }
-      },
-      "figma": {
-        "status": "pending-access",
-        "componentKey": null,
-        "componentSetKey": null,
-        "propertyMappings": []
-      },
-      "governance": {
-        "tier": "candidate",
-        "designReview": "pending",
-        "promotionRequirements": [
-          "Approve the opinionated intent API.",
-          "Validate the Figma property mapping.",
-          "Complete manual accessibility review.",
-          "Record the final promotion decision."
-        ]
-      },
-      "audit": {
-        "duplicationCluster": "button-contract",
-        "disposition": "merge",
-        "tokenBoundary": "public",
-        "findingIds": [
-          "API-BTN-001"
-        ]
-      },
-      "health": {
-        "repositoryReadiness": "blocked",
-        "externalDesignBinding": "partial",
-        "blockers": [
-          "Design review is pending.",
-          "Manual screen-reader audit is pending."
-        ],
-        "warnings": [
-          "The contract is proposed and remains pending design-system approval."
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "identity": {
         "id": "public-toast-service",
         "name": "Toast Service",
         "kind": "service",
@@ -3198,12 +3198,12 @@
       "status": "planned",
       "componentIds": [
         "ps-button",
-        "ps-up-button"
+        "ps-button-candidate"
       ],
       "summary": "The approved ps-button target uses intent, appearance, disabled, loading, governed icons, and activated; compatibility aliases remain supported until the next major release.",
       "evidence": [
         "packages/ui-patterns/src/public-button.component.ts",
-        "packages/ui-patterns/src/public-up-button.component.ts",
+        "packages/ui-patterns/src/public-button-candidate.component.ts",
         "docs/design-system/components/button-api-migration.md",
         "docs/documentation-upgrade/18-component-estate-audit.md",
         "docs/documentation-upgrade/20-component-consolidation-proposal.md"

@@ -113,16 +113,22 @@ Every user-visible and source-level "UP" reference was replaced with generic
 
 ## Explicitly NOT done in this pass (flagged for your review)
 
-- [ ] **The `ps-up-button` selector itself was not renamed.** You asked to
-      rename "up-button" references to "button-candidate" — that instruction
-      was applied to prose, doc filenames, test names, and internal constant
-      names, but not to the live Angular component selector (`ps-up-button`),
-      its class name (`PublicUpButtonComponent`), its exported types
-      (`PublicUpButtonIntent`, `PublicUpButtonIcon`, etc.), or its source file
-      name (`public-up-button.component.ts`, `up-button.stories.ts`). That is
-      a public API rename touching every consumer, the manifest, Storybook,
-      and multiple e2e suites — a larger, separate change. Say the word and
-      it can be scoped as its own task.
+- [x] ~~The `ps-up-button` selector itself was not renamed.~~ **Done July 21,
+      2026** in a follow-up pass: the selector (`ps-up-button` →
+      `ps-button-candidate`), class name (`PublicUpButtonComponent` →
+      `PublicButtonCandidateComponent`), exported types
+      (`PublicUpButtonIntent`/`PublicUpButtonAppearance`/`PublicUpButtonIcon` →
+      `PublicButtonCandidateIntent`/`PublicButtonCandidateAppearance`/
+      `PublicButtonCandidateIcon`), source file
+      (`public-up-button.component.ts` → `public-button-candidate.component.ts`),
+      story file (`up-button.stories.ts` → `button-candidate.stories.ts`), the
+      `chromatic-up-button.mjs` script, CSS custom properties
+      (`--ps-up-button-*` → `--ps-button-candidate-*`), and every consumer
+      (manifest registry, candidates-view component and its e2e/unit specs,
+      `button-candidate.storybook.spec.ts`, `component-registry.storybook.spec.ts`,
+      `package.json` script names, README/TESTING.md command references, and
+      the button-candidate docs) were all renamed and verified with a full
+      `pnpm verify:release` run.
 - [ ] **Diagram regeneration.** Five PNGs were deleted rather than fixed
       because no SVG-to-PNG rasterizer was available in this environment.
       Two of the deleted diagrams have clean `.svg` sources already checked

@@ -6,11 +6,11 @@ export {
   type PublicButtonTone,
 } from './public-button.component';
 export {
-  PublicUpButtonComponent,
-  type PublicUpButtonAppearance,
-  type PublicUpButtonIcon,
-  type PublicUpButtonIntent,
-} from './public-up-button.component';
+  PublicButtonCandidateComponent,
+  type PublicButtonCandidateAppearance,
+  type PublicButtonCandidateIcon,
+  type PublicButtonCandidateIntent,
+} from './public-button-candidate.component';
 export { PublicCardComponent } from './public-card.component';
 export { PublicCheckboxComponent, type PublicCheckboxVariant } from './public-checkbox.component';
 export { PublicDialogComponent } from './public-dialog.component';

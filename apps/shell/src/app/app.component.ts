@@ -15,7 +15,7 @@ export class AppComponent {
     { path: '/services', label: 'Citizen Services' },
     { path: '/reporting', label: 'Reporting' },
     { path: '/admin', label: 'Administration' },
-    { path: '/qa', label: 'QA Components' },
+    { path: '/qa', label: 'Component Lab' },
   ];
   readonly documentationUrl =
     window.location.port === '4200'

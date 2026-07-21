@@ -18,7 +18,7 @@ const meta: Meta<ComponentRegistryDashboardComponent> = {
   }),
   args: {
     mode: 'overview',
-    focusId: 'ps-up-button',
+    focusId: 'ps-button-candidate',
   },
   argTypes: {
     mode: {
@@ -30,7 +30,7 @@ const meta: Meta<ComponentRegistryDashboardComponent> = {
       control: 'select',
       options: [
         'ps-button',
-        'ps-up-button',
+        'ps-button-candidate',
         'ps-card',
         'ps-dialog',
         'ps-empty-state',
@@ -91,9 +91,9 @@ export const DocumentationReadiness: Story = {
 };
 
 export const ComponentDetail: Story = {
-  args: { mode: 'detail', focusId: 'ps-up-button' },
+  args: { mode: 'detail', focusId: 'ps-button-candidate' },
 };
 
-export const UpButtonPromotionReadiness: Story = {
-  args: { mode: 'promotion', focusId: 'ps-up-button' },
+export const ButtonCandidatePromotionReadiness: Story = {
+  args: { mode: 'promotion', focusId: 'ps-button-candidate' },
 };

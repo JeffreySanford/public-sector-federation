@@ -113,7 +113,7 @@ pnpm build:tokens
 pnpm lint:wrappers
 pnpm manifest:check
 pnpm test:e2e:list
-pnpm test:storybook:up-button:chromium
+pnpm test:storybook:button-candidate:chromium
 pnpm chromatic
 pnpm report:all
 ```

@@ -2,15 +2,15 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import {
   PublicButtonComponent,
-  PublicUpButtonComponent,
-  type PublicUpButtonAppearance,
-  type PublicUpButtonIcon,
-  type PublicUpButtonIntent,
+  PublicButtonCandidateComponent,
+  type PublicButtonCandidateAppearance,
+  type PublicButtonCandidateIcon,
+  type PublicButtonCandidateIntent,
 } from '@public-sector/ui-patterns';
 
-const intents: PublicUpButtonIntent[] = ['primary', 'secondary', 'destructive'];
-const appearances: PublicUpButtonAppearance[] = ['solid', 'outlined', 'text'];
-const icons: PublicUpButtonIcon[] = [
+const intents: PublicButtonCandidateIntent[] = ['primary', 'secondary', 'destructive'];
+const appearances: PublicButtonCandidateAppearance[] = ['solid', 'outlined', 'text'];
+const icons: PublicButtonCandidateIcon[] = [
   'check',
   'arrow-right',
   'download',
@@ -24,18 +24,18 @@ const icons: PublicUpButtonIcon[] = [
   'lock',
 ];
 
-const meta: Meta<PublicUpButtonComponent> = {
+const meta: Meta<PublicButtonCandidateComponent> = {
   title: 'Design System/Experiments/Button Contract Exploration',
-  component: PublicUpButtonComponent,
-  decorators: [moduleMetadata({ imports: [PublicUpButtonComponent] })],
+  component: PublicButtonCandidateComponent,
+  decorators: [moduleMetadata({ imports: [PublicButtonCandidateComponent] })],
   render: (args) => ({
-    component: PublicUpButtonComponent,
+    component: PublicButtonCandidateComponent,
     props: args,
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
-      <main class="up-button-story" aria-labelledby="upButtonStoryTitle">
-        <h1 id="upButtonStoryTitle">Button contract exploration</h1>
-        <ps-up-button
+      <main class="button-candidate-story" aria-labelledby="buttonCandidateStoryTitle">
+        <h1 id="buttonCandidateStoryTitle">Button contract exploration</h1>
+        <ps-button-candidate
           [label]="label"
           [icon]="icon"
           [intent]="intent"
@@ -48,13 +48,13 @@ const meta: Meta<PublicUpButtonComponent> = {
     `,
     styles: [
       `
-        .up-button-story {
+        .button-candidate-story {
           display: grid;
           min-height: 8rem;
           place-items: center;
         }
 
-        .up-button-story h1 {
+        .button-candidate-story h1 {
           position: absolute;
           width: 1px;
           height: 1px;
@@ -122,7 +122,7 @@ const meta: Meta<PublicUpButtonComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<PublicUpButtonComponent> & { component?: typeof PublicUpButtonComponent };
+type Story = StoryObj<PublicButtonCandidateComponent> & { component?: typeof PublicButtonCandidateComponent };
 
 export const Primary: Story = {};
 
@@ -215,7 +215,7 @@ export const Disabled: Story = {
 };
 
 export const InteractionHarness: Story = {
-  component: PublicUpButtonComponent,
+  component: PublicButtonCandidateComponent,
   parameters: {
     layout: 'centered',
     docs: {
@@ -225,15 +225,15 @@ export const InteractionHarness: Story = {
     },
   },
   render: () => ({
-    component: PublicUpButtonComponent,
+    component: PublicButtonCandidateComponent,
     props: {
       clickCount: 0,
     },
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
-      <main class="up-button-story" aria-labelledby="upButtonInteractionTitle">
-        <h1 id="upButtonInteractionTitle">Button Contract Exploration interaction harness</h1>
-        <ps-up-button
+      <main class="button-candidate-story" aria-labelledby="buttonCandidateInteractionTitle">
+        <h1 id="buttonCandidateInteractionTitle">Button Contract Exploration interaction harness</h1>
+        <ps-button-candidate
           label="Submit application"
           icon="check"
           (activated)="clickCount = clickCount + 1"
@@ -243,14 +243,14 @@ export const InteractionHarness: Story = {
     `,
     styles: [
       `
-        .up-button-story {
+        .button-candidate-story {
           display: grid;
           gap: 1rem;
           min-height: 10rem;
           place-items: center;
         }
 
-        .up-button-story h1 {
+        .button-candidate-story h1 {
           position: absolute;
           width: 1px;
           height: 1px;
@@ -269,7 +269,7 @@ export const InteractionHarness: Story = {
 };
 
 export const LongLabel: Story = {
-  component: PublicUpButtonComponent,
+  component: PublicButtonCandidateComponent,
   args: {
     label: 'Submit housing assistance eligibility review for North Region queue',
     icon: 'check',
@@ -279,12 +279,12 @@ export const LongLabel: Story = {
     layout: 'fullscreen',
   },
   render: (args) => ({
-    component: PublicUpButtonComponent,
+    component: PublicButtonCandidateComponent,
     props: args,
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="button-story-shell">
-        <ps-up-button
+        <ps-button-candidate
           [label]="label"
           [icon]="icon"
           [intent]="intent"
@@ -309,7 +309,7 @@ export const LongLabel: Story = {
 };
 
 export const ToneMatrix: Story = {
-  component: PublicUpButtonComponent,
+  component: PublicButtonCandidateComponent,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -319,16 +319,16 @@ export const ToneMatrix: Story = {
     },
   },
   render: () => ({
-    component: PublicUpButtonComponent,
+    component: PublicButtonCandidateComponent,
     props: { intents },
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="button-story-shell">
         <section class="button-matrix" aria-label="Button candidate intent matrix">
           @for (intent of intents; track intent) {
             <div class="button-cell">
               <span>{{ intent }}</span>
-              <ps-up-button [label]="intent + ' action'" [intent]="intent" icon="check" />
+              <ps-button-candidate [label]="intent + ' action'" [intent]="intent" icon="check" />
             </div>
           }
         </section>
@@ -371,7 +371,7 @@ export const ToneMatrix: Story = {
 };
 
 export const AppearanceMatrix: Story = {
-  component: PublicUpButtonComponent,
+  component: PublicButtonCandidateComponent,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -381,18 +381,18 @@ export const AppearanceMatrix: Story = {
     },
   },
   render: () => ({
-    component: PublicUpButtonComponent,
+    component: PublicButtonCandidateComponent,
     props: { appearances },
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="button-story-shell">
         <section class="appearance-matrix" aria-label="Button candidate appearance matrix">
           @for (appearance of appearances; track appearance) {
             <div class="button-cell">
               <span>{{ appearance }}</span>
-              <ps-up-button label="Primary action" intent="primary" [appearance]="appearance" icon="check" />
-              <ps-up-button label="Secondary action" intent="secondary" [appearance]="appearance" icon="arrow-right" />
-              <ps-up-button label="Destructive action" intent="destructive" [appearance]="appearance" icon="times-circle" />
+              <ps-button-candidate label="Primary action" intent="primary" [appearance]="appearance" icon="check" />
+              <ps-button-candidate label="Secondary action" intent="secondary" [appearance]="appearance" icon="arrow-right" />
+              <ps-button-candidate label="Destructive action" intent="destructive" [appearance]="appearance" icon="times-circle" />
             </div>
           }
         </section>
@@ -434,7 +434,7 @@ export const AppearanceMatrix: Story = {
 };
 
 export const InteractionStateReference: Story = {
-  component: PublicUpButtonComponent,
+  component: PublicButtonCandidateComponent,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -444,26 +444,26 @@ export const InteractionStateReference: Story = {
     },
   },
   render: () => ({
-    component: PublicUpButtonComponent,
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    component: PublicButtonCandidateComponent,
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="button-story-shell">
         <section class="state-matrix" aria-label="Button candidate interaction state reference">
           <div class="button-cell">
             <span>Default</span>
-            <ps-up-button label="Default" icon="check" />
+            <ps-button-candidate label="Default" icon="check" />
           </div>
           <div class="button-cell">
             <span>Disabled</span>
-            <ps-up-button label="Disabled" icon="lock" disabled />
+            <ps-button-candidate label="Disabled" icon="lock" disabled />
           </div>
           <div class="button-cell">
             <span>Loading</span>
-            <ps-up-button label="Loading" icon="send" loading />
+            <ps-button-candidate label="Loading" icon="send" loading />
           </div>
           <div class="button-cell">
             <span>Focus target</span>
-            <ps-up-button label="Focus target" icon="arrow-right" />
+            <ps-button-candidate label="Focus target" icon="arrow-right" />
           </div>
         </section>
       </main>
@@ -504,7 +504,7 @@ export const InteractionStateReference: Story = {
 };
 
 export const SizeMatrix: Story = {
-  component: PublicUpButtonComponent,
+  component: PublicButtonCandidateComponent,
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -514,25 +514,25 @@ export const SizeMatrix: Story = {
     },
   },
   render: () => ({
-    component: PublicUpButtonComponent,
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    component: PublicButtonCandidateComponent,
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="button-story-shell">
         <section class="size-matrix" aria-label="Button candidate size token matrix">
           <div class="button-cell size-compact">
             <span>Compact tokens</span>
-            <ps-up-button label="Compact" icon="check" />
-            <ps-up-button label="Compact outline" icon="download" appearance="outlined" />
+            <ps-button-candidate label="Compact" icon="check" />
+            <ps-button-candidate label="Compact outline" icon="download" appearance="outlined" />
           </div>
           <div class="button-cell">
             <span>Default tokens</span>
-            <ps-up-button label="Default" icon="check" />
-            <ps-up-button label="Default outline" icon="download" appearance="outlined" />
+            <ps-button-candidate label="Default" icon="check" />
+            <ps-button-candidate label="Default outline" icon="download" appearance="outlined" />
           </div>
           <div class="button-cell size-spacious">
             <span>Spacious tokens</span>
-            <ps-up-button label="Spacious" icon="check" />
-            <ps-up-button label="Spacious outline" icon="download" appearance="outlined" />
+            <ps-button-candidate label="Spacious" icon="check" />
+            <ps-button-candidate label="Spacious outline" icon="download" appearance="outlined" />
           </div>
         </section>
       </main>
@@ -569,19 +569,19 @@ export const SizeMatrix: Story = {
         }
 
         .size-compact {
-          --ps-up-button-min-height: 2.25rem;
-          --ps-up-button-padding-block: 0.45rem;
-          --ps-up-button-padding-inline: 0.75rem;
-          --ps-up-button-font-size: 0.875rem;
-          --ps-up-button-icon-size: 0.9rem;
+          --ps-button-candidate-min-height: 2.25rem;
+          --ps-button-candidate-padding-block: 0.45rem;
+          --ps-button-candidate-padding-inline: 0.75rem;
+          --ps-button-candidate-font-size: 0.875rem;
+          --ps-button-candidate-icon-size: 0.9rem;
         }
 
         .size-spacious {
-          --ps-up-button-min-height: 3rem;
-          --ps-up-button-padding-block: 0.8rem;
-          --ps-up-button-padding-inline: 1.1rem;
-          --ps-up-button-font-size: 1rem;
-          --ps-up-button-icon-size: 1.1rem;
+          --ps-button-candidate-min-height: 3rem;
+          --ps-button-candidate-padding-block: 0.8rem;
+          --ps-button-candidate-padding-inline: 1.1rem;
+          --ps-button-candidate-font-size: 1rem;
+          --ps-button-candidate-icon-size: 1.1rem;
         }
       `,
     ],
@@ -589,16 +589,16 @@ export const SizeMatrix: Story = {
 };
 
 export const FocusReference: Story = {
-  component: PublicUpButtonComponent,
+  component: PublicButtonCandidateComponent,
   parameters: {
     layout: 'centered',
   },
   render: () => ({
-    component: PublicUpButtonComponent,
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    component: PublicButtonCandidateComponent,
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="focus-reference" aria-label="Button candidate focus reference">
-        <ps-up-button label="Focus reference" icon="arrow-right" />
+        <ps-button-candidate label="Focus reference" icon="arrow-right" />
       </main>
     `,
     styles: [
@@ -616,26 +616,26 @@ export const FocusReference: Story = {
 };
 
 export const LightDarkModeMatrix: Story = {
-  component: PublicUpButtonComponent,
+  component: PublicButtonCandidateComponent,
   parameters: {
     layout: 'fullscreen',
   },
   render: () => ({
-    component: PublicUpButtonComponent,
+    component: PublicButtonCandidateComponent,
     props: { intents },
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="mode-matrix" aria-label="Button candidate light and dark mode matrix">
         <section class="mode-panel light-panel">
           <span>Light</span>
           @for (intent of intents; track intent) {
-            <ps-up-button [label]="intent" [intent]="intent" icon="check" />
+            <ps-button-candidate [label]="intent" [intent]="intent" icon="check" />
           }
         </section>
         <section class="mode-panel dark-panel">
           <span>Dark</span>
           @for (intent of intents; track intent) {
-            <ps-up-button [label]="intent" [intent]="intent" icon="check" />
+            <ps-button-candidate [label]="intent" [intent]="intent" icon="check" />
           }
         </section>
       </main>
@@ -700,32 +700,32 @@ export const LightDarkModeMatrix: Story = {
 };
 
 export const ThemeVariantMatrix: Story = {
-  component: PublicUpButtonComponent,
+  component: PublicButtonCandidateComponent,
   parameters: {
     layout: 'fullscreen',
   },
   render: () => ({
-    component: PublicUpButtonComponent,
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    component: PublicButtonCandidateComponent,
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="variant-matrix" aria-label="Button candidate theme variant matrix">
         <section class="variant-panel neutral">
           <span>Neutral</span>
-          <ps-up-button label="Primary" icon="check" />
-          <ps-up-button label="Outlined" icon="download" appearance="outlined" />
-          <ps-up-button label="Text" icon="info-circle" appearance="text" />
+          <ps-button-candidate label="Primary" icon="check" />
+          <ps-button-candidate label="Outlined" icon="download" appearance="outlined" />
+          <ps-button-candidate label="Text" icon="info-circle" appearance="text" />
         </section>
         <section class="variant-panel vibrant">
           <span>Vibrant</span>
-          <ps-up-button label="Primary" icon="check" />
-          <ps-up-button label="Outlined" icon="download" appearance="outlined" />
-          <ps-up-button label="Text" icon="info-circle" appearance="text" />
+          <ps-button-candidate label="Primary" icon="check" />
+          <ps-button-candidate label="Outlined" icon="download" appearance="outlined" />
+          <ps-button-candidate label="Text" icon="info-circle" appearance="text" />
         </section>
         <section class="variant-panel pastel">
           <span>Pastel</span>
-          <ps-up-button label="Primary" icon="check" />
-          <ps-up-button label="Outlined" icon="download" appearance="outlined" />
-          <ps-up-button label="Text" icon="info-circle" appearance="text" />
+          <ps-button-candidate label="Primary" icon="check" />
+          <ps-button-candidate label="Outlined" icon="download" appearance="outlined" />
+          <ps-button-candidate label="Text" icon="info-circle" appearance="text" />
         </section>
       </main>
     `,
@@ -803,19 +803,19 @@ export const ThemeVariantMatrix: Story = {
 };
 
 export const CurrentVsCandidate: Story = {
-  component: PublicUpButtonComponent,
+  component: PublicButtonCandidateComponent,
   parameters: {
     layout: 'fullscreen',
     docs: {
       description: {
         story:
-          'Side-by-side comparison of the stable public-sector ps-button wrapper and the experimental ps-up-button candidate. Use this story to review visual deltas before promotion.',
+          'Side-by-side comparison of the stable public-sector ps-button wrapper and the experimental ps-button-candidate candidate. Use this story to review visual deltas before promotion.',
       },
     },
   },
   render: () => ({
-    component: PublicUpButtonComponent,
-    moduleMetadata: { imports: [PublicButtonComponent, PublicUpButtonComponent] },
+    component: PublicButtonCandidateComponent,
+    moduleMetadata: { imports: [PublicButtonComponent, PublicButtonCandidateComponent] },
     template: `
       <main class="comparison-shell" aria-labelledby="buttonComparisonTitle">
         <header class="comparison-header">
@@ -830,34 +830,34 @@ export const CurrentVsCandidate: Story = {
 
           <div class="scenario">Primary solid</div>
           <div class="sample"><ps-button label="Primary action" icon="pi pi-check" /></div>
-          <div class="sample"><ps-up-button label="Primary action" icon="check" /></div>
+          <div class="sample"><ps-button-candidate label="Primary action" icon="check" /></div>
 
           <div class="scenario">Secondary solid</div>
           <div class="sample"><ps-button label="Secondary action" icon="pi pi-arrow-right" tone="secondary" /></div>
-          <div class="sample"><ps-up-button label="Secondary action" icon="arrow-right" intent="secondary" /></div>
+          <div class="sample"><ps-button-candidate label="Secondary action" icon="arrow-right" intent="secondary" /></div>
 
           <div class="scenario">Outlined</div>
           <div class="sample"><ps-button label="Outlined action" icon="pi pi-download" [outlined]="true" /></div>
-          <div class="sample"><ps-up-button label="Outlined action" icon="download" appearance="outlined" /></div>
+          <div class="sample"><ps-button-candidate label="Outlined action" icon="download" appearance="outlined" /></div>
 
           <div class="scenario">Text</div>
           <div class="sample"><ps-button label="Text action" icon="pi pi-info-circle" [text]="true" /></div>
-          <div class="sample"><ps-up-button label="Text action" icon="info-circle" appearance="text" /></div>
+          <div class="sample"><ps-button-candidate label="Text action" icon="info-circle" appearance="text" /></div>
 
           <div class="scenario">Disabled</div>
           <div class="sample"><ps-button label="Unavailable action" icon="pi pi-lock" [disabled]="true" /></div>
-          <div class="sample"><ps-up-button label="Unavailable action" icon="lock" [disabled]="true" /></div>
+          <div class="sample"><ps-button-candidate label="Unavailable action" icon="lock" [disabled]="true" /></div>
 
           <div class="scenario">Loading</div>
           <div class="sample"><ps-button label="Submitting" icon="pi pi-send" [loading]="true" /></div>
-          <div class="sample"><ps-up-button label="Submitting" icon="send" [loading]="true" /></div>
+          <div class="sample"><ps-button-candidate label="Submitting" icon="send" [loading]="true" /></div>
 
           <div class="scenario">Long label</div>
           <div class="sample">
             <ps-button label="Submit housing assistance eligibility review for North Region queue" icon="pi pi-check" [outlined]="true" />
           </div>
           <div class="sample">
-            <ps-up-button label="Submit housing assistance eligibility review for North Region queue" icon="check" appearance="outlined" />
+            <ps-button-candidate label="Submit housing assistance eligibility review for North Region queue" icon="check" appearance="outlined" />
           </div>
         </section>
       </main>

@@ -30,10 +30,10 @@ and [the table/input/checkbox backlog](../backlog/table-input-checkbox-wrappers.
 - Canonical evidence: `apps/qa-remote/src/stories/button.stories.ts`.
 - Guidance: `apps/starlight/src/content/docs/components/button/index.mdx`.
 
-- `PublicUpButtonComponent` / `ps-up-button` is a candidate action API and is not
+- `PublicButtonCandidateComponent` / `ps-button-candidate` is a candidate action API and is not
   yet the stable replacement for `ps-button`.
-- Source: `packages/ui-patterns/src/public-up-button.component.ts`.
-- Evidence: `apps/qa-remote/src/stories/up-button.stories.ts`.
+- Source: `packages/ui-patterns/src/public-button-candidate.component.ts`.
+- Evidence: `apps/qa-remote/src/stories/button-candidate.stories.ts`.
 
 ### Content Surfaces
 

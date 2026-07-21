@@ -8,7 +8,7 @@
       <h1 id="candidatesViewTitle">Current Button vs Button candidate</h1>
       <p>
         This view isolates the first experimental component. It compares the stable
-        <code>ps-button</code> wrapper with <code>ps-up-button</code>, connects the
+        <code>ps-button</code> wrapper with <code>ps-button-candidate</code>, connects the
         Storybook evidence, and shows what still blocks promotion. It does not migrate
         the rest of the public-sector design system.
       </p>
@@ -33,7 +33,7 @@
     </div>
     <ul>
       <li>Stable wrapper: <code>ps-button</code></li>
-      <li>Experimental wrapper: <code>ps-up-button</code></li>
+      <li>Experimental wrapper: <code>ps-button-candidate</code></li>
       <li>Promotion gate: verified Button design-source tokens and completed evidence</li>
     </ul>
   </section>
@@ -130,12 +130,12 @@
         <div class="implementation-card__header">
           <div>
             <span>Experimental / Candidate</span>
-            <h3><code>ps-up-button</code></h3>
+            <h3><code>ps-button-candidate</code></h3>
           </div>
           <ps-tag value="Candidate" tone="warn" />
         </div>
         <div class="implementation-card__stage">
-          <ps-up-button
+          <ps-button-candidate
             [label]="label() || 'Button'"
             icon="check"
             [intent]="intent()"
@@ -252,7 +252,7 @@
 
           <div class="comparison-row__sample">
             <span class="comparison-row__mobile-label">Candidate</span>
-            <ps-up-button
+            <ps-button-candidate
               [label]="scenario.buttonLabel"
               [icon]="scenario.icon"
               [intent]="scenario.intent"

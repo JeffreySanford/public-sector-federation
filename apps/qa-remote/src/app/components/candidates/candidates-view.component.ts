@@ -4,10 +4,10 @@ import { DomSanitizer, type SafeResourceUrl } from '@angular/platform-browser';
 import {
   PublicButtonComponent,
   PublicTagComponent,
-  PublicUpButtonComponent,
-  type PublicUpButtonAppearance,
-  type PublicUpButtonIcon,
-  type PublicUpButtonIntent,
+  PublicButtonCandidateComponent,
+  type PublicButtonCandidateAppearance,
+  type PublicButtonCandidateIcon,
+  type PublicButtonCandidateIntent,
 } from '@public-sector/ui-patterns';
 import {
   PublicSectorThemeService,
@@ -27,9 +27,9 @@ interface ComparisonScenario {
   label: string;
   description: string;
   buttonLabel: string;
-  icon?: PublicUpButtonIcon;
-  intent: PublicUpButtonIntent;
-  appearance: PublicUpButtonAppearance;
+  icon?: PublicButtonCandidateIcon;
+  intent: PublicButtonCandidateIntent;
+  appearance: PublicButtonCandidateAppearance;
   disabled?: boolean;
   loading?: boolean;
 }
@@ -53,7 +53,7 @@ interface ThemeMatrixRow {
     CommonModule,
     PublicButtonComponent,
     PublicTagComponent,
-    PublicUpButtonComponent,
+    PublicButtonCandidateComponent,
   ],
   templateUrl: './candidates-view.component.html',
   styleUrl: './candidates-view.component.css',
@@ -63,17 +63,17 @@ export class CandidatesViewComponent {
   readonly theme = inject(PublicSectorThemeService);
 
   readonly label = signal('Review application');
-  readonly intent = signal<PublicUpButtonIntent>('primary');
-  readonly appearance = signal<PublicUpButtonAppearance>('solid');
+  readonly intent = signal<PublicButtonCandidateIntent>('primary');
+  readonly appearance = signal<PublicButtonCandidateAppearance>('solid');
   readonly disabled = signal(false);
   readonly loading = signal(false);
   readonly stableActivations = signal(0);
   readonly candidateActivations = signal(0);
   readonly showStorybookPreview = signal(false);
 
-  readonly intents: readonly PublicUpButtonIntent[] = ['primary', 'secondary', 'destructive'];
+  readonly intents: readonly PublicButtonCandidateIntent[] = ['primary', 'secondary', 'destructive'];
 
-  readonly appearances: readonly PublicUpButtonAppearance[] = [
+  readonly appearances: readonly PublicButtonCandidateAppearance[] = [
     'solid',
     'outlined',
     'text',
@@ -173,7 +173,7 @@ export class CandidatesViewComponent {
   readonly lifecycleRows: readonly LifecycleRow[] = [
     {
       evidence: 'Candidate wrapper',
-      currentState: '`ps-up-button` exists in `@public-sector/ui-patterns`.',
+      currentState: '`ps-button-candidate` exists in `@public-sector/ui-patterns`.',
       status: 'Complete',
     },
     {
@@ -189,13 +189,13 @@ export class CandidatesViewComponent {
       status: 'Complete',
     },
     {
-      evidence: 'QA direct remote',
+      evidence: 'Component Lab direct remote',
       currentState:
         'Candidates view provides side-by-side runtime validation on port 4204.',
       status: 'In review',
     },
     {
-      evidence: 'Shell-composed QA',
+      evidence: 'Shell-composed Component Lab',
       currentState:
         'The same Candidates view must pass when mounted through the `/qa` shell route.',
       status: 'In review',
@@ -231,12 +231,12 @@ export class CandidatesViewComponent {
 
   readonly definitionOfDone = [
     'Current ps-button remains unchanged and usable.',
-    'Candidate ps-up-button renders beside the stable Button with identical comparison inputs.',
+    'Candidate ps-button-candidate renders beside the stable Button with identical comparison inputs.',
     'Neutral, vibrant, and pastel variants work in light and dark modes.',
     'Storybook comparison and source links remain available when the iframe is unavailable.',
     'Figma publication status is visible without becoming a runtime dependency.',
     'Keyboard, focus, disabled, loading, long-label, and responsive behavior are reviewed.',
-    'Direct QA remote and shell-composed Playwright checks pass.',
+    'Direct Component Lab and shell-composed Playwright checks pass.',
     'Promotion remains blocked until verified Button design source token values replace sample assumptions.',
   ] as const;
 
@@ -245,14 +245,14 @@ export class CandidatesViewComponent {
   }
 
   setIntent(value: string): void {
-    if (this.intents.includes(value as PublicUpButtonIntent)) {
-      this.intent.set(value as PublicUpButtonIntent);
+    if (this.intents.includes(value as PublicButtonCandidateIntent)) {
+      this.intent.set(value as PublicButtonCandidateIntent);
     }
   }
 
   setAppearance(value: string): void {
-    if (this.appearances.includes(value as PublicUpButtonAppearance)) {
-      this.appearance.set(value as PublicUpButtonAppearance);
+    if (this.appearances.includes(value as PublicButtonCandidateAppearance)) {
+      this.appearance.set(value as PublicButtonCandidateAppearance);
     }
   }
 

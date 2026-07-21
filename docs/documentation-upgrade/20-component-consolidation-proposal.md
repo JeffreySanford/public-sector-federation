@@ -24,7 +24,7 @@ This proposal is grounded in [18 — Component estate audit](./18-component-esta
 ### Button
 
 **Approved decision:** Keep `ps-button` as the canonical selector and merge the stronger
-`ps-up-button` contract into it. Do not maintain two permanent Button components.
+`ps-button-candidate` contract into it. Do not maintain two permanent Button components.
 
 Preferred contract:
 

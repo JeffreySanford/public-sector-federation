@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import {
-  PublicUpButtonComponent,
+  PublicButtonCandidateComponent,
   componentManifest,
-  type PublicUpButtonAppearance,
-  type PublicUpButtonIntent,
+  type PublicButtonCandidateAppearance,
+  type PublicButtonCandidateIntent,
 } from '@public-sector/ui-patterns';
 
-const candidateManifest = componentManifest.entries.find((entry) => entry.identity.id === 'ps-up-button');
-if (!candidateManifest) throw new Error('ps-up-button is missing from the component manifest.');
+const candidateManifest = componentManifest.entries.find((entry) => entry.identity.id === 'ps-button-candidate');
+if (!candidateManifest) throw new Error('ps-button-candidate is missing from the component manifest.');
 const variantValues = (name: string): string[] =>
   candidateManifest.variants.properties.find((variant) => variant.name === name)?.values ?? [];
-const intents = variantValues('intent') as PublicUpButtonIntent[];
-const appearances = variantValues('appearance') as PublicUpButtonAppearance[];
+const intents = variantValues('intent') as PublicButtonCandidateIntent[];
+const appearances = variantValues('appearance') as PublicButtonCandidateAppearance[];
 
 const pageStyles = `
   .contract-page {
@@ -31,7 +31,7 @@ const pageStyles = `
   article, .live-proof { display: grid; gap: 0.8rem; align-content: start; padding: 1.25rem; border: 1px solid var(--p-content-border-color); border-radius: var(--p-border-radius-md); }
   article h2 { margin: 0; }
   ul { margin: 0; padding-left: 1.2rem; }
-  .matrix article ps-up-button { margin-right: 0.5rem; margin-bottom: 0.5rem; }
+  .matrix article ps-button-candidate { margin-right: 0.5rem; margin-bottom: 0.5rem; }
   .live-proof { grid-template-columns: max-content 1fr; align-items: center; }
   output { font-weight: 800; }
   table { width: 100%; border-collapse: collapse; }
@@ -41,8 +41,8 @@ const pageStyles = `
 
 const meta: Meta = {
   title: 'Design System/Architecture/Opinionated Wrapper Contract',
-  component: PublicUpButtonComponent,
-  decorators: [moduleMetadata({ imports: [PublicUpButtonComponent] })],
+  component: PublicButtonCandidateComponent,
+  decorators: [moduleMetadata({ imports: [PublicButtonCandidateComponent] })],
   parameters: {
     layout: 'fullscreen',
     a11y: { test: 'error' },
@@ -61,7 +61,7 @@ type Story = StoryObj;
 export const PreferredCandidateApi: Story = {
   render: () => ({
     props: { activations: 0 },
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="contract-page" aria-labelledby="preferredApiTitle">
         <header>
@@ -97,7 +97,7 @@ export const PreferredCandidateApi: Story = {
         </section>
 
         <section class="live-proof" aria-label="Preferred API interaction proof">
-          <ps-up-button
+          <ps-button-candidate
             label="Delete draft"
             icon="times-circle"
             intent="destructive"
@@ -115,7 +115,7 @@ export const PreferredCandidateApi: Story = {
 export const SupportedIntentMatrix: Story = {
   render: () => ({
     props: { intents, appearances },
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="contract-page" aria-labelledby="intentMatrixTitle">
         <header>
@@ -128,7 +128,7 @@ export const SupportedIntentMatrix: Story = {
             <article>
               <h2>{{ intent }}</h2>
               @for (appearance of appearances; track appearance) {
-                <ps-up-button
+                <ps-button-candidate
                   [label]="intent + ' ' + appearance"
                   [intent]="intent"
                   [appearance]="appearance"
@@ -146,7 +146,7 @@ export const SupportedIntentMatrix: Story = {
 
 export const ProviderTranslation: Story = {
   render: () => ({
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="contract-page" aria-labelledby="translationTitle">
         <header>
@@ -175,7 +175,7 @@ export const ProviderTranslation: Story = {
 export const CandidateContractBoundary: Story = {
   render: () => ({
     props: { preferred: 0 },
-    moduleMetadata: { imports: [PublicUpButtonComponent] },
+    moduleMetadata: { imports: [PublicButtonCandidateComponent] },
     template: `
       <main class="contract-page" aria-labelledby="contractBoundaryTitle">
         <header>
@@ -186,7 +186,7 @@ export const CandidateContractBoundary: Story = {
         <section class="contract-grid">
           <article>
             <h2>Supported contract</h2>
-            <ps-up-button label="Remove item" intent="destructive" (activated)="preferred = preferred + 1" />
+            <ps-button-candidate label="Remove item" intent="destructive" (activated)="preferred = preferred + 1" />
             <output>Activations: {{ preferred }}</output>
           </article>
           <article><h2>Not public</h2><p><code>tone</code>, <code>buttonClick</code>, and raw <code>pi ...</code> classes are intentionally absent.</p></article>
