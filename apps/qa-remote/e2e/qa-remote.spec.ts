@@ -1,6 +1,33 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
+interface ComponentManifestEntry {
+  identity: {
+    id: string;
+  };
+  implementation: {
+    providerName: string;
+  };
+  audit: {
+    disposition: string;
+    duplicationCluster: string;
+    tokenBoundary: string;
+  };
+}
+
+const componentManifest = JSON.parse(
+  readFileSync(resolve(process.cwd(), 'packages/ui-patterns/generated/component-manifest.json'), 'utf8'),
+) as { entries: ComponentManifestEntry[] };
+
+function getManifestEntry(id: string): ComponentManifestEntry {
+  const entry = componentManifest.entries.find((candidate) => candidate.identity.id === id);
+  if (!entry) throw new Error(`Component manifest entry ${id} was not found.`);
+  return entry;
+}
+
+const selectManifestEntry = getManifestEntry('ps-select');
 const shellQaUrl = 'http://localhost:4200/qa';
 const directQaUrl = 'http://localhost:4204';
 
@@ -67,10 +94,10 @@ test.describe('Forensic design-system workbench', () => {
     await expect(detail.getByRole('heading', { name: 'Select', exact: true })).toBeVisible();
     await expect(detail.getByRole('heading', { name: 'Evidence coverage', exact: true })).toBeVisible();
     await expect(detail.getByRole('heading', { name: 'Consolidation decision', exact: true })).toBeVisible();
-    await expect(detail).toContainText('retain');
-    await expect(detail).toContainText('unique:ps-select');
-    await expect(detail).toContainText('provider-managed');
-    await expect(detail).toContainText('PrimeNG');
+    await expect(detail).toContainText(selectManifestEntry.audit.disposition);
+    await expect(detail).toContainText(selectManifestEntry.audit.duplicationCluster);
+    await expect(detail).toContainText(selectManifestEntry.audit.tokenBoundary);
+    await expect(detail).toContainText(selectManifestEntry.implementation.providerName);
   });
 
   test('combines lifecycle and provider filters without fabricating results', async ({ page }) => {
