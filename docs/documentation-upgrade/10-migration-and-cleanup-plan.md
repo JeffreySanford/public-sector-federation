@@ -269,15 +269,19 @@ and automated visual and interaction validation.
 
 ## Documentation migration
 
+_Decided: engineering reference docs stay engineering reference docs. Starlight is a clean,
+designer-level documentation area, not a mirror of `docs/design-system/`._
+
 ```mermaid
 flowchart LR
   Old[Existing Markdown sources] --> Classify{Classify content}
-  Classify --> Guidance[User guidance]
-  Classify --> Architecture[Architecture]
+  Classify --> Guidance[Designer-level guidance]
+  Classify --> Engineering[Engineering reference]
   Classify --> Evidence[Quality evidence]
   Classify --> History[Historical process]
   Guidance --> Starlight[Starlight public docs]
-  Architecture --> Starlight
+  Engineering --> GitHub[Stays in docs/design-system, GitHub-only]
+  Starlight -.link out to specific file.-> GitHub
   Evidence --> Generated[Manifest-driven views]
   History --> Archive[Archive or exploration log]
 ```
@@ -331,11 +335,13 @@ Low-risk changes:
 
 ### Phase 2: Documentation relocation
 
-- [ ] move user guidance into Starlight so it is discoverable from the public docs site — Starlight already
-      has its own curated architecture/foundations/patterns/quality/develop pages rather than mirroring
-      `docs/design-system/`; whether the ~50 engineering reference docs under `docs/design-system/`
-      (architecture, governance, validation) should be summarized into Starlight or remain
-      GitHub-only engineering reference material is a scope decision that has not been made;
+- [x] move user guidance into Starlight so it is discoverable from the public docs site — scope decided:
+      the ~50 engineering reference docs under `docs/design-system/` (architecture, governance,
+      validation) stay GitHub-only reference material and are **not** migrated into Starlight.
+      Starlight is a clean, designer-level documentation area, not an engineering-docs mirror.
+      Reporting from Storybook (canonical live stories, `StoryFrame` embeds) is the model to keep.
+      Where a Starlight page needs to point at engineering detail, link out to the specific
+      GitHub markdown file rather than duplicating its content;
 - [x] move system-health and evidence data into generated views that are maintained from the manifest or release pipeline —
       first concrete step done: added `ComponentStatusTable.astro`, which imports
       `packages/ui-patterns/generated/component-manifest.json` directly at Astro build time and
