@@ -1,0 +1,90 @@
+---
+import manifest from '../../../../packages/ui-patterns/generated/component-manifest.json';
+
+interface ManifestEntry {
+  identity: { id: string; name: string; selector: string | null; kind: string };
+  lifecycle: { status: string };
+  implementation: { provider: string };
+  evidence: { storybook: { status: string }; tests: { status: string } };
+  accessibility: { screenReaderAudit: string };
+  figma: { status: string };
+}
+
+const entries = (manifest.entries as unknown as ManifestEntry[])
+  .slice()
+  .sort((a, b) => a.identity.name.localeCompare(b.identity.name));
+---
+
+<div class="component-status-table">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Component</th>
+        <th scope="col">Lifecycle</th>
+        <th scope="col">Provider</th>
+        <th scope="col">Storybook</th>
+        <th scope="col">Tests</th>
+        <th scope="col">Manual a11y review</th>
+        <th scope="col">Figma</th>
+      </tr>
+    </thead>
+    <tbody>
+      {entries.map((entry) => (
+        <tr>
+          <th scope="row">
+            {entry.identity.name}
+            {entry.identity.selector && <code>{entry.identity.selector}</code>}
+          </th>
+          <td>{entry.lifecycle.status}</td>
+          <td>{entry.implementation.provider}</td>
+          <td>{entry.evidence.storybook.status}</td>
+          <td>{entry.evidence.tests.status}</td>
+          <td>{entry.accessibility.screenReaderAudit}</td>
+          <td>{entry.figma.status}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="component-status-table__note">
+    Generated at build time from <code>packages/ui-patterns/generated/component-manifest.json</code> —
+    every exported entry, not only the flagship pages above. This table cannot drift from the
+    manifest because it is read directly from it, not hand-copied.
+  </p>
+</div>
+
+<style>
+  .component-status-table {
+    margin-block: 1.5rem;
+  }
+
+  .component-status-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--sl-text-sm);
+  }
+
+  .component-status-table th,
+  .component-status-table td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--sl-color-gray-5);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .component-status-table thead th {
+    background: var(--sl-color-gray-6);
+  }
+
+  .component-status-table th[scope='row'] code {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-2);
+  }
+
+  .component-status-table__note {
+    margin-top: 0.75rem;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+</style>

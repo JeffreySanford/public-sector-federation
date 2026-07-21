@@ -3,6 +3,8 @@ title: Components
 description: Public component contracts, usage guidance, lifecycle status, and live implementation evidence.
 ---
 
+import ComponentStatusTable from '../../../components/ComponentStatusTable.astro';
+
 Component documentation should help someone choose and use a component before presenting implementation evidence.
 
 ## Current catalog status
@@ -60,6 +62,16 @@ The quality gate cross-checks these relationships against `packages/ui-patterns/
 ## Second catalog wave
 
 Checkbox, Input, and Table reuse the flagship page model for three native (non-PrimeNG) components. They prove the model generalizes beyond PrimeNG-backed and composite components: a shared field-relationship contract (label, help, required, invalid) across Checkbox and Input, and a projection-based content contract for Table that deliberately does not own row rendering, sorting, or pagination.
+
+## Full component status
+
+The narrative above covers the six components with a complete flagship-model documentation page.
+The full public export surface is larger — every entry below is read directly from the generated
+manifest at build time, so this table always matches
+[`packages/ui-patterns/generated/component-manifest.json`](https://github.com/JeffreySanford/public-sector-federation/blob/master/packages/ui-patterns/generated/component-manifest.json)
+without anyone needing to hand-update it here.
+
+<ComponentStatusTable />
 
 ## Page contract
 

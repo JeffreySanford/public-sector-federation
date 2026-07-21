@@ -11,7 +11,7 @@
     },
     {
       "route": "/docs/components/",
-      "source": "apps/starlight/src/content/docs/components/index.md"
+      "source": "apps/starlight/src/content/docs/components/index.mdx"
     },
     {
       "route": "/docs/components/button/",

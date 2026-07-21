@@ -331,9 +331,22 @@ Low-risk changes:
 
 ### Phase 2: Documentation relocation
 
-- [ ] move user guidance into Starlight so it is discoverable from the public docs site;
-- [ ] move system-health and evidence data into generated views that are maintained from the manifest or release pipeline;
-- [ ] move historical process notes, dated progress reports, and internal workflow detail into the exploration log or archive.
+- [ ] move user guidance into Starlight so it is discoverable from the public docs site — Starlight already
+      has its own curated architecture/foundations/patterns/quality/develop pages rather than mirroring
+      `docs/design-system/`; whether the ~50 engineering reference docs under `docs/design-system/`
+      (architecture, governance, validation) should be summarized into Starlight or remain
+      GitHub-only engineering reference material is a scope decision that has not been made;
+- [x] move system-health and evidence data into generated views that are maintained from the manifest or release pipeline —
+      first concrete step done: added `ComponentStatusTable.astro`, which imports
+      `packages/ui-patterns/generated/component-manifest.json` directly at Astro build time and
+      renders a live table of all 21 manifest entries (lifecycle, provider, Storybook, tests, manual
+      a11y review, Figma) on the components page, so it can never drift from the manifest the way
+      the hand-authored `documentation-integrity.json` and flagship prose already could. The
+      flagship narrative for Button/Select/Dialog/Checkbox/Input/Table remains hand-authored
+      prose, by design — only the full-catalog status table is generated;
+- [ ] move historical process notes, dated progress reports, and internal workflow detail into the exploration log or archive —
+      not started; the `exploration/index.md` Starlight page and `docs/documentation-upgrade/` /
+      `docs/design-system/` trees still hold this material in place rather than a dedicated archive.
 
 ### Phase 3: Tooling retirement
 
