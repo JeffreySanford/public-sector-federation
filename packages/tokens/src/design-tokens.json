@@ -1140,7 +1140,7 @@
               "height": {
                 "$type": "dimension",
                 "$value": "2.625rem",
-                "$description": "UP Button minimum interactive height.",
+                "$description": "Button candidate minimum interactive height.",
                 "$extensions": {
                   "public-sector": {
                     "cssVariable": "--ps-up-button-min-height",
@@ -1160,7 +1160,7 @@
               "block": {
                 "$type": "dimension",
                 "$value": "0.65rem",
-                "$description": "UP Button vertical padding.",
+                "$description": "Button candidate vertical padding.",
                 "$extensions": {
                   "public-sector": {
                     "cssVariable": "--ps-up-button-padding-block",
@@ -1178,7 +1178,7 @@
               "inline": {
                 "$type": "dimension",
                 "$value": "0.9rem",
-                "$description": "UP Button horizontal padding.",
+                "$description": "Button candidate horizontal padding.",
                 "$extensions": {
                   "public-sector": {
                     "cssVariable": "--ps-up-button-padding-inline",
@@ -1198,7 +1198,7 @@
               "gap": {
                 "$type": "dimension",
                 "$value": "0.5rem",
-                "$description": "UP Button icon, spinner, and label gap.",
+                "$description": "Button candidate icon, spinner, and label gap.",
                 "$extensions": {
                   "public-sector": {
                     "cssVariable": "--ps-up-button-content-gap",
@@ -1218,7 +1218,7 @@
               "size": {
                 "$type": "dimension",
                 "$value": "0.95rem",
-                "$description": "UP Button label font size.",
+                "$description": "Button candidate label font size.",
                 "$extensions": {
                   "public-sector": {
                     "cssVariable": "--ps-up-button-font-size",
@@ -1238,7 +1238,7 @@
               "size": {
                 "$type": "dimension",
                 "$value": "1rem",
-                "$description": "UP Button icon size.",
+                "$description": "Button candidate icon size.",
                 "$extensions": {
                   "public-sector": {
                     "cssVariable": "--ps-up-button-icon-size",

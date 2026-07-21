@@ -9,14 +9,14 @@ export interface CandidateLink {
   external?: boolean;
 }
 
-export const UP_BUTTON_STORY_ID =
+export const BUTTON_CANDIDATE_STORY_ID =
   'design-system-experiments-button-contract-exploration--current-vs-candidate';
 
-export const UP_BUTTON_STORYBOOK_URL =
-  `http://localhost:4400/?path=/story/${UP_BUTTON_STORY_ID}`;
+export const BUTTON_CANDIDATE_STORYBOOK_URL =
+  `http://localhost:4400/?path=/story/${BUTTON_CANDIDATE_STORY_ID}`;
 
-export const UP_BUTTON_STORYBOOK_EMBED_URL =
-  `http://localhost:4400/iframe.html?id=${UP_BUTTON_STORY_ID}&viewMode=story&shortcuts=false&singleStory=true`;
+export const BUTTON_CANDIDATE_STORYBOOK_EMBED_URL =
+  `http://localhost:4400/iframe.html?id=${BUTTON_CANDIDATE_STORY_ID}&viewMode=story&shortcuts=false&singleStory=true`;
 
 const githubRoot =
   'https://github.com/JeffreySanford/public-sector-federation/blob/master';
@@ -28,14 +28,14 @@ export const candidateLinks: readonly CandidateLink[] = [
     description:
       'Runs locally on port 4400 and opens the Current vs Candidate story with the Storybook toolbar and addons.',
     status: 'Local',
-    href: UP_BUTTON_STORYBOOK_URL,
+    href: BUTTON_CANDIDATE_STORYBOOK_URL,
     external: true,
   },
   {
     id: 'figma',
-    label: 'Open UP Button Figma component',
+    label: 'Open Button candidate Figma component',
     description:
-      'Pending an approved UP Design System Button component URL and verified variable collection.',
+      'Pending an approved Button component URL and verified variable collection.',
     status: 'Pending',
   },
   {
@@ -64,10 +64,10 @@ export const candidateLinks: readonly CandidateLink[] = [
   },
   {
     id: 'plan',
-    label: 'UP Button candidate integration plan',
-    description: 'Token, Figma, Storybook, testing, and promotion checklist.',
+    label: 'Button candidate overview',
+    description: 'Lifecycle, source-of-truth boundaries, and links to design, developer, and validation guidance.',
     status: 'Available',
-    href: `${githubRoot}/docs/design-system/components/button-candidate-integration-plan.md`,
+    href: `${githubRoot}/docs/design-system/components/button-candidate.md`,
     external: true,
   },
 ];

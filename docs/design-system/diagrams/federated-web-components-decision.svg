@@ -74,7 +74,7 @@
   <g transform="translate(42 366)">
     <rect class="row" width="332" height="46"/>
     <circle class="icon-circle-blue" cx="24" cy="23" r="14"/><path d="M13 15c7-3 14 0 22-3v21c-8 3-15 0-22 3z M13 15v24" fill="none" stroke="#2457b8" stroke-width="2"/>
-    <text class="small-title" x="54" y="20">Documentation &amp; Validation</text><text class="small" x="54" y="35">Storybook, Zeroheight, and evidence</text>
+    <text class="small-title" x="54" y="20">Documentation &amp; Validation</text><text class="small" x="54" y="35">Storybook, Starlight, and evidence</text>
   </g>
 
   <text class="section-title" x="462" y="82" text-anchor="middle">FLOW OF DESIGN</text>
@@ -131,15 +131,15 @@
   <text class="section-title" x="1378" y="86" text-anchor="middle">SHELL NAVIGATION <tspan class="small-title">(Example)</tspan></text>
   <line class="divider" x1="1180" y1="96" x2="1575" y2="96"/>
   <g transform="translate(1195 108)">
-    <text class="small-title" x="46" y="28">Point of Entry</text><text class="small" x="215" y="20">Route + nav placement</text><text class="small" x="215" y="36">Entry card pattern</text>
+    <text class="small-title" x="46" y="28">Case Intake</text><text class="small" x="215" y="20">Route + nav placement</text><text class="small" x="215" y="36">Entry card pattern</text>
     <line class="divider" x1="-15" y1="54" x2="380" y2="54"/>
-    <text class="small-title" x="46" y="84">Unified Pricing</text><text class="small-title" x="46" y="101">and Committing</text><text class="small" x="215" y="82">Route + mount point</text><text class="small" x="215" y="98">Landing page workflow</text>
+    <text class="small-title" x="46" y="84">Service Requests</text><text class="small-title" x="46" y="101">and Committing</text><text class="small" x="215" y="82">Route + mount point</text><text class="small" x="215" y="98">Landing page workflow</text>
     <line class="divider" x1="-15" y1="119" x2="380" y2="119"/>
-    <text class="small-title" x="46" y="150">Rates Sheet</text><text class="small" x="215" y="146">Route + remote loading</text><text class="small" x="215" y="162">Rates table and filters</text>
+    <text class="small-title" x="46" y="150">Reporting</text><text class="small" x="215" y="146">Route + remote loading</text><text class="small" x="215" y="162">Rates table and filters</text>
     <line class="divider" x1="-15" y1="184" x2="380" y2="184"/>
-    <text class="small-title" x="46" y="214">Loan Pipeline</text><text class="small" x="215" y="210">Route + remote loading</text><text class="small" x="215" y="226">Pipeline list and actions</text>
+    <text class="small-title" x="46" y="214">Case Queue</text><text class="small" x="215" y="210">Route + remote loading</text><text class="small" x="215" y="226">Pipeline list and actions</text>
     <line class="divider" x1="-15" y1="248" x2="380" y2="248"/>
-    <text class="small-title" x="46" y="278">Committed Loans</text><text class="small" x="215" y="274">Route + remote loading</text><text class="small" x="215" y="290">Committed loan workflows</text>
+    <text class="small-title" x="46" y="278">Administration</text><text class="small" x="215" y="274">Route + remote loading</text><text class="small" x="215" y="290">Committed loan workflows</text>
   </g>
 
   <rect class="panel" x="1180" y="372" width="395" height="80"/>
@@ -235,7 +235,7 @@
 
   <rect class="panel" x="22" y="922" width="565" height="58"/>
   <text class="section-title" x="305" y="943" text-anchor="middle">DESIGN SYSTEM IMPLICATIONS</text>
-  <text class="small-title" x="305" y="965" text-anchor="middle">Tokens, PrimeNG provider guidance, registry components, layout patterns, accessibility evidence, Storybook, and Zeroheight docs.</text>
+  <text class="small-title" x="305" y="965" text-anchor="middle">Tokens, PrimeNG provider guidance, registry components, layout patterns, accessibility evidence, Storybook, and Starlight docs.</text>
   <rect class="panel-purple" x="608" y="922" width="582" height="58"/>
   <text class="section-title purple" x="899" y="943" text-anchor="middle">VALIDATION CHECKLIST</text>
   <text class="small-title" x="899" y="965" text-anchor="middle">Remote manifests, element registration, token resolution, overlays, routing, lifecycle cleanup, accessibility, and performance tracking.</text>

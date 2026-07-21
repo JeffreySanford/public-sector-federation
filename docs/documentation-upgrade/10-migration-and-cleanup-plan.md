@@ -1,7 +1,7 @@
 # Migration and Cleanup Plan
 
 _Last aligned: July 20, 2026._ The Button candidate rename (Phase 1 and Phase 4, below) has
-landed: the public rename map's `UP Button Candidate → Button Contract Exploration` and part of
+landed: the public rename map's `Button Candidate → Button Contract Exploration` and part of
 `Candidates → Experiments` are complete in the manifest, Storybook title, and
 `docs/design-system/components/button-candidate-*.md` files (the old `up-button-candidate-*.md`
 files were removed, not duplicated). The `Acceptance Stories → Interaction Stories` rename is
@@ -87,7 +87,7 @@ Target public framing:
 
 Current framing:
 
-> UP Button Candidate with promotion blockers and Starlight guidance.
+> Button Candidate with promotion blockers and Starlight guidance.
 
 Target framing:
 
@@ -104,7 +104,7 @@ Target framing:
 | Acceptance Stories | Component Stories or Interaction Stories |
 | Overview Walkthrough | System Overview |
 | Skills Demonstrated | Remove |
-| UP Button Candidate | Button Contract Exploration |
+| Button Candidate | Button Contract Exploration |
 | Stable vs Candidate | Current Contract vs Proposed Contract |
 | externally blocked | awaiting external decision, when user-facing |
 

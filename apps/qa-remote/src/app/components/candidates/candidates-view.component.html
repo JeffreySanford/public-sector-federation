@@ -3,9 +3,9 @@
     <div class="candidate-hero__content">
       <div class="candidate-hero__eyebrow">
         <ps-tag value="Candidate" tone="warn" />
-        <span>UP Design System Button proof</span>
+        <span>Button contract exploration proof</span>
       </div>
-      <h1 id="candidatesViewTitle">Current Button vs UP Button candidate</h1>
+      <h1 id="candidatesViewTitle">Current Button vs Button candidate</h1>
       <p>
         This view isolates the first experimental component. It compares the stable
         <code>ps-button</code> wrapper with <code>ps-up-button</code>, connects the
@@ -26,7 +26,7 @@
       <span class="candidate-kicker">Narrow proof scope</span>
       <h2 id="candidateScopeTitle">One Button candidate, not a system-wide conversion</h2>
       <p>
-        Only Button-related UP design information, tokens, states, and guidance are in
+        Only Button-related design information, tokens, states, and guidance are in
         scope. Card, Table, Dialog, Toast, navigation, and other wrappers continue to use
         the existing public-sector contract.
       </p>
@@ -34,7 +34,7 @@
     <ul>
       <li>Stable wrapper: <code>ps-button</code></li>
       <li>Experimental wrapper: <code>ps-up-button</code></li>
-      <li>Promotion gate: verified UP Button tokens and completed evidence</li>
+      <li>Promotion gate: verified Button design-source tokens and completed evidence</li>
     </ul>
   </section>
 
@@ -129,7 +129,7 @@
       <article class="implementation-card implementation-card--candidate">
         <div class="implementation-card__header">
           <div>
-            <span>UP Design System / Candidate</span>
+            <span>Experimental / Candidate</span>
             <h3><code>ps-up-button</code></h3>
           </div>
           <ps-tag value="Candidate" tone="warn" />
@@ -228,7 +228,7 @@
       <div class="comparison-table__header" aria-hidden="true">
         <span>Scenario</span>
         <span>Current / Stable</span>
-        <span>UP Candidate</span>
+        <span>Candidate</span>
       </div>
 
       @for (scenario of scenarios; track scenario.id) {
@@ -251,7 +251,7 @@
           </div>
 
           <div class="comparison-row__sample">
-            <span class="comparison-row__mobile-label">UP Candidate</span>
+            <span class="comparison-row__mobile-label">Candidate</span>
             <ps-up-button
               [label]="scenario.buttonLabel"
               [icon]="scenario.icon"
@@ -288,14 +288,14 @@
       <a [href]="storybookUrl" target="_blank" rel="noreferrer">
         Open Current vs Candidate story
       </a>
-      <code>design-system-candidates-button-up--current-vs-candidate</code>
+      <code>design-system-experiments-button-contract-exploration--current-vs-candidate</code>
     </div>
 
     @if (showStorybookPreview()) {
       <div class="storybook-frame">
         <iframe
           [src]="storybookEmbedUrl"
-          title="Storybook Current Button versus UP Button candidate"
+          title="Storybook Current Button versus Button candidate"
           loading="lazy"
         ></iframe>
         <p>

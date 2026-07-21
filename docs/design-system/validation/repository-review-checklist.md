@@ -1,9 +1,8 @@
 # Repository Review Checklist
 
-Use this checklist when production repository access is available. The goal is
-to replace assumptions with verified implementation details.
-
-![Repository validation map](../diagrams/repository-validation-map.png)
+Use this checklist when validating a production deployment of this design
+system. The goal is to replace assumptions with verified implementation
+details.
 
 ## Token Pipeline
 

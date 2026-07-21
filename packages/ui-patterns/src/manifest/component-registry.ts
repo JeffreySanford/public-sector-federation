@@ -546,9 +546,10 @@ export const componentRegistry = [
     documentationStatus: 'complete',
     documentationFiles: [
       'docs/design-system/architecture/opinionated-wrapper-contract.md',
-      'docs/design-system/components/button-candidate-overview.md',
-      'docs/design-system/components/button-candidate-integration-plan.md',
+      'docs/design-system/components/button-candidate.md',
+      'docs/design-system/components/button-candidate-design-tokens.md',
       'docs/design-system/components/button-candidate-developer.md',
+      'docs/design-system/components/button-candidate-validation.md',
     ],
     accessibilityPattern: 'button',
     automatedChecks: 'complete',

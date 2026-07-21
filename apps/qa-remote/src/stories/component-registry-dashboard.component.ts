@@ -388,7 +388,7 @@ export class ComponentRegistryDashboardComponent {
       accessibility: 'Accessibility Coverage',
       documentation: 'Documentation Readiness',
       detail: 'Component Detail',
-      promotion: 'UP Button Promotion Readiness',
+      promotion: 'Button Candidate Promotion Readiness',
     };
     return titles[this.mode()];
   });

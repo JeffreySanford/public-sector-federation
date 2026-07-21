@@ -333,7 +333,7 @@ This view demonstrates that Jeffrey can:
 
 The Design Alignment Lab replaces the narrow **Candidates** page.
 
-The current page is dominated by one UP Button comparison and repeated promotion disclaimers. The upgraded view should become a reusable space for reconciling shipped code, design intent, tokens, Storybook behavior, and proposed public contracts.
+The current page is dominated by one Button candidate comparison and repeated promotion disclaimers. The upgraded view should become a reusable space for reconciling shipped code, design intent, tokens, Storybook behavior, and proposed public contracts.
 
 It should answer:
 

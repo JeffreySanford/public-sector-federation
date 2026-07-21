@@ -63,7 +63,7 @@ Use intent to describe the role of the action, not its provider color name.
 
 `ps-up-button` renders PrimeNG internally. The wrapper translates:
 
-- `intent` into UP Button token mappings;
+- `intent` into component-owned token mappings;
 - `appearance` into the private PrimeNG variant;
 - provider-neutral icon names into PrimeIcons classes;
 - PrimeNG `onClick` into the `activated` output;
@@ -97,7 +97,7 @@ and Storybook evidence can migrate without an unrelated breaking change.
 Use these Storybook areas:
 
 ```text
-Design System / Experiments / Button UP
+Design System / Experiments / Button Contract Exploration
 Design System / Architecture / Opinionated Wrapper Contract
 ```
 
@@ -113,6 +113,6 @@ plan, and a human promotion decision.
 See:
 
 - [Opinionated wrapper contract](../architecture/opinionated-wrapper-contract.md)
-- [Candidate overview](./button-candidate-overview.md)
-- [Candidate integration plan](./button-candidate-integration-plan.md)
+- [Button Contract Exploration overview](./button-candidate.md)
+- [Candidate design and tokens](./button-candidate-design-tokens.md)
 - [Candidate validation](./button-candidate-validation.md)

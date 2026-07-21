@@ -60,7 +60,7 @@ A team identifies a need.
 Example:
 
 ```text
-Loan pipeline needs a new status visualization.
+Case queue needs a new status visualization.
 ```
 
 Before creating a new shared asset, answer:

@@ -32,7 +32,7 @@ describe('CandidatesViewComponent', () => {
     expect(
       element.querySelector('[data-testid="live-button-comparison"] ps-up-button'),
     ).not.toBeNull();
-    expect(element.textContent).toContain('Current Button vs UP Button candidate');
+    expect(element.textContent).toContain('Current Button vs Button candidate');
   });
 
   it('updates the shared comparison controls', () => {

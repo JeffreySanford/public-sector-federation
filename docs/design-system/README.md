@@ -86,8 +86,7 @@ Still target-state work:
 
 The diagrams in [diagrams](./diagrams/) describe the engineering operating model. Some were created before Starlight became canonical, so read tool-specific labels through the hierarchy above.
 
-- [Design system architecture diagram](./diagrams/design-system-architecture-diagram.png)
 - [Token delivery decision diagram](./diagrams/token-delivery-decision-diagram.png)
-- [Implementation options](./diagrams/shared-design-system-implementation-options.png)
 - [Runtime architecture](./diagrams/shared-design-system-implementation-runtime-architecture.png)
-- [Repository validation map](./diagrams/repository-validation-map.png)
+- [Shell interaction model](./diagrams/shell-interaction-model.svg)
+- [Federated Web Components decision](./diagrams/federated-web-components-decision.svg)

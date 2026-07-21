@@ -15,8 +15,8 @@ import {
 } from '@public-sector/primeng-preset';
 import {
   candidateLinks,
-  UP_BUTTON_STORYBOOK_EMBED_URL,
-  UP_BUTTON_STORYBOOK_URL,
+  BUTTON_CANDIDATE_STORYBOOK_EMBED_URL,
+  BUTTON_CANDIDATE_STORYBOOK_URL,
 } from './candidate-links';
 
 type CandidateStatus = 'Complete' | 'In review' | 'Pending' | 'Blocked';
@@ -85,10 +85,10 @@ export class CandidatesViewComponent {
     'pastel',
   ];
 
-  readonly storybookUrl = UP_BUTTON_STORYBOOK_URL;
+  readonly storybookUrl = BUTTON_CANDIDATE_STORYBOOK_URL;
   readonly storybookEmbedUrl: SafeResourceUrl =
     this.sanitizer.bypassSecurityTrustResourceUrl(
-      UP_BUTTON_STORYBOOK_EMBED_URL,
+      BUTTON_CANDIDATE_STORYBOOK_EMBED_URL,
     );
   readonly links = candidateLinks;
 
@@ -177,7 +177,7 @@ export class CandidatesViewComponent {
       status: 'Complete',
     },
     {
-      evidence: 'UP Button token values',
+      evidence: 'Button candidate token values',
       currentState:
         'Sanitized/sample mappings are working; approved enterprise Button values are still required.',
       status: 'Blocked',
@@ -203,7 +203,7 @@ export class CandidatesViewComponent {
     {
       evidence: 'Figma Button source',
       currentState:
-        'Approved UP Button component and variable URLs still need to be recorded.',
+        'Approved Button component and variable URLs still need to be recorded.',
       status: 'Pending',
     },
     {
@@ -237,7 +237,7 @@ export class CandidatesViewComponent {
     'Figma publication status is visible without becoming a runtime dependency.',
     'Keyboard, focus, disabled, loading, long-label, and responsive behavior are reviewed.',
     'Direct QA remote and shell-composed Playwright checks pass.',
-    'Promotion remains blocked until verified UP Button token values replace sample assumptions.',
+    'Promotion remains blocked until verified Button design source token values replace sample assumptions.',
   ] as const;
 
   setLabel(value: string): void {

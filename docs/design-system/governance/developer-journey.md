@@ -24,7 +24,7 @@ The developer goes to Starlight to answer:
 - Where are the Storybook examples?
 - Is the pattern Active, Candidate, or Experimental?
 
-For a new Rates Sheet view, they might find:
+For a new Reporting view, they might find:
 
 ```
 ✅ Page layout: Active
@@ -93,7 +93,7 @@ composition as a starting template:
 ```typescript
 <public-page-layout>
   <ps-page-header
-    [title]="'Rates Sheet'"
+    [title]="'Reporting'"
     [description]="'Review current rates and pricing options'"
   />
 
@@ -180,10 +180,10 @@ integration surface:
 
 ```bash
 # Direct subapp
-http://localhost:4201/rates-sheet
+http://localhost:4201/reporting
 
 # Shell-mounted (if configured)
-http://localhost:4200/application/rates-sheet
+http://localhost:4200/application/reporting
 
 # Run shell and subapp E2E together
 pnpm e2e:federation
@@ -215,7 +215,7 @@ Page header + card + form + table + empty state
 
 No design-system change required. The product team owns the composition.
 
-Example: A custom "Loan Dashboard" that uses page header, cards, tables, and
+Example: A custom "Operations Dashboard" that uses page header, cards, tables, and
 status chips. This is product-team composition, not a new shared component.
 
 #### Path B: Domain-Specific Feature
@@ -223,14 +223,14 @@ status chips. This is product-team composition, not a new shared component.
 Keep the feature in the product application using shared primitives:
 
 ```
-Capital Markets Risk Assessment Panel
+Domain-Specific Risk Assessment Panel
   (uses table + form + status chip + accordion)
 ```
 
 It may consume and compose shared primitives without becoming a shared
 component itself.
 
-Example: A loan-underwriting-specific feature that is unlikely to be reused
+Example: A domain-specific feature that is unlikely to be reused
 across domains. It uses approved components but is not promoted as shared.
 
 #### Path C: Genuine Reusable Gap
@@ -245,19 +245,19 @@ Two have keyboard-navigation defects.
 Developers keep rebuilding this locally.
 
 Evidence:
-- Three separate implementations in Rates Sheet, Pipeline, Committed Loans
+- Three separate implementations in Reporting, Case Queue, Administration
 - 12+ defects filed on similar patterns
 - Design team confirmed this pattern is common
 - User research shows bulk actions are frequent workflows
 
 Expected consumers:
-- Rates Sheet team
-- Loan Pipeline team
-- Committed Loans team
+- Reporting team
+- Case Queue team
+- Administration team
 - (at least 3 teams to justify shared investment)
 
 Proposed owner:
-Capital Markets UI team
+Platform UI team
 
 Proposed scope:
 New `<public-bulk-actions>` component wrapping PrimeNG toolbar

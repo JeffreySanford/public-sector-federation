@@ -13,7 +13,7 @@ repository.
 
 Do not add a synthetic legacy app to this repo yet. The current value is proving
 the target-state path with the four existing remotes. Real migrated legacy apps
-should be validated when the enterprise repository has a concrete path to
+should be validated once a production deployment has a concrete path to
 allowlist and migrate.
 
 ## Remote Entry Configuration Path

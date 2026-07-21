@@ -40,7 +40,7 @@ The Candidate Storybook surface includes:
 Primary comparison story ID:
 
 ```text
-design-system-candidates-button-up--current-vs-candidate
+design-system-experiments-button-contract-exploration--current-vs-candidate
 ```
 
 ## Accessibility requirements
@@ -88,7 +88,7 @@ pnpm lint
 | Current-versus-candidate story | Comparison story exists | Available |
 | Experiments view | Direct and shell-composed comparison view exists | Available |
 | Unit and Playwright coverage | Candidate-focused specifications exist | Available |
-| UP source-token verification | Approved Button source still required | Pending |
+| Source-token verification | Approved Button design source still required | Pending |
 | Figma Button component | Link and variable references still required | Pending |
 | Stable Storybook deployment | Local Storybook currently used | Pending |
 | Accessibility approval | Automated and human review required | Pending |
@@ -98,7 +98,7 @@ pnpm lint
 
 The Candidate must remain Candidate until:
 
-- the approved UP Button design source is linked;
+- the approved Button design source is linked;
 - Button-specific source tokens and aliases are verified;
 - public API terminology is approved;
 - all required appearances, tones, states, themes, and modes are represented;
@@ -129,7 +129,7 @@ The review may result in:
 | Responsibility | Owner |
 | --- | --- |
 | Design intent and Figma source | To be assigned |
-| UP Button token verification | To be assigned |
+| Design-token verification | To be assigned |
 | Angular wrapper and registry API | Public Sector Design System engineering |
 | Storybook and QA validation | Public Sector Design System engineering |
 | Accessibility review | To be assigned |

@@ -56,7 +56,7 @@ The disabled and loading states suppress activation. Loading also exposes `aria-
 The target Button token flow is:
 
 ```text
-approved UP Button source
+approved external design source
   -> source inventory
   -> primitive tokens
   -> semantic action tokens
@@ -85,7 +85,7 @@ Recommended Candidate component-token namespace:
 --ps-up-button-transition-duration
 ```
 
-## Token information to collect from UP Design System
+## Token information to collect from an approved external design source
 
 ### Color and action roles
 
@@ -128,7 +128,7 @@ Recommended Candidate component-token namespace:
 
 Before promotion:
 
-- verify the exact UP source token path;
+- verify the exact external source token path;
 - preserve source aliases and Figma variable IDs;
 - record light and dark values;
 - record theme or brand-mode values where applicable;
@@ -152,7 +152,7 @@ The Experiments view changes the shared document theme so the stable and Candida
 
 **Status:** Pending
 
-When available, link the approved UP Button Figma component set here and document:
+When available, link the approved Button Figma component set here and document:
 
 - component node URL;
 - variable collections and modes;
@@ -164,6 +164,6 @@ When available, link the approved UP Button Figma component set here and documen
 
 ## Current qualification
 
-The current implementation uses UP-inspired styling and existing public-sector foundations. These values are Candidate evidence, not approved enterprise UP Button source values.
+The current implementation uses exploratory styling and existing public-sector foundations. These values are Candidate evidence, not approved external design-source values.
 
-Only Button-related UP values are required for this proof. This work does not authorize importing or converting every UP Design System token family or component.
+Only Button-related values are required for this proof. This work does not authorize importing or converting every token family or component from an external design system.

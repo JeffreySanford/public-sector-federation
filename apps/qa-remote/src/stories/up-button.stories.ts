@@ -115,7 +115,7 @@ const meta: Meta<PublicUpButtonComponent> = {
       extractArgTypes: () => ({}),
       description: {
         component:
-          'Candidate up-design-system Button wrapper using the repo token contract directly. This is separate from the existing ps-button until the API and token mapping are accepted.',
+          'Experimental candidate Button wrapper using the repo token contract directly. This is separate from the existing ps-button until the API and token mapping are accepted.',
       },
     },
   },
@@ -232,7 +232,7 @@ export const InteractionHarness: Story = {
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="up-button-story" aria-labelledby="upButtonInteractionTitle">
-        <h1 id="upButtonInteractionTitle">UP Button interaction harness</h1>
+        <h1 id="upButtonInteractionTitle">Button Contract Exploration interaction harness</h1>
         <ps-up-button
           label="Submit application"
           icon="check"
@@ -324,7 +324,7 @@ export const ToneMatrix: Story = {
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="button-story-shell">
-        <section class="button-matrix" aria-label="UP Button intent matrix">
+        <section class="button-matrix" aria-label="Button candidate intent matrix">
           @for (intent of intents; track intent) {
             <div class="button-cell">
               <span>{{ intent }}</span>
@@ -386,7 +386,7 @@ export const AppearanceMatrix: Story = {
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="button-story-shell">
-        <section class="appearance-matrix" aria-label="UP Button appearance matrix">
+        <section class="appearance-matrix" aria-label="Button candidate appearance matrix">
           @for (appearance of appearances; track appearance) {
             <div class="button-cell">
               <span>{{ appearance }}</span>
@@ -448,7 +448,7 @@ export const InteractionStateReference: Story = {
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="button-story-shell">
-        <section class="state-matrix" aria-label="UP Button interaction state reference">
+        <section class="state-matrix" aria-label="Button candidate interaction state reference">
           <div class="button-cell">
             <span>Default</span>
             <ps-up-button label="Default" icon="check" />
@@ -518,7 +518,7 @@ export const SizeMatrix: Story = {
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
       <main class="button-story-shell">
-        <section class="size-matrix" aria-label="UP Button size token matrix">
+        <section class="size-matrix" aria-label="Button candidate size token matrix">
           <div class="button-cell size-compact">
             <span>Compact tokens</span>
             <ps-up-button label="Compact" icon="check" />
@@ -597,7 +597,7 @@ export const FocusReference: Story = {
     component: PublicUpButtonComponent,
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
-      <main class="focus-reference" aria-label="UP Button focus reference">
+      <main class="focus-reference" aria-label="Button candidate focus reference">
         <ps-up-button label="Focus reference" icon="arrow-right" />
       </main>
     `,
@@ -625,7 +625,7 @@ export const LightDarkModeMatrix: Story = {
     props: { intents },
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
-      <main class="mode-matrix" aria-label="UP Button light and dark mode matrix">
+      <main class="mode-matrix" aria-label="Button candidate light and dark mode matrix">
         <section class="mode-panel light-panel">
           <span>Light</span>
           @for (intent of intents; track intent) {
@@ -708,7 +708,7 @@ export const ThemeVariantMatrix: Story = {
     component: PublicUpButtonComponent,
     moduleMetadata: { imports: [PublicUpButtonComponent] },
     template: `
-      <main class="variant-matrix" aria-label="UP Button theme variant matrix">
+      <main class="variant-matrix" aria-label="Button candidate theme variant matrix">
         <section class="variant-panel neutral">
           <span>Neutral</span>
           <ps-up-button label="Primary" icon="check" />
@@ -809,7 +809,7 @@ export const CurrentVsCandidate: Story = {
     docs: {
       description: {
         story:
-          'Side-by-side comparison of the stable public-sector ps-button wrapper and the UP Design System candidate ps-up-button. Use this story to review visual deltas before promotion.',
+          'Side-by-side comparison of the stable public-sector ps-button wrapper and the experimental ps-up-button candidate. Use this story to review visual deltas before promotion.',
       },
     },
   },
@@ -820,13 +820,13 @@ export const CurrentVsCandidate: Story = {
       <main class="comparison-shell" aria-labelledby="buttonComparisonTitle">
         <header class="comparison-header">
           <p>Candidate comparison</p>
-          <h1 id="buttonComparisonTitle">Current Button vs UP Button candidate</h1>
+          <h1 id="buttonComparisonTitle">Current Button vs Button candidate</h1>
         </header>
 
         <section class="comparison-grid" aria-label="Button styling comparison">
           <div class="comparison-heading" aria-hidden="true">Scenario</div>
           <div class="comparison-heading" aria-hidden="true">Current design system</div>
-          <div class="comparison-heading" aria-hidden="true">UP Design System candidate</div>
+          <div class="comparison-heading" aria-hidden="true">Experimental candidate</div>
 
           <div class="scenario">Primary solid</div>
           <div class="sample"><ps-button label="Primary action" icon="pi pi-check" /></div>
@@ -985,7 +985,7 @@ export const CurrentVsCandidate: Story = {
           }
 
           .sample + .sample::before {
-            content: 'UP candidate';
+            content: 'Candidate';
           }
         }
       `,

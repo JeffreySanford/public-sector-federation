@@ -72,7 +72,7 @@ against the real framework details before treating the recommendation as final.
 
 ## System Diagram
 
-![Design system architecture diagram](./diagrams/design-system-architecture-diagram.png)
+![Runtime architecture diagram](./diagrams/shared-design-system-implementation-runtime-architecture.png)
 
 The diagram shows five separate flows:
 

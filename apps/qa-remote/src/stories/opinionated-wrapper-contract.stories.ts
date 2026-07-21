@@ -158,9 +158,9 @@ export const ProviderTranslation: Story = {
             <tr><th>Public request</th><th>Private mapping</th><th>Public promise</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>intent="primary"</code></td><td>UP primary tokens → PrimeNG button variables</td><td>Primary action treatment</td></tr>
-            <tr><td><code>intent="secondary"</code></td><td>UP secondary tokens → PrimeNG button variables</td><td>Supporting action treatment</td></tr>
-            <tr><td><code>intent="destructive"</code></td><td>UP error tokens → PrimeNG button variables</td><td>Destructive action treatment</td></tr>
+            <tr><td><code>intent="primary"</code></td><td>Candidate primary tokens → PrimeNG button variables</td><td>Primary action treatment</td></tr>
+            <tr><td><code>intent="secondary"</code></td><td>Candidate secondary tokens → PrimeNG button variables</td><td>Supporting action treatment</td></tr>
+            <tr><td><code>intent="destructive"</code></td><td>Candidate error tokens → PrimeNG button variables</td><td>Destructive action treatment</td></tr>
             <tr><td><code>appearance="outlined"</code></td><td>PrimeNG variant mapping</td><td>Outlined emphasis</td></tr>
             <tr><td><code>icon="save"</code></td><td>Private PrimeIcons class mapping</td><td>Approved save icon</td></tr>
             <tr><td><code>(activated)</code></td><td>PrimeNG onClick normalized to void</td><td>Action occurred</td></tr>

@@ -7,7 +7,7 @@ Other integration models can exist elsewhere, but this recommendation assumes
 the required federated Web Component runtime and focuses on the token and
 component-registry contracts inside it.
 
-![Federated Web Components decision model](../diagrams/federated-web-components-decision.png)
+![Federated Web Components decision model](../diagrams/federated-web-components-decision.svg)
 
 The diagram above shows the design system, shell, subapplication, boundary, and
 validation relationships that support this decision.

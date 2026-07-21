@@ -4,7 +4,7 @@ The design system should remain logically separate from the platform shell. The
 shell consumes the design system, proves it in a real runtime, and supplies the
 navigation and application composition for a specific business domain.
 
-![Shell interaction model](../diagrams/shell-interaction-model.png)
+![Shell interaction model](../diagrams/shell-interaction-model.svg)
 
 ```text
 Design system
@@ -58,11 +58,11 @@ The initial shell navigation should represent these destinations:
 
 | Navigation item | Shell responsibility | Sub-application responsibility |
 | --- | --- | --- |
-| Point of Entry | Route, nav placement, entry-card pattern usage | Entry workflow and domain data |
-| Unified Pricing and Committing | Route and landing-page mount point | Landing page and pricing workflows |
-| Rates Sheet | Route and remote loading | Rates table, filters, and rate workflow |
-| Loan Pipeline | Route and remote loading | Pipeline list, status, search, and actions |
-| Committed Loans | Route and remote loading | Committed-loan list, detail, and actions |
+| Case Intake | Route, nav placement, entry-card pattern usage | Intake workflow and domain data |
+| Service Requests | Route and landing-page mount point | Landing page and request workflows |
+| Reporting | Route and remote loading | Report table, filters, and export workflow |
+| Case Queue | Route and remote loading | Queue list, status, search, and actions |
+| Administration | Route and remote loading | Admin list, detail, and actions |
 
 These labels are shell configuration. The design system should provide the
 navigation pattern, active state, responsive behavior, icon usage, keyboard
@@ -85,11 +85,11 @@ component, while the shell provides the navigation data:
 
 ```ts
 const navigationItems = [
-  { label: 'Point of Entry', route: '/entry' },
-  { label: 'Unified Pricing and Committing', route: '/pricing' },
-  { label: 'Rates Sheet', route: '/rates' },
-  { label: 'Loan Pipeline', route: '/pipeline' },
-  { label: 'Committed Loans', route: '/committed-loans' },
+  { label: 'Case Intake', route: '/intake' },
+  { label: 'Service Requests', route: '/services' },
+  { label: 'Reporting', route: '/reporting' },
+  { label: 'Case Queue', route: '/queue' },
+  { label: 'Administration', route: '/admin' },
 ];
 ```
 

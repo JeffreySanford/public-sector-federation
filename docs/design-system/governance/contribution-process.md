@@ -53,7 +53,7 @@ Describe the user or developer problem.
 Example:
 
 ```text
-Loan pipeline teams are implementing status indicators independently, creating
+Case queue teams are implementing status indicators independently, creating
 inconsistent accessibility behavior and duplicated logic.
 ```
 
@@ -160,7 +160,7 @@ Keep a request inside the application when it is:
 Example local feature:
 
 ```text
-Loan Pipeline Escalation Risk Analyzer
+Case Queue Escalation Risk Analyzer
 ```
 
 Likely shared candidates:

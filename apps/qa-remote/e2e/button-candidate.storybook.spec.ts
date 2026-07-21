@@ -22,7 +22,7 @@ async function gotoCandidateStory(page: Page, story: string, globals?: string): 
   await expect(body).toBeVisible({ timeout: 20000 });
 }
 
-test.describe('UP Button Candidate isolated Storybook iframe', () => {
+test.describe('Button Contract Exploration isolated Storybook iframe', () => {
   test('renders primary story with role, accessible name, and token-driven styles', async ({ page }) => {
     await gotoCandidateStory(page, 'primary');
 
@@ -207,12 +207,12 @@ test.describe('UP Button Candidate isolated Storybook iframe', () => {
     await expect(page.getByRole('button', { name: 'Outlined' })).toHaveCount(3);
   });
 
-  test('renders current wrapper and UP candidate comparison story', async ({ page }) => {
+  test('renders current wrapper and candidate comparison story', async ({ page }) => {
     await gotoCandidateStory(page, 'current-vs-candidate');
 
-    await expect(page.getByRole('heading', { name: 'Current Button vs UP Button candidate' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Current Button vs Button candidate' })).toBeVisible();
     await expect(page.getByText('Current design system')).toBeVisible();
-    await expect(page.getByText('UP Design System candidate')).toBeVisible();
+    await expect(page.getByText('Experimental candidate')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Primary action' })).toHaveCount(2);
     await expect(page.getByRole('button', { name: 'Submit housing assistance eligibility review for North Region queue' })).toHaveCount(2);
   });
@@ -230,8 +230,8 @@ test.describe('UP Button Candidate isolated Storybook iframe', () => {
         variantClass: document.documentElement.classList.contains('ps-theme-vibrant'),
         buttonBackground: computed.getPropertyValue('--ps-button-background').trim(),
         buttonText: computed.getPropertyValue('--ps-button-text').trim(),
-        upButtonBackground: computed.getPropertyValue('--ps-up-button-background').trim(),
-        upButtonForeground: computed.getPropertyValue('--ps-up-button-foreground').trim(),
+        candidateButtonBackground: computed.getPropertyValue('--ps-up-button-background').trim(),
+        candidateButtonForeground: computed.getPropertyValue('--ps-up-button-foreground').trim(),
       };
     });
 
@@ -239,7 +239,7 @@ test.describe('UP Button Candidate isolated Storybook iframe', () => {
     expect(tokenValues.variantClass).toBe(true);
     expect(tokenValues.buttonBackground).toBeTruthy();
     expect(tokenValues.buttonText).toBeTruthy();
-    expect(tokenValues.upButtonBackground).toBeTruthy();
-    expect(tokenValues.upButtonForeground).toBeTruthy();
+    expect(tokenValues.candidateButtonBackground).toBeTruthy();
+    expect(tokenValues.candidateButtonForeground).toBeTruthy();
   });
 });

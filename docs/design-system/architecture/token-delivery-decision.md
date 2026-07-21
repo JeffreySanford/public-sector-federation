@@ -69,12 +69,12 @@ These versions and runtime settings must move together:
 - Storybook e2e proves wrapper stories build and render.
 - Shell e2e has existing token/theme and dialog overlay proof.
 
-## Open Enterprise Checks
+## Open Follow-Up Checks
 
-- Confirm the production Figma/DTCG-compatible export shape.
-- Confirm production shell token CSS load path.
+- Confirm the Figma/DTCG-compatible export shape for a real design source.
+- Confirm the deployed shell token CSS load path.
 - Confirm whether remotes import tokens directly, inherit shell tokens, or both.
-- Confirm package sharing/version strategy in production federation config.
+- Confirm package sharing/version strategy in a deployed federation config.
 - Expand overlay proof beyond dialog to menu, select, popover, and tooltip.
 
 ## Decision

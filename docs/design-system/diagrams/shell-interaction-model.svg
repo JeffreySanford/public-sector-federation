@@ -156,25 +156,25 @@
       <rect class="row" x="34" y="858" width="490" height="34" />
       <rect class="row" x="34" y="892" width="490" height="34" />
       <rect class="row" x="34" y="926" width="490" height="34" />
-      <text class="table-text" x="50" y="812">Point of Entry</text>
+      <text class="table-text" x="50" y="812">Case Intake</text>
       <text class="table-text" x="210" y="805">Route, nav placement,</text>
       <text class="table-text" x="210" y="819">entry-card pattern</text>
       <text class="table-text" x="382" y="805">Entry workflow and</text>
       <text class="table-text" x="382" y="819">domain data</text>
-      <text class="table-text" x="50" y="846">Unified Pricing</text>
+      <text class="table-text" x="50" y="846">Service Requests</text>
       <text class="table-text" x="210" y="839">Route and landing-page</text>
       <text class="table-text" x="210" y="853">mount point</text>
       <text class="table-text" x="382" y="839">Landing page and</text>
       <text class="table-text" x="382" y="853">pricing workflows</text>
-      <text class="table-text" x="50" y="880">Rates Sheet</text>
+      <text class="table-text" x="50" y="880">Reporting</text>
       <text class="table-text" x="210" y="880">Route and remote loading</text>
       <text class="table-text" x="382" y="873">Rates table, filters,</text>
       <text class="table-text" x="382" y="887">and rate workflow</text>
-      <text class="table-text" x="50" y="914">Loan Pipeline</text>
+      <text class="table-text" x="50" y="914">Case Queue</text>
       <text class="table-text" x="210" y="914">Route and remote loading</text>
       <text class="table-text" x="382" y="907">Pipeline list, status,</text>
       <text class="table-text" x="382" y="921">search, and actions</text>
-      <text class="table-text" x="50" y="948">Committed Loans</text>
+      <text class="table-text" x="50" y="948">Administration</text>
       <text class="table-text" x="210" y="948">Route and remote loading</text>
       <text class="table-text" x="382" y="941">Committed-loan list,</text>
       <text class="table-text" x="382" y="955">detail, and actions</text>

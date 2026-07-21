@@ -61,7 +61,7 @@ test.describe('component manifest Storybook registry', () => {
     await expect(page.getByText('Unassigned', { exact: true }).first()).toBeVisible();
   });
 
-  test('renders UP Button promotion evidence and blockers', async ({ page }) => {
+  test('renders Button candidate promotion evidence and blockers', async ({ page }) => {
     await gotoStory(page, 'up-button-promotion-readiness');
 
     await expect(page.getByRole('heading', { name: 'Button Contract Exploration' })).toBeVisible();

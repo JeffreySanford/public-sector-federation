@@ -18,7 +18,7 @@ consumer need
 
 ## Public versus private API
 
-The UP Button Candidate now demonstrates the preferred boundary.
+The Button Contract Exploration candidate now demonstrates the preferred boundary.
 
 ### Public contract
 
@@ -44,9 +44,9 @@ purposes that the shell and subapps can justify:
 
 | Public intent | Design-system meaning | Private token mapping |
 | --- | --- | --- |
-| `primary` | Main action for the current task | UP primary Button tokens |
-| `secondary` | Supporting or alternative action | UP secondary Button tokens |
-| `destructive` | Action with destructive consequences | UP error Button tokens |
+| `primary` | Main action for the current task | Candidate primary Button tokens |
+| `secondary` | Supporting or alternative action | Candidate secondary Button tokens |
+| `destructive` | Action with destructive consequences | Candidate error Button tokens |
 
 New intents require a validated consumer need, design review, Storybook evidence,
 accessibility review, and a reviewed manifest change.

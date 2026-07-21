@@ -121,7 +121,7 @@ governance decision backed by evidence, not an automatic build result.
 
 ## Boundary Owners
 
-Named owners still need to be confirmed in the enterprise repository. Until
+Named owners still need to be confirmed for a production deployment. Until
 then, use these role owners for accountability:
 
 | Boundary | Role Owner | Owns |

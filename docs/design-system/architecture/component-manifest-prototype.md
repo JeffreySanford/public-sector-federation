@@ -38,7 +38,7 @@ The prototype deliberately does not:
 - claim that a pending design binding is complete;
 - publish or update Starlight pages;
 - treat automated accessibility checks as WCAG conformance;
-- promote the UP Button candidate;
+- promote the Button candidate;
 - remove existing PrimeNG escape hatches;
 - replace current wrappers with different implementations.
 
@@ -160,7 +160,7 @@ The manifest powers the following Storybook projections:
 - Accessibility Coverage
 - Documentation Readiness
 - Component Detail
-- UP Button Promotion Readiness
+- Button Candidate Promotion Readiness
 
 Storybook is a view over the contract. It is not another place to manually maintain
 status. A lifecycle or evidence change belongs in the registry and appears in every

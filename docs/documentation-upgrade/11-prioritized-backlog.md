@@ -194,7 +194,7 @@ See [Main Application Three-View Upgrade](./16-main-application-view-upgrade.md)
 
 #### Design Alignment Lab
 
-- [x] Replace the UP Button-specific Candidates view with a reusable alignment workbench.
+- [x] Replace the Button-candidate-specific Candidates view with a reusable alignment workbench.
 - [x] Support Button, Select, and Dialog as selectable alignment cases.
 - [x] Add code lifecycle, Figma lifecycle, alignment status, selector, canonical story, blockers, and recommended decision summary.
 - [ ] Add a live canonical Storybook implementation for each case.

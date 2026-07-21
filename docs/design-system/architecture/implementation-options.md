@@ -6,7 +6,7 @@ implementation proof should focus on the required custom-element runtime.
 
 ## Options To Compare
 
-![Implementation options](../diagrams/shared-design-system-implementation-options.png)
+![Runtime architecture](../diagrams/shared-design-system-implementation-runtime-architecture.png)
 
 | Option | Strengths | Risks/Costs |
 | --- | --- | --- |

@@ -21,7 +21,7 @@
   grep -r "QA Remote" . --include="*.md" --include="*.ts" --include="*.html"
   grep -r "Candidate" . --include="*.md" --include="*.ts"
   grep -r "Acceptance Story" .
-  grep -r "UP Button" .
+  grep -r "Button Candidate" .
   ```
 
 - [ ] Complete rename map (Button Candidate → Button, QA Remote → Component Lab, etc.)
