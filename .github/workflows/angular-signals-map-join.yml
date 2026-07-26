@@ -27,8 +27,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.23.1
-          cache: npm
-          cache-dependency-path: examples/angular-signals-map-join/package-lock.json
 
       - name: Install dependencies
         run: npm install
